@@ -107,7 +107,10 @@ export const Progressbars = ({
       <div className="h-full p-5 pt-0 space-y-4">
         <ul className="space-y-4">
           {items.map((item, index) => (
-            <li key={index} className="flex justify-between items-center gap-x-2">
+            <li
+              key={index}
+              className="flex justify-between items-center gap-x-2"
+            >
               <div className="w-full grid grid-cols-2 items-center gap-x-2">
                 <span className="text-sm text-card-foreground">
                   {item.label}

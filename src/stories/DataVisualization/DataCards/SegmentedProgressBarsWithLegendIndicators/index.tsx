@@ -41,7 +41,7 @@ const ArrowIcon = () => (
 const getIndicatorColor = (
   indicatorColor: string,
   index: number,
-  indicatorCount: number
+  indicatorCount: number,
 ): string => {
   if (index < indicatorCount) {
     return indicatorColor;
@@ -50,10 +50,39 @@ const getIndicatorColor = (
 };
 
 const defaultSegments: SegmentData[] = [
-  { label: "High", count: 163, percentage: 23, indicatorCount: 3, color: "bg-chart-5", indicatorColor: "bg-chart-5" },
-  { label: "Medium", count: 168, percentage: 25, indicatorCount: 2, color: "bg-chart-3", indicatorColor: "bg-chart-3" },
-  { label: "Low", count: 382, percentage: 62, indicatorCount: 1, color: "bg-chart-1", indicatorColor: "bg-chart-1" },
-  { label: "Informational", count: 66, percentage: 15, indicatorCount: 0, color: "bg-muted bg-[linear-gradient(135deg,var(--color-muted-foreground)_25%,transparent_25%,transparent_50%,var(--color-muted-foreground)_50%,var(--color-muted-foreground)_75%,transparent_75%,transparent)] bg-[length:7px_7px]", indicatorColor: "bg-muted-foreground/50" },
+  {
+    label: "High",
+    count: 163,
+    percentage: 23,
+    indicatorCount: 3,
+    color: "bg-chart-5",
+    indicatorColor: "bg-chart-5",
+  },
+  {
+    label: "Medium",
+    count: 168,
+    percentage: 25,
+    indicatorCount: 2,
+    color: "bg-chart-3",
+    indicatorColor: "bg-chart-3",
+  },
+  {
+    label: "Low",
+    count: 382,
+    percentage: 62,
+    indicatorCount: 1,
+    color: "bg-chart-1",
+    indicatorColor: "bg-chart-1",
+  },
+  {
+    label: "Informational",
+    count: 66,
+    percentage: 15,
+    indicatorCount: 0,
+    color:
+      "bg-muted bg-[linear-gradient(135deg,var(--color-muted-foreground)_25%,transparent_25%,transparent_50%,var(--color-muted-foreground)_50%,var(--color-muted-foreground)_75%,transparent_75%,transparent)] bg-[length:7px_7px]",
+    indicatorColor: "bg-muted-foreground/50",
+  },
 ];
 
 export const SegmentedProgressBarsWithLegendIndicators = ({
@@ -113,7 +142,7 @@ export const SegmentedProgressBarsWithLegendIndicators = ({
                     className={`shrink-0 w-1 h-3.5 inline-block ${getIndicatorColor(
                       segment.indicatorColor,
                       i,
-                      segment.indicatorCount
+                      segment.indicatorCount,
                     )} rounded-full`}
                   ></span>
                 ))}

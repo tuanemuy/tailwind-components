@@ -17,7 +17,8 @@ export interface FilesGridViewProps {
 const defaultItems: FileItem[] = [
   {
     id: "1",
-    imageSrc: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+    imageSrc:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
     imageAlt: "Analytics Image",
     title: "Analytics",
     metadata: [
@@ -28,7 +29,8 @@ const defaultItems: FileItem[] = [
   },
   {
     id: "2",
-    imageSrc: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
+    imageSrc:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
     imageAlt: "User Profile Image",
     title: "User Profile",
     metadata: [
@@ -39,24 +41,20 @@ const defaultItems: FileItem[] = [
   },
   {
     id: "3",
-    imageSrc: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop",
+    imageSrc:
+      "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop",
     imageAlt: "Payment Image",
     title: "Payment",
-    metadata: [
-      { label: "Edited 1 day ago" },
-      { label: "2mb", hidden: true },
-    ],
+    metadata: [{ label: "Edited 1 day ago" }, { label: "2mb", hidden: true }],
     href: "#",
   },
   {
     id: "4",
-    imageSrc: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=400&h=300&fit=crop",
+    imageSrc:
+      "https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=400&h=300&fit=crop",
     imageAlt: "Workspace Image",
     title: "Workspace",
-    metadata: [
-      { label: "Edited 1 week ago" },
-      { label: "20kb", hidden: true },
-    ],
+    metadata: [{ label: "Edited 1 week ago" }, { label: "20kb", hidden: true }],
     href: "#",
   },
 ];

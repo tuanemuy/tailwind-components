@@ -67,12 +67,28 @@ const defaultColumns: ListBarColumn[] = [
 
 const defaultItems: ListBarItem[] = [
   { label: "preline.co", values: ["39,8k", "329,3k", "19,8k"], barWidth: 100 },
-  { label: "preline.co/examples", values: ["27k", "56,2k", "48,2k"], barWidth: 65 },
-  { label: "preline.co/plugins", values: ["77,8k", "13.0k", "5.5k"], barWidth: 40 },
+  {
+    label: "preline.co/examples",
+    values: ["27k", "56,2k", "48,2k"],
+    barWidth: 65,
+  },
+  {
+    label: "preline.co/plugins",
+    values: ["77,8k", "13.0k", "5.5k"],
+    barWidth: 40,
+  },
   { label: "preline.co/docs", values: ["56,9k", "35,97k", "5k"], barWidth: 20 },
   { label: "preline.co/figma", values: ["8,9k", "3,1k", "4k"], barWidth: 15 },
-  { label: "preline.co/examples/hero", values: ["2k", "2,2k", "76,4k"], barWidth: 15 },
-  { label: "preline.co/examples/ai-tables", values: ["2,1k", "22,1k", "34,1k"], barWidth: 10 },
+  {
+    label: "preline.co/examples/hero",
+    values: ["2k", "2,2k", "76,4k"],
+    barWidth: 15,
+  },
+  {
+    label: "preline.co/examples/ai-tables",
+    values: ["2,1k", "22,1k", "34,1k"],
+    barWidth: 10,
+  },
   { label: "Others", values: ["1,4k", "4k", "5,1k"], barWidth: 7 },
 ];
 
@@ -145,7 +161,10 @@ export const ListBar = ({
       <div className="p-5 pt-0 space-y-4">
         <ul className="space-y-2">
           {items.map((item, index) => (
-            <li key={index} className="flex justify-between items-center gap-x-2">
+            <li
+              key={index}
+              className="flex justify-between items-center gap-x-2"
+            >
               <div className="relative size-full truncate">
                 <span className="relative z-1 block py-1 px-2 w-full text-sm truncate text-card-foreground">
                   {item.label}
@@ -157,9 +176,7 @@ export const ListBar = ({
               </div>
               {item.values.map((value, valueIndex) => (
                 <div key={valueIndex} className="w-20 text-end">
-                  <span className="text-sm text-muted-foreground">
-                    {value}
-                  </span>
+                  <span className="text-sm text-muted-foreground">{value}</span>
                 </div>
               ))}
             </li>

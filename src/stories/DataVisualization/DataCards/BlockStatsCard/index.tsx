@@ -88,9 +88,7 @@ export const BlockStatsCard = ({
 }: BlockStatsCardProps) => {
   const TrendIcon = trendDirection === "up" ? ArrowUpIcon : ArrowDownIcon;
   const trendColorClass =
-    trendDirection === "up"
-      ? "text-primary"
-      : "text-destructive";
+    trendDirection === "up" ? "text-primary" : "text-destructive";
 
   return (
     <div className="p-4 bg-card border-b border-border">
@@ -130,7 +128,9 @@ export const BlockStatsCard = ({
         {/* Legend Indicator */}
         <div className="mt-5 grid grid-cols-2 gap-2">
           <div className="flex flex-col">
-            <p className="text-xl text-card-foreground">{primarySummary.count}</p>
+            <p className="text-xl text-card-foreground">
+              {primarySummary.count}
+            </p>
             <div className="flex items-center gap-1.5">
               <span className="shrink-0 w-3 h-1.5 inline-block bg-chart-4 rounded-full"></span>
               <div className="grow">
@@ -162,9 +162,7 @@ export const BlockStatsCard = ({
             <div
               key={index}
               className={`w-2.5 h-3.5 rounded-[3px] ${
-                index < activeBlocks
-                  ? "bg-chart-4"
-                  : "bg-muted-foreground/30"
+                index < activeBlocks ? "bg-chart-4" : "bg-muted-foreground/30"
               }`}
               role="progressbar"
               aria-valuenow={5}

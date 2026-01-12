@@ -1,6 +1,12 @@
 import type { ReactNode } from "react";
 
-export type FileType = "image" | "text" | "html" | "document" | "spreadsheet" | "presentation";
+export type FileType =
+  | "image"
+  | "text"
+  | "html"
+  | "document"
+  | "spreadsheet"
+  | "presentation";
 
 export interface FileCardItem {
   id: string;
@@ -92,7 +98,8 @@ const defaultItems: FileCardItem[] = [
   {
     id: "1",
     type: "image",
-    imageSrc: "https://images.unsplash.com/photo-1635776062360-af423602aff3?w=180&h=180&fit=crop",
+    imageSrc:
+      "https://images.unsplash.com/photo-1635776062360-af423602aff3?w=180&h=180&fit=crop",
     fileName: "cover_image.jpg",
     metadata: "James, Feb 25th, 2023",
   },

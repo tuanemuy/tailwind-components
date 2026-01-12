@@ -123,7 +123,7 @@ const getDifferenceColorClass = (status?: TimeDifferenceStatus) => {
 const getSegmentColorClass = (
   index: number,
   filledSegments: number,
-  status?: TimeDifferenceStatus
+  status?: TimeDifferenceStatus,
 ) => {
   if (index < filledSegments) {
     if (status === "over") {
@@ -177,7 +177,11 @@ export const TimeSheet = ({
                   {entry.time}
                   {entry.difference && entry.differenceLabel && (
                     <span className="md:hidden py-0.5 px-2 bg-card border border-border text-muted-foreground text-xs rounded-full">
-                      <span className={getDifferenceColorClass(entry.differenceStatus)}>
+                      <span
+                        className={getDifferenceColorClass(
+                          entry.differenceStatus,
+                        )}
+                      >
                         {entry.difference}
                       </span>{" "}
                       {entry.differenceLabel}
@@ -185,7 +189,11 @@ export const TimeSheet = ({
                   )}
                   {entry.difference && !entry.differenceLabel && (
                     <span className="md:hidden py-0.5 px-2 bg-card border border-border text-muted-foreground text-xs rounded-full">
-                      <span className={getDifferenceColorClass(entry.differenceStatus)}>
+                      <span
+                        className={getDifferenceColorClass(
+                          entry.differenceStatus,
+                        )}
+                      >
                         {entry.difference}
                       </span>
                     </span>
@@ -197,10 +205,16 @@ export const TimeSheet = ({
                   >
                     {entry.tooltipText && entry.differenceStatus ? (
                       <>
-                        <span className={getDifferenceColorClass(entry.differenceStatus)}>
+                        <span
+                          className={getDifferenceColorClass(
+                            entry.differenceStatus,
+                          )}
+                        >
                           {entry.difference}
                         </span>{" "}
-                        {entry.differenceStatus === "under" ? "under limit" : "over limit"}
+                        {entry.differenceStatus === "under"
+                          ? "under limit"
+                          : "over limit"}
                       </>
                     ) : (
                       entry.tooltipText || entry.time
@@ -212,20 +226,22 @@ export const TimeSheet = ({
 
             {/* Segmented Progress */}
             <div className="lg:order-2 col-span-12 lg:col-span-6 mt-1 md:mt-0 w-full flex lg:justify-center items-center gap-x-1.5">
-              {Array.from({ length: entry.totalSegments }).map((_, segmentIndex) => (
-                <div
-                  key={segmentIndex}
-                  className={`shrink-0 size-2.5 flex flex-col justify-center overflow-hidden text-xs text-white text-center whitespace-nowrap rounded-full transition duration-500 ${getSegmentColorClass(
-                    segmentIndex,
-                    entry.filledSegments,
-                    entry.differenceStatus
-                  )}`}
-                  role="progressbar"
-                  aria-valuenow={10}
-                  aria-valuemin={0}
-                  aria-valuemax={100}
-                />
-              ))}
+              {Array.from({ length: entry.totalSegments }).map(
+                (_, segmentIndex) => (
+                  <div
+                    key={segmentIndex}
+                    className={`shrink-0 size-2.5 flex flex-col justify-center overflow-hidden text-xs text-white text-center whitespace-nowrap rounded-full transition duration-500 ${getSegmentColorClass(
+                      segmentIndex,
+                      entry.filledSegments,
+                      entry.differenceStatus,
+                    )}`}
+                    role="progressbar"
+                    aria-valuenow={10}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                  />
+                ),
+              )}
             </div>
           </div>
         ))}

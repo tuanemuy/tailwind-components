@@ -123,7 +123,7 @@ export const StatsWithAvatarGroup = ({
             {card.avatars && card.avatars.length > 0 && (
               <div className="flex items-center -space-x-2">
                 {card.avatars.map((avatar, avatarIndex) =>
-                  renderAvatar(avatar, avatarIndex)
+                  renderAvatar(avatar, avatarIndex),
                 )}
               </div>
             )}

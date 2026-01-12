@@ -136,20 +136,45 @@ const defaultFeedbackItem: DropdownMenuItem = {
 const defaultSections: ProgressSection[] = [
   {
     segments: [
-      { color: "bg-chart-5", label: "Spam/blocked", value: 12, percentage: 9.9 },
-      { color: "bg-chart-4", label: "Valid leads", value: 28, percentage: 25.6 },
+      {
+        color: "bg-chart-5",
+        label: "Spam/blocked",
+        value: 12,
+        percentage: 9.9,
+      },
+      {
+        color: "bg-chart-4",
+        label: "Valid leads",
+        value: 28,
+        percentage: 25.6,
+      },
     ],
   },
   {
     segments: [
-      { color: "bg-chart-3", label: "Qualified leads", value: 38, percentage: 29.5 },
+      {
+        color: "bg-chart-3",
+        label: "Qualified leads",
+        value: 38,
+        percentage: 29.5,
+      },
       { color: "bg-chart-2", label: "Cold leads", value: 31, percentage: 20.5 },
     ],
   },
   {
     segments: [
-      { color: "bg-chart-1", label: "Converted to deal", value: 22, percentage: 17.0 },
-      { color: "bg-primary", label: "Still in pipeline", value: 44, percentage: 43.0 },
+      {
+        color: "bg-chart-1",
+        label: "Converted to deal",
+        value: 22,
+        percentage: 17.0,
+      },
+      {
+        color: "bg-primary",
+        label: "Still in pipeline",
+        value: 44,
+        percentage: 43.0,
+      },
     ],
   },
 ];

@@ -26,7 +26,8 @@ export const CustomHighlight: Story = {
   args: {
     title: "Browser Usage",
     highlightValue: "92%",
-    description: "Desktop browser usage has increased significantly this month.",
+    description:
+      "Desktop browser usage has increased significantly this month.",
   },
 };
 

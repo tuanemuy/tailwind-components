@@ -74,7 +74,8 @@ const defaultItems: UserCardItem[] = [
   {
     id: "1",
     name: "Amanda Harvey",
-    avatarSrc: "https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?w=320&h=320&fit=facearea&facepad=3",
+    avatarSrc:
+      "https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?w=320&h=320&fit=facearea&facepad=3",
     heroBackground: <DefaultHeroBackground />,
     badge: {
       label: "Pro",
@@ -92,7 +93,8 @@ const defaultItems: UserCardItem[] = [
   {
     id: "2",
     name: "James Collins",
-    avatarSrc: "https://images.unsplash.com/photo-1659482633369-9fe69af50bfb?w=320&h=320&fit=facearea&facepad=3",
+    avatarSrc:
+      "https://images.unsplash.com/photo-1659482633369-9fe69af50bfb?w=320&h=320&fit=facearea&facepad=3",
     heroBackground: <DefaultHeroBackground />,
     info: [
       { label: "Role", value: "Back-End Developer" },
@@ -158,7 +160,9 @@ export const UserCardWithHeroBackground = ({
             <dl className="grid grid-cols-2 gap-x-2">
               {item.info.map((infoItem, idx) => (
                 <div key={idx} className="contents">
-                  <dt className="py-1 text-sm text-muted-foreground">{infoItem.label}:</dt>
+                  <dt className="py-1 text-sm text-muted-foreground">
+                    {infoItem.label}:
+                  </dt>
                   <dd className="py-1 inline-flex justify-end items-center gap-x-2 text-end font-medium text-sm text-foreground">
                     {infoItem.value}
                   </dd>

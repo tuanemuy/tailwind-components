@@ -117,8 +117,20 @@ const CNFlag = () => (
 );
 
 const defaultItems: ItemData[] = [
-  { icon: <USFlag />, rank: "1st", count: "1,265", label: "United States", barHeight: 10 },
-  { icon: <DEFlag />, rank: "2nd", count: "1,009", label: "Germany", barHeight: 8 },
+  {
+    icon: <USFlag />,
+    rank: "1st",
+    count: "1,265",
+    label: "United States",
+    barHeight: 10,
+  },
+  {
+    icon: <DEFlag />,
+    rank: "2nd",
+    count: "1,009",
+    label: "Germany",
+    barHeight: 8,
+  },
   { icon: <CNFlag />, rank: "3rd", count: "922", label: "China", barHeight: 6 },
 ];
 
@@ -179,9 +191,7 @@ export const TopCountries = ({
           </span>
         </div>
 
-        <p className="mt-1 text-sm text-muted-foreground">
-          {performanceText}
-        </p>
+        <p className="mt-1 text-sm text-muted-foreground">{performanceText}</p>
       </div>
     </div>
   );

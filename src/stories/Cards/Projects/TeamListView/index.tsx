@@ -29,12 +29,22 @@ const defaultItems: TeamItem[] = [
     name: "#Digitalmarketing",
     href: "#",
     badges: ["Marketing", "Digital"],
-    description: "Our group promotes and sells products and services by leveraging online marketing tactics",
+    description:
+      "Our group promotes and sells products and services by leveraging online marketing tactics",
     members: [
-      { type: "image", src: "https://images.unsplash.com/photo-1659482633369-9fe69af50bfb?w=320&h=320&fit=facearea&facepad=2.5" },
+      {
+        type: "image",
+        src: "https://images.unsplash.com/photo-1659482633369-9fe69af50bfb?w=320&h=320&fit=facearea&facepad=2.5",
+      },
       { type: "initial", initial: "L" },
-      { type: "image", src: "https://images.unsplash.com/photo-1679412330254-90cb240038c5?w=320&h=320&fit=facearea&facepad=2.5" },
-      { type: "image", src: "https://images.unsplash.com/photo-1659482634023-2c4fda99ac0c?w=320&h=320&fit=facearea&facepad=2.5" },
+      {
+        type: "image",
+        src: "https://images.unsplash.com/photo-1679412330254-90cb240038c5?w=320&h=320&fit=facearea&facepad=2.5",
+      },
+      {
+        type: "image",
+        src: "https://images.unsplash.com/photo-1659482634023-2c4fda99ac0c?w=320&h=320&fit=facearea&facepad=2.5",
+      },
       { type: "initial", initial: "O" },
     ],
   },
@@ -45,7 +55,10 @@ const defaultItems: TeamItem[] = [
     badges: ["Customer service", "Support"],
     description: "Keep in touch and stay productive with us",
     members: [
-      { type: "image", src: "https://images.unsplash.com/photo-1659482634023-2c4fda99ac0c?w=320&h=320&fit=facearea&facepad=2.5" },
+      {
+        type: "image",
+        src: "https://images.unsplash.com/photo-1659482634023-2c4fda99ac0c?w=320&h=320&fit=facearea&facepad=2.5",
+      },
       { type: "initial", initial: "M" },
       { type: "initial", initial: "S" },
     ],
@@ -115,7 +128,7 @@ export const TeamListView = ({
                       >
                         {member.initial}
                       </span>
-                    )
+                    ),
                   )}
                 </div>
               </div>

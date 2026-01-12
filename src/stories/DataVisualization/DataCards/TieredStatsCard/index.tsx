@@ -100,9 +100,7 @@ export const TieredStatsCard = ({
 }: TieredStatsCardProps) => {
   const TrendIcon = trendDirection === "up" ? ArrowUpIcon : ArrowDownIcon;
   const trendColorClass =
-    trendDirection === "up"
-      ? "text-primary"
-      : "text-destructive";
+    trendDirection === "up" ? "text-primary" : "text-destructive";
 
   return (
     <div>
@@ -198,7 +196,10 @@ export const TieredStatsCard = ({
       <div className="p-4 bg-card border-b border-border">
         <ul className="flex flex-col gap-y-2">
           {tiers.map((tier, index) => (
-            <li key={index} className="flex justify-between items-center gap-x-2">
+            <li
+              key={index}
+              className="flex justify-between items-center gap-x-2"
+            >
               <div className="relative size-full truncate">
                 <span className="relative z-[1] inline-flex py-1 px-2 w-full text-sm truncate">
                   <span className="text-card-foreground">{tier.name}</span>

@@ -126,7 +126,9 @@ export const ChatReports = ({
               </span>
             </div>
 
-            <p className="text-sm text-muted-foreground">{item.comparisonText}</p>
+            <p className="text-sm text-muted-foreground">
+              {item.comparisonText}
+            </p>
           </div>
         );
       })}

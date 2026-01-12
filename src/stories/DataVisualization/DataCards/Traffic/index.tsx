@@ -25,8 +25,18 @@ export interface TrafficProps {
 
 const defaultSources: TrafficSource[] = [
   { name: "github.com", value: "164k", percentage: 42, color: "bg-chart-5" },
-  { name: "accounts.google.com", value: "49k", percentage: 27, color: "bg-chart-4" },
-  { name: "themes.getbootstrap.com", value: "26k", percentage: 16, color: "bg-chart-3" },
+  {
+    name: "accounts.google.com",
+    value: "49k",
+    percentage: 27,
+    color: "bg-chart-4",
+  },
+  {
+    name: "themes.getbootstrap.com",
+    value: "26k",
+    percentage: 16,
+    color: "bg-chart-3",
+  },
   { name: "htmlstream.com", value: "8k", percentage: 6, color: "bg-chart-2" },
   { name: "Others", value: "12k", percentage: 9, color: "bg-muted-foreground" },
 ];

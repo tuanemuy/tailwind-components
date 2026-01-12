@@ -154,7 +154,14 @@ const createFavoriteButton = (name: string) => (
 
 const createActionsDropdown = (name: string) => (
   <UserActionsDropdown
-    item={{ id: "", name, avatarSrc: "", heroBackground: <DefaultHeroBackground />, info: [], tags: [] }}
+    item={{
+      id: "",
+      name,
+      avatarSrc: "",
+      heroBackground: <DefaultHeroBackground />,
+      info: [],
+      tags: [],
+    }}
     onShare={() => alert(`Sharing ${name}`)}
     onBlock={() => alert(`Blocked ${name}`)}
     onDelete={() => alert(`Deleted ${name}`)}
@@ -167,7 +174,8 @@ export const WithActions: Story = {
       {
         id: "1",
         name: "Amanda Harvey",
-        avatarSrc: "https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?w=320&h=320&fit=facearea&facepad=3",
+        avatarSrc:
+          "https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?w=320&h=320&fit=facearea&facepad=3",
         heroBackground: <DefaultHeroBackground />,
         badge: {
           label: "Pro",
@@ -187,7 +195,8 @@ export const WithActions: Story = {
       {
         id: "2",
         name: "James Collins",
-        avatarSrc: "https://images.unsplash.com/photo-1659482633369-9fe69af50bfb?w=320&h=320&fit=facearea&facepad=3",
+        avatarSrc:
+          "https://images.unsplash.com/photo-1659482633369-9fe69af50bfb?w=320&h=320&fit=facearea&facepad=3",
         heroBackground: <DefaultHeroBackground />,
         info: [
           { label: "Role", value: "Back-End Developer" },
@@ -209,7 +218,8 @@ export const SingleUser: Story = {
       {
         id: "1",
         name: "Sarah Connor",
-        avatarSrc: "https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?w=320&h=320&fit=facearea&facepad=3",
+        avatarSrc:
+          "https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?w=320&h=320&fit=facearea&facepad=3",
         heroBackground: <DefaultHeroBackground />,
         badge: {
           label: "Admin",

@@ -145,7 +145,8 @@ export const WithActions: Story = {
     items: [
       {
         id: "1",
-        imageSrc: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+        imageSrc:
+          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
         imageAlt: "Analytics Image",
         title: "Analytics",
         metadata: [
@@ -157,7 +158,8 @@ export const WithActions: Story = {
       },
       {
         id: "2",
-        imageSrc: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
+        imageSrc:
+          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
         imageAlt: "User Profile Image",
         title: "User Profile",
         metadata: [

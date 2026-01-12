@@ -150,9 +150,7 @@ export const StasCardsWithProgress = ({
   onDateButtonClick,
 }: StasCardsWithProgressProps) => {
   const getTrendColorClass = (variant: TrendVariant): string => {
-    return variant === "positive"
-      ? "text-primary"
-      : "text-destructive";
+    return variant === "positive" ? "text-primary" : "text-destructive";
   };
 
   return (

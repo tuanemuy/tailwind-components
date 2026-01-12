@@ -25,9 +25,18 @@ const defaultItems: FolderItem[] = [
   {
     id: "1",
     images: [
-      { src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop", label: "Resources" },
-      { src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&h=200&fit=crop", label: "Pro Banner" },
-      { src: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=200&h=200&fit=crop", label: "Preline v2.0" },
+      {
+        src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop",
+        label: "Resources",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&h=200&fit=crop",
+        label: "Pro Banner",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=200&h=200&fit=crop",
+        label: "Preline v2.0",
+      },
     ],
     title: "Analytics",
     metadata: ["Edited a minute ago", "20"],
@@ -36,8 +45,14 @@ const defaultItems: FolderItem[] = [
   {
     id: "2",
     images: [
-      { src: "https://images.unsplash.com/photo-1635776062360-af423602aff3?w=200&h=200&fit=crop", label: "E-commerce demo layout" },
-      { src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop", label: "Dashboard" },
+      {
+        src: "https://images.unsplash.com/photo-1635776062360-af423602aff3?w=200&h=200&fit=crop",
+        label: "E-commerce demo layout",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop",
+        label: "Dashboard",
+      },
     ],
     title: "Dashboard",
     metadata: ["Edited 5 weeks ago", "3"],
@@ -56,20 +71,22 @@ export const FilesMultipleImagesListView = ({
           className="relative group p-3 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 bg-card border border-border -mt-px first:mt-0 first:rounded-t-xl last:rounded-b-xl"
         >
           <div className="grid grid-cols-3 gap-1">
-            {item.images.slice(0, item.addButton ? 2 : 3).map((image, imgIndex) => (
-              <a
-                key={imgIndex}
-                className="group relative block sm:w-20 h-24 sm:h-16 flex flex-col justify-center items-center p-3 bg-muted border border-border first:rounded-s-lg last:rounded-e-lg overflow-hidden after:absolute after:inset-0 hover:after:bg-foreground/70 after:duration-300 focus:outline-hidden focus:after:bg-foreground/70"
-                href={image.href || "#"}
-              >
-                <img src={image.src} alt={image.alt || "Project Image"} />
-                {image.label && (
-                  <small className="absolute bottom-2 start-2 end-2 z-10 text-xs text-white truncate opacity-0 group-hover:opacity-100 group-hover:duration-300 group-focus:opacity-100 group-focus:duration-300">
-                    {image.label}
-                  </small>
-                )}
-              </a>
-            ))}
+            {item.images
+              .slice(0, item.addButton ? 2 : 3)
+              .map((image, imgIndex) => (
+                <a
+                  key={imgIndex}
+                  className="group relative block sm:w-20 h-24 sm:h-16 flex flex-col justify-center items-center p-3 bg-muted border border-border first:rounded-s-lg last:rounded-e-lg overflow-hidden after:absolute after:inset-0 hover:after:bg-foreground/70 after:duration-300 focus:outline-hidden focus:after:bg-foreground/70"
+                  href={image.href || "#"}
+                >
+                  <img src={image.src} alt={image.alt || "Project Image"} />
+                  {image.label && (
+                    <small className="absolute bottom-2 start-2 end-2 z-10 text-xs text-white truncate opacity-0 group-hover:opacity-100 group-hover:duration-300 group-focus:opacity-100 group-focus:duration-300">
+                      {image.label}
+                    </small>
+                  )}
+                </a>
+              ))}
             {item.addButton && (
               <div className="sm:w-20 h-24 sm:h-16 first:rounded-s-lg last:rounded-e-lg overflow-hidden">
                 {item.addButton}

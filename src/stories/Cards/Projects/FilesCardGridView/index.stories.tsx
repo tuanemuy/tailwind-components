@@ -32,7 +32,18 @@ const FileActionButtons = ({
       className="size-7.5 inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-muted-foreground hover:bg-muted disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-muted"
       onClick={() => onDownload?.(item)}
     >
-      <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        className="shrink-0 size-4"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
         <polyline points="7 10 12 15 17 10" />
         <line x1="12" x2="12" y1="15" y2="3" />
@@ -44,7 +55,18 @@ const FileActionButtons = ({
       className="size-7.5 inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-muted-foreground hover:bg-muted disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-muted"
       onClick={() => onShare?.(item)}
     >
-      <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        className="shrink-0 size-4"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <circle cx="18" cy="5" r="3" />
         <circle cx="6" cy="12" r="3" />
         <circle cx="18" cy="19" r="3" />
@@ -60,7 +82,18 @@ const FileActionButtons = ({
       className="size-7.5 inline-flex justify-center items-center gap-x-2 rounded-lg border border-transparent text-destructive hover:bg-destructive/10 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-destructive/10"
       onClick={() => onDelete?.(item)}
     >
-      <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        className="shrink-0 size-4"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <path d="M3 6h18" />
         <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
         <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
@@ -79,7 +112,8 @@ export const CustomItems: Story = {
       {
         id: "1",
         type: "image",
-        imageSrc: "https://images.unsplash.com/photo-1635776062360-af423602aff3?w=560&h=320&fit=crop",
+        imageSrc:
+          "https://images.unsplash.com/photo-1635776062360-af423602aff3?w=560&h=320&fit=crop",
         fileName: "hero_banner.jpg",
         metadata: "Design Team, Jan 10th, 2024",
       },
@@ -108,7 +142,8 @@ export const WithActions: Story = {
       {
         id: "1",
         type: "image",
-        imageSrc: "https://images.unsplash.com/photo-1635776062360-af423602aff3?w=560&h=320&fit=crop",
+        imageSrc:
+          "https://images.unsplash.com/photo-1635776062360-af423602aff3?w=560&h=320&fit=crop",
         fileName: "cover_image.jpg",
         metadata: "James, Feb 25th, 2023",
         actions: createActionButtons("cover_image.jpg"),

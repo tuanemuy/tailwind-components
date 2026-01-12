@@ -14,7 +14,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // Sample dropdown component for actions
-const FileActionsDropdown = ({ onEdit, onFavorite, onArchive, onDelete }: {
+const FileActionsDropdown = ({
+  onEdit,
+  onFavorite,
+  onArchive,
+  onDelete,
+}: {
   onEdit?: () => void;
   onFavorite?: () => void;
   onArchive?: () => void;
@@ -95,7 +100,8 @@ export const CustomItems: Story = {
     items: [
       {
         id: "1",
-        imageSrc: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+        imageSrc:
+          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
         imageAlt: "Dashboard Image",
         title: "Dashboard",
         metadata: [
@@ -106,7 +112,8 @@ export const CustomItems: Story = {
       },
       {
         id: "2",
-        imageSrc: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
+        imageSrc:
+          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
         imageAlt: "Welcome Page Image",
         title: "Welcome Page",
         metadata: [
@@ -124,10 +131,14 @@ export const WithActions: Story = {
     items: [
       {
         id: "1",
-        imageSrc: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+        imageSrc:
+          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
         imageAlt: "Analytics Image",
         title: "Analytics",
-        metadata: [{ label: "Edited a minute ago" }, { label: "15kb", hidden: true }],
+        metadata: [
+          { label: "Edited a minute ago" },
+          { label: "15kb", hidden: true },
+        ],
         href: "#",
         actions: (
           <FileActionsDropdown
@@ -140,10 +151,14 @@ export const WithActions: Story = {
       },
       {
         id: "2",
-        imageSrc: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
+        imageSrc:
+          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
         imageAlt: "User Profile Image",
         title: "User Profile",
-        metadata: [{ label: "Edited 1 hour ago" }, { label: "412kb", hidden: true }],
+        metadata: [
+          { label: "Edited 1 hour ago" },
+          { label: "412kb", hidden: true },
+        ],
         href: "#",
         actions: (
           <FileActionsDropdown

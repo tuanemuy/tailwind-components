@@ -124,7 +124,15 @@ export const Default: Story = {};
 
 const createActionsDropdown = (projectTitle: string) => (
   <ProjectActionsDropdown
-    item={{ id: "", logo: <SlackIcon />, companyName: "", projectTitle, stats: [], details: [], category: { name: "" } }}
+    item={{
+      id: "",
+      logo: <SlackIcon />,
+      companyName: "",
+      projectTitle,
+      stats: [],
+      details: [],
+      category: { name: "" },
+    }}
     onEdit={() => alert(`Editing ${projectTitle}`)}
     onShare={() => alert(`Sharing ${projectTitle}`)}
     onDelete={() => alert(`Deleting ${projectTitle}`)}
@@ -155,7 +163,9 @@ export const WithActions: Story = {
                   src="https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?w=320&h=320&fit=facearea&facepad=3"
                   alt="Amanda Harvey"
                 />
-                <span className="font-medium text-sm text-foreground">Amanda Harvey</span>
+                <span className="font-medium text-sm text-foreground">
+                  Amanda Harvey
+                </span>
               </div>
             ),
           },
@@ -187,7 +197,9 @@ export const WithActions: Story = {
                   src="https://images.unsplash.com/photo-1659482633369-9fe69af50bfb?w=320&h=320&fit=facearea&facepad=3"
                   alt="John Smith"
                 />
-                <span className="font-medium text-sm text-foreground">John Smith</span>
+                <span className="font-medium text-sm text-foreground">
+                  John Smith
+                </span>
               </div>
             ),
           },
@@ -226,7 +238,9 @@ export const SingleProject: Story = {
                   src="https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?w=320&h=320&fit=facearea&facepad=3"
                   alt="Sarah Connor"
                 />
-                <span className="font-medium text-sm text-foreground">Sarah Connor</span>
+                <span className="font-medium text-sm text-foreground">
+                  Sarah Connor
+                </span>
               </div>
             ),
           },
@@ -239,7 +253,9 @@ export const SingleProject: Story = {
                   src="https://images.unsplash.com/photo-1659482633369-9fe69af50bfb?w=320&h=320&fit=facearea&facepad=3"
                   alt="Mike Ross"
                 />
-                <span className="font-medium text-sm text-foreground">Mike Ross</span>
+                <span className="font-medium text-sm text-foreground">
+                  Mike Ross
+                </span>
               </div>
             ),
           },

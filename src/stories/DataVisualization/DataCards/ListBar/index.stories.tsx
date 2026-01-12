@@ -33,10 +33,7 @@ export const CustomColumns: Story = {
   args: {
     title: "Traffic Sources",
     rowLabel: "Source",
-    columns: [
-      { label: "Visits" },
-      { label: "Sessions" },
-    ],
+    columns: [{ label: "Visits" }, { label: "Sessions" }],
     items: [
       { label: "Direct", values: ["12.5k", "45.2k"], barWidth: 100 },
       { label: "Organic Search", values: ["8.2k", "32.1k"], barWidth: 70 },
@@ -50,9 +47,21 @@ export const CustomColumns: Story = {
 export const FewItems: Story = {
   args: {
     items: [
-      { label: "preline.co", values: ["39,8k", "329,3k", "19,8k"], barWidth: 100 },
-      { label: "preline.co/examples", values: ["27k", "56,2k", "48,2k"], barWidth: 65 },
-      { label: "preline.co/plugins", values: ["77,8k", "13.0k", "5.5k"], barWidth: 40 },
+      {
+        label: "preline.co",
+        values: ["39,8k", "329,3k", "19,8k"],
+        barWidth: 100,
+      },
+      {
+        label: "preline.co/examples",
+        values: ["27k", "56,2k", "48,2k"],
+        barWidth: 65,
+      },
+      {
+        label: "preline.co/plugins",
+        values: ["77,8k", "13.0k", "5.5k"],
+        barWidth: 40,
+      },
     ],
   },
 };

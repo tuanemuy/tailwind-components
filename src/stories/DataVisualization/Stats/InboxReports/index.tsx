@@ -238,7 +238,12 @@ const GoogleBrandIcon = () => (
     </g>
     <defs>
       <clipPath id="clip0_google">
-        <rect width="32" height="32" fill="white" transform="translate(0.937439)" />
+        <rect
+          width="32"
+          height="32"
+          fill="white"
+          transform="translate(0.937439)"
+        />
       </clipPath>
     </defs>
   </svg>
@@ -268,7 +273,11 @@ const defaultCards: InboxReportCard[] = [
   {
     value: "1,086",
     label: "Total emails",
-    brandIcons: [<MailBrandIcon key="mail" />, <GoogleBrandIcon key="google" />, <YandexBrandIcon key="yandex" />],
+    brandIcons: [
+      <MailBrandIcon key="mail" />,
+      <GoogleBrandIcon key="google" />,
+      <YandexBrandIcon key="yandex" />,
+    ],
     details: [
       { label: "Replied:", value: "828", icon: <RepliedIcon /> },
       { label: "Tagged:", value: "9", icon: <TaggedIcon /> },

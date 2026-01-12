@@ -86,7 +86,9 @@ const defaultItems: ProjectItem[] = [
               src="https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?w=320&h=320&fit=facearea&facepad=3"
               alt="Amanda Harvey"
             />
-            <span className="font-medium text-sm text-foreground">Amanda Harvey</span>
+            <span className="font-medium text-sm text-foreground">
+              Amanda Harvey
+            </span>
           </div>
         ),
       },
@@ -99,7 +101,9 @@ const defaultItems: ProjectItem[] = [
               src="https://images.unsplash.com/photo-1659482633369-9fe69af50bfb?w=320&h=320&fit=facearea&facepad=3"
               alt="James Collins"
             />
-            <span className="font-medium text-sm text-foreground">James Collins</span>
+            <span className="font-medium text-sm text-foreground">
+              James Collins
+            </span>
           </div>
         ),
       },
@@ -130,7 +134,9 @@ const defaultItems: ProjectItem[] = [
               src="https://images.unsplash.com/photo-1659482633369-9fe69af50bfb?w=320&h=320&fit=facearea&facepad=3"
               alt="John Smith"
             />
-            <span className="font-medium text-sm text-foreground">John Smith</span>
+            <span className="font-medium text-sm text-foreground">
+              John Smith
+            </span>
           </div>
         ),
       },
@@ -143,7 +149,9 @@ const defaultItems: ProjectItem[] = [
               src="https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?w=320&h=320&fit=facearea&facepad=3"
               alt="Sarah Johnson"
             />
-            <span className="font-medium text-sm text-foreground">Sarah Johnson</span>
+            <span className="font-medium text-sm text-foreground">
+              Sarah Johnson
+            </span>
           </div>
         ),
       },
@@ -155,9 +163,7 @@ const defaultItems: ProjectItem[] = [
   },
 ];
 
-export const Projects = ({
-  items = defaultItems,
-}: ProjectsProps) => {
+export const Projects = ({ items = defaultItems }: ProjectsProps) => {
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
       {items.map((item) => (
@@ -214,10 +220,14 @@ export const Projects = ({
           <div className="p-4 flex flex-col gap-y-4">
             {item.details.map((detail, detailIndex) => (
               <div key={detailIndex} className="flex items-center gap-x-2">
-                <p className="min-w-20 text-sm text-muted-foreground">{detail.label}</p>
+                <p className="min-w-20 text-sm text-muted-foreground">
+                  {detail.label}
+                </p>
                 <div className="grow">
                   {typeof detail.value === "string" ? (
-                    <p className="font-medium text-sm text-foreground">{detail.value}</p>
+                    <p className="font-medium text-sm text-foreground">
+                      {detail.value}
+                    </p>
                   ) : (
                     detail.value
                   )}
@@ -230,7 +240,9 @@ export const Projects = ({
               <p className="min-w-20 text-sm text-muted-foreground">Category</p>
               <div className="grow">
                 <span className="py-px px-2 inline-flex items-center gap-x-1.5 bg-muted text-sm text-foreground rounded-md">
-                  <span className={`inline-block w-1 h-3 ${item.category.color || "bg-primary"} rounded-full`}></span>
+                  <span
+                    className={`inline-block w-1 h-3 ${item.category.color || "bg-primary"} rounded-full`}
+                  ></span>
                   {item.category.name}
                 </span>
               </div>

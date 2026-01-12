@@ -142,10 +142,22 @@ export const WithActions: Story = {
       {
         id: "1",
         images: [
-          { src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop", label: "Resources" },
-          { src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&h=200&fit=crop", label: "Pro Banner" },
-          { src: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=200&h=200&fit=crop", label: "Preline v2.0" },
-          { src: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=200&h=200&fit=crop", label: "Analytics Site (Outdated)" },
+          {
+            src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop",
+            label: "Resources",
+          },
+          {
+            src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&h=200&fit=crop",
+            label: "Pro Banner",
+          },
+          {
+            src: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=200&h=200&fit=crop",
+            label: "Preline v2.0",
+          },
+          {
+            src: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=200&h=200&fit=crop",
+            label: "Analytics Site (Outdated)",
+          },
         ],
         title: "Analytics",
         metadata: [
@@ -158,8 +170,14 @@ export const WithActions: Story = {
       {
         id: "2",
         images: [
-          { src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop", label: "Resources" },
-          { src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&h=200&fit=crop", label: "Pro Banner" },
+          {
+            src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop",
+            label: "Resources",
+          },
+          {
+            src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&h=200&fit=crop",
+            label: "Pro Banner",
+          },
         ],
         title: "Dashboard",
         metadata: [
@@ -179,8 +197,14 @@ export const WithAddButton: Story = {
       {
         id: "1",
         images: [
-          { src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop", label: "Resources" },
-          { src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&h=200&fit=crop", label: "Pro Banner" },
+          {
+            src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop",
+            label: "Resources",
+          },
+          {
+            src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&h=200&fit=crop",
+            label: "Pro Banner",
+          },
         ],
         title: "Dashboard",
         metadata: [

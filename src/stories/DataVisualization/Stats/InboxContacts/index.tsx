@@ -250,7 +250,7 @@ export const InboxContacts = ({
           >
             {renderCardContent(card)}
           </div>
-        )
+        ),
       )}
     </div>
   );
