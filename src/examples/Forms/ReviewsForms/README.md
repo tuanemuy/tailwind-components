@@ -1,3 +1,14 @@
 # Reviews Forms
 
-Create customizable review forms with pre-set questions to guide reviewers, ensuring consistent and valuable feedback for submissions.
+商品レビューやフィードバックを投稿するためのフォームコンポーネント集です。評価入力、質問形式、テキスト入力などを組み合わせたレビューフォームを提供します。
+
+---
+
+## コンポーネント一覧
+
+### WriteAClothingProductReview
+**衣類商品レビューフォーム**
+
+説明: 衣類商品のレビューを投稿するためのフォーム。商品画像と名前が表示され、「おすすめしますか？」（絵文字付きYes/No）、総合評価（星評価）、フィット感（小さい〜大きい）、タイトル、レビュー本文を入力できます。ガイド付きの質問形式で、一貫した有益なフィードバックを収集できます。
+
+主なユースケース: ECサイトの商品レビュー、アパレル商品のフィードバック、カスタマーレビュー収集
