@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["**"]
+    "includes": ["src/**"]
   },
   "formatter": {
     "enabled": true,
@@ -16,7 +16,6 @@
   "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
     "enabled": true,
-    "includes": ["src/**"],
     "rules": {
       "recommended": true,
       "security": {
