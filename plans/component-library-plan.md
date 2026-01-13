@@ -1245,3 +1245,660 @@ export type LayoutVariant = "list" | "grid";
 - `src/examples/docs/categories/*.json` - カテゴリ別詳細メタデータ
 - `src/examples/` - HTMLサンプル（変換元）
 - `src/stories/` - 既存React実装（リファクタリング対象）
+
+---
+
+## 追加実装計画（Phase 9以降）
+
+720コンポーネントの詳細分析結果に基づき、以下のコンポーネントを追加実装する。
+
+### カバレッジ分析
+
+| カテゴリ | サンプル数 | 現計画 | 不足 |
+|---------|----------|--------|------|
+| UIControls | 103 | 約20 | 約80 |
+| Forms | 108 | 約15 | 約90 |
+| PageSections | 90 | 約5 | 約85 |
+| Overlays | 53 | 2 | 約50 |
+| Cards | 51 | 3 | 約48 |
+| E-Commerce | 49 | 4 | 約45 |
+| Marketing | 48 | 3 | 約45 |
+| Headers | 29 | 1 | 約28 |
+| InboxChatMessages | 28 | 0 | 28 |
+| Tables | 27 | 1 | 約26 |
+| DataVisualization | 23 | 1 | 約22 |
+| Pages | 22 | 3 | 約19 |
+| SidebarAndContents | 18 | 1 | 約17 |
+| Finance | 16 | 0 | 16 |
+| SearchAndCommandPalettes | 16 | 0 | 16 |
+| CalendarAndScheduling | 11 | 0 | 11 |
+| KanbanBoards | 9 | 0 | 9 |
+| VideoAndAudio | 8 | 0 | 8 |
+| Footer | 6 | 1 | 約5 |
+| Feedback | 5 | 0 | 5 |
+| **合計** | **720** | **約60** | **約650** |
+
+---
+
+### Phase 9: Atoms追加
+
+**目標**: 基本UIパーツの充実
+
+| コンポーネント | 説明 | 使用箇所 |
+|--------------|------|---------|
+| Tooltip | ツールチップ表示 | 全般 |
+| Skeleton | ローディングプレースホルダー | 全般 |
+| Spinner | ローディングスピナー | 全般 |
+| Image | 画像表示（lazy loading対応） | 全般 |
+| Kbd | キーボードショートカット表示 | Settings, Help |
+
+---
+
+### Phase 10: Molecules追加
+
+**目標**: 複合UIパーツの充実
+
+#### Navigation系
+
+| コンポーネント | 説明 | サンプル数 |
+|--------------|------|----------|
+| Tabs | タブナビゲーション（BarOnTop, Bordered, Segment, Vertical） | 11 |
+| Breadcrumb | パンくずリスト | 5 |
+| Pagination | ページネーション | 8 |
+| Stepper | ステップインジケーター | 6 |
+
+#### Input系
+
+| コンポーネント | 説明 | サンプル数 |
+|--------------|------|----------|
+| SearchInput | 検索入力（Command+K対応） | 8 |
+| DatePicker | 日付選択 | 6 |
+| TimePicker | 時刻選択 | 4 |
+| DateRangePicker | 日付範囲選択 | 3 |
+| RangeSlider | 範囲スライダー | 5 |
+| ColorPicker | カラー選択 | 3 |
+| TagInput | タグ入力（複数選択） | 4 |
+| ComboBox | コンボボックス（検索+選択） | 6 |
+
+#### Feedback系
+
+| コンポーネント | 説明 | サンプル数 |
+|--------------|------|----------|
+| Alert | アラートバナー | 8 |
+| Toast | トースト通知 | 5 |
+| EmptyState | 空状態表示 | 4 |
+
+#### Content系
+
+| コンポーネント | 説明 | サンプル数 |
+|--------------|------|----------|
+| Accordion | アコーディオン | 6 |
+| Menu | メニュー（Context, Dropdown） | 10 |
+| Tooltip（拡張） | コンテンツ付きツールチップ | 5 |
+| Rating | 星評価（5段階） | 4 |
+
+---
+
+### Phase 11: Organisms - PageSections
+
+**目標**: ページセクションコンポーネントの実装（90サンプル対応）
+
+#### Banners
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| Banner | 告知バナー（Gift, LoginRegister, News） | 5 |
+| FloatingBanner | フローティングバナー（Rate, QuickActions） | 3 |
+
+#### DescriptionLists
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| DescriptionList | 定義リスト（Simple, WithIcons, Grid） | 8 |
+| UserProfileCard | プロフィールカード | 9 |
+
+#### Navigations
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| SectionNav | セクション内ナビ（BottomBordered, Pilled, Horizontal） | 4 |
+| CardNav | カードナビゲーション（BarOnTop, Segment, Vertical） | 11 |
+
+#### Timeline
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| Timeline | タイムライン（Activity, History, Order） | 10 |
+| ActivityFeed | アクティビティフィード | 4 |
+
+#### TitleBars
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| TitleBar | タイトルバー（Simple, WithActions, WithDatepicker） | 22 |
+| KanbanGroupHeading | カンバンカラムヘッダー | 4 |
+
+#### QuickActions
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| QuickActionCard | クイックアクションカード | 14 |
+| QuickActionBar | フローティングアクションバー | 2 |
+
+#### SetUpFlows
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| SetupFlow | セットアップフロー（List, Timeline, Accordion） | 4 |
+| OnboardingChecklist | オンボーディングチェックリスト | 2 |
+
+#### Success/Feedback
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| SuccessMessage | 成功メッセージ画面 | 2 |
+| NotificationSettings | 通知設定マトリクス | 1 |
+
+---
+
+### Phase 12: Organisms - Overlays拡張
+
+**目標**: モーダル・ドロワーのバリエーション実装（53サンプル対応）
+
+#### Authentication系
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| TwoFactorModal | 2FA設定モーダル | 1 |
+
+#### Billing/Payment系
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| AddCardModal | カード追加モーダル | 2 |
+| AddPaymentModal | 支払い方法追加モーダル | 2 |
+| ManageCardsModal | カード管理モーダル | 1 |
+| UpgradeModal | アップグレードモーダル | 2 |
+
+#### DateAndTime系
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| SnoozeModal | スヌーズ設定モーダル | 2 |
+| ScheduleModal | スケジュール設定モーダル | 2 |
+| RecurrenceModal | 繰り返し設定モーダル | 1 |
+
+#### DataManagement系
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| ExportModal | エクスポートモーダル | 2 |
+| ImportModal | インポートモーダル | 2 |
+
+#### E-Commerce系
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| ProductDetailModal | 商品詳細モーダル | 2 |
+| SizeGuideModal | サイズガイドモーダル | 1 |
+| ViewLookModal | コーディネート表示モーダル | 1 |
+
+#### Feedback系
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| ConfirmModal | 確認モーダル（Delete, Cancel） | 2 |
+| ReviewModal | レビューモーダル | 2 |
+
+#### General系
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| StatusModal | ステータス設定モーダル | 2 |
+| TagsModal | タグ管理モーダル | 2 |
+| KeyboardShortcutsModal | ショートカット一覧モーダル | 1 |
+| InvoiceModal | 請求書表示モーダル | 1 |
+| LocationModal | 位置選択モーダル | 2 |
+
+#### ShareAndInvite系
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| InviteModal | 招待モーダル（Simple, WithPermissions） | 2 |
+| ShareModal | 共有モーダル | 1 |
+
+#### Filter系
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| FilterDrawer | フィルターサイドバー | 2 |
+| FilterModal | フィルターモーダル | 1 |
+
+#### Drawers拡張
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| ActivityDrawer | アクティビティドロワー | 1 |
+| ChatUserDetailsDrawer | チャット詳細ドロワー | 1 |
+| FilesInfoDrawer | ファイル情報ドロワー | 1 |
+| TaskDetailsDrawer | タスク詳細ドロワー | 1 |
+| UserDetailsDrawer | ユーザー詳細ドロワー | 2 |
+
+#### EditForm系
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| EditUserModal | ユーザー編集モーダル | 1 |
+| EditEventModal | イベント編集モーダル | 1 |
+| CreateProjectModal | プロジェクト作成モーダル | 2 |
+
+#### Compose系
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| ComposeModal | メッセージ作成モーダル | 1 |
+
+#### Settings系
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| SettingsModal | 設定モーダル（タブ付き） | 3 |
+
+---
+
+### Phase 13: Organisms - Cards
+
+**目標**: カードコンポーネントの実装（51サンプル対応）
+
+#### Contacts
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| ContactCard | 連絡先カード（Avatar, Checkbox, Mini） | 6 |
+
+#### DataSnippets
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| ProjectSummaryCard | プロジェクトサマリーカード | 3 |
+| FollowUsCard | SNSリンクカード | 1 |
+| FileSnippet | ファイルスニペット | 1 |
+
+#### FilesAndFolders
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| FolderCard | フォルダカード | 1 |
+| PreviewFileCard | ファイルプレビューカード | 2 |
+
+#### ImportAndExportData
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| ImportExportCard | インポート/エクスポートカード | 3 |
+
+#### Integrations
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| IntegrationCard | 連携サービスカード | 2 |
+
+#### LocationAndAddress
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| AddressCard | 住所カード | 2 |
+| StoreContactCard | 店舗連絡先カード | 1 |
+
+#### MiniCards
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| CreditsCard | クレジット残量カード | 1 |
+| HelpResourcesCard | ヘルプリソースカード | 1 |
+| IntroVideoCard | 紹介動画カード | 1 |
+| TrialCard | トライアル残日数カード | 1 |
+| UpgradeProCard | アップグレード促進カード | 1 |
+
+#### ProjectDetails
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| ProjectDetailsCard | プロジェクト詳細カード（Alternative, Default） | 2 |
+
+#### Projects
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| FileCard | ファイルカード（Grid, List, MultiImages） | 6 |
+| ProjectCard | プロジェクトカード | 1 |
+| TeamCard | チームカード | 1 |
+| UserHeroCard | ユーザーヒーローカード | 1 |
+
+#### BrandingFeaturedCards
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| AppDownloadCard | アプリダウンロードカード | 2 |
+
+#### InlineCards
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| InviteFriendsCard | 友人招待カード | 1 |
+| FeaturePreviewCard | 機能プレビューカード | 1 |
+
+#### MasonryLayout
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| MasonryGrid | メイソンリーグリッド | 1 |
+
+---
+
+### Phase 14: Organisms - E-Commerce拡張
+
+**目標**: ECサイト向けコンポーネントの実装（49サンプル対応）
+
+#### CheckoutForms
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| CheckoutForm | チェックアウトフォーム（Guest, LoggedIn） | 2 |
+| OrderConfirmation | 注文確認画面 | 2 |
+| OrderSummary | 注文サマリー | 1 |
+| ReviewAndPay | 確認・支払い画面 | 1 |
+| ShoppingBag | ショッピングバッグ | 2 |
+| ShopCheckout | ショップチェックアウト | 1 |
+
+#### E-CommerceGalleries
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| ProductGallery | 商品ギャラリー（Grid, HorizontalSlider, VerticalSlider） | 4 |
+| ImageTextPair | 画像テキストペア | 1 |
+
+#### E-CommerceGalleryCategories
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| CategoryGrid | カテゴリグリッド | 3 |
+| CategorySlider | カテゴリスライダー | 3 |
+| CategoryCircular | 円形カテゴリナビ | 1 |
+| CategoryPill | ピル型カテゴリ | 2 |
+
+#### E-CommerceOrderDetails
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| OrderStatusCard | 注文ステータスカード | 4 |
+| ExchangeReturnCard | 交換・返品カード | 2 |
+
+#### E-CommerceProductDetails
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| ProductDetails | 商品詳細（Gallery, Marketplace, Shop, StickySidebar） | 4 |
+
+#### E-CommerceProductListings
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| ProductListing | 商品リスト（Marketplace, Mini, Shop） | 14 |
+| ProductListingGrid | 商品グリッド | 4 |
+| ProductListingSlider | 商品スライダー | 2 |
+| CompleteTheLook | コーディネート提案 | 1 |
+
+---
+
+### Phase 15: Organisms - DataVisualization
+
+**目標**: データ可視化コンポーネントの実装（23サンプル対応）
+
+#### DataCards
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| BlockStatsCard | ブロック統計カード | 1 |
+| BrowsersCard | ブラウザ統計カード | 1 |
+| ListBarCard | リストバーカード | 1 |
+| ProgressbarsCard | プログレスバーカード | 1 |
+| ProjectCostsCard | プロジェクトコストカード | 1 |
+| SegmentedProgressCard | セグメントプログレスカード | 1 |
+| StackedProgressCard | スタックプログレスカード | 1 |
+| SalesStatsCard | 売上統計カード | 1 |
+| SurveyDataCard | アンケートデータカード（Horizontal, Vertical） | 2 |
+| TieredStatsCard | 階層統計カード | 1 |
+| TimeSheetCard | タイムシートカード | 1 |
+| TopCardWithProgress | トップカード（Progress付き） | 1 |
+| TopCountriesCard | 上位国ランキングカード | 1 |
+| TrafficCard | トラフィックカード | 1 |
+
+#### Stats
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| ChatReportsStats | チャットレポート統計 | 1 |
+| InboxContactsStats | 連絡先統計 | 1 |
+| InboxReportsStats | 受信箱統計 | 1 |
+| BrandSalesStats | ブランド売上統計 | 1 |
+| ProjectReportsStats | プロジェクトレポート統計 | 1 |
+| AnimatedStats | ホバーアニメーション統計 | 1 |
+| AvatarGroupStats | アバターグループ統計 | 1 |
+| IconStats | アイコン統計 | 1 |
+
+---
+
+### Phase 16: Organisms - InboxChatMessages（新規）
+
+**目標**: チャット・メッセージングコンポーネントの実装（28サンプル対応）
+
+#### ChatBubbles
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| MessageBubble | メッセージバブル（Text, Image, File, Voice, Link） | 12 |
+
+#### ChatThreads
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| InboxThread | メールスレッド表示 | 1 |
+| ComposeThread | メッセージ作成フォーム | 1 |
+
+#### ChatWidgets
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| ChatWidget | チャットウィジェット（Welcome, Messages, Conversation, Help） | 7 |
+
+#### Layouts
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| ChatLayout | チャットレイアウト | 2 |
+| InboxLayout | インボックスレイアウト | 2 |
+| TicketsLayout | チケット管理レイアウト | 1 |
+| ReportsLayout | レポートレイアウト | 1 |
+| CRMLayout | CRMレイアウト | 1 |
+
+---
+
+### Phase 17: Organisms - ドメイン特化追加
+
+**目標**: 特定ドメイン向けコンポーネントの実装
+
+#### Finance（16サンプル）
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| BalanceCard | 残高表示カード | 2 |
+| TransactionList | 取引履歴リスト | 3 |
+| PaymentCard | 支払いカード | 2 |
+| TransferForm | 送金フォーム | 3 |
+| AccountCard | 口座カード | 2 |
+| ReceiptTimeline | レシートタイムライン | 1 |
+| CurrencySelect | 通貨選択 | 3 |
+
+#### CalendarAndScheduling（11サンプル）
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| CalendarHeader | カレンダーヘッダー | 1 |
+| CalendarGrid | カレンダーグリッド | 2 |
+| EventCard | イベントカード | 2 |
+| ScheduleTimeline | スケジュールタイムライン | 2 |
+| DatePicker（拡張） | カレンダー付き日付選択 | 2 |
+| TimeslotPicker | タイムスロット選択 | 2 |
+
+#### KanbanBoards（9サンプル）
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| KanbanBoard | カンバンボード | 1 |
+| KanbanColumn | カンバンカラム | 2 |
+| KanbanCard | カンバンカード | 3 |
+| KanbanHeader | カンバンヘッダー | 3 |
+
+#### SearchAndCommandPalettes（16サンプル）
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| CommandPalette | コマンドパレット | 3 |
+| SearchModal | 検索モーダル | 3 |
+| SearchResults | 検索結果 | 4 |
+| RecentSearches | 最近の検索 | 2 |
+| SearchSuggestions | 検索候補 | 4 |
+
+#### VideoAndAudio（8サンプル）
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| VideoPlayer | ビデオプレイヤー | 2 |
+| AudioPlayer | オーディオプレイヤー | 2 |
+| VideoCall | ビデオ通話UI | 2 |
+| MediaControls | メディアコントロール | 2 |
+
+#### Feedback（5サンプル）
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| FeedbackForm | フィードバックフォーム | 2 |
+| RatingForm | 評価フォーム | 2 |
+| NPSSurvey | NPSアンケート | 1 |
+
+---
+
+### Phase 18: Tables拡張
+
+**目標**: テーブルコンポーネントの拡張（27サンプル対応）
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| DataTable | データテーブル（Sortable, Filterable, Selectable） | 8 |
+| ProjectsTable | プロジェクトテーブル | 2 |
+| UsersTable | ユーザーテーブル | 2 |
+| InvoicesTable | 請求書テーブル | 2 |
+| OrdersTable | 注文テーブル | 2 |
+| TransactionsTable | 取引テーブル | 2 |
+| FilesTable | ファイルテーブル | 2 |
+| ExpandableTable | 展開可能テーブル | 2 |
+| StickyTable | スティッキーヘッダーテーブル | 2 |
+| CompactTable | コンパクトテーブル | 3 |
+
+---
+
+### Phase 19: Headers/Sidebars拡張
+
+**目標**: ヘッダー・サイドバーの拡張（47サンプル対応）
+
+#### Headers拡張（29サンプル）
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| ApplicationNavbar | アプリケーションナビゲーションバー | 5 |
+| MarketplaceHeader | マーケットプレイスヘッダー | 3 |
+| DashboardHeader | ダッシュボードヘッダー | 4 |
+| ECommerceHeader | ECサイトヘッダー | 4 |
+| BlogHeader | ブログヘッダー | 3 |
+| DocsHeader | ドキュメントヘッダー | 2 |
+| MobileHeader | モバイルヘッダー | 4 |
+| StickyHeader | スティッキーヘッダー | 4 |
+
+#### Sidebars拡張（18サンプル）
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| DashboardSidebar | ダッシュボードサイドバー | 4 |
+| DetachedSidebar | 分離型サイドバー | 2 |
+| CollapsibleSidebar | 折りたたみサイドバー | 3 |
+| IconSidebar | アイコンサイドバー | 2 |
+| DoubleSidebar | ダブルサイドバー | 2 |
+| FilterSidebar | フィルターサイドバー | 3 |
+| SettingsSidebar | 設定サイドバー | 2 |
+
+---
+
+### Phase 20: Pages拡張
+
+**目標**: ページテンプレートの拡張（22サンプル対応）
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| AuthPage | 認証ページ（Login, Signup, ForgotPassword, 2FA） | 4 |
+| DashboardPage | ダッシュボードページ | 3 |
+| ProfilePage | プロフィールページ | 2 |
+| SettingsPage | 設定ページ | 2 |
+| NotFoundPage | 404ページ | 1 |
+| ErrorPage | エラーページ | 1 |
+| MaintenancePage | メンテナンスページ | 1 |
+| ComingSoonPage | 準備中ページ | 1 |
+| PricingPage | 料金ページ | 2 |
+| ContactPage | お問い合わせページ | 1 |
+| BlogListPage | ブログ一覧ページ | 1 |
+| BlogPostPage | ブログ記事ページ | 1 |
+| ProductPage | 商品ページ | 1 |
+| CheckoutPage | チェックアウトページ | 1 |
+
+---
+
+### Phase 21: Marketing拡張
+
+**目標**: マーケティングコンポーネントの拡張（48サンプル対応）
+
+| コンポーネント | 説明 | サンプル |
+|--------------|------|---------|
+| HeroSection | ヒーローセクション | 8 |
+| FeatureSection | 機能紹介セクション | 6 |
+| CTASection | CTAセクション | 5 |
+| TestimonialSection | 証言セクション | 6 |
+| PricingSection | 料金セクション | 5 |
+| FAQSection | FAQセクション | 4 |
+| TeamSection | チーム紹介セクション | 4 |
+| StatsSection | 統計セクション | 4 |
+| LogoCloudSection | ロゴクラウドセクション | 3 |
+| NewsletterSection | ニュースレターセクション | 3 |
+
+---
+
+## 改訂版マイルストーン
+
+| Phase | 内容 | 新規コンポーネント数 | 累計 |
+|-------|------|-------------------|------|
+| 1-8 | 既存計画（完了済み） | 60 | 60 |
+| 9 | Atoms追加 | 5 | 65 |
+| 10 | Molecules追加 | 25 | 90 |
+| 11 | PageSections | 30 | 120 |
+| 12 | Overlays拡張 | 35 | 155 |
+| 13 | Cards | 25 | 180 |
+| 14 | E-Commerce拡張 | 25 | 205 |
+| 15 | DataVisualization | 22 | 227 |
+| 16 | InboxChatMessages | 15 | 242 |
+| 17 | ドメイン特化追加 | 30 | 272 |
+| 18 | Tables拡張 | 10 | 282 |
+| 19 | Headers/Sidebars拡張 | 15 | 297 |
+| 20 | Pages拡張 | 14 | 311 |
+| 21 | Marketing拡張 | 10 | 321 |
+| **合計** | | **321** | **321** |
+
+**注**: 720サンプルのうち、類似パターンの統合により約321コンポーネントで全体をカバー可能と試算。残りのバリエーションはpropsやslotsで対応。
