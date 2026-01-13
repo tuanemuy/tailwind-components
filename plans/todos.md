@@ -47,26 +47,26 @@
 
 ### Group A（Atomsのみ依存、並列実装可能）
 
-- [ ] TrendIndicator（上昇/下降 + パーセント表示）
-- [ ] AvatarGroup（複数アバター + オーバーフロー）
-- [ ] ButtonGroup（ボタン群 + 境界線処理）
-- [ ] FormField（ラベル + 入力 + エラー + ヘルプテキスト）
-- [ ] IconButton（アイコンのみボタン）
+- [x] TrendIndicator（上昇/下降 + パーセント表示）
+- [x] AvatarGroup（複数アバター + オーバーフロー）
+- [x] ButtonGroup（ボタン群 + 境界線処理）
+- [x] FormField（ラベル + 入力 + エラー + ヘルプテキスト）
+- [x] IconButton（アイコンのみボタン）
 
 ### Group B（Group A完了後）
 
-- [ ] FileItem（ファイル情報表示）
-- [ ] Dropdown（トリガー + メニュー）
-- [ ] StatCard（統計値表示カード）
+- [x] FileItem（ファイル情報表示）
+- [x] Dropdown（トリガー + メニュー）
+- [x] StatCard（統計値表示カード）
 
 ### Group C（Group B完了後）
 
-- [ ] Select（選択コンポーネント）
-- [ ] Popover（ポップオーバー）
+- [x] Select（選択コンポーネント）
+- [x] Popover（ポップオーバー）
 
 ### Storybook
 
-- [ ] 各Moleculeのstoriesファイル
+- [x] 各Moleculeのstoriesファイル
 
 ---
 
@@ -168,10 +168,10 @@
 |-------|------|---------|------|------|
 | 1 | Foundation | 6 | 6 | 100% |
 | 2 | Atoms | 14 | 14 | 100% |
-| 3 | Molecules | 11 | 0 | 0% |
+| 3 | Molecules | 11 | 11 | 100% |
 | 4 | Organisms - Data | 6 | 0 | 0% |
 | 5 | Organisms - Layout | 7 | 0 | 0% |
 | 6 | Organisms - Forms | 5 | 0 | 0% |
 | 7 | Organisms - Domain | 7 | 0 | 0% |
 | 8 | Pages | 4 | 0 | 0% |
-| **合計** | | **60** | **20** | **33%** |
+| **合計** | | **60** | **31** | **52%** |

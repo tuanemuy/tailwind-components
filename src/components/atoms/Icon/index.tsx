@@ -1,4 +1,3 @@
-import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 import type { Size } from "@/lib/types";
 
@@ -15,21 +14,24 @@ const sizeClasses: Record<Size, string> = {
   xl: "size-8",
 };
 
-export const Icon = forwardRef<SVGSVGElement, IconProps>(
-  ({ className, size = "md", icon: IconComponent, style, ...props }, ref) => {
-    const sizeClass = typeof size === "string" ? sizeClasses[size] : undefined;
-    const sizeStyle =
-      typeof size === "number" ? { width: size, height: size } : undefined;
+export const Icon = ({
+  className,
+  size = "md",
+  icon: IconComponent,
+  style,
+  ...props
+}: IconProps) => {
+  const sizeClass = typeof size === "string" ? sizeClasses[size] : undefined;
+  const sizeStyle =
+    typeof size === "number" ? { width: size, height: size } : undefined;
 
-    return (
-      <IconComponent
-        ref={ref}
-        className={cn(sizeClass, className)}
-        style={{ ...sizeStyle, ...style }}
-        aria-hidden="true"
-        {...props}
-      />
-    );
-  },
-);
+  return (
+    <IconComponent
+      className={cn(sizeClass, className)}
+      style={{ ...sizeStyle, ...style }}
+      aria-hidden="true"
+      {...props}
+    />
+  );
+};
 Icon.displayName = "Icon";
