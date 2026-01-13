@@ -21,23 +21,23 @@
 
 ### コンポーネント
 
-- [ ] Button（Primary, Ghost, White, Destructive, Outline）
-- [ ] Badge（Status, Soft, Outline, WithDot, WithIcon）
-- [ ] Avatar（Image, Initials, WithStatus）
-- [ ] Icon（統一ラッパー）
-- [ ] Input（Text, Password, Email, Number）
-- [ ] Textarea
-- [ ] Checkbox
-- [ ] Radio
-- [ ] Switch
-- [ ] ProgressBar
-- [ ] Link
-- [ ] Label
-- [ ] Separator
+- [x] Button（Primary, Ghost, White, Destructive, Outline）
+- [x] Badge（Status, Soft, Outline, WithDot, WithIcon）
+- [x] Avatar（Image, Initials, WithStatus）
+- [x] Icon（統一ラッパー）
+- [x] Input（Text, Password, Email, Number）
+- [x] Textarea
+- [x] Checkbox
+- [x] Radio
+- [x] Switch
+- [x] ProgressBar
+- [x] Link
+- [x] Label
+- [x] Separator
 
 ### Storybook
 
-- [ ] 各Atomのstoriesファイル
+- [x] 各Atomのstoriesファイル
 
 ---
 
@@ -167,11 +167,11 @@
 | Phase | 内容 | タスク数 | 完了 | 進捗 |
 |-------|------|---------|------|------|
 | 1 | Foundation | 6 | 6 | 100% |
-| 2 | Atoms | 14 | 0 | 0% |
+| 2 | Atoms | 14 | 14 | 100% |
 | 3 | Molecules | 11 | 0 | 0% |
 | 4 | Organisms - Data | 6 | 0 | 0% |
 | 5 | Organisms - Layout | 7 | 0 | 0% |
 | 6 | Organisms - Forms | 5 | 0 | 0% |
 | 7 | Organisms - Domain | 7 | 0 | 0% |
 | 8 | Pages | 4 | 0 | 0% |
-| **合計** | | **60** | **6** | **10%** |
+| **合計** | | **60** | **20** | **33%** |
