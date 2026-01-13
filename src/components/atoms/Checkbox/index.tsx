@@ -8,15 +8,18 @@ export interface CheckboxProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "type">,
     VariantProps<typeof checkboxVariants> {
   indeterminate?: boolean;
+  label?: string;
+  labelClassName?: string;
 }
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ className, size, indeterminate, disabled, ...props }, ref) => (
+  ({ className, size, indeterminate, disabled, label, labelClassName, ...props }, ref) => (
     <label
       className={cn(
-        "relative inline-flex cursor-pointer",
+        "relative inline-flex cursor-pointer items-center",
         "has-[:checked]:*:*:opacity-100",
         disabled && "cursor-not-allowed opacity-50",
+        label && "gap-x-2",
         className,
       )}
     >
@@ -30,7 +33,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       <span
         className={cn(
           checkboxVariants({ size }),
-          "flex items-center justify-center border-input",
+          "flex shrink-0 items-center justify-center border-input",
           "peer-checked:border-primary peer-checked:bg-primary peer-checked:text-primary-foreground",
           "peer-focus-visible:ring-2 peer-focus-visible:ring-ring/50",
           indeterminate && "border-primary bg-primary text-primary-foreground",
@@ -50,6 +53,11 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           />
         )}
       </span>
+      {label && (
+        <span className={cn("text-sm text-muted-foreground", labelClassName)}>
+          {label}
+        </span>
+      )}
     </label>
   ),
 );

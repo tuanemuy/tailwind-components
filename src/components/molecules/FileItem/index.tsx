@@ -34,7 +34,7 @@ export interface FileItemProps extends React.HTMLAttributes<HTMLDivElement> {
   size?: string;
   date?: string;
   isFolder?: boolean;
-  status?: "uploading" | "complete" | "error";
+  status?: "pending" | "uploading" | "complete" | "error";
   progress?: number;
   icon?: React.ReactNode;
   actions?: React.ReactNode;
