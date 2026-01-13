@@ -60,3 +60,4 @@ export { AlertCircleIcon } from "./AlertCircle";
 export { CheckCircleIcon } from "./CheckCircle";
 export { XCircleIcon } from "./XCircle";
 export { InfoIcon } from "./Info";
+export { SpinnerIcon } from "./Spinner";

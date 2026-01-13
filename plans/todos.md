@@ -76,15 +76,15 @@
 
 ### コンポーネント
 
-- [ ] Card（Header, Body, Footer構造）
-- [ ] StatCardGroup（StatCard配列、グリッドレイアウト）
-- [ ] Table（ヘッダー、行、ページネーション）
-- [ ] FileList（リスト/グリッド切り替え）
-- [ ] DataCard（チャート付きカード）
+- [x] Card（Header, Body, Footer構造）
+- [x] StatCardGroup（StatCard配列、グリッドレイアウト）
+- [x] Table（ヘッダー、行、ページネーション）
+- [x] FileList（リスト/グリッド切り替え）
+- [x] DataCard（チャート付きカード）
 
 ### Storybook
 
-- [ ] 各Organismのstoriesファイル
+- [x] 各Organismのstoriesファイル
 
 ---
 
@@ -169,9 +169,9 @@
 | 1 | Foundation | 6 | 6 | 100% |
 | 2 | Atoms | 14 | 14 | 100% |
 | 3 | Molecules | 11 | 11 | 100% |
-| 4 | Organisms - Data | 6 | 0 | 0% |
+| 4 | Organisms - Data | 6 | 6 | 100% |
 | 5 | Organisms - Layout | 7 | 0 | 0% |
 | 6 | Organisms - Forms | 5 | 0 | 0% |
 | 7 | Organisms - Domain | 7 | 0 | 0% |
 | 8 | Pages | 4 | 0 | 0% |
-| **合計** | | **60** | **31** | **52%** |
+| **合計** | | **60** | **37** | **62%** |
