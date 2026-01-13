@@ -61,3 +61,28 @@ export { CheckCircleIcon } from "./CheckCircle";
 export { XCircleIcon } from "./XCircle";
 export { InfoIcon } from "./Info";
 export { SpinnerIcon } from "./Spinner";
+
+// Form icons
+export { UploadCloudIcon } from "./UploadCloud";
+export { FilterIcon } from "./Filter";
+
+// Payment icons
+export { CreditCardIcon } from "./CreditCard";
+export { WalletIcon } from "./Wallet";
+export { BuildingIcon } from "./Building";
+
+// Security icons
+export { LockIcon } from "./Lock";
+
+// E-Commerce icons
+export { ShoppingBagIcon } from "./ShoppingBag";
+export { TruckIcon } from "./Truck";
+export { HeartIcon } from "./Heart";
+export { StarIcon } from "./Star";
+
+// Arrow icons
+export { ArrowLeftIcon } from "./ArrowLeft";
+export { ArrowRightIcon } from "./ArrowRight";
+
+// Quote icon
+export { QuoteIcon } from "./Quote";
