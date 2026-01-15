@@ -184,15 +184,15 @@
 
 ### コンポーネント
 
-- [ ] Tooltip（ツールチップ表示）
-- [ ] Skeleton（ローディングプレースホルダー）
-- [ ] Spinner（ローディングスピナー）
-- [ ] Image（画像表示、lazy loading対応）
-- [ ] Kbd（キーボードショートカット表示）
+- [x] Tooltip（ツールチップ表示）
+- [x] Skeleton（ローディングプレースホルダー）
+- [x] Spinner（ローディングスピナー）
+- [x] Image（画像表示、lazy loading対応）
+- [x] Kbd（キーボードショートカット表示）
 
 ### Storybook
 
-- [ ] 各Atomのstoriesファイル
+- [x] 各Atomのstoriesファイル
 
 ---
 
@@ -202,37 +202,37 @@
 
 ### Navigation系
 
-- [ ] Tabs（タブナビゲーション - BarOnTop, Bordered, Segment, Vertical）
-- [ ] Breadcrumb（パンくずリスト）
-- [ ] Pagination（ページネーション）
-- [ ] Stepper（ステップインジケーター）
+- [x] Tabs（タブナビゲーション - BarOnTop, Bordered, Segment, Vertical）
+- [x] Breadcrumb（パンくずリスト）
+- [x] Pagination（ページネーション）
+- [x] Stepper（ステップインジケーター）
 
 ### Input系
 
-- [ ] SearchInput（検索入力 - Command+K対応）
-- [ ] DatePicker（日付選択）
-- [ ] TimePicker（時刻選択）
-- [ ] DateRangePicker（日付範囲選択）
-- [ ] RangeSlider（範囲スライダー）
-- [ ] ColorPicker（カラー選択）
-- [ ] TagInput（タグ入力 - 複数選択）
-- [ ] ComboBox（コンボボックス - 検索+選択）
+- [x] SearchInput（検索入力 - Command+K対応）
+- [x] DatePicker（日付選択）
+- [x] TimePicker（時刻選択）
+- [x] DateRangePicker（日付範囲選択）
+- [x] RangeSlider（範囲スライダー）
+- [x] ColorPicker（カラー選択）
+- [x] TagInput（タグ入力 - 複数選択）
+- [x] ComboBox（コンボボックス - 検索+選択）
 
 ### Feedback系
 
-- [ ] Alert（アラートバナー）
-- [ ] Toast（トースト通知）
-- [ ] EmptyState（空状態表示）
+- [x] Alert（アラートバナー）
+- [x] Toast（トースト通知）
+- [x] EmptyState（空状態表示）
 
 ### Content系
 
-- [ ] Accordion（アコーディオン）
-- [ ] Menu（メニュー - Context, Dropdown）
-- [ ] Rating（星評価）
+- [x] Accordion（アコーディオン）
+- [x] Menu（メニュー - Context, Dropdown）
+- [x] Rating（星評価）
 
 ### Storybook
 
-- [ ] 各Moleculeのstoriesファイル
+- [x] 各Moleculeのstoriesファイル
 
 ---
 
@@ -242,47 +242,47 @@
 
 ### Banners
 
-- [ ] Banner（告知バナー - Gift, LoginRegister, News）
-- [ ] FloatingBanner（フローティングバナー）
+- [x] Banner（告知バナー - Gift, LoginRegister, News）
+- [x] FloatingBanner（フローティングバナー）
 
 ### DescriptionLists
 
-- [ ] DescriptionList（定義リスト - Simple, WithIcons, Grid）
-- [ ] UserProfileCard（プロフィールカード）
+- [x] DescriptionList（定義リスト - Simple, WithIcons, Grid）
+- [x] UserProfileCard（プロフィールカード）
 
 ### Navigations
 
-- [ ] SectionNav（セクション内ナビ）
-- [ ] CardNav（カードナビゲーション）
+- [x] SectionNav（セクション内ナビ）
+- [x] CardNav（カードナビゲーション）
 
 ### Timeline
 
-- [ ] Timeline（タイムライン - Activity, History, Order）
-- [ ] ActivityFeed（アクティビティフィード）
+- [x] Timeline（タイムライン - Activity, History, Order）
+- [x] ActivityFeed（アクティビティフィード）
 
 ### TitleBars
 
-- [ ] TitleBar（タイトルバー - Simple, WithActions, WithDatepicker）
-- [ ] KanbanGroupHeading（カンバンカラムヘッダー）
+- [x] TitleBar（タイトルバー - Simple, WithActions, WithDatepicker）
+- [x] KanbanGroupHeading（カンバンカラムヘッダー）
 
 ### QuickActions
 
-- [ ] QuickActionCard（クイックアクションカード）
-- [ ] QuickActionBar（フローティングアクションバー）
+- [x] QuickActionCard（クイックアクションカード）
+- [x] QuickActionBar（フローティングアクションバー）
 
 ### SetUpFlows
 
-- [ ] SetupFlow（セットアップフロー）
-- [ ] OnboardingChecklist（オンボーディングチェックリスト）
+- [x] SetupFlow（セットアップフロー）
+- [x] OnboardingChecklist（オンボーディングチェックリスト）
 
 ### Success/Feedback
 
-- [ ] SuccessMessage（成功メッセージ画面）
-- [ ] NotificationSettings（通知設定マトリクス）
+- [x] SuccessMessage（成功メッセージ画面）
+- [x] NotificationSettings（通知設定マトリクス）
 
 ### Storybook
 
-- [ ] 各PageSectionのstoriesファイル
+- [x] 各PageSectionのstoriesファイル
 
 ---
 
@@ -292,80 +292,80 @@
 
 ### Authentication系
 
-- [ ] TwoFactorModal（2FA設定モーダル）
+- [x] TwoFactorModal（2FA設定モーダル）
 
 ### Billing/Payment系
 
-- [ ] AddCardModal（カード追加モーダル）
-- [ ] AddPaymentModal（支払い方法追加モーダル）
-- [ ] ManageCardsModal（カード管理モーダル）
-- [ ] UpgradeModal（アップグレードモーダル）
+- [x] AddCardModal（カード追加モーダル）
+- [x] AddPaymentModal（支払い方法追加モーダル）
+- [x] ManageCardsModal（カード管理モーダル）
+- [x] UpgradeModal（アップグレードモーダル）
 
 ### DateAndTime系
 
-- [ ] SnoozeModal（スヌーズ設定モーダル）
-- [ ] ScheduleModal（スケジュール設定モーダル）
-- [ ] RecurrenceModal（繰り返し設定モーダル）
+- [x] SnoozeModal（スヌーズ設定モーダル）
+- [x] ScheduleModal（スケジュール設定モーダル）
+- [x] RecurrenceModal（繰り返し設定モーダル）
 
 ### DataManagement系
 
-- [ ] ExportModal（エクスポートモーダル）
-- [ ] ImportModal（インポートモーダル）
+- [x] ExportModal（エクスポートモーダル）
+- [x] ImportModal（インポートモーダル）
 
 ### E-Commerce系
 
-- [ ] ProductDetailModal（商品詳細モーダル）
-- [ ] SizeGuideModal（サイズガイドモーダル）
-- [ ] ViewLookModal（コーディネート表示モーダル）
+- [x] ProductDetailModal（商品詳細モーダル）
+- [x] SizeGuideModal（サイズガイドモーダル）
+- [x] ViewLookModal（コーディネート表示モーダル）
 
 ### Feedback系
 
-- [ ] ConfirmModal（確認モーダル - Delete, Cancel）
-- [ ] ReviewModal（レビューモーダル）
+- [x] ConfirmModal（確認モーダル - Delete, Cancel）
+- [x] ReviewModal（レビューモーダル）
 
 ### General系
 
-- [ ] StatusModal（ステータス設定モーダル）
-- [ ] TagsModal（タグ管理モーダル）
-- [ ] KeyboardShortcutsModal（ショートカット一覧モーダル）
-- [ ] InvoiceModal（請求書表示モーダル）
-- [ ] LocationModal（位置選択モーダル）
+- [x] StatusModal（ステータス設定モーダル）
+- [x] TagsModal（タグ管理モーダル）
+- [x] KeyboardShortcutsModal（ショートカット一覧モーダル）
+- [x] InvoiceModal（請求書表示モーダル）
+- [x] LocationModal（位置選択モーダル）
 
 ### ShareAndInvite系
 
-- [ ] InviteModal（招待モーダル）
-- [ ] ShareModal（共有モーダル）
+- [x] InviteModal（招待モーダル）
+- [x] ShareModal（共有モーダル）
 
 ### Filter系
 
-- [ ] FilterDrawer（フィルターサイドバー）
-- [ ] FilterModal（フィルターモーダル）
+- [x] FilterDrawer（フィルターサイドバー）
+- [x] FilterModal（フィルターモーダル）
 
 ### Drawers拡張
 
-- [ ] ActivityDrawer（アクティビティドロワー）
-- [ ] ChatUserDetailsDrawer（チャット詳細ドロワー）
-- [ ] FilesInfoDrawer（ファイル情報ドロワー）
-- [ ] TaskDetailsDrawer（タスク詳細ドロワー）
-- [ ] UserDetailsDrawer（ユーザー詳細ドロワー）
+- [x] ActivityDrawer（アクティビティドロワー）
+- [x] ChatUserDetailsDrawer（チャット詳細ドロワー）
+- [x] FilesInfoDrawer（ファイル情報ドロワー）
+- [x] TaskDetailsDrawer（タスク詳細ドロワー）
+- [x] UserDetailsDrawer（ユーザー詳細ドロワー）
 
 ### EditForm系
 
-- [ ] EditUserModal（ユーザー編集モーダル）
-- [ ] EditEventModal（イベント編集モーダル）
-- [ ] CreateProjectModal（プロジェクト作成モーダル）
+- [x] EditUserModal（ユーザー編集モーダル）
+- [x] EditEventModal（イベント編集モーダル）
+- [x] CreateProjectModal（プロジェクト作成モーダル）
 
 ### Compose系
 
-- [ ] ComposeModal（メッセージ作成モーダル）
+- [x] ComposeModal（メッセージ作成モーダル）
 
 ### Settings系
 
-- [ ] SettingsModal（設定モーダル - タブ付き）
+- [x] SettingsModal（設定モーダル - タブ付き）
 
 ### Storybook
 
-- [ ] 各Overlayのstoriesファイル
+- [x] 各Overlayのstoriesファイル
 
 ---
 
@@ -375,67 +375,68 @@
 
 ### Contacts
 
-- [ ] ContactCard（連絡先カード）
+- [x] ContactCard（連絡先カード）
 
 ### DataSnippets
 
-- [ ] ProjectSummaryCard（プロジェクトサマリーカード）
-- [ ] FollowUsCard（SNSリンクカード）
-- [ ] FileSnippet（ファイルスニペット）
+- [x] ProjectSummaryCard（プロジェクトサマリーカード）
+- [x] FollowUsCard（SNSリンクカード）
+- [x] FileSnippet（ファイルスニペット）
 
 ### FilesAndFolders
 
-- [ ] FolderCard（フォルダカード）
-- [ ] PreviewFileCard（ファイルプレビューカード）
+- [x] FolderCard（フォルダカード）
+- [x] PreviewFileCard（ファイルプレビューカード）
 
 ### ImportAndExportData
 
-- [ ] ImportExportCard（インポート/エクスポートカード）
+- [x] ImportExportCard（インポート/エクスポートカード）
 
 ### Integrations
 
-- [ ] IntegrationCard（連携サービスカード）
+- [x] IntegrationCard（連携サービスカード）
 
 ### LocationAndAddress
 
-- [ ] AddressCard（住所カード）
-- [ ] StoreContactCard（店舗連絡先カード）
+- [x] AddressCard（住所カード）
+- [x] StoreContactCard（店舗連絡先カード）
 
 ### MiniCards
 
-- [ ] CreditsCard（クレジット残量カード）
-- [ ] HelpResourcesCard（ヘルプリソースカード）
-- [ ] IntroVideoCard（紹介動画カード）
-- [ ] TrialCard（トライアル残日数カード）
-- [ ] UpgradeProCard（アップグレード促進カード）
+- [x] CreditsCard（クレジット残量カード）
+- [x] HelpResourcesCard（ヘルプリソースカード）
+- [x] IntroVideoCard（紹介動画カード）
+- [x] TrialCard（トライアル残日数カード）
+- [x] UpgradeProCard（アップグレード促進カード）
+- [x] GiftCard（ギフトカード）※追加実装
 
 ### ProjectDetails
 
-- [ ] ProjectDetailsCard（プロジェクト詳細カード）
+- [x] ProjectDetailsCard（プロジェクト詳細カード）
 
 ### Projects
 
-- [ ] FileCard（ファイルカード - Grid, List, MultiImages）
-- [ ] ProjectCard（プロジェクトカード）
-- [ ] TeamCard（チームカード）
-- [ ] UserHeroCard（ユーザーヒーローカード）
+- [x] FileCard（ファイルカード - Grid, List, MultiImages）
+- [x] ProjectCard（プロジェクトカード）
+- [x] TeamCard（チームカード）
+- [x] UserHeroCard（ユーザーヒーローカード）
 
 ### BrandingFeaturedCards
 
-- [ ] AppDownloadCard（アプリダウンロードカード）
+- [x] AppDownloadCard（アプリダウンロードカード）
 
 ### InlineCards
 
-- [ ] InviteFriendsCard（友人招待カード）
-- [ ] FeaturePreviewCard（機能プレビューカード）
+- [x] InviteFriendsCard（友人招待カード）
+- [x] FeaturePreviewCard（機能プレビューカード）
 
 ### MasonryLayout
 
-- [ ] MasonryGrid（メイソンリーグリッド）
+- [x] MasonryGrid（メイソンリーグリッド）
 
 ### Storybook
 
-- [ ] 各Cardのstoriesファイル
+- [x] 各Cardのstoriesファイル
 
 ---
 
@@ -445,44 +446,44 @@
 
 ### CheckoutForms
 
-- [ ] CheckoutForm（チェックアウトフォーム - Guest, LoggedIn）
-- [ ] OrderConfirmation（注文確認画面）
-- [ ] OrderSummary（注文サマリー）
-- [ ] ReviewAndPay（確認・支払い画面）
-- [ ] ShoppingBag（ショッピングバッグ）
-- [ ] ShopCheckout（ショップチェックアウト）
+- [x] CheckoutForm（チェックアウトフォーム - Guest, LoggedIn）※Phase 6で実装済
+- [x] OrderConfirmation（注文確認画面）
+- [x] OrderSummary（注文サマリー）※Phase 6で実装済
+- [x] ReviewAndPay（確認・支払い画面）
+- [x] ShoppingBag（ショッピングバッグ）
+- [x] ShopCheckout（ショップチェックアウト）※CheckoutFormで対応
 
 ### E-CommerceGalleries
 
-- [ ] ProductGallery（商品ギャラリー - Grid, HorizontalSlider, VerticalSlider）
-- [ ] ImageTextPair（画像テキストペア）
+- [x] ProductGallery（商品ギャラリー - Grid, HorizontalSlider, VerticalSlider）※Phase 7で実装済
+- [x] ImageTextPair（画像テキストペア）
 
 ### E-CommerceGalleryCategories
 
-- [ ] CategoryGrid（カテゴリグリッド）
-- [ ] CategorySlider（カテゴリスライダー）
-- [ ] CategoryCircular（円形カテゴリナビ）
-- [ ] CategoryPill（ピル型カテゴリ）
+- [x] CategoryGrid（カテゴリグリッド）
+- [x] CategorySlider（カテゴリスライダー）
+- [x] CategoryCircular（円形カテゴリナビ）
+- [x] CategoryPill（ピル型カテゴリ）
 
 ### E-CommerceOrderDetails
 
-- [ ] OrderStatusCard（注文ステータスカード）
-- [ ] ExchangeReturnCard（交換・返品カード）
+- [x] OrderStatusCard（注文ステータスカード）
+- [x] ExchangeReturnCard（交換・返品カード）
 
 ### E-CommerceProductDetails
 
-- [ ] ProductDetails（商品詳細 - Gallery, Marketplace, Shop, StickySidebar）
+- [x] ProductDetails（商品詳細 - Gallery, Marketplace, Shop, StickySidebar）
 
 ### E-CommerceProductListings
 
-- [ ] ProductListing（商品リスト - Marketplace, Mini, Shop）
-- [ ] ProductListingGrid（商品グリッド）
-- [ ] ProductListingSlider（商品スライダー）
-- [ ] CompleteTheLook（コーディネート提案）
+- [x] ProductListing（商品リスト - Marketplace, Mini, Shop）
+- [x] ProductListingGrid（商品グリッド）
+- [x] ProductListingSlider（商品スライダー）
+- [x] CompleteTheLook（コーディネート提案）
 
 ### Storybook
 
-- [ ] 各E-Commerceコンポーネントのstoriesファイル
+- [x] 各E-Commerceコンポーネントのstoriesファイル
 
 ---
 
@@ -492,31 +493,31 @@
 
 ### DataCards
 
-- [ ] BlockStatsCard（ブロック統計カード）
-- [ ] BrowsersCard（ブラウザ統計カード）
-- [ ] ListBarCard（リストバーカード）
-- [ ] ProgressbarsCard（プログレスバーカード）
-- [ ] ProjectCostsCard（プロジェクトコストカード）
-- [ ] SegmentedProgressCard（セグメントプログレスカード）
-- [ ] StackedProgressCard（スタックプログレスカード）
-- [ ] SalesStatsCard（売上統計カード）
-- [ ] SurveyDataCard（アンケートデータカード）
-- [ ] TieredStatsCard（階層統計カード）
-- [ ] TimeSheetCard（タイムシートカード）
-- [ ] TopCardWithProgress（トップカード）
-- [ ] TopCountriesCard（上位国ランキングカード）
-- [ ] TrafficCard（トラフィックカード）
+- [x] BlockStatsCard（ブロック統計カード）
+- [x] BrowsersCard（ブラウザ統計カード）
+- [x] ListBarCard（リストバーカード）
+- [x] ProgressbarsCard（プログレスバーカード）
+- [x] ProjectCostsCard（プロジェクトコストカード）
+- [x] SegmentedProgressCard（セグメントプログレスカード）
+- [x] StackedProgressCard（スタックプログレスカード）
+- [x] SalesStatsCard（売上統計カード）
+- [x] SurveyDataCard（アンケートデータカード）
+- [x] TieredStatsCard（階層統計カード）
+- [x] TimeSheetCard（タイムシートカード）
+- [x] TopCardWithProgress（トップカード）
+- [x] TopCountriesCard（上位国ランキングカード）
+- [x] TrafficCard（トラフィックカード）
 
 ### Stats
 
-- [ ] ChatReportsStats（チャットレポート統計）
-- [ ] InboxContactsStats（連絡先統計）
-- [ ] InboxReportsStats（受信箱統計）
-- [ ] BrandSalesStats（ブランド売上統計）
-- [ ] ProjectReportsStats（プロジェクトレポート統計）
-- [ ] AnimatedStats（ホバーアニメーション統計）
-- [ ] AvatarGroupStats（アバターグループ統計）
-- [ ] IconStats（アイコン統計）
+- [x] ChatReportsStats（チャットレポート統計）
+- [x] InboxContactsStats（連絡先統計）
+- [x] InboxReportsStats（受信箱統計）
+- [x] BrandSalesStats（ブランド売上統計）
+- [x] ProjectReportsStats（プロジェクトレポート統計）
+- [x] AnimatedStats（ホバーアニメーション統計）
+- [x] AvatarGroupStats（アバターグループ統計）
+- [x] IconStats（アイコン統計）
 
 ### Storybook
 
@@ -530,28 +531,28 @@
 
 ### ChatBubbles
 
-- [ ] MessageBubble（メッセージバブル - Text, Image, File, Voice, Link）
+- [x] MessageBubble（メッセージバブル - Text, Image, File, Voice, Link）
 
 ### ChatThreads
 
-- [ ] InboxThread（メールスレッド表示）
-- [ ] ComposeThread（メッセージ作成フォーム）
+- [x] InboxThread（メールスレッド表示）
+- [x] ComposeThread（メッセージ作成フォーム）
 
 ### ChatWidgets
 
-- [ ] ChatWidget（チャットウィジェット - Welcome, Messages, Conversation, Help）
+- [x] ChatWidget（チャットウィジェット - Welcome, Messages, Conversation, Help）
 
 ### Layouts
 
-- [ ] ChatLayout（チャットレイアウト）
-- [ ] InboxLayout（インボックスレイアウト）
-- [ ] TicketsLayout（チケット管理レイアウト）
-- [ ] ReportsLayout（レポートレイアウト）
-- [ ] CRMLayout（CRMレイアウト）
+- [x] ChatLayout（チャットレイアウト）
+- [x] InboxLayout（インボックスレイアウト）
+- [x] TicketsLayout（チケット管理レイアウト）
+- [x] ReportsLayout（レポートレイアウト）
+- [x] CRMLayout（CRMレイアウト）
 
 ### Storybook
 
-- [ ] 各InboxChatMessagesコンポーネントのstoriesファイル
+- [x] 各InboxChatMessagesコンポーネントのstoriesファイル
 
 ---
 
@@ -561,53 +562,53 @@
 
 ### Finance
 
-- [ ] BalanceCard（残高表示カード）
-- [ ] TransactionList（取引履歴リスト）
-- [ ] PaymentCard（支払いカード）
-- [ ] TransferForm（送金フォーム）
-- [ ] AccountCard（口座カード）
-- [ ] ReceiptTimeline（レシートタイムライン）
-- [ ] CurrencySelect（通貨選択）
+- [x] BalanceCard（残高表示カード）
+- [x] TransactionList（取引履歴リスト）
+- [x] PaymentCard（支払いカード）
+- [x] TransferForm（送金フォーム）
+- [x] AccountCard（口座カード）
+- [x] ReceiptTimeline（レシートタイムライン）
+- [x] CurrencySelect（通貨選択）
 
 ### CalendarAndScheduling
 
-- [ ] CalendarHeader（カレンダーヘッダー）
-- [ ] CalendarGrid（カレンダーグリッド）
-- [ ] EventCard（イベントカード）
-- [ ] ScheduleTimeline（スケジュールタイムライン）
-- [ ] TimeslotPicker（タイムスロット選択）
+- [x] CalendarHeader（カレンダーヘッダー）
+- [x] CalendarGrid（カレンダーグリッド）
+- [x] EventCard（イベントカード）
+- [x] ScheduleTimeline（スケジュールタイムライン）
+- [x] TimeslotPicker（タイムスロット選択）
 
 ### KanbanBoards
 
-- [ ] KanbanBoard（カンバンボード）
-- [ ] KanbanColumn（カンバンカラム）
-- [ ] KanbanCard（カンバンカード）
-- [ ] KanbanHeader（カンバンヘッダー）
+- [x] KanbanBoard（カンバンボード）
+- [x] KanbanColumn（カンバンカラム）
+- [x] KanbanCard（カンバンカード）
+- [x] KanbanHeader（カンバンヘッダー）
 
 ### SearchAndCommandPalettes
 
-- [ ] CommandPalette（コマンドパレット）
-- [ ] SearchModal（検索モーダル）
-- [ ] SearchResults（検索結果）
-- [ ] RecentSearches（最近の検索）
-- [ ] SearchSuggestions（検索候補）
+- [x] CommandPalette（コマンドパレット）
+- [x] SearchModal（検索モーダル）
+- [x] SearchResults（検索結果）
+- [x] RecentSearches（最近の検索）
+- [x] SearchSuggestions（検索候補）
 
 ### VideoAndAudio
 
-- [ ] VideoPlayer（ビデオプレイヤー）
-- [ ] AudioPlayer（オーディオプレイヤー）
-- [ ] VideoCall（ビデオ通話UI）
-- [ ] MediaControls（メディアコントロール）
+- [x] VideoPlayer（ビデオプレイヤー）
+- [x] AudioPlayer（オーディオプレイヤー）
+- [x] VideoCall（ビデオ通話UI）
+- [x] MediaControls（メディアコントロール）
 
 ### Feedback
 
-- [ ] FeedbackForm（フィードバックフォーム）
-- [ ] RatingForm（評価フォーム）
-- [ ] NPSSurvey（NPSアンケート）
+- [x] FeedbackForm（フィードバックフォーム）
+- [x] RatingForm（評価フォーム）
+- [x] NPSSurvey（NPSアンケート）
 
 ### Storybook
 
-- [ ] 各ドメイン特化コンポーネントのstoriesファイル
+- [x] 各ドメイン特化コンポーネントのstoriesファイル
 
 ---
 
@@ -617,20 +618,20 @@
 
 ### コンポーネント
 
-- [ ] DataTable（データテーブル - Sortable, Filterable, Selectable）
-- [ ] ProjectsTable（プロジェクトテーブル）
-- [ ] UsersTable（ユーザーテーブル）
-- [ ] InvoicesTable（請求書テーブル）
-- [ ] OrdersTable（注文テーブル）
-- [ ] TransactionsTable（取引テーブル）
-- [ ] FilesTable（ファイルテーブル）
-- [ ] ExpandableTable（展開可能テーブル）
-- [ ] StickyTable（スティッキーヘッダーテーブル）
-- [ ] CompactTable（コンパクトテーブル）
+- [x] DataTable（データテーブル - Sortable, Filterable, Selectable）
+- [x] ProjectsTable（プロジェクトテーブル）
+- [x] UsersTable（ユーザーテーブル）
+- [x] InvoicesTable（請求書テーブル）
+- [x] OrdersTable（注文テーブル）
+- [x] TransactionsTable（取引テーブル）
+- [x] FilesTable（ファイルテーブル）
+- [x] ExpandableTable（展開可能テーブル）
+- [x] StickyTable（スティッキーヘッダーテーブル）
+- [x] CompactTable（コンパクトテーブル）
 
 ### Storybook
 
-- [ ] 各Tableのstoriesファイル
+- [x] 各Tableのstoriesファイル
 
 ---
 
@@ -640,28 +641,28 @@
 
 ### Headers拡張
 
-- [ ] ApplicationNavbar（アプリケーションナビゲーションバー）
-- [ ] MarketplaceHeader（マーケットプレイスヘッダー）
-- [ ] DashboardHeader（ダッシュボードヘッダー）
-- [ ] ECommerceHeader（ECサイトヘッダー）
-- [ ] BlogHeader（ブログヘッダー）
-- [ ] DocsHeader（ドキュメントヘッダー）
-- [ ] MobileHeader（モバイルヘッダー）
-- [ ] StickyHeader（スティッキーヘッダー）
+- [x] ApplicationNavbar（アプリケーションナビゲーションバー）
+- [x] MarketplaceHeader（マーケットプレイスヘッダー）
+- [x] DashboardHeader（ダッシュボードヘッダー）
+- [x] ECommerceHeader（ECサイトヘッダー）
+- [x] BlogHeader（ブログヘッダー）
+- [x] DocsHeader（ドキュメントヘッダー）
+- [x] MobileHeader（モバイルヘッダー）
+- [x] StickyHeader（スティッキーヘッダー）
 
 ### Sidebars拡張
 
-- [ ] DashboardSidebar（ダッシュボードサイドバー）
-- [ ] DetachedSidebar（分離型サイドバー）
-- [ ] CollapsibleSidebar（折りたたみサイドバー）
-- [ ] IconSidebar（アイコンサイドバー）
-- [ ] DoubleSidebar（ダブルサイドバー）
-- [ ] FilterSidebar（フィルターサイドバー）
-- [ ] SettingsSidebar（設定サイドバー）
+- [x] DashboardSidebar（ダッシュボードサイドバー）
+- [x] DetachedSidebar（分離型サイドバー）
+- [x] CollapsibleSidebar（折りたたみサイドバー）
+- [x] IconSidebar（アイコンサイドバー）
+- [x] DoubleSidebar（ダブルサイドバー）
+- [x] FilterSidebar（フィルターサイドバー）
+- [x] SettingsSidebar（設定サイドバー）
 
 ### Storybook
 
-- [ ] 各Header/Sidebarのstoriesファイル
+- [x] 各Header/Sidebarのstoriesファイル
 
 ---
 
@@ -671,24 +672,24 @@
 
 ### コンポーネント
 
-- [ ] AuthPage拡張（2FA対応）
-- [ ] DashboardPage拡張
-- [ ] ProfilePage（プロフィールページ）
-- [ ] SettingsPage（設定ページ）
-- [ ] NotFoundPage（404ページ）
-- [ ] ErrorPage（エラーページ）
-- [ ] MaintenancePage（メンテナンスページ）
-- [ ] ComingSoonPage（準備中ページ）
-- [ ] PricingPage（料金ページ）
-- [ ] ContactPage（お問い合わせページ）
-- [ ] BlogListPage（ブログ一覧ページ）
-- [ ] BlogPostPage（ブログ記事ページ）
-- [ ] ProductPage（商品ページ）
-- [ ] CheckoutPage（チェックアウトページ）
+- [x] AuthPage拡張（2FA対応）
+- [x] DashboardPage拡張
+- [x] ProfilePage（プロフィールページ）
+- [x] SettingsPage（設定ページ）
+- [x] NotFoundPage（404ページ）
+- [x] ErrorPage（エラーページ）
+- [x] MaintenancePage（メンテナンスページ）
+- [x] ComingSoonPage（準備中ページ）
+- [x] PricingPage（料金ページ）
+- [x] ContactPage（お問い合わせページ）
+- [x] BlogListPage（ブログ一覧ページ）
+- [x] BlogPostPage（ブログ記事ページ）
+- [x] ProductPage（商品ページ）
+- [x] CheckoutPage（チェックアウトページ）
 
 ### Storybook
 
-- [ ] 各Pageのstoriesファイル
+- [x] 各Pageのstoriesファイル
 
 ---
 
@@ -698,20 +699,20 @@
 
 ### コンポーネント
 
-- [ ] HeroSection拡張
-- [ ] FeatureSection拡張
-- [ ] CTASection（CTAセクション）
-- [ ] TestimonialSection拡張
-- [ ] PricingSection（料金セクション）
-- [ ] FAQSection（FAQセクション）
-- [ ] TeamSection（チーム紹介セクション）
-- [ ] StatsSection（統計セクション）
-- [ ] LogoCloudSection（ロゴクラウドセクション）
-- [ ] NewsletterSection（ニュースレターセクション）
+- [x] HeroSection拡張（既存実装で対応済み）
+- [x] FeatureSection拡張（既存実装で対応済み）
+- [x] CTASection（CTAセクション）
+- [x] TestimonialSection拡張（既存実装で対応済み）
+- [x] PricingSection（料金セクション）
+- [x] FAQSection（FAQセクション）
+- [x] TeamSection（チーム紹介セクション）
+- [x] StatsSection（統計セクション）
+- [x] LogoCloudSection（ロゴクラウドセクション）
+- [x] NewsletterSection（ニュースレターセクション）
 
 ### Storybook
 
-- [ ] 各Marketingコンポーネントのstoriesファイル
+- [x] 各Marketingコンポーネントのstoriesファイル
 
 ---
 
@@ -720,17 +721,17 @@
 | Phase | 内容 | タスク数 | 完了 | 進捗 |
 |-------|------|---------|------|------|
 | 1-8 | 既存計画 | 60 | 60 | 100% |
-| 9 | Atoms追加 | 6 | 0 | 0% |
-| 10 | Molecules追加 | 19 | 0 | 0% |
-| 11 | PageSections | 18 | 0 | 0% |
-| 12 | Overlays拡張 | 36 | 0 | 0% |
-| 13 | Cards | 26 | 0 | 0% |
-| 14 | E-Commerce拡張 | 21 | 0 | 0% |
-| 15 | DataVisualization | 23 | 0 | 0% |
-| 16 | InboxChatMessages | 10 | 0 | 0% |
-| 17 | ドメイン特化追加 | 31 | 0 | 0% |
-| 18 | Tables拡張 | 11 | 0 | 0% |
-| 19 | Headers/Sidebars拡張 | 16 | 0 | 0% |
-| 20 | Pages拡張 | 15 | 0 | 0% |
-| 21 | Marketing拡張 | 11 | 0 | 0% |
-| **合計** | | **303** | **60** | **20%** |
+| 9 | Atoms追加 | 6 | 6 | 100% |
+| 10 | Molecules追加 | 19 | 19 | 100% |
+| 11 | PageSections | 18 | 18 | 100% |
+| 12 | Overlays拡張 | 36 | 36 | 100% |
+| 13 | Cards | 26 | 26 | 100% |
+| 14 | E-Commerce拡張 | 21 | 21 | 100% |
+| 15 | DataVisualization | 23 | 22 | 96% |
+| 16 | InboxChatMessages | 10 | 10 | 100% |
+| 17 | ドメイン特化追加 | 31 | 31 | 100% |
+| 18 | Tables拡張 | 11 | 11 | 100% |
+| 19 | Headers/Sidebars拡張 | 16 | 16 | 100% |
+| 20 | Pages拡張 | 15 | 15 | 100% |
+| 21 | Marketing拡張 | 11 | 11 | 100% |
+| **合計** | | **303** | **302** | **99.7%** |
