@@ -17,7 +17,7 @@ import {
 import { EyeIcon, EyeOffIcon, MailIcon, LockIcon, UserIcon } from "@/lib/icons";
 
 // Auth page variants
-type AuthVariant = "login" | "signup" | "forgot-password" | "reset-password";
+type AuthVariant = "login" | "signup" | "forgot-password" | "reset-password" | "verify-2fa";
 type AuthLayout = "centered" | "split" | "stacked";
 
 // Social login provider
@@ -60,6 +60,7 @@ export interface AuthFormData {
   confirmPassword?: string;
   name?: string;
   rememberMe?: boolean;
+  verificationCode?: string;
 }
 
 // Default titles based on variant
@@ -68,6 +69,7 @@ const defaultTitles: Record<AuthVariant, string> = {
   signup: "Create an account",
   "forgot-password": "Forgot password?",
   "reset-password": "Reset password",
+  "verify-2fa": "Two-factor authentication",
 };
 
 const defaultSubtitles: Record<AuthVariant, string> = {
@@ -75,6 +77,7 @@ const defaultSubtitles: Record<AuthVariant, string> = {
   signup: "Start your journey with us today",
   "forgot-password": "Enter your email to receive a reset link",
   "reset-password": "Enter your new password below",
+  "verify-2fa": "Enter the code from your authenticator app",
 };
 
 export const AuthPage = forwardRef<HTMLDivElement, AuthPageProps>(
@@ -123,6 +126,7 @@ export const AuthPage = forwardRef<HTMLDivElement, AuthPageProps>(
         confirmPassword: formData.get("confirmPassword") as string,
         name: formData.get("name") as string,
         rememberMe,
+        verificationCode: formData.get("verificationCode") as string,
       };
       onSubmit?.(data);
     };
@@ -224,6 +228,25 @@ export const AuthPage = forwardRef<HTMLDivElement, AuthPageProps>(
             />
           )}
 
+          {/* 2FA verification code field */}
+          {variant === "verify-2fa" && (
+            <FormField
+              label="Verification code"
+              type="text"
+              required
+              inputProps={{
+                name: "verificationCode",
+                placeholder: "Enter 6-digit code",
+                autoComplete: "one-time-code",
+                inputMode: "numeric",
+                pattern: "[0-9]*",
+                maxLength: 6,
+                leftIcon: <LockIcon className="size-4 text-muted-foreground" />,
+              }}
+              helperText="Enter the code from your authenticator app"
+            />
+          )}
+
           {/* Remember me & Forgot password for login */}
           {variant === "login" && (showRememberMe || showForgotPassword) && (
             <div className="flex items-center justify-between">
@@ -267,6 +290,7 @@ export const AuthPage = forwardRef<HTMLDivElement, AuthPageProps>(
             {variant === "signup" && "Create account"}
             {variant === "forgot-password" && "Send reset link"}
             {variant === "reset-password" && "Reset password"}
+            {variant === "verify-2fa" && "Verify"}
           </Button>
 
           {/* Social login */}
@@ -323,6 +347,14 @@ export const AuthPage = forwardRef<HTMLDivElement, AuthPageProps>(
               </Link>
             </>
           )}
+        {variant === "verify-2fa" && showLoginLink && (
+          <>
+            Having trouble?{" "}
+            <Link href={loginUrl} variant="default" className="font-medium">
+              Try another method
+            </Link>
+          </>
+        )}
       </div>
     );
 

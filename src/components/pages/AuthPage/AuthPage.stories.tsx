@@ -12,7 +12,7 @@ const meta: Meta<typeof AuthPage> = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["login", "signup", "forgot-password", "reset-password"],
+      options: ["login", "signup", "forgot-password", "reset-password", "verify-2fa"],
     },
     layout: {
       control: "select",
@@ -232,5 +232,39 @@ export const SignupSplit: Story = {
     socialProviders,
     splitImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
     onSubmit: (data) => console.log("Signup submitted:", data),
+  },
+};
+
+// Two-factor authentication
+export const TwoFactorAuth: Story = {
+  args: {
+    variant: "verify-2fa",
+    layout: "centered",
+    logo: <Logo />,
+    footer: <Footer />,
+    onSubmit: (data) => console.log("2FA verification submitted:", data),
+  },
+};
+
+// Two-factor authentication with error
+export const TwoFactorAuthWithError: Story = {
+  args: {
+    variant: "verify-2fa",
+    layout: "centered",
+    logo: <Logo />,
+    error: "Invalid verification code. Please try again.",
+    footer: <Footer />,
+    onSubmit: (data) => console.log("2FA verification submitted:", data),
+  },
+};
+
+// Two-factor authentication loading
+export const TwoFactorAuthLoading: Story = {
+  args: {
+    variant: "verify-2fa",
+    layout: "centered",
+    logo: <Logo />,
+    loading: true,
+    onSubmit: (data) => console.log("2FA verification submitted:", data),
   },
 };
