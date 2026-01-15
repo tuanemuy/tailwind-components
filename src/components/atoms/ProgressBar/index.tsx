@@ -10,6 +10,8 @@ export interface ProgressBarProps
   value: number;
   max?: number;
   showValue?: boolean;
+  /** Custom color for the progress bar (overrides variant) */
+  color?: string;
 }
 
 export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
@@ -21,6 +23,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
       value,
       max = 100,
       showValue = false,
+      color,
       ...props
     },
     ref,
@@ -43,8 +46,14 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
           aria-valuemax={max}
         >
           <div
-            className={cn(progressBarVariants({ variant }))}
-            style={{ width: `${percentage}%` }}
+            className={cn(
+              progressBarVariants({ variant: color ? undefined : variant }),
+              color && "bg-current"
+            )}
+            style={{
+              width: `${percentage}%`,
+              ...(color ? { color, backgroundColor: color } : {}),
+            }}
           />
         </div>
       </div>

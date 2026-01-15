@@ -15,6 +15,7 @@ export interface FormFieldProps {
   type?: InputType;
   inputProps?: Omit<InputProps, "error"> | TextareaProps;
   multiline?: boolean;
+  children?: React.ReactNode;
 }
 
 export const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
@@ -29,6 +30,7 @@ export const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
       type = "text",
       inputProps,
       multiline = false,
+      children,
     },
     ref,
   ) => {
@@ -46,7 +48,9 @@ export const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
             {label}
           </Label>
         )}
-        {multiline ? (
+        {children ? (
+          children
+        ) : multiline ? (
           <Textarea
             id={inputId}
             aria-invalid={hasError}

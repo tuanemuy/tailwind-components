@@ -25,6 +25,8 @@ export interface DropdownProps extends React.HTMLAttributes<HTMLDivElement> {
   trigger?: React.ReactNode;
   triggerLabel?: string;
   placement?: Placement;
+  /** Alias for placement */
+  align?: "start" | "end";
   closeOnSelect?: boolean;
   children: React.ReactNode;
 }
@@ -35,13 +37,17 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
       className,
       trigger,
       triggerLabel = "Options",
-      placement = "bottom-end",
+      placement,
+      align,
       closeOnSelect = true,
       children,
       ...props
     },
     _ref,
   ) => {
+    // Compute effective placement: placement takes priority, then align, then default
+    const effectivePlacement: Placement = placement || (align === "start" ? "bottom-start" : "bottom-end");
+
     const [isOpen, setIsOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -126,7 +132,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
             <div
               className={cn(
                 "absolute z-50 min-w-48 rounded-lg border border-border bg-card p-1 shadow-lg",
-                placementClasses[placement],
+                placementClasses[effectivePlacement],
               )}
               role="menu"
             >
@@ -145,11 +151,15 @@ export interface DropdownItemProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: React.ReactNode;
   destructive?: boolean;
+  /** Alias for destructive - use "destructive" for red styling */
+  variant?: "default" | "destructive";
 }
 
 export const DropdownItem = forwardRef<HTMLButtonElement, DropdownItemProps>(
-  ({ className, icon, destructive, children, onClick, ...props }, ref) => {
+  ({ className, icon, destructive, variant, children, onClick, ...props }, ref) => {
     const context = useContext(DropdownContext);
+    // variant="destructive" is an alias for destructive={true}
+    const isDestructive = destructive || variant === "destructive";
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
       onClick?.(e);
@@ -161,7 +171,7 @@ export const DropdownItem = forwardRef<HTMLButtonElement, DropdownItemProps>(
         ref={ref}
         className={cn(
           "flex w-full items-center gap-x-2 rounded-md px-3 py-2 text-sm transition-colors",
-          destructive
+          isDestructive
             ? "text-destructive hover:bg-destructive/10 focus:bg-destructive/10"
             : "text-foreground hover:bg-accent focus:bg-accent",
           "focus:outline-none",

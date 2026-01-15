@@ -10,6 +10,8 @@ export interface AvatarProps
     VariantProps<typeof avatarVariants> {
   src?: string;
   alt?: string;
+  /** Alias for alt - display name for the avatar */
+  name?: string;
   initials?: string;
   status?: AvatarStatus;
   fallback?: React.ReactNode;
@@ -17,13 +19,18 @@ export interface AvatarProps
 
 export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
   (
-    { className, size, src, alt, initials, status, fallback, ...props },
+    { className, size, src, alt, name, initials, status, fallback, ...props },
     ref,
   ) => {
     const [imageError, setImageError] = useState(false);
 
+    // name can be used as alt alias
+    const displayName = alt || name;
+    // Auto-generate initials from name if not provided
+    const displayInitials = initials || (name ? name.charAt(0).toUpperCase() : undefined);
+
     const showImage = src && !imageError;
-    const showInitials = !showImage && initials;
+    const showInitials = !showImage && displayInitials;
     const showFallback = !showImage && !showInitials && fallback;
 
     return (
@@ -32,13 +39,13 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
           {showImage && (
             <img
               src={src}
-              alt={alt || "Avatar"}
+              alt={displayName || "Avatar"}
               className="size-full object-cover"
               onError={() => setImageError(true)}
             />
           )}
           {showInitials && (
-            <span aria-label={alt || initials}>{initials}</span>
+            <span aria-label={displayName || displayInitials}>{displayInitials}</span>
           )}
           {showFallback && fallback}
           {!showImage && !showInitials && !showFallback && (

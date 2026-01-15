@@ -9,10 +9,15 @@ export interface TrendIndicatorProps
   direction: TrendDirection;
   variant?: TrendVariant;
   showIcon?: boolean;
-  size?: "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg";
 }
 
 const sizeClasses = {
+  xs: {
+    wrapper: "gap-x-0.5",
+    icon: "size-2.5",
+    text: "text-[10px]",
+  },
   sm: {
     wrapper: "gap-x-0.5",
     icon: "size-3",
