@@ -34,6 +34,9 @@ export type FileType =
   | "archive"
   | "other";
 
+// エクスポート形式
+export type ExportFormat = "csv" | "json" | "xlsx" | "xml" | "pdf";
+
 // レイアウト
 export type LayoutVariant = "list" | "grid";
 
