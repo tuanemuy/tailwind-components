@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { MailIcon, SearchIcon, UserIcon } from "@/lib/icons";
 import { Input } from "./index";
-import { SearchIcon, MailIcon, UserIcon } from "@/lib/icons";
 
 const meta: Meta<typeof Input> = {
   title: "Atoms/Input",
@@ -87,7 +87,7 @@ export const Email: Story = {
   },
 };
 
-export const Number: Story = {
+export const NumberInput: Story = {
   args: {
     type: "number",
     placeholder: "0",
@@ -96,7 +96,7 @@ export const Number: Story = {
   },
 };
 
-export const Error: Story = {
+export const ErrorState: Story = {
   args: {
     placeholder: "Invalid input",
     error: true,
@@ -122,7 +122,11 @@ export const AllTypes: Story = {
   render: () => (
     <div className="flex flex-col gap-4 w-80">
       <Input type="text" placeholder="Text input" />
-      <Input type="email" placeholder="Email input" leftIcon={<MailIcon className="size-4" />} />
+      <Input
+        type="email"
+        placeholder="Email input"
+        leftIcon={<MailIcon className="size-4" />}
+      />
       <Input type="password" placeholder="Password input" />
       <Input type="number" placeholder="Number input" />
       <Input type="tel" placeholder="Phone input" />

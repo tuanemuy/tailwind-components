@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
 import type { Size } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 export interface IconProps extends React.SVGAttributes<SVGElement> {
   size?: Size | number;

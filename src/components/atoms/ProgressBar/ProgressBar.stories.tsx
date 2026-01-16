@@ -48,7 +48,9 @@ export const Sizes: Story = {
   render: () => (
     <div className="flex flex-col gap-4 w-80">
       <div>
-        <span className="text-xs text-muted-foreground mb-1 block">Extra Small</span>
+        <span className="text-xs text-muted-foreground mb-1 block">
+          Extra Small
+        </span>
         <ProgressBar size="xs" value={60} />
       </div>
       <div>
@@ -64,7 +66,9 @@ export const Sizes: Story = {
         <ProgressBar size="lg" value={60} />
       </div>
       <div>
-        <span className="text-xs text-muted-foreground mb-1 block">Extra Large</span>
+        <span className="text-xs text-muted-foreground mb-1 block">
+          Extra Large
+        </span>
         <ProgressBar size="xl" value={60} />
       </div>
     </div>
@@ -75,15 +79,21 @@ export const Variants: Story = {
   render: () => (
     <div className="flex flex-col gap-4 w-80">
       <div>
-        <span className="text-xs text-muted-foreground mb-1 block">Default</span>
+        <span className="text-xs text-muted-foreground mb-1 block">
+          Default
+        </span>
         <ProgressBar variant="default" value={60} />
       </div>
       <div>
-        <span className="text-xs text-muted-foreground mb-1 block">Success</span>
+        <span className="text-xs text-muted-foreground mb-1 block">
+          Success
+        </span>
         <ProgressBar variant="success" value={80} />
       </div>
       <div>
-        <span className="text-xs text-muted-foreground mb-1 block">Warning</span>
+        <span className="text-xs text-muted-foreground mb-1 block">
+          Warning
+        </span>
         <ProgressBar variant="warning" value={50} />
       </div>
       <div>

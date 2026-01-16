@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { AlertCircleIcon, CheckIcon, XIcon } from "@/lib/icons";
 import { Badge } from "./index";
-import { CheckIcon, XIcon, AlertCircleIcon } from "@/lib/icons";
 
 const meta: Meta<typeof Badge> = {
   title: "Atoms/Badge",
@@ -12,7 +12,14 @@ const meta: Meta<typeof Badge> = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["default", "secondary", "destructive", "outline", "success", "warning"],
+      options: [
+        "default",
+        "secondary",
+        "destructive",
+        "outline",
+        "success",
+        "warning",
+      ],
     },
     size: {
       control: "select",
@@ -75,11 +82,21 @@ export const Outline: Story = {
 export const SoftVariants: Story = {
   render: () => (
     <div className="flex items-center gap-4">
-      <Badge variant="default" soft>Default</Badge>
-      <Badge variant="secondary" soft>Secondary</Badge>
-      <Badge variant="destructive" soft>Destructive</Badge>
-      <Badge variant="success" soft>Success</Badge>
-      <Badge variant="warning" soft>Warning</Badge>
+      <Badge variant="default" soft>
+        Default
+      </Badge>
+      <Badge variant="secondary" soft>
+        Secondary
+      </Badge>
+      <Badge variant="destructive" soft>
+        Destructive
+      </Badge>
+      <Badge variant="success" soft>
+        Success
+      </Badge>
+      <Badge variant="warning" soft>
+        Warning
+      </Badge>
     </div>
   ),
 };
@@ -105,10 +122,18 @@ export const WithDot: Story = {
 export const WithDotColors: Story = {
   render: () => (
     <div className="flex items-center gap-4">
-      <Badge variant="outline" dot dotColor="success">Online</Badge>
-      <Badge variant="outline" dot dotColor="warning">Away</Badge>
-      <Badge variant="outline" dot dotColor="error">Offline</Badge>
-      <Badge variant="outline" dot dotColor="default">Default</Badge>
+      <Badge variant="outline" dot dotColor="success">
+        Online
+      </Badge>
+      <Badge variant="outline" dot dotColor="warning">
+        Away
+      </Badge>
+      <Badge variant="outline" dot dotColor="error">
+        Offline
+      </Badge>
+      <Badge variant="outline" dot dotColor="default">
+        Default
+      </Badge>
     </div>
   ),
 };
@@ -135,7 +160,11 @@ export const StatusExamples: Story = {
       <Badge variant="success" soft leftIcon={<CheckIcon className="size-3" />}>
         Completed
       </Badge>
-      <Badge variant="warning" soft leftIcon={<AlertCircleIcon className="size-3" />}>
+      <Badge
+        variant="warning"
+        soft
+        leftIcon={<AlertCircleIcon className="size-3" />}
+      >
         Pending
       </Badge>
       <Badge variant="destructive" soft leftIcon={<XIcon className="size-3" />}>

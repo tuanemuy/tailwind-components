@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Label } from "./index";
 import { Input } from "../Input";
+import { Label } from "./index";
 
 const meta: Meta<typeof Label> = {
   title: "Atoms/Label",
@@ -54,7 +54,9 @@ export const WithInput: Story = {
 export const RequiredWithInput: Story = {
   render: () => (
     <div className="flex flex-col gap-2 w-80">
-      <Label htmlFor="name" required>Full name</Label>
+      <Label htmlFor="name" required>
+        Full name
+      </Label>
       <Input id="name" placeholder="John Doe" />
     </div>
   ),
@@ -63,7 +65,9 @@ export const RequiredWithInput: Story = {
 export const OptionalWithInput: Story = {
   render: () => (
     <div className="flex flex-col gap-2 w-80">
-      <Label htmlFor="phone" optional>Phone number</Label>
+      <Label htmlFor="phone" optional>
+        Phone number
+      </Label>
       <Input id="phone" type="tel" placeholder="+1 (555) 123-4567" />
     </div>
   ),
@@ -73,15 +77,21 @@ export const FormExample: Story = {
   render: () => (
     <div className="flex flex-col gap-4 w-80">
       <div className="flex flex-col gap-2">
-        <Label htmlFor="f-name" required>Name</Label>
+        <Label htmlFor="f-name" required>
+          Name
+        </Label>
         <Input id="f-name" placeholder="Enter your name" />
       </div>
       <div className="flex flex-col gap-2">
-        <Label htmlFor="f-email" required>Email</Label>
+        <Label htmlFor="f-email" required>
+          Email
+        </Label>
         <Input id="f-email" type="email" placeholder="Enter your email" />
       </div>
       <div className="flex flex-col gap-2">
-        <Label htmlFor="f-company" optional>Company</Label>
+        <Label htmlFor="f-company" optional>
+          Company
+        </Label>
         <Input id="f-company" placeholder="Enter your company" />
       </div>
     </div>
@@ -102,7 +112,9 @@ export const DisabledState: Story = {
 export const WithDescription: Story = {
   render: () => (
     <div className="flex flex-col gap-1 w-80">
-      <Label htmlFor="password" required>Password</Label>
+      <Label htmlFor="password" required>
+        Password
+      </Label>
       <p className="text-xs text-muted-foreground">
         Must be at least 8 characters
       </p>

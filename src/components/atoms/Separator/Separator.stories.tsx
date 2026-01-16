@@ -39,13 +39,9 @@ export const Vertical: Story = {
 export const InContent: Story = {
   render: () => (
     <div className="w-80">
-      <p className="text-sm">
-        This is some content above the separator.
-      </p>
+      <p className="text-sm">This is some content above the separator.</p>
       <Separator className="my-4" />
-      <p className="text-sm">
-        This is some content below the separator.
-      </p>
+      <p className="text-sm">This is some content below the separator.</p>
     </div>
   ),
 };
@@ -92,13 +88,21 @@ export const VerticalInline: Story = {
 export const InNavigation: Story = {
   render: () => (
     <nav className="flex items-center gap-4 h-5">
-      <a href="#" className="text-sm hover:text-primary">Home</a>
+      <a href="#home" className="text-sm hover:text-primary">
+        Home
+      </a>
       <Separator orientation="vertical" />
-      <a href="#" className="text-sm hover:text-primary">Products</a>
+      <a href="#products" className="text-sm hover:text-primary">
+        Products
+      </a>
       <Separator orientation="vertical" />
-      <a href="#" className="text-sm hover:text-primary">About</a>
+      <a href="#about" className="text-sm hover:text-primary">
+        About
+      </a>
       <Separator orientation="vertical" />
-      <a href="#" className="text-sm hover:text-primary">Contact</a>
+      <a href="#contact" className="text-sm hover:text-primary">
+        Contact
+      </a>
     </nav>
   ),
 };
@@ -117,10 +121,16 @@ export const InCard: Story = {
       </div>
       <Separator className="my-4" />
       <div className="flex justify-end gap-2">
-        <button className="text-sm text-muted-foreground hover:text-foreground">
+        <button
+          type="button"
+          className="text-sm text-muted-foreground hover:text-foreground"
+        >
           Cancel
         </button>
-        <button className="text-sm text-primary hover:text-primary/80">
+        <button
+          type="button"
+          className="text-sm text-primary hover:text-primary/80"
+        >
           Save
         </button>
       </div>
@@ -143,15 +153,23 @@ export const WithText: Story = {
 export const LoginDivider: Story = {
   render: () => (
     <div className="w-80 space-y-4">
-      <button className="w-full rounded-lg border py-2 text-sm font-medium hover:bg-accent">
+      <button
+        type="button"
+        className="w-full rounded-lg border py-2 text-sm font-medium hover:bg-accent"
+      >
         Continue with Google
       </button>
       <div className="flex items-center gap-4">
         <Separator className="flex-1" />
-        <span className="text-xs text-muted-foreground uppercase">or continue with</span>
+        <span className="text-xs text-muted-foreground uppercase">
+          or continue with
+        </span>
         <Separator className="flex-1" />
       </div>
-      <button className="w-full rounded-lg bg-primary py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
+      <button
+        type="button"
+        className="w-full rounded-lg bg-primary py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+      >
         Sign in with Email
       </button>
     </div>

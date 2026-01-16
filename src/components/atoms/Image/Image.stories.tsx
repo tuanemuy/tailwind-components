@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Image, EagerImage } from "./index";
+import { ImageIcon } from "@/lib/icons";
 import { Skeleton } from "../Skeleton";
 import { Spinner } from "../Spinner";
-import { ImageIcon } from "@/lib/icons";
+import { EagerImage, Image } from "./index";
 
 const meta: Meta<typeof Image> = {
   title: "Atoms/Image",

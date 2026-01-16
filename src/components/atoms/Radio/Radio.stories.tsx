@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { Radio } from "./index";
 import { Label } from "../Label";
+import { Radio } from "./index";
 
 const meta: Meta<typeof Radio> = {
   title: "Atoms/Radio",
@@ -88,7 +88,9 @@ export const RadioGroup: Story = {
       </div>
       <div className="flex items-center gap-2">
         <Radio id="plan4" name="plan" disabled />
-        <Label htmlFor="plan4" className="text-muted-foreground">Custom Plan (disabled)</Label>
+        <Label htmlFor="plan4" className="text-muted-foreground">
+          Custom Plan (disabled)
+        </Label>
       </div>
     </div>
   ),
@@ -125,9 +127,7 @@ const ControlledExample = () => {
         />
         <Label htmlFor="ctrl3">Option 3</Label>
       </div>
-      <p className="mt-2 text-sm text-muted-foreground">
-        Selected: {selected}
-      </p>
+      <p className="mt-2 text-sm text-muted-foreground">Selected: {selected}</p>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { ChevronRightIcon, DownloadIcon, PlusIcon } from "@/lib/icons";
 import { Button } from "./index";
-import { PlusIcon, DownloadIcon, ChevronRightIcon } from "@/lib/icons";
 
 const meta: Meta<typeof Button> = {
   title: "Atoms/Button",
@@ -124,11 +124,21 @@ export const AllVariants: Story = {
         <Button variant="outline">Outline</Button>
       </div>
       <div className="flex items-center gap-4">
-        <Button variant="primary" disabled>Primary</Button>
-        <Button variant="secondary" disabled>Secondary</Button>
-        <Button variant="ghost" disabled>Ghost</Button>
-        <Button variant="destructive" disabled>Destructive</Button>
-        <Button variant="outline" disabled>Outline</Button>
+        <Button variant="primary" disabled>
+          Primary
+        </Button>
+        <Button variant="secondary" disabled>
+          Secondary
+        </Button>
+        <Button variant="ghost" disabled>
+          Ghost
+        </Button>
+        <Button variant="destructive" disabled>
+          Destructive
+        </Button>
+        <Button variant="outline" disabled>
+          Outline
+        </Button>
       </div>
     </div>
   ),

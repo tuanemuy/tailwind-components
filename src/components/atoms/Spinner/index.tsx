@@ -1,7 +1,7 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 import { spinnerVariants } from "@/lib/variants/spinner";
-import type { VariantProps } from "class-variance-authority";
 
 export interface SpinnerProps
   extends React.SVGAttributes<SVGSVGElement>,
@@ -11,6 +11,7 @@ export interface SpinnerProps
 
 export const Spinner = forwardRef<SVGSVGElement, SpinnerProps>(
   ({ className, size, variant, label = "Loading", ...props }, ref) => (
+    // biome-ignore lint/a11y/useSemanticElements: SVG spinner requires role="status" for accessibility
     <svg
       ref={ref}
       className={cn(spinnerVariants({ size, variant }), className)}
@@ -71,6 +72,7 @@ const variantColors = {
 
 export const DotsSpinner = forwardRef<HTMLDivElement, DotsSpinnerProps>(
   ({ className, size = "md", variant = "default", ...props }, ref) => (
+    // biome-ignore lint/a11y/useSemanticElements: Spinner requires role="status" for accessibility
     <div
       ref={ref}
       className={cn("flex items-center", dotGaps[size], className)}
@@ -128,6 +130,7 @@ const ringColors = {
 
 export const RingSpinner = forwardRef<HTMLDivElement, RingSpinnerProps>(
   ({ className, size = "md", variant = "default", ...props }, ref) => (
+    // biome-ignore lint/a11y/useSemanticElements: Spinner requires role="status" for accessibility
     <div
       ref={ref}
       className={cn(

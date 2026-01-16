@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Kbd, KbdGroup, PlatformKbd } from "./index";
 import { SearchIcon } from "@/lib/icons";
+import { Kbd, KbdGroup, PlatformKbd } from "./index";
 
 const meta: Meta<typeof Kbd> = {
   title: "Atoms/Kbd",

@@ -1,23 +1,23 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Icon } from "./index";
 import {
-  HomeIcon,
-  UserIcon,
-  SettingsIcon,
-  SearchIcon,
   BellIcon,
-  MailIcon,
   CalendarIcon,
+  CheckIcon,
+  EditIcon,
   FileIcon,
   FolderIcon,
-  TrendUpIcon,
-  TrendDownIcon,
-  CheckIcon,
-  XIcon,
+  HomeIcon,
+  MailIcon,
   PlusIcon,
-  EditIcon,
+  SearchIcon,
+  SettingsIcon,
   TrashIcon,
+  TrendDownIcon,
+  TrendUpIcon,
+  UserIcon,
+  XIcon,
 } from "@/lib/icons";
+import { Icon } from "./index";
 
 const meta: Meta<typeof Icon> = {
   title: "Atoms/Icon",

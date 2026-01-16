@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Tooltip } from "./index";
-import { Button } from "../Button";
 import { SettingsIcon } from "@/lib/icons";
+import { Button } from "../Button";
+import { Tooltip } from "./index";
 
 const meta: Meta<typeof Tooltip> = {
   title: "Atoms/Tooltip",
@@ -118,7 +118,7 @@ export const OnIconButton: Story = {
   render: () => (
     <div className="p-8">
       <Tooltip content="Settings">
-        <button className="rounded-md p-2 hover:bg-muted">
+        <button type="button" className="rounded-md p-2 hover:bg-muted">
           <SettingsIcon className="size-5" />
         </button>
       </Tooltip>

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { Checkbox } from "./index";
 import { Label } from "../Label";
+import { Checkbox } from "./index";
 
 const meta: Meta<typeof Checkbox> = {
   title: "Atoms/Checkbox",
@@ -96,7 +96,9 @@ export const CheckboxGroup: Story = {
       </div>
       <div className="flex items-center gap-2">
         <Checkbox id="option4" disabled />
-        <Label htmlFor="option4" className="text-muted-foreground">Option 4 (disabled)</Label>
+        <Label htmlFor="option4" className="text-muted-foreground">
+          Option 4 (disabled)
+        </Label>
       </div>
     </div>
   ),
@@ -111,9 +113,7 @@ const ControlledExample = () => {
         checked={checked}
         onChange={(e) => setChecked(e.target.checked)}
       />
-      <Label htmlFor="controlled">
-        {checked ? "Checked" : "Unchecked"}
-      </Label>
+      <Label htmlFor="controlled">{checked ? "Checked" : "Unchecked"}</Label>
     </div>
   );
 };

@@ -1,22 +1,51 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 import { kbdVariants } from "@/lib/variants/kbd";
-import type { VariantProps } from "class-variance-authority";
 
 export interface KbdProps
   extends React.HTMLAttributes<HTMLElement>,
-    VariantProps<typeof kbdVariants> {}
+    VariantProps<typeof kbdVariants> {
+  /** Array of keys to display (renders as KbdGroup internally) */
+  keys?: string[];
+  /** Separator between keys when using keys prop */
+  separator?: React.ReactNode;
+}
 
 export const Kbd = forwardRef<HTMLElement, KbdProps>(
-  ({ className, variant, size, children, ...props }, ref) => (
-    <kbd
-      ref={ref}
-      className={cn(kbdVariants({ variant, size }), className)}
-      {...props}
-    >
-      {children}
-    </kbd>
-  ),
+  ({ className, variant, size, children, keys, separator, ...props }, ref) => {
+    // If keys prop is provided, render as a group of kbd elements
+    if (keys && keys.length > 0) {
+      const defaultSeparator = (
+        <span className="text-muted-foreground mx-0.5">+</span>
+      );
+      return (
+        <span
+          ref={ref as React.Ref<HTMLSpanElement>}
+          className={cn("inline-flex items-center", className)}
+          {...(props as React.HTMLAttributes<HTMLSpanElement>)}
+        >
+          {keys.map((key, index) => (
+            // biome-ignore lint/suspicious/noArrayIndexKey: Keys array may contain duplicates, index is needed for uniqueness
+            <span key={`${key}-${index}`} className="inline-flex items-center">
+              {index > 0 && (separator ?? defaultSeparator)}
+              <kbd className={cn(kbdVariants({ variant, size }))}>{key}</kbd>
+            </span>
+          ))}
+        </span>
+      );
+    }
+
+    return (
+      <kbd
+        ref={ref}
+        className={cn(kbdVariants({ variant, size }), className)}
+        {...props}
+      >
+        {children}
+      </kbd>
+    );
+  },
 );
 Kbd.displayName = "Kbd";
 
@@ -46,7 +75,8 @@ export const KbdGroup = forwardRef<HTMLDivElement, KbdGroupProps>(
       {...props}
     >
       {keys.map((key, index) => (
-        <span key={index} className="inline-flex items-center">
+        // biome-ignore lint/suspicious/noArrayIndexKey: Keys array may contain duplicates, index is needed for uniqueness
+        <span key={`${key}-${index}`} className="inline-flex items-center">
           {index > 0 && separator}
           <Kbd variant={variant} size={size}>
             {key}
@@ -92,8 +122,7 @@ export interface PlatformKbdProps extends Omit<KbdProps, "children"> {
 
 export const PlatformKbd = forwardRef<HTMLElement, PlatformKbdProps>(
   ({ keyName, ...props }, ref) => {
-    const symbol =
-      keySymbols[keyName.toLowerCase() as KeySymbol] ?? keyName;
+    const symbol = keySymbols[keyName.toLowerCase() as KeySymbol] ?? keyName;
     return (
       <Kbd ref={ref} {...props}>
         {symbol}

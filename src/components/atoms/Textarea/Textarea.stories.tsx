@@ -41,7 +41,8 @@ export const Default: Story = {
 
 export const WithValue: Story = {
   args: {
-    defaultValue: "This is a sample text that demonstrates the textarea component with some content.",
+    defaultValue:
+      "This is a sample text that demonstrates the textarea component with some content.",
     className: "w-80",
   },
 };
@@ -65,7 +66,7 @@ export const Resizable: Story = {
   },
 };
 
-export const Error: Story = {
+export const ErrorState: Story = {
   args: {
     placeholder: "Error state",
     error: true,

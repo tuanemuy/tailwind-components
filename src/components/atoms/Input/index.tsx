@@ -1,8 +1,8 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef, useState } from "react";
+import { EyeIcon, EyeOffIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { inputVariants } from "@/lib/variants/input";
-import { EyeIcon, EyeOffIcon } from "@/lib/icons";
-import type { VariantProps } from "class-variance-authority";
 
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">,
@@ -10,6 +10,8 @@ export interface InputProps
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   error?: boolean;
+  /** Size of the input (alias for inputSize) */
+  size?: "sm" | "md" | "lg";
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -18,6 +20,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       className,
       variant,
       inputSize,
+      size,
       type = "text",
       leftIcon,
       rightIcon,
@@ -27,6 +30,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     },
     ref,
   ) => {
+    // Use size prop as alias for inputSize
+    const resolvedSize = inputSize ?? size;
     const [showPassword, setShowPassword] = useState(false);
     const isPassword = type === "password";
     const inputType = isPassword && showPassword ? "text" : type;
@@ -45,7 +50,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           type={inputType}
           className={cn(
-            inputVariants({ variant: error ? "error" : variant, inputSize }),
+            inputVariants({
+              variant: error ? "error" : variant,
+              inputSize: resolvedSize,
+            }),
             hasLeftIcon && "ps-10",
             hasRightIcon && "pe-10",
             className,

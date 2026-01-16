@@ -1,7 +1,7 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
-import { switchVariants, switchThumbVariants } from "@/lib/variants/switch";
-import type { VariantProps } from "class-variance-authority";
+import { switchThumbVariants, switchVariants } from "@/lib/variants/switch";
 
 export interface SwitchProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "type">,
@@ -34,7 +34,9 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
           className,
         )}
       >
-        <span className={cn(switchThumbVariants({ size, checked: !!checked }))} />
+        <span
+          className={cn(switchThumbVariants({ size, checked: !!checked }))}
+        />
       </span>
     </label>
   ),

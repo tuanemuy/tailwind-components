@@ -1,7 +1,7 @@
-import { forwardRef, useState, useCallback } from "react";
+import type { VariantProps } from "class-variance-authority";
+import { forwardRef, useCallback, useState } from "react";
 import { cn } from "@/lib/utils";
 import { imageVariants } from "@/lib/variants/image";
-import type { VariantProps } from "class-variance-authority";
 
 export interface ImageProps
   extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, "placeholder">,

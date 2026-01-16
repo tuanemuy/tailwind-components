@@ -1,7 +1,7 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 import { skeletonVariants } from "@/lib/variants/skeleton";
-import type { VariantProps } from "class-variance-authority";
 
 export interface SkeletonProps
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -11,18 +11,7 @@ export interface SkeletonProps
 }
 
 export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
-  (
-    {
-      className,
-      animation,
-      shape,
-      width,
-      height,
-      style,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ className, animation, shape, width, height, style, ...props }, ref) => {
     const customStyle = {
       ...style,
       width: typeof width === "number" ? `${width}px` : width,
@@ -53,7 +42,8 @@ export const SkeletonText = forwardRef<HTMLDivElement, SkeletonTextProps>(
     <div ref={ref} className={cn("space-y-2", className)}>
       {Array.from({ length: lines }).map((_, index) => (
         <Skeleton
-          key={index}
+          // biome-ignore lint/suspicious/noArrayIndexKey: Skeleton lines are static, index is the only identifier
+          key={`skeleton-line-${index}`}
           shape="text"
           height={16}
           style={{
@@ -131,9 +121,7 @@ export const SkeletonCard = forwardRef<HTMLDivElement, SkeletonCardProps>(
           className="mb-2 w-3/4"
         />
       )}
-      {showDescription && (
-        <SkeletonText animation={animation} lines={2} />
-      )}
+      {showDescription && <SkeletonText animation={animation} lines={2} />}
     </div>
   ),
 );

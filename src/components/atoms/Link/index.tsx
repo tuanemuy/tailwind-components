@@ -1,7 +1,7 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 import { linkVariants } from "@/lib/variants/link";
-import type { VariantProps } from "class-variance-authority";
 
 export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
@@ -9,6 +9,7 @@ export interface LinkProps
   external?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
+  unstyled?: boolean;
 }
 
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
@@ -20,6 +21,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       external,
       leftIcon,
       rightIcon,
+      unstyled,
       children,
       ...props
     },
@@ -27,7 +29,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
   ) => (
     <a
       ref={ref}
-      className={cn(linkVariants({ variant, size }), className)}
+      className={cn(!unstyled && linkVariants({ variant, size }), className)}
       {...(external && {
         target: "_blank",
         rel: "noopener noreferrer",

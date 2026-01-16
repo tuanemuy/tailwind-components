@@ -1,7 +1,7 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
-import { progressVariants, progressBarVariants } from "@/lib/variants/progress";
-import type { VariantProps } from "class-variance-authority";
+import { progressBarVariants, progressVariants } from "@/lib/variants/progress";
 
 export interface ProgressBarProps
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -10,6 +10,8 @@ export interface ProgressBarProps
   value: number;
   max?: number;
   showValue?: boolean;
+  /** Alias for showValue */
+  showLabel?: boolean;
   /** Custom color for the progress bar (overrides variant) */
   color?: string;
 }
@@ -22,20 +24,24 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
       variant,
       value,
       max = 100,
-      showValue = false,
+      showValue,
+      showLabel,
       color,
       ...props
     },
     ref,
   ) => {
     const percentage = Math.min(Math.max((value / max) * 100, 0), 100);
+    const shouldShowValue = showValue ?? showLabel ?? false;
 
     return (
       <div ref={ref} className={cn("w-full", className)} {...props}>
-        {showValue && (
+        {shouldShowValue && (
           <div className="mb-1 flex justify-between text-sm">
             <span className="text-muted-foreground">Progress</span>
-            <span className="font-medium text-foreground">{Math.round(percentage)}%</span>
+            <span className="font-medium text-foreground">
+              {Math.round(percentage)}%
+            </span>
           </div>
         )}
         <div
@@ -48,7 +54,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
           <div
             className={cn(
               progressBarVariants({ variant: color ? undefined : variant }),
-              color && "bg-current"
+              color && "bg-current",
             )}
             style={{
               width: `${percentage}%`,

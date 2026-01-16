@@ -9,12 +9,10 @@ export interface LabelProps
 
 export const Label = forwardRef<HTMLLabelElement, LabelProps>(
   ({ className, required, optional, children, ...props }, ref) => (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Label component receives htmlFor via props when needed
     <label
       ref={ref}
-      className={cn(
-        "block text-sm font-medium text-foreground",
-        className,
-      )}
+      className={cn("block text-sm font-medium text-foreground", className)}
       {...props}
     >
       {children}

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Link } from "./index";
 import { ChevronRightIcon, ExternalLinkIcon } from "@/lib/icons";
+import { Link } from "./index";
 
 const meta: Meta<typeof Link> = {
   title: "Atoms/Link",
@@ -53,9 +53,15 @@ export const Nav: Story = {
 export const Sizes: Story = {
   render: () => (
     <div className="flex items-center gap-4">
-      <Link href="#" size="sm">Small</Link>
-      <Link href="#" size="md">Medium</Link>
-      <Link href="#" size="lg">Large</Link>
+      <Link href="#" size="sm">
+        Small
+      </Link>
+      <Link href="#" size="md">
+        Medium
+      </Link>
+      <Link href="#" size="lg">
+        Large
+      </Link>
     </div>
   ),
 };
@@ -88,9 +94,15 @@ export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-4">
-        <Link href="#" variant="default">Default</Link>
-        <Link href="#" variant="muted">Muted</Link>
-        <Link href="#" variant="nav">Nav</Link>
+        <Link href="#" variant="default">
+          Default
+        </Link>
+        <Link href="#" variant="muted">
+          Muted
+        </Link>
+        <Link href="#" variant="nav">
+          Nav
+        </Link>
       </div>
     </div>
   ),
@@ -99,9 +111,7 @@ export const AllVariants: Story = {
 export const InText: Story = {
   render: () => (
     <p className="text-sm text-muted-foreground max-w-md">
-      By continuing, you agree to our{" "}
-      <Link href="#">Terms of Service</Link>
-      {" "}and{" "}
+      By continuing, you agree to our <Link href="#">Terms of Service</Link> and{" "}
       <Link href="#">Privacy Policy</Link>.
     </p>
   ),
@@ -110,10 +120,18 @@ export const InText: Story = {
 export const NavigationExample: Story = {
   render: () => (
     <nav className="flex items-center gap-6">
-      <Link href="#" variant="nav">Home</Link>
-      <Link href="#" variant="nav">Products</Link>
-      <Link href="#" variant="nav">About</Link>
-      <Link href="#" variant="nav">Contact</Link>
+      <Link href="#" variant="nav">
+        Home
+      </Link>
+      <Link href="#" variant="nav">
+        Products
+      </Link>
+      <Link href="#" variant="nav">
+        About
+      </Link>
+      <Link href="#" variant="nav">
+        Contact
+      </Link>
     </nav>
   ),
 };
@@ -121,9 +139,15 @@ export const NavigationExample: Story = {
 export const FooterLinks: Story = {
   render: () => (
     <div className="flex flex-col gap-2">
-      <Link href="#" variant="muted" size="sm">Privacy Policy</Link>
-      <Link href="#" variant="muted" size="sm">Terms of Service</Link>
-      <Link href="#" variant="muted" size="sm">Cookie Settings</Link>
+      <Link href="#" variant="muted" size="sm">
+        Privacy Policy
+      </Link>
+      <Link href="#" variant="muted" size="sm">
+        Terms of Service
+      </Link>
+      <Link href="#" variant="muted" size="sm">
+        Cookie Settings
+      </Link>
       <Link href="https://example.com" variant="muted" size="sm" external>
         Help Center
       </Link>
