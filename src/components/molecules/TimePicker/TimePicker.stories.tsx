@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { TimePicker } from "./index";
 import type { TimeValue } from "./index";
+import { TimePicker } from "./index";
 
 const meta: Meta<typeof TimePicker> = {
   title: "Molecules/TimePicker",
@@ -36,11 +36,7 @@ const ControlledTimePicker = () => {
 
   return (
     <div className="space-y-4">
-      <TimePicker
-        value={time}
-        onChange={setTime}
-        placeholder="Pick a time"
-      />
+      <TimePicker value={time} onChange={setTime} placeholder="Pick a time" />
       {time && (
         <p className="text-sm text-muted-foreground">
           Selected: {time.hours.toString().padStart(2, "0")}:
@@ -116,9 +112,7 @@ export const MinuteStep15: Story = {
           minuteStep={15}
           placeholder="Select time"
         />
-        <p className="text-xs text-muted-foreground">
-          Minutes increment by 15
-        </p>
+        <p className="text-xs text-muted-foreground">Minutes increment by 15</p>
       </div>
     );
   },
@@ -136,9 +130,7 @@ export const MinuteStep5: Story = {
           minuteStep={5}
           placeholder="Select time"
         />
-        <p className="text-xs text-muted-foreground">
-          Minutes increment by 5
-        </p>
+        <p className="text-xs text-muted-foreground">Minutes increment by 5</p>
       </div>
     );
   },

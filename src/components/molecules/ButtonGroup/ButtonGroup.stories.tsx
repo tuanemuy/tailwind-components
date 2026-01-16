@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ButtonGroup } from "./index";
 import { Button } from "@/components/atoms";
 import { ChevronLeftIcon, ChevronRightIcon } from "@/lib/icons";
+import { ButtonGroup } from "./index";
 
 const meta: Meta<typeof ButtonGroup> = {
   title: "Molecules/ButtonGroup",
@@ -68,10 +68,16 @@ export const VerticalSeparated: Story = {
 export const WithIcons: Story = {
   render: () => (
     <ButtonGroup variant="attached">
-      <Button variant="outline" leftIcon={<ChevronLeftIcon className="size-4" />}>
+      <Button
+        variant="outline"
+        leftIcon={<ChevronLeftIcon className="size-4" />}
+      >
         Previous
       </Button>
-      <Button variant="outline" rightIcon={<ChevronRightIcon className="size-4" />}>
+      <Button
+        variant="outline"
+        rightIcon={<ChevronRightIcon className="size-4" />}
+      >
         Next
       </Button>
     </ButtonGroup>

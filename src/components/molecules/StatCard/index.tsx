@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
 import { TrendIndicator } from "@/components/molecules/TrendIndicator";
 import type { TrendDirection, TrendVariant } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 export interface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {
   icon?: React.ReactNode;
@@ -23,15 +23,14 @@ const variantClasses = {
 };
 
 export const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
-  ({ className, icon, label, value, trend, variant = "bordered", ...props }, ref) => {
+  (
+    { className, icon, label, value, trend, variant = "bordered", ...props },
+    ref,
+  ) => {
     return (
       <div
         ref={ref}
-        className={cn(
-          "rounded-lg p-4",
-          variantClasses[variant],
-          className,
-        )}
+        className={cn("rounded-lg p-4", variantClasses[variant], className)}
         {...props}
       >
         <div className="flex items-start justify-between gap-x-3">

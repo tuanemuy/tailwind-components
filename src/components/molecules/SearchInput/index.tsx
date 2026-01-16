@@ -1,11 +1,11 @@
 "use client";
 
-import { forwardRef, useRef, useEffect } from "react";
+import type { VariantProps } from "class-variance-authority";
+import { forwardRef, useEffect, useRef } from "react";
+import { Kbd } from "@/components/atoms";
+import { SearchIcon, XIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { searchInputVariants } from "@/lib/variants/searchInput";
-import { SearchIcon, XIcon } from "@/lib/icons";
-import { Kbd } from "@/components/atoms";
-import type { VariantProps } from "class-variance-authority";
 
 export interface SearchInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">,
@@ -31,7 +31,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
       onChange,
       ...props
     },
-    ref
+    ref,
   ) => {
     const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -40,7 +40,10 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
       if (!showShortcut) return;
 
       const handleKeyDown = (event: KeyboardEvent) => {
-        if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === shortcutKey.toLowerCase()) {
+        if (
+          (event.metaKey || event.ctrlKey) &&
+          event.key.toLowerCase() === shortcutKey.toLowerCase()
+        ) {
           event.preventDefault();
           inputRef.current?.focus();
         }
@@ -60,21 +63,24 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
       }
     };
 
-    const iconSize = size === "sm" ? "size-3.5" : size === "lg" ? "size-5" : "size-4";
+    const iconSize =
+      size === "sm" ? "size-3.5" : size === "lg" ? "size-5" : "size-4";
     const hasValue = value !== undefined && value !== "";
 
     return (
       <div className={cn(searchInputVariants({ size }), className)}>
-        <SearchIcon className={cn(iconSize, "shrink-0 text-muted-foreground")} />
+        <SearchIcon
+          className={cn(iconSize, "shrink-0 text-muted-foreground")}
+        />
         <input
           ref={setRefs}
           type="search"
           value={value}
           onChange={onChange}
           className={cn(
-            "flex-1 bg-transparent outline-none placeholder:text-muted-foreground",
+            "flex-1 border-transparent bg-transparent outline-none placeholder:text-muted-foreground focus:border-transparent focus:ring-0",
             "[&::-webkit-search-cancel-button]:hidden",
-            "[&::-webkit-search-decoration]:hidden"
+            "[&::-webkit-search-decoration]:hidden",
           )}
           {...props}
         />
@@ -84,6 +90,8 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
+            role="img"
+            aria-label="Loading"
           >
             <circle
               className="opacity-25"
@@ -114,6 +122,6 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
         )}
       </div>
     );
-  }
+  },
 );
 SearchInput.displayName = "SearchInput";

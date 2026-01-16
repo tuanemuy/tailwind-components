@@ -1,10 +1,10 @@
 "use client";
 
-import { forwardRef, useState } from "react";
-import { cn } from "@/lib/utils";
-import { ratingVariants, ratingStarVariants } from "@/lib/variants/rating";
-import { StarIcon } from "@/lib/icons";
 import type { VariantProps } from "class-variance-authority";
+import { forwardRef, useState } from "react";
+import { StarIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
+import { ratingStarVariants, ratingVariants } from "@/lib/variants/rating";
 
 // Star component
 interface StarProps {
@@ -32,7 +32,7 @@ const Star = ({
       disabled={readonly}
       className={cn(
         ratingStarVariants({ state, readonly }),
-        "focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        "focus:outline-none focus-visible:ring-2 focus-visible:ring-ring",
       )}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
@@ -72,7 +72,7 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
       precision = 1,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
     const [hoverValue, setHoverValue] = useState<number | null>(null);
@@ -110,6 +110,7 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
         <div className={cn(ratingVariants({ size }))}>
           {Array.from({ length: max }, (_, index) => (
             <Star
+              // biome-ignore lint/suspicious/noArrayIndexKey: Star elements are static, index is the only identifier
               key={index}
               filled={index < displayValue}
               hovered={hoverValue !== null && index < hoverValue}
@@ -120,16 +121,18 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
           ))}
         </div>
         {showValue && (
-          <span className={cn(
-            "font-medium text-foreground",
-            size === "sm" ? "text-xs" : size === "xl" ? "text-lg" : "text-sm"
-          )}>
+          <span
+            className={cn(
+              "font-medium text-foreground",
+              size === "sm" ? "text-xs" : size === "xl" ? "text-lg" : "text-sm",
+            )}
+          >
             {value.toFixed(precision)}
           </span>
         )}
       </div>
     );
-  }
+  },
 );
 Rating.displayName = "Rating";
 
@@ -153,6 +156,6 @@ export const RatingDisplay = forwardRef<HTMLDivElement, RatingDisplayProps>(
         )}
       </div>
     );
-  }
+  },
 );
 RatingDisplay.displayName = "RatingDisplay";

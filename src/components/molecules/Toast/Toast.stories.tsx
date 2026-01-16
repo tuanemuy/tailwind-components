@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Toast, ToastProvider, useToast } from "./index";
 import { Button } from "@/components/atoms";
+import { Toast, ToastProvider, useToast } from "./index";
 
 const meta: Meta<typeof Toast> = {
   title: "Molecules/Toast",
@@ -55,7 +55,7 @@ export const Warning: Story = {
   },
 };
 
-export const Error: Story = {
+export const ErrorVariant: Story = {
   args: {
     variant: "error",
     title: "Error",
@@ -69,7 +69,11 @@ export const WithAction: Story = {
     variant: "default",
     title: "New message",
     description: "You have a new message from John.",
-    action: <Button size="sm" variant="outline">View</Button>,
+    action: (
+      <Button size="sm" variant="outline">
+        View
+      </Button>
+    ),
     className: "w-[350px]",
   },
 };
@@ -96,11 +100,36 @@ export const NotClosable: Story = {
 export const AllVariants: Story = {
   render: () => (
     <div className="space-y-4">
-      <Toast variant="default" title="Default" description="Default toast" className="w-[350px]" />
-      <Toast variant="info" title="Info" description="Info toast" className="w-[350px]" />
-      <Toast variant="success" title="Success" description="Success toast" className="w-[350px]" />
-      <Toast variant="warning" title="Warning" description="Warning toast" className="w-[350px]" />
-      <Toast variant="error" title="Error" description="Error toast" className="w-[350px]" />
+      <Toast
+        variant="default"
+        title="Default"
+        description="Default toast"
+        className="w-[350px]"
+      />
+      <Toast
+        variant="info"
+        title="Info"
+        description="Info toast"
+        className="w-[350px]"
+      />
+      <Toast
+        variant="success"
+        title="Success"
+        description="Success toast"
+        className="w-[350px]"
+      />
+      <Toast
+        variant="warning"
+        title="Warning"
+        description="Warning toast"
+        className="w-[350px]"
+      />
+      <Toast
+        variant="error"
+        title="Error"
+        description="Error toast"
+        className="w-[350px]"
+      />
     </div>
   ),
 };
@@ -109,7 +138,9 @@ export const AllVariants: Story = {
 const ToastDemo = () => {
   const { addToast, clearToasts } = useToast();
 
-  const showToast = (variant: "default" | "info" | "success" | "warning" | "error") => {
+  const showToast = (
+    variant: "default" | "info" | "success" | "warning" | "error",
+  ) => {
     addToast({
       variant,
       title: `${variant.charAt(0).toUpperCase() + variant.slice(1)} Toast`,
@@ -120,12 +151,24 @@ const ToastDemo = () => {
 
   return (
     <div className="flex flex-wrap gap-2">
-      <Button variant="outline" onClick={() => showToast("default")}>Default</Button>
-      <Button variant="outline" onClick={() => showToast("info")}>Info</Button>
-      <Button variant="outline" onClick={() => showToast("success")}>Success</Button>
-      <Button variant="outline" onClick={() => showToast("warning")}>Warning</Button>
-      <Button variant="outline" onClick={() => showToast("error")}>Error</Button>
-      <Button variant="ghost" onClick={clearToasts}>Clear All</Button>
+      <Button variant="outline" onClick={() => showToast("default")}>
+        Default
+      </Button>
+      <Button variant="outline" onClick={() => showToast("info")}>
+        Info
+      </Button>
+      <Button variant="outline" onClick={() => showToast("success")}>
+        Success
+      </Button>
+      <Button variant="outline" onClick={() => showToast("warning")}>
+        Warning
+      </Button>
+      <Button variant="outline" onClick={() => showToast("error")}>
+        Error
+      </Button>
+      <Button variant="ghost" onClick={clearToasts}>
+        Clear All
+      </Button>
     </div>
   );
 };
@@ -153,11 +196,13 @@ const ToastPositionDemo = () => {
   return (
     <div className="flex gap-2">
       <Button
-        onClick={() => addToast({
-          variant: "success",
-          title: "Saved!",
-          description: "Your changes have been saved.",
-        })}
+        onClick={() =>
+          addToast({
+            variant: "success",
+            title: "Saved!",
+            description: "Your changes have been saved.",
+          })
+        }
       >
         Show Toast
       </Button>

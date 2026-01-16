@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { FileItem } from "./index";
 import { Button } from "@/components/atoms";
-import { DownloadIcon, TrashIcon, EditIcon } from "@/lib/icons";
+import { DownloadIcon, EditIcon, TrashIcon } from "@/lib/icons";
+import { FileItem } from "./index";
 
 const meta: Meta<typeof FileItem> = {
   title: "Molecules/FileItem",
@@ -67,7 +67,7 @@ export const Uploading: Story = {
   },
 };
 
-export const Error: Story = {
+export const ErrorStatus: Story = {
   args: {
     name: "failed-upload.zip",
     fileType: "archive",
@@ -114,9 +114,24 @@ export const FileTypes: Story = {
 export const UploadProgress: Story = {
   render: () => (
     <div className="w-96 space-y-2">
-      <FileItem name="file1.pdf" fileType="document" status="uploading" progress={25} />
-      <FileItem name="file2.jpg" fileType="image" status="uploading" progress={60} />
-      <FileItem name="file3.mp4" fileType="video" status="uploading" progress={90} />
+      <FileItem
+        name="file1.pdf"
+        fileType="document"
+        status="uploading"
+        progress={25}
+      />
+      <FileItem
+        name="file2.jpg"
+        fileType="image"
+        status="uploading"
+        progress={60}
+      />
+      <FileItem
+        name="file3.mp4"
+        fileType="video"
+        status="uploading"
+        progress={90}
+      />
     </div>
   ),
 };

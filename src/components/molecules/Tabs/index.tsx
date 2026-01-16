@@ -1,15 +1,21 @@
 "use client";
 
-import { forwardRef, createContext, useContext, useState } from "react";
+import type { VariantProps } from "class-variance-authority";
+import { createContext, forwardRef, useContext, useState } from "react";
 import { cn } from "@/lib/utils";
 import {
+  tabsContentVariants,
   tabsListVariants,
   tabsTriggerVariants,
-  tabsContentVariants,
 } from "@/lib/variants/tabs";
-import type { VariantProps } from "class-variance-authority";
 
-type TabsVariant = "default" | "bordered" | "segment" | "pills" | "underline" | "vertical";
+type TabsVariant =
+  | "default"
+  | "bordered"
+  | "segment"
+  | "pills"
+  | "underline"
+  | "vertical";
 
 interface TabsContextValue {
   value: string;
@@ -28,10 +34,13 @@ const useTabsContext = () => {
 };
 
 // Tabs Root
-export interface TabsProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TabsProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   value?: string;
   defaultValue?: string;
   onValueChange?: (value: string) => void;
+  /** Alias for onValueChange */
+  onChange?: (value: string) => void;
   variant?: TabsVariant;
 }
 
@@ -42,31 +51,35 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       value: controlledValue,
       defaultValue,
       onValueChange,
+      onChange: onChangeProp,
       variant = "default",
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
-    const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue ?? "");
+    const handleValueChange = onValueChange ?? onChangeProp;
+    const [uncontrolledValue, setUncontrolledValue] = useState(
+      defaultValue ?? "",
+    );
 
     const isControlled = controlledValue !== undefined;
     const value = isControlled ? controlledValue : uncontrolledValue;
 
-    const onChange = (newValue: string) => {
+    const handleChange = (newValue: string) => {
       if (!isControlled) {
         setUncontrolledValue(newValue);
       }
-      onValueChange?.(newValue);
+      handleValueChange?.(newValue);
     };
 
     return (
-      <TabsContext.Provider value={{ value, onChange, variant }}>
+      <TabsContext.Provider value={{ value, onChange: handleChange, variant }}>
         <div
           ref={ref}
           className={cn(
             variant === "vertical" ? "flex gap-x-4" : "",
-            className
+            className,
           )}
           {...props}
         >
@@ -74,7 +87,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
         </div>
       </TabsContext.Provider>
     );
-  }
+  },
 );
 Tabs.displayName = "Tabs";
 
@@ -97,7 +110,7 @@ export const TabsList = forwardRef<HTMLDivElement, TabsListProps>(
         {children}
       </div>
     );
-  }
+  },
 );
 TabsList.displayName = "TabsList";
 
@@ -107,11 +120,14 @@ export interface TabsTriggerProps
     VariantProps<typeof tabsTriggerVariants> {
   value: string;
   icon?: React.ReactNode;
+  /** Alternative to children - renders as button text */
+  label?: string;
 }
 
 export const TabsTrigger = forwardRef<HTMLButtonElement, TabsTriggerProps>(
-  ({ className, value, size, icon, children, ...props }, ref) => {
+  ({ className, value, size, icon, label, children, ...props }, ref) => {
     const { value: selectedValue, onChange, variant } = useTabsContext();
+    const content = children ?? label;
     const isActive = selectedValue === value;
 
     return (
@@ -126,10 +142,10 @@ export const TabsTrigger = forwardRef<HTMLButtonElement, TabsTriggerProps>(
         {...props}
       >
         {icon && <span className="me-2 size-4">{icon}</span>}
-        {children}
+        {content}
       </button>
     );
-  }
+  },
 );
 TabsTrigger.displayName = "TabsTrigger";
 
@@ -151,7 +167,6 @@ export const TabsContent = forwardRef<HTMLDivElement, TabsContentProps>(
       <div
         ref={ref}
         role="tabpanel"
-        tabIndex={0}
         data-state={isActive ? "active" : "inactive"}
         className={cn(tabsContentVariants({ variant }), className)}
         {...props}
@@ -159,6 +174,10 @@ export const TabsContent = forwardRef<HTMLDivElement, TabsContentProps>(
         {children}
       </div>
     );
-  }
+  },
 );
 TabsContent.displayName = "TabsContent";
+
+// Tab alias for TabsTrigger (for backwards compatibility)
+export const Tab = TabsTrigger;
+export type TabProps = TabsTriggerProps;

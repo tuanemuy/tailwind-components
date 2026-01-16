@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { Alert, AlertWithLink } from "./index";
 import { Button } from "@/components/atoms";
+import { Alert, AlertWithLink } from "./index";
 
 const meta: Meta<typeof Alert> = {
   title: "Molecules/Alert",
@@ -60,7 +60,7 @@ export const Warning: Story = {
   },
 };
 
-export const Error: Story = {
+export const ErrorVariant: Story = {
   args: {
     variant: "error",
     title: "Error",
@@ -94,9 +94,7 @@ export const Closable: Story = {
     const [visible, setVisible] = useState(true);
 
     if (!visible) {
-      return (
-        <Button onClick={() => setVisible(true)}>Show Alert</Button>
-      );
+      return <Button onClick={() => setVisible(true)}>Show Alert</Button>;
     }
 
     return (

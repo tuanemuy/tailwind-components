@@ -1,23 +1,23 @@
 "use client";
 
+import type { VariantProps } from "class-variance-authority";
 import {
-  forwardRef,
+  Children,
+  cloneElement,
   createContext,
+  forwardRef,
+  isValidElement,
   useContext,
   useState,
-  Children,
-  isValidElement,
-  cloneElement,
 } from "react";
+import { ChevronDownIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import {
-  accordionVariants,
+  accordionContentVariants,
   accordionItemVariants,
   accordionTriggerVariants,
-  accordionContentVariants,
+  accordionVariants,
 } from "@/lib/variants/accordion";
-import { ChevronDownIcon } from "@/lib/icons";
-import type { VariantProps } from "class-variance-authority";
 
 type AccordionVariant = "default" | "bordered" | "separated";
 type AccordionSize = "sm" | "md" | "lg";
@@ -36,7 +36,9 @@ const AccordionContext = createContext<AccordionContextValue | null>(null);
 const useAccordionContext = () => {
   const context = useContext(AccordionContext);
   if (!context) {
-    throw new Error("Accordion components must be used within an Accordion provider");
+    throw new Error(
+      "Accordion components must be used within an Accordion provider",
+    );
   }
   return context;
 };
@@ -67,7 +69,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
 
@@ -77,9 +79,12 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     // Pass variant to children
     const childrenWithProps = Children.map(children, (child) => {
       if (isValidElement(child)) {
-        return cloneElement(child as React.ReactElement<{ variant?: AccordionVariant }>, {
-          variant: variant ?? "default",
-        });
+        return cloneElement(
+          child as React.ReactElement<{ variant?: AccordionVariant }>,
+          {
+            variant: variant ?? "default",
+          },
+        );
       }
       return child;
     });
@@ -108,7 +113,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
         </div>
       </AccordionContext.Provider>
     );
-  }
+  },
 );
 Accordion.displayName = "Accordion";
 
@@ -118,25 +123,34 @@ interface AccordionItemContextValue {
   isOpen: boolean;
 }
 
-const AccordionItemContext = createContext<AccordionItemContextValue | null>(null);
+const AccordionItemContext = createContext<AccordionItemContextValue | null>(
+  null,
+);
 
 const useAccordionItemContext = () => {
   const context = useContext(AccordionItemContext);
   if (!context) {
-    throw new Error("AccordionTrigger and AccordionContent must be used within AccordionItem");
+    throw new Error(
+      "AccordionTrigger and AccordionContent must be used within AccordionItem",
+    );
   }
   return context;
 };
 
-export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface AccordionItemProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   value: string;
   disabled?: boolean;
   variant?: AccordionVariant;
 }
 
 export const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
-  ({ className, value, disabled = false, variant, children, ...props }, ref) => {
-    const { value: selectedValues, variant: contextVariant } = useAccordionContext();
+  (
+    { className, value, disabled = false, variant, children, ...props },
+    ref,
+  ) => {
+    const { value: selectedValues, variant: contextVariant } =
+      useAccordionContext();
     const isOpen = selectedValues.includes(value);
     const actualVariant = variant ?? contextVariant;
 
@@ -149,7 +163,7 @@ export const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
           className={cn(
             accordionItemVariants({ variant: actualVariant }),
             disabled && "opacity-50",
-            className
+            className,
           )}
           {...props}
         >
@@ -157,7 +171,7 @@ export const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
         </div>
       </AccordionItemContext.Provider>
     );
-  }
+  },
 );
 AccordionItem.displayName = "AccordionItem";
 
@@ -168,41 +182,46 @@ export interface AccordionTriggerProps
   icon?: React.ReactNode;
 }
 
-export const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerProps>(
-  ({ className, size: propSize, icon, children, ...props }, ref) => {
-    const { value: selectedValues, size: contextSize, onValueChange } = useAccordionContext();
-    const { value, isOpen } = useAccordionItemContext();
-    const size = propSize ?? contextSize;
+export const AccordionTrigger = forwardRef<
+  HTMLButtonElement,
+  AccordionTriggerProps
+>(({ className, size: propSize, icon, children, ...props }, ref) => {
+  const {
+    value: selectedValues,
+    size: contextSize,
+    onValueChange,
+  } = useAccordionContext();
+  const { value, isOpen } = useAccordionItemContext();
+  const size = propSize ?? contextSize;
 
-    const handleClick = () => {
-      if (isOpen) {
-        onValueChange(selectedValues.filter((v) => v !== value));
-      } else {
-        onValueChange([...selectedValues.filter((v) => v !== value), value]);
-      }
-    };
+  const handleClick = () => {
+    if (isOpen) {
+      onValueChange(selectedValues.filter((v) => v !== value));
+    } else {
+      onValueChange([...selectedValues.filter((v) => v !== value), value]);
+    }
+  };
 
-    return (
-      <button
-        ref={ref}
-        type="button"
-        aria-expanded={isOpen}
-        className={cn(accordionTriggerVariants({ size }), className)}
-        onClick={handleClick}
-        {...props}
-      >
-        {icon && <span className="me-3">{icon}</span>}
-        <span className="flex-1 text-left">{children}</span>
-        <ChevronDownIcon
-          className={cn(
-            "size-4 shrink-0 transition-transform duration-200",
-            isOpen && "rotate-180"
-          )}
-        />
-      </button>
-    );
-  }
-);
+  return (
+    <button
+      ref={ref}
+      type="button"
+      aria-expanded={isOpen}
+      className={cn(accordionTriggerVariants({ size }), className)}
+      onClick={handleClick}
+      {...props}
+    >
+      {icon && <span className="me-3">{icon}</span>}
+      <span className="flex-1 text-left">{children}</span>
+      <ChevronDownIcon
+        className={cn(
+          "size-4 shrink-0 transition-transform duration-200",
+          isOpen && "rotate-180",
+        )}
+      />
+    </button>
+  );
+});
 AccordionTrigger.displayName = "AccordionTrigger";
 
 // Accordion Content
@@ -210,23 +229,24 @@ export interface AccordionContentProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof accordionContentVariants> {}
 
-export const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
-  ({ className, size: propSize, children, ...props }, ref) => {
-    const { size: contextSize } = useAccordionContext();
-    const { isOpen } = useAccordionItemContext();
-    const size = propSize ?? contextSize;
+export const AccordionContent = forwardRef<
+  HTMLDivElement,
+  AccordionContentProps
+>(({ className, size: propSize, children, ...props }, ref) => {
+  const { size: contextSize } = useAccordionContext();
+  const { isOpen } = useAccordionItemContext();
+  const size = propSize ?? contextSize;
 
-    if (!isOpen) return null;
+  if (!isOpen) return null;
 
-    return (
-      <div
-        ref={ref}
-        className={cn(accordionContentVariants({ size }), className)}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  }
-);
+  return (
+    <div
+      ref={ref}
+      className={cn(accordionContentVariants({ size }), className)}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+});
 AccordionContent.displayName = "AccordionContent";

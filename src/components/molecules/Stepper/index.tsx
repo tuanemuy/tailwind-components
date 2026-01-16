@@ -1,15 +1,22 @@
 "use client";
 
-import { forwardRef, createContext, useContext, Children, isValidElement, cloneElement } from "react";
+import type { VariantProps } from "class-variance-authority";
+import {
+  Children,
+  cloneElement,
+  createContext,
+  forwardRef,
+  isValidElement,
+  useContext,
+} from "react";
+import { CheckIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import {
+  stepConnectorVariants,
+  stepIndicatorVariants,
   stepperVariants,
   stepVariants,
-  stepIndicatorVariants,
-  stepConnectorVariants,
 } from "@/lib/variants/stepper";
-import { CheckIcon } from "@/lib/icons";
-import type { VariantProps } from "class-variance-authority";
 
 type Orientation = "horizontal" | "vertical";
 type StepStatus = "completed" | "current" | "upcoming" | "error";
@@ -26,12 +33,14 @@ const StepperContext = createContext<StepperContextValue | null>(null);
 
 const useStepperContext = () => {
   const context = useContext(StepperContext);
-  return context ?? {
-    orientation: "horizontal" as Orientation,
-    size: "md" as StepSize,
-    currentStep: 0,
-    totalSteps: 0,
-  };
+  return (
+    context ?? {
+      orientation: "horizontal" as Orientation,
+      size: "md" as StepSize,
+      currentStep: 0,
+      totalSteps: 0,
+    }
+  );
 };
 
 // Stepper Root
@@ -52,24 +61,32 @@ export const Stepper = forwardRef<HTMLDivElement, StepperProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const childrenArray = Children.toArray(children);
     const totalSteps = childrenArray.length;
 
     const stepsWithIndex = childrenArray.map((child, index) => {
       if (isValidElement(child)) {
-        return cloneElement(child as React.ReactElement<{ index?: number; isLast?: boolean }>, {
-          index,
-          isLast: index === totalSteps - 1,
-        });
+        return cloneElement(
+          child as React.ReactElement<{ index?: number; isLast?: boolean }>,
+          {
+            index,
+            isLast: index === totalSteps - 1,
+          },
+        );
       }
       return child;
     });
 
     return (
       <StepperContext.Provider
-        value={{ orientation: orientation ?? "horizontal", size, currentStep, totalSteps }}
+        value={{
+          orientation: orientation ?? "horizontal",
+          size,
+          currentStep,
+          totalSteps,
+        }}
       >
         <div
           ref={ref}
@@ -80,7 +97,7 @@ export const Stepper = forwardRef<HTMLDivElement, StepperProps>(
         </div>
       </StepperContext.Provider>
     );
-  }
+  },
 );
 Stepper.displayName = "Stepper";
 
@@ -95,7 +112,19 @@ export interface StepProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const Step = forwardRef<HTMLDivElement, StepProps>(
-  ({ className, index = 0, isLast = false, status, icon, label, description, ...props }, ref) => {
+  (
+    {
+      className,
+      index = 0,
+      isLast = false,
+      status,
+      icon,
+      label,
+      description,
+      ...props
+    },
+    ref,
+  ) => {
     const { orientation, size, currentStep } = useStepperContext();
 
     const derivedStatus =
@@ -114,37 +143,60 @@ export const Step = forwardRef<HTMLDivElement, StepProps>(
         className={cn(
           stepVariants({ orientation }),
           orientation === "vertical" && "pb-6 last:pb-0",
-          className
+          className,
         )}
         {...props}
       >
-        <div className={cn(
-          "flex",
-          orientation === "horizontal" ? "flex-col items-center" : "items-start gap-x-3"
-        )}>
+        <div
+          className={cn(
+            "flex",
+            orientation === "horizontal"
+              ? "flex-col items-center"
+              : "items-start gap-x-3",
+          )}
+        >
           {/* Indicator */}
-          <StepIndicator status={derivedStatus} size={size} icon={icon} index={index} />
+          <StepIndicator
+            status={derivedStatus}
+            size={size}
+            icon={icon}
+            index={index}
+          />
 
           {/* Content */}
-          <div className={cn(
-            orientation === "horizontal" ? "mt-2 text-center" : "",
-          )}>
-            <div className={cn(
-              "font-medium",
-              size === "sm" ? "text-xs" : size === "lg" ? "text-base" : "text-sm",
-              derivedStatus === "current"
-                ? "text-foreground"
-                : derivedStatus === "completed"
+          <div
+            className={cn(
+              orientation === "horizontal" ? "mt-2 text-center" : "",
+            )}
+          >
+            <div
+              className={cn(
+                "font-medium",
+                size === "sm"
+                  ? "text-xs"
+                  : size === "lg"
+                    ? "text-base"
+                    : "text-sm",
+                derivedStatus === "current"
                   ? "text-foreground"
-                  : "text-muted-foreground"
-            )}>
+                  : derivedStatus === "completed"
+                    ? "text-foreground"
+                    : "text-muted-foreground",
+              )}
+            >
               {label}
             </div>
             {description && (
-              <div className={cn(
-                "text-muted-foreground",
-                size === "sm" ? "text-xs" : size === "lg" ? "text-sm" : "text-xs"
-              )}>
+              <div
+                className={cn(
+                  "text-muted-foreground",
+                  size === "sm"
+                    ? "text-xs"
+                    : size === "lg"
+                      ? "text-sm"
+                      : "text-xs",
+                )}
+              >
                 {description}
               </div>
             )}
@@ -153,15 +205,17 @@ export const Step = forwardRef<HTMLDivElement, StepProps>(
 
         {/* Connector */}
         {!isLast && (
-          <div className={cn(
-            stepConnectorVariants({ orientation, completed: isCompleted }),
-            orientation === "horizontal" && "mx-2",
-            orientation === "vertical" && "ms-4 mt-2"
-          )} />
+          <div
+            className={cn(
+              stepConnectorVariants({ orientation, completed: isCompleted }),
+              orientation === "horizontal" && "mx-2",
+              orientation === "vertical" && "ms-4 mt-2",
+            )}
+          />
         )}
       </div>
     );
-  }
+  },
 );
 Step.displayName = "Step";
 
@@ -178,7 +232,8 @@ const StepIndicator = ({
   icon,
   index = 0,
 }: StepIndicatorProps) => {
-  const iconSize = size === "sm" ? "size-3" : size === "lg" ? "size-5" : "size-4";
+  const iconSize =
+    size === "sm" ? "size-3" : size === "lg" ? "size-5" : "size-4";
 
   return (
     <div className={cn(stepIndicatorVariants({ size, status }))}>

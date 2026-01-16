@@ -2,9 +2,18 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { AvatarGroup } from "./index";
 
 const sampleAvatars = [
-  { src: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=100&h=100&fit=crop", alt: "User 1" },
-  { src: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&h=100&fit=crop", alt: "User 2" },
-  { src: "https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?w=100&h=100&fit=crop", alt: "User 3" },
+  {
+    src: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=100&h=100&fit=crop",
+    alt: "User 1",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&h=100&fit=crop",
+    alt: "User 2",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?w=100&h=100&fit=crop",
+    alt: "User 3",
+  },
   { initials: "AB", alt: "User 4" },
   { initials: "CD", alt: "User 5" },
   { initials: "EF", alt: "User 6" },

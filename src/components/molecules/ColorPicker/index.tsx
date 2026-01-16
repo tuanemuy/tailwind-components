@@ -1,22 +1,31 @@
 "use client";
 
-import { forwardRef, useState, useRef, useEffect } from "react";
-import { cn } from "@/lib/utils";
+import type { VariantProps } from "class-variance-authority";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import { Input } from "@/components/atoms";
+import { cn } from "@/lib/utils";
 import {
-  colorPickerTriggerVariants,
-  colorPickerSwatchVariants,
-  colorPickerPresetVariants,
   colorPickerDropdownVariants,
   colorPickerNativeVariants,
+  colorPickerPresetVariants,
+  colorPickerSwatchVariants,
+  colorPickerTriggerVariants,
 } from "@/lib/variants/colorPicker";
-import type { VariantProps } from "class-variance-authority";
 
 // Predefined color presets
 const DEFAULT_PRESETS = [
-  "#ef4444", "#f97316", "#eab308", "#22c55e", "#14b8a6",
-  "#3b82f6", "#6366f1", "#a855f7", "#ec4899", "#f43f5e",
-  "#64748b", "#000000",
+  "#ef4444",
+  "#f97316",
+  "#eab308",
+  "#22c55e",
+  "#14b8a6",
+  "#3b82f6",
+  "#6366f1",
+  "#a855f7",
+  "#ec4899",
+  "#f43f5e",
+  "#64748b",
+  "#000000",
 ];
 
 export interface ColorPickerProps
@@ -43,7 +52,7 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
       disabled = false,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [isOpen, setIsOpen] = useState(false);
     const [inputValue, setInputValue] = useState(value);
@@ -56,7 +65,10 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
     // Close on click outside
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
-        if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        if (
+          containerRef.current &&
+          !containerRef.current.contains(event.target as Node)
+        ) {
           setIsOpen(false);
         }
       };
@@ -64,7 +76,8 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
       if (isOpen) {
         document.addEventListener("mousedown", handleClickOutside);
       }
-      return () => document.removeEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
     }, [isOpen]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,7 +93,9 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
       setInputValue(color);
     };
 
-    const handleNativePickerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleNativePickerChange = (
+      e: React.ChangeEvent<HTMLInputElement>,
+    ) => {
       const newValue = e.target.value;
       onChange?.(newValue);
       setInputValue(newValue);
@@ -102,7 +117,7 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
         </button>
 
         {isOpen && (
-          <div className={cn(colorPickerDropdownVariants())}>
+          <div className={cn(colorPickerDropdownVariants({ size }))}>
             {/* Native color picker */}
             <div className="mb-3 flex items-center gap-x-2">
               <div className="relative">
@@ -136,7 +151,10 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
                     key={color}
                     type="button"
                     className={cn(
-                      colorPickerPresetVariants({ size, selected: value === color })
+                      colorPickerPresetVariants({
+                        size,
+                        selected: value === color,
+                      }),
                     )}
                     style={{ backgroundColor: color }}
                     onClick={() => handlePresetClick(color)}
@@ -148,7 +166,7 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
         )}
       </div>
     );
-  }
+  },
 );
 ColorPicker.displayName = "ColorPicker";
 
@@ -156,8 +174,22 @@ ColorPicker.displayName = "ColorPicker";
 export interface InlineColorPickerProps
   extends Omit<ColorPickerProps, "showPresets" | "showInput"> {}
 
-export const InlineColorPicker = forwardRef<HTMLDivElement, InlineColorPickerProps>(
-  ({ className, value = "#3b82f6", onChange, presets = DEFAULT_PRESETS, size = "md", disabled = false, ...props }, ref) => {
+export const InlineColorPicker = forwardRef<
+  HTMLDivElement,
+  InlineColorPickerProps
+>(
+  (
+    {
+      className,
+      value = "#3b82f6",
+      onChange,
+      presets = DEFAULT_PRESETS,
+      size = "md",
+      disabled = false,
+      ...props
+    },
+    ref,
+  ) => {
     const [inputValue, setInputValue] = useState(value);
 
     useEffect(() => {
@@ -177,7 +209,9 @@ export const InlineColorPicker = forwardRef<HTMLDivElement, InlineColorPickerPro
       setInputValue(color);
     };
 
-    const handleNativePickerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleNativePickerChange = (
+      e: React.ChangeEvent<HTMLInputElement>,
+    ) => {
       const newValue = e.target.value;
       onChange?.(newValue);
       setInputValue(newValue);
@@ -186,7 +220,11 @@ export const InlineColorPicker = forwardRef<HTMLDivElement, InlineColorPickerPro
     return (
       <div
         ref={ref}
-        className={cn("space-y-3", disabled && "opacity-50 pointer-events-none", className)}
+        className={cn(
+          "space-y-3",
+          disabled && "opacity-50 pointer-events-none",
+          className,
+        )}
         {...props}
       >
         {/* Native color picker and input */}
@@ -223,7 +261,10 @@ export const InlineColorPicker = forwardRef<HTMLDivElement, InlineColorPickerPro
                 type="button"
                 disabled={disabled}
                 className={cn(
-                  colorPickerPresetVariants({ size, selected: value === color })
+                  colorPickerPresetVariants({
+                    size,
+                    selected: value === color,
+                  }),
                 )}
                 style={{ backgroundColor: color }}
                 onClick={() => handlePresetClick(color)}
@@ -233,6 +274,6 @@ export const InlineColorPicker = forwardRef<HTMLDivElement, InlineColorPickerPro
         )}
       </div>
     );
-  }
+  },
 );
 InlineColorPicker.displayName = "InlineColorPicker";

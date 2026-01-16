@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "./index";
-import { HomeIcon, UserIcon, SettingsIcon, BellIcon } from "@/lib/icons";
+import { BellIcon, HomeIcon, SettingsIcon, UserIcon } from "@/lib/icons";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./index";
 
 const meta: Meta<typeof Tabs> = {
   title: "Molecules/Tabs",
@@ -12,7 +12,14 @@ const meta: Meta<typeof Tabs> = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["default", "bordered", "segment", "pills", "underline", "vertical"],
+      options: [
+        "default",
+        "bordered",
+        "segment",
+        "pills",
+        "underline",
+        "vertical",
+      ],
     },
   },
 };
@@ -56,13 +63,19 @@ export const Bordered: Story = {
         <TabsTrigger value="tab3">Settings</TabsTrigger>
       </TabsList>
       <TabsContent value="tab1">
-        <p className="text-sm text-muted-foreground">Account settings content.</p>
+        <p className="text-sm text-muted-foreground">
+          Account settings content.
+        </p>
       </TabsContent>
       <TabsContent value="tab2">
-        <p className="text-sm text-muted-foreground">Password settings content.</p>
+        <p className="text-sm text-muted-foreground">
+          Password settings content.
+        </p>
       </TabsContent>
       <TabsContent value="tab3">
-        <p className="text-sm text-muted-foreground">General settings content.</p>
+        <p className="text-sm text-muted-foreground">
+          General settings content.
+        </p>
       </TabsContent>
     </Tabs>
   ),

@@ -104,7 +104,7 @@ export const InForm: Story = {
   render: () => (
     <form className="w-80 space-y-4">
       <div className="space-y-2">
-        <label className="block text-sm font-medium">Country</label>
+        <span className="block text-sm font-medium">Country</span>
         <Select
           name="country"
           options={countryOptions}
@@ -112,7 +112,7 @@ export const InForm: Story = {
         />
       </div>
       <div className="space-y-2">
-        <label className="block text-sm font-medium">Status</label>
+        <span className="block text-sm font-medium">Status</span>
         <Select
           name="status"
           options={statusOptions}

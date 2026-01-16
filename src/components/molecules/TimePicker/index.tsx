@@ -1,10 +1,11 @@
 "use client";
 
-import { forwardRef, useState, useRef, useEffect } from "react";
-import { cn } from "@/lib/utils";
-import { ClockIcon, ChevronUpIcon, ChevronDownIcon } from "@/lib/icons";
 import type { VariantProps } from "class-variance-authority";
 import { cva } from "class-variance-authority";
+import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { ChevronDownIcon, ChevronUpIcon, ClockIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 const timePickerVariants = cva(
   "inline-flex items-center gap-x-2 rounded-lg border border-border bg-background transition-colors focus-within:ring-2 focus-within:ring-ring",
@@ -19,7 +20,7 @@ const timePickerVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
 type TimePickerSize = "sm" | "md" | "lg";
@@ -40,7 +41,13 @@ interface TimePanelProps {
   minuteStep?: number;
 }
 
-const TimePanel = ({ value, onChange, format, size = "md", minuteStep = 1 }: TimePanelProps) => {
+const TimePanel = ({
+  value,
+  onChange,
+  format,
+  size = "md",
+  minuteStep = 1,
+}: TimePanelProps) => {
   const incrementHours = () => {
     let newHours = value.hours + 1;
     if (format === "12h") {
@@ -82,47 +89,80 @@ const TimePanel = ({ value, onChange, format, size = "md", minuteStep = 1 }: Tim
 
   const buttonClass = cn(
     "rounded p-1 text-muted-foreground hover:bg-accent hover:text-foreground focus:outline-none",
-    size === "sm" && "p-0.5"
+    size === "sm" && "p-0.5",
   );
 
-  const iconSize = size === "sm" ? "size-3" : size === "lg" ? "size-5" : "size-4";
+  const iconSize =
+    size === "sm" ? "size-3" : size === "lg" ? "size-5" : "size-4";
 
   return (
     <div className="rounded-lg border border-border bg-card p-3 shadow-lg">
       <div className="flex items-center gap-x-2">
         {/* Hours */}
         <div className="flex flex-col items-center">
-          <button type="button" onClick={incrementHours} className={buttonClass}>
+          <button
+            type="button"
+            onClick={incrementHours}
+            className={buttonClass}
+          >
             <ChevronUpIcon className={iconSize} />
           </button>
-          <span className={cn(
-            "w-10 text-center font-mono tabular-nums",
-            size === "sm" ? "text-lg" : size === "lg" ? "text-3xl" : "text-2xl"
-          )}>
+          <span
+            className={cn(
+              "w-10 text-center font-mono tabular-nums",
+              size === "sm"
+                ? "text-lg"
+                : size === "lg"
+                  ? "text-3xl"
+                  : "text-2xl",
+            )}
+          >
             {value.hours.toString().padStart(2, "0")}
           </span>
-          <button type="button" onClick={decrementHours} className={buttonClass}>
+          <button
+            type="button"
+            onClick={decrementHours}
+            className={buttonClass}
+          >
             <ChevronDownIcon className={iconSize} />
           </button>
         </div>
 
-        <span className={cn(
-          "font-mono",
-          size === "sm" ? "text-lg" : size === "lg" ? "text-3xl" : "text-2xl"
-        )}>:</span>
+        <span
+          className={cn(
+            "font-mono",
+            size === "sm" ? "text-lg" : size === "lg" ? "text-3xl" : "text-2xl",
+          )}
+        >
+          :
+        </span>
 
         {/* Minutes */}
         <div className="flex flex-col items-center">
-          <button type="button" onClick={incrementMinutes} className={buttonClass}>
+          <button
+            type="button"
+            onClick={incrementMinutes}
+            className={buttonClass}
+          >
             <ChevronUpIcon className={iconSize} />
           </button>
-          <span className={cn(
-            "w-10 text-center font-mono tabular-nums",
-            size === "sm" ? "text-lg" : size === "lg" ? "text-3xl" : "text-2xl"
-          )}>
+          <span
+            className={cn(
+              "w-10 text-center font-mono tabular-nums",
+              size === "sm"
+                ? "text-lg"
+                : size === "lg"
+                  ? "text-3xl"
+                  : "text-2xl",
+            )}
+          >
             {value.minutes.toString().padStart(2, "0")}
           </span>
-          <button type="button" onClick={decrementMinutes} className={buttonClass}>
+          <button
+            type="button"
+            onClick={decrementMinutes}
+            className={buttonClass}
+          >
             <ChevronDownIcon className={iconSize} />
           </button>
         </div>
@@ -136,7 +176,11 @@ const TimePanel = ({ value, onChange, format, size = "md", minuteStep = 1 }: Tim
               className={cn(
                 "rounded px-2 py-1 font-medium transition-colors",
                 "hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring",
-                size === "sm" ? "text-xs" : size === "lg" ? "text-base" : "text-sm"
+                size === "sm"
+                  ? "text-xs"
+                  : size === "lg"
+                    ? "text-base"
+                    : "text-sm",
               )}
             >
               {value.period}
@@ -183,10 +227,14 @@ export const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
       disabled = false,
       ...props
     },
-    ref
+    _ref,
   ) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [position, setPosition] = useState({ top: 0, left: 0 });
+    const [positioned, setPositioned] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
+    const triggerRef = useRef<HTMLButtonElement>(null);
+    const panelRef = useRef<HTMLDivElement>(null);
 
     const defaultValue: TimeValue = {
       hours: format === "12h" ? 12 : 0,
@@ -196,10 +244,59 @@ export const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
 
     const currentValue = value ?? defaultValue;
 
+    // Reset positioned when closing
+    useEffect(() => {
+      if (!isOpen) {
+        setPositioned(false);
+      }
+    }, [isOpen]);
+
+    // Calculate position when open
+    useLayoutEffect(() => {
+      if (!isOpen || !triggerRef.current || !panelRef.current) return;
+
+      const updatePosition = () => {
+        if (!triggerRef.current || !panelRef.current) return;
+        const triggerRect = triggerRef.current.getBoundingClientRect();
+        const panelRect = panelRef.current.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+
+        let top = triggerRect.bottom + 4;
+        const left = triggerRect.left;
+
+        // Check if panel would overflow below viewport
+        if (top + panelRect.height > viewportHeight) {
+          if (triggerRect.top > viewportHeight - triggerRect.bottom) {
+            top = triggerRect.top - panelRect.height - 4;
+          }
+        }
+
+        if (top < 8) top = 8;
+
+        setPosition({ top, left });
+        setPositioned(true);
+      };
+
+      updatePosition();
+      window.addEventListener("scroll", updatePosition, true);
+      window.addEventListener("resize", updatePosition);
+
+      return () => {
+        window.removeEventListener("scroll", updatePosition, true);
+        window.removeEventListener("resize", updatePosition);
+      };
+    }, [isOpen]);
+
     // Close on click outside
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
-        if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        const target = event.target as Node;
+        if (
+          containerRef.current &&
+          !containerRef.current.contains(target) &&
+          panelRef.current &&
+          !panelRef.current.contains(target)
+        ) {
           setIsOpen(false);
         }
       };
@@ -207,7 +304,8 @@ export const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
       if (isOpen) {
         document.addEventListener("mousedown", handleClickOutside);
       }
-      return () => document.removeEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
     }, [isOpen]);
 
     // Close on escape
@@ -224,18 +322,41 @@ export const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
       return () => document.removeEventListener("keydown", handleEscape);
     }, [isOpen]);
 
-    const iconSize = size === "sm" ? "size-3.5" : size === "lg" ? "size-5" : "size-4";
+    const iconSize =
+      size === "sm" ? "size-3.5" : size === "lg" ? "size-5" : "size-4";
+
+    const panelContent = isOpen ? (
+      <div
+        ref={panelRef}
+        className="fixed z-[9999]"
+        style={{
+          top: position.top,
+          left: position.left,
+          visibility: positioned ? "visible" : "hidden",
+        }}
+      >
+        <TimePanel
+          value={currentValue}
+          onChange={(newValue) => {
+            onChange?.(newValue);
+          }}
+          format={format}
+          size={size ?? "md"}
+          minuteStep={minuteStep}
+        />
+      </div>
+    ) : null;
 
     return (
       <div ref={containerRef} className="relative inline-block" {...props}>
         <button
-          ref={ref as React.Ref<HTMLButtonElement>}
+          ref={triggerRef}
           type="button"
           disabled={disabled}
           className={cn(
             timePickerVariants({ size }),
             disabled && "cursor-not-allowed opacity-50",
-            className
+            className,
           )}
           onClick={() => setIsOpen(!isOpen)}
         >
@@ -245,22 +366,12 @@ export const TimePicker = forwardRef<HTMLDivElement, TimePickerProps>(
           </span>
         </button>
 
-        {isOpen && (
-          <div className="absolute top-full z-50 mt-1">
-            <TimePanel
-              value={currentValue}
-              onChange={(newValue) => {
-                onChange?.(newValue);
-              }}
-              format={format}
-              size={size ?? "md"}
-              minuteStep={minuteStep}
-            />
-          </div>
-        )}
+        {typeof document !== "undefined" &&
+          panelContent &&
+          createPortal(panelContent, document.body)}
       </div>
     );
-  }
+  },
 );
 TimePicker.displayName = "TimePicker";
 

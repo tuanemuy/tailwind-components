@@ -25,11 +25,7 @@ export const Default: Story = {
     const [tags, setTags] = useState<string[]>([]);
     return (
       <div className="w-[300px]">
-        <TagInput
-          value={tags}
-          onChange={setTags}
-          placeholder="Add tags..."
-        />
+        <TagInput value={tags} onChange={setTags} placeholder="Add tags..." />
       </div>
     );
   },
@@ -37,7 +33,11 @@ export const Default: Story = {
 
 export const WithInitialTags: Story = {
   render: () => {
-    const [tags, setTags] = useState<string[]>(["React", "TypeScript", "Tailwind"]);
+    const [tags, setTags] = useState<string[]>([
+      "React",
+      "TypeScript",
+      "Tailwind",
+    ]);
     return (
       <div className="w-[300px]">
         <TagInput value={tags} onChange={setTags} />
@@ -79,9 +79,7 @@ export const MaxTags: Story = {
           maxTags={5}
           placeholder="Max 5 tags"
         />
-        <p className="text-xs text-muted-foreground">
-          {tags.length}/5 tags
-        </p>
+        <p className="text-xs text-muted-foreground">{tags.length}/5 tags</p>
       </div>
     );
   },
@@ -132,9 +130,7 @@ export const WithValidation: Story = {
           validateTag={validateTag}
           placeholder="2-20 characters"
         />
-        {error && (
-          <p className="text-xs text-destructive">{error}</p>
-        )}
+        {error && <p className="text-xs text-destructive">{error}</p>}
       </div>
     );
   },
@@ -167,10 +163,7 @@ export const EmailTags: Story = {
 export const Disabled: Story = {
   render: () => (
     <div className="w-[300px]">
-      <TagInput
-        value={["Cannot", "Edit"]}
-        disabled
-      />
+      <TagInput value={["Cannot", "Edit"]} disabled />
     </div>
   ),
 };

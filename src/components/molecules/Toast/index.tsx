@@ -1,28 +1,37 @@
 "use client";
 
+import type { VariantProps } from "class-variance-authority";
 import {
-  forwardRef,
   createContext,
-  useContext,
-  useState,
+  forwardRef,
   useCallback,
+  useContext,
   useEffect,
+  useState,
 } from "react";
-import { cn } from "@/lib/utils";
-import { toastVariants, toastContainerVariants } from "@/lib/variants/toast";
 import {
-  InfoIcon,
-  CheckCircleIcon,
   AlertCircleIcon,
+  CheckCircleIcon,
+  InfoIcon,
   XCircleIcon,
   XIcon,
 } from "@/lib/icons";
-import type { VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+import { toastContainerVariants, toastVariants } from "@/lib/variants/toast";
 
 type ToastVariant = "default" | "info" | "success" | "warning" | "error";
-type ToastPosition = "top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right";
+type ToastPosition =
+  | "top-left"
+  | "top-center"
+  | "top-right"
+  | "bottom-left"
+  | "bottom-center"
+  | "bottom-right";
 
-const variantIcons: Record<ToastVariant, React.ComponentType<{ className?: string }>> = {
+const variantIcons: Record<
+  ToastVariant,
+  React.ComponentType<{ className?: string }>
+> = {
   default: InfoIcon,
   info: InfoIcon,
   success: CheckCircleIcon,
@@ -58,7 +67,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const IconComponent = variantIcons[variant ?? "default"];
 
@@ -79,9 +88,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
         {/* Content */}
         <div className="flex-1 space-y-1">
           {title && <h5 className="text-sm font-medium">{title}</h5>}
-          {description && (
-            <p className="text-sm opacity-90">{description}</p>
-          )}
+          {description && <p className="text-sm opacity-90">{description}</p>}
           {children}
         </div>
 
@@ -101,7 +108,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
         )}
       </div>
     );
-  }
+  },
 );
 Toast.displayName = "Toast";
 
@@ -146,14 +153,11 @@ export const ToastProvider = ({
 }: ToastProviderProps) => {
   const [toasts, setToasts] = useState<ToastItem[]>([]);
 
-  const addToast = useCallback(
-    (toast: Omit<ToastItem, "id">) => {
-      const id = Math.random().toString(36).substring(2, 9);
-      setToasts((prev) => [...prev, { ...toast, id }]);
-      return id;
-    },
-    []
-  );
+  const addToast = useCallback((toast: Omit<ToastItem, "id">) => {
+    const id = Math.random().toString(36).substring(2, 9);
+    setToasts((prev) => [...prev, { ...toast, id }]);
+    return id;
+  }, []);
 
   const removeToast = useCallback((id: string) => {
     setToasts((prev) => prev.filter((toast) => toast.id !== id));
@@ -164,7 +168,9 @@ export const ToastProvider = ({
   }, []);
 
   return (
-    <ToastContext.Provider value={{ toasts, addToast, removeToast, clearToasts }}>
+    <ToastContext.Provider
+      value={{ toasts, addToast, removeToast, clearToasts }}
+    >
       {children}
       <ToastContainer position={position} defaultDuration={defaultDuration} />
     </ToastContext.Provider>
@@ -172,11 +178,15 @@ export const ToastProvider = ({
 };
 
 // Toast Container
-interface ToastContainerProps extends VariantProps<typeof toastContainerVariants> {
+interface ToastContainerProps
+  extends VariantProps<typeof toastContainerVariants> {
   defaultDuration?: number;
 }
 
-const ToastContainer = ({ position, defaultDuration = 5000 }: ToastContainerProps) => {
+const ToastContainer = ({
+  position,
+  defaultDuration = 5000,
+}: ToastContainerProps) => {
   const { toasts, removeToast } = useToast();
 
   return (
@@ -200,7 +210,11 @@ interface ToastItemWithTimerProps {
   onClose: () => void;
 }
 
-const ToastItemWithTimer = ({ toast, duration, onClose }: ToastItemWithTimerProps) => {
+const ToastItemWithTimer = ({
+  toast,
+  duration,
+  onClose,
+}: ToastItemWithTimerProps) => {
   useEffect(() => {
     if (duration > 0) {
       const timer = setTimeout(onClose, duration);
@@ -221,11 +235,26 @@ const ToastItemWithTimer = ({ toast, duration, onClose }: ToastItemWithTimerProp
 
 // Helper function for creating toasts outside of components
 export const toast = {
-  default: (props: Omit<ToastItem, "id" | "variant">) => ({ ...props, variant: "default" as const }),
-  info: (props: Omit<ToastItem, "id" | "variant">) => ({ ...props, variant: "info" as const }),
-  success: (props: Omit<ToastItem, "id" | "variant">) => ({ ...props, variant: "success" as const }),
-  warning: (props: Omit<ToastItem, "id" | "variant">) => ({ ...props, variant: "warning" as const }),
-  error: (props: Omit<ToastItem, "id" | "variant">) => ({ ...props, variant: "error" as const }),
+  default: (props: Omit<ToastItem, "id" | "variant">) => ({
+    ...props,
+    variant: "default" as const,
+  }),
+  info: (props: Omit<ToastItem, "id" | "variant">) => ({
+    ...props,
+    variant: "info" as const,
+  }),
+  success: (props: Omit<ToastItem, "id" | "variant">) => ({
+    ...props,
+    variant: "success" as const,
+  }),
+  warning: (props: Omit<ToastItem, "id" | "variant">) => ({
+    ...props,
+    variant: "warning" as const,
+  }),
+  error: (props: Omit<ToastItem, "id" | "variant">) => ({
+    ...props,
+    variant: "error" as const,
+  }),
 };
 
 export type { ToastItem, ToastVariant, ToastPosition };

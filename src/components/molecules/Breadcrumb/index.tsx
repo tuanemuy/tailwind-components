@@ -1,10 +1,20 @@
 "use client";
 
-import { forwardRef, createContext, useContext, Children, isValidElement, cloneElement } from "react";
-import { cn } from "@/lib/utils";
-import { breadcrumbVariants, breadcrumbItemVariants } from "@/lib/variants/breadcrumb";
-import { ChevronRightIcon } from "@/lib/icons";
 import type { VariantProps } from "class-variance-authority";
+import {
+  Children,
+  cloneElement,
+  createContext,
+  forwardRef,
+  isValidElement,
+  useContext,
+} from "react";
+import { ChevronRightIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
+import {
+  breadcrumbItemVariants,
+  breadcrumbVariants,
+} from "@/lib/variants/breadcrumb";
 
 type BreadcrumbSize = "sm" | "md" | "lg";
 
@@ -31,18 +41,26 @@ export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(
     const childrenArray = Children.toArray(children);
 
     const separatorElement = separator ?? (
-      <ChevronRightIcon className={cn(
-        "text-muted-foreground",
-        size === "sm" ? "size-3" : size === "lg" ? "size-5" : "size-4"
-      )} />
+      <ChevronRightIcon
+        className={cn(
+          "text-muted-foreground",
+          size === "sm" ? "size-3" : size === "lg" ? "size-5" : "size-4",
+        )}
+      />
     );
 
     const itemsWithSeparators = childrenArray.map((child, index) => {
       const isLast = index === childrenArray.length - 1;
 
       return (
+        // biome-ignore lint/suspicious/noArrayIndexKey: Breadcrumb items are rendered from children array
         <li key={index} className="flex items-center">
-          {isValidElement(child) ? cloneElement(child as React.ReactElement<{ isCurrent?: boolean }>, { isCurrent: isLast }) : child}
+          {isValidElement(child)
+            ? cloneElement(
+                child as React.ReactElement<{ isCurrent?: boolean }>,
+                { isCurrent: isLast },
+              )
+            : child}
           {!isLast && (
             <span className="mx-2 flex-shrink-0" aria-hidden="true">
               {separatorElement}
@@ -61,7 +79,7 @@ export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(
         </nav>
       </BreadcrumbContext.Provider>
     );
-  }
+  },
 );
 Breadcrumb.displayName = "Breadcrumb";
 
@@ -78,7 +96,8 @@ export const BreadcrumbItem = forwardRef<HTMLSpanElement, BreadcrumbItemProps>(
   ({ className, href, isCurrent, icon, children, ...props }, ref) => {
     const { size } = useBreadcrumbContext();
 
-    const iconSize = size === "sm" ? "size-3" : size === "lg" ? "size-5" : "size-4";
+    const iconSize =
+      size === "sm" ? "size-3" : size === "lg" ? "size-5" : "size-4";
 
     const content = (
       <>
@@ -91,7 +110,10 @@ export const BreadcrumbItem = forwardRef<HTMLSpanElement, BreadcrumbItemProps>(
       return (
         <span
           ref={ref}
-          className={cn(breadcrumbItemVariants({ variant: "current" }), className)}
+          className={cn(
+            breadcrumbItemVariants({ variant: "current" }),
+            className,
+          )}
           aria-current="page"
           {...props}
         >
@@ -104,7 +126,10 @@ export const BreadcrumbItem = forwardRef<HTMLSpanElement, BreadcrumbItemProps>(
       return (
         <a
           href={href}
-          className={cn(breadcrumbItemVariants({ variant: "default" }), className)}
+          className={cn(
+            breadcrumbItemVariants({ variant: "default" }),
+            className,
+          )}
         >
           {content}
         </a>
@@ -114,31 +139,36 @@ export const BreadcrumbItem = forwardRef<HTMLSpanElement, BreadcrumbItemProps>(
     return (
       <span
         ref={ref}
-        className={cn(breadcrumbItemVariants({ variant: "default" }), className)}
+        className={cn(
+          breadcrumbItemVariants({ variant: "default" }),
+          className,
+        )}
         {...props}
       >
         {content}
       </span>
     );
-  }
+  },
 );
 BreadcrumbItem.displayName = "BreadcrumbItem";
 
 // BreadcrumbEllipsis
-export interface BreadcrumbEllipsisProps extends React.HTMLAttributes<HTMLSpanElement> {}
+export interface BreadcrumbEllipsisProps
+  extends React.HTMLAttributes<HTMLSpanElement> {}
 
-export const BreadcrumbEllipsis = forwardRef<HTMLSpanElement, BreadcrumbEllipsisProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <span
-        ref={ref}
-        className={cn("text-muted-foreground", className)}
-        aria-hidden="true"
-        {...props}
-      >
-        &hellip;
-      </span>
-    );
-  }
-);
+export const BreadcrumbEllipsis = forwardRef<
+  HTMLSpanElement,
+  BreadcrumbEllipsisProps
+>(({ className, ...props }, ref) => {
+  return (
+    <span
+      ref={ref}
+      className={cn("text-muted-foreground", className)}
+      aria-hidden="true"
+      {...props}
+    >
+      &hellip;
+    </span>
+  );
+});
 BreadcrumbEllipsis.displayName = "BreadcrumbEllipsis";

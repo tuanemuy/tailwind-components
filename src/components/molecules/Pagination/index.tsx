@@ -1,10 +1,17 @@
 "use client";
 
-import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { paginationVariants, paginationItemVariants } from "@/lib/variants/pagination";
-import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from "@/lib/icons";
 import type { VariantProps } from "class-variance-authority";
+import { forwardRef } from "react";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  MoreHorizontalIcon,
+} from "@/lib/icons";
+import { cn } from "@/lib/utils";
+import {
+  paginationItemVariants,
+  paginationVariants,
+} from "@/lib/variants/pagination";
 
 // Pagination Root
 export interface PaginationProps
@@ -20,7 +27,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
         </ul>
       </nav>
     );
-  }
+  },
 );
 Pagination.displayName = "Pagination";
 
@@ -29,14 +36,23 @@ export interface PaginationItemProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof paginationItemVariants> {}
 
-export const PaginationItem = forwardRef<HTMLButtonElement, PaginationItemProps>(
-  ({ className, variant = "default", size = "md", active, children, ...props }, ref) => {
+export const PaginationItem = forwardRef<
+  HTMLButtonElement,
+  PaginationItemProps
+>(
+  (
+    { className, variant = "default", size = "md", active, children, ...props },
+    ref,
+  ) => {
     return (
       <li>
         <button
           ref={ref}
           type="button"
-          className={cn(paginationItemVariants({ variant, size, active }), className)}
+          className={cn(
+            paginationItemVariants({ variant, size, active }),
+            className,
+          )}
           aria-current={active ? "page" : undefined}
           {...props}
         >
@@ -44,7 +60,7 @@ export const PaginationItem = forwardRef<HTMLButtonElement, PaginationItemProps>
         </button>
       </li>
     );
-  }
+  },
 );
 PaginationItem.displayName = "PaginationItem";
 
@@ -54,9 +70,22 @@ export interface PaginationPreviousProps
   label?: string;
 }
 
-export const PaginationPrevious = forwardRef<HTMLButtonElement, PaginationPreviousProps>(
-  ({ className, label = "Previous", size = "md", variant = "default", ...props }, ref) => {
-    const iconSize = size === "sm" ? "size-3.5" : size === "lg" ? "size-5" : "size-4";
+export const PaginationPrevious = forwardRef<
+  HTMLButtonElement,
+  PaginationPreviousProps
+>(
+  (
+    {
+      className,
+      label = "Previous",
+      size = "md",
+      variant = "default",
+      ...props
+    },
+    ref,
+  ) => {
+    const iconSize =
+      size === "sm" ? "size-3.5" : size === "lg" ? "size-5" : "size-4";
 
     return (
       <PaginationItem
@@ -70,7 +99,7 @@ export const PaginationPrevious = forwardRef<HTMLButtonElement, PaginationPrevio
         <span className="sr-only sm:not-sr-only">{label}</span>
       </PaginationItem>
     );
-  }
+  },
 );
 PaginationPrevious.displayName = "PaginationPrevious";
 
@@ -80,9 +109,16 @@ export interface PaginationNextProps
   label?: string;
 }
 
-export const PaginationNext = forwardRef<HTMLButtonElement, PaginationNextProps>(
-  ({ className, label = "Next", size = "md", variant = "default", ...props }, ref) => {
-    const iconSize = size === "sm" ? "size-3.5" : size === "lg" ? "size-5" : "size-4";
+export const PaginationNext = forwardRef<
+  HTMLButtonElement,
+  PaginationNextProps
+>(
+  (
+    { className, label = "Next", size = "md", variant = "default", ...props },
+    ref,
+  ) => {
+    const iconSize =
+      size === "sm" ? "size-3.5" : size === "lg" ? "size-5" : "size-4";
 
     return (
       <PaginationItem
@@ -96,41 +132,43 @@ export const PaginationNext = forwardRef<HTMLButtonElement, PaginationNextProps>
         <ChevronRightIcon className={iconSize} />
       </PaginationItem>
     );
-  }
+  },
 );
 PaginationNext.displayName = "PaginationNext";
 
 // PaginationEllipsis
-export interface PaginationEllipsisProps extends React.HTMLAttributes<HTMLSpanElement> {
+export interface PaginationEllipsisProps
+  extends React.HTMLAttributes<HTMLSpanElement> {
   size?: "sm" | "md" | "lg";
 }
 
-export const PaginationEllipsis = forwardRef<HTMLSpanElement, PaginationEllipsisProps>(
-  ({ className, size = "md", ...props }, ref) => {
-    const sizeClasses = {
-      sm: "h-8 w-8",
-      md: "h-9 w-9",
-      lg: "h-10 w-10",
-    };
+export const PaginationEllipsis = forwardRef<
+  HTMLSpanElement,
+  PaginationEllipsisProps
+>(({ className, size = "md", ...props }, ref) => {
+  const sizeClasses = {
+    sm: "h-8 w-8",
+    md: "h-9 w-9",
+    lg: "h-10 w-10",
+  };
 
-    return (
-      <li>
-        <span
-          ref={ref}
-          className={cn(
-            "flex items-center justify-center text-muted-foreground",
-            sizeClasses[size],
-            className
-          )}
-          aria-hidden="true"
-          {...props}
-        >
-          <MoreHorizontalIcon className="size-4" />
-        </span>
-      </li>
-    );
-  }
-);
+  return (
+    <li>
+      <span
+        ref={ref}
+        className={cn(
+          "flex items-center justify-center text-muted-foreground",
+          sizeClasses[size],
+          className,
+        )}
+        aria-hidden="true"
+        {...props}
+      >
+        <MoreHorizontalIcon className="size-4" />
+      </span>
+    </li>
+  );
+});
 PaginationEllipsis.displayName = "PaginationEllipsis";
 
 // Helper component for a complete pagination
@@ -197,6 +235,7 @@ export const PaginationNumbers = ({
       />
       {pages.map((page, index) =>
         page === "ellipsis" ? (
+          // biome-ignore lint/suspicious/noArrayIndexKey: Ellipsis elements need index for unique keys
           <PaginationEllipsis key={`ellipsis-${index}`} size={size} />
         ) : (
           <PaginationItem
@@ -208,7 +247,7 @@ export const PaginationNumbers = ({
           >
             {page}
           </PaginationItem>
-        )
+        ),
       )}
       <PaginationNext
         onClick={() => onPageChange(currentPage + 1)}

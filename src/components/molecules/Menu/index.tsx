@@ -1,17 +1,21 @@
 "use client";
 
-import {
-  forwardRef,
-  createContext,
-  useContext,
-  useState,
-  useRef,
-  useEffect,
-} from "react";
-import { cn } from "@/lib/utils";
-import { menuVariants, menuItemVariants, menuLabelVariants } from "@/lib/variants/menu";
-import { CheckIcon, ChevronRightIcon } from "@/lib/icons";
 import type { VariantProps } from "class-variance-authority";
+import {
+  createContext,
+  forwardRef,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { CheckIcon, ChevronRightIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
+import {
+  menuItemVariants,
+  menuLabelVariants,
+  menuVariants,
+} from "@/lib/variants/menu";
 
 type MenuSize = "sm" | "md" | "lg";
 
@@ -46,7 +50,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(
         </div>
       </MenuContext.Provider>
     );
-  }
+  },
 );
 Menu.displayName = "Menu";
 
@@ -76,7 +80,7 @@ export const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const { size: contextSize, onClose } = useMenuContext();
     const size = propSize ?? contextSize;
@@ -106,11 +110,13 @@ export const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(
         {icon && <span className="size-4 shrink-0">{icon}</span>}
         <span className="flex-1 text-left">{children}</span>
         {shortcut && (
-          <span className="ms-auto text-xs text-muted-foreground">{shortcut}</span>
+          <span className="ms-auto text-xs text-muted-foreground">
+            {shortcut}
+          </span>
         )}
       </button>
     );
-  }
+  },
 );
 MenuItem.displayName = "MenuItem";
 
@@ -133,19 +139,18 @@ export const MenuLabel = forwardRef<HTMLDivElement, MenuLabelProps>(
         {children}
       </div>
     );
-  }
+  },
 );
 MenuLabel.displayName = "MenuLabel";
 
 // MenuDivider
 export const MenuDivider = forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
+  HTMLHRElement,
+  React.HTMLAttributes<HTMLHRElement>
 >(({ className, ...props }, ref) => (
-  <div
+  <hr
     ref={ref}
-    role="separator"
-    className={cn("my-1 h-px bg-border", className)}
+    className={cn("my-1 h-px border-0 bg-border", className)}
     {...props}
   />
 ));
@@ -165,7 +170,10 @@ export const SubMenu = forwardRef<HTMLDivElement, SubMenuProps>(
 
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
-        if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        if (
+          containerRef.current &&
+          !containerRef.current.contains(event.target as Node)
+        ) {
           setIsOpen(false);
         }
       };
@@ -173,7 +181,8 @@ export const SubMenu = forwardRef<HTMLDivElement, SubMenuProps>(
       if (isOpen) {
         document.addEventListener("mousedown", handleClickOutside);
       }
-      return () => document.removeEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
     }, [isOpen]);
 
     return (
@@ -201,7 +210,7 @@ export const SubMenu = forwardRef<HTMLDivElement, SubMenuProps>(
         )}
       </div>
     );
-  }
+  },
 );
 SubMenu.displayName = "SubMenu";
 
@@ -212,7 +221,11 @@ export interface ContextMenuProps {
   disabled?: boolean;
 }
 
-export const ContextMenu = ({ children, menu, disabled = false }: ContextMenuProps) => {
+export const ContextMenu = ({
+  children,
+  menu,
+  disabled = false,
+}: ContextMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const menuRef = useRef<HTMLDivElement>(null);

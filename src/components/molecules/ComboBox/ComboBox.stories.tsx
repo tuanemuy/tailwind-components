@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { ComboBox } from "./index";
 import type { ComboBoxOption } from "./index";
+import { ComboBox } from "./index";
 
 const meta: Meta<typeof ComboBox> = {
   title: "Molecules/ComboBox",
@@ -51,11 +51,7 @@ export const WithSelectedValue: Story = {
     const [value, setValue] = useState<string>("react");
     return (
       <div className="w-[250px]">
-        <ComboBox
-          options={frameworks}
-          value={value}
-          onChange={setValue}
-        />
+        <ComboBox options={frameworks} value={value} onChange={setValue} />
       </div>
     );
   },
@@ -131,7 +127,11 @@ export const WithDisabledOptions: Story = {
     const options: ComboBoxOption[] = [
       { value: "free", label: "Free Plan" },
       { value: "pro", label: "Pro Plan" },
-      { value: "enterprise", label: "Enterprise (Contact Sales)", disabled: true },
+      {
+        value: "enterprise",
+        label: "Enterprise (Contact Sales)",
+        disabled: true,
+      },
     ];
 
     return (
@@ -185,11 +185,7 @@ export const CustomMessages: Story = {
 export const Disabled: Story = {
   render: () => (
     <div className="w-[250px]">
-      <ComboBox
-        options={frameworks}
-        value="react"
-        disabled
-      />
+      <ComboBox options={frameworks} value="react" disabled />
     </div>
   ),
 };
@@ -201,8 +197,8 @@ export const FormExample: Story = {
 
     return (
       <div className="w-[300px] space-y-4 rounded-lg border border-border p-4">
-        <div className="space-y-2">
-          <label className="text-sm font-medium">Framework</label>
+        <div>
+          <span className="mb-2 block text-sm font-medium">Framework</span>
           <ComboBox
             options={frameworks}
             value={framework}
@@ -210,8 +206,8 @@ export const FormExample: Story = {
             placeholder="Select framework"
           />
         </div>
-        <div className="space-y-2">
-          <label className="text-sm font-medium">Country</label>
+        <div>
+          <span className="mb-2 block text-sm font-medium">Country</span>
           <ComboBox
             options={countries}
             value={country}

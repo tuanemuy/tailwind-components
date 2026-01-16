@@ -1,11 +1,16 @@
 "use client";
 
-import { forwardRef, useState, useRef, useEffect } from "react";
-import { cn } from "@/lib/utils";
-import { datePickerVariants, calendarVariants, calendarDayVariants } from "@/lib/variants/datePicker";
-import { CalendarIcon, ChevronLeftIcon, ChevronRightIcon } from "@/lib/icons";
-import { Button } from "@/components/atoms";
 import type { VariantProps } from "class-variance-authority";
+import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { Button } from "@/components/atoms";
+import { CalendarIcon, ChevronLeftIcon, ChevronRightIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
+import {
+  calendarDayVariants,
+  calendarVariants,
+  datePickerVariants,
+} from "@/lib/variants/datePicker";
 
 type DatePickerSize = "sm" | "md" | "lg";
 
@@ -25,11 +30,27 @@ interface RangeCalendarProps {
 
 const DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 const MONTHS = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 
-const RangeCalendar = ({ value, onChange, size = "md", minDate, maxDate }: RangeCalendarProps) => {
+const RangeCalendar = ({
+  value,
+  onChange,
+  size = "md",
+  minDate,
+  maxDate,
+}: RangeCalendarProps) => {
   const today = new Date();
   const [viewDate, setViewDate] = useState(value?.start ?? today);
   const [selectingEnd, setSelectingEnd] = useState(false);
@@ -129,7 +150,7 @@ const RangeCalendar = ({ value, onChange, size = "md", minDate, maxDate }: Range
           onMouseLeave={() => setHoverDate(null)}
         >
           {day}
-        </button>
+        </button>,
       );
     }
 
@@ -137,10 +158,11 @@ const RangeCalendar = ({ value, onChange, size = "md", minDate, maxDate }: Range
   };
 
   const buttonSize = size === "sm" ? "sm" : size === "lg" ? "md" : "sm";
-  const iconSize = size === "sm" ? "size-3" : size === "lg" ? "size-5" : "size-4";
+  const iconSize =
+    size === "sm" ? "size-3" : size === "lg" ? "size-5" : "size-4";
 
   return (
-    <div className={cn(calendarVariants({ size }), "w-auto")}>
+    <div className={cn(calendarVariants({ size }))}>
       {/* Header */}
       <div className="mb-2 flex items-center justify-between">
         <Button
@@ -174,9 +196,7 @@ const RangeCalendar = ({ value, onChange, size = "md", minDate, maxDate }: Range
       </div>
 
       {/* Calendar grid */}
-      <div className="grid grid-cols-7 gap-1">
-        {renderDays()}
-      </div>
+      <div className="grid grid-cols-7 gap-1">{renderDays()}</div>
 
       {/* Selection hint */}
       <div className="mt-2 text-center text-xs text-muted-foreground">
@@ -229,15 +249,68 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       disabled = false,
       ...props
     },
-    ref
+    _ref,
   ) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [position, setPosition] = useState({ top: 0, left: 0 });
+    const [positioned, setPositioned] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
+    const triggerRef = useRef<HTMLButtonElement>(null);
+    const calendarRef = useRef<HTMLDivElement>(null);
+
+    // Reset positioned when closing
+    useEffect(() => {
+      if (!isOpen) {
+        setPositioned(false);
+      }
+    }, [isOpen]);
+
+    // Calculate position when open
+    useLayoutEffect(() => {
+      if (!isOpen || !triggerRef.current || !calendarRef.current) return;
+
+      const updatePosition = () => {
+        if (!triggerRef.current || !calendarRef.current) return;
+        const triggerRect = triggerRef.current.getBoundingClientRect();
+        const calendarRect = calendarRef.current.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+
+        let top = triggerRect.bottom + 4;
+        const left = triggerRect.left;
+
+        // Check if calendar would overflow below viewport
+        if (top + calendarRect.height > viewportHeight) {
+          if (triggerRect.top > viewportHeight - triggerRect.bottom) {
+            top = triggerRect.top - calendarRect.height - 4;
+          }
+        }
+
+        if (top < 8) top = 8;
+
+        setPosition({ top, left });
+        setPositioned(true);
+      };
+
+      updatePosition();
+      window.addEventListener("scroll", updatePosition, true);
+      window.addEventListener("resize", updatePosition);
+
+      return () => {
+        window.removeEventListener("scroll", updatePosition, true);
+        window.removeEventListener("resize", updatePosition);
+      };
+    }, [isOpen]);
 
     // Close on click outside
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
-        if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        const target = event.target as Node;
+        if (
+          containerRef.current &&
+          !containerRef.current.contains(target) &&
+          calendarRef.current &&
+          !calendarRef.current.contains(target)
+        ) {
           setIsOpen(false);
         }
       };
@@ -245,7 +318,8 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       if (isOpen) {
         document.addEventListener("mousedown", handleClickOutside);
       }
-      return () => document.removeEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
     }, [isOpen]);
 
     // Close on escape
@@ -269,42 +343,55 @@ export const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       }
     };
 
-    const iconSize = size === "sm" ? "size-3.5" : size === "lg" ? "size-5" : "size-4";
+    const iconSize =
+      size === "sm" ? "size-3.5" : size === "lg" ? "size-5" : "size-4";
     const hasValue = value?.start || value?.end;
+
+    const calendarContent = isOpen ? (
+      <div
+        ref={calendarRef}
+        className="fixed z-[9999]"
+        style={{
+          top: position.top,
+          left: position.left,
+          visibility: positioned ? "visible" : "hidden",
+        }}
+      >
+        <RangeCalendar
+          value={value}
+          onChange={handleRangeChange}
+          size={size ?? "md"}
+          minDate={minDate}
+          maxDate={maxDate}
+        />
+      </div>
+    ) : null;
 
     return (
       <div ref={containerRef} className="relative inline-block" {...props}>
         <button
-          ref={ref as React.Ref<HTMLButtonElement>}
+          ref={triggerRef}
           type="button"
           disabled={disabled}
           className={cn(
             datePickerVariants({ size }),
             "min-w-[200px]",
             disabled && "cursor-not-allowed opacity-50",
-            className
+            className,
           )}
           onClick={() => setIsOpen(!isOpen)}
         >
           <CalendarIcon className={cn(iconSize, "text-muted-foreground")} />
           <span className={cn(!hasValue && "text-muted-foreground")}>
-            {hasValue ? format(value!) : placeholder}
+            {value ? format(value) : placeholder}
           </span>
         </button>
 
-        {isOpen && (
-          <div className="absolute top-full z-50 mt-1">
-            <RangeCalendar
-              value={value}
-              onChange={handleRangeChange}
-              size={size ?? "md"}
-              minDate={minDate}
-              maxDate={maxDate}
-            />
-          </div>
-        )}
+        {typeof document !== "undefined" &&
+          calendarContent &&
+          createPortal(calendarContent, document.body)}
       </div>
     );
-  }
+  },
 );
 DateRangePicker.displayName = "DateRangePicker";

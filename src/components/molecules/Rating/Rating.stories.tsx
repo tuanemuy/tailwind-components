@@ -175,6 +175,7 @@ export const ProductReview: Story = {
           className="justify-center"
         />
         <button
+          type="button"
           onClick={handleSubmit}
           disabled={rating === 0}
           className="w-full rounded-md bg-primary py-2 text-sm font-medium text-primary-foreground disabled:opacity-50"
@@ -193,7 +194,9 @@ export const ReviewSummary: Story = {
         <span className="text-4xl font-bold">4.5</span>
         <div>
           <Rating value={4.5} readonly size="sm" />
-          <p className="text-sm text-muted-foreground">Based on 1,234 reviews</p>
+          <p className="text-sm text-muted-foreground">
+            Based on 1,234 reviews
+          </p>
         </div>
       </div>
       <div className="space-y-2">
@@ -218,7 +221,15 @@ export const ReviewSummary: Story = {
               />
             </div>
             <span className="w-8 text-right text-sm text-muted-foreground">
-              {stars === 5 ? "65%" : stars === 4 ? "20%" : stars === 3 ? "10%" : stars === 2 ? "3%" : "2%"}
+              {stars === 5
+                ? "65%"
+                : stars === 4
+                  ? "20%"
+                  : stars === 3
+                    ? "10%"
+                    : stars === 2
+                      ? "3%"
+                      : "2%"}
             </span>
           </div>
         ))}

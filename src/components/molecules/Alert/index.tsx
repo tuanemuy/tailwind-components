@@ -1,20 +1,23 @@
 "use client";
 
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { alertVariants, alertIconVariants } from "@/lib/variants/alert";
 import {
-  InfoIcon,
-  CheckCircleIcon,
   AlertCircleIcon,
+  CheckCircleIcon,
+  InfoIcon,
   XCircleIcon,
   XIcon,
 } from "@/lib/icons";
-import type { VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+import { alertIconVariants, alertVariants } from "@/lib/variants/alert";
 
 type AlertVariant = "default" | "info" | "success" | "warning" | "error";
 
-const variantIcons: Record<AlertVariant, React.ComponentType<{ className?: string }>> = {
+const variantIcons: Record<
+  AlertVariant,
+  React.ComponentType<{ className?: string }>
+> = {
   default: InfoIcon,
   info: InfoIcon,
   success: CheckCircleIcon,
@@ -50,7 +53,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const IconComponent = variantIcons[variant ?? "default"];
 
@@ -71,18 +74,30 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
         {/* Content */}
         <div className="flex-1 space-y-1">
           {title && (
-            <h5 className={cn(
-              "font-medium",
-              size === "sm" ? "text-xs" : size === "lg" ? "text-base" : "text-sm"
-            )}>
+            <h5
+              className={cn(
+                "font-medium",
+                size === "sm"
+                  ? "text-xs"
+                  : size === "lg"
+                    ? "text-base"
+                    : "text-sm",
+              )}
+            >
               {title}
             </h5>
           )}
           {description && (
-            <p className={cn(
-              "opacity-90",
-              size === "sm" ? "text-xs" : size === "lg" ? "text-sm" : "text-sm"
-            )}>
+            <p
+              className={cn(
+                "opacity-90",
+                size === "sm"
+                  ? "text-xs"
+                  : size === "lg"
+                    ? "text-sm"
+                    : "text-sm",
+              )}
+            >
               {description}
             </p>
           )}
@@ -102,12 +117,16 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
             )}
             aria-label="Close alert"
           >
-            <XIcon className={cn(size === "sm" ? "size-3" : size === "lg" ? "size-5" : "size-4")} />
+            <XIcon
+              className={cn(
+                size === "sm" ? "size-3" : size === "lg" ? "size-5" : "size-4",
+              )}
+            />
           </button>
         )}
       </div>
     );
-  }
+  },
 );
 Alert.displayName = "Alert";
 
@@ -120,14 +139,8 @@ export interface AlertWithLinkProps extends AlertProps {
 
 export const AlertWithLink = forwardRef<HTMLDivElement, AlertWithLinkProps>(
   (
-    {
-      linkText = "Learn more",
-      linkHref,
-      onLinkClick,
-      description,
-      ...props
-    },
-    ref
+    { linkText = "Learn more", linkHref, onLinkClick, description, ...props },
+    ref,
   ) => {
     return (
       <Alert ref={ref} description={description} {...props}>
@@ -142,6 +155,6 @@ export const AlertWithLink = forwardRef<HTMLDivElement, AlertWithLinkProps>(
         )}
       </Alert>
     );
-  }
+  },
 );
 AlertWithLink.displayName = "AlertWithLink";

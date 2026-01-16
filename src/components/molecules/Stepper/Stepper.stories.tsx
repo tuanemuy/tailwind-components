@@ -1,8 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { Stepper, Step } from "./index";
 import { Button } from "@/components/atoms";
-import { UserIcon, CreditCardIcon, CheckCircleIcon, ShoppingBagIcon } from "@/lib/icons";
+import {
+  CheckCircleIcon,
+  CreditCardIcon,
+  ShoppingBagIcon,
+  UserIcon,
+} from "@/lib/icons";
+import { Step, Stepper } from "./index";
 
 const meta: Meta<typeof Stepper> = {
   title: "Molecules/Stepper",
@@ -144,8 +149,12 @@ const InteractiveStepperDemo = () => {
   return (
     <div className="w-[700px] space-y-8">
       <Stepper currentStep={currentStep}>
-        {steps.map((step, index) => (
-          <Step key={index} label={step.label} description={step.description} />
+        {steps.map((step) => (
+          <Step
+            key={step.label}
+            label={step.label}
+            description={step.description}
+          />
         ))}
       </Stepper>
 
@@ -165,7 +174,9 @@ const InteractiveStepperDemo = () => {
           Previous
         </Button>
         <Button
-          onClick={() => setCurrentStep((prev) => Math.min(steps.length - 1, prev + 1))}
+          onClick={() =>
+            setCurrentStep((prev) => Math.min(steps.length - 1, prev + 1))
+          }
           disabled={currentStep === steps.length - 1}
         >
           {currentStep === steps.length - 1 ? "Finish" : "Next"}

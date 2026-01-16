@@ -1,7 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "./index";
-import { InfoIcon, SettingsIcon, UserIcon, CreditCardIcon } from "@/lib/icons";
+import { CreditCardIcon, InfoIcon, SettingsIcon, UserIcon } from "@/lib/icons";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "./index";
 
 const meta: Meta<typeof Accordion> = {
   title: "Molecules/Accordion",
@@ -47,7 +52,8 @@ export const Default: Story = {
       <AccordionItem value="item-3">
         <AccordionTrigger>Is it animated?</AccordionTrigger>
         <AccordionContent>
-          Yes. It&apos;s animated by default, but you can disable it if you prefer.
+          Yes. It&apos;s animated by default, but you can disable it if you
+          prefer.
         </AccordionContent>
       </AccordionItem>
     </Accordion>
@@ -56,7 +62,11 @@ export const Default: Story = {
 
 export const Bordered: Story = {
   render: () => (
-    <Accordion variant="bordered" className="w-[450px]" defaultValue={["item-1"]}>
+    <Accordion
+      variant="bordered"
+      className="w-[450px]"
+      defaultValue={["item-1"]}
+    >
       <AccordionItem value="item-1">
         <AccordionTrigger>What is your refund policy?</AccordionTrigger>
         <AccordionContent>
@@ -84,12 +94,16 @@ export const Bordered: Story = {
 
 export const Separated: Story = {
   render: () => (
-    <Accordion variant="separated" className="w-[450px]" defaultValue={["item-1"]}>
+    <Accordion
+      variant="separated"
+      className="w-[450px]"
+      defaultValue={["item-1"]}
+    >
       <AccordionItem value="item-1">
         <AccordionTrigger>Getting Started</AccordionTrigger>
         <AccordionContent>
-          Welcome to our platform! Here&apos;s everything you need to know to get
-          started quickly.
+          Welcome to our platform! Here&apos;s everything you need to know to
+          get started quickly.
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
@@ -111,7 +125,11 @@ export const Separated: Story = {
 
 export const Multiple: Story = {
   render: () => (
-    <Accordion type="multiple" className="w-[450px]" defaultValue={["item-1", "item-2"]}>
+    <Accordion
+      type="multiple"
+      className="w-[450px]"
+      defaultValue={["item-1", "item-2"]}
+    >
       <AccordionItem value="item-1">
         <AccordionTrigger>First Section</AccordionTrigger>
         <AccordionContent>
@@ -198,8 +216,8 @@ export const Large: Story = {
       <AccordionItem value="item-1">
         <AccordionTrigger>Large Accordion</AccordionTrigger>
         <AccordionContent>
-          This accordion has larger text and more spacious padding for
-          better readability in featured sections.
+          This accordion has larger text and more spacious padding for better
+          readability in featured sections.
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
@@ -220,18 +238,21 @@ export const Controlled: Story = {
       <div className="w-[450px] space-y-4">
         <div className="flex gap-x-2">
           <button
+            type="button"
             onClick={() => setValue(["item-1"])}
             className="rounded bg-primary px-3 py-1.5 text-sm text-primary-foreground"
           >
             Open First
           </button>
           <button
+            type="button"
             onClick={() => setValue(["item-2"])}
             className="rounded bg-primary px-3 py-1.5 text-sm text-primary-foreground"
           >
             Open Second
           </button>
           <button
+            type="button"
             onClick={() => setValue([])}
             className="rounded bg-muted px-3 py-1.5 text-sm"
           >
@@ -255,7 +276,11 @@ export const Controlled: Story = {
 
 export const NonCollapsible: Story = {
   render: () => (
-    <Accordion className="w-[450px]" defaultValue={["item-1"]} collapsible={false}>
+    <Accordion
+      className="w-[450px]"
+      defaultValue={["item-1"]}
+      collapsible={false}
+    >
       <AccordionItem value="item-1">
         <AccordionTrigger>Always One Open</AccordionTrigger>
         <AccordionContent>

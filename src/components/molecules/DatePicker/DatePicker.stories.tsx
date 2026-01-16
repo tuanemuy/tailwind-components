@@ -31,11 +31,7 @@ const ControlledDatePicker = () => {
 
   return (
     <div className="space-y-4">
-      <DatePicker
-        value={date}
-        onChange={setDate}
-        placeholder="Pick a date"
-      />
+      <DatePicker value={date} onChange={setDate} placeholder="Pick a date" />
       {date && (
         <p className="text-sm text-muted-foreground">
           Selected: {date.toLocaleDateString()}
@@ -144,11 +140,13 @@ export const CustomFormat: Story = {
       <DatePicker
         value={date}
         onChange={setDate}
-        format={(d) => d.toLocaleDateString("ja-JP", {
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit",
-        })}
+        format={(d) =>
+          d.toLocaleDateString("ja-JP", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          })
+        }
       />
     );
   },

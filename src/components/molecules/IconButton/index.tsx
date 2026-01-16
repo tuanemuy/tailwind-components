@@ -1,6 +1,6 @@
+import { cva, type VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
-import { cva, type VariantProps } from "class-variance-authority";
 
 const iconButtonVariants = cva(
   "inline-flex items-center justify-center rounded-lg transition-colors focus:outline-none disabled:pointer-events-none disabled:opacity-50",

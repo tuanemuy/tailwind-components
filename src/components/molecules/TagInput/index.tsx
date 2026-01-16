@@ -1,11 +1,14 @@
 "use client";
 
-import { forwardRef, useState, useRef } from "react";
-import type { KeyboardEvent } from "react";
-import { cn } from "@/lib/utils";
-import { tagInputContainerVariants, tagVariants } from "@/lib/variants/tagInput";
-import { XIcon } from "@/lib/icons";
 import type { VariantProps } from "class-variance-authority";
+import type { KeyboardEvent } from "react";
+import { forwardRef, useRef, useState } from "react";
+import { XIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
+import {
+  tagInputContainerVariants,
+  tagVariants,
+} from "@/lib/variants/tagInput";
 
 export interface TagInputProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange">,
@@ -39,7 +42,7 @@ export const TagInput = forwardRef<HTMLDivElement, TagInputProps>(
       onTagRemove,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [inputValue, setInputValue] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
@@ -66,7 +69,11 @@ export const TagInput = forwardRef<HTMLDivElement, TagInputProps>(
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value;
       // Check for delimiter
-      if (delimiter && delimiter instanceof RegExp ? delimiter.test(newValue) : newValue.includes(delimiter as string)) {
+      if (
+        delimiter && delimiter instanceof RegExp
+          ? delimiter.test(newValue)
+          : newValue.includes(delimiter as string)
+      ) {
         const parts = newValue.split(delimiter).filter(Boolean);
         parts.forEach(addTag);
       } else {
@@ -87,15 +94,17 @@ export const TagInput = forwardRef<HTMLDivElement, TagInputProps>(
       inputRef.current?.focus();
     };
 
-    const iconSize = size === "sm" ? "size-3" : size === "lg" ? "size-4" : "size-3.5";
+    const iconSize =
+      size === "sm" ? "size-3" : size === "lg" ? "size-4" : "size-3.5";
 
     return (
+      // biome-ignore lint/a11y/useKeyWithClickEvents: Container click focuses the input
       <div
         ref={ref}
         className={cn(
           tagInputContainerVariants({ size }),
           disabled && "cursor-not-allowed opacity-50",
-          className
+          className,
         )}
         onClick={handleContainerClick}
         {...props}
@@ -124,11 +133,13 @@ export const TagInput = forwardRef<HTMLDivElement, TagInputProps>(
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           placeholder={value.length === 0 ? placeholder : ""}
-          disabled={disabled || (maxTags !== undefined && value.length >= maxTags)}
-          className="min-w-[80px] flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
+          disabled={
+            disabled || (maxTags !== undefined && value.length >= maxTags)
+          }
+          className="min-w-[80px] flex-1 border-transparent bg-transparent outline-none placeholder:text-muted-foreground focus:border-transparent focus:ring-0"
         />
       </div>
     );
-  }
+  },
 );
 TagInput.displayName = "TagInput";

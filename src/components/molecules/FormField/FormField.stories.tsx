@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { FormField } from "./index";
 import { MailIcon } from "@/lib/icons";
+import { FormField } from "./index";
 
 const meta: Meta<typeof FormField> = {
   title: "Molecules/FormField",

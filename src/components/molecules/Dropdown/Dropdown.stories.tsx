@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Dropdown, DropdownItem, DropdownDivider } from "./index";
 import { Button } from "@/components/atoms";
 import {
-  EditIcon,
   CopyIcon,
-  TrashIcon,
   DownloadIcon,
-  UserIcon,
-  SettingsIcon,
+  EditIcon,
   MoreHorizontalIcon,
+  SettingsIcon,
+  TrashIcon,
+  UserIcon,
 } from "@/lib/icons";
+import { Dropdown, DropdownDivider, DropdownItem } from "./index";
 
 const meta: Meta<typeof Dropdown> = {
   title: "Molecules/Dropdown",
@@ -32,9 +32,15 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <Dropdown triggerLabel="Options">
-      <DropdownItem icon={<EditIcon className="size-full" />}>Edit</DropdownItem>
-      <DropdownItem icon={<CopyIcon className="size-full" />}>Duplicate</DropdownItem>
-      <DropdownItem icon={<DownloadIcon className="size-full" />}>Download</DropdownItem>
+      <DropdownItem icon={<EditIcon className="size-full" />}>
+        Edit
+      </DropdownItem>
+      <DropdownItem icon={<CopyIcon className="size-full" />}>
+        Duplicate
+      </DropdownItem>
+      <DropdownItem icon={<DownloadIcon className="size-full" />}>
+        Download
+      </DropdownItem>
       <DropdownDivider />
       <DropdownItem icon={<TrashIcon className="size-full" />} destructive>
         Delete
@@ -82,8 +88,12 @@ export const PlacementBottomEnd: Story = {
 export const UserMenu: Story = {
   render: () => (
     <Dropdown triggerLabel="Account">
-      <DropdownItem icon={<UserIcon className="size-full" />}>Profile</DropdownItem>
-      <DropdownItem icon={<SettingsIcon className="size-full" />}>Settings</DropdownItem>
+      <DropdownItem icon={<UserIcon className="size-full" />}>
+        Profile
+      </DropdownItem>
+      <DropdownItem icon={<SettingsIcon className="size-full" />}>
+        Settings
+      </DropdownItem>
       <DropdownDivider />
       <DropdownItem destructive>Sign out</DropdownItem>
     </Dropdown>

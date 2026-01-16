@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { EmptyState, NoData, NoResults, NoUsers, NoFiles } from "./index";
 import { Button } from "@/components/atoms";
-import { PlusIcon, UploadIcon, SearchIcon, MailIcon } from "@/lib/icons";
+import { MailIcon, PlusIcon, SearchIcon, UploadIcon } from "@/lib/icons";
+import { EmptyState, NoData, NoFiles, NoResults, NoUsers } from "./index";
 
 const meta: Meta<typeof EmptyState> = {
   title: "Molecules/EmptyState",
@@ -25,7 +25,8 @@ export const Default: Story = {
   args: {
     icon: <SearchIcon />,
     title: "No results found",
-    description: "Try adjusting your search or filter to find what you're looking for.",
+    description:
+      "Try adjusting your search or filter to find what you're looking for.",
     className: "w-[400px]",
   },
 };
@@ -36,9 +37,7 @@ export const WithAction: Story = {
     title: "No projects yet",
     description: "Get started by creating your first project.",
     action: (
-      <Button leftIcon={<PlusIcon className="size-4" />}>
-        Create Project
-      </Button>
+      <Button leftIcon={<PlusIcon className="size-4" />}>Create Project</Button>
     ),
     className: "w-[400px]",
   },
@@ -138,7 +137,9 @@ export const CustomContent: Story = {
         <span className="font-medium text-foreground">user@example.com</span>
       </p>
       <div className="mt-4 flex gap-x-2">
-        <Button variant="outline" size="sm">Resend Email</Button>
+        <Button variant="outline" size="sm">
+          Resend Email
+        </Button>
         <Button size="sm">Open Email App</Button>
       </div>
     </EmptyState>

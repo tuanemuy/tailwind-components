@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { DateRangePicker } from "./index";
 import type { DateRange } from "./index";
+import { DateRangePicker } from "./index";
 
 const meta: Meta<typeof DateRangePicker> = {
   title: "Molecules/DateRangePicker",

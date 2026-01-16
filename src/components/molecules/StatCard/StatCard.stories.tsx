@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { StoreIcon, TagIcon, TrendUpIcon, UsersIcon } from "@/lib/icons";
 import { StatCard } from "./index";
-import { UsersIcon, StoreIcon, TagIcon, TrendUpIcon } from "@/lib/icons";
 
 const meta: Meta<typeof StatCard> = {
   title: "Molecules/StatCard",

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbEllipsis } from "./index";
-import { HomeIcon, FolderIcon, FileTextIcon } from "@/lib/icons";
+import { FileTextIcon, FolderIcon, HomeIcon } from "@/lib/icons";
+import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem } from "./index";
 
 const meta: Meta<typeof Breadcrumb> = {
   title: "Molecules/Breadcrumb",

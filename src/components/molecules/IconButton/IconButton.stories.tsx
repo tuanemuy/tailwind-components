@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { IconButton } from "./index";
 import {
-  PlusIcon,
+  BellIcon,
   EditIcon,
-  TrashIcon,
+  MenuIcon,
   MoreHorizontalIcon,
+  PlusIcon,
   SearchIcon,
   SettingsIcon,
-  BellIcon,
-  MenuIcon,
+  TrashIcon,
 } from "@/lib/icons";
+import { IconButton } from "./index";
 
 const meta: Meta<typeof IconButton> = {
   title: "Molecules/IconButton",
@@ -81,11 +81,36 @@ export const Outline: Story = {
 export const Sizes: Story = {
   render: () => (
     <div className="flex items-center gap-4">
-      <IconButton size="xs" icon={<PlusIcon className="size-full" />} label="Add" variant="outline" />
-      <IconButton size="sm" icon={<PlusIcon className="size-full" />} label="Add" variant="outline" />
-      <IconButton size="md" icon={<PlusIcon className="size-full" />} label="Add" variant="outline" />
-      <IconButton size="lg" icon={<PlusIcon className="size-full" />} label="Add" variant="outline" />
-      <IconButton size="xl" icon={<PlusIcon className="size-full" />} label="Add" variant="outline" />
+      <IconButton
+        size="xs"
+        icon={<PlusIcon className="size-full" />}
+        label="Add"
+        variant="outline"
+      />
+      <IconButton
+        size="sm"
+        icon={<PlusIcon className="size-full" />}
+        label="Add"
+        variant="outline"
+      />
+      <IconButton
+        size="md"
+        icon={<PlusIcon className="size-full" />}
+        label="Add"
+        variant="outline"
+      />
+      <IconButton
+        size="lg"
+        icon={<PlusIcon className="size-full" />}
+        label="Add"
+        variant="outline"
+      />
+      <IconButton
+        size="xl"
+        icon={<PlusIcon className="size-full" />}
+        label="Add"
+        variant="outline"
+      />
     </div>
   ),
 };
@@ -111,8 +136,14 @@ export const CommonIcons: Story = {
   render: () => (
     <div className="flex items-center gap-2">
       <IconButton icon={<SearchIcon className="size-full" />} label="Search" />
-      <IconButton icon={<BellIcon className="size-full" />} label="Notifications" />
-      <IconButton icon={<SettingsIcon className="size-full" />} label="Settings" />
+      <IconButton
+        icon={<BellIcon className="size-full" />}
+        label="Notifications"
+      />
+      <IconButton
+        icon={<SettingsIcon className="size-full" />}
+        label="Settings"
+      />
       <IconButton icon={<MenuIcon className="size-full" />} label="Menu" />
     </div>
   ),
@@ -121,11 +152,31 @@ export const CommonIcons: Story = {
 export const AllVariants: Story = {
   render: () => (
     <div className="flex items-center gap-4">
-      <IconButton variant="primary" icon={<PlusIcon className="size-full" />} label="Primary" />
-      <IconButton variant="secondary" icon={<PlusIcon className="size-full" />} label="Secondary" />
-      <IconButton variant="ghost" icon={<PlusIcon className="size-full" />} label="Ghost" />
-      <IconButton variant="destructive" icon={<PlusIcon className="size-full" />} label="Destructive" />
-      <IconButton variant="outline" icon={<PlusIcon className="size-full" />} label="Outline" />
+      <IconButton
+        variant="primary"
+        icon={<PlusIcon className="size-full" />}
+        label="Primary"
+      />
+      <IconButton
+        variant="secondary"
+        icon={<PlusIcon className="size-full" />}
+        label="Secondary"
+      />
+      <IconButton
+        variant="ghost"
+        icon={<PlusIcon className="size-full" />}
+        label="Ghost"
+      />
+      <IconButton
+        variant="destructive"
+        icon={<PlusIcon className="size-full" />}
+        label="Destructive"
+      />
+      <IconButton
+        variant="outline"
+        icon={<PlusIcon className="size-full" />}
+        label="Outline"
+      />
     </div>
   ),
 };

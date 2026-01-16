@@ -1,6 +1,6 @@
-import { forwardRef, Children, isValidElement, cloneElement } from "react";
-import { cn } from "@/lib/utils";
+import { Children, cloneElement, forwardRef, isValidElement } from "react";
 import type { ButtonProps } from "@/components/atoms";
+import { cn } from "@/lib/utils";
 
 export interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "attached" | "separated";
@@ -26,6 +26,7 @@ export const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
     const childCount = childArray.length;
 
     return (
+      // biome-ignore lint/a11y/useSemanticElements: ButtonGroup is not a form control, fieldset is not appropriate
       <div
         ref={ref}
         className={cn(

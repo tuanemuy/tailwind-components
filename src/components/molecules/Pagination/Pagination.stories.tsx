@@ -2,11 +2,11 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import {
   Pagination,
-  PaginationItem,
-  PaginationPrevious,
-  PaginationNext,
   PaginationEllipsis,
+  PaginationItem,
+  PaginationNext,
   PaginationNumbers,
+  PaginationPrevious,
 } from "./index";
 
 const meta: Meta<typeof Pagination> = {
@@ -62,7 +62,9 @@ export const Small: Story = {
     <Pagination size="sm">
       <PaginationPrevious size="sm" />
       <PaginationItem size="sm">1</PaginationItem>
-      <PaginationItem size="sm" active>2</PaginationItem>
+      <PaginationItem size="sm" active>
+        2
+      </PaginationItem>
       <PaginationItem size="sm">3</PaginationItem>
       <PaginationNext size="sm" />
     </Pagination>
@@ -74,7 +76,9 @@ export const Large: Story = {
     <Pagination size="lg">
       <PaginationPrevious size="lg" />
       <PaginationItem size="lg">1</PaginationItem>
-      <PaginationItem size="lg" active>2</PaginationItem>
+      <PaginationItem size="lg" active>
+        2
+      </PaginationItem>
       <PaginationItem size="lg">3</PaginationItem>
       <PaginationNext size="lg" />
     </Pagination>
@@ -86,7 +90,9 @@ export const OutlineVariant: Story = {
     <Pagination>
       <PaginationPrevious variant="outline" />
       <PaginationItem variant="outline">1</PaginationItem>
-      <PaginationItem variant="outline" active>2</PaginationItem>
+      <PaginationItem variant="outline" active>
+        2
+      </PaginationItem>
       <PaginationItem variant="outline">3</PaginationItem>
       <PaginationItem variant="outline">4</PaginationItem>
       <PaginationItem variant="outline">5</PaginationItem>

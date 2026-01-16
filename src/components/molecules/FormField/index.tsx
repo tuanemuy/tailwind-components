@@ -1,7 +1,13 @@
 import { forwardRef, useId } from "react";
-import { cn } from "@/lib/utils";
-import { Label, Input, Textarea, type InputProps, type TextareaProps } from "@/components/atoms";
+import {
+  Input,
+  type InputProps,
+  Label,
+  Textarea,
+  type TextareaProps,
+} from "@/components/atoms";
 import { AlertCircleIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 type InputType = "text" | "email" | "password" | "number" | "tel" | "url";
 
@@ -60,7 +66,9 @@ export const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
                 .join(" ") || undefined
             }
             {...(inputProps as TextareaProps)}
-            variant={hasError ? "error" : (inputProps as TextareaProps)?.variant}
+            variant={
+              hasError ? "error" : (inputProps as TextareaProps)?.variant
+            }
           />
         ) : (
           <Input

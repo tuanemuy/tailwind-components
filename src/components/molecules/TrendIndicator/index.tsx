@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { TrendUpIcon, TrendDownIcon } from "@/lib/icons";
+import { TrendDownIcon, TrendUpIcon } from "@/lib/icons";
 import type { TrendDirection, TrendVariant } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 export interface TrendIndicatorProps
   extends React.HTMLAttributes<HTMLSpanElement> {

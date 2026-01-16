@@ -1,16 +1,19 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
 import { Badge, Button } from "@/components/atoms";
 import {
   FileIcon,
   FileTextIcon,
-  ImageIcon,
   FolderIcon,
+  ImageIcon,
   MoreHorizontalIcon,
 } from "@/lib/icons";
 import type { FileType } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
-const fileTypeIcons: Record<FileType, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
+const fileTypeIcons: Record<
+  FileType,
+  React.ComponentType<React.SVGProps<SVGSVGElement>>
+> = {
   image: ImageIcon,
   document: FileTextIcon,
   video: FileIcon,

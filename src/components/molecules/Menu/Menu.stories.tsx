@@ -1,21 +1,21 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {
-  Menu,
-  MenuItem,
-  MenuLabel,
-  MenuDivider,
-  SubMenu,
-  ContextMenu,
-} from "./index";
-import {
-  EditIcon,
   CopyIcon,
+  EditIcon,
+  FolderIcon,
+  MailIcon,
+  SettingsIcon,
   TrashIcon,
   UserIcon,
-  SettingsIcon,
-  MailIcon,
-  FolderIcon,
 } from "@/lib/icons";
+import {
+  ContextMenu,
+  Menu,
+  MenuDivider,
+  MenuItem,
+  MenuLabel,
+  SubMenu,
+} from "./index";
 
 const meta: Meta<typeof Menu> = {
   title: "Molecules/Menu",
@@ -56,7 +56,10 @@ export const WithIcons: Story = {
       <MenuItem icon={<EditIcon className="size-full" />}>Edit</MenuItem>
       <MenuItem icon={<CopyIcon className="size-full" />}>Duplicate</MenuItem>
       <MenuDivider />
-      <MenuItem icon={<TrashIcon className="size-full" />} variant="destructive">
+      <MenuItem
+        icon={<TrashIcon className="size-full" />}
+        variant="destructive"
+      >
         Delete
       </MenuItem>
     </Menu>
@@ -74,7 +77,11 @@ export const WithShortcuts: Story = {
       </MenuItem>
       <MenuItem shortcut="⌘S">Save</MenuItem>
       <MenuDivider />
-      <MenuItem icon={<TrashIcon className="size-full" />} variant="destructive" shortcut="⌫">
+      <MenuItem
+        icon={<TrashIcon className="size-full" />}
+        variant="destructive"
+        shortcut="⌫"
+      >
         Delete
       </MenuItem>
     </Menu>
@@ -125,7 +132,9 @@ export const Large: Story = {
   render: () => (
     <Menu size="lg">
       <MenuItem icon={<UserIcon className="size-full" />}>Profile</MenuItem>
-      <MenuItem icon={<SettingsIcon className="size-full" />}>Settings</MenuItem>
+      <MenuItem icon={<SettingsIcon className="size-full" />}>
+        Settings
+      </MenuItem>
       <MenuItem icon={<MailIcon className="size-full" />}>Messages</MenuItem>
       <MenuDivider />
       <MenuItem variant="destructive">Sign Out</MenuItem>
@@ -163,7 +172,10 @@ export const WithSubMenu: Story = {
       </SubMenu>
       <MenuItem icon={<CopyIcon className="size-full" />}>Copy</MenuItem>
       <MenuDivider />
-      <MenuItem icon={<TrashIcon className="size-full" />} variant="destructive">
+      <MenuItem
+        icon={<TrashIcon className="size-full" />}
+        variant="destructive"
+      >
         Delete
       </MenuItem>
     </Menu>
@@ -208,7 +220,9 @@ export const UserMenu: Story = {
       </div>
       <MenuDivider />
       <MenuItem icon={<UserIcon className="size-full" />}>Profile</MenuItem>
-      <MenuItem icon={<SettingsIcon className="size-full" />}>Settings</MenuItem>
+      <MenuItem icon={<SettingsIcon className="size-full" />}>
+        Settings
+      </MenuItem>
       <MenuItem icon={<MailIcon className="size-full" />}>
         Messages
         <span className="ms-auto rounded-full bg-primary px-1.5 py-0.5 text-[10px] text-primary-foreground">

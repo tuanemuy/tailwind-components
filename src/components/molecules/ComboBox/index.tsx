@@ -1,21 +1,15 @@
 "use client";
 
-import {
-  forwardRef,
-  useState,
-  useRef,
-  useEffect,
-  useMemo,
-} from "react";
+import type { VariantProps } from "class-variance-authority";
 import type { KeyboardEvent } from "react";
+import { forwardRef, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { CheckIcon, ChevronDownIcon, SearchIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import {
-  comboBoxTriggerVariants,
-  comboBoxContentVariants,
   comboBoxItemVariants,
+  comboBoxTriggerVariants,
 } from "@/lib/variants/comboBox";
-import { ChevronDownIcon, CheckIcon, SearchIcon } from "@/lib/icons";
-import type { VariantProps } from "class-variance-authority";
 
 export interface ComboBoxOption {
   value: string;
@@ -52,28 +46,82 @@ export const ComboBox = forwardRef<HTMLDivElement, ComboBoxProps>(
       clearable: _clearable = false,
       searchable = true,
     },
-    ref
+    _ref,
   ) => {
     const [isOpen, setIsOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [highlightedIndex, setHighlightedIndex] = useState(0);
+    const [position, setPosition] = useState({ top: 0, left: 0, width: 0 });
+    const [positioned, setPositioned] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
+    const triggerRef = useRef<HTMLButtonElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const listRef = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
 
     const selectedOption = options.find((opt) => opt.value === value);
 
     const filteredOptions = useMemo(() => {
       if (!searchQuery) return options;
       return options.filter((opt) =>
-        opt.label.toLowerCase().includes(searchQuery.toLowerCase())
+        opt.label.toLowerCase().includes(searchQuery.toLowerCase()),
       );
     }, [options, searchQuery]);
+
+    // Reset positioned when closing
+    useEffect(() => {
+      if (!isOpen) {
+        setPositioned(false);
+      }
+    }, [isOpen]);
+
+    // Calculate position when open
+    useLayoutEffect(() => {
+      if (!isOpen || !triggerRef.current || !contentRef.current) return;
+
+      const updatePosition = () => {
+        if (!triggerRef.current || !contentRef.current) return;
+        const triggerRect = triggerRef.current.getBoundingClientRect();
+        const contentRect = contentRef.current.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+
+        let top = triggerRect.bottom + 4;
+        const left = triggerRect.left;
+        const width = triggerRect.width;
+
+        // Check if content would overflow below viewport
+        if (top + contentRect.height > viewportHeight) {
+          if (triggerRect.top > viewportHeight - triggerRect.bottom) {
+            top = triggerRect.top - contentRect.height - 4;
+          }
+        }
+
+        if (top < 8) top = 8;
+
+        setPosition({ top, left, width });
+        setPositioned(true);
+      };
+
+      updatePosition();
+      window.addEventListener("scroll", updatePosition, true);
+      window.addEventListener("resize", updatePosition);
+
+      return () => {
+        window.removeEventListener("scroll", updatePosition, true);
+        window.removeEventListener("resize", updatePosition);
+      };
+    }, [isOpen]);
 
     // Close on click outside
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
-        if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        const target = event.target as Node;
+        if (
+          containerRef.current &&
+          !containerRef.current.contains(target) &&
+          contentRef.current &&
+          !contentRef.current.contains(target)
+        ) {
           setIsOpen(false);
           setSearchQuery("");
         }
@@ -82,7 +130,8 @@ export const ComboBox = forwardRef<HTMLDivElement, ComboBoxProps>(
       if (isOpen) {
         document.addEventListener("mousedown", handleClickOutside);
       }
-      return () => document.removeEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
     }, [isOpen]);
 
     // Focus input when opening
@@ -95,7 +144,7 @@ export const ComboBox = forwardRef<HTMLDivElement, ComboBoxProps>(
     // Reset highlighted index when filtered options change
     useEffect(() => {
       setHighlightedIndex(0);
-    }, [filteredOptions]);
+    }, []);
 
     // Scroll highlighted item into view
     useEffect(() => {
@@ -124,7 +173,7 @@ export const ComboBox = forwardRef<HTMLDivElement, ComboBoxProps>(
         case "ArrowDown":
           e.preventDefault();
           setHighlightedIndex((prev) =>
-            prev < filteredOptions.length - 1 ? prev + 1 : prev
+            prev < filteredOptions.length - 1 ? prev + 1 : prev,
           );
           break;
         case "ArrowUp":
@@ -144,18 +193,117 @@ export const ComboBox = forwardRef<HTMLDivElement, ComboBoxProps>(
       }
     };
 
-    const iconSize = size === "sm" ? "size-3.5" : size === "lg" ? "size-5" : "size-4";
+    const iconSize =
+      size === "sm" ? "size-3.5" : size === "lg" ? "size-5" : "size-4";
+
+    const contentPanel = isOpen ? (
+      <div
+        ref={contentRef}
+        className={cn(
+          "fixed z-[9999] overflow-hidden rounded-lg border border-border bg-card shadow-lg",
+        )}
+        style={{
+          top: position.top,
+          left: position.left,
+          width: position.width,
+          visibility: positioned ? "visible" : "hidden",
+        }}
+      >
+        {/* Search input */}
+        {searchable && (
+          <div className="border-b border-border p-2">
+            <div className="flex items-center gap-x-2 rounded-md bg-muted px-2">
+              <SearchIcon className={cn(iconSize, "text-muted-foreground")} />
+              <input
+                ref={inputRef}
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder={searchPlaceholder}
+                className={cn(
+                  "w-full bg-transparent py-1.5 outline-none placeholder:text-muted-foreground",
+                  size === "sm"
+                    ? "text-xs"
+                    : size === "lg"
+                      ? "text-base"
+                      : "text-sm",
+                )}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Options list */}
+        <div
+          ref={listRef}
+          className="max-h-60 overflow-auto p-1"
+          role="listbox"
+        >
+          {filteredOptions.length === 0 ? (
+            <div
+              className={cn(
+                "py-6 text-center text-muted-foreground",
+                size === "sm"
+                  ? "text-xs"
+                  : size === "lg"
+                    ? "text-base"
+                    : "text-sm",
+              )}
+            >
+              {emptyMessage}
+            </div>
+          ) : (
+            filteredOptions.map((option, index) => {
+              const isSelected = option.value === value;
+              const isHighlighted = index === highlightedIndex;
+
+              return (
+                <div
+                  key={option.value}
+                  data-combobox-item
+                  role="option"
+                  tabIndex={-1}
+                  aria-selected={isSelected}
+                  className={cn(
+                    comboBoxItemVariants({
+                      size,
+                      selected: isSelected,
+                      highlighted: isHighlighted,
+                    }),
+                    option.disabled && "cursor-not-allowed opacity-50",
+                    "rounded-md",
+                  )}
+                  onClick={() =>
+                    !option.disabled && handleSelect(option.value)
+                  }
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !option.disabled) {
+                      handleSelect(option.value);
+                    }
+                  }}
+                  onMouseEnter={() => setHighlightedIndex(index)}
+                >
+                  <span className="flex-1">{option.label}</span>
+                  {isSelected && <CheckIcon className={iconSize} />}
+                </div>
+              );
+            })
+          )}
+        </div>
+      </div>
+    ) : null;
 
     return (
       <div ref={containerRef} className="relative inline-block w-full">
         <button
-          ref={ref as React.Ref<HTMLButtonElement>}
+          ref={triggerRef}
           type="button"
           disabled={disabled}
           className={cn(
             comboBoxTriggerVariants({ size }),
             disabled && "cursor-not-allowed opacity-50",
-            className
+            className,
           )}
           onClick={() => setIsOpen(!isOpen)}
           onKeyDown={handleKeyDown}
@@ -169,77 +317,16 @@ export const ComboBox = forwardRef<HTMLDivElement, ComboBoxProps>(
             className={cn(
               iconSize,
               "shrink-0 transition-transform",
-              isOpen && "rotate-180"
+              isOpen && "rotate-180",
             )}
           />
         </button>
 
-        {isOpen && (
-          <div className={cn(comboBoxContentVariants({ size }), "overflow-hidden")}>
-            {/* Search input */}
-            {searchable && (
-              <div className="border-b border-border p-2">
-                <div className="flex items-center gap-x-2 rounded-md bg-muted px-2">
-                  <SearchIcon className={cn(iconSize, "text-muted-foreground")} />
-                  <input
-                    ref={inputRef}
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    placeholder={searchPlaceholder}
-                    className={cn(
-                      "w-full bg-transparent py-1.5 outline-none placeholder:text-muted-foreground",
-                      size === "sm" ? "text-xs" : size === "lg" ? "text-base" : "text-sm"
-                    )}
-                  />
-                </div>
-              </div>
-            )}
-
-            {/* Options list */}
-            <div ref={listRef} className="max-h-60 overflow-auto p-1" role="listbox">
-              {filteredOptions.length === 0 ? (
-                <div className={cn(
-                  "py-6 text-center text-muted-foreground",
-                  size === "sm" ? "text-xs" : size === "lg" ? "text-base" : "text-sm"
-                )}>
-                  {emptyMessage}
-                </div>
-              ) : (
-                filteredOptions.map((option, index) => {
-                  const isSelected = option.value === value;
-                  const isHighlighted = index === highlightedIndex;
-
-                  return (
-                    <div
-                      key={option.value}
-                      data-combobox-item
-                      role="option"
-                      aria-selected={isSelected}
-                      className={cn(
-                        comboBoxItemVariants({
-                          size,
-                          selected: isSelected,
-                          highlighted: isHighlighted,
-                        }),
-                        option.disabled && "cursor-not-allowed opacity-50",
-                        "rounded-md"
-                      )}
-                      onClick={() => !option.disabled && handleSelect(option.value)}
-                      onMouseEnter={() => setHighlightedIndex(index)}
-                    >
-                      <span className="flex-1">{option.label}</span>
-                      {isSelected && <CheckIcon className={iconSize} />}
-                    </div>
-                  );
-                })
-              )}
-            </div>
-          </div>
-        )}
+        {typeof document !== "undefined" &&
+          contentPanel &&
+          createPortal(contentPanel, document.body)}
       </div>
     );
-  }
+  },
 );
 ComboBox.displayName = "ComboBox";

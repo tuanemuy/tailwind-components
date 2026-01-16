@@ -45,16 +45,22 @@ export const WithCustomPresets: Story = {
   render: () => {
     const [color, setColor] = useState("#3b82f6");
     const brandColors = [
-      "#1d4ed8", "#2563eb", "#3b82f6", "#60a5fa", "#93c5fd", "#dbeafe",
-      "#1e40af", "#1e3a8a", "#172554", "#0f172a", "#020617", "#000000",
+      "#1d4ed8",
+      "#2563eb",
+      "#3b82f6",
+      "#60a5fa",
+      "#93c5fd",
+      "#dbeafe",
+      "#1e40af",
+      "#1e3a8a",
+      "#172554",
+      "#0f172a",
+      "#020617",
+      "#000000",
     ];
 
     return (
-      <ColorPicker
-        value={color}
-        onChange={setColor}
-        presets={brandColors}
-      />
+      <ColorPicker value={color} onChange={setColor} presets={brandColors} />
     );
   },
 };
@@ -62,7 +68,9 @@ export const WithCustomPresets: Story = {
 export const WithoutPresets: Story = {
   render: () => {
     const [color, setColor] = useState("#a855f7");
-    return <ColorPicker value={color} onChange={setColor} showPresets={false} />;
+    return (
+      <ColorPicker value={color} onChange={setColor} showPresets={false} />
+    );
   },
 };
 
@@ -74,9 +82,7 @@ export const WithoutInput: Story = {
 };
 
 export const Disabled: Story = {
-  render: () => (
-    <ColorPicker value="#64748b" disabled />
-  ),
+  render: () => <ColorPicker value="#64748b" disabled />,
 };
 
 // Inline ColorPicker Stories
@@ -86,9 +92,7 @@ export const Inline: Story = {
     return (
       <div className="space-y-4">
         <InlineColorPicker value={color} onChange={setColor} />
-        <p className="text-sm text-muted-foreground">
-          Selected: {color}
-        </p>
+        <p className="text-sm text-muted-foreground">Selected: {color}</p>
       </div>
     );
   },
@@ -115,7 +119,7 @@ export const FormExample: Story = {
     return (
       <div className="w-[280px] space-y-4 rounded-lg border border-border p-4">
         <div>
-          <label className="mb-2 block text-sm font-medium">Brand Color</label>
+          <span className="mb-2 block text-sm font-medium">Brand Color</span>
           <ColorPicker value={color} onChange={setColor} />
         </div>
         <div className="flex items-center gap-x-2">
@@ -123,7 +127,9 @@ export const FormExample: Story = {
             className="h-10 flex-1 rounded-md"
             style={{ backgroundColor: color }}
           />
-          <span className="text-sm font-mono text-muted-foreground">{color}</span>
+          <span className="text-sm font-mono text-muted-foreground">
+            {color}
+          </span>
         </div>
       </div>
     );
