@@ -572,11 +572,14 @@
 
 ### CalendarAndScheduling
 
-- [x] CalendarHeader（カレンダーヘッダー）
-- [x] CalendarGrid（カレンダーグリッド）
-- [x] EventCard（イベントカード）
-- [x] ScheduleTimeline（スケジュールタイムライン）
-- [x] TimeslotPicker（タイムスロット選択）
+- [x] FullCalendar（フルカレンダー - Day/Week/Month/Yearビュー切り替え）
+  - 対応: DayViewFullCalendar, WeekViewFullCalendar, MonthViewFullCalendar, YearViewFullCalendar
+- [x] MiniCalendar（ミニカレンダー - 単月、年間表示）
+  - 対応: SingleCalendarMonth, YearlyCalendarMonth
+- [x] CalendarEventSidebar（イベント作成/編集サイドバー）
+  - 対応: CalendarCreateEventSidebar, CalendarEditEventSidebar
+- [x] ScheduleWidget（スケジュールウィジェット - リスト表示、予約カード）
+  - 対応: CalendarWithListGroupAndModals, ListingBooking, VideoCallUserSchedule
 
 ### KanbanBoards
 
@@ -716,6 +719,97 @@
 
 ---
 
+## Phase 22: ギャップ補完（追加実装）
+
+**依存**: Phase 21 完了後
+**目標**: ギャップ分析で特定された未カバーコンポーネントの実装
+
+### 22.1 Forms - 入力グループ拡張
+
+- [x] CheckboxGroup（チェックボックスグループ - List, Card, Table, MultiColumn）
+- [x] RadioGroup（ラジオボタングループ - List, Card, Inline, Button）
+- [x] SectionFilterBar（セクションフィルターバー）
+
+### 22.2 PageSections - 追加
+
+- [x] ListGroup（リストグループ - Basic, Bordered, Hoverable, WithIcons）
+- [x] ImageGallery（画像ギャラリー）
+- [x] InvoicePreview（請求書プレビュー）
+
+### 22.3 Marketing - 追加
+
+- [x] IconSection（アイコン付き機能紹介セクション）
+- [x] CareersSection（採用情報セクション）
+- [x] ContentSection（コンテンツセクション）
+- [x] ClientLogoCloud（クライアントロゴ一覧）
+
+### 22.4 Headers - 追加
+
+- [x] ApplicationToolbar（アプリケーションツールバー）
+- [x] StackedHeader（スタック型ヘッダー - Multi-row）
+
+### 22.5 Sidebars/Layouts - 追加
+
+- [x] MultiColumnLayout（マルチカラムレイアウト）
+
+### 22.6 Finance - 追加
+
+- [x] PaymentGradientCard（グラデーションクレジットカード表示）
+- [x] PricingPlans（料金プラン比較 - CompareTable, PlanBilling, FAQ付き）
+- [x] TransactionDetails（取引詳細 - 送金確認、レシート、支払いリクエスト）
+
+### 22.7 CalendarAndScheduling - 統合済み
+
+**注**: Phase 17のCalendarAndSchedulingセクションで11サンプル全体をカバー済み
+- FullCalendar（4サンプル）
+- MiniCalendar（2サンプル）
+- CalendarEventSidebar（2サンプル）
+- ScheduleWidget（3サンプル）
+
+### 22.8 VideoAndAudio - 追加
+
+- [x] VoiceMessage（音声メッセージ - 再生済み、未再生、CRM用）
+- [x] VideoCallSettings（ビデオ通話設定パネル）
+
+### 22.9 Footer - 追加
+
+- [x] MarketplaceFooter（マーケットプレイス向けフッター）
+- [x] ShopFooter（ECショップ向けフッター）
+- [x] StartupFooter（スタートアップ向けフッター）
+- [x] StackedFooter（スタック型フッター）
+
+### 22.10 Pages/Authentication - 追加
+
+- [x] LockScreenPage（ロック画面）
+- [x] TwoStepVerificationPage（2段階認証ページ）
+- [x] EmailVerificationPage（メール認証確認ページ）
+- [x] OnboardingPlansPage（オンボーディング：プラン選択）
+- [x] OnboardingSyncContactsPage（オンボーディング：連絡先同期）
+- [x] OnboardingRolePage（オンボーディング：役割選択）
+- [x] OnboardingProjectPage（オンボーディング：プロジェクト作成）
+- [x] CheckOrderPage（注文確認ページ - ゲスト）
+- [x] OrderCheckupPage（注文追跡ページ - タブ切り替え）
+- [x] GuestCheckoutPage（ゲストチェックアウト選択ページ）
+- [x] CreateAccountPage（アカウント作成ページ - 詳細フォーム）
+- [x] ForgotPasswordCenteredPage（パスワードリセット - センター配置）
+- [x] LoginCenteredPage（ログインページ - センター配置）
+
+### 22.11 Pages/Article - 追加
+
+- [x] CareersDetailPage（求人詳細ページ）
+- [x] CaseStudyPage（ケーススタディページ）
+- [x] CustomerStoryPage（顧客事例ページ）
+
+### 22.12 SearchAndCommandPalettes - 追加
+
+- [x] SidebarSearch（サイドバー検索 - チャットユーザー検索）
+
+### Storybook
+
+- [x] Phase 22 各コンポーネントのstoriesファイル
+
+---
+
 ## 改訂版進捗サマリー
 
 | Phase | 内容 | タスク数 | 完了 | 進捗 |
@@ -734,4 +828,96 @@
 | 19 | Headers/Sidebars拡張 | 16 | 16 | 100% |
 | 20 | Pages拡張 | 15 | 15 | 100% |
 | 21 | Marketing拡張 | 11 | 11 | 100% |
-| **合計** | | **303** | **302** | **99.7%** |
+| **22** | **ギャップ補完** | **44** | **44** | **100%** |
+| **合計** | | **347** | **347** | **100%** |
+
+---
+
+## ギャップ分析による追加コンポーネント一覧
+
+Phase 22で追加される主要コンポーネント（53個）の概要：
+
+| カテゴリ | 追加コンポーネント数 | 対応サンプル数 |
+|---------|-------------------|--------------|
+| Forms（入力グループ） | 3 | 51 |
+| PageSections | 3 | 13 |
+| Marketing | 4 | 14 |
+| Headers | 2 | 10 |
+| Sidebars/Layouts | 1 | 5 |
+| Finance | 3 | 10 |
+| CalendarAndScheduling | 0 | 0 | ※Phase 17に統合済み
+| VideoAndAudio | 2 | 4 |
+| Footer | 4 | 5 |
+| Pages/Authentication | 13 | 13 |
+| Pages/Article | 3 | 3 |
+| SearchAndCommandPalettes | 1 | 1 |
+| **合計** | **41コンポーネント** | **134サンプル** |
+
+**注**: Phase 22の実装により、720サンプル全体のカバレッジが約85%から100%に改善
+
+---
+
+## Phase 23: Select コンポーネント実装拡張
+
+**依存**: Phase 22 完了後
+**目標**: `src/examples/UIControls/Selects/` の17種類のSelectバリエーションを完全サポート
+
+### 23.1 基盤整備
+
+- [ ] lib/variants/select.ts 新規作成（selectTriggerVariants, selectOptionVariants）
+- [ ] SelectOption インターフェース拡張（icon, avatar, description, color追加）
+
+### 23.2 Select コンポーネント拡張
+
+- [ ] `size` prop 追加（xs, sm, md, lg）
+- [ ] `variant` prop 追加（default, inline, minimal, tag）
+- [ ] `icon` 表示サポート追加（オプション内アイコン表示）
+- [ ] `avatar` 表示サポート追加（オプション内アバター表示）
+- [ ] `description` 表示サポート追加（オプション内説明テキスト）
+- [ ] `color` インジケーター表示サポート追加（ステータスカラー）
+- [ ] `renderOption` prop 追加（カスタムオプション描画）
+- [ ] `renderValue` prop 追加（カスタムトリガー表示）
+- [ ] `searchable` prop 追加（ComboBox機能の統合オプション）
+
+### 23.3 新規コンポーネント
+
+- [ ] MultiSelect（複数選択セレクト - TagsSelect, ThreadsTagSelect対応）
+- [ ] InlineSelect（インラインラベル付きセレクト - InlineWithLabelSelect, WithinInputSelect対応）
+
+### 23.4 Storybook
+
+- [ ] Select.stories.tsx 拡張（新規バリエーション追加）
+- [ ] MultiSelect.stories.tsx 新規作成
+- [ ] InlineSelect.stories.tsx 新規作成
+
+### 対応サンプルマッピング
+
+| サンプル | 対応方法 |
+|---------|---------|
+| SimpleSelect | Select（既存） |
+| TimeSelect | Select（既存） |
+| SearchInsideDropdown | ComboBox（既存） |
+| MiniSelect | Select + `size="sm"` |
+| ViewSelect | Select + `variant="minimal"` |
+| WithIconsSelect | Select + `icon` in option |
+| CurrencySelect | Select + `icon` in option |
+| SimpleStyleCurrencySelect | Select + `icon` + `variant="minimal"` |
+| CustomTemplateWithAvatarSelect | Select + `renderOption` |
+| AssigneeSelect | MultiSelect + `avatar` |
+| StatusSelect | Select + `color` indicator |
+| InlineWithLabelSelect | InlineSelect |
+| ItemListWithDescriptionSelect | Select + `description` |
+| TagsSelect | MultiSelect |
+| TagStyleSelect | MultiSelect + `tagStyle="pill"` |
+| ThreadsTagSelect | MultiSelect + specialized style |
+| WithinInputSelect | InlineSelect + input integration |
+
+---
+
+## 進捗サマリー（Phase 23 含む）
+
+| Phase | 内容 | タスク数 | 完了 | 進捗 |
+|-------|------|---------|------|------|
+| 1-22 | 既存計画 | 347 | 347 | 100% |
+| **23** | **Select拡張** | **16** | **0** | **0%** |
+| **合計** | | **363** | **347** | **96%** |

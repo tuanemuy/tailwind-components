@@ -1742,14 +1742,23 @@ export type LayoutVariant = "list" | "grid";
 
 #### CalendarAndScheduling（11サンプル）
 
-| コンポーネント | 説明 | サンプル |
-|--------------|------|---------|
-| CalendarHeader | カレンダーヘッダー | 1 |
-| CalendarGrid | カレンダーグリッド | 2 |
-| EventCard | イベントカード | 2 |
-| ScheduleTimeline | スケジュールタイムライン | 2 |
-| DatePicker（拡張） | カレンダー付き日付選択 | 2 |
-| TimeslotPicker | タイムスロット選択 | 2 |
+| コンポーネント | 説明 | サンプル | 対応サンプル名 |
+|--------------|------|---------|--------------|
+| FullCalendar | フルカレンダー（Day/Week/Month/Yearビュー切り替え） | 4 | DayViewFullCalendar, WeekViewFullCalendar, MonthViewFullCalendar, YearViewFullCalendar |
+| MiniCalendar | ミニカレンダー（単月、年間） | 2 | SingleCalendarMonth, YearlyCalendarMonth |
+| CalendarEventSidebar | イベント作成/編集サイドバー | 2 | CalendarCreateEventSidebar, CalendarEditEventSidebar |
+| ScheduleWidget | スケジュールウィジェット（リスト表示、予約カード） | 3 | CalendarWithListGroupAndModals, ListingBooking, VideoCallUserSchedule |
+
+**FullCalendar 実装詳細:**
+```
+FullCalendar
+├── view: "day" | "week" | "month" | "year"
+├── Header（日付ナビ、ビュー切り替え、追加ボタン）
+├── Sidebar（ミニカレンダー、カレンダーフィルター）
+├── TimeGrid（時間軸グリッド、終日イベント行）
+├── EventCard（イベント表示）
+└── ダークモード対応
+```
 
 #### KanbanBoards（9サンプル）
 
@@ -1902,3 +1911,1076 @@ export type LayoutVariant = "list" | "grid";
 | **合計** | | **321** | **321** |
 
 **注**: 720サンプルのうち、類似パターンの統合により約321コンポーネントで全体をカバー可能と試算。残りのバリエーションはpropsやslotsで対応。
+
+---
+
+## Phase 22: ギャップ補完（追加実装）
+
+**目標**: ギャップ分析で特定された未カバーコンポーネントの実装
+
+### 22.1 Forms - 入力グループ拡張（51サンプル対応）
+
+| コンポーネント | 説明 | サンプル数 |
+|--------------|------|----------|
+| CheckboxGroup | チェックボックスグループ（List, Card, Table, MultiColumn） | 25 |
+| RadioGroup | ラジオボタングループ（List, Card, Inline） | 20 |
+| SectionFilterBar | セクションフィルターバー | 6 |
+
+**実装詳細:**
+```
+CheckboxGroup
+├── variant: "list" | "card" | "table" | "grid"
+├── layout: "vertical" | "horizontal" | "multiColumn"
+├── Checkbox (atoms) × N
+└── [グループラベル、説明、エラー表示]
+
+RadioGroup
+├── variant: "list" | "card" | "inline" | "button"
+├── Radio (atoms) × N
+└── [グループラベル、説明]
+
+SectionFilterBar
+├── SearchInput (molecules)
+├── Select (molecules)
+├── Button (atoms)
+└── [フィルター表示/非表示切り替え]
+```
+
+---
+
+### 22.2 PageSections - 追加コンポーネント（13サンプル対応）
+
+| コンポーネント | 説明 | サンプル数 |
+|--------------|------|----------|
+| ListGroup | リストグループ（Basic, Bordered, Hoverable, WithIcons） | 11 |
+| ImageGallery | 画像ギャラリー（Grid, Masonry） | 1 |
+| InvoicePreview | 請求書プレビュー | 1 |
+
+---
+
+### 22.3 Marketing - 追加コンポーネント（14サンプル対応）
+
+| コンポーネント | 説明 | サンプル数 |
+|--------------|------|----------|
+| IconSection | アイコン付き機能紹介セクション | 7 |
+| CareersSection | 採用情報セクション | 1 |
+| ContentSection | コンテンツセクション（テキスト+画像） | 3 |
+| ClientLogoCloud | クライアントロゴ一覧（LogoCloudSection拡張） | 3 |
+
+---
+
+### 22.4 Headers - 追加コンポーネント（10サンプル対応）
+
+| コンポーネント | 説明 | サンプル数 |
+|--------------|------|----------|
+| ApplicationToolbar | アプリケーションツールバー | 2 |
+| StackedHeader | スタック型ヘッダー（Multi-row） | 8 |
+
+---
+
+### 22.5 Sidebars/Layouts - 追加コンポーネント（5サンプル対応）
+
+| コンポーネント | 説明 | サンプル数 |
+|--------------|------|----------|
+| MultiColumnLayout | マルチカラムレイアウト | 5 |
+
+---
+
+### 22.6 Finance - 追加コンポーネント（10サンプル対応）
+
+| コンポーネント | 説明 | サンプル数 |
+|--------------|------|----------|
+| PaymentGradientCard | グラデーションクレジットカード表示 | 1 |
+| PricingPlans | 料金プラン比較（CompareTable, PlanBilling, FAQ付き） | 6 |
+| TransactionDetails | 取引詳細（送金確認、レシート、支払いリクエスト） | 3 |
+
+---
+
+### 22.7 CalendarAndScheduling - 統合済み
+
+**注**: Phase 17のCalendarAndSchedulingセクションで11サンプル全体を以下のコンポーネントでカバー済み：
+- FullCalendar（4サンプル）: Day/Week/Month/Yearビュー
+- MiniCalendar（2サンプル）: 単月、年間表示
+- CalendarEventSidebar（2サンプル）: イベント作成/編集
+- ScheduleWidget（3サンプル）: リスト表示、予約カード、ビデオ会議スケジュール
+
+このPhaseでの追加コンポーネントはなし（Phase 17に統合）。
+
+---
+
+### 22.8 VideoAndAudio - 追加コンポーネント（4サンプル対応）
+
+| コンポーネント | 説明 | サンプル数 |
+|--------------|------|----------|
+| VoiceMessage | 音声メッセージ（再生済み、未再生、CRM用） | 3 |
+| VideoCallSettings | ビデオ通話設定パネル | 1 |
+
+---
+
+### 22.9 Footer - 追加コンポーネント（5サンプル対応）
+
+| コンポーネント | 説明 | サンプル数 |
+|--------------|------|----------|
+| MarketplaceFooter | マーケットプレイス向けフッター（決済方法、SNS） | 1 |
+| ShopFooter | ECショップ向けフッター（ニュースレター、ロケーション） | 1 |
+| StartupFooter | スタートアップ向けフッター（アプリダウンロード） | 1 |
+| StackedFooter | スタック型フッター（ミニ、リンク付き） | 2 |
+
+---
+
+### 22.10 Pages/Authentication - 追加ページ（13サンプル対応）
+
+| コンポーネント | 説明 | サンプル数 |
+|--------------|------|----------|
+| LockScreenPage | ロック画面 | 1 |
+| TwoStepVerificationPage | 2段階認証ページ | 1 |
+| EmailVerificationPage | メール認証確認ページ | 1 |
+| OnboardingPlansPage | オンボーディング：プラン選択 | 1 |
+| OnboardingSyncContactsPage | オンボーディング：連絡先同期 | 1 |
+| OnboardingRolePage | オンボーディング：役割選択 | 1 |
+| OnboardingProjectPage | オンボーディング：プロジェクト作成 | 1 |
+| CheckOrderPage | 注文確認ページ（ゲスト） | 1 |
+| OrderCheckupPage | 注文追跡ページ（タブ切り替え） | 1 |
+| GuestCheckoutPage | ゲストチェックアウト選択ページ | 1 |
+| CreateAccountPage | アカウント作成ページ（詳細フォーム） | 1 |
+| ForgotPasswordCenteredPage | パスワードリセット（センター配置） | 1 |
+| LoginCenteredPage | ログインページ（センター配置） | 1 |
+
+---
+
+### 22.11 Pages/Article - 追加ページ（3サンプル対応）
+
+| コンポーネント | 説明 | サンプル数 |
+|--------------|------|----------|
+| CareersDetailPage | 求人詳細ページ | 1 |
+| CaseStudyPage | ケーススタディページ | 1 |
+| CustomerStoryPage | 顧客事例ページ | 1 |
+
+---
+
+### 22.12 SearchAndCommandPalettes - 追加コンポーネント（1サンプル対応）
+
+| コンポーネント | 説明 | サンプル数 |
+|--------------|------|----------|
+| SidebarSearch | サイドバー検索（チャットユーザー検索） | 1 |
+
+---
+
+### 22.13 UIControls - Dropdowns拡張（31サンプル対応）
+
+**目標**: 31種類のDropdownバリエーションを体系化
+
+| コンポーネント | 説明 | サンプル数 |
+|--------------|------|----------|
+| AccountDropdown | アカウント管理ドロップダウン（ログイン、プロファイル、設定、ショップ用） | 4 |
+| AssignDropdown | 担当者割り当てドロップダウン（アバター、検索、複数選択） | 2 |
+| WorkspaceDropdown | ワークスペース/プロジェクト切り替えドロップダウン | 3 |
+| NotificationDropdown | 通知一覧ドロップダウン（未読バッジ、スヌーズ） | 2 |
+| FilterDropdown | フィルター設定ドロップダウン（検索、チェックボックス、日付範囲） | 5 |
+| ActionDropdown | アクションメニュードロップダウン（シンプル、サブメニュー、アイコン付き） | 6 |
+| StatusDropdown | ステータス管理ドロップダウン（色選択、カスタムステータス） | 3 |
+| ToolbarDropdown | ツールバー用ドロップダウン（フォーマット、デザインツール、ダウンロード） | 4 |
+| SpecialDropdown | 特殊ドロップダウン（PIN入力、お気に入り、タグ管理） | 2 |
+
+**実装詳細:**
+```
+AccountDropdown
+├── variant: "login" | "profile" | "shop" | "videocall"
+├── Avatar (atoms)
+├── Switch (atoms) ※ダークモード切替
+└── [メニュー項目]
+
+AssignDropdown
+├── searchable: boolean
+├── multiSelect: boolean
+├── Avatar (atoms)
+├── Checkbox (atoms)
+└── [ユーザーリスト]
+
+FilterDropdown
+├── type: "checkbox" | "date" | "search" | "sorting"
+├── Checkbox (atoms)
+├── Select (molecules)
+└── [フィルター項目]
+
+StatusDropdown
+├── colorPicker: boolean
+├── customStatus: boolean
+├── Badge (atoms)
+└── [ステータスリスト]
+```
+
+---
+
+### 22.14 UIControls - Selects拡張（17サンプル対応）
+
+**目標**: 17種類のSelectバリエーションを体系化
+
+| コンポーネント | 説明 | サンプル数 |
+|--------------|------|----------|
+| AssigneeSelect | 担当者選択（複数選択、アバター付き、タグモード） | 2 |
+| CurrencySelect | 通貨選択（国旗アイコン付き、検索機能） | 3 |
+| StatusSelect | ステータス選択（カラーインジケーター付き） | 1 |
+| TagSelect | タグ選択（複数選択、絵文字対応、丸型タグ） | 3 |
+| TimeSelect | 時間選択（12時間形式、AM/PM） | 1 |
+| ViewSelect | 表示形式選択（ボード、テーブル、タイムライン） | 1 |
+| CountrySelect | 国選択（国旗アイコン、検索機能） | 2 |
+| PermissionSelect | 権限選択（インライン、アイコン付き説明） | 2 |
+| FileTypeSelect | ファイルタイプ選択（アイコン付き） | 1 |
+| SimpleSelect | シンプルセレクト（基本形、インラインラベル付き） | 1 |
+
+**実装詳細:**
+```
+CurrencySelect
+├── searchable: boolean
+├── showFlag: boolean
+├── Icon (atoms) ※国旗
+└── [通貨リスト]
+
+TagSelect
+├── multiSelect: boolean
+├── style: "pill" | "badge" | "emoji"
+├── Badge (atoms)
+└── [タグリスト]
+
+StatusSelect
+├── showIndicator: boolean
+├── colors: ColorPalette
+├── Badge (atoms)
+└── [ステータスリスト]
+
+PermissionSelect
+├── variant: "inline" | "dropdown"
+├── showDescription: boolean
+├── Icon (atoms)
+└── [権限リスト]
+```
+
+---
+
+### 22.15 Forms - RadioAndCheckbox詳細（42サンプル対応）
+
+**目標**: 42種類のRadio/Checkboxバリエーションを体系化
+
+| コンポーネント | 説明 | サンプル数 |
+|--------------|------|----------|
+| BadgeCheckbox | バッジスタイルチェックボックス（アイコン付き、カラーバリエーション） | 4 |
+| CardCheckbox | カード型チェックボックス（画像、フラグ、メディア付き） | 8 |
+| ButtonRadio | ボタン型ラジオボタン（セグメント、アイコン付き） | 6 |
+| TableRadio | テーブル内ラジオボタン（複数列、ヘッダー付き） | 3 |
+| SegmentCheckbox | セグメント型チェックボックス（水平、垂直） | 4 |
+| TreeCheckbox | ツリー型チェックボックス（階層構造、展開可能） | 2 |
+| GalleryRadio | ギャラリースタイルラジオボタン（画像選択、カード型） | 6 |
+| InlineCheckbox | インラインチェックボックス（リスト、説明付き、アイコン付き） | 9 |
+
+**実装詳細:**
+```
+CardCheckbox
+├── variant: "image" | "flag" | "media" | "icon"
+├── layout: "grid" | "list" | "horizontal"
+├── showDescription: boolean
+├── Card (organisms)
+├── Checkbox (atoms)
+└── [コンテンツ]
+
+GalleryRadio
+├── variant: "image" | "card" | "centered"
+├── columns: 2 | 3 | 4
+├── Radio (atoms)
+└── [画像/カードコンテンツ]
+
+TreeCheckbox
+├── expandable: boolean
+├── indeterminate: boolean ※親の中間状態
+├── Checkbox (atoms)
+└── [ツリー構造]
+
+TableRadio
+├── columns: ColumnDefinition[]
+├── showHeader: boolean
+├── Radio (atoms)
+└── [テーブル行]
+```
+
+---
+
+### 22.16 Forms - TextareaInput/Switches追加（13サンプル対応）
+
+**目標**: テキストエリアとスイッチのバリエーションを体系化
+
+| コンポーネント | 説明 | サンプル数 |
+|--------------|------|----------|
+| CommentTextarea | コメント入力テキストエリア（アバター、送信ボタン付き） | 2 |
+| MainTextarea | メインテキストエリア（リサイズ可能、文字数カウント） | 2 |
+| RichTextarea | リッチテキストエリア（フォーマットツールバー付き） | 2 |
+| CodeTextarea | コードテキストエリア（シンタックスハイライト、行番号） | 2 |
+| SwitchGroup | スイッチグループ（通知設定、グリッド表示） | 3 |
+| SwitchWithLabel | ラベル付きスイッチ（説明付き、アラート連動） | 2 |
+
+**実装詳細:**
+```
+CommentTextarea
+├── showAvatar: boolean
+├── showSendButton: boolean
+├── Avatar (atoms)
+├── Textarea (atoms)
+├── Button (atoms)
+└── [ツールバー]
+
+SwitchGroup
+├── layout: "list" | "grid" | "table"
+├── showDescription: boolean
+├── Switch (atoms)
+├── Label (atoms)
+└── [スイッチ項目]
+```
+
+---
+
+### 22.17 PageSections - 未カバー補完（3サンプル対応）
+
+**目標**: PageSectionsの未カバーサンプルを補完
+
+| コンポーネント | 説明 | サンプル数 |
+|--------------|------|----------|
+| SmartHomeGallery | スマートホーム画像ギャラリー | 1 |
+| ListingInvoice | 請求書リスト表示 | 1 |
+| NotificationMatrix | 通知設定マトリックス（テーブル形式チェックボックス） | 1 |
+
+---
+
+### 22.18 UIControls - その他（23サンプル対応）
+
+**目標**: Badges, ButtonGroups, ProgressBars, Links, Popoversの詳細バリエーション
+
+| コンポーネント | 説明 | サンプル数 |
+|--------------|------|----------|
+| TrendBadge | トレンドバッジ（Simple, Soft, White, Bordered） | 6 |
+| StatusBadge | ステータスバッジ（インジケーター付き、ツールチップ付き） | 4 |
+| FilterBadge | フィルターバッジ（削除可能、アバター付き） | 4 |
+| DividerBadge | 区切り付きバッジ（カウント表示、グレー背景） | 3 |
+| ActionButtonGroup | アクションボタングループ（コメント、ビデオ通話、フィードバック） | 4 |
+| RatingProgressBar | 評価プログレスバー（星評価、NPS、服飾評価） | 2 |
+
+---
+
+## 改訂版マイルストーン（Phase 22拡張版）
+
+| Phase | 内容 | 新規コンポーネント数 | 累計 |
+|-------|------|-------------------|------|
+| 1-8 | 既存計画（完了済み） | 60 | 60 |
+| 9 | Atoms追加 | 5 | 65 |
+| 10 | Molecules追加 | 25 | 90 |
+| 11 | PageSections | 30 | 120 |
+| 12 | Overlays拡張 | 35 | 155 |
+| 13 | Cards | 25 | 180 |
+| 14 | E-Commerce拡張 | 25 | 205 |
+| 15 | DataVisualization | 22 | 227 |
+| 16 | InboxChatMessages | 15 | 242 |
+| 17 | ドメイン特化追加 | 30 | 272 |
+| 18 | Tables拡張 | 10 | 282 |
+| 19 | Headers/Sidebars拡張 | 15 | 297 |
+| 20 | Pages拡張 | 14 | 311 |
+| 21 | Marketing拡張 | 10 | 321 |
+| **22.1-22.12** | **ギャップ補完（基本）** | **41** | **362** |
+| **22.13-22.18** | **ギャップ補完（UIControls/Forms）** | **42** | **404** |
+| **合計** | | **404** | **404** |
+
+### Phase 22 内訳
+
+| サブフェーズ | 内容 | コンポーネント数 | 対応サンプル数 |
+|------------|------|-----------------|---------------|
+| 22.1 | Forms - 入力グループ拡張 | 3 | 51 |
+| 22.2 | PageSections - 追加 | 3 | 13 |
+| 22.3 | Marketing - 追加 | 4 | 14 |
+| 22.4 | Headers - 追加 | 2 | 10 |
+| 22.5 | Sidebars/Layouts - 追加 | 1 | 5 |
+| 22.6 | Finance - 追加 | 3 | 10 |
+| 22.7 | CalendarAndScheduling - 統合済み | 0 | 0 |
+| 22.8 | VideoAndAudio - 追加 | 2 | 4 |
+| 22.9 | Footer - 追加 | 4 | 5 |
+| 22.10 | Pages/Authentication - 追加 | 13 | 13 |
+| 22.11 | Pages/Article - 追加 | 3 | 3 |
+| 22.12 | SearchAndCommandPalettes - 追加 | 1 | 1 |
+| **22.13** | **UIControls - Dropdowns拡張** | **9** | **31** |
+| **22.14** | **UIControls - Selects拡張** | **10** | **17** |
+| **22.15** | **Forms - RadioAndCheckbox詳細** | **8** | **42** |
+| **22.16** | **Forms - TextareaInput/Switches** | **6** | **13** |
+| **22.17** | **PageSections - 未カバー補完** | **3** | **3** |
+| **22.18** | **UIControls - その他** | **6** | **23** |
+| **合計** | | **83** | **263** |
+
+---
+
+## ギャップ分析サマリー（最終版）
+
+Phase 22の拡張により、720サンプル全体の**100%カバレッジ**を達成：
+
+| カテゴリ | サンプル数 | Phase 1-21 | Phase 22.1-12 | Phase 22.13-18 | 合計カバー率 |
+|---------|----------|-----------|---------------|----------------|-------------|
+| UIControls | 103 | 32% | +0% | **+68%** | **100%** |
+| Forms | 108 | 15% | +40% | **+45%** | **100%** |
+| PageSections | 90 | 85% | +12% | **+3%** | **100%** |
+| Marketing | 48 | 70% | +30% | +0% | 100% |
+| Headers | 29 | 65% | +35% | +0% | 100% |
+| SidebarAndContents | 18 | 70% | +30% | +0% | 100% |
+| Finance | 16 | 45% | +55% | +0% | 100% |
+| CalendarAndScheduling | 11 | 100% | +0% | +0% | 100% |
+| VideoAndAudio | 8 | 50% | +50% | +0% | 100% |
+| Footer | 6 | 17% | +83% | +0% | 100% |
+| Pages | 22 | 55% | +45% | +0% | 100% |
+| SearchAndCommandPalettes | 16 | 94% | +6% | +0% | 100% |
+| Overlays | 53 | 100% | +0% | +0% | 100% |
+| Cards | 51 | 100% | +0% | +0% | 100% |
+| E-Commerce | 49 | 100% | +0% | +0% | 100% |
+| InboxChatMessages | 28 | 100% | +0% | +0% | 100% |
+| Tables | 27 | 100% | +0% | +0% | 100% |
+| DataVisualization | 23 | 100% | +0% | +0% | 100% |
+| KanbanBoards | 9 | 100% | +0% | +0% | 100% |
+| Feedback | 5 | 100% | +0% | +0% | 100% |
+| **合計** | **720** | **~70%** | **+15%** | **+15%** | **100%** |
+
+---
+
+## 重要な修正点（今回の更新）
+
+### 追加されたPhase
+
+| Phase | 対象カテゴリ | 主な追加内容 |
+|-------|------------|-------------|
+| 22.13 | UIControls/Dropdowns | 31種類のドロップダウンバリエーション |
+| 22.14 | UIControls/Selects | 17種類のセレクトバリエーション |
+| 22.15 | Forms/RadioAndCheckbox | 42種類のラジオ/チェックボックスバリエーション |
+| 22.16 | Forms/TextareaInput | 13種類のテキストエリア/スイッチ |
+| 22.17 | PageSections | 3種類の未カバーセクション |
+| 22.18 | UIControls/その他 | 23種類のバッジ/ボタングループ/プログレスバー |
+
+### 修正理由
+
+1. **UIControls（103サンプル）**: 当初の計画では基本的なButton, Badge, Inputのみ定義されていたが、実際には31種類のDropdown、17種類のSelect、20種類のBadge、14種類のButtonGroupなど、詳細なバリエーションが存在
+2. **Forms/RadioAndCheckbox（42サンプル）**: 当初「CheckboxGroup」「RadioGroup」として簡略化されていたが、カード型、ギャラリー型、ツリー型など多様なスタイルが存在
+3. **Forms/TextareaInput（13サンプル）**: 当初の計画で明示的にカバーされていなかった
+
+---
+
+## Phase 23: Select コンポーネント実装拡張
+
+**目標**: `src/examples/UIControls/Selects/` の17種類のSelectバリエーションを完全サポート
+
+### 23.1 現状分析
+
+**現在実装済みのコンポーネント:**
+
+| コンポーネント | 場所 | 機能 |
+|--------------|------|------|
+| Select | `molecules/Select` | 基本的なセレクト（value/label） |
+| ComboBox | `molecules/ComboBox` | 検索可能なセレクト |
+| TagInput | `molecules/TagInput` | タグ入力（複数値） |
+
+**17種類のSelectサンプル:**
+
+```
+src/examples/UIControls/Selects/
+├── AssigneeSelect           # 担当者選択（アバター付き）
+├── CurrencySelect           # 通貨選択（国旗アイコン付き）
+├── CustomTemplateWithAvatarSelect  # カスタムテンプレート
+├── InlineWithLabelSelect    # インラインラベル付き
+├── ItemListWithDescriptionSelect   # 説明付きアイテム
+├── MiniSelect               # ミニサイズ
+├── SearchInsideDropdown     # 検索機能付き
+├── SimpleSelect             # シンプル
+├── SimpleStyleCurrencySelect # 通貨選択（シンプルスタイル）
+├── StatusSelect             # ステータス選択
+├── TagsSelect               # タグ選択（複数選択）
+├── TagStyleSelect           # タグスタイル
+├── ThreadsTagSelect         # スレッドタグ選択
+├── TimeSelect               # 時刻選択
+├── ViewSelect               # 表示形式選択
+├── WithIconsSelect          # アイコン付き
+└── WithinInputSelect        # 入力フィールド内Select
+```
+
+### 23.2 対応状況マトリクス
+
+| サンプル | 対応可否 | 使用コンポーネント | 不足機能 |
+|---------|---------|------------------|----------|
+| SimpleSelect | ✅ 可 | Select | - |
+| TimeSelect | ✅ 可 | Select | - |
+| SearchInsideDropdown | ✅ 可 | ComboBox | - |
+| MiniSelect | ⚠️ 部分的 | Select | `size` prop |
+| ViewSelect | ⚠️ 部分的 | Select | minimal variant |
+| WithIconsSelect | ❌ 不可 | - | `icon` in option |
+| CustomTemplateWithAvatarSelect | ❌ 不可 | - | `renderOption`, avatar |
+| CurrencySelect | ❌ 不可 | - | `icon` in option |
+| SimpleStyleCurrencySelect | ❌ 不可 | - | `icon` in option |
+| AssigneeSelect | ❌ 不可 | - | avatar in option |
+| StatusSelect | ❌ 不可 | - | color indicator |
+| InlineWithLabelSelect | ❌ 不可 | - | inline `variant` |
+| ItemListWithDescriptionSelect | ❌ 不可 | - | `description` in option |
+| TagsSelect | ❌ 不可 | - | multi-select |
+| TagStyleSelect | ❌ 不可 | - | tag-style trigger |
+| ThreadsTagSelect | ❌ 不可 | - | specialized style |
+| WithinInputSelect | ❌ 不可 | - | input integration |
+
+**結論**: 17サンプル中 **3個**（18%）のみ現状で対応可能
+
+### 23.3 Select コンポーネント拡張仕様
+
+#### 23.3.1 SelectOption インターフェース拡張
+
+```typescript
+// 現在の定義
+interface SelectOption {
+  value: string;
+  label: string;
+  disabled?: boolean;
+}
+
+// 拡張後
+interface SelectOption {
+  value: string;
+  label: string;
+  disabled?: boolean;
+  icon?: React.ReactNode;        // アイコン（国旗、ファイルタイプ等）
+  avatar?: string;               // アバター画像URL
+  description?: string;          // 説明テキスト
+  color?: string;                // ステータスカラー
+}
+```
+
+#### 23.3.2 Select props 拡張
+
+```typescript
+interface SelectProps {
+  // 既存props
+  options: SelectOption[];
+  value?: string;
+  defaultValue?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  error?: boolean;
+  onChange?: (value: string) => void;
+  name?: string;
+
+  // 新規追加props
+  size?: "xs" | "sm" | "md" | "lg";              // サイズバリエーション
+  variant?: "default" | "inline" | "minimal" | "tag";  // スタイルバリエーション
+  renderOption?: (option: SelectOption) => React.ReactNode;  // カスタム描画
+  renderValue?: (option: SelectOption | null) => React.ReactNode;  // トリガー表示カスタム
+  searchable?: boolean;                          // 検索機能（ComboBoxと統合）
+  multiple?: boolean;                            // 複数選択
+  showIcon?: boolean;                            // アイコン表示
+  showAvatar?: boolean;                          // アバター表示
+  showDescription?: boolean;                     // 説明表示
+  showColorIndicator?: boolean;                  // カラーインジケーター表示
+}
+```
+
+#### 23.3.3 lib/variants/select.ts 新規作成
+
+```typescript
+import { cva } from "class-variance-authority";
+
+export const selectTriggerVariants = cva(
+  "flex items-center justify-between rounded-lg border bg-background transition-colors focus:outline-none focus:ring-2 focus:ring-ring/50",
+  {
+    variants: {
+      size: {
+        xs: "h-7 px-2 text-xs",
+        sm: "h-8 px-2.5 text-sm",
+        md: "h-10 px-3 text-sm",
+        lg: "h-12 px-4 text-base",
+      },
+      variant: {
+        default: "border-border hover:border-ring",
+        inline: "border-transparent bg-transparent hover:bg-accent",
+        minimal: "border-transparent bg-transparent px-0",
+        tag: "rounded-full border-primary/20 bg-primary/10 text-primary",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+      variant: "default",
+    },
+  }
+);
+
+export const selectOptionVariants = cva(
+  "flex cursor-pointer items-center rounded-md px-3 py-2 text-sm transition-colors",
+  {
+    variants: {
+      size: {
+        xs: "px-2 py-1 text-xs",
+        sm: "px-2.5 py-1.5 text-sm",
+        md: "px-3 py-2 text-sm",
+        lg: "px-4 py-3 text-base",
+      },
+      selected: {
+        true: "bg-accent",
+        false: "hover:bg-accent",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+      selected: false,
+    },
+  }
+);
+```
+
+### 23.4 追加コンポーネント
+
+#### 23.4.1 MultiSelect（複数選択）
+
+```typescript
+interface MultiSelectProps extends Omit<SelectProps, "value" | "onChange" | "multiple"> {
+  value?: string[];
+  onChange?: (values: string[]) => void;
+  maxSelected?: number;
+  tagStyle?: "badge" | "pill" | "avatar";
+}
+```
+
+対応サンプル: TagsSelect, TagStyleSelect, ThreadsTagSelect, AssigneeSelect
+
+#### 23.4.2 InlineSelect（インライン配置）
+
+```typescript
+interface InlineSelectProps extends SelectProps {
+  label?: string;
+  labelPosition?: "left" | "right";
+}
+```
+
+対応サンプル: InlineWithLabelSelect, WithinInputSelect
+
+### 23.5 実装依存関係
+
+```
+Select 拡張
+├── lib/variants/select.ts（新規）
+├── SelectOption 拡張型
+├── atoms/Avatar（既存）
+├── atoms/Badge（既存）
+├── atoms/Icon（既存）
+└── lib/icons/*（既存）
+
+MultiSelect（新規）
+├── Select 拡張（ベース）
+├── atoms/Badge（タグ表示）
+├── molecules/TagInput（参考実装）
+└── lib/variants/select.ts
+
+InlineSelect（新規）
+├── Select 拡張（ベース）
+├── atoms/Label（ラベル）
+└── lib/variants/select.ts
+```
+
+### 23.6 実装優先度
+
+| 優先度 | タスク | 対応サンプル数 |
+|-------|-------|---------------|
+| P0 | SelectOption インターフェース拡張 | - |
+| P0 | lib/variants/select.ts 作成 | - |
+| P1 | Select に size prop 追加 | 2 |
+| P1 | Select に icon/avatar サポート追加 | 5 |
+| P2 | Select に description サポート追加 | 1 |
+| P2 | Select に renderOption/renderValue 追加 | 3 |
+| P3 | MultiSelect コンポーネント新規作成 | 4 |
+| P3 | InlineSelect コンポーネント新規作成 | 2 |
+
+---
+
+## 全体カバレッジ更新（Phase 23 含む）
+
+| Phase | 内容 | コンポーネント数 | 累計 |
+|-------|------|-----------------|------|
+| 1-22 | 既存計画 | 404 | 404 |
+| **23** | **Select拡張** | **3** | **407** |
+| **合計** | | **407** | **407** |
+
+**注**: Phase 23で追加されるのは2つの新規コンポーネント（MultiSelect, InlineSelect）と1つの新規バリアントファイル。
+既存のSelectコンポーネントの拡張により、17サンプル全体をカバー可能になる。
+
+---
+
+## Phase 24: リファクタリング - 独自実装の統合（技術的負債解消）
+
+### 24.1 問題の概要
+
+**発見日時**: 2026-01-16
+
+現在の実装において、計画で定義された階層的な依存関係が守られておらず、同じ機能（ポータル表示、位置計算、クリック外検出など）が複数のコンポーネントで重複実装されている。これは「再実装防止ルール」への明確な違反であり、技術的負債として解消が必要。
+
+### 24.2 問題箇所の詳細分析
+
+#### 24.2.1 ポータル関連機能の重複実装
+
+以下のコンポーネントが `createPortal` + `getBoundingClientRect` + `handleClickOutside` を**それぞれ独自実装**している：
+
+| コンポーネント | ファイル | 行数 | 使用すべき基盤 | 実際 |
+|--------------|---------|------|--------------|------|
+| **Dropdown** | `molecules/Dropdown/index.tsx` | 639行 | - | ✅ 基盤として正しい |
+| **Popover** | `molecules/Popover/index.tsx` | 288行 | - | ✅ 基盤として正しい |
+| **Select** | `molecules/Select/index.tsx` | 281行 | Dropdown | ❌ 独自実装 |
+| **ComboBox** | `molecules/ComboBox/index.tsx` | 333行 | Dropdown | ❌ 独自実装 |
+| **DatePicker** | `molecules/DatePicker/index.tsx` | 335行 | Dropdown/Popover | ❌ 独自実装 |
+| **DateRangePicker** | `molecules/DateRangePicker/index.tsx` | 392行 | Dropdown/Popover | ❌ 独自実装 |
+| **TimePicker** | `molecules/TimePicker/index.tsx` | 371行 | Dropdown | ❌ 独自実装 |
+| **ColorPicker** | `molecules/ColorPicker/index.tsx` | 170行 | Popover | ❌ 独自実装 |
+| **Menu** | `molecules/Menu/index.tsx` | 280行 | Popover | ❌ 独自実装 |
+| **SidebarSearch** | `molecules/SidebarSearch/index.tsx` | 517行 | Popover | ❌ 独自実装 |
+| **Finance/CurrencySelect** | `organisms/Finance/index.tsx` | 150行 | Select | ❌ 独自実装 |
+
+**重複コード量の見積もり:**
+
+| 機能 | 平均行数/コンポーネント | 重複回数 | 合計重複行数 |
+|-----|----------------------|---------|------------|
+| ポータル表示 (`createPortal`) | 15行 | 9回 | ~135行 |
+| 位置計算 (`getBoundingClientRect` + `useLayoutEffect`) | 40行 | 9回 | ~360行 |
+| クリック外検出 (`handleClickOutside`) | 20行 | 11回 | ~220行 |
+| キーボード操作（Escape, Arrow keys） | 35行 | 8回 | ~280行 |
+| **合計** | | | **~995行** |
+
+### 24.3 計画での意図 vs 実際の実装
+
+#### 計画の意図（依存関係図）
+
+```
+Dropdown (基盤)
+├── Select      → Dropdown + 値選択ロジック
+├── ComboBox    → Dropdown + 検索フィルター
+├── DatePicker  → Dropdown + カレンダーUI
+├── DateRangePicker → Dropdown + 範囲カレンダーUI
+└── TimePicker  → Dropdown + 時刻選択UI
+
+Popover (基盤)
+├── ColorPicker → Popover + カラーピッカーUI
+├── Menu        → Popover + メニュー項目管理
+└── Tooltip     → Popover + ホバー表示
+
+Select (派生)
+└── CurrencySelect → Select + 国旗アイコン
+```
+
+#### 実際の実装（依存関係なし）
+
+```
+Dropdown (独立)     ─┐
+Select (独立)       ├─ すべて同じポータル・位置計算・クリック外検出を
+ComboBox (独立)     │  それぞれ独自実装
+DatePicker (独立)   │
+DateRangePicker (独立)│
+TimePicker (独立)   ─┘
+
+Popover (独立)      ─┐
+ColorPicker (独立)  ├─ すべて同じクリック外検出を独自実装
+Menu (独立)         │
+SidebarSearch (独立)─┘
+
+Finance/CurrencySelect (独立) ─ Selectを使用せず独自実装
+```
+
+### 24.4 リファクタリング計画
+
+#### 24.4.1 Phase 24-A: 基盤コンポーネントの共通化
+
+**目標**: Dropdown と Popover を唯一のポータル基盤として確立
+
+| タスク | 内容 | 優先度 |
+|-------|------|-------|
+| 24-A-1 | Dropdown の API を拡張し、カスタムトリガー・コンテンツをサポート | P0 |
+| 24-A-2 | Popover の API を確認し、必要に応じて拡張 | P0 |
+| 24-A-3 | 共通フック `useFloating` の作成（位置計算ロジック統合） | P1 |
+| 24-A-4 | 共通フック `useClickOutside` の作成 | P1 |
+
+**useFloating フック仕様:**
+
+```typescript
+// lib/hooks/useFloating.ts
+interface UseFloatingOptions {
+  placement?: 'top' | 'bottom' | 'left' | 'right' | 'auto';
+  offset?: number;
+  flip?: boolean;       // 画面端で反転
+  shift?: boolean;      // 画面内に収める
+  boundary?: Element;   // 境界要素
+}
+
+interface UseFloatingReturn {
+  refs: {
+    trigger: RefObject<HTMLElement>;
+    floating: RefObject<HTMLElement>;
+  };
+  position: { top: number; left: number };
+  placement: string;    // 実際の配置位置
+  update: () => void;   // 位置再計算
+}
+
+function useFloating(options?: UseFloatingOptions): UseFloatingReturn;
+```
+
+**useClickOutside フック仕様:**
+
+```typescript
+// lib/hooks/useClickOutside.ts
+interface UseClickOutsideOptions {
+  enabled?: boolean;
+  excludeRefs?: RefObject<HTMLElement>[];
+}
+
+function useClickOutside(
+  ref: RefObject<HTMLElement>,
+  callback: () => void,
+  options?: UseClickOutsideOptions
+): void;
+```
+
+#### 24.4.2 Phase 24-B: Moleculesのリファクタリング（Dropdownベース）
+
+**目標**: Select系コンポーネントをDropdownベースに書き換え
+
+| タスク | 対象コンポーネント | 削減行数（見込み） | 優先度 |
+|-------|------------------|------------------|-------|
+| 24-B-1 | **Select** → Dropdown使用に変更 | ~120行 | P0 |
+| 24-B-2 | **ComboBox** → Dropdown使用に変更 | ~130行 | P0 |
+| 24-B-3 | **TimePicker** → Dropdown使用に変更 | ~100行 | P1 |
+| 24-B-4 | **DatePicker** → Popover使用に変更 | ~100行 | P1 |
+| 24-B-5 | **DateRangePicker** → Popover使用に変更 | ~110行 | P1 |
+
+**Select リファクタリング例:**
+
+```typescript
+// Before: 281行の独自実装
+const Select = ({ options, value, onChange, ...props }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [position, setPosition] = useState({ top: 0, left: 0 });
+  const triggerRef = useRef(null);
+
+  // 位置計算（40行）
+  useLayoutEffect(() => { /* ... */ }, [isOpen]);
+
+  // クリック外検出（20行）
+  useEffect(() => { /* ... */ }, [isOpen]);
+
+  // キーボード操作（35行）
+  const handleKeyDown = (e) => { /* ... */ };
+
+  return (
+    <>
+      <button ref={triggerRef} onClick={() => setIsOpen(!isOpen)} />
+      {isOpen && createPortal(<OptionsList />, document.body)}
+    </>
+  );
+};
+
+// After: ~100行（Dropdown使用）
+const Select = ({ options, value, onChange, ...props }) => {
+  return (
+    <Dropdown>
+      <Dropdown.Trigger asChild>
+        <button>{/* 選択値表示 */}</button>
+      </Dropdown.Trigger>
+      <Dropdown.Content>
+        {options.map(option => (
+          <Dropdown.Item
+            key={option.value}
+            onClick={() => onChange(option.value)}
+          >
+            {option.label}
+          </Dropdown.Item>
+        ))}
+      </Dropdown.Content>
+    </Dropdown>
+  );
+};
+```
+
+#### 24.4.3 Phase 24-C: Moleculesのリファクタリング（Popoverベース）
+
+**目標**: Popover系コンポーネントをPopoverベースに書き換え
+
+| タスク | 対象コンポーネント | 削減行数（見込み） | 優先度 |
+|-------|------------------|------------------|-------|
+| 24-C-1 | **ColorPicker** → Popover使用に変更 | ~50行 | P1 |
+| 24-C-2 | **Menu/ContextMenu** → Popover使用に変更 | ~60行 | P1 |
+| 24-C-3 | **SidebarSearch** → 構造見直し | ~30行 | P2 |
+
+#### 24.4.4 Phase 24-D: Organismsのリファクタリング
+
+**目標**: 上位コンポーネントが下位Moleculesを正しく使用するよう修正
+
+| タスク | 対象コンポーネント | 内容 | 優先度 |
+|-------|------------------|------|-------|
+| 24-D-1 | **Finance/CurrencySelect** | Selectコンポーネントを使用するよう変更 | P0 |
+| 24-D-2 | 他のorganismsの監査 | 独自実装がないか確認 | P1 |
+
+**CurrencySelect リファクタリング例:**
+
+```typescript
+// Before: Finance/index.tsx内で150行の独自実装
+function CurrencySelect({ currencies, value, onChange }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [position, setPosition] = useState({ top: 0, left: 0 });
+  // ... 150行の重複コード
+}
+
+// After: Selectを使用（~30行）
+import { Select } from "@/components/molecules";
+
+function CurrencySelect({ currencies, value, onChange }) {
+  const options = currencies.map(c => ({
+    value: c.code,
+    label: c.name,
+    icon: <FlagIcon code={c.country} />,
+  }));
+
+  return (
+    <Select
+      options={options}
+      value={value}
+      onChange={onChange}
+      showIcon
+      renderOption={(opt) => (
+        <div className="flex items-center gap-2">
+          {opt.icon}
+          <span>{opt.label}</span>
+        </div>
+      )}
+    />
+  );
+}
+```
+
+### 24.5 実装優先度とスケジュール
+
+| Phase | タスク | 優先度 | 影響範囲 | 削減行数 |
+|-------|-------|-------|---------|---------|
+| 24-A | 共通フック作成 | P0 | 基盤 | - |
+| 24-B-1 | Select リファクタリング | P0 | 高 | ~120行 |
+| 24-B-2 | ComboBox リファクタリング | P0 | 高 | ~130行 |
+| 24-D-1 | CurrencySelect リファクタリング | P0 | 中 | ~120行 |
+| 24-B-3 | TimePicker リファクタリング | P1 | 中 | ~100行 |
+| 24-B-4 | DatePicker リファクタリング | P1 | 中 | ~100行 |
+| 24-B-5 | DateRangePicker リファクタリング | P1 | 中 | ~110行 |
+| 24-C-1 | ColorPicker リファクタリング | P1 | 低 | ~50行 |
+| 24-C-2 | Menu リファクタリング | P1 | 低 | ~60行 |
+| 24-C-3 | SidebarSearch リファクタリング | P2 | 低 | ~30行 |
+| 24-D-2 | 他organisms監査 | P1 | - | TBD |
+
+**合計削減見込み: ~820行**
+
+### 24.6 リファクタリング後の依存関係図
+
+```
+lib/hooks/
+├── useFloating.ts      # 位置計算の共通フック
+└── useClickOutside.ts  # クリック外検出の共通フック
+
+molecules/
+├── Dropdown/           # ポータル基盤（フックを使用）
+│   └── 内部でuseFloating, useClickOutsideを使用
+│
+├── Popover/            # ポータル基盤（フックを使用）
+│   └── 内部でuseFloating, useClickOutsideを使用
+│
+├── Select/             # Dropdownを使用
+│   └── import { Dropdown } from "../Dropdown"
+│
+├── ComboBox/           # Dropdownを使用
+│   └── import { Dropdown } from "../Dropdown"
+│
+├── TimePicker/         # Dropdownを使用
+│   └── import { Dropdown } from "../Dropdown"
+│
+├── DatePicker/         # Popoverを使用
+│   └── import { Popover } from "../Popover"
+│
+├── DateRangePicker/    # Popoverを使用
+│   └── import { Popover } from "../Popover"
+│
+├── ColorPicker/        # Popoverを使用
+│   └── import { Popover } from "../Popover"
+│
+└── Menu/               # Popoverを使用
+    └── import { Popover } from "../Popover"
+
+organisms/
+├── Finance/
+│   └── CurrencySelect  # Selectを使用
+│       └── import { Select } from "@/components/molecules"
+```
+
+### 24.7 品質チェックリスト（リファクタリング時）
+
+```
+□ 既存のAPIを破壊していないか（後方互換性）
+□ Storybookのストーリーが引き続き動作するか
+□ TypeScript型エラーがないか
+□ キーボードナビゲーションが維持されているか
+□ アクセシビリティ属性（aria-*）が維持されているか
+□ ダークモード対応が維持されているか
+□ レスポンシブ対応が維持されているか
+□ パフォーマンスが劣化していないか（不要な再レンダリングなし）
+```
+
+### 24.8 リスクと対策
+
+| リスク | 影響 | 対策 |
+|-------|------|------|
+| API破壊による既存コード影響 | 高 | 段階的な移行、deprecation warning |
+| 位置計算ロジックの微妙な差異 | 中 | 各コンポーネントの既存動作をテストで確認 |
+| 複雑なキーボード操作の統合困難 | 中 | コンポーネントごとの独自キー操作は維持可能に設計 |
+| Storybook/テストの大量修正 | 中 | リファクタリングと同時にテスト更新 |
+
+---
+
+## 改訂版マイルストーン（Phase 24 含む）
+
+| Phase | 内容 | コンポーネント数 | 削減行数 |
+|-------|------|-----------------|---------|
+| 1-22 | 既存計画 | 404 | - |
+| 23 | Select拡張 | 3 | - |
+| **24** | **リファクタリング** | **0（既存修正）** | **~820行** |
+| **合計** | | **407** | **~820行削減** |
+
+---
+
+## 教訓と今後の方針
+
+### 発生原因の分析
+
+1. **初期実装時の計画参照不足**: 各コンポーネント実装時に計画の依存関係図を参照せず、独立して実装された
+2. **コードレビュー基準の不徹底**: 「再実装防止ルール」のチェックが実施されなかった
+3. **コピー&ペーストの連鎖**: 最初のSelect実装がコピーされ、類似コンポーネントに展開された
+
+### 再発防止策
+
+1. **PRレビューテンプレートの更新**:
+   ```
+   ## 再実装チェック
+   - [ ] 同じUIパターンが既にAtomsに存在しないか確認した
+   - [ ] 同じ複合パターンがMoleculesに存在しないか確認した
+   - [ ] ポータル/位置計算は Dropdown または Popover を使用している
+   - [ ] 新規アイコンは lib/icons/ に追加した
+   ```
+
+2. **ESLint ルールの追加**:
+   ```javascript
+   // .eslintrc.js
+   rules: {
+     'no-restricted-imports': ['error', {
+       patterns: [
+         {
+           group: ['react-dom'],
+           importNames: ['createPortal'],
+           message: 'createPortalは Dropdown または Popover を経由して使用してください'
+         }
+       ]
+     }]
+   }
+   ```
+
+3. **アーキテクチャドキュメントの整備**:
+   - 各コンポーネントの「使用すべき基盤コンポーネント」を明記
+   - 依存関係図をREADMEに掲載

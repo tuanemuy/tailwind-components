@@ -16,6 +16,7 @@
   "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
     "enabled": true,
+    "includes": ["src/**", "!src/examples/**"],
     "rules": {
       "recommended": true,
       "security": {
@@ -36,6 +37,9 @@
       },
       "correctness": {
         "useUniqueElementIds": "off"
+      },
+      "a11y": {
+        "noStaticElementInteractions": "off"
       }
     }
   },
