@@ -12,6 +12,7 @@ export function PrinterIcon(props: SVGProps<SVGSVGElement>) {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
       {...props}
     >
       <polyline points="6 9 6 2 18 2 18 9" />
