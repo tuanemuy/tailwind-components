@@ -1,4 +1,4 @@
-.light-theme {
+:root {
   --background: oklch(0.9689 0.0185 347.4166);
   --foreground: oklch(0.4712 0 0);
   --card: oklch(0.9744 0.0304 88.371);
@@ -55,7 +55,7 @@
   --shadow-2xl: 3px 3px 0px 0px hsl(325.78 58.1800% 56.8600% / 2.5);
 }
 
-.dark-theme {
+.dark {
   --background: oklch(0.2497 0.0305 234.1628);
   --foreground: oklch(0.9306 0.0197 349.0785);
   --card: oklch(0.2902 0.0299 233.5352);

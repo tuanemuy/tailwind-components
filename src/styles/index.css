@@ -116,13 +116,6 @@
   --color-info-foreground: var(--info-foreground);
 }
 
-:root {
-  @apply light-theme;
-}
-
-.dark {
-  @apply dark-theme;
-}
 
 /* Custom animations */
 @theme inline {

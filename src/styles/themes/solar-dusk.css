@@ -1,4 +1,4 @@
-.light-theme {
+:root {
   --background: oklch(0.9885 0.0057 84.5659);
   --foreground: oklch(0.366 0.0251 49.6085);
   --card: oklch(0.9686 0.0091 78.2818);
@@ -38,24 +38,24 @@
   --shadow-2xs: 0px 2px 3px 0px hsl(28 18% 25% / 0.09);
   --shadow-xs: 0px 2px 3px 0px hsl(28 18% 25% / 0.09);
   --shadow-sm:
-    0px 2px 3px 0px hsl(28 18% 25% / 0.18), 0px 1px 2px -1px
-    hsl(28 18% 25% / 0.18);
+    0px 2px 3px 0px hsl(28 18% 25% / 0.18),
+    0px 1px 2px -1px hsl(28 18% 25% / 0.18);
   --shadow:
-    0px 2px 3px 0px hsl(28 18% 25% / 0.18), 0px 1px 2px -1px
-    hsl(28 18% 25% / 0.18);
+    0px 2px 3px 0px hsl(28 18% 25% / 0.18),
+    0px 1px 2px -1px hsl(28 18% 25% / 0.18);
   --shadow-md:
-    0px 2px 3px 0px hsl(28 18% 25% / 0.18), 0px 2px 4px -1px
-    hsl(28 18% 25% / 0.18);
+    0px 2px 3px 0px hsl(28 18% 25% / 0.18),
+    0px 2px 4px -1px hsl(28 18% 25% / 0.18);
   --shadow-lg:
-    0px 2px 3px 0px hsl(28 18% 25% / 0.18), 0px 4px 6px -1px
-    hsl(28 18% 25% / 0.18);
+    0px 2px 3px 0px hsl(28 18% 25% / 0.18),
+    0px 4px 6px -1px hsl(28 18% 25% / 0.18);
   --shadow-xl:
-    0px 2px 3px 0px hsl(28 18% 25% / 0.18), 0px 8px 10px -1px
-    hsl(28 18% 25% / 0.18);
+    0px 2px 3px 0px hsl(28 18% 25% / 0.18),
+    0px 8px 10px -1px hsl(28 18% 25% / 0.18);
   --shadow-2xl: 0px 2px 3px 0px hsl(28 18% 25% / 0.45);
 }
 
-.dark-theme {
+.dark {
   --background: oklch(0.2161 0.0061 56.0434);
   --foreground: oklch(0.9699 0.0013 106.4238);
   --card: oklch(0.2685 0.0063 34.2976);
