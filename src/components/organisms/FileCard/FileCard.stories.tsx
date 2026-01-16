@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { FileCard, FileCardGrid, FileCardList } from "./";
 import type { FileCardData } from "./";
+import { FileCard, FileCardGrid, FileCardList } from "./";
 
 const meta: Meta<typeof FileCard> = {
   title: "Organisms/FileCard",
@@ -39,8 +39,10 @@ const imageFile: FileCardData = {
   size: "1.8 MB",
   extension: "jpg",
   modifiedAt: "Mar 8, 2024",
-  previewUrl: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&h=300&fit=crop",
-  thumbnailUrl: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100&h=100&fit=crop",
+  previewUrl:
+    "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&h=300&fit=crop",
+  thumbnailUrl:
+    "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100&h=100&fit=crop",
   owner: {
     id: "u2",
     name: "Alex Kim",
@@ -128,7 +130,8 @@ const sampleFiles: FileCardData[] = [
     name: "hero-banner.jpg",
     type: "image",
     size: "1.8 MB",
-    previewUrl: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&h=300&fit=crop",
+    previewUrl:
+      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&h=300&fit=crop",
     modifiedAt: "Mar 8, 2024",
     isStarred: true,
   },
@@ -137,7 +140,8 @@ const sampleFiles: FileCardData[] = [
     name: "product-shot.png",
     type: "image",
     size: "2.1 MB",
-    previewUrl: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop",
+    previewUrl:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop",
     modifiedAt: "Mar 7, 2024",
   },
   {
@@ -145,7 +149,8 @@ const sampleFiles: FileCardData[] = [
     name: "team-photo.jpg",
     type: "image",
     size: "3.2 MB",
-    previewUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=300&fit=crop",
+    previewUrl:
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=300&fit=crop",
     modifiedAt: "Mar 5, 2024",
   },
   {
@@ -161,7 +166,8 @@ const sampleFiles: FileCardData[] = [
     name: "promo-video.mp4",
     type: "video",
     size: "128 MB",
-    previewUrl: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=400&h=300&fit=crop",
+    previewUrl:
+      "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=400&h=300&fit=crop",
     modifiedAt: "Mar 3, 2024",
   },
   {
@@ -266,7 +272,16 @@ export const FileTypes: Story = {
   render: () => (
     <div className="grid grid-cols-2 gap-4">
       {(
-        ["image", "video", "audio", "document", "code", "archive", "folder", "other"] as const
+        [
+          "image",
+          "video",
+          "audio",
+          "document",
+          "code",
+          "archive",
+          "folder",
+          "other",
+        ] as const
       ).map((type) => (
         <FileCard
           key={type}

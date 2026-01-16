@@ -1,8 +1,15 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/atoms/Button";
 import { Badge } from "@/components/atoms/Badge";
-import { MapPinIcon, PhoneIcon, MailIcon, ClockIcon, ExternalLinkIcon, GlobeIcon } from "@/lib/icons";
+import { Button } from "@/components/atoms/Button";
+import {
+  ClockIcon,
+  ExternalLinkIcon,
+  GlobeIcon,
+  MailIcon,
+  MapPinIcon,
+  PhoneIcon,
+} from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 export interface BusinessHours {
   day: string;
@@ -32,7 +39,8 @@ export interface StoreContactData {
   imageUrl?: string;
 }
 
-export interface StoreContactCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface StoreContactCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   store: StoreContactData;
   variant?: "default" | "compact" | "detailed" | "horizontal";
   showHours?: boolean;
@@ -42,7 +50,10 @@ export interface StoreContactCardProps extends React.HTMLAttributes<HTMLDivEleme
   onEmailClick?: (store: StoreContactData) => void;
 }
 
-export const StoreContactCard = forwardRef<HTMLDivElement, StoreContactCardProps>(
+export const StoreContactCard = forwardRef<
+  HTMLDivElement,
+  StoreContactCardProps
+>(
   (
     {
       className,
@@ -55,14 +66,16 @@ export const StoreContactCard = forwardRef<HTMLDivElement, StoreContactCardProps
       onEmailClick,
       ...props
     },
-    ref
+    ref,
   ) => {
     const formatAddress = () => {
       const { address } = store;
       const parts = [
         address.line1,
         address.line2,
-        [address.city, address.state, address.postalCode].filter(Boolean).join(", "),
+        [address.city, address.state, address.postalCode]
+          .filter(Boolean)
+          .join(", "),
         address.country,
       ].filter(Boolean);
       return parts;
@@ -74,7 +87,7 @@ export const StoreContactCard = forwardRef<HTMLDivElement, StoreContactCardProps
           ref={ref}
           className={cn(
             "flex gap-x-4 rounded-xl border border-border bg-card p-4",
-            className
+            className,
           )}
           {...props}
         >
@@ -92,15 +105,22 @@ export const StoreContactCard = forwardRef<HTMLDivElement, StoreContactCardProps
             <div className="flex items-start justify-between gap-x-4">
               <div>
                 <div className="flex items-center gap-x-2">
-                  <h3 className="font-semibold text-foreground">{store.name}</h3>
+                  <h3 className="font-semibold text-foreground">
+                    {store.name}
+                  </h3>
                   {store.isOpen !== undefined && (
-                    <Badge variant={store.isOpen ? "success" : "secondary"} size="sm">
+                    <Badge
+                      variant={store.isOpen ? "success" : "secondary"}
+                      size="sm"
+                    >
                       {store.isOpen ? "Open" : "Closed"}
                     </Badge>
                   )}
                 </div>
                 {store.distance && (
-                  <p className="text-sm text-muted-foreground">{store.distance} away</p>
+                  <p className="text-sm text-muted-foreground">
+                    {store.distance} away
+                  </p>
                 )}
               </div>
             </div>
@@ -149,16 +169,21 @@ export const StoreContactCard = forwardRef<HTMLDivElement, StoreContactCardProps
           ref={ref}
           className={cn(
             "rounded-lg border border-border bg-card p-3",
-            className
+            className,
           )}
           {...props}
         >
           <div className="flex items-start justify-between gap-x-3">
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-x-2">
-                <h4 className="truncate text-sm font-medium text-foreground">{store.name}</h4>
+                <h4 className="truncate text-sm font-medium text-foreground">
+                  {store.name}
+                </h4>
                 {store.isOpen !== undefined && (
-                  <Badge variant={store.isOpen ? "success" : "secondary"} size="sm">
+                  <Badge
+                    variant={store.isOpen ? "success" : "secondary"}
+                    size="sm"
+                  >
                     {store.isOpen ? "Open" : "Closed"}
                   </Badge>
                 )}
@@ -167,7 +192,9 @@ export const StoreContactCard = forwardRef<HTMLDivElement, StoreContactCardProps
                 {store.address.line1}, {store.address.city}
               </p>
               {store.distance && (
-                <p className="text-xs text-muted-foreground">{store.distance}</p>
+                <p className="text-xs text-muted-foreground">
+                  {store.distance}
+                </p>
               )}
             </div>
             <Button
@@ -187,7 +214,10 @@ export const StoreContactCard = forwardRef<HTMLDivElement, StoreContactCardProps
       return (
         <div
           ref={ref}
-          className={cn("overflow-hidden rounded-xl border border-border bg-card", className)}
+          className={cn(
+            "overflow-hidden rounded-xl border border-border bg-card",
+            className,
+          )}
           {...props}
         >
           {store.imageUrl && (
@@ -205,11 +235,16 @@ export const StoreContactCard = forwardRef<HTMLDivElement, StoreContactCardProps
               <div>
                 <h3 className="font-semibold text-foreground">{store.name}</h3>
                 {store.distance && (
-                  <p className="text-sm text-muted-foreground">{store.distance} away</p>
+                  <p className="text-sm text-muted-foreground">
+                    {store.distance} away
+                  </p>
                 )}
               </div>
               {store.isOpen !== undefined && (
-                <Badge variant={store.isOpen ? "success" : "secondary"} size="sm">
+                <Badge
+                  variant={store.isOpen ? "success" : "secondary"}
+                  size="sm"
+                >
                   {store.isOpen ? "Open Now" : "Closed"}
                 </Badge>
               )}
@@ -219,8 +254,8 @@ export const StoreContactCard = forwardRef<HTMLDivElement, StoreContactCardProps
               <div className="flex items-start gap-x-3">
                 <MapPinIcon className="mt-0.5 size-5 shrink-0 text-muted-foreground" />
                 <div className="text-sm text-muted-foreground">
-                  {formatAddress().map((line, index) => (
-                    <p key={index}>{line}</p>
+                  {formatAddress().map((line) => (
+                    <p key={line}>{line}</p>
                   ))}
                 </div>
               </div>
@@ -228,7 +263,10 @@ export const StoreContactCard = forwardRef<HTMLDivElement, StoreContactCardProps
               {store.phone && (
                 <div className="flex items-center gap-x-3">
                   <PhoneIcon className="size-5 shrink-0 text-muted-foreground" />
-                  <a href={`tel:${store.phone}`} className="text-sm text-foreground hover:underline">
+                  <a
+                    href={`tel:${store.phone}`}
+                    className="text-sm text-foreground hover:underline"
+                  >
                     {store.phone}
                   </a>
                 </div>
@@ -237,7 +275,10 @@ export const StoreContactCard = forwardRef<HTMLDivElement, StoreContactCardProps
               {store.email && (
                 <div className="flex items-center gap-x-3">
                   <MailIcon className="size-5 shrink-0 text-muted-foreground" />
-                  <a href={`mailto:${store.email}`} className="text-sm text-foreground hover:underline">
+                  <a
+                    href={`mailto:${store.email}`}
+                    className="text-sm text-foreground hover:underline"
+                  >
                     {store.email}
                   </a>
                 </div>
@@ -246,7 +287,12 @@ export const StoreContactCard = forwardRef<HTMLDivElement, StoreContactCardProps
               {store.website && (
                 <div className="flex items-center gap-x-3">
                   <GlobeIcon className="size-5 shrink-0 text-muted-foreground" />
-                  <a href={store.website} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground hover:underline">
+                  <a
+                    href={store.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-foreground hover:underline"
+                  >
                     {store.website}
                   </a>
                 </div>
@@ -260,14 +306,22 @@ export const StoreContactCard = forwardRef<HTMLDivElement, StoreContactCardProps
                   <span>Business Hours</span>
                 </div>
                 <div className="mt-2 space-y-1">
-                  {store.hours.map((hour, index) => (
+                  {store.hours.map((hour) => (
                     <div
-                      key={index}
+                      key={hour.day}
                       className="flex items-center justify-between text-sm"
                     >
                       <span className="text-muted-foreground">{hour.day}</span>
-                      <span className={hour.isClosed ? "text-muted-foreground" : "text-foreground"}>
-                        {hour.isClosed ? "Closed" : `${hour.open} - ${hour.close}`}
+                      <span
+                        className={
+                          hour.isClosed
+                            ? "text-muted-foreground"
+                            : "text-foreground"
+                        }
+                      >
+                        {hour.isClosed
+                          ? "Closed"
+                          : `${hour.open} - ${hour.close}`}
                       </span>
                     </div>
                   ))}
@@ -310,7 +364,9 @@ export const StoreContactCard = forwardRef<HTMLDivElement, StoreContactCardProps
           <div>
             <h3 className="font-semibold text-foreground">{store.name}</h3>
             {store.distance && (
-              <p className="text-sm text-muted-foreground">{store.distance} away</p>
+              <p className="text-sm text-muted-foreground">
+                {store.distance} away
+              </p>
             )}
           </div>
           {store.isOpen !== undefined && (
@@ -323,7 +379,9 @@ export const StoreContactCard = forwardRef<HTMLDivElement, StoreContactCardProps
         <div className="mt-4 space-y-2">
           <div className="flex items-start gap-x-2 text-sm">
             <MapPinIcon className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
-            <span className="text-muted-foreground">{formatAddress().join(", ")}</span>
+            <span className="text-muted-foreground">
+              {formatAddress().join(", ")}
+            </span>
           </div>
           {store.phone && (
             <div className="flex items-center gap-x-2 text-sm">
@@ -350,22 +408,20 @@ export const StoreContactCard = forwardRef<HTMLDivElement, StoreContactCardProps
               Call
             </Button>
           )}
-          <Button
-            size="sm"
-            onClick={() => onDirectionsClick?.(store)}
-          >
+          <Button size="sm" onClick={() => onDirectionsClick?.(store)}>
             <MapPinIcon className="mr-2 size-4" />
             Directions
           </Button>
         </div>
       </div>
     );
-  }
+  },
 );
 StoreContactCard.displayName = "StoreContactCard";
 
 // List component for multiple stores
-export interface StoreContactListProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface StoreContactListProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   stores: StoreContactData[];
   variant?: StoreContactCardProps["variant"];
   showHours?: boolean;
@@ -375,7 +431,10 @@ export interface StoreContactListProps extends React.HTMLAttributes<HTMLDivEleme
   onEmailClick?: (store: StoreContactData) => void;
 }
 
-export const StoreContactList = forwardRef<HTMLDivElement, StoreContactListProps>(
+export const StoreContactList = forwardRef<
+  HTMLDivElement,
+  StoreContactListProps
+>(
   (
     {
       className,
@@ -388,14 +447,10 @@ export const StoreContactList = forwardRef<HTMLDivElement, StoreContactListProps
       onEmailClick,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
-      <div
-        ref={ref}
-        className={cn("space-y-3", className)}
-        {...props}
-      >
+      <div ref={ref} className={cn("space-y-3", className)} {...props}>
         {stores.map((store) => (
           <StoreContactCard
             key={store.id}
@@ -410,6 +465,6 @@ export const StoreContactList = forwardRef<HTMLDivElement, StoreContactListProps
         ))}
       </div>
     );
-  }
+  },
 );
 StoreContactList.displayName = "StoreContactList";

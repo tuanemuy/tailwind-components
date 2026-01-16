@@ -1,29 +1,33 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { type ReactNode, useState } from "react";
 import { Avatar } from "@/components/atoms/Avatar";
-import { Button } from "@/components/atoms/Button";
 import { Badge } from "@/components/atoms/Badge";
+import { Button } from "@/components/atoms/Button";
 import {
-  MessageGroup,
-  TypingIndicator,
-  type MessageData,
-} from "../MessageBubble";
-import { ComposeThread } from "../ComposeThread";
-import {
-  XIcon,
   ChevronDownIcon,
   ChevronLeftIcon,
-  SearchIcon,
   QuestionIcon,
+  SearchIcon,
+  XIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
+import { ComposeThread } from "../ComposeThread";
+import {
+  type MessageData,
+  MessageGroup,
+  TypingIndicator,
+} from "../MessageBubble";
 
 // ============================================
 // Types
 // ============================================
 
-export type ChatWidgetView = "welcome" | "conversation" | "conversations" | "help";
+export type ChatWidgetView =
+  | "welcome"
+  | "conversation"
+  | "conversations"
+  | "help";
 
 export interface ChatUser {
   id: string;
@@ -128,7 +132,7 @@ export const ChatWidget = ({
         "fixed z-50",
         position === "bottom-right" && "bottom-6 right-6",
         position === "bottom-left" && "bottom-6 left-6",
-        className
+        className,
       )}
     >
       {/* Widget Panel */}
@@ -606,7 +610,9 @@ const HelpArticleItem = ({ article, onClick }: HelpArticleItemProps) => (
       {article.icon || <QuestionIcon className="size-4" />}
     </div>
     <div className="flex-1 min-w-0">
-      <span className="text-sm font-medium block truncate">{article.title}</span>
+      <span className="text-sm font-medium block truncate">
+        {article.title}
+      </span>
       {article.description && (
         <p className="text-xs text-muted-foreground truncate">
           {article.description}
@@ -643,6 +649,8 @@ const ChatIcon = ({ className }: { className?: string }) => (
     height="16"
     fill="currentColor"
     viewBox="0 0 16 16"
+    role="img"
+    aria-label="Chat"
   >
     <path d="M14 0a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z" />
   </svg>

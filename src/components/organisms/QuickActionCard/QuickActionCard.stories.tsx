@@ -1,25 +1,25 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  QuickActionCard,
-  QuickActionGrid,
-  MiniQuickActionCard,
-  QuickActionList,
-} from "./index";
 import { Badge } from "@/components/atoms/Badge";
 import {
-  PlusIcon,
+  CalendarIcon,
+  DownloadIcon,
   FileIcon,
   FolderIcon,
-  UploadIcon,
-  DownloadIcon,
-  ShareIcon,
-  SettingsIcon,
-  UserIcon,
-  CalendarIcon,
-  MailIcon,
-  LinkIcon,
   ImageIcon,
+  LinkIcon,
+  MailIcon,
+  PlusIcon,
+  SettingsIcon,
+  ShareIcon,
+  UploadIcon,
+  UserIcon,
 } from "@/lib/icons";
+import {
+  MiniQuickActionCard,
+  QuickActionCard,
+  QuickActionGrid,
+  QuickActionList,
+} from "./index";
 
 const meta: Meta<typeof QuickActionCard> = {
   title: "Organisms/PageSections/QuickActionCard",
@@ -75,7 +75,11 @@ export const WithBadge: Story = {
     icon: <MailIcon className="size-full" />,
     title: "Inbox",
     description: "View your messages",
-    badge: <Badge variant="default" size="sm">5 new</Badge>,
+    badge: (
+      <Badge variant="default" size="sm">
+        5 new
+      </Badge>
+    ),
     onClick: () => console.log("Clicked"),
   },
   decorators: Default.decorators,
@@ -234,10 +238,26 @@ export const List: StoryObj<typeof QuickActionList> = {
   render: () => (
     <QuickActionList
       items={[
-        { icon: <PlusIcon className="size-full" />, label: "New", onClick: () => console.log("New") },
-        { icon: <UploadIcon className="size-full" />, label: "Upload", onClick: () => console.log("Upload") },
-        { icon: <DownloadIcon className="size-full" />, label: "Download", onClick: () => console.log("Download") },
-        { icon: <ShareIcon className="size-full" />, label: "Share", onClick: () => console.log("Share") },
+        {
+          icon: <PlusIcon className="size-full" />,
+          label: "New",
+          onClick: () => console.log("New"),
+        },
+        {
+          icon: <UploadIcon className="size-full" />,
+          label: "Upload",
+          onClick: () => console.log("Upload"),
+        },
+        {
+          icon: <DownloadIcon className="size-full" />,
+          label: "Download",
+          onClick: () => console.log("Download"),
+        },
+        {
+          icon: <ShareIcon className="size-full" />,
+          label: "Share",
+          onClick: () => console.log("Share"),
+        },
       ]}
     />
   ),
@@ -268,7 +288,11 @@ export const DashboardActions: Story = {
           size="sm"
           icon={<MailIcon className="size-full" />}
           title="Send Message"
-          badge={<Badge variant="destructive" size="sm">3</Badge>}
+          badge={
+            <Badge variant="destructive" size="sm">
+              3
+            </Badge>
+          }
           onClick={() => console.log("Send message")}
         />
         <QuickActionCard
@@ -286,7 +310,9 @@ export const DashboardActions: Story = {
 export const FileActions: Story = {
   render: () => (
     <div className="rounded-lg border border-border bg-card p-4">
-      <h3 className="mb-4 text-sm font-medium text-muted-foreground">Create new</h3>
+      <h3 className="mb-4 text-sm font-medium text-muted-foreground">
+        Create new
+      </h3>
       <QuickActionGrid columns={2}>
         <QuickActionCard
           variant="ghost"

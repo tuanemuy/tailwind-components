@@ -1,15 +1,11 @@
 import { forwardRef, useState } from "react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/atoms/Button";
 import { Badge } from "@/components/atoms/Badge";
-import { ProgressBar } from "@/components/atoms/ProgressBar";
+import { Button } from "@/components/atoms/Button";
 import { Checkbox } from "@/components/atoms/Checkbox";
-import {
-  UploadIcon,
-  DownloadIcon,
-  FileIcon,
-} from "@/lib/icons";
+import { ProgressBar } from "@/components/atoms/ProgressBar";
+import { DownloadIcon, FileIcon, UploadIcon } from "@/lib/icons";
 import type { ExportFormat } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 // Re-export for backward compatibility
 export type { ExportFormat };
@@ -21,7 +17,8 @@ export interface ExportOption {
   available?: boolean;
 }
 
-export interface ImportExportCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ImportExportCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   mode: "import" | "export" | "both";
   title?: string;
   description?: string;
@@ -45,7 +42,10 @@ const formatIcons: Record<ExportFormat, string> = {
   pdf: "PDF",
 };
 
-export const ImportExportCard = forwardRef<HTMLDivElement, ImportExportCardProps>(
+export const ImportExportCard = forwardRef<
+  HTMLDivElement,
+  ImportExportCardProps
+>(
   (
     {
       className,
@@ -53,11 +53,36 @@ export const ImportExportCard = forwardRef<HTMLDivElement, ImportExportCardProps
       title,
       description,
       exportFormats = [
-        { format: "csv", label: "CSV", description: "Comma-separated values", available: true },
-        { format: "json", label: "JSON", description: "JavaScript Object Notation", available: true },
-        { format: "xlsx", label: "Excel", description: "Microsoft Excel format", available: true },
-        { format: "xml", label: "XML", description: "Extensible Markup Language", available: true },
-        { format: "pdf", label: "PDF", description: "Portable Document Format", available: false },
+        {
+          format: "csv",
+          label: "CSV",
+          description: "Comma-separated values",
+          available: true,
+        },
+        {
+          format: "json",
+          label: "JSON",
+          description: "JavaScript Object Notation",
+          available: true,
+        },
+        {
+          format: "xlsx",
+          label: "Excel",
+          description: "Microsoft Excel format",
+          available: true,
+        },
+        {
+          format: "xml",
+          label: "XML",
+          description: "Extensible Markup Language",
+          available: true,
+        },
+        {
+          format: "pdf",
+          label: "PDF",
+          description: "Portable Document Format",
+          available: false,
+        },
       ],
       selectedFormats = [],
       onFormatSelect,
@@ -70,7 +95,7 @@ export const ImportExportCard = forwardRef<HTMLDivElement, ImportExportCardProps
       variant = "default",
       ...props
     },
-    ref
+    ref,
   ) => {
     const [dragOver, setDragOver] = useState(false);
 
@@ -118,15 +143,18 @@ export const ImportExportCard = forwardRef<HTMLDivElement, ImportExportCardProps
                 </div>
                 <div>
                   <h3 className="font-semibold text-foreground">Import Data</h3>
-                  <p className="text-sm text-muted-foreground">Upload your files</p>
+                  <p className="text-sm text-muted-foreground">
+                    Upload your files
+                  </p>
                 </div>
               </div>
 
-              <div
+              <section
+                aria-label="File drop zone"
                 className={cn(
                   "flex flex-col items-center justify-center rounded-lg border-2 border-dashed p-6 text-center transition-colors",
                   dragOver ? "border-primary bg-primary/5" : "border-border",
-                  isImporting && "pointer-events-none opacity-60"
+                  isImporting && "pointer-events-none opacity-60",
                 )}
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
@@ -148,13 +176,15 @@ export const ImportExportCard = forwardRef<HTMLDivElement, ImportExportCardProps
                     disabled={isImporting}
                   />
                 </label>
-              </div>
+              </section>
 
               {isImporting && (
                 <div className="mt-4">
                   <div className="mb-2 flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">Importing...</span>
-                    <span className="font-medium text-foreground">{importProgress}%</span>
+                    <span className="font-medium text-foreground">
+                      {importProgress}%
+                    </span>
                   </div>
                   <ProgressBar value={importProgress} size="sm" />
                 </div>
@@ -179,27 +209,37 @@ export const ImportExportCard = forwardRef<HTMLDivElement, ImportExportCardProps
                 {exportFormats.map((option) => (
                   <label
                     key={option.format}
+                    htmlFor={`export-split-${option.format}`}
                     className={cn(
                       "flex cursor-pointer items-center gap-x-3 rounded-lg border p-3 transition-colors",
                       selectedFormats.includes(option.format)
                         ? "border-primary bg-primary/5"
                         : "border-border hover:border-border/80",
-                      !option.available && "cursor-not-allowed opacity-50"
+                      !option.available && "cursor-not-allowed opacity-50",
                     )}
                   >
                     <Checkbox
+                      id={`export-split-${option.format}`}
                       checked={selectedFormats.includes(option.format)}
-                      onChange={() => option.available && toggleFormat(option.format)}
+                      onChange={() =>
+                        option.available && toggleFormat(option.format)
+                      }
                       disabled={!option.available}
                     />
                     <div className="flex-1">
-                      <p className="text-sm font-medium text-foreground">{option.label}</p>
+                      <p className="text-sm font-medium text-foreground">
+                        {option.label}
+                      </p>
                       {option.description && (
-                        <p className="text-xs text-muted-foreground">{option.description}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {option.description}
+                        </p>
                       )}
                     </div>
                     {!option.available && (
-                      <Badge variant="secondary" size="sm">Pro</Badge>
+                      <Badge variant="secondary" size="sm">
+                        Pro
+                      </Badge>
                     )}
                   </label>
                 ))}
@@ -209,7 +249,9 @@ export const ImportExportCard = forwardRef<HTMLDivElement, ImportExportCardProps
                 <div className="mt-4">
                   <div className="mb-2 flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">Exporting...</span>
-                    <span className="font-medium text-foreground">{exportProgress}%</span>
+                    <span className="font-medium text-foreground">
+                      {exportProgress}%
+                    </span>
                   </div>
                   <ProgressBar value={exportProgress} size="sm" />
                 </div>
@@ -221,7 +263,8 @@ export const ImportExportCard = forwardRef<HTMLDivElement, ImportExportCardProps
                 disabled={selectedFormats.length === 0 || isExporting}
               >
                 <DownloadIcon className="mr-2 size-4" />
-                Export {selectedFormats.length > 0 && `(${selectedFormats.length})`}
+                Export{" "}
+                {selectedFormats.length > 0 && `(${selectedFormats.length})`}
               </Button>
             </div>
           )}
@@ -233,7 +276,10 @@ export const ImportExportCard = forwardRef<HTMLDivElement, ImportExportCardProps
       return (
         <div
           ref={ref}
-          className={cn("rounded-xl border border-border bg-card p-4", className)}
+          className={cn(
+            "rounded-xl border border-border bg-card p-4",
+            className,
+          )}
           {...props}
         >
           <div className="flex items-center justify-between">
@@ -242,7 +288,9 @@ export const ImportExportCard = forwardRef<HTMLDivElement, ImportExportCardProps
                 <FileIcon className="size-5 text-muted-foreground" />
               </div>
               <div>
-                <h3 className="font-medium text-foreground">{title || "Data Management"}</h3>
+                <h3 className="font-medium text-foreground">
+                  {title || "Data Management"}
+                </h3>
                 {description && (
                   <p className="text-sm text-muted-foreground">{description}</p>
                 )}
@@ -287,7 +335,12 @@ export const ImportExportCard = forwardRef<HTMLDivElement, ImportExportCardProps
         {/* Header */}
         <div className="border-b border-border p-4">
           <h3 className="font-semibold text-foreground">
-            {title || (mode === "import" ? "Import Data" : mode === "export" ? "Export Data" : "Import / Export")}
+            {title ||
+              (mode === "import"
+                ? "Import Data"
+                : mode === "export"
+                  ? "Export Data"
+                  : "Import / Export")}
           </h3>
           {description && (
             <p className="mt-1 text-sm text-muted-foreground">{description}</p>
@@ -301,11 +354,12 @@ export const ImportExportCard = forwardRef<HTMLDivElement, ImportExportCardProps
               <UploadIcon className="size-4" />
               Import
             </h4>
-            <div
+            <section
+              aria-label="File drop zone"
               className={cn(
                 "flex flex-col items-center justify-center rounded-lg border-2 border-dashed p-6 text-center transition-colors",
                 dragOver ? "border-primary bg-primary/5" : "border-border",
-                isImporting && "pointer-events-none opacity-60"
+                isImporting && "pointer-events-none opacity-60",
               )}
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
@@ -328,13 +382,15 @@ export const ImportExportCard = forwardRef<HTMLDivElement, ImportExportCardProps
               <p className="mt-1 text-xs text-muted-foreground">
                 Supports CSV, JSON, XLSX files
               </p>
-            </div>
+            </section>
 
             {isImporting && (
               <div className="mt-4">
                 <div className="mb-2 flex items-center justify-between text-sm">
                   <span className="text-muted-foreground">Importing...</span>
-                  <span className="font-medium text-foreground">{importProgress}%</span>
+                  <span className="font-medium text-foreground">
+                    {importProgress}%
+                  </span>
                 </div>
                 <ProgressBar value={importProgress} size="sm" />
               </div>
@@ -355,30 +411,40 @@ export const ImportExportCard = forwardRef<HTMLDivElement, ImportExportCardProps
               {exportFormats.map((option) => (
                 <label
                   key={option.format}
+                  htmlFor={`export-default-${option.format}`}
                   className={cn(
                     "flex cursor-pointer items-center gap-x-3 rounded-lg border p-3 transition-colors",
                     selectedFormats.includes(option.format)
                       ? "border-primary bg-primary/5"
                       : "border-border hover:bg-muted/50",
-                    !option.available && "cursor-not-allowed opacity-50"
+                    !option.available && "cursor-not-allowed opacity-50",
                   )}
                 >
                   <Checkbox
+                    id={`export-default-${option.format}`}
                     checked={selectedFormats.includes(option.format)}
-                    onChange={() => option.available && toggleFormat(option.format)}
+                    onChange={() =>
+                      option.available && toggleFormat(option.format)
+                    }
                     disabled={!option.available}
                   />
                   <div className="flex size-8 items-center justify-center rounded bg-muted text-xs font-semibold">
                     {formatIcons[option.format]}
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm font-medium text-foreground">{option.label}</p>
+                    <p className="text-sm font-medium text-foreground">
+                      {option.label}
+                    </p>
                     {option.description && (
-                      <p className="text-xs text-muted-foreground">{option.description}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {option.description}
+                      </p>
                     )}
                   </div>
                   {!option.available && (
-                    <Badge variant="secondary" size="sm">Pro</Badge>
+                    <Badge variant="secondary" size="sm">
+                      Pro
+                    </Badge>
                   )}
                 </label>
               ))}
@@ -388,7 +454,9 @@ export const ImportExportCard = forwardRef<HTMLDivElement, ImportExportCardProps
               <div className="mt-4">
                 <div className="mb-2 flex items-center justify-between text-sm">
                   <span className="text-muted-foreground">Exporting...</span>
-                  <span className="font-medium text-foreground">{exportProgress}%</span>
+                  <span className="font-medium text-foreground">
+                    {exportProgress}%
+                  </span>
                 </div>
                 <ProgressBar value={exportProgress} size="sm" />
               </div>
@@ -406,6 +474,6 @@ export const ImportExportCard = forwardRef<HTMLDivElement, ImportExportCardProps
         )}
       </div>
     );
-  }
+  },
 );
 ImportExportCard.displayName = "ImportExportCard";

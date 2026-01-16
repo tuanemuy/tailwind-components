@@ -1,21 +1,29 @@
-import { forwardRef, useState, useRef, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { forwardRef, type ReactNode, useRef, useState } from "react";
+import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import { Checkbox } from "@/components/atoms/Checkbox";
-import { Badge } from "@/components/atoms/Badge";
 import { ProgressBar } from "@/components/atoms/ProgressBar";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "@/components/organisms/Modal";
-import { Select, type SelectOption } from "@/components/molecules/Select";
-import { DateRangePicker, type DateRange } from "@/components/molecules/DateRangePicker";
 import {
-  DownloadIcon,
-  UploadIcon,
-  FileIcon,
-  CheckCircleIcon,
+  type DateRange,
+  DateRangePicker,
+} from "@/components/molecules/DateRangePicker";
+import { Select, type SelectOption } from "@/components/molecules/Select";
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "@/components/organisms/Modal";
+import {
   AlertCircleIcon,
+  CheckCircleIcon,
+  DownloadIcon,
+  FileIcon,
+  UploadIcon,
   XIcon,
 } from "@/lib/icons";
 import type { ExportFormat } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 // Re-export for backward compatibility
 export type { ExportFormat };
@@ -47,7 +55,10 @@ export interface ExportModalProps {
   className?: string;
 }
 
-const formatOptions: Record<ExportFormat, { label: string; description: string }> = {
+const formatOptions: Record<
+  ExportFormat,
+  { label: string; description: string }
+> = {
   csv: { label: "CSV", description: "Comma-separated values" },
   xlsx: { label: "Excel", description: "Microsoft Excel spreadsheet" },
   json: { label: "JSON", description: "JavaScript Object Notation" },
@@ -152,33 +163,39 @@ export const ExportModal = forwardRef<HTMLDivElement, ExportModalProps>(
                   Please wait while we prepare your file
                 </p>
               </div>
-              <ProgressBar value={progress} size="md" className="mx-auto max-w-xs" />
-              <p className="text-sm text-muted-foreground">{progress}% complete</p>
+              <ProgressBar
+                value={progress}
+                size="md"
+                className="mx-auto max-w-xs"
+              />
+              <p className="text-sm text-muted-foreground">
+                {progress}% complete
+              </p>
             </div>
           ) : (
             <div className="space-y-6">
               {/* Format selection */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">
+              <div>
+                <span className="mb-2 block text-sm font-medium text-foreground">
                   Export format
-                </label>
+                </span>
                 <Select
                   value={format}
                   onChange={(value) => setFormat(value as ExportFormat)}
                   options={formatSelectOptions}
                   disabled={loading}
                 />
-                <p className="text-xs text-muted-foreground">
+                <p className="mt-2 text-xs text-muted-foreground">
                   {formatOptions[format].description}
                 </p>
               </div>
 
               {/* Date range */}
               {showDateRange && (
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-foreground">
+                <div>
+                  <span className="mb-2 block text-sm font-medium text-foreground">
                     Date range (optional)
-                  </label>
+                  </span>
                   <DateRangePicker
                     value={dateRange}
                     onChange={setDateRange}
@@ -189,11 +206,11 @@ export const ExportModal = forwardRef<HTMLDivElement, ExportModalProps>(
 
               {/* Column selection */}
               {columns.length > 0 && (
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <label className="text-sm font-medium text-foreground">
+                <div>
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="block text-sm font-medium text-foreground">
                       Columns to include
-                    </label>
+                    </span>
                     <div className="flex gap-2">
                       <Button
                         variant="ghost"
@@ -219,9 +236,11 @@ export const ExportModal = forwardRef<HTMLDivElement, ExportModalProps>(
                       return (
                         <label
                           key={column.id}
+                          htmlFor={`export-column-${column.id}`}
                           className="flex cursor-pointer items-center gap-3"
                         >
                           <Checkbox
+                            id={`export-column-${column.id}`}
                             checked={isSelected}
                             onChange={() => toggleColumn(column.id)}
                             disabled={loading || column.required}
@@ -238,8 +257,9 @@ export const ExportModal = forwardRef<HTMLDivElement, ExportModalProps>(
                       );
                     })}
                   </div>
-                  <p className="text-xs text-muted-foreground">
-                    {selectedColumns.length} of {columns.length} columns selected
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    {selectedColumns.length} of {columns.length} columns
+                    selected
                   </p>
                 </div>
               )}
@@ -328,14 +348,18 @@ export const ImportModal = forwardRef<HTMLDivElement, ImportModalProps>(
 
       // Check file size
       if (selectedFile.size > maxFileSize) {
-        setError(`File size must be less than ${Math.round(maxFileSize / 1024 / 1024)}MB`);
+        setError(
+          `File size must be less than ${Math.round(maxFileSize / 1024 / 1024)}MB`,
+        );
         return false;
       }
 
       // Check file type
       const extension = `.${selectedFile.name.split(".").pop()?.toLowerCase()}`;
       if (!acceptedFormats.includes(extension)) {
-        setError(`Invalid file type. Accepted formats: ${acceptedFormats.join(", ")}`);
+        setError(
+          `Invalid file type. Accepted formats: ${acceptedFormats.join(", ")}`,
+        );
         return false;
       }
 
@@ -406,8 +430,14 @@ export const ImportModal = forwardRef<HTMLDivElement, ImportModalProps>(
                   Please wait while we process your file
                 </p>
               </div>
-              <ProgressBar value={progress} size="md" className="mx-auto max-w-xs" />
-              <p className="text-sm text-muted-foreground">{progress}% complete</p>
+              <ProgressBar
+                value={progress}
+                size="md"
+                className="mx-auto max-w-xs"
+              />
+              <p className="text-sm text-muted-foreground">
+                {progress}% complete
+              </p>
             </div>
           ) : hasResult ? (
             <div className="space-y-4 py-4">
@@ -432,9 +462,10 @@ export const ImportModal = forwardRef<HTMLDivElement, ImportModalProps>(
                     Errors:
                   </p>
                   <ul className="space-y-1 text-xs text-destructive">
-                    {result.errors.slice(0, 10).map((err, index) => (
-                      <li key={index}>
-                        {err.row ? `Row ${err.row}: ` : ""}{err.message}
+                    {result.errors.slice(0, 10).map((err) => (
+                      <li key={`${err.row || "general"}-${err.message}`}>
+                        {err.row ? `Row ${err.row}: ` : ""}
+                        {err.message}
                       </li>
                     ))}
                     {result.errors.length > 10 && (
@@ -447,14 +478,14 @@ export const ImportModal = forwardRef<HTMLDivElement, ImportModalProps>(
           ) : (
             <div className="space-y-4">
               {/* Drop zone */}
-              <div
+              <section
+                aria-label="File drop zone"
                 onDragOver={(e) => {
                   e.preventDefault();
                   setIsDragging(true);
                 }}
                 onDragLeave={() => setIsDragging(false)}
                 onDrop={handleDrop}
-                onClick={() => inputRef.current?.click()}
                 className={cn(
                   "cursor-pointer rounded-lg border-2 border-dashed p-8 text-center transition-colors",
                   isDragging
@@ -499,7 +530,11 @@ export const ImportModal = forwardRef<HTMLDivElement, ImportModalProps>(
                     </Button>
                   </div>
                 ) : (
-                  <div className="space-y-2">
+                  <button
+                    type="button"
+                    className="w-full space-y-2"
+                    onClick={() => inputRef.current?.click()}
+                  >
                     <UploadIcon className="mx-auto size-10 text-muted-foreground" />
                     <div>
                       <p className="font-medium text-foreground">
@@ -510,9 +545,9 @@ export const ImportModal = forwardRef<HTMLDivElement, ImportModalProps>(
                         {Math.round(maxFileSize / 1024 / 1024)}MB
                       </p>
                     </div>
-                  </div>
+                  </button>
                 )}
-              </div>
+              </section>
 
               {/* Error message */}
               {error && (

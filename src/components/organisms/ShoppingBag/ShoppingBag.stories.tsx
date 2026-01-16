@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ShoppingBag, MiniShoppingBag, type ShoppingBagItem } from "./index";
 import { CouponInput } from "../CheckoutForm";
+import { MiniShoppingBag, ShoppingBag, type ShoppingBagItem } from "./index";
 
 const meta: Meta<typeof ShoppingBag> = {
   title: "Organisms/E-Commerce/ShoppingBag",
@@ -18,7 +18,8 @@ const sampleItems: ShoppingBagItem[] = [
   {
     id: "1",
     name: "Guatemala Elephant Coffee",
-    image: "https://images.unsplash.com/photo-1615486629862-10b0890e79b3?w=200&h=200&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1615486629862-10b0890e79b3?w=200&h=200&fit=crop",
     price: 5.5,
     quantity: 1,
     attributes: [
@@ -31,7 +32,8 @@ const sampleItems: ShoppingBagItem[] = [
   {
     id: "2",
     name: "El Mirador Premium Blend",
-    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=200&h=200&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=200&h=200&fit=crop",
     price: 6.95,
     quantity: 2,
     attributes: [
@@ -59,9 +61,7 @@ export const WithPromoCode: Story = {
     title: "Shopping bag",
     freeShippingThreshold: 25,
     promoCodeInput: (
-      <CouponInput
-        onApply={(code) => console.log("Apply code:", code)}
-      />
+      <CouponInput onApply={(code) => console.log("Apply code:", code)} />
     ),
   },
 };

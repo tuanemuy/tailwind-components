@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { ConfirmModal, DeleteConfirmModal, CancelConfirmModal } from "./index";
 import { Button } from "@/components/atoms/Button";
+import { CancelConfirmModal, ConfirmModal, DeleteConfirmModal } from "./index";
 
 const meta: Meta<typeof ConfirmModal> = {
   title: "Organisms/Overlays/ConfirmModal",

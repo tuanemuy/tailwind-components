@@ -1,7 +1,7 @@
 import { forwardRef, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
 import { Avatar } from "@/components/atoms";
-import { TwitterIcon, LinkedInIcon, GitHubIcon } from "@/lib/icons";
+import { GitHubIcon, LinkedInIcon, TwitterIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Types
 export interface TeamMemberSocial {
@@ -39,11 +39,24 @@ const backgroundClasses = {
 };
 
 export const TeamSection = forwardRef<HTMLElement, TeamSectionProps>(
-  ({ className, padding = "lg", backgroundColor = "default", children, ...props }, ref) => {
+  (
+    {
+      className,
+      padding = "lg",
+      backgroundColor = "default",
+      children,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <section
         ref={ref}
-        className={cn(paddingClasses[padding], backgroundClasses[backgroundColor], className)}
+        className={cn(
+          paddingClasses[padding],
+          backgroundClasses[backgroundColor],
+          className,
+        )}
         {...props}
       >
         <div className="container mx-auto px-4">{children}</div>
@@ -54,61 +67,76 @@ export const TeamSection = forwardRef<HTMLElement, TeamSectionProps>(
 TeamSection.displayName = "TeamSection";
 
 // TeamSectionHeader component
-export interface TeamSectionHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TeamSectionHeaderProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   align?: "left" | "center";
 }
 
-export const TeamSectionHeader = forwardRef<HTMLDivElement, TeamSectionHeaderProps>(
-  ({ className, align = "center", children, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "mb-12 md:mb-16",
-          align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-2xl text-left",
-          className,
-        )}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  },
-);
+export const TeamSectionHeader = forwardRef<
+  HTMLDivElement,
+  TeamSectionHeaderProps
+>(({ className, align = "center", children, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "mb-12 md:mb-16",
+        align === "center"
+          ? "mx-auto max-w-3xl text-center"
+          : "max-w-2xl text-left",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+});
 TeamSectionHeader.displayName = "TeamSectionHeader";
 
 // TeamSectionTitle component
-export interface TeamSectionTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+export interface TeamSectionTitleProps
+  extends React.HTMLAttributes<HTMLHeadingElement> {
   as?: "h2" | "h3";
 }
 
-export const TeamSectionTitle = forwardRef<HTMLHeadingElement, TeamSectionTitleProps>(
-  ({ className, as: Component = "h2", children, ...props }, ref) => {
-    return (
-      <Component
-        ref={ref}
-        className={cn("text-3xl font-bold text-foreground md:text-4xl", className)}
-        {...props}
-      >
-        {children}
-      </Component>
-    );
-  },
-);
+export const TeamSectionTitle = forwardRef<
+  HTMLHeadingElement,
+  TeamSectionTitleProps
+>(({ className, as: Component = "h2", children, ...props }, ref) => {
+  return (
+    <Component
+      ref={ref}
+      className={cn(
+        "text-3xl font-bold text-foreground md:text-4xl",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </Component>
+  );
+});
 TeamSectionTitle.displayName = "TeamSectionTitle";
 
 // TeamSectionSubtitle component
-export interface TeamSectionSubtitleProps extends React.HTMLAttributes<HTMLParagraphElement> {}
+export interface TeamSectionSubtitleProps
+  extends React.HTMLAttributes<HTMLParagraphElement> {}
 
-export const TeamSectionSubtitle = forwardRef<HTMLParagraphElement, TeamSectionSubtitleProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <p ref={ref} className={cn("mt-4 text-lg text-muted-foreground", className)} {...props}>
-        {children}
-      </p>
-    );
-  },
-);
+export const TeamSectionSubtitle = forwardRef<
+  HTMLParagraphElement,
+  TeamSectionSubtitleProps
+>(({ className, children, ...props }, ref) => {
+  return (
+    <p
+      ref={ref}
+      className={cn("mt-4 text-lg text-muted-foreground", className)}
+      {...props}
+    >
+      {children}
+    </p>
+  );
+});
 TeamSectionSubtitle.displayName = "TeamSectionSubtitle";
 
 // TeamGrid component
@@ -134,7 +162,12 @@ export const TeamGrid = forwardRef<HTMLDivElement, TeamGridProps>(
     return (
       <div
         ref={ref}
-        className={cn("grid", columnClasses[columns], gapClasses[gap], className)}
+        className={cn(
+          "grid",
+          columnClasses[columns],
+          gapClasses[gap],
+          className,
+        )}
         {...props}
       >
         {children}
@@ -145,7 +178,8 @@ export const TeamGrid = forwardRef<HTMLDivElement, TeamGridProps>(
 TeamGrid.displayName = "TeamGrid";
 
 // TeamMemberCard component
-export interface TeamMemberCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TeamMemberCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   member: TeamMember;
   variant?: "simple" | "card" | "detailed";
   avatarSize?: "sm" | "md" | "lg" | "xl";
@@ -157,7 +191,7 @@ const avatarSizeMap = {
   sm: "md" as const,
   md: "lg" as const,
   lg: "xl" as const,
-  xl: "2xl" as const,
+  xl: "xl" as const,
 };
 
 const avatarSizeClasses = {
@@ -240,9 +274,9 @@ export const TeamMemberCard = forwardRef<HTMLDivElement, TeamMemberCardProps>(
         {/* Social Links */}
         {showSocials && member.socials && member.socials.length > 0 && (
           <div className="mt-4 flex items-center justify-center gap-2">
-            {member.socials.map((social, index) => (
+            {member.socials.map((social) => (
               <a
-                key={index}
+                key={social.platform}
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -260,7 +294,8 @@ export const TeamMemberCard = forwardRef<HTMLDivElement, TeamMemberCardProps>(
 TeamMemberCard.displayName = "TeamMemberCard";
 
 // TeamMemberList component (horizontal layout)
-export interface TeamMemberListProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TeamMemberListProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   members: TeamMember[];
   variant?: "compact" | "detailed";
 }
@@ -268,7 +303,11 @@ export interface TeamMemberListProps extends React.HTMLAttributes<HTMLDivElement
 export const TeamMemberList = forwardRef<HTMLDivElement, TeamMemberListProps>(
   ({ className, members, variant = "compact", ...props }, ref) => {
     return (
-      <div ref={ref} className={cn("divide-y divide-border", className)} {...props}>
+      <div
+        ref={ref}
+        className={cn("divide-y divide-border", className)}
+        {...props}
+      >
         {members.map((member) => (
           <div
             key={member.id}
@@ -287,23 +326,31 @@ export const TeamMemberList = forwardRef<HTMLDivElement, TeamMemberListProps>(
               <div className="font-medium text-foreground">{member.name}</div>
               <div className="text-sm text-muted-foreground">{member.role}</div>
             </div>
-            {variant === "detailed" && member.socials && member.socials.length > 0 && (
-              <div className="flex items-center gap-1">
-                {member.socials.slice(0, 3).map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                  >
-                    {social.platform === "twitter" && <TwitterIcon className="size-4" />}
-                    {social.platform === "linkedin" && <LinkedInIcon className="size-4" />}
-                    {social.platform === "github" && <GitHubIcon className="size-4" />}
-                  </a>
-                ))}
-              </div>
-            )}
+            {variant === "detailed" &&
+              member.socials &&
+              member.socials.length > 0 && (
+                <div className="flex items-center gap-1">
+                  {member.socials.slice(0, 3).map((social) => (
+                    <a
+                      key={social.platform}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                    >
+                      {social.platform === "twitter" && (
+                        <TwitterIcon className="size-4" />
+                      )}
+                      {social.platform === "linkedin" && (
+                        <LinkedInIcon className="size-4" />
+                      )}
+                      {social.platform === "github" && (
+                        <GitHubIcon className="size-4" />
+                      )}
+                    </a>
+                  ))}
+                </div>
+              )}
           </div>
         ))}
       </div>
@@ -313,79 +360,88 @@ export const TeamMemberList = forwardRef<HTMLDivElement, TeamMemberListProps>(
 TeamMemberList.displayName = "TeamMemberList";
 
 // FeaturedTeamMember component
-export interface FeaturedTeamMemberProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FeaturedTeamMemberProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   member: TeamMember;
   quote?: string;
   imagePosition?: "left" | "right";
 }
 
-export const FeaturedTeamMember = forwardRef<HTMLDivElement, FeaturedTeamMemberProps>(
-  ({ className, member, quote, imagePosition = "left", ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "grid items-center gap-8 md:gap-12 lg:grid-cols-2",
-          imagePosition === "right" && "lg:[&>*:first-child]:order-2",
-          className,
-        )}
-        {...props}
-      >
-        {/* Image */}
-        <div className="flex justify-center lg:justify-start">
-          {member.avatar ? (
-            <img
-              src={member.avatar}
-              alt={member.name}
-              className="size-64 rounded-2xl object-cover shadow-lg md:size-80"
-            />
-          ) : (
-            <div className="flex size-64 items-center justify-center rounded-2xl bg-muted text-6xl font-bold text-muted-foreground md:size-80">
-              {member.initials}
-            </div>
-          )}
-        </div>
-
-        {/* Content */}
-        <div>
-          {quote && (
-            <blockquote className="mb-6 text-xl italic text-muted-foreground md:text-2xl">
-              "{quote}"
-            </blockquote>
-          )}
-          <div>
-            <h3 className="text-xl font-bold text-foreground">{member.name}</h3>
-            <p className="text-muted-foreground">{member.role}</p>
+export const FeaturedTeamMember = forwardRef<
+  HTMLDivElement,
+  FeaturedTeamMemberProps
+>(({ className, member, quote, imagePosition = "left", ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "grid items-center gap-8 md:gap-12 lg:grid-cols-2",
+        imagePosition === "right" && "lg:[&>*:first-child]:order-2",
+        className,
+      )}
+      {...props}
+    >
+      {/* Image */}
+      <div className="flex justify-center lg:justify-start">
+        {member.avatar ? (
+          <img
+            src={member.avatar}
+            alt={member.name}
+            className="size-64 rounded-2xl object-cover shadow-lg md:size-80"
+          />
+        ) : (
+          <div className="flex size-64 items-center justify-center rounded-2xl bg-muted text-6xl font-bold text-muted-foreground md:size-80">
+            {member.initials}
           </div>
-          {member.bio && (
-            <p className="mt-4 text-muted-foreground">{member.bio}</p>
-          )}
-          {member.socials && member.socials.length > 0 && (
-            <div className="mt-6 flex items-center gap-3">
-              {member.socials.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                >
-                  {social.platform === "twitter" && <TwitterIcon className="size-5" />}
-                  {social.platform === "linkedin" && <LinkedInIcon className="size-5" />}
-                  {social.platform === "github" && <GitHubIcon className="size-5" />}
-                </a>
-              ))}
-            </div>
-          )}
-        </div>
+        )}
       </div>
-    );
-  },
-);
+
+      {/* Content */}
+      <div>
+        {quote && (
+          <blockquote className="mb-6 text-xl italic text-muted-foreground md:text-2xl">
+            "{quote}"
+          </blockquote>
+        )}
+        <div>
+          <h3 className="text-xl font-bold text-foreground">{member.name}</h3>
+          <p className="text-muted-foreground">{member.role}</p>
+        </div>
+        {member.bio && (
+          <p className="mt-4 text-muted-foreground">{member.bio}</p>
+        )}
+        {member.socials && member.socials.length > 0 && (
+          <div className="mt-6 flex items-center gap-3">
+            {member.socials.map((social) => (
+              <a
+                key={social.platform}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              >
+                {social.platform === "twitter" && (
+                  <TwitterIcon className="size-5" />
+                )}
+                {social.platform === "linkedin" && (
+                  <LinkedInIcon className="size-5" />
+                )}
+                {social.platform === "github" && (
+                  <GitHubIcon className="size-5" />
+                )}
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+});
 FeaturedTeamMember.displayName = "FeaturedTeamMember";
 
 // CompleteTeamSection component - pre-composed full team section
-export interface CompleteTeamSectionProps extends React.HTMLAttributes<HTMLElement> {
+export interface CompleteTeamSectionProps
+  extends React.HTMLAttributes<HTMLElement> {
   title: string;
   subtitle?: string;
   members: TeamMember[];
@@ -396,7 +452,10 @@ export interface CompleteTeamSectionProps extends React.HTMLAttributes<HTMLEleme
   featuredMember?: TeamMember & { quote?: string };
 }
 
-export const CompleteTeamSection = forwardRef<HTMLElement, CompleteTeamSectionProps>(
+export const CompleteTeamSection = forwardRef<
+  HTMLElement,
+  CompleteTeamSectionProps
+>(
   (
     {
       className,
@@ -421,7 +480,10 @@ export const CompleteTeamSection = forwardRef<HTMLElement, CompleteTeamSectionPr
 
         {featuredMember && (
           <div className="mb-16">
-            <FeaturedTeamMember member={featuredMember} quote={featuredMember.quote} />
+            <FeaturedTeamMember
+              member={featuredMember}
+              quote={featuredMember.quote}
+            />
           </div>
         )}
 

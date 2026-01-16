@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {
   CategoryCard,
-  CategoryGrid,
   CategoryCircular,
+  type CategoryData,
+  CategoryGrid,
   CategoryPill,
   CategorySlider,
-  type CategoryData,
 } from "./index";
 
 const meta: Meta<typeof CategoryCard> = {

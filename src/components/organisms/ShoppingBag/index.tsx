@@ -1,10 +1,10 @@
 "use client";
 
 import { forwardRef, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/atoms";
 import { IconButton } from "@/components/molecules";
-import { XIcon, EditIcon } from "@/lib/icons";
+import { EditIcon, XIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Types
 export interface ShoppingBagItem {
@@ -32,7 +32,7 @@ export interface ShoppingBagProps extends React.HTMLAttributes<HTMLDivElement> {
   paymentMethods?: ReactNode;
 }
 
-const formatPrice = (amount: number, currency: string = "USD"): string => {
+const formatPrice = (amount: number, currency = "USD"): string => {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency,
@@ -58,7 +58,10 @@ export const ShoppingBag = forwardRef<HTMLDivElement, ShoppingBagProps>(
     },
     ref,
   ) => {
-    const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const subtotal = items.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0,
+    );
     const remainingForFreeShipping = freeShippingThreshold
       ? Math.max(0, freeShippingThreshold - subtotal)
       : 0;
@@ -66,19 +69,30 @@ export const ShoppingBag = forwardRef<HTMLDivElement, ShoppingBagProps>(
     return (
       <div
         ref={ref}
-        className={cn("w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12", className)}
+        className={cn(
+          "w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12",
+          className,
+        )}
         {...props}
       >
         {/* Header */}
         <div className="mb-6 sm:mb-10 max-w-2xl text-center mx-auto">
-          <h1 className="font-medium text-foreground text-3xl sm:text-4xl">{title}</h1>
+          <h1 className="font-medium text-foreground text-3xl sm:text-4xl">
+            {title}
+          </h1>
 
-          {subtitle && <p className="mt-3 text-sm text-foreground">{subtitle}</p>}
+          {subtitle && (
+            <p className="mt-3 text-sm text-foreground">{subtitle}</p>
+          )}
 
           {freeShippingThreshold && remainingForFreeShipping > 0 && (
             <p className="mt-3 text-sm text-muted-foreground">
-              You're {formatPrice(remainingForFreeShipping, currency)} away from being eligible for{" "}
-              <span className="font-medium text-foreground">Free US delivery</span>.
+              You're {formatPrice(remainingForFreeShipping, currency)} away from
+              being eligible for{" "}
+              <span className="font-medium text-foreground">
+                Free US delivery
+              </span>
+              .
             </p>
           )}
         </div>
@@ -108,7 +122,9 @@ export const ShoppingBag = forwardRef<HTMLDivElement, ShoppingBagProps>(
               <div className="flex flex-col">
                 <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <span className="text-foreground">Total excl. delivery:</span>
+                    <span className="text-foreground">
+                      Total excl. delivery:
+                    </span>
                   </div>
                   <div className="text-end">
                     <span className="font-medium text-foreground">
@@ -118,7 +134,11 @@ export const ShoppingBag = forwardRef<HTMLDivElement, ShoppingBagProps>(
                 </div>
 
                 <div className="mt-5">
-                  <Button variant="primary" className="w-full" onClick={onCheckout}>
+                  <Button
+                    variant="primary"
+                    className="w-full"
+                    onClick={onCheckout}
+                  >
                     Checkout securely
                   </Button>
                 </div>
@@ -156,7 +176,9 @@ const ShoppingBagItemCard = ({
     outOfStock: { label: "Out of stock", className: "text-destructive" },
   };
 
-  const stockInfo = item.stockStatus ? stockStatusConfig[item.stockStatus] : null;
+  const stockInfo = item.stockStatus
+    ? stockStatusConfig[item.stockStatus]
+    : null;
 
   return (
     <div className="flex gap-5">
@@ -180,9 +202,14 @@ const ShoppingBagItemCard = ({
 
               {item.attributes && item.attributes.length > 0 && (
                 <ul className="mt-1.5 space-y-1">
-                  {item.attributes.map((attr, index) => (
-                    <li key={index} className="text-sm text-muted-foreground">
-                      <span className="font-medium text-foreground">{attr.label}:</span>{" "}
+                  {item.attributes.map((attr) => (
+                    <li
+                      key={attr.label}
+                      className="text-sm text-muted-foreground"
+                    >
+                      <span className="font-medium text-foreground">
+                        {attr.label}:
+                      </span>{" "}
                       {attr.value}
                     </li>
                   ))}
@@ -191,7 +218,11 @@ const ShoppingBagItemCard = ({
 
               {onEdit && (
                 <div className="mt-3 flex flex-wrap gap-2">
-                  <Button variant="outline" size="sm" onClick={() => onEdit(item.id)}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => onEdit(item.id)}
+                  >
                     <EditIcon className="size-4 mr-2" />
                     Edit details
                   </Button>
@@ -208,9 +239,17 @@ const ShoppingBagItemCard = ({
               <select
                 className="py-2 ps-3 pe-8 inline-block border border-border rounded-lg text-sm text-foreground bg-background focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none"
                 value={item.quantity}
-                onChange={(e) => onQuantityChange?.(item.id, parseInt(e.target.value, 10))}
+                onChange={(e) =>
+                  onQuantityChange?.(
+                    item.id,
+                    Number.parseInt(e.target.value, 10),
+                  )
+                }
               >
-                {Array.from({ length: item.maxQuantity || 10 }, (_, i) => i + 1).map((num) => (
+                {Array.from(
+                  { length: item.maxQuantity || 10 },
+                  (_, i) => i + 1,
+                ).map((num) => (
                   <option key={num} value={num}>
                     {num}
                   </option>
@@ -230,7 +269,12 @@ const ShoppingBagItemCard = ({
 
             {stockInfo && (
               <p className="mt-1">
-                <span className={cn("inline-flex items-center gap-x-1 text-sm", stockInfo.className)}>
+                <span
+                  className={cn(
+                    "inline-flex items-center gap-x-1 text-sm",
+                    stockInfo.className,
+                  )}
+                >
                   {stockInfo.label}
                 </span>
               </p>
@@ -239,12 +283,16 @@ const ShoppingBagItemCard = ({
 
           {/* Unit Price */}
           <div className="col-span-12 sm:col-span-4 lg:col-span-2 sm:text-end">
-            <p className="text-foreground">{formatPrice(item.price, currency)} each</p>
+            <p className="text-foreground">
+              {formatPrice(item.price, currency)} each
+            </p>
           </div>
 
           {/* Total */}
           <div className="col-span-12 sm:col-span-4 lg:col-span-2 sm:text-end">
-            <p className="text-foreground">{formatPrice(item.price * item.quantity, currency)}</p>
+            <p className="text-foreground">
+              {formatPrice(item.price * item.quantity, currency)}
+            </p>
           </div>
         </div>
       </div>
@@ -253,7 +301,8 @@ const ShoppingBagItemCard = ({
 };
 
 // MiniShoppingBag for sidebar/dropdown
-export interface MiniShoppingBagProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface MiniShoppingBagProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   items: ShoppingBagItem[];
   currency?: string;
   onRemoveItem?: (itemId: string) => void;
@@ -263,15 +312,29 @@ export interface MiniShoppingBagProps extends React.HTMLAttributes<HTMLDivElemen
 
 export const MiniShoppingBag = forwardRef<HTMLDivElement, MiniShoppingBagProps>(
   (
-    { className, items, currency = "USD", onRemoveItem, onViewBag, onCheckout, ...props },
+    {
+      className,
+      items,
+      currency = "USD",
+      onRemoveItem,
+      onViewBag,
+      onCheckout,
+      ...props
+    },
     ref,
   ) => {
-    const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const subtotal = items.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0,
+    );
 
     return (
       <div
         ref={ref}
-        className={cn("w-80 bg-card border border-border rounded-xl shadow-lg", className)}
+        className={cn(
+          "w-80 bg-card border border-border rounded-xl shadow-lg",
+          className,
+        )}
         {...props}
       >
         <div className="p-4 border-b border-border">
@@ -299,8 +362,12 @@ export const MiniShoppingBag = forwardRef<HTMLDivElement, MiniShoppingBagProps>(
                     />
                   )}
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-foreground truncate">{item.name}</p>
-                    <p className="text-sm text-muted-foreground">Qty: {item.quantity}</p>
+                    <p className="font-medium text-foreground truncate">
+                      {item.name}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Qty: {item.quantity}
+                    </p>
                     <p className="text-sm font-medium text-foreground">
                       {formatPrice(item.price * item.quantity, currency)}
                     </p>
@@ -323,7 +390,9 @@ export const MiniShoppingBag = forwardRef<HTMLDivElement, MiniShoppingBagProps>(
         <div className="p-4 border-t border-border space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-muted-foreground">Subtotal</span>
-            <span className="font-medium text-foreground">{formatPrice(subtotal, currency)}</span>
+            <span className="font-medium text-foreground">
+              {formatPrice(subtotal, currency)}
+            </span>
           </div>
 
           <div className="flex gap-2">

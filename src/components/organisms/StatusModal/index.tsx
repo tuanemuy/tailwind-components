@@ -1,9 +1,14 @@
-import { forwardRef, useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { forwardRef, type ReactNode, useState } from "react";
 import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "@/components/organisms/Modal";
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "@/components/organisms/Modal";
 import { CheckIcon, ClockIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 export interface StatusOption {
   id: string;
@@ -104,12 +109,16 @@ export const StatusModal = forwardRef<HTMLDivElement, StatusModalProps>(
                       option.color || "bg-muted",
                     )}
                   >
-                    {option.icon || <span className="size-2 rounded-full bg-current" />}
+                    {option.icon || (
+                      <span className="size-2 rounded-full bg-current" />
+                    )}
                   </span>
 
                   {/* Label and description */}
                   <div className="min-w-0 flex-1">
-                    <p className="font-medium text-foreground">{option.label}</p>
+                    <p className="font-medium text-foreground">
+                      {option.label}
+                    </p>
                     {option.description && (
                       <p className="text-xs text-muted-foreground">
                         {option.description}
@@ -127,11 +136,15 @@ export const StatusModal = forwardRef<HTMLDivElement, StatusModalProps>(
 
             {/* Custom message */}
             {showCustomMessage && (
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">
+              <div>
+                <label
+                  htmlFor="status-message-input"
+                  className="mb-2 block text-sm font-medium text-foreground"
+                >
                   Status message
                 </label>
                 <Input
+                  id="status-message-input"
                   value={customMessage}
                   onChange={(e) => setCustomMessage(e.target.value)}
                   placeholder={customMessagePlaceholder}
@@ -189,21 +202,21 @@ const availabilityOptions: StatusOption[] = [
   },
 ];
 
-export interface AvailabilityStatusModalProps extends Omit<StatusModalProps, "options" | "title"> {
+export interface AvailabilityStatusModalProps
+  extends Omit<StatusModalProps, "options" | "title"> {
   title?: string;
   options?: StatusOption[];
 }
 
-export const AvailabilityStatusModal = forwardRef<HTMLDivElement, AvailabilityStatusModalProps>(
-  ({ title = "Set your status", options = availabilityOptions, ...props }, ref) => {
-    return (
-      <StatusModal
-        ref={ref}
-        title={title}
-        options={options}
-        {...props}
-      />
-    );
+export const AvailabilityStatusModal = forwardRef<
+  HTMLDivElement,
+  AvailabilityStatusModalProps
+>(
+  (
+    { title = "Set your status", options = availabilityOptions, ...props },
+    ref,
+  ) => {
+    return <StatusModal ref={ref} title={title} options={options} {...props} />;
   },
 );
 AvailabilityStatusModal.displayName = "AvailabilityStatusModal";
@@ -238,13 +251,17 @@ const taskStatusOptions: StatusOption[] = [
   },
 ];
 
-export interface TaskStatusModalProps extends Omit<StatusModalProps, "options" | "title" | "showCustomMessage"> {
+export interface TaskStatusModalProps
+  extends Omit<StatusModalProps, "options" | "title" | "showCustomMessage"> {
   title?: string;
   options?: StatusOption[];
 }
 
 export const TaskStatusModal = forwardRef<HTMLDivElement, TaskStatusModalProps>(
-  ({ title = "Update task status", options = taskStatusOptions, ...props }, ref) => {
+  (
+    { title = "Update task status", options = taskStatusOptions, ...props },
+    ref,
+  ) => {
     return (
       <StatusModal
         ref={ref}

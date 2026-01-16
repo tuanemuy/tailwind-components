@@ -1,36 +1,31 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
-import {
-  feedbackFormVariants,
-  feedbackCategoryVariants,
-  ratingFormVariants,
-  ratingScaleVariants,
-  ratingScaleItemVariants,
-  npsSurveyVariants,
-  npsScaleVariants,
-  npsScoreVariants,
-  npsLabelVariants,
-  thankYouVariants,
-} from "@/lib/variants";
+import type { VariantProps } from "class-variance-authority";
+import { type ReactNode, useState } from "react";
 import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
-import { Textarea } from "@/components/atoms/Textarea";
 import { Label } from "@/components/atoms/Label";
+import { Textarea } from "@/components/atoms/Textarea";
 import { Rating } from "@/components/molecules/Rating";
 import {
   CheckCircleIcon,
-  SmileIcon,
-  ThumbsUpIcon,
-  ThumbsDownIcon,
-  MessageSquareIcon,
-  AlertCircleIcon,
-  StarIcon,
-  ZapIcon,
   HeartIcon,
+  ThumbsDownIcon,
+  ThumbsUpIcon,
 } from "@/lib/icons";
-import type { VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+import {
+  feedbackCategoryVariants,
+  feedbackFormVariants,
+  npsLabelVariants,
+  npsScaleVariants,
+  npsScoreVariants,
+  npsSurveyVariants,
+  ratingFormVariants,
+  ratingScaleItemVariants,
+  ratingScaleVariants,
+  thankYouVariants,
+} from "@/lib/variants";
 
 // =============================================================================
 // FeedbackForm
@@ -118,7 +113,7 @@ export function FeedbackForm({
                   feedbackCategoryVariants({
                     variant:
                       selectedCategory === category.id ? "selected" : "default",
-                  })
+                  }),
                 )}
                 onClick={() => setSelectedCategory(category.id)}
               >
@@ -258,12 +253,12 @@ export function RatingForm({
           <div className={cn(ratingScaleVariants({ variant: "emoji" }))}>
             {emojis.slice(0, maxRating).map((emoji, index) => (
               <button
-                key={index}
+                key={emoji}
                 type="button"
                 className={cn(
                   ratingScaleItemVariants({
                     variant: rating === index + 1 ? "selected" : "emoji",
-                  })
+                  }),
                 )}
                 onClick={() => setRating(index + 1)}
               >
@@ -282,7 +277,7 @@ export function RatingForm({
                 className={cn(
                   ratingScaleItemVariants({
                     variant: rating === num ? "selected" : "numeric",
-                  })
+                  }),
                 )}
                 onClick={() => setRating(num)}
               >
@@ -302,7 +297,7 @@ export function RatingForm({
                   "flex flex-col items-center gap-2 rounded-lg border border-border p-6 transition-all",
                   rating === option.value
                     ? "border-primary bg-primary/10"
-                    : "hover:border-primary hover:bg-primary/5"
+                    : "hover:border-primary hover:bg-primary/5",
                 )}
                 onClick={() => setRating(option.value)}
               >
@@ -373,7 +368,9 @@ export function NPSSurvey({
   const [reason, setReason] = useState("");
   const [step, setStep] = useState<"score" | "followup" | "thanks">("score");
 
-  const getScoreType = (score: number): "detractor" | "passive" | "promoter" => {
+  const getScoreType = (
+    score: number,
+  ): "detractor" | "passive" | "promoter" => {
     if (score <= 6) return "detractor";
     if (score <= 8) return "passive";
     return "promoter";
@@ -429,7 +426,7 @@ export function NPSSurvey({
                   className={cn(
                     npsScoreVariants({
                       variant: score === num ? type : "default",
-                    })
+                    }),
                   )}
                   onClick={() => handleScoreSelect(num)}
                 >
@@ -520,9 +517,7 @@ export function QuickFeedback({
     return (
       <div className={cn("flex items-center gap-2 text-sm", className)}>
         <CheckCircleIcon className="size-4 text-success" />
-        <span className="text-muted-foreground">
-          Thanks for your feedback!
-        </span>
+        <span className="text-muted-foreground">Thanks for your feedback!</span>
       </div>
     );
   }
@@ -554,8 +549,4 @@ export function QuickFeedback({
   );
 }
 
-// =============================================================================
-// Exports
-// =============================================================================
-
-export type { FeedbackCategory, RatingType };
+// Types are exported at their definitions above

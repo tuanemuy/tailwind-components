@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { TagsModal, tagColors } from "./index";
-import type { TagItem } from "./index";
 import { Button } from "@/components/atoms/Button";
+import type { TagItem } from "./index";
+import { TagsModal, tagColors } from "./index";
 
 const meta: Meta<typeof TagsModal> = {
   title: "Organisms/Overlays/TagsModal",
@@ -75,7 +75,9 @@ export const WithCreateNew: Story = {
 
     return (
       <>
-        <Button onClick={() => setIsOpen(true)}>Manage Tags (Create New)</Button>
+        <Button onClick={() => setIsOpen(true)}>
+          Manage Tags (Create New)
+        </Button>
         <TagsModal
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}

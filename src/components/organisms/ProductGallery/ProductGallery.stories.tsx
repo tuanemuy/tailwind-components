@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ProductGallery, ProductGalleryDots } from "./index";
 import { Badge } from "@/components/atoms";
+import { ProductGallery, ProductGalleryDots } from "./index";
 
 const meta: Meta<typeof ProductGallery> = {
   title: "Organisms/ProductGallery",

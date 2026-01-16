@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  KanbanBoard,
-  KanbanColumn,
-  KanbanCard,
-  KanbanHeader,
-  type KanbanColumnData,
-  type KanbanCardData,
-} from "./index";
 import { Button } from "@/components/atoms/Button";
 import { FilterIcon, SettingsIcon } from "@/lib/icons";
+import {
+  KanbanBoard,
+  KanbanCard,
+  type KanbanCardData,
+  KanbanColumn,
+  type KanbanColumnData,
+  KanbanHeader,
+} from "./index";
 
 const meta: Meta<typeof KanbanBoard> = {
   title: "Organisms/KanbanBoard",
@@ -34,7 +34,11 @@ const sampleCards: KanbanCardData[] = [
     ],
     assignees: [
       { id: "u1", name: "John Doe", avatar: "https://i.pravatar.cc/100?img=1" },
-      { id: "u2", name: "Jane Smith", avatar: "https://i.pravatar.cc/100?img=2" },
+      {
+        id: "u2",
+        name: "Jane Smith",
+        avatar: "https://i.pravatar.cc/100?img=2",
+      },
     ],
     dueDate: "Jan 15",
     comments: 5,
@@ -47,7 +51,11 @@ const sampleCards: KanbanCardData[] = [
     priority: "high",
     tags: [{ id: "t3", label: "Bug", color: "red" }],
     assignees: [
-      { id: "u3", name: "Mike Johnson", avatar: "https://i.pravatar.cc/100?img=3" },
+      {
+        id: "u3",
+        name: "Mike Johnson",
+        avatar: "https://i.pravatar.cc/100?img=3",
+      },
     ],
     dueDate: "Jan 12",
     comments: 3,
@@ -212,13 +220,18 @@ export const CardWithCover: StoryObj<typeof KanbanCard> = {
           id: "1",
           title: "Design System Update",
           description: "Update the design system with new components",
-          coverImage: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400&h=200&fit=crop",
+          coverImage:
+            "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400&h=200&fit=crop",
           tags: [
             { id: "t1", label: "Design", color: "purple" },
             { id: "t2", label: "UI", color: "pink" },
           ],
           assignees: [
-            { id: "u1", name: "John", avatar: "https://i.pravatar.cc/100?img=1" },
+            {
+              id: "u1",
+              name: "John",
+              avatar: "https://i.pravatar.cc/100?img=1",
+            },
           ],
           dueDate: "Jan 20",
         }}
@@ -263,7 +276,12 @@ export const EmptyBoard: Story = {
         <KanbanBoard
           columns={[
             { id: "todo", title: "To Do", color: "blue", cards: [] },
-            { id: "in-progress", title: "In Progress", color: "yellow", cards: [] },
+            {
+              id: "in-progress",
+              title: "In Progress",
+              color: "yellow",
+              cards: [],
+            },
             { id: "done", title: "Done", color: "green", cards: [] },
           ]}
           onCardClick={() => {}}

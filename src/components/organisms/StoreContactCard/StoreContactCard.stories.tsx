@@ -29,7 +29,8 @@ const sampleStore = {
   website: "https://store.com/downtown",
   distance: "0.3 mi",
   isOpen: true,
-  imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=400&fit=crop",
+  imageUrl:
+    "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=400&fit=crop",
   hours: [
     { day: "Monday", open: "9:00 AM", close: "6:00 PM" },
     { day: "Tuesday", open: "9:00 AM", close: "6:00 PM" },

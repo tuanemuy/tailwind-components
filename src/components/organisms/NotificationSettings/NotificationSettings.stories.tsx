@@ -1,13 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import {
-  NotificationSettings,
-  GroupedNotificationSettings,
-  NotificationToggleCard,
+  BellIcon,
+  MailIcon,
+  MessageSquareIcon,
+  SmartphoneIcon,
+} from "@/lib/icons";
+import {
   EmailDigestSettings,
+  GroupedNotificationSettings,
   NotificationPreferencesPanel,
+  NotificationSettings,
+  NotificationToggleCard,
 } from "./index";
-import { MailIcon, BellIcon, SmartphoneIcon, MessageSquareIcon } from "@/lib/icons";
 
 const meta: Meta<typeof NotificationSettings> = {
   title: "Organisms/PageSections/NotificationSettings",
@@ -200,57 +205,58 @@ export const Grouped: StoryObj<typeof GroupedNotificationSettings> = {
   ),
 };
 
-export const GroupedWithChannels: StoryObj<typeof GroupedNotificationSettings> = {
-  render: () => (
-    <div className="max-w-lg">
-      <GroupedNotificationSettings
-        showChannels
-        groups={[
-          {
-            id: "messages",
-            title: "Messages",
-            settings: [
-              {
-                id: "dm",
-                title: "Direct messages",
-                description: "New direct messages",
-                enabled: true,
-                channels: { email: true, push: true, sms: false },
-              },
-              {
-                id: "replies",
-                title: "Replies",
-                description: "Replies to your messages",
-                enabled: true,
-                channels: { email: false, push: true, sms: false },
-              },
-            ],
-          },
-          {
-            id: "alerts",
-            title: "Important Alerts",
-            settings: [
-              {
-                id: "security",
-                title: "Security alerts",
-                description: "Suspicious activity on your account",
-                enabled: true,
-                channels: { email: true, push: true, sms: true },
-              },
-              {
-                id: "billing",
-                title: "Billing alerts",
-                description: "Payment reminders and receipts",
-                enabled: true,
-                channels: { email: true, push: false, sms: false },
-              },
-            ],
-          },
-        ]}
-      />
-    </div>
-  ),
-};
+export const GroupedWithChannels: StoryObj<typeof GroupedNotificationSettings> =
+  {
+    render: () => (
+      <div className="max-w-lg">
+        <GroupedNotificationSettings
+          showChannels
+          groups={[
+            {
+              id: "messages",
+              title: "Messages",
+              settings: [
+                {
+                  id: "dm",
+                  title: "Direct messages",
+                  description: "New direct messages",
+                  enabled: true,
+                  channels: { email: true, push: true, sms: false },
+                },
+                {
+                  id: "replies",
+                  title: "Replies",
+                  description: "Replies to your messages",
+                  enabled: true,
+                  channels: { email: false, push: true, sms: false },
+                },
+              ],
+            },
+            {
+              id: "alerts",
+              title: "Important Alerts",
+              settings: [
+                {
+                  id: "security",
+                  title: "Security alerts",
+                  description: "Suspicious activity on your account",
+                  enabled: true,
+                  channels: { email: true, push: true, sms: true },
+                },
+                {
+                  id: "billing",
+                  title: "Billing alerts",
+                  description: "Payment reminders and receipts",
+                  enabled: true,
+                  channels: { email: true, push: false, sms: false },
+                },
+              ],
+            },
+          ]}
+        />
+      </div>
+    ),
+  };
 
 // Toggle cards
 export const ToggleCards: StoryObj<typeof NotificationToggleCard> = {
@@ -344,7 +350,9 @@ export const PreferencesPanel: StoryObj<typeof NotificationPreferencesPanel> = {
   ),
 };
 
-export const PreferencesPanelSaving: StoryObj<typeof NotificationPreferencesPanel> = {
+export const PreferencesPanelSaving: StoryObj<
+  typeof NotificationPreferencesPanel
+> = {
   render: () => (
     <div className="max-w-lg">
       <NotificationPreferencesPanel
@@ -391,24 +399,26 @@ export const Interactive: Story = {
             ? {
                 ...s,
                 enabled,
-                channels: enabled ? s.channels : { email: false, push: false, sms: false },
+                channels: enabled
+                  ? s.channels
+                  : { email: false, push: false, sms: false },
               }
-            : s
-        )
+            : s,
+        ),
       );
     };
 
     const handleChannelChange = (
       id: string,
       channel: "email" | "push" | "sms",
-      enabled: boolean
+      enabled: boolean,
     ) => {
       setSettings((prev) =>
         prev.map((s) =>
           s.id === id
             ? { ...s, channels: { ...s.channels, [channel]: enabled } }
-            : s
-        )
+            : s,
+        ),
       );
     };
 

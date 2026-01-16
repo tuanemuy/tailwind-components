@@ -134,9 +134,12 @@ const columns: ExpandableTableColumn<Employee>[] = [
     align: "center",
     render: (value) => {
       const statusColors = {
-        active: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
-        inactive: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400",
-        pending: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
+        active:
+          "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
+        inactive:
+          "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400",
+        pending:
+          "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
       };
       return (
         <span
@@ -216,14 +219,18 @@ const renderExpandedRow = (row: Employee) => (
             >
               <span className="text-sm text-foreground">{project.name}</span>
               <div className="flex items-center gap-3">
-                <span className="text-xs text-muted-foreground">{project.status}</span>
+                <span className="text-xs text-muted-foreground">
+                  {project.status}
+                </span>
                 <div className="w-20 h-2 bg-muted rounded-full overflow-hidden">
                   <div
                     className="h-full bg-primary rounded-full"
                     style={{ width: `${project.progress}%` }}
                   />
                 </div>
-                <span className="text-xs text-muted-foreground w-8">{project.progress}%</span>
+                <span className="text-xs text-muted-foreground w-8">
+                  {project.progress}%
+                </span>
               </div>
             </div>
           ))}
@@ -265,7 +272,9 @@ export const SingleExpanded: Story = {
 // With Controlled Expansion
 export const ControlledExpansion: Story = {
   render: function Render() {
-    const [expandedRows, setExpandedRows] = useState<(string | number)[]>(["1"]);
+    const [expandedRows, setExpandedRows] = useState<(string | number)[]>([
+      "1",
+    ]);
 
     return (
       <ExpandableTable
@@ -302,7 +311,10 @@ export const WithSelection: Story = {
 // With Sorting
 export const WithSorting: Story = {
   render: function Render() {
-    const [sortState, setSortState] = useState({ key: "name", direction: "asc" as const });
+    const [sortState, setSortState] = useState<{ key: string; direction: "asc" | "desc" }>({
+      key: "name",
+      direction: "asc",
+    });
 
     const sortedData = [...sampleEmployees].sort((a, b) => {
       const aVal = a[sortState.key as keyof Employee];
@@ -339,7 +351,7 @@ export const WithPagination: Story = {
 
     const paginatedData = sampleEmployees.slice(
       (page - 1) * pageSize,
-      page * pageSize
+      page * pageSize,
     );
 
     return (

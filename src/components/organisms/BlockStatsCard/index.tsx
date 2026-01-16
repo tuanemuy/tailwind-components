@@ -1,9 +1,9 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
+import { TrendIndicator } from "@/components/molecules";
+import type { TrendDirection, TrendVariant } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { dataCardVariants } from "@/lib/variants/dataVisualization";
-import { TrendIndicator } from "@/components/molecules";
-import type { VariantProps } from "class-variance-authority";
-import type { TrendDirection, TrendVariant } from "@/lib/types";
 
 // ============================================
 // BlockStatsCard
@@ -66,7 +66,9 @@ export const BlockStatsCard = forwardRef<HTMLDivElement, BlockStatsCardProps>(
                 <h3 className="text-sm font-medium text-foreground">{title}</h3>
               )}
               {subtitle && (
-                <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {subtitle}
+                </p>
               )}
             </div>
             {action && <div className="shrink-0">{action}</div>}
@@ -74,7 +76,9 @@ export const BlockStatsCard = forwardRef<HTMLDivElement, BlockStatsCardProps>(
         )}
 
         {/* Stats Grid */}
-        <div className={cn("grid divide-x divide-border", columnClasses[columns])}>
+        <div
+          className={cn("grid divide-x divide-border", columnClasses[columns])}
+        >
           {stats.map((stat) => (
             <div
               key={stat.id}
@@ -85,7 +89,7 @@ export const BlockStatsCard = forwardRef<HTMLDivElement, BlockStatsCardProps>(
                   <span
                     className={cn(
                       "shrink-0 text-muted-foreground",
-                      stat.color && "text-current"
+                      stat.color && "text-current",
                     )}
                     style={stat.color ? { color: stat.color } : undefined}
                   >
@@ -100,7 +104,7 @@ export const BlockStatsCard = forwardRef<HTMLDivElement, BlockStatsCardProps>(
                 <span
                   className={cn(
                     "text-xl font-semibold text-foreground",
-                    stat.color && "text-current"
+                    stat.color && "text-current",
                   )}
                   style={stat.color ? { color: stat.color } : undefined}
                 >
@@ -128,7 +132,8 @@ BlockStatsCard.displayName = "BlockStatsCard";
 // BlockStatsGrid - Multiple cards in a grid
 // ============================================
 
-export interface BlockStatsGridProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface BlockStatsGridProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   columns?: 1 | 2 | 3 | 4;
   gap?: "sm" | "md" | "lg";
@@ -152,7 +157,12 @@ export const BlockStatsGrid = forwardRef<HTMLDivElement, BlockStatsGridProps>(
     return (
       <div
         ref={ref}
-        className={cn("grid", gridColumnClasses[columns], gapClasses[gap], className)}
+        className={cn(
+          "grid",
+          gridColumnClasses[columns],
+          gapClasses[gap],
+          className,
+        )}
         {...props}
       >
         {children}
@@ -166,7 +176,8 @@ BlockStatsGrid.displayName = "BlockStatsGrid";
 // MiniBlockStats - Compact inline stats
 // ============================================
 
-export interface MiniBlockStatsProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface MiniBlockStatsProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   stats: BlockStatItem[];
   size?: "sm" | "md";
 }
@@ -178,7 +189,7 @@ export const MiniBlockStats = forwardRef<HTMLDivElement, MiniBlockStatsProps>(
         ref={ref}
         className={cn(
           "flex items-center divide-x divide-border rounded-lg border border-border bg-card",
-          className
+          className,
         )}
         {...props}
       >
@@ -187,7 +198,7 @@ export const MiniBlockStats = forwardRef<HTMLDivElement, MiniBlockStatsProps>(
             key={stat.id}
             className={cn(
               "flex flex-col items-center justify-center",
-              size === "sm" ? "px-3 py-2" : "px-4 py-3"
+              size === "sm" ? "px-3 py-2" : "px-4 py-3",
             )}
           >
             <span className="text-xs text-muted-foreground">{stat.label}</span>
@@ -195,7 +206,7 @@ export const MiniBlockStats = forwardRef<HTMLDivElement, MiniBlockStatsProps>(
               <span
                 className={cn(
                   "font-semibold text-foreground",
-                  size === "sm" ? "text-base" : "text-lg"
+                  size === "sm" ? "text-base" : "text-lg",
                 )}
               >
                 {stat.value}

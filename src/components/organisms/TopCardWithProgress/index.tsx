@@ -1,10 +1,10 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
+import { Badge } from "@/components/atoms";
+import { TrendIndicator } from "@/components/molecules";
+import type { TrendDirection, TrendVariant } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { dataCardVariants } from "@/lib/variants/dataVisualization";
-import { TrendIndicator } from "@/components/molecules";
-import { Badge } from "@/components/atoms";
-import type { VariantProps } from "class-variance-authority";
-import type { TrendDirection, TrendVariant } from "@/lib/types";
 
 // ============================================
 // Types
@@ -44,7 +44,10 @@ export interface TopCardWithProgressProps
   formatValue?: (value: number) => string;
 }
 
-export const TopCardWithProgress = forwardRef<HTMLDivElement, TopCardWithProgressProps>(
+export const TopCardWithProgress = forwardRef<
+  HTMLDivElement,
+  TopCardWithProgressProps
+>(
   (
     {
       className,
@@ -79,7 +82,9 @@ export const TopCardWithProgress = forwardRef<HTMLDivElement, TopCardWithProgres
                 <h3 className="text-sm font-medium text-foreground">{title}</h3>
               )}
               {subtitle && (
-                <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {subtitle}
+                </p>
               )}
             </div>
             {action && <div className="shrink-0">{action}</div>}
@@ -89,9 +94,13 @@ export const TopCardWithProgress = forwardRef<HTMLDivElement, TopCardWithProgres
         {/* Items */}
         <div className="divide-y divide-border">
           {displayItems.map((item, index) => {
-            const percentage = item.percentage ??
-              (item.target ? (item.value / item.target) * 100 : (item.value / maxValue) * 100);
-            const barColor = item.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+            const percentage =
+              item.percentage ??
+              (item.target
+                ? (item.value / item.target) * 100
+                : (item.value / maxValue) * 100);
+            const barColor =
+              item.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
             return (
               <div key={item.id} className="px-4 py-3">
@@ -104,10 +113,10 @@ export const TopCardWithProgress = forwardRef<HTMLDivElement, TopCardWithProgres
                         index === 0
                           ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400"
                           : index === 1
-                          ? "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300"
-                          : index === 2
-                          ? "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400"
-                          : "bg-muted text-muted-foreground"
+                            ? "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+                            : index === 2
+                              ? "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400"
+                              : "bg-muted text-muted-foreground",
                       )}
                     >
                       {index + 1}
@@ -116,10 +125,7 @@ export const TopCardWithProgress = forwardRef<HTMLDivElement, TopCardWithProgres
 
                   {/* Icon */}
                   {item.icon && (
-                    <span
-                      className="shrink-0"
-                      style={{ color: barColor }}
-                    >
+                    <span className="shrink-0" style={{ color: barColor }}>
                       {item.icon}
                     </span>
                   )}
@@ -165,7 +171,12 @@ export const TopCardWithProgress = forwardRef<HTMLDivElement, TopCardWithProgres
                 </div>
 
                 {/* Progress Bar */}
-                <div className={cn("mt-2 h-1.5 rounded-full bg-muted overflow-hidden", showRank && "ml-9")}>
+                <div
+                  className={cn(
+                    "mt-2 h-1.5 rounded-full bg-muted overflow-hidden",
+                    showRank && "ml-9",
+                  )}
+                >
                   <div
                     className="h-full rounded-full transition-all duration-500"
                     style={{
@@ -223,7 +234,10 @@ export interface TopPerformersCardProps
   formatValue?: (value: number) => string;
 }
 
-export const TopPerformersCard = forwardRef<HTMLDivElement, TopPerformersCardProps>(
+export const TopPerformersCard = forwardRef<
+  HTMLDivElement,
+  TopPerformersCardProps
+>(
   (
     {
       className,
@@ -273,10 +287,10 @@ export const TopPerformersCard = forwardRef<HTMLDivElement, TopPerformersCardPro
                       index === 0
                         ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400"
                         : index === 1
-                        ? "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300"
-                        : index === 2
-                        ? "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400"
-                        : "bg-muted text-muted-foreground"
+                          ? "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+                          : index === 2
+                            ? "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400"
+                            : "bg-muted text-muted-foreground",
                     )}
                   >
                     {index + 1}
@@ -303,11 +317,12 @@ export const TopPerformersCard = forwardRef<HTMLDivElement, TopPerformersCardPro
                         </Badge>
                       )}
                     </div>
-                    {performer.secondaryValue !== undefined && secondaryLabel && (
-                      <p className="text-xs text-muted-foreground">
-                        {secondaryLabel}: {performer.secondaryValue}
-                      </p>
-                    )}
+                    {performer.secondaryValue !== undefined &&
+                      secondaryLabel && (
+                        <p className="text-xs text-muted-foreground">
+                          {secondaryLabel}: {performer.secondaryValue}
+                        </p>
+                      )}
                   </div>
 
                   {/* Value */}
@@ -325,7 +340,9 @@ export const TopPerformersCard = forwardRef<HTMLDivElement, TopPerformersCardPro
                         {formatValue(performer.value)}
                       </span>
                       {valueLabel && (
-                        <p className="text-xs text-muted-foreground">{valueLabel}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {valueLabel}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -367,7 +384,10 @@ export interface GoalProgressCardProps
   formatValue?: (value: number) => string;
 }
 
-export const GoalProgressCard = forwardRef<HTMLDivElement, GoalProgressCardProps>(
+export const GoalProgressCard = forwardRef<
+  HTMLDivElement,
+  GoalProgressCardProps
+>(
   (
     {
       className,
@@ -431,9 +451,7 @@ export const GoalProgressCard = forwardRef<HTMLDivElement, GoalProgressCardProps
                 / {formatValue(target)} {unit}
               </span>
             </div>
-            <Badge
-              variant={isComplete ? "success" : "secondary"}
-            >
+            <Badge variant={isComplete ? "success" : "secondary"}>
               {Math.round(percentage)}%
             </Badge>
           </div>

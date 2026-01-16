@@ -1,24 +1,24 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { Badge } from "@/components/atoms/Badge";
 import {
-  DescriptionList,
-  DescriptionListItem,
-  DescriptionListIcon,
-  DescriptionTerm,
-  DescriptionDetails,
-  HorizontalDescriptionList,
-  CardDescriptionList,
-} from "./index";
-import {
-  UserIcon,
-  MailIcon,
-  PhoneIcon,
-  MapPinIcon,
+  BuildingIcon,
   CalendarIcon,
   CreditCardIcon,
-  BuildingIcon,
   GlobeIcon,
+  MailIcon,
+  MapPinIcon,
+  PhoneIcon,
+  UserIcon,
 } from "@/lib/icons";
-import { Badge } from "@/components/atoms/Badge";
+import {
+  CardDescriptionList,
+  DescriptionDetails,
+  DescriptionList,
+  DescriptionListIcon,
+  DescriptionListItem,
+  DescriptionTerm,
+  HorizontalDescriptionList,
+} from "./index";
 
 const meta: Meta<typeof DescriptionList> = {
   title: "Organisms/PageSections/DescriptionList",
@@ -54,10 +54,26 @@ const sampleItems = [
 ];
 
 const itemsWithIcons = [
-  { term: "Full name", details: "John Doe", icon: <UserIcon className="size-full" /> },
-  { term: "Email", details: "john@example.com", icon: <MailIcon className="size-full" /> },
-  { term: "Phone", details: "+1 (555) 123-4567", icon: <PhoneIcon className="size-full" /> },
-  { term: "Location", details: "New York, USA", icon: <MapPinIcon className="size-full" /> },
+  {
+    term: "Full name",
+    details: "John Doe",
+    icon: <UserIcon className="size-full" />,
+  },
+  {
+    term: "Email",
+    details: "john@example.com",
+    icon: <MailIcon className="size-full" />,
+  },
+  {
+    term: "Phone",
+    details: "+1 (555) 123-4567",
+    icon: <PhoneIcon className="size-full" />,
+  },
+  {
+    term: "Location",
+    details: "New York, USA",
+    icon: <MapPinIcon className="size-full" />,
+  },
 ];
 
 export const Default: Story = {
@@ -111,11 +127,7 @@ export const Card: Story = {
 };
 
 export const Horizontal: StoryObj<typeof HorizontalDescriptionList> = {
-  render: () => (
-    <HorizontalDescriptionList
-      items={sampleItems}
-    />
-  ),
+  render: () => <HorizontalDescriptionList items={sampleItems} />,
 };
 
 export const HorizontalStriped: StoryObj<typeof HorizontalDescriptionList> = {
@@ -132,11 +144,7 @@ export const HorizontalStriped: StoryObj<typeof HorizontalDescriptionList> = {
 };
 
 export const HorizontalWithIcons: StoryObj<typeof HorizontalDescriptionList> = {
-  render: () => (
-    <HorizontalDescriptionList
-      items={itemsWithIcons}
-    />
-  ),
+  render: () => <HorizontalDescriptionList items={itemsWithIcons} />,
 };
 
 export const CardStyleWithTitle: StoryObj<typeof CardDescriptionList> = {
@@ -145,10 +153,18 @@ export const CardStyleWithTitle: StoryObj<typeof CardDescriptionList> = {
       title="Account Information"
       description="Your personal account details"
       items={[
-        { term: "Account ID", details: "#ACC-12345", icon: <CreditCardIcon className="size-full" /> },
+        {
+          term: "Account ID",
+          details: "#ACC-12345",
+          icon: <CreditCardIcon className="size-full" />,
+        },
         { term: "Plan", details: "Professional" },
         { term: "Status", details: <Badge variant="success">Active</Badge> },
-        { term: "Member since", details: "January 2023", icon: <CalendarIcon className="size-full" /> },
+        {
+          term: "Member since",
+          details: "January 2023",
+          icon: <CalendarIcon className="size-full" />,
+        },
       ]}
     />
   ),
@@ -169,13 +185,21 @@ export const OrderDetails: Story = {
       title="Order #ORD-12345"
       description="Placed on January 15, 2024"
       items={[
-        { term: "Order status", details: <Badge variant="warning">Processing</Badge> },
+        {
+          term: "Order status",
+          details: <Badge variant="warning">Processing</Badge>,
+        },
         { term: "Payment method", details: "Visa ending in 4242" },
         { term: "Shipping method", details: "Express Delivery" },
         { term: "Subtotal", details: "$99.00" },
         { term: "Shipping", details: "$9.99" },
         { term: "Tax", details: "$8.91" },
-        { term: "Total", details: <span className="font-semibold text-foreground">$117.90</span> },
+        {
+          term: "Total",
+          details: (
+            <span className="font-semibold text-foreground">$117.90</span>
+          ),
+        },
       ]}
     />
   ),
@@ -187,12 +211,28 @@ export const CompanyProfile: Story = {
       variant="grid"
       columns={2}
       items={[
-        { term: "Company name", details: "Acme Corporation", icon: <BuildingIcon className="size-full" /> },
+        {
+          term: "Company name",
+          details: "Acme Corporation",
+          icon: <BuildingIcon className="size-full" />,
+        },
         { term: "Industry", details: "Technology" },
-        { term: "Website", details: "www.acme.com", icon: <GlobeIcon className="size-full" /> },
-        { term: "Founded", details: "2015", icon: <CalendarIcon className="size-full" /> },
+        {
+          term: "Website",
+          details: "www.acme.com",
+          icon: <GlobeIcon className="size-full" />,
+        },
+        {
+          term: "Founded",
+          details: "2015",
+          icon: <CalendarIcon className="size-full" />,
+        },
         { term: "Employees", details: "500+" },
-        { term: "Location", details: "San Francisco, CA", icon: <MapPinIcon className="size-full" /> },
+        {
+          term: "Location",
+          details: "San Francisco, CA",
+          icon: <MapPinIcon className="size-full" />,
+        },
       ]}
     />
   ),
@@ -202,15 +242,21 @@ export const Sizes: Story = {
   render: () => (
     <div className="space-y-8">
       <div>
-        <h4 className="mb-2 text-sm font-medium text-muted-foreground">Small</h4>
+        <h4 className="mb-2 text-sm font-medium text-muted-foreground">
+          Small
+        </h4>
         <HorizontalDescriptionList size="sm" items={sampleItems.slice(0, 2)} />
       </div>
       <div>
-        <h4 className="mb-2 text-sm font-medium text-muted-foreground">Medium (Default)</h4>
+        <h4 className="mb-2 text-sm font-medium text-muted-foreground">
+          Medium (Default)
+        </h4>
         <HorizontalDescriptionList size="md" items={sampleItems.slice(0, 2)} />
       </div>
       <div>
-        <h4 className="mb-2 text-sm font-medium text-muted-foreground">Large</h4>
+        <h4 className="mb-2 text-sm font-medium text-muted-foreground">
+          Large
+        </h4>
         <HorizontalDescriptionList size="lg" items={sampleItems.slice(0, 2)} />
       </div>
     </div>
@@ -221,12 +267,16 @@ export const Composable: Story = {
   render: () => (
     <DescriptionList variant="default">
       <DescriptionListItem variant="default">
-        <DescriptionListIcon><UserIcon className="size-full" /></DescriptionListIcon>
+        <DescriptionListIcon>
+          <UserIcon className="size-full" />
+        </DescriptionListIcon>
         <DescriptionTerm>Username</DescriptionTerm>
         <DescriptionDetails>johndoe</DescriptionDetails>
       </DescriptionListItem>
       <DescriptionListItem variant="default">
-        <DescriptionListIcon><MailIcon className="size-full" /></DescriptionListIcon>
+        <DescriptionListIcon>
+          <MailIcon className="size-full" />
+        </DescriptionListIcon>
         <DescriptionTerm>Email</DescriptionTerm>
         <DescriptionDetails>john@example.com</DescriptionDetails>
       </DescriptionListItem>

@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {
-  SuccessMessage,
-  InlineSuccessMessage,
+  FileIcon,
+  FolderIcon,
+  MailIcon,
+  RocketIcon,
+  SearchIcon,
+} from "@/lib/icons";
+import {
   ConfirmationMessage,
   EmptyStateMessage,
+  InlineSuccessMessage,
   ProcessingMessage,
+  SuccessMessage,
 } from "./index";
-import {
-  MailIcon,
-  FileIcon,
-  SearchIcon,
-  FolderIcon,
-  RocketIcon,
-} from "@/lib/icons";
 
 const meta: Meta<typeof SuccessMessage> = {
   title: "Organisms/PageSections/SuccessMessage",
@@ -44,7 +44,8 @@ export const Default: Story = {
   args: {
     type: "success",
     title: "Payment Successful!",
-    description: "Your payment has been processed successfully. You will receive a confirmation email shortly.",
+    description:
+      "Your payment has been processed successfully. You will receive a confirmation email shortly.",
     primaryAction: {
       label: "Continue",
       onClick: () => console.log("Continue clicked"),
@@ -81,7 +82,8 @@ export const ErrorMessage: Story = {
   args: {
     type: "error",
     title: "Payment Failed",
-    description: "We couldn't process your payment. Please check your card details and try again.",
+    description:
+      "We couldn't process your payment. Please check your card details and try again.",
     primaryAction: {
       label: "Try Again",
       onClick: () => console.log("Try again"),
@@ -98,7 +100,8 @@ export const WarningMessage: Story = {
   args: {
     type: "warning",
     title: "Action Required",
-    description: "Your subscription will expire in 3 days. Renew now to avoid service interruption.",
+    description:
+      "Your subscription will expire in 3 days. Renew now to avoid service interruption.",
     primaryAction: {
       label: "Renew Now",
       onClick: () => console.log("Renew"),
@@ -115,7 +118,8 @@ export const InfoMessage: Story = {
   args: {
     type: "info",
     title: "Email Sent",
-    description: "We've sent a verification email to your inbox. Please check your email and click the link to verify.",
+    description:
+      "We've sent a verification email to your inbox. Please check your email and click the link to verify.",
     primaryAction: {
       label: "Open Email App",
       onClick: () => console.log("Open email"),
@@ -176,7 +180,10 @@ export const WithFooter: Story = {
     },
     footer: (
       <p className="text-xs text-muted-foreground">
-        Need help? <a href="#" className="text-primary hover:underline">Contact Support</a>
+        Need help?{" "}
+        <a href="#contact-support" className="text-primary hover:underline">
+          Contact Support
+        </a>
       </p>
     ),
   },

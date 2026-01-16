@@ -1,8 +1,8 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
+import { Badge } from "@/components/atoms";
 import { cn } from "@/lib/utils";
 import { dataCardVariants } from "@/lib/variants/dataVisualization";
-import { Badge } from "@/components/atoms";
-import type { VariantProps } from "class-variance-authority";
 
 // ============================================
 // Types
@@ -66,17 +66,30 @@ export const TimeSheetCard = forwardRef<HTMLDivElement, TimeSheetCardProps>(
     },
     ref,
   ) => {
-    const calculatedTotal = totalHours ?? entries.reduce((sum, e) => sum + e.hours, 0);
+    const calculatedTotal =
+      totalHours ?? entries.reduce((sum, e) => sum + e.hours, 0);
     const maxHours = Math.max(...entries.map((e) => e.hours));
 
     const getStatusBadge = (status?: string) => {
       switch (status) {
         case "completed":
-          return <Badge variant="success" size="sm">Completed</Badge>;
+          return (
+            <Badge variant="success" size="sm">
+              Completed
+            </Badge>
+          );
         case "in-progress":
-          return <Badge variant="warning" size="sm">In Progress</Badge>;
+          return (
+            <Badge variant="warning" size="sm">
+              In Progress
+            </Badge>
+          );
         case "pending":
-          return <Badge variant="secondary" size="sm">Pending</Badge>;
+          return (
+            <Badge variant="secondary" size="sm">
+              Pending
+            </Badge>
+          );
         default:
           return null;
       }
@@ -96,12 +109,16 @@ export const TimeSheetCard = forwardRef<HTMLDivElement, TimeSheetCardProps>(
                 <h3 className="text-sm font-medium text-foreground">{title}</h3>
               )}
               {subtitle && (
-                <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {subtitle}
+                </p>
               )}
             </div>
             <div className="flex items-center gap-x-2">
               {period && (
-                <Badge variant="secondary" size="sm">{period}</Badge>
+                <Badge variant="secondary" size="sm">
+                  {period}
+                </Badge>
               )}
               {action}
             </div>
@@ -132,9 +149,13 @@ export const TimeSheetCard = forwardRef<HTMLDivElement, TimeSheetCardProps>(
                 <div
                   className={cn(
                     "h-full rounded-full transition-all",
-                    calculatedTotal >= targetHours ? "bg-success" : "bg-primary"
+                    calculatedTotal >= targetHours
+                      ? "bg-success"
+                      : "bg-primary",
                   )}
-                  style={{ width: `${Math.min((calculatedTotal / targetHours) * 100, 100)}%` }}
+                  style={{
+                    width: `${Math.min((calculatedTotal / targetHours) * 100, 100)}%`,
+                  }}
                 />
               </div>
               <p className="mt-1 text-xs text-muted-foreground text-right">
@@ -147,7 +168,8 @@ export const TimeSheetCard = forwardRef<HTMLDivElement, TimeSheetCardProps>(
         {/* Time Entries */}
         <div className="divide-y divide-border">
           {entries.map((entry, index) => {
-            const barColor = entry.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+            const barColor =
+              entry.color || `hsl(var(--chart-${(index % 5) + 1}))`;
             const percentage = (entry.hours / maxHours) * 100;
 
             return (
@@ -209,7 +231,10 @@ export interface WeeklyTimeSheetCardProps
   formatHours?: (hours: number) => string;
 }
 
-export const WeeklyTimeSheetCard = forwardRef<HTMLDivElement, WeeklyTimeSheetCardProps>(
+export const WeeklyTimeSheetCard = forwardRef<
+  HTMLDivElement,
+  WeeklyTimeSheetCardProps
+>(
   (
     {
       className,
@@ -264,12 +289,17 @@ export const WeeklyTimeSheetCard = forwardRef<HTMLDivElement, WeeklyTimeSheetCar
         <div className="p-4">
           <div className="flex items-end justify-around gap-x-2 h-32">
             {weekData.days.map((day) => {
-              const dayTotal = day.totalHours ?? day.entries.reduce((sum, e) => sum + e.hours, 0);
+              const dayTotal =
+                day.totalHours ??
+                day.entries.reduce((sum, e) => sum + e.hours, 0);
               const heightPercent = (dayTotal / targetHoursPerDay) * 100;
               const isOverTarget = dayTotal > targetHoursPerDay;
 
               return (
-                <div key={day.date} className="flex flex-col items-center flex-1">
+                <div
+                  key={day.date}
+                  className="flex flex-col items-center flex-1"
+                >
                   <div
                     className="w-full max-w-8 rounded-t transition-all relative"
                     style={{
@@ -280,7 +310,7 @@ export const WeeklyTimeSheetCard = forwardRef<HTMLDivElement, WeeklyTimeSheetCar
                     <div
                       className={cn(
                         "absolute inset-0 rounded-t",
-                        isOverTarget ? "bg-success" : "bg-primary"
+                        isOverTarget ? "bg-success" : "bg-primary",
                       )}
                     />
                     {isOverTarget && (
@@ -300,10 +330,15 @@ export const WeeklyTimeSheetCard = forwardRef<HTMLDivElement, WeeklyTimeSheetCar
           {/* Day Labels */}
           <div className="flex justify-around mt-2">
             {weekData.days.map((day) => {
-              const dayTotal = day.totalHours ?? day.entries.reduce((sum, e) => sum + e.hours, 0);
+              const dayTotal =
+                day.totalHours ??
+                day.entries.reduce((sum, e) => sum + e.hours, 0);
 
               return (
-                <div key={day.date} className="flex flex-col items-center flex-1">
+                <div
+                  key={day.date}
+                  className="flex flex-col items-center flex-1"
+                >
                   <span className="text-xs font-medium text-foreground">
                     {day.dayLabel || day.date}
                   </span>
@@ -334,7 +369,10 @@ export interface CompactTimesheetListProps
   formatHours?: (hours: number) => string;
 }
 
-export const CompactTimesheetList = forwardRef<HTMLDivElement, CompactTimesheetListProps>(
+export const CompactTimesheetList = forwardRef<
+  HTMLDivElement,
+  CompactTimesheetListProps
+>(
   (
     {
       className,
@@ -369,10 +407,14 @@ export const CompactTimesheetList = forwardRef<HTMLDivElement, CompactTimesheetL
         <div className="divide-y divide-border">
           {entries.map((entry, index) => {
             const percentage = (entry.hours / total) * 100;
-            const barColor = entry.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+            const barColor =
+              entry.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
             return (
-              <div key={entry.id} className="flex items-center gap-x-3 px-4 py-2.5">
+              <div
+                key={entry.id}
+                className="flex items-center gap-x-3 px-4 py-2.5"
+              >
                 <span
                   className="size-2 shrink-0 rounded-full"
                   style={{ backgroundColor: barColor }}

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { MasonryGrid, MasonryItem, ImageMasonry, CardMasonry } from "./";
 import { Badge } from "@/components/atoms/Badge";
+import { CardMasonry, ImageMasonry, MasonryGrid, MasonryItem } from "./";
 
 const meta: Meta<typeof MasonryGrid> = {
   title: "Organisms/MasonryGrid",
@@ -34,7 +34,9 @@ export const Default: Story = {
           key={card.id}
           className={`${card.height} ${card.color} rounded-xl flex items-center justify-center`}
         >
-          <span className="text-lg font-semibold text-foreground">Card {card.id}</span>
+          <span className="text-lg font-semibold text-foreground">
+            Card {card.id}
+          </span>
         </div>
       ))}
     </MasonryGrid>
@@ -49,7 +51,9 @@ export const TwoColumns: Story = {
           key={card.id}
           className={`${card.height} ${card.color} rounded-xl flex items-center justify-center`}
         >
-          <span className="text-lg font-semibold text-foreground">Card {card.id}</span>
+          <span className="text-lg font-semibold text-foreground">
+            Card {card.id}
+          </span>
         </div>
       ))}
     </MasonryGrid>
@@ -64,7 +68,9 @@ export const SmallGap: Story = {
           key={card.id}
           className={`${card.height} ${card.color} rounded-lg flex items-center justify-center`}
         >
-          <span className="text-lg font-semibold text-foreground">{card.id}</span>
+          <span className="text-lg font-semibold text-foreground">
+            {card.id}
+          </span>
         </div>
       ))}
     </MasonryGrid>
@@ -73,14 +79,46 @@ export const SmallGap: Story = {
 
 // Image Masonry
 const sampleImages = [
-  { id: "1", src: "https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=400&h=600&fit=crop", alt: "Nature" },
-  { id: "2", src: "https://images.unsplash.com/photo-1682687221038-404670f09ef1?w=400&h=300&fit=crop", alt: "Landscape" },
-  { id: "3", src: "https://images.unsplash.com/photo-1682695796954-bad0d0f59ff1?w=400&h=500&fit=crop", alt: "Mountain" },
-  { id: "4", src: "https://images.unsplash.com/photo-1682695797221-8164ff1fafc9?w=400&h=400&fit=crop", alt: "Ocean" },
-  { id: "5", src: "https://images.unsplash.com/photo-1682695794947-17061dc284dd?w=400&h=350&fit=crop", alt: "Forest" },
-  { id: "6", src: "https://images.unsplash.com/photo-1682695796497-31a44224d6d6?w=400&h=550&fit=crop", alt: "City" },
-  { id: "7", src: "https://images.unsplash.com/photo-1682695797873-aa4cb6edd613?w=400&h=450&fit=crop", alt: "Desert" },
-  { id: "8", src: "https://images.unsplash.com/photo-1682695798256-28a674122872?w=400&h=320&fit=crop", alt: "Beach" },
+  {
+    id: "1",
+    src: "https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=400&h=600&fit=crop",
+    alt: "Nature",
+  },
+  {
+    id: "2",
+    src: "https://images.unsplash.com/photo-1682687221038-404670f09ef1?w=400&h=300&fit=crop",
+    alt: "Landscape",
+  },
+  {
+    id: "3",
+    src: "https://images.unsplash.com/photo-1682695796954-bad0d0f59ff1?w=400&h=500&fit=crop",
+    alt: "Mountain",
+  },
+  {
+    id: "4",
+    src: "https://images.unsplash.com/photo-1682695797221-8164ff1fafc9?w=400&h=400&fit=crop",
+    alt: "Ocean",
+  },
+  {
+    id: "5",
+    src: "https://images.unsplash.com/photo-1682695794947-17061dc284dd?w=400&h=350&fit=crop",
+    alt: "Forest",
+  },
+  {
+    id: "6",
+    src: "https://images.unsplash.com/photo-1682695796497-31a44224d6d6?w=400&h=550&fit=crop",
+    alt: "City",
+  },
+  {
+    id: "7",
+    src: "https://images.unsplash.com/photo-1682695797873-aa4cb6edd613?w=400&h=450&fit=crop",
+    alt: "Desert",
+  },
+  {
+    id: "8",
+    src: "https://images.unsplash.com/photo-1682695798256-28a674122872?w=400&h=320&fit=crop",
+    alt: "Beach",
+  },
 ];
 
 export const Images: StoryObj<typeof ImageMasonry> = {
@@ -102,7 +140,8 @@ const cardItems = [
       <div className="rounded-xl border border-border bg-card p-4">
         <h3 className="font-semibold text-foreground">Project Update</h3>
         <p className="mt-2 text-sm text-muted-foreground">
-          We've made great progress on the new dashboard features. The team has been working hard on performance improvements.
+          We've made great progress on the new dashboard features. The team has
+          been working hard on performance improvements.
         </p>
         <div className="mt-3 flex gap-2">
           <Badge variant="success">Completed</Badge>
@@ -121,7 +160,9 @@ const cardItems = [
         />
         <div className="p-4">
           <h3 className="font-semibold text-foreground">New Feature</h3>
-          <p className="mt-1 text-sm text-muted-foreground">Check out our latest feature release.</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Check out our latest feature release.
+          </p>
         </div>
       </div>
     ),
@@ -172,13 +213,16 @@ const cardItems = [
     content: (
       <div className="rounded-xl border border-border bg-card p-4">
         <p className="text-sm text-muted-foreground italic">
-          "This product has completely transformed how our team collaborates. Highly recommended!"
+          "This product has completely transformed how our team collaborates.
+          Highly recommended!"
         </p>
         <div className="mt-3 flex items-center gap-2">
           <div className="size-8 rounded-full bg-muted flex items-center justify-center">
             <span className="text-xs font-medium">SC</span>
           </div>
-          <span className="text-sm font-medium text-foreground">Sarah Chen</span>
+          <span className="text-sm font-medium text-foreground">
+            Sarah Chen
+          </span>
         </div>
       </div>
     ),
@@ -199,11 +243,7 @@ const cardItems = [
 
 export const Cards: StoryObj<typeof CardMasonry> = {
   render: () => (
-    <CardMasonry
-      items={cardItems}
-      columns={{ default: 2, md: 3 }}
-      gap="md"
-    />
+    <CardMasonry items={cardItems} columns={{ default: 2, md: 3 }} gap="md" />
   ),
 };
 
@@ -212,12 +252,15 @@ export const WithMasonryItem: Story = {
     <MasonryGrid columns={{ default: 2, md: 3 }} gap="md">
       <MasonryItem className="rounded-xl border border-border bg-card p-4">
         <h3 className="font-semibold">Item 1</h3>
-        <p className="mt-2 text-sm text-muted-foreground">This is a shorter item.</p>
+        <p className="mt-2 text-sm text-muted-foreground">
+          This is a shorter item.
+        </p>
       </MasonryItem>
       <MasonryItem className="rounded-xl border border-border bg-card p-4">
         <h3 className="font-semibold">Item 2</h3>
         <p className="mt-2 text-sm text-muted-foreground">
-          This is a longer item with more content. It will take up more vertical space in the masonry layout.
+          This is a longer item with more content. It will take up more vertical
+          space in the masonry layout.
         </p>
         <p className="mt-2 text-sm text-muted-foreground">
           Additional paragraph to make this card taller.
@@ -225,7 +268,9 @@ export const WithMasonryItem: Story = {
       </MasonryItem>
       <MasonryItem className="rounded-xl border border-border bg-card p-4">
         <h3 className="font-semibold">Item 3</h3>
-        <p className="mt-2 text-sm text-muted-foreground">Medium length content here.</p>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Medium length content here.
+        </p>
       </MasonryItem>
       <MasonryItem className="rounded-xl border border-border bg-card p-4">
         <h3 className="font-semibold">Item 4</h3>
@@ -234,7 +279,8 @@ export const WithMasonryItem: Story = {
       <MasonryItem className="rounded-xl border border-border bg-card p-4">
         <h3 className="font-semibold">Item 5</h3>
         <p className="mt-2 text-sm text-muted-foreground">
-          Another longer item to demonstrate the masonry effect. The items will flow naturally into the available space.
+          Another longer item to demonstrate the masonry effect. The items will
+          flow naturally into the available space.
         </p>
         <ul className="mt-2 list-disc pl-4 text-sm text-muted-foreground">
           <li>Feature one</li>

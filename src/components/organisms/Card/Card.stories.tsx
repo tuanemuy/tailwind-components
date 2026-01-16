@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Card, CardHeader, CardBody, CardFooter, CardImage } from "./index";
 import { Button } from "@/components/atoms";
 import { AvatarGroup } from "@/components/molecules";
 import { MoreHorizontalIcon } from "@/lib/icons";
+import { Card, CardBody, CardFooter, CardHeader, CardImage } from "./index";
 
 const meta: Meta<typeof Card> = {
   title: "Organisms/Card",
@@ -72,7 +72,9 @@ export const WithAction: Story = {
         </p>
       </CardBody>
       <CardFooter bordered align="between">
-        <span className="text-xs text-muted-foreground">Last updated: 2 days ago</span>
+        <span className="text-xs text-muted-foreground">
+          Last updated: 2 days ago
+        </span>
         <Button size="sm">Edit</Button>
       </CardFooter>
     </Card>

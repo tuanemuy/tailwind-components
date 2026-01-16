@@ -1,8 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { DataTable, type DataTableColumn, type SortState, type FilterState } from "./index";
-import { Badge, Avatar, Button } from "@/components/atoms";
-import { MoreHorizontalIcon, EditIcon, TrashIcon } from "@/lib/icons";
+import { Avatar, Badge, Button } from "@/components/atoms";
+import {
+  DataTable,
+  type DataTableColumn,
+  type FilterState,
+  type SortState,
+} from "./index";
 
 // Sample data type
 interface Person {
@@ -268,7 +272,7 @@ export const WithPagination: Story = {
 
     const paginatedData = sampleData.slice(
       (page - 1) * pageSize,
-      page * pageSize
+      page * pageSize,
     );
 
     return (
@@ -309,7 +313,7 @@ export const FullFeatured: Story = {
       filteredData = filteredData.filter(
         (row) =>
           row.name.toLowerCase().includes(searchLower) ||
-          row.email.toLowerCase().includes(searchLower)
+          row.email.toLowerCase().includes(searchLower),
       );
     }
 
@@ -326,7 +330,7 @@ export const FullFeatured: Story = {
     // Apply pagination
     const paginatedData = filteredData.slice(
       (page - 1) * pageSize,
-      page * pageSize
+      page * pageSize,
     );
 
     return (

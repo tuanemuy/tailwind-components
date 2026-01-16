@@ -1,23 +1,36 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/atoms/Button";
 import { Badge } from "@/components/atoms/Badge";
+import { Button } from "@/components/atoms/Button";
 import { SmartphoneIcon, StarIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // App Store Badge Icons (inline SVGs for better customization)
 const AppleIcon = ({ className }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+  <svg
+    className={className}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    role="img"
+    aria-label="Apple"
+  >
     <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
   </svg>
 );
 
 const GooglePlayIcon = ({ className }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+  <svg
+    className={className}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    role="img"
+    aria-label="Google Play"
+  >
     <path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.25-.84-.76-.84-1.35zm13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27zm3.35-4.31c.34.27.64.71.64 1.19s-.09.85-.41 1.13l-2.09 1.09-2.47-2.47 2.47-2.47 1.86.97V10.81zM6.05 2.66l10.76 6.22-2.27 2.27-8.49-8.49z" />
   </svg>
 );
 
-export interface AppDownloadCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface AppDownloadCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "default" | "horizontal" | "minimal" | "featured";
   appName: string;
   appIcon?: React.ReactNode;
@@ -60,7 +73,7 @@ export const AppDownloadCard = forwardRef<HTMLDivElement, AppDownloadCardProps>(
       onPlayStoreClick,
       ...props
     },
-    ref
+    ref,
   ) => {
     const renderAppIcon = () => {
       if (appIcon) return appIcon;
@@ -124,7 +137,7 @@ export const AppDownloadCard = forwardRef<HTMLDivElement, AppDownloadCardProps>(
           ref={ref}
           className={cn(
             "overflow-hidden rounded-xl bg-gradient-to-br from-primary/10 via-primary/5 to-background border border-border",
-            className
+            className,
           )}
           {...props}
         >
@@ -137,7 +150,9 @@ export const AppDownloadCard = forwardRef<HTMLDivElement, AppDownloadCardProps>(
                 </div>
                 <div>
                   <div className="flex items-center gap-x-2">
-                    <h3 className="text-xl font-bold text-foreground">{appName}</h3>
+                    <h3 className="text-xl font-bold text-foreground">
+                      {appName}
+                    </h3>
                     {isNew && <Badge variant="default">New</Badge>}
                   </div>
                   {tagline && (
@@ -155,19 +170,24 @@ export const AppDownloadCard = forwardRef<HTMLDivElement, AppDownloadCardProps>(
                   <div className="flex">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <StarIcon
+                        // biome-ignore lint/suspicious/noArrayIndexKey: Star rating uses fixed indices
                         key={i}
                         className={cn(
                           "size-4",
                           i < Math.floor(rating)
                             ? "fill-warning text-warning"
-                            : "text-muted-foreground"
+                            : "text-muted-foreground",
                         )}
                       />
                     ))}
                   </div>
-                  <span className="font-medium text-foreground">{rating.toFixed(1)}</span>
+                  <span className="font-medium text-foreground">
+                    {rating.toFixed(1)}
+                  </span>
                   {reviewCount && (
-                    <span className="text-sm text-muted-foreground">({reviewCount} reviews)</span>
+                    <span className="text-sm text-muted-foreground">
+                      ({reviewCount} reviews)
+                    </span>
                   )}
                 </div>
               )}
@@ -210,7 +230,7 @@ export const AppDownloadCard = forwardRef<HTMLDivElement, AppDownloadCardProps>(
           ref={ref}
           className={cn(
             "flex items-center gap-x-4 rounded-xl border border-border bg-card p-4",
-            className
+            className,
           )}
           {...props}
         >
@@ -219,23 +239,33 @@ export const AppDownloadCard = forwardRef<HTMLDivElement, AppDownloadCardProps>(
           </div>
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-x-2">
-              <h4 className="truncate font-semibold text-foreground">{appName}</h4>
-              {isNew && <Badge variant="default" size="sm">New</Badge>}
+              <h4 className="truncate font-semibold text-foreground">
+                {appName}
+              </h4>
+              {isNew && (
+                <Badge variant="default" size="sm">
+                  New
+                </Badge>
+              )}
             </div>
             {tagline && (
-              <p className="truncate text-sm text-muted-foreground">{tagline}</p>
+              <p className="truncate text-sm text-muted-foreground">
+                {tagline}
+              </p>
             )}
             {rating && (
               <div className="mt-1 flex items-center gap-x-1">
                 <StarIcon className="size-3.5 fill-warning text-warning" />
-                <span className="text-sm font-medium text-foreground">{rating.toFixed(1)}</span>
+                <span className="text-sm font-medium text-foreground">
+                  {rating.toFixed(1)}
+                </span>
               </div>
             )}
           </div>
           {showBadges && (
             <div className="flex gap-x-2">
-              {(appStoreUrl || onAppStoreClick) && (
-                appStoreUrl ? (
+              {(appStoreUrl || onAppStoreClick) &&
+                (appStoreUrl ? (
                   <a
                     href={appStoreUrl}
                     className="inline-flex size-8 items-center justify-center rounded-lg border border-border bg-background text-foreground hover:bg-accent hover:text-accent-foreground"
@@ -243,13 +273,17 @@ export const AppDownloadCard = forwardRef<HTMLDivElement, AppDownloadCardProps>(
                     <AppleIcon className="size-4" />
                   </a>
                 ) : (
-                  <Button variant="outline" size="sm" className="size-8 p-0" onClick={onAppStoreClick}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="size-8 p-0"
+                    onClick={onAppStoreClick}
+                  >
                     <AppleIcon className="size-4" />
                   </Button>
-                )
-              )}
-              {(playStoreUrl || onPlayStoreClick) && (
-                playStoreUrl ? (
+                ))}
+              {(playStoreUrl || onPlayStoreClick) &&
+                (playStoreUrl ? (
                   <a
                     href={playStoreUrl}
                     className="inline-flex size-8 items-center justify-center rounded-lg border border-border bg-background text-foreground hover:bg-accent hover:text-accent-foreground"
@@ -257,11 +291,15 @@ export const AppDownloadCard = forwardRef<HTMLDivElement, AppDownloadCardProps>(
                     <GooglePlayIcon className="size-4" />
                   </a>
                 ) : (
-                  <Button variant="outline" size="sm" className="size-8 p-0" onClick={onPlayStoreClick}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="size-8 p-0"
+                    onClick={onPlayStoreClick}
+                  >
                     <GooglePlayIcon className="size-4" />
                   </Button>
-                )
-              )}
+                ))}
             </div>
           )}
         </div>
@@ -275,7 +313,7 @@ export const AppDownloadCard = forwardRef<HTMLDivElement, AppDownloadCardProps>(
           ref={ref}
           className={cn(
             "flex items-center gap-x-3 rounded-lg p-3 hover:bg-muted/50",
-            className
+            className,
           )}
           {...props}
         >
@@ -283,11 +321,15 @@ export const AppDownloadCard = forwardRef<HTMLDivElement, AppDownloadCardProps>(
             {renderAppIcon()}
           </div>
           <div className="min-w-0 flex-1">
-            <h4 className="truncate text-sm font-medium text-foreground">{appName}</h4>
+            <h4 className="truncate text-sm font-medium text-foreground">
+              {appName}
+            </h4>
             {rating && (
               <div className="flex items-center gap-x-1">
                 <StarIcon className="size-3 fill-warning text-warning" />
-                <span className="text-xs text-muted-foreground">{rating.toFixed(1)}</span>
+                <span className="text-xs text-muted-foreground">
+                  {rating.toFixed(1)}
+                </span>
               </div>
             )}
           </div>
@@ -302,10 +344,7 @@ export const AppDownloadCard = forwardRef<HTMLDivElement, AppDownloadCardProps>(
     return (
       <div
         ref={ref}
-        className={cn(
-          "rounded-xl border border-border bg-card p-6",
-          className
-        )}
+        className={cn("rounded-xl border border-border bg-card p-6", className)}
         {...props}
       >
         <div className="flex items-start gap-x-4">
@@ -315,7 +354,11 @@ export const AppDownloadCard = forwardRef<HTMLDivElement, AppDownloadCardProps>(
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-x-2">
               <h3 className="font-semibold text-foreground">{appName}</h3>
-              {isNew && <Badge variant="default" size="sm">New</Badge>}
+              {isNew && (
+                <Badge variant="default" size="sm">
+                  New
+                </Badge>
+              )}
             </div>
             {tagline && (
               <p className="text-sm text-muted-foreground">{tagline}</p>
@@ -325,12 +368,13 @@ export const AppDownloadCard = forwardRef<HTMLDivElement, AppDownloadCardProps>(
                 <div className="flex">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <StarIcon
+                      // biome-ignore lint/suspicious/noArrayIndexKey: Star rating uses fixed indices
                       key={i}
                       className={cn(
                         "size-3.5",
                         i < Math.floor(rating)
                           ? "fill-warning text-warning"
-                          : "text-muted-foreground"
+                          : "text-muted-foreground",
                       )}
                     />
                   ))}
@@ -351,10 +395,12 @@ export const AppDownloadCard = forwardRef<HTMLDivElement, AppDownloadCardProps>(
         {showBadges && <div className="mt-4">{renderStoreBadges()}</div>}
 
         {version && (
-          <p className="mt-4 text-xs text-muted-foreground">Version {version}</p>
+          <p className="mt-4 text-xs text-muted-foreground">
+            Version {version}
+          </p>
         )}
       </div>
     );
-  }
+  },
 );
 AppDownloadCard.displayName = "AppDownloadCard";

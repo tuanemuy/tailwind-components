@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
 import { Badge } from "@/components/atoms";
+import { cn } from "@/lib/utils";
 
 // HeroSection component
 export interface HeroSectionProps extends React.HTMLAttributes<HTMLElement> {
@@ -51,7 +51,11 @@ export const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
           hasBackground && "bg-cover bg-center bg-no-repeat",
           className,
         )}
-        style={hasBackground ? { backgroundImage: `url(${backgroundImage})` } : undefined}
+        style={
+          hasBackground
+            ? { backgroundImage: `url(${backgroundImage})` }
+            : undefined
+        }
         {...props}
       >
         {/* Background Overlay */}
@@ -63,11 +67,21 @@ export const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
         )}
 
         {/* Content */}
-        <div className={cn("relative", variant === "split" ? "" : "container mx-auto px-4")}>
+        <div
+          className={cn(
+            "relative",
+            variant === "split" ? "" : "container mx-auto px-4",
+          )}
+        >
           {variant === "split" ? (
             <div className="container mx-auto px-4">{children}</div>
           ) : (
-            <div className={cn("flex flex-col gap-y-6 max-w-3xl mx-auto", alignClasses[align])}>
+            <div
+              className={cn(
+                "flex flex-col gap-y-6 max-w-3xl mx-auto",
+                alignClasses[align],
+              )}
+            >
               {children}
             </div>
           )}
@@ -115,7 +129,8 @@ export const HeroBadge = forwardRef<HTMLDivElement, HeroBadgeProps>(
 HeroBadge.displayName = "HeroBadge";
 
 // HeroTitle component
-export interface HeroTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+export interface HeroTitleProps
+  extends React.HTMLAttributes<HTMLHeadingElement> {
   as?: "h1" | "h2";
   size?: "sm" | "md" | "lg" | "xl";
   gradient?: boolean;
@@ -129,14 +144,25 @@ const titleSizeClasses = {
 };
 
 export const HeroTitle = forwardRef<HTMLHeadingElement, HeroTitleProps>(
-  ({ className, as: Component = "h1", size = "md", gradient = false, children, ...props }, ref) => {
+  (
+    {
+      className,
+      as: Component = "h1",
+      size = "md",
+      gradient = false,
+      children,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <Component
         ref={ref}
         className={cn(
           "font-bold tracking-tight text-foreground",
           titleSizeClasses[size],
-          gradient && "bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent",
+          gradient &&
+            "bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent",
           className,
         )}
         {...props}
@@ -149,7 +175,8 @@ export const HeroTitle = forwardRef<HTMLHeadingElement, HeroTitleProps>(
 HeroTitle.displayName = "HeroTitle";
 
 // HeroSubtitle component
-export interface HeroSubtitleProps extends React.HTMLAttributes<HTMLParagraphElement> {
+export interface HeroSubtitleProps
+  extends React.HTMLAttributes<HTMLParagraphElement> {
   size?: "sm" | "md" | "lg";
 }
 
@@ -164,7 +191,11 @@ export const HeroSubtitle = forwardRef<HTMLParagraphElement, HeroSubtitleProps>(
     return (
       <p
         ref={ref}
-        className={cn("text-muted-foreground max-w-2xl", subtitleSizeClasses[size], className)}
+        className={cn(
+          "text-muted-foreground max-w-2xl",
+          subtitleSizeClasses[size],
+          className,
+        )}
         {...props}
       >
         {children}
@@ -187,7 +218,10 @@ const actionsAlignClasses = {
 };
 
 export const HeroActions = forwardRef<HTMLDivElement, HeroActionsProps>(
-  ({ className, direction = "row", align = "center", children, ...props }, ref) => {
+  (
+    { className, direction = "row", align = "center", children, ...props },
+    ref,
+  ) => {
     return (
       <div
         ref={ref}
@@ -223,7 +257,18 @@ const imageAspectRatioClasses = {
 };
 
 export const HeroImage = forwardRef<HTMLDivElement, HeroImageProps>(
-  ({ className, src, alt, aspectRatio = "auto", rounded = true, shadow = true, ...props }, ref) => {
+  (
+    {
+      className,
+      src,
+      alt,
+      aspectRatio = "auto",
+      rounded = true,
+      shadow = true,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <div
         ref={ref}
@@ -293,9 +338,11 @@ export const HeroStats = forwardRef<HTMLDivElement, HeroStatsProps>(
         className={cn("flex flex-wrap items-center gap-x-8 gap-y-4", className)}
         {...props}
       >
-        {stats.map((stat, index) => (
-          <div key={index} className="text-center">
-            <div className="text-3xl font-bold text-foreground md:text-4xl">{stat.value}</div>
+        {stats.map((stat) => (
+          <div key={`${stat.value}-${stat.label}`} className="text-center">
+            <div className="text-3xl font-bold text-foreground md:text-4xl">
+              {stat.value}
+            </div>
             <div className="text-sm text-muted-foreground">{stat.label}</div>
           </div>
         ))}
@@ -306,7 +353,8 @@ export const HeroStats = forwardRef<HTMLDivElement, HeroStatsProps>(
 HeroStats.displayName = "HeroStats";
 
 // HeroTrustedBy component
-export interface HeroTrustedByProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface HeroTrustedByProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
   logos: { src: string; alt: string }[];
 }
@@ -317,9 +365,9 @@ export const HeroTrustedBy = forwardRef<HTMLDivElement, HeroTrustedByProps>(
       <div ref={ref} className={cn("space-y-4", className)} {...props}>
         <p className="text-sm text-muted-foreground">{title}</p>
         <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
-          {logos.map((logo, index) => (
+          {logos.map((logo) => (
             <img
-              key={index}
+              key={logo.src}
               src={logo.src}
               alt={logo.alt}
               className="h-8 opacity-50 grayscale transition-all hover:opacity-100 hover:grayscale-0"

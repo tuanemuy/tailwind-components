@@ -1,11 +1,13 @@
-import { forwardRef, Children, isValidElement, useMemo } from "react";
+import { Children, forwardRef, isValidElement, useMemo } from "react";
 import { cn } from "@/lib/utils";
 
 export interface MasonryGridProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Number of columns (responsive object or single number)
    */
-  columns?: number | { default: number; sm?: number; md?: number; lg?: number; xl?: number };
+  columns?:
+    | number
+    | { default: number; sm?: number; md?: number; lg?: number; xl?: number };
   /**
    * Gap between items (in Tailwind spacing units)
    */
@@ -39,7 +41,7 @@ export const MasonryGrid = forwardRef<HTMLDivElement, MasonryGridProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Build responsive column classes
     const columnClasses = useMemo(() => {
@@ -66,15 +68,11 @@ export const MasonryGrid = forwardRef<HTMLDivElement, MasonryGridProps>(
         {Children.map(children, (child) => {
           if (!isValidElement(child)) return child;
 
-          return (
-            <div className="mb-4 break-inside-avoid">
-              {child}
-            </div>
-          );
+          return <div className="mb-4 break-inside-avoid">{child}</div>;
         })}
       </div>
     );
-  }
+  },
 );
 MasonryGrid.displayName = "MasonryGrid";
 
@@ -88,22 +86,19 @@ export interface MasonryItemProps extends React.HTMLAttributes<HTMLDivElement> {
 export const MasonryItem = forwardRef<HTMLDivElement, MasonryItemProps>(
   ({ className, children, ...props }, ref) => {
     return (
-      <div
-        ref={ref}
-        className={cn("break-inside-avoid", className)}
-        {...props}
-      >
+      <div ref={ref} className={cn("break-inside-avoid", className)} {...props}>
         {children}
       </div>
     );
-  }
+  },
 );
 MasonryItem.displayName = "MasonryItem";
 
 /**
  * ImageMasonry - Specialized masonry for images
  */
-export interface ImageMasonryProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ImageMasonryProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   images: {
     id: string;
     src: string;
@@ -114,7 +109,11 @@ export interface ImageMasonryProps extends React.HTMLAttributes<HTMLDivElement> 
   columns?: MasonryGridProps["columns"];
   gap?: MasonryGridProps["gap"];
   onImageClick?: (image: { id: string; src: string }) => void;
-  renderImage?: (image: { id: string; src: string; alt?: string }) => React.ReactNode;
+  renderImage?: (image: {
+    id: string;
+    src: string;
+    alt?: string;
+  }) => React.ReactNode;
 }
 
 export const ImageMasonry = forwardRef<HTMLDivElement, ImageMasonryProps>(
@@ -128,7 +127,7 @@ export const ImageMasonry = forwardRef<HTMLDivElement, ImageMasonryProps>(
       renderImage,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <MasonryGrid
@@ -138,30 +137,40 @@ export const ImageMasonry = forwardRef<HTMLDivElement, ImageMasonryProps>(
         className={className}
         {...props}
       >
-        {images.map((image) => (
-          <div
-            key={image.id}
-            className={cn(
-              "overflow-hidden rounded-lg",
-              onImageClick && "cursor-pointer"
-            )}
-            onClick={() => onImageClick?.(image)}
-          >
-            {renderImage ? (
-              renderImage(image)
-            ) : (
-              <img
-                src={image.src}
-                alt={image.alt || ""}
-                className="w-full h-auto"
-                loading="lazy"
-              />
-            )}
-          </div>
-        ))}
+        {images.map((image) => {
+          const imageContent = renderImage ? (
+            renderImage(image)
+          ) : (
+            <img
+              src={image.src}
+              alt={image.alt || ""}
+              className="w-full h-auto"
+              loading="lazy"
+            />
+          );
+
+          if (onImageClick) {
+            return (
+              <button
+                key={image.id}
+                type="button"
+                className="overflow-hidden rounded-lg cursor-pointer"
+                onClick={() => onImageClick(image)}
+              >
+                {imageContent}
+              </button>
+            );
+          }
+
+          return (
+            <div key={image.id} className="overflow-hidden rounded-lg">
+              {imageContent}
+            </div>
+          );
+        })}
       </MasonryGrid>
     );
-  }
+  },
 );
 ImageMasonry.displayName = "ImageMasonry";
 
@@ -182,14 +191,8 @@ export interface CardMasonryProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const CardMasonry = forwardRef<HTMLDivElement, CardMasonryProps>(
   (
-    {
-      className,
-      items,
-      columns = { default: 2, md: 3 },
-      gap = "md",
-      ...props
-    },
-    ref
+    { className, items, columns = { default: 2, md: 3 }, gap = "md", ...props },
+    ref,
   ) => {
     return (
       <MasonryGrid
@@ -200,12 +203,10 @@ export const CardMasonry = forwardRef<HTMLDivElement, CardMasonryProps>(
         {...props}
       >
         {items.map((item) => (
-          <div key={item.id}>
-            {item.content}
-          </div>
+          <div key={item.id}>{item.content}</div>
         ))}
       </MasonryGrid>
     );
-  }
+  },
 );
 CardMasonry.displayName = "CardMasonry";

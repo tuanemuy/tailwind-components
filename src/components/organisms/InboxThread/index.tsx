@@ -1,22 +1,26 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { type ReactNode, useState } from "react";
 import { Avatar } from "@/components/atoms/Avatar";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
-import { Dropdown, DropdownItem, DropdownDivider } from "@/components/molecules/Dropdown";
 import {
-  MoreVerticalIcon,
-  ReplyIcon,
-  ForwardIcon,
-  TrashIcon,
+  Dropdown,
+  DropdownDivider,
+  DropdownItem,
+} from "@/components/molecules/Dropdown";
+import {
   ArchiveIcon,
-  MailIcon,
-  PrinterIcon,
-  StarIcon,
   FileIcon,
+  ForwardIcon,
+  MailIcon,
+  MoreVerticalIcon,
+  PrinterIcon,
+  ReplyIcon,
+  StarIcon,
+  TrashIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // ============================================
 // Types
@@ -91,10 +95,13 @@ export const InboxThread = ({
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
 
   return (
-    <div className={cn("bg-card rounded-2xl shadow-xs dark:bg-card", className)}>
+    <div
+      className={cn("bg-card rounded-2xl shadow-xs dark:bg-card", className)}
+    >
       {/* Header */}
       <div className="relative">
-        <div
+        <button
+          type="button"
           className="py-3 ps-4 pe-14 w-full inline-flex items-center gap-x-2 truncate cursor-pointer"
           onClick={() => setIsExpanded(!isExpanded)}
         >
@@ -140,7 +147,9 @@ export const InboxThread = ({
               {isExpanded && (
                 <div className="sm:hidden leading-4 truncate">
                   <span className="text-sm text-foreground">Date: </span>
-                  <span className="text-sm text-muted-foreground">{email.date}</span>
+                  <span className="text-sm text-muted-foreground">
+                    {email.date}
+                  </span>
                 </div>
               )}
 
@@ -166,7 +175,7 @@ export const InboxThread = ({
               )}
             </div>
           </div>
-        </div>
+        </button>
 
         {/* Actions */}
         {showActions && (
@@ -245,8 +254,11 @@ export const InboxThread = ({
                 Attachments ({email.attachments.length})
               </p>
               <div className="flex flex-wrap gap-2">
-                {email.attachments.map((attachment, index) => (
-                  <AttachmentItem key={index} attachment={attachment} />
+                {email.attachments.map((attachment) => (
+                  <AttachmentItem
+                    key={attachment.name}
+                    attachment={attachment}
+                  />
                 ))}
               </div>
             </div>
@@ -263,6 +275,7 @@ export const InboxThread = ({
 
 const ReplyAllIcon = ({ className }: { className?: string }) => (
   <svg
+    aria-hidden="true"
     className={className}
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -364,13 +377,14 @@ export const CompactInboxItem = ({
   className,
 }: CompactInboxItemProps) => {
   return (
-    <div
+    <button
+      type="button"
       className={cn(
-        "p-3 flex items-start gap-x-3 cursor-pointer transition-colors",
+        "p-3 flex items-start gap-x-3 cursor-pointer transition-colors w-full text-left",
         "hover:bg-muted/50",
         isSelected && "bg-primary/5",
         !email.isRead && "bg-primary/5 font-medium",
-        className
+        className,
       )}
       onClick={onClick}
     >
@@ -381,10 +395,7 @@ export const CompactInboxItem = ({
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between gap-x-2">
           <span
-            className={cn(
-              "text-sm truncate",
-              !email.isRead && "font-semibold"
-            )}
+            className={cn("text-sm truncate", !email.isRead && "font-semibold")}
           >
             {email.from.name}
           </span>
@@ -392,15 +403,12 @@ export const CompactInboxItem = ({
             {email.date.split(" ")[0]}
           </span>
         </div>
-        <p
-          className={cn(
-            "text-sm truncate",
-            !email.isRead && "font-semibold"
-          )}
-        >
+        <p className={cn("text-sm truncate", !email.isRead && "font-semibold")}>
           {email.subject}
         </p>
-        <p className="text-xs text-muted-foreground truncate">{email.preview}</p>
+        <p className="text-xs text-muted-foreground truncate">
+          {email.preview}
+        </p>
 
         {/* Labels */}
         {email.labels && email.labels.length > 0 && (
@@ -428,11 +436,11 @@ export const CompactInboxItem = ({
             "size-4",
             email.isStarred
               ? "fill-yellow-400 text-yellow-400"
-              : "text-muted-foreground"
+              : "text-muted-foreground",
           )}
         />
       </button>
-    </div>
+    </button>
   );
 };
 
@@ -480,7 +488,7 @@ export const InboxSidebar = ({
               "w-full flex items-center justify-between gap-x-2 px-3 py-2 rounded-lg text-sm transition-colors",
               folder.isActive
                 ? "bg-primary/10 text-primary"
-                : "text-foreground hover:bg-muted"
+                : "text-foreground hover:bg-muted",
             )}
             onClick={() => onFolderClick?.(folder.id)}
           >
@@ -489,7 +497,9 @@ export const InboxSidebar = ({
               <span>{folder.name}</span>
             </div>
             {folder.count !== undefined && folder.count > 0 && (
-              <span className="text-xs text-muted-foreground">{folder.count}</span>
+              <span className="text-xs text-muted-foreground">
+                {folder.count}
+              </span>
             )}
           </button>
         ))}

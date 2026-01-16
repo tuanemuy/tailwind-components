@@ -1,12 +1,19 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {
+  AlertTriangleIcon,
+  FileIcon,
+  MailIcon,
+  SendIcon,
+  StarIcon,
+  TrashIcon,
+} from "@/lib/icons";
+import {
+  CompactInboxItem,
+  type EmailData,
+  InboxSidebar,
   InboxThread,
   InboxThreadList,
-  CompactInboxItem,
-  InboxSidebar,
-  type EmailData,
 } from "./index";
-import { MailIcon, SendIcon, FileIcon, StarIcon, TrashIcon, AlertTriangleIcon } from "@/lib/icons";
 
 const meta: Meta<typeof InboxThread> = {
   title: "Organisms/InboxChatMessages/InboxThread",
@@ -25,11 +32,13 @@ const sampleEmail: EmailData = {
   from: {
     name: "John Smith",
     email: "john.smith@example.com",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop",
   },
   to: [{ name: "Me", email: "me@example.com" }],
   subject: "Project Update - Q4 Planning",
-  preview: "Hi team, I wanted to share some updates on our Q4 planning process...",
+  preview:
+    "Hi team, I wanted to share some updates on our Q4 planning process...",
   content: `<p>Hi team,</p>
 <p>I wanted to share some updates on our Q4 planning process. We've made significant progress on the roadmap and have identified key priorities for the upcoming quarter.</p>
 <p><strong>Key Highlights:</strong></p>
@@ -59,7 +68,8 @@ const emailList: EmailData[] = [
     },
     to: [{ name: "Me", email: "me@example.com" }],
     subject: "New Campaign Launch",
-    preview: "We're excited to announce the launch of our new marketing campaign...",
+    preview:
+      "We're excited to announce the launch of our new marketing campaign...",
     content: `<p>We're excited to announce the launch of our new marketing campaign.</p>`,
     date: "Dec 14, 2024 3:00 PM",
     isRead: true,
@@ -73,8 +83,10 @@ const emailList: EmailData[] = [
     },
     to: [{ name: "Me", email: "me@example.com" }],
     subject: "Holiday Schedule Update",
-    preview: "Please find the updated holiday schedule for the upcoming year...",
-    content: `<p>Please find the updated holiday schedule for the upcoming year.</p>`,
+    preview:
+      "Please find the updated holiday schedule for the upcoming year...",
+    content:
+      "<p>Please find the updated holiday schedule for the upcoming year.</p>",
     date: "Dec 13, 2024 9:00 AM",
     isRead: true,
     isStarred: true,
@@ -135,12 +147,42 @@ export const SidebarExample: Story = {
     <div className="w-64">
       <InboxSidebar
         folders={[
-          { id: "inbox", name: "Inbox", icon: <MailIcon className="size-4" />, count: 12, isActive: true },
-          { id: "sent", name: "Sent", icon: <SendIcon className="size-4" />, count: 45 },
-          { id: "drafts", name: "Drafts", icon: <FileIcon className="size-4" />, count: 3 },
-          { id: "starred", name: "Starred", icon: <StarIcon className="size-4" />, count: 8 },
-          { id: "spam", name: "Spam", icon: <AlertTriangleIcon className="size-4" />, count: 2 },
-          { id: "trash", name: "Trash", icon: <TrashIcon className="size-4" /> },
+          {
+            id: "inbox",
+            name: "Inbox",
+            icon: <MailIcon className="size-4" />,
+            count: 12,
+            isActive: true,
+          },
+          {
+            id: "sent",
+            name: "Sent",
+            icon: <SendIcon className="size-4" />,
+            count: 45,
+          },
+          {
+            id: "drafts",
+            name: "Drafts",
+            icon: <FileIcon className="size-4" />,
+            count: 3,
+          },
+          {
+            id: "starred",
+            name: "Starred",
+            icon: <StarIcon className="size-4" />,
+            count: 8,
+          },
+          {
+            id: "spam",
+            name: "Spam",
+            icon: <AlertTriangleIcon className="size-4" />,
+            count: 2,
+          },
+          {
+            id: "trash",
+            name: "Trash",
+            icon: <TrashIcon className="size-4" />,
+          },
         ]}
         onFolderClick={(id: string) => console.log("Folder:", id)}
         onCompose={() => console.log("Compose")}

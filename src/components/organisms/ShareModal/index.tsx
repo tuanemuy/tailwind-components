@@ -1,9 +1,14 @@
-import { forwardRef, useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { forwardRef, type ReactNode, useState } from "react";
 import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "@/components/organisms/Modal";
-import { CheckIcon, CopyIcon, LinkIcon, GlobeIcon } from "@/lib/icons";
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "@/components/organisms/Modal";
+import { CheckIcon, CopyIcon, GlobeIcon, LinkIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 export type ShareAccess = "private" | "restricted" | "public";
 
@@ -116,12 +121,16 @@ export const ShareModal = forwardRef<HTMLDivElement, ShareModalProps>(
           <div className="space-y-6">
             {/* Copy link */}
             {showCopyLink && (
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">
+              <div>
+                <label
+                  htmlFor="share-link-input"
+                  className="mb-2 block text-sm font-medium text-foreground"
+                >
                   Share link
                 </label>
                 <div className="flex gap-2">
                   <Input
+                    id="share-link-input"
                     value={shareUrl}
                     readOnly
                     className="flex-1"
@@ -150,10 +159,10 @@ export const ShareModal = forwardRef<HTMLDivElement, ShareModalProps>(
 
             {/* Access options */}
             {showAccessOptions && (
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">
+              <div>
+                <span className="mb-2 block text-sm font-medium text-foreground">
                   Who can access
-                </label>
+                </span>
                 <div className="space-y-2">
                   {accessOptions.map((option) => (
                     <button
@@ -172,7 +181,9 @@ export const ShareModal = forwardRef<HTMLDivElement, ShareModalProps>(
                         {option.icon}
                       </span>
                       <div className="min-w-0 flex-1">
-                        <p className="font-medium text-foreground">{option.label}</p>
+                        <p className="font-medium text-foreground">
+                          {option.label}
+                        </p>
                         <p className="text-xs text-muted-foreground">
                           {option.description}
                         </p>
@@ -188,10 +199,10 @@ export const ShareModal = forwardRef<HTMLDivElement, ShareModalProps>(
 
             {/* Social share */}
             {showSocialShare && (
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">
+              <div>
+                <span className="mb-2 block text-sm font-medium text-foreground">
                   Share via
-                </label>
+                </span>
                 <div className="flex gap-2">
                   <Button
                     variant="outline"

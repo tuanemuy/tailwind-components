@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {
   ProductListing,
-  ProductListingSlider,
   ProductListingGrid,
   type ProductListingItem,
+  ProductListingSlider,
 } from "./index";
 
 const meta: Meta<typeof ProductListing> = {
@@ -22,7 +22,8 @@ const sampleProducts: ProductListingItem[] = [
   {
     id: "1",
     name: "Air Max Performance Running Shoes",
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop",
     price: { current: 149.99, currency: "USD" },
     rating: { value: 4.5, count: 128 },
     badges: [{ type: "new", label: "New" }],
@@ -32,7 +33,8 @@ const sampleProducts: ProductListingItem[] = [
   {
     id: "2",
     name: "Classic Leather Sneakers",
-    image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=400&h=400&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=400&h=400&fit=crop",
     price: { current: 179.99, original: 249.99, currency: "USD" },
     rating: { value: 4.8, count: 64 },
     badges: [{ type: "sale", value: "-28%" }],
@@ -42,7 +44,8 @@ const sampleProducts: ProductListingItem[] = [
   {
     id: "3",
     name: "Canvas High-Top Sneakers",
-    image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=400&h=400&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=400&h=400&fit=crop",
     price: { current: 59.99, currency: "USD" },
     rating: { value: 4.2, count: 256 },
     category: "Classic",
@@ -51,7 +54,8 @@ const sampleProducts: ProductListingItem[] = [
   {
     id: "4",
     name: "Trail Running Shoes",
-    image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=400&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=400&fit=crop",
     price: { current: 129.99, currency: "USD" },
     rating: { value: 4.6, count: 89 },
     badges: [{ type: "featured", label: "Best Seller" }],
@@ -61,7 +65,8 @@ const sampleProducts: ProductListingItem[] = [
   {
     id: "5",
     name: "Limited Edition Collaboration",
-    image: "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=400&h=400&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=400&h=400&fit=crop",
     price: { current: 299.99, currency: "USD" },
     rating: { value: 5.0, count: 42 },
     badges: [{ type: "featured", label: "Limited" }],
@@ -71,7 +76,8 @@ const sampleProducts: ProductListingItem[] = [
   {
     id: "6",
     name: "Everyday Comfort Slip-Ons",
-    image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&h=400&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&h=400&fit=crop",
     price: { current: 79.99, currency: "USD" },
     rating: { value: 4.3, count: 167 },
     category: "Casual",
@@ -80,7 +86,8 @@ const sampleProducts: ProductListingItem[] = [
   {
     id: "7",
     name: "Minimalist Training Shoes",
-    image: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=400&h=400&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=400&h=400&fit=crop",
     price: { current: 99.99, original: 129.99, currency: "USD" },
     rating: { value: 4.4, count: 95 },
     badges: [{ type: "sale", value: "-23%" }],
@@ -90,7 +97,8 @@ const sampleProducts: ProductListingItem[] = [
   {
     id: "8",
     name: "Retro Basketball Sneakers",
-    image: "https://images.unsplash.com/photo-1605348532760-6753d2c43329?w=400&h=400&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1605348532760-6753d2c43329?w=400&h=400&fit=crop",
     price: { current: 139.99, currency: "USD" },
     rating: { value: 4.7, count: 203 },
     badges: [{ type: "new", label: "New" }],
@@ -190,9 +198,13 @@ export const SliderWithArrows: StoryObj<typeof ProductListingSlider> = {
       showArrows={true}
       showQuickActions={true}
       showRating={true}
-      onProductClick={(product) => console.log("Product clicked:", product.name)}
+      onProductClick={(product) =>
+        console.log("Product clicked:", product.name)
+      }
       onQuickView={(product) => console.log("Quick view:", product.name)}
-      onAddToWishlist={(product) => console.log("Add to wishlist:", product.name)}
+      onAddToWishlist={(product) =>
+        console.log("Add to wishlist:", product.name)
+      }
     />
   ),
 };
@@ -203,7 +215,9 @@ export const SliderNoArrows: StoryObj<typeof ProductListingSlider> = {
       products={sampleProducts}
       showArrows={false}
       showRating={true}
-      onProductClick={(product) => console.log("Product clicked:", product.name)}
+      onProductClick={(product) =>
+        console.log("Product clicked:", product.name)
+      }
     />
   ),
 };
@@ -219,7 +233,9 @@ export const GridWithHeader: StoryObj<typeof ProductListingGrid> = {
       showQuickActions={true}
       showRating={true}
       viewAllLink="#"
-      onProductClick={(product) => console.log("Product clicked:", product.name)}
+      onProductClick={(product) =>
+        console.log("Product clicked:", product.name)
+      }
       onAddToCart={(product) => console.log("Add to cart:", product.name)}
     />
   ),
@@ -235,9 +251,13 @@ export const GridWithViewAllButton: StoryObj<typeof ProductListingGrid> = {
       showQuickActions={true}
       showRating={true}
       onViewAll={() => console.log("View all clicked")}
-      onProductClick={(product) => console.log("Product clicked:", product.name)}
+      onProductClick={(product) =>
+        console.log("Product clicked:", product.name)
+      }
       onQuickView={(product) => console.log("Quick view:", product.name)}
-      onAddToWishlist={(product) => console.log("Add to wishlist:", product.name)}
+      onAddToWishlist={(product) =>
+        console.log("Add to wishlist:", product.name)
+      }
       onAddToCart={(product) => console.log("Add to cart:", product.name)}
     />
   ),
@@ -250,7 +270,9 @@ export const GridTitleOnly: StoryObj<typeof ProductListingGrid> = {
       products={sampleProducts.slice(0, 3)}
       columns={3}
       showRating={true}
-      onProductClick={(product) => console.log("Product clicked:", product.name)}
+      onProductClick={(product) =>
+        console.log("Product clicked:", product.name)
+      }
     />
   ),
 };
@@ -264,8 +286,12 @@ export const SliderWithHeader: StoryObj<typeof ProductListingGrid> = {
       variant="slider"
       showQuickActions={true}
       showRating={true}
-      onProductClick={(product) => console.log("Product clicked:", product.name)}
-      onAddToWishlist={(product) => console.log("Add to wishlist:", product.name)}
+      onProductClick={(product) =>
+        console.log("Product clicked:", product.name)
+      }
+      onAddToWishlist={(product) =>
+        console.log("Add to wishlist:", product.name)
+      }
     />
   ),
 };

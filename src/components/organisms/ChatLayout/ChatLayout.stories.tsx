@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ChatLayout, type ChatContact, type ChatRoom } from "./index";
 import type { MessageData } from "../MessageBubble";
+import { type ChatContact, ChatLayout, type ChatRoom } from "./index";
 
 const meta: Meta<typeof ChatLayout> = {
   title: "Organisms/InboxChatMessages/ChatLayout",
@@ -18,7 +18,8 @@ const sampleContacts: ChatContact[] = [
   {
     id: "1",
     name: "Sarah Johnson",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop",
     status: "online",
     lastMessage: "Sure, I'll send it over!",
     lastMessageTime: "2:30 PM",
@@ -27,7 +28,8 @@ const sampleContacts: ChatContact[] = [
   {
     id: "2",
     name: "Mike Chen",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop",
     status: "offline",
     lastMessage: "Thanks for the update.",
     lastMessageTime: "Yesterday",
@@ -36,7 +38,8 @@ const sampleContacts: ChatContact[] = [
   {
     id: "3",
     name: "Emily Davis",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop",
     status: "away",
     lastMessage: "Let me check and get back to you.",
     lastMessageTime: "Dec 12",
@@ -45,7 +48,8 @@ const sampleContacts: ChatContact[] = [
   {
     id: "4",
     name: "Alex Thompson",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop",
     status: "online",
     lastMessage: "Great idea! Let's discuss tomorrow.",
     lastMessageTime: "Dec 10",
@@ -90,14 +94,16 @@ const sampleMessages: MessageData[] = [
     content: "Hey! How's the project going?",
     sender: "other",
     senderName: "Sarah Johnson",
-    senderAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop",
+    senderAvatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop",
     timestamp: "2:25 PM",
     status: "read",
   },
   {
     id: "2",
     type: "text",
-    content: "Pretty good! Just finished the main features. I'll be pushing the updates soon.",
+    content:
+      "Pretty good! Just finished the main features. I'll be pushing the updates soon.",
     sender: "self",
     senderName: "Me",
     timestamp: "2:26 PM",
@@ -106,10 +112,12 @@ const sampleMessages: MessageData[] = [
   {
     id: "3",
     type: "text",
-    content: "That's great! Can you send me the documentation when you're done?",
+    content:
+      "That's great! Can you send me the documentation when you're done?",
     sender: "other",
     senderName: "Sarah Johnson",
-    senderAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop",
+    senderAvatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop",
     timestamp: "2:28 PM",
     status: "read",
   },
@@ -119,7 +127,8 @@ const sampleMessages: MessageData[] = [
     content: "Sure, I'll send it over!",
     sender: "other",
     senderName: "Sarah Johnson",
-    senderAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop",
+    senderAvatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop",
     timestamp: "2:30 PM",
     status: "read",
   },

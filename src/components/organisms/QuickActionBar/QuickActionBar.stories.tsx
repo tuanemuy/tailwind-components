@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { QuickActionBar, SelectionActionBar, ContextActionBar } from "./index";
 import {
-  PlusIcon,
-  EditIcon,
-  TrashIcon,
-  ShareIcon,
-  DownloadIcon,
-  CopyIcon,
   ArchiveIcon,
-  StarIcon,
+  CopyIcon,
+  DownloadIcon,
+  EditIcon,
   FolderIcon,
+  PlusIcon,
+  ShareIcon,
+  StarIcon,
+  TrashIcon,
 } from "@/lib/icons";
+import { ContextActionBar, QuickActionBar, SelectionActionBar } from "./index";
 
 const meta: Meta<typeof QuickActionBar> = {
   title: "Organisms/PageSections/QuickActionBar",
@@ -42,9 +42,21 @@ export default meta;
 type Story = StoryObj<typeof QuickActionBar>;
 
 const basicActions = [
-  { icon: <PlusIcon className="size-full" />, label: "New", onClick: () => console.log("New") },
-  { icon: <EditIcon className="size-full" />, label: "Edit", onClick: () => console.log("Edit") },
-  { icon: <ShareIcon className="size-full" />, label: "Share", onClick: () => console.log("Share") },
+  {
+    icon: <PlusIcon className="size-full" />,
+    label: "New",
+    onClick: () => console.log("New"),
+  },
+  {
+    icon: <EditIcon className="size-full" />,
+    label: "Edit",
+    onClick: () => console.log("Edit"),
+  },
+  {
+    icon: <ShareIcon className="size-full" />,
+    label: "Share",
+    onClick: () => console.log("Share"),
+  },
 ];
 
 export const Default: Story = {
@@ -71,10 +83,28 @@ export const IconsOnly: Story = {
 export const WithVariants: Story = {
   args: {
     actions: [
-      { icon: <CopyIcon className="size-full" />, label: "Copy", onClick: () => console.log("Copy") },
-      { icon: <ShareIcon className="size-full" />, label: "Share", onClick: () => console.log("Share") },
-      { icon: <DownloadIcon className="size-full" />, label: "Download", onClick: () => console.log("Download"), variant: "primary" as const },
-      { icon: <TrashIcon className="size-full" />, label: "Delete", onClick: () => console.log("Delete"), variant: "destructive" as const },
+      {
+        icon: <CopyIcon className="size-full" />,
+        label: "Copy",
+        onClick: () => console.log("Copy"),
+      },
+      {
+        icon: <ShareIcon className="size-full" />,
+        label: "Share",
+        onClick: () => console.log("Share"),
+      },
+      {
+        icon: <DownloadIcon className="size-full" />,
+        label: "Download",
+        onClick: () => console.log("Download"),
+        variant: "primary" as const,
+      },
+      {
+        icon: <TrashIcon className="size-full" />,
+        label: "Delete",
+        onClick: () => console.log("Delete"),
+        variant: "destructive" as const,
+      },
     ],
     closable: true,
   },
@@ -86,20 +116,32 @@ export const Positions: Story = {
       <QuickActionBar
         position="bottom"
         actions={[
-          { icon: <PlusIcon className="size-full" />, label: "Bottom Center", onClick: () => {} },
+          {
+            icon: <PlusIcon className="size-full" />,
+            label: "Bottom Center",
+            onClick: () => {},
+          },
         ]}
       />
       <QuickActionBar
         position="bottom-left"
         actions={[
-          { icon: <PlusIcon className="size-full" />, label: "Bottom Left", onClick: () => {} },
+          {
+            icon: <PlusIcon className="size-full" />,
+            label: "Bottom Left",
+            onClick: () => {},
+          },
         ]}
         className="left-4"
       />
       <QuickActionBar
         position="bottom-right"
         actions={[
-          { icon: <PlusIcon className="size-full" />, label: "Bottom Right", onClick: () => {} },
+          {
+            icon: <PlusIcon className="size-full" />,
+            label: "Bottom Right",
+            onClick: () => {},
+          },
         ]}
       />
     </div>
@@ -121,11 +163,7 @@ export const Sizes: Story = {
         actions={basicActions}
         className="bottom-20"
       />
-      <QuickActionBar
-        size="lg"
-        position="bottom"
-        actions={basicActions}
-      />
+      <QuickActionBar size="lg" position="bottom" actions={basicActions} />
     </div>
   ),
 };
@@ -139,9 +177,22 @@ export const Selection: StoryObj<typeof SelectionActionBar> = {
       onSelectAll={() => console.log("Select all")}
       onClear={() => console.log("Clear")}
       actions={[
-        { icon: <FolderIcon className="size-full" />, label: "Move", onClick: () => console.log("Move") },
-        { icon: <ArchiveIcon className="size-full" />, label: "Archive", onClick: () => console.log("Archive") },
-        { icon: <TrashIcon className="size-full" />, label: "Delete", onClick: () => console.log("Delete"), variant: "destructive" },
+        {
+          icon: <FolderIcon className="size-full" />,
+          label: "Move",
+          onClick: () => console.log("Move"),
+        },
+        {
+          icon: <ArchiveIcon className="size-full" />,
+          label: "Archive",
+          onClick: () => console.log("Archive"),
+        },
+        {
+          icon: <TrashIcon className="size-full" />,
+          label: "Delete",
+          onClick: () => console.log("Delete"),
+          variant: "destructive",
+        },
       ]}
     />
   ),
@@ -153,9 +204,23 @@ export const SelectionWithPrimaryAction: StoryObj<typeof SelectionActionBar> = {
       selectedCount={12}
       onClear={() => console.log("Clear")}
       actions={[
-        { icon: <ShareIcon className="size-full" />, label: "Share", onClick: () => console.log("Share"), variant: "primary" },
-        { icon: <DownloadIcon className="size-full" />, label: "Export", onClick: () => console.log("Export") },
-        { icon: <TrashIcon className="size-full" />, label: "Delete", onClick: () => console.log("Delete"), variant: "destructive" },
+        {
+          icon: <ShareIcon className="size-full" />,
+          label: "Share",
+          onClick: () => console.log("Share"),
+          variant: "primary",
+        },
+        {
+          icon: <DownloadIcon className="size-full" />,
+          label: "Export",
+          onClick: () => console.log("Export"),
+        },
+        {
+          icon: <TrashIcon className="size-full" />,
+          label: "Delete",
+          onClick: () => console.log("Delete"),
+          variant: "destructive",
+        },
       ]}
     />
   ),
@@ -168,13 +233,46 @@ export const Context: StoryObj<typeof ContextActionBar> = {
       <ContextActionBar
         className="relative"
         actions={[
-          { icon: <EditIcon className="size-full" />, label: "Edit", onClick: () => console.log("Edit"), shortcut: "⌘E" },
-          { icon: <CopyIcon className="size-full" />, label: "Copy", onClick: () => console.log("Copy"), shortcut: "⌘C" },
-          { icon: <FolderIcon className="size-full" />, label: "Move to...", onClick: () => console.log("Move") },
-          { icon: <StarIcon className="size-full" />, label: "Add to favorites", onClick: () => console.log("Favorite") },
-          { icon: <ShareIcon className="size-full" />, label: "Share", onClick: () => console.log("Share"), shortcut: "⌘S" },
-          { icon: <ArchiveIcon className="size-full" />, label: "Archive", onClick: () => console.log("Archive") },
-          { icon: <TrashIcon className="size-full" />, label: "Delete", onClick: () => console.log("Delete"), shortcut: "⌫", destructive: true },
+          {
+            icon: <EditIcon className="size-full" />,
+            label: "Edit",
+            onClick: () => console.log("Edit"),
+            shortcut: "⌘E",
+          },
+          {
+            icon: <CopyIcon className="size-full" />,
+            label: "Copy",
+            onClick: () => console.log("Copy"),
+            shortcut: "⌘C",
+          },
+          {
+            icon: <FolderIcon className="size-full" />,
+            label: "Move to...",
+            onClick: () => console.log("Move"),
+          },
+          {
+            icon: <StarIcon className="size-full" />,
+            label: "Add to favorites",
+            onClick: () => console.log("Favorite"),
+          },
+          {
+            icon: <ShareIcon className="size-full" />,
+            label: "Share",
+            onClick: () => console.log("Share"),
+            shortcut: "⌘S",
+          },
+          {
+            icon: <ArchiveIcon className="size-full" />,
+            label: "Archive",
+            onClick: () => console.log("Archive"),
+          },
+          {
+            icon: <TrashIcon className="size-full" />,
+            label: "Delete",
+            onClick: () => console.log("Delete"),
+            shortcut: "⌫",
+            destructive: true,
+          },
         ]}
       />
     </div>
@@ -189,10 +287,27 @@ export const Context: StoryObj<typeof ContextActionBar> = {
 export const FileManagerActions: Story = {
   args: {
     actions: [
-      { icon: <PlusIcon className="size-full" />, label: "New", onClick: () => console.log("New") },
-      { icon: <CopyIcon className="size-full" />, label: "Copy", onClick: () => console.log("Copy") },
-      { icon: <FolderIcon className="size-full" />, label: "Move", onClick: () => console.log("Move") },
-      { icon: <DownloadIcon className="size-full" />, label: "Download", onClick: () => console.log("Download"), variant: "primary" as const },
+      {
+        icon: <PlusIcon className="size-full" />,
+        label: "New",
+        onClick: () => console.log("New"),
+      },
+      {
+        icon: <CopyIcon className="size-full" />,
+        label: "Copy",
+        onClick: () => console.log("Copy"),
+      },
+      {
+        icon: <FolderIcon className="size-full" />,
+        label: "Move",
+        onClick: () => console.log("Move"),
+      },
+      {
+        icon: <DownloadIcon className="size-full" />,
+        label: "Download",
+        onClick: () => console.log("Download"),
+        variant: "primary" as const,
+      },
     ],
     closable: true,
   },
@@ -202,10 +317,27 @@ export const FileManagerActions: Story = {
 export const EmailActions: Story = {
   args: {
     actions: [
-      { icon: <ArchiveIcon className="size-full" />, label: "Archive", onClick: () => console.log("Archive") },
-      { icon: <TrashIcon className="size-full" />, label: "Delete", onClick: () => console.log("Delete"), variant: "destructive" as const },
-      { icon: <FolderIcon className="size-full" />, label: "Move", onClick: () => console.log("Move") },
-      { icon: <StarIcon className="size-full" />, label: "Star", onClick: () => console.log("Star") },
+      {
+        icon: <ArchiveIcon className="size-full" />,
+        label: "Archive",
+        onClick: () => console.log("Archive"),
+      },
+      {
+        icon: <TrashIcon className="size-full" />,
+        label: "Delete",
+        onClick: () => console.log("Delete"),
+        variant: "destructive" as const,
+      },
+      {
+        icon: <FolderIcon className="size-full" />,
+        label: "Move",
+        onClick: () => console.log("Move"),
+      },
+      {
+        icon: <StarIcon className="size-full" />,
+        label: "Star",
+        onClick: () => console.log("Star"),
+      },
     ],
     showLabels: false,
   },
@@ -214,9 +346,24 @@ export const EmailActions: Story = {
 export const DisabledActions: Story = {
   args: {
     actions: [
-      { icon: <EditIcon className="size-full" />, label: "Edit", onClick: () => console.log("Edit") },
-      { icon: <ShareIcon className="size-full" />, label: "Share", onClick: () => console.log("Share"), disabled: true },
-      { icon: <TrashIcon className="size-full" />, label: "Delete", onClick: () => console.log("Delete"), disabled: true, variant: "destructive" as const },
+      {
+        icon: <EditIcon className="size-full" />,
+        label: "Edit",
+        onClick: () => console.log("Edit"),
+      },
+      {
+        icon: <ShareIcon className="size-full" />,
+        label: "Share",
+        onClick: () => console.log("Share"),
+        disabled: true,
+      },
+      {
+        icon: <TrashIcon className="size-full" />,
+        label: "Delete",
+        onClick: () => console.log("Delete"),
+        disabled: true,
+        variant: "destructive" as const,
+      },
     ],
   },
 };

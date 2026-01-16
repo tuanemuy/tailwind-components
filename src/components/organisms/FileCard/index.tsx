@@ -1,26 +1,26 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
 import { Avatar } from "@/components/atoms/Avatar";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import { Checkbox } from "@/components/atoms/Checkbox";
 import {
+  ArchiveIcon,
+  DownloadIcon,
+  EyeIcon,
+  FileCodeIcon,
   FileIcon,
   FileTextIcon,
-  FileCodeIcon,
-  ImageIcon,
-  VideoIcon,
-  MusicIcon,
-  ArchiveIcon,
   FolderIcon,
-  MoreHorizontalIcon,
-  DownloadIcon,
-  TrashIcon,
-  StarIcon,
-  EyeIcon,
-  ShareIcon,
+  ImageIcon,
   LinkIcon,
+  MoreHorizontalIcon,
+  MusicIcon,
+  ShareIcon,
+  StarIcon,
+  TrashIcon,
+  VideoIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 export type FileCardType =
   | "image"
@@ -32,7 +32,10 @@ export type FileCardType =
   | "folder"
   | "other";
 
-const fileTypeConfig: Record<FileCardType, { icon: React.ComponentType<{ className?: string }>; color: string }> = {
+const fileTypeConfig: Record<
+  FileCardType,
+  { icon: React.ComponentType<{ className?: string }>; color: string }
+> = {
   image: { icon: ImageIcon, color: "text-success" },
   video: { icon: VideoIcon, color: "text-primary" },
   audio: { icon: MusicIcon, color: "text-warning" },
@@ -70,7 +73,8 @@ export interface FileCardData {
   extension?: string;
 }
 
-export interface FileCardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect" | "onClick"> {
+export interface FileCardProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect" | "onClick"> {
   file: FileCardData;
   variant?: "default" | "grid" | "list" | "compact" | "multi-image";
   selectable?: boolean;
@@ -103,7 +107,7 @@ export const FileCard = forwardRef<HTMLDivElement, FileCardProps>(
       actions,
       ...props
     },
-    ref
+    ref,
   ) => {
     const typeConfig = fileTypeConfig[file.type];
     const FileTypeIcon = typeConfig.icon;
@@ -118,33 +122,23 @@ export const FileCard = forwardRef<HTMLDivElement, FileCardProps>(
       const displayImages = file.images.slice(0, 4);
       const remainingCount = file.images.length - 4;
 
-      return (
-        <div
-          ref={ref}
-          className={cn(
-            "group rounded-xl border border-border bg-card overflow-hidden",
-            selected && "ring-2 ring-primary",
-            onClick && "cursor-pointer",
-            className
-          )}
-          onClick={() => onClick?.(file)}
-          {...props}
-        >
+      const cardContent = (
+        <>
           {/* Image Grid */}
           <div
             className={cn(
               "grid gap-0.5 bg-muted",
               displayImages.length === 1 && "grid-cols-1",
               displayImages.length === 2 && "grid-cols-2",
-              displayImages.length >= 3 && "grid-cols-2 grid-rows-2"
+              displayImages.length >= 3 && "grid-cols-2 grid-rows-2",
             )}
           >
             {displayImages.map((img, index) => (
               <div
-                key={index}
+                key={`${file.id}-image-${img}-${index}`}
                 className={cn(
                   "relative aspect-square overflow-hidden",
-                  displayImages.length === 3 && index === 0 && "row-span-2"
+                  displayImages.length === 3 && index === 0 && "row-span-2",
                 )}
               >
                 <img
@@ -154,7 +148,9 @@ export const FileCard = forwardRef<HTMLDivElement, FileCardProps>(
                 />
                 {index === displayImages.length - 1 && remainingCount > 0 && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/50">
-                    <span className="text-lg font-semibold text-white">+{remainingCount}</span>
+                    <span className="text-lg font-semibold text-white">
+                      +{remainingCount}
+                    </span>
                   </div>
                 )}
               </div>
@@ -165,7 +161,9 @@ export const FileCard = forwardRef<HTMLDivElement, FileCardProps>(
           <div className="p-3">
             <div className="flex items-start justify-between gap-x-2">
               <div className="min-w-0 flex-1">
-                <h4 className="truncate font-medium text-foreground">{file.name}</h4>
+                <h4 className="truncate font-medium text-foreground">
+                  {file.name}
+                </h4>
                 <p className="text-xs text-muted-foreground">
                   {file.images.length} images{file.size && ` · ${file.size}`}
                 </p>
@@ -179,24 +177,38 @@ export const FileCard = forwardRef<HTMLDivElement, FileCardProps>(
               )}
             </div>
           </div>
-        </div>
+        </>
       );
-    }
 
-    // Grid variant
-    if (variant === "grid") {
       return (
         <div
           ref={ref}
           className={cn(
             "group rounded-xl border border-border bg-card overflow-hidden",
             selected && "ring-2 ring-primary",
-            onClick && "cursor-pointer",
-            className
+            className,
           )}
-          onClick={() => onClick?.(file)}
           {...props}
         >
+          {onClick ? (
+            <button
+              type="button"
+              className="w-full text-left"
+              onClick={() => onClick(file)}
+            >
+              {cardContent}
+            </button>
+          ) : (
+            cardContent
+          )}
+        </div>
+      );
+    }
+
+    // Grid variant
+    if (variant === "grid") {
+      const gridContent = (
+        <>
           {/* Preview Area */}
           <div className="relative aspect-[4/3] bg-muted">
             {file.previewUrl || file.thumbnailUrl ? (
@@ -243,15 +255,16 @@ export const FileCard = forwardRef<HTMLDivElement, FileCardProps>(
 
             {/* Selection Checkbox */}
             {selectable && (
-              <div
+              <button
+                type="button"
                 className={cn(
                   "absolute left-2 top-2 opacity-0 transition-opacity group-hover:opacity-100",
-                  selected && "opacity-100"
+                  selected && "opacity-100",
                 )}
                 onClick={handleSelect}
               >
                 <Checkbox checked={selected} />
-              </div>
+              </button>
             )}
 
             {/* Star */}
@@ -266,7 +279,9 @@ export const FileCard = forwardRef<HTMLDivElement, FileCardProps>(
           <div className="p-3">
             <div className="flex items-start justify-between gap-x-2">
               <div className="min-w-0 flex-1">
-                <h4 className="truncate text-sm font-medium text-foreground">{file.name}</h4>
+                <h4 className="truncate text-sm font-medium text-foreground">
+                  {file.name}
+                </h4>
                 <p className="text-xs text-muted-foreground">
                   {file.size}
                   {file.modifiedAt && ` · ${file.modifiedAt}`}
@@ -284,24 +299,38 @@ export const FileCard = forwardRef<HTMLDivElement, FileCardProps>(
               )}
             </div>
           </div>
+        </>
+      );
+
+      return (
+        <div
+          ref={ref}
+          className={cn(
+            "group rounded-xl border border-border bg-card overflow-hidden",
+            selected && "ring-2 ring-primary",
+            className,
+          )}
+          {...props}
+        >
+          {onClick ? (
+            <button
+              type="button"
+              className="w-full text-left"
+              onClick={() => onClick(file)}
+            >
+              {gridContent}
+            </button>
+          ) : (
+            gridContent
+          )}
         </div>
       );
     }
 
     // List variant
     if (variant === "list") {
-      return (
-        <div
-          ref={ref}
-          className={cn(
-            "group flex items-center gap-x-4 rounded-lg border border-border bg-card p-3",
-            selected && "ring-2 ring-primary",
-            onClick && "cursor-pointer hover:border-primary/50",
-            className
-          )}
-          onClick={() => onClick?.(file)}
-          {...props}
-        >
+      const listContent = (
+        <>
           {selectable && (
             <Checkbox
               checked={selected}
@@ -326,9 +355,15 @@ export const FileCard = forwardRef<HTMLDivElement, FileCardProps>(
           {/* Info */}
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-x-2">
-              <h4 className="truncate text-sm font-medium text-foreground">{file.name}</h4>
-              {file.isStarred && <StarIcon className="size-3.5 fill-warning text-warning" />}
-              {file.isShared && <LinkIcon className="size-3.5 text-muted-foreground" />}
+              <h4 className="truncate text-sm font-medium text-foreground">
+                {file.name}
+              </h4>
+              {file.isStarred && (
+                <StarIcon className="size-3.5 fill-warning text-warning" />
+              )}
+              {file.isShared && (
+                <LinkIcon className="size-3.5 text-muted-foreground" />
+              )}
             </div>
             <p className="text-xs text-muted-foreground">
               {file.size}
@@ -348,10 +383,7 @@ export const FileCard = forwardRef<HTMLDivElement, FileCardProps>(
           )}
 
           {/* Actions */}
-          <div
-            className="flex items-center gap-x-1 opacity-0 transition-opacity group-hover:opacity-100"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <fieldset className="flex items-center gap-x-1 border-0 p-0 m-0 opacity-0 transition-opacity group-hover:opacity-100">
             {actions || (
               <>
                 {onDownload && (
@@ -386,25 +418,40 @@ export const FileCard = forwardRef<HTMLDivElement, FileCardProps>(
                 )}
               </>
             )}
-          </div>
+          </fieldset>
+        </>
+      );
+
+      return (
+        <div
+          ref={ref}
+          className={cn(
+            "group rounded-lg border border-border bg-card",
+            selected && "ring-2 ring-primary",
+            onClick && "hover:border-primary/50",
+            className,
+          )}
+          {...props}
+        >
+          {onClick ? (
+            <button
+              type="button"
+              className="flex w-full items-center gap-x-4 p-3 text-left"
+              onClick={() => onClick(file)}
+            >
+              {listContent}
+            </button>
+          ) : (
+            <div className="flex items-center gap-x-4 p-3">{listContent}</div>
+          )}
         </div>
       );
     }
 
     // Compact variant
     if (variant === "compact") {
-      return (
-        <div
-          ref={ref}
-          className={cn(
-            "flex items-center gap-x-3 rounded-lg p-2 hover:bg-muted/50",
-            selected && "bg-muted",
-            onClick && "cursor-pointer",
-            className
-          )}
-          onClick={() => onClick?.(file)}
-          {...props}
-        >
+      const compactContent = (
+        <>
           {selectable && (
             <Checkbox
               checked={selected}
@@ -415,25 +462,43 @@ export const FileCard = forwardRef<HTMLDivElement, FileCardProps>(
           <FileTypeIcon className={cn("size-4 shrink-0", typeConfig.color)} />
           <span className="truncate text-sm text-foreground">{file.name}</span>
           {file.size && (
-            <span className="ml-auto text-xs text-muted-foreground">{file.size}</span>
+            <span className="ml-auto text-xs text-muted-foreground">
+              {file.size}
+            </span>
+          )}
+        </>
+      );
+
+      return (
+        <div
+          ref={ref}
+          className={cn(
+            "rounded-lg hover:bg-muted/50",
+            selected && "bg-muted",
+            className,
+          )}
+          {...props}
+        >
+          {onClick ? (
+            <button
+              type="button"
+              className="flex w-full items-center gap-x-3 p-2 text-left"
+              onClick={() => onClick(file)}
+            >
+              {compactContent}
+            </button>
+          ) : (
+            <div className="flex items-center gap-x-3 p-2">
+              {compactContent}
+            </div>
           )}
         </div>
       );
     }
 
     // Default variant
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "group rounded-xl border border-border bg-card p-4",
-          selected && "ring-2 ring-primary",
-          onClick && "cursor-pointer hover:border-primary/50",
-          className
-        )}
-        onClick={() => onClick?.(file)}
-        {...props}
-      >
+    const defaultContent = (
+      <>
         <div className="flex items-start justify-between gap-x-4">
           <div className="flex items-start gap-x-3">
             {selectable && (
@@ -457,36 +522,44 @@ export const FileCard = forwardRef<HTMLDivElement, FileCardProps>(
             </div>
             <div className="min-w-0">
               <div className="flex items-center gap-x-2">
-                <h4 className="truncate font-medium text-foreground">{file.name}</h4>
-                {file.isStarred && <StarIcon className="size-3.5 fill-warning text-warning" />}
+                <h4 className="truncate font-medium text-foreground">
+                  {file.name}
+                </h4>
+                {file.isStarred && (
+                  <StarIcon className="size-3.5 fill-warning text-warning" />
+                )}
               </div>
               <p className="text-sm text-muted-foreground">
                 {file.extension?.toUpperCase()}
                 {file.size && ` · ${file.size}`}
               </p>
               {file.modifiedAt && (
-                <p className="mt-1 text-xs text-muted-foreground">Modified {file.modifiedAt}</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Modified {file.modifiedAt}
+                </p>
               )}
             </div>
           </div>
 
-          <div className="flex items-center gap-x-1" onClick={(e) => e.stopPropagation()}>
+          <fieldset className="flex items-center gap-x-1 border-0 p-0 m-0">
             {actions || (
               <Button variant="ghost" size="sm" className="size-8 p-0">
                 <MoreHorizontalIcon className="size-4" />
               </Button>
             )}
-          </div>
+          </fieldset>
         </div>
 
         {file.description && (
-          <p className="mt-3 line-clamp-2 text-sm text-muted-foreground">{file.description}</p>
+          <p className="mt-3 line-clamp-2 text-sm text-muted-foreground">
+            {file.description}
+          </p>
         )}
 
         {file.tags && file.tags.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-1.5">
-            {file.tags.map((tag, index) => (
-              <Badge key={index} variant="secondary" size="sm">
+            {file.tags.map((tag) => (
+              <Badge key={tag} variant="secondary" size="sm">
                 {tag}
               </Badge>
             ))}
@@ -499,10 +572,14 @@ export const FileCard = forwardRef<HTMLDivElement, FileCardProps>(
               <div className="flex items-center gap-x-2">
                 <Avatar
                   src={file.owner.avatarSrc}
-                  fallback={file.owner.avatarFallback || file.owner.name.charAt(0)}
+                  fallback={
+                    file.owner.avatarFallback || file.owner.name.charAt(0)
+                  }
                   size="sm"
                 />
-                <span className="text-sm text-muted-foreground">{file.owner.name}</span>
+                <span className="text-sm text-muted-foreground">
+                  {file.owner.name}
+                </span>
               </div>
             )}
             {file.sharedWith && file.sharedWith.length > 0 && (
@@ -515,14 +592,40 @@ export const FileCard = forwardRef<HTMLDivElement, FileCardProps>(
             )}
           </div>
         )}
+      </>
+    );
+
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "group rounded-xl border border-border bg-card",
+          selected && "ring-2 ring-primary",
+          onClick && "hover:border-primary/50",
+          className,
+        )}
+        {...props}
+      >
+        {onClick ? (
+          <button
+            type="button"
+            className="w-full p-4 text-left"
+            onClick={() => onClick(file)}
+          >
+            {defaultContent}
+          </button>
+        ) : (
+          <div className="p-4">{defaultContent}</div>
+        )}
       </div>
     );
-  }
+  },
 );
 FileCard.displayName = "FileCard";
 
 // Grid Layout
-export interface FileCardGridProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FileCardGridProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   files: FileCardData[];
   variant?: "grid" | "multi-image";
   columns?: 2 | 3 | 4 | 5 | 6;
@@ -557,13 +660,15 @@ export const FileCardGrid = forwardRef<HTMLDivElement, FileCardGridProps>(
       onPreview,
       ...props
     },
-    ref
+    ref,
   ) => {
     const handleSelect = (id: string, selected: boolean) => {
       if (selected) {
         onSelectionChange?.([...selectedIds, id]);
       } else {
-        onSelectionChange?.(selectedIds.filter((selectedId) => selectedId !== id));
+        onSelectionChange?.(
+          selectedIds.filter((selectedId) => selectedId !== id),
+        );
       }
     };
 
@@ -588,12 +693,13 @@ export const FileCardGrid = forwardRef<HTMLDivElement, FileCardGridProps>(
         ))}
       </div>
     );
-  }
+  },
 );
 FileCardGrid.displayName = "FileCardGrid";
 
 // List Layout
-export interface FileCardListProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FileCardListProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   files: FileCardData[];
   selectable?: boolean;
   selectedIds?: string[];
@@ -618,13 +724,15 @@ export const FileCardList = forwardRef<HTMLDivElement, FileCardListProps>(
       onDelete,
       ...props
     },
-    ref
+    ref,
   ) => {
     const handleSelect = (id: string, selected: boolean) => {
       if (selected) {
         onSelectionChange?.([...selectedIds, id]);
       } else {
-        onSelectionChange?.(selectedIds.filter((selectedId) => selectedId !== id));
+        onSelectionChange?.(
+          selectedIds.filter((selectedId) => selectedId !== id),
+        );
       }
     };
 
@@ -646,6 +754,6 @@ export const FileCardList = forwardRef<HTMLDivElement, FileCardListProps>(
         ))}
       </div>
     );
-  }
+  },
 );
 FileCardList.displayName = "FileCardList";

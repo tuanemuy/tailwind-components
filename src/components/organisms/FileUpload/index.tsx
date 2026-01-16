@@ -1,25 +1,25 @@
 "use client";
 
 import {
-  forwardRef,
-  useState,
-  useCallback,
-  useRef,
-  useId,
-  type DragEvent,
   type ChangeEvent,
+  type DragEvent,
+  forwardRef,
+  useCallback,
+  useId,
+  useRef,
+  useState,
 } from "react";
-import { cn } from "@/lib/utils";
 import { Button, ProgressBar } from "@/components/atoms";
 import { FileItem } from "@/components/molecules";
 import {
-  UploadCloudIcon,
-  ImageIcon,
-  FileIcon,
-  XIcon,
   AlertCircleIcon,
+  FileIcon,
+  ImageIcon,
+  UploadCloudIcon,
+  XIcon,
 } from "@/lib/icons";
 import type { FileType } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 // Helper function to determine file type
 const getFileType = (file: File): FileType => {
@@ -35,7 +35,11 @@ const getFileType = (file: File): FileType => {
     return "document";
   if (file.type.startsWith("video/")) return "video";
   if (file.type.startsWith("audio/")) return "audio";
-  if (file.type.includes("zip") || file.type.includes("rar") || file.type.includes("tar"))
+  if (
+    file.type.includes("zip") ||
+    file.type.includes("rar") ||
+    file.type.includes("tar")
+  )
     return "archive";
   return "other";
 };
@@ -46,7 +50,7 @@ const formatFileSize = (bytes: number): string => {
   const k = 1024;
   const sizes = ["Bytes", "KB", "MB", "GB"];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+  return `${Number.parseFloat((bytes / k ** i).toFixed(2))} ${sizes[i]}`;
 };
 
 // Variant types
@@ -63,7 +67,8 @@ export interface UploadFile {
 }
 
 // Main FileUpload component
-export interface FileUploadProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
+export interface FileUploadProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   variant?: FileUploadVariant;
   accept?: string;
   multiple?: boolean;
@@ -131,7 +136,9 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
         for (const file of newFiles) {
           // Check max size
           if (maxSize && file.size > maxSize) {
-            setLocalError(`File "${file.name}" exceeds maximum size of ${formatFileSize(maxSize)}`);
+            setLocalError(
+              `File "${file.name}" exceeds maximum size of ${formatFileSize(maxSize)}`,
+            );
             continue;
           }
           validFiles.push(file);
@@ -207,7 +214,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
     if (variant === "image") {
       return (
         <div ref={ref} className={cn("space-y-4", className)} {...props}>
-          <div
+          <section
             className={cn(
               "relative rounded-xl border-2 border-dashed transition-colors",
               isDragging
@@ -217,6 +224,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
                   : "border-border hover:border-muted-foreground/50",
               disabled && "opacity-50 cursor-not-allowed",
             )}
+            aria-label="File drop zone"
             onDragEnter={handleDragEnter}
             onDragLeave={handleDragLeave}
             onDragOver={handleDragOver}
@@ -249,17 +257,25 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
                 </button>
               </div>
             ) : (
-              <div
-                className="flex flex-col items-center justify-center p-8 cursor-pointer"
+              <button
+                type="button"
+                className="flex w-full flex-col items-center justify-center p-8 cursor-pointer"
                 onClick={handleBrowseClick}
+                disabled={disabled}
               >
                 <ImageIcon className="size-12 text-muted-foreground mb-4" />
-                <p className="text-sm text-muted-foreground mb-1">{dropzoneText}</p>
+                <p className="text-sm text-muted-foreground mb-1">
+                  {dropzoneText}
+                </p>
                 <p className="text-sm font-medium text-primary">{browseText}</p>
-                {hintText && <p className="mt-2 text-xs text-muted-foreground">{hintText}</p>}
-              </div>
+                {hintText && (
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    {hintText}
+                  </p>
+                )}
+              </button>
             )}
-          </div>
+          </section>
           {displayError && (
             <p className="flex items-center gap-x-1.5 text-sm text-destructive">
               <AlertCircleIcon className="size-4" />
@@ -299,7 +315,9 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
             onChange={handleChange}
             className="sr-only"
           />
-          {hintText && <p className="text-xs text-muted-foreground">{hintText}</p>}
+          {hintText && (
+            <p className="text-xs text-muted-foreground">{hintText}</p>
+          )}
           {displayError && (
             <p className="flex items-center gap-x-1.5 text-sm text-destructive">
               <AlertCircleIcon className="size-4" />
@@ -341,7 +359,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
         {...props}
       >
         {/* Dropzone */}
-        <div
+        <section
           className={cn(
             "relative p-8 flex flex-col items-center justify-center text-center rounded-xl border-2 border-dashed transition-colors",
             variant === "card" && "rounded-none border-0 border-b",
@@ -352,6 +370,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
                 : "border-border bg-background hover:border-muted-foreground/50",
             disabled && "opacity-50 cursor-not-allowed",
           )}
+          aria-label="File drop zone"
           onDragEnter={handleDragEnter}
           onDragLeave={handleDragLeave}
           onDragOver={handleDragOver}
@@ -390,7 +409,7 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
           {hintText && (
             <p className="mt-2 text-xs text-muted-foreground">{hintText}</p>
           )}
-        </div>
+        </section>
 
         {/* Error */}
         {displayError && (
@@ -402,7 +421,9 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
 
         {/* File List */}
         {showFileList && files.length > 0 && (
-          <div className={cn("p-4 space-y-2", variant === "card" && "bg-muted/30")}>
+          <div
+            className={cn("p-4 space-y-2", variant === "card" && "bg-muted/30")}
+          >
             {files.map((file) => (
               <FileItem
                 key={file.id}
@@ -432,67 +453,72 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(
 FileUpload.displayName = "FileUpload";
 
 // FileUploadPreview component - for image preview grid
-export interface FileUploadPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FileUploadPreviewProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   files: UploadFile[];
   onRemove?: (file: UploadFile) => void;
 }
 
-export const FileUploadPreview = forwardRef<HTMLDivElement, FileUploadPreviewProps>(
-  ({ className, files, onRemove, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn("grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-5", className)}
-        {...props}
-      >
-        {files.map((file) => (
-          <div
-            key={file.id}
-            className="relative aspect-square rounded-lg overflow-hidden bg-muted"
-          >
-            {file.preview ? (
-              <img
-                src={file.preview}
-                alt={file.file.name}
-                className="size-full object-cover"
-              />
-            ) : (
-              <div className="size-full flex items-center justify-center">
-                <FileIcon className="size-8 text-muted-foreground" />
-              </div>
-            )}
+export const FileUploadPreview = forwardRef<
+  HTMLDivElement,
+  FileUploadPreviewProps
+>(({ className, files, onRemove, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-5",
+        className,
+      )}
+      {...props}
+    >
+      {files.map((file) => (
+        <div
+          key={file.id}
+          className="relative aspect-square rounded-lg overflow-hidden bg-muted"
+        >
+          {file.preview ? (
+            <img
+              src={file.preview}
+              alt={file.file.name}
+              className="size-full object-cover"
+            />
+          ) : (
+            <div className="size-full flex items-center justify-center">
+              <FileIcon className="size-8 text-muted-foreground" />
+            </div>
+          )}
 
-            {/* Upload progress overlay */}
-            {file.status === "uploading" && (
-              <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                <div className="w-3/4">
-                  <ProgressBar value={file.progress || 0} size="sm" />
-                </div>
+          {/* Upload progress overlay */}
+          {file.status === "uploading" && (
+            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+              <div className="w-3/4">
+                <ProgressBar value={file.progress || 0} size="sm" />
               </div>
-            )}
+            </div>
+          )}
 
-            {/* Error overlay */}
-            {file.status === "error" && (
-              <div className="absolute inset-0 bg-destructive/50 flex items-center justify-center">
-                <AlertCircleIcon className="size-6 text-white" />
-              </div>
-            )}
+          {/* Error overlay */}
+          {file.status === "error" && (
+            <div className="absolute inset-0 bg-destructive/50 flex items-center justify-center">
+              <AlertCircleIcon className="size-6 text-white" />
+            </div>
+          )}
 
-            {/* Remove button */}
-            {onRemove && file.status !== "uploading" && (
-              <button
-                type="button"
-                className="absolute top-1 right-1 p-1 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
-                onClick={() => onRemove(file)}
-                aria-label={`Remove ${file.file.name}`}
-              >
-                <XIcon className="size-3" />
-              </button>
-            )}
-          </div>
-        ))}
-      </div>
-    );
-  },
-);
+          {/* Remove button */}
+          {onRemove && file.status !== "uploading" && (
+            <button
+              type="button"
+              className="absolute top-1 right-1 p-1 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+              onClick={() => onRemove(file)}
+              aria-label={`Remove ${file.file.name}`}
+            >
+              <XIcon className="size-3" />
+            </button>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+});
 FileUploadPreview.displayName = "FileUploadPreview";

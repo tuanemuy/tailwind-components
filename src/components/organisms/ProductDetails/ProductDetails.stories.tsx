@@ -79,7 +79,8 @@ export const Default: Story = {
       "Durable rubber outsole",
       "Reflective details for visibility",
     ],
-    deliveryInfo: "Free shipping on orders over $100. Estimated delivery: 3-5 business days.",
+    deliveryInfo:
+      "Free shipping on orders over $100. Estimated delivery: 3-5 business days.",
     returnPolicy: "Free returns within 30 days of purchase.",
     onVariantChange: (type, value) => console.log("Variant:", type, value),
     onQuantityChange: (qty) => console.log("Quantity:", qty),
@@ -113,8 +114,18 @@ export const WithDiscount: Story = {
         name: "Color",
         type: "color",
         options: [
-          { value: "brown", label: "Brown", colorHex: "#92400E", available: true },
-          { value: "black", label: "Black", colorHex: "#1F2937", available: true },
+          {
+            value: "brown",
+            label: "Brown",
+            colorHex: "#92400E",
+            available: true,
+          },
+          {
+            value: "black",
+            label: "Black",
+            colorHex: "#1F2937",
+            available: true,
+          },
           { value: "tan", label: "Tan", colorHex: "#D97706", available: true },
         ],
       },
@@ -182,8 +193,18 @@ export const LowStock: Story = {
         name: "Color",
         type: "color",
         options: [
-          { value: "white", label: "White", colorHex: "#FFFFFF", available: true },
-          { value: "navy", label: "Navy", colorHex: "#1E3A5F", available: true },
+          {
+            value: "white",
+            label: "White",
+            colorHex: "#FFFFFF",
+            available: true,
+          },
+          {
+            value: "navy",
+            label: "Navy",
+            colorHex: "#1E3A5F",
+            available: true,
+          },
           { value: "red", label: "Red", colorHex: "#DC2626", available: true },
         ],
       },
@@ -194,11 +215,7 @@ export const LowStock: Story = {
     reviewCount: 256,
     inStock: true,
     stockQuantity: 3,
-    features: [
-      "100% cotton canvas",
-      "Rubber toe cap",
-      "Cushioned insole",
-    ],
+    features: ["100% cotton canvas", "Rubber toe cap", "Cushioned insole"],
     deliveryInfo: "Ships within 1-2 business days",
     returnPolicy: "30-day easy returns",
     onVariantChange: (type, value) => console.log("Variant:", type, value),
@@ -251,7 +268,8 @@ export const WithAdditionalContent: Story = {
       <div className="mt-6 p-4 rounded-lg bg-muted">
         <h4 className="font-medium text-foreground mb-2">Size Guide</h4>
         <p className="text-sm text-muted-foreground">
-          Not sure about your size? Check our detailed size guide or contact our support team for assistance.
+          Not sure about your size? Check our detailed size guide or contact our
+          support team for assistance.
         </p>
       </div>
     ),

@@ -1,9 +1,9 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef, useState } from "react";
+import { TrendIndicator } from "@/components/molecules";
+import type { TrendDirection, TrendVariant } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { dataCardVariants } from "@/lib/variants/dataVisualization";
-import { TrendIndicator } from "@/components/molecules";
-import type { VariantProps } from "class-variance-authority";
-import type { TrendDirection, TrendVariant } from "@/lib/types";
 
 // ============================================
 // Types
@@ -73,7 +73,9 @@ export const AnimatedStats = forwardRef<HTMLDivElement, AnimatedStatsProps>(
                 <h3 className="text-sm font-medium text-foreground">{title}</h3>
               )}
               {subtitle && (
-                <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {subtitle}
+                </p>
               )}
             </div>
             {action && <div className="shrink-0">{action}</div>}
@@ -81,7 +83,9 @@ export const AnimatedStats = forwardRef<HTMLDivElement, AnimatedStatsProps>(
         )}
 
         {/* Stats Grid */}
-        <div className={cn("grid divide-x divide-border", columnClasses[columns])}>
+        <div
+          className={cn("grid divide-x divide-border", columnClasses[columns])}
+        >
           {stats.map((stat) => (
             <AnimatedStatCell key={stat.id} stat={stat} />
           ))}
@@ -109,7 +113,7 @@ function AnimatedStatCell({ stat }: { stat: AnimatedStatItem }) {
             "transition-all duration-300 transform",
             isHovered && stat.hoverValue !== undefined
               ? "-translate-y-full opacity-0"
-              : "translate-y-0 opacity-100"
+              : "translate-y-0 opacity-100",
           )}
         >
           {stat.icon && (
@@ -146,7 +150,7 @@ function AnimatedStatCell({ stat }: { stat: AnimatedStatItem }) {
               "absolute inset-0 transition-all duration-300 transform",
               isHovered
                 ? "translate-y-0 opacity-100"
-                : "translate-y-full opacity-0"
+                : "translate-y-full opacity-0",
             )}
           >
             <p className="text-xs text-muted-foreground">
@@ -183,7 +187,10 @@ export interface PulseAnimatedStatsProps
   action?: React.ReactNode;
 }
 
-export const PulseAnimatedStats = forwardRef<HTMLDivElement, PulseAnimatedStatsProps>(
+export const PulseAnimatedStats = forwardRef<
+  HTMLDivElement,
+  PulseAnimatedStatsProps
+>(
   (
     {
       className,
@@ -215,7 +222,8 @@ export const PulseAnimatedStats = forwardRef<HTMLDivElement, PulseAnimatedStatsP
         {/* Stats */}
         <div className="p-4 space-y-4">
           {stats.map((stat, index) => {
-            const barColor = stat.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+            const barColor =
+              stat.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
             return (
               <div
@@ -227,7 +235,7 @@ export const PulseAnimatedStats = forwardRef<HTMLDivElement, PulseAnimatedStatsP
                   <span
                     className={cn(
                       "size-3 rounded-full block",
-                      showPulse && "animate-pulse"
+                      showPulse && "animate-pulse",
                     )}
                     style={{ backgroundColor: barColor }}
                   />
@@ -332,9 +340,12 @@ export const CountUpStats = forwardRef<HTMLDivElement, CountUpStatsProps>(
         )}
 
         {/* Stats Grid */}
-        <div className={cn("grid divide-x divide-border", columnClasses[columns])}>
+        <div
+          className={cn("grid divide-x divide-border", columnClasses[columns])}
+        >
           {stats.map((stat, index) => {
-            const statColor = stat.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+            const statColor =
+              stat.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
             return (
               <div key={stat.id} className="p-4 text-center">
@@ -377,16 +388,12 @@ export interface GlowAnimatedStatsProps
   action?: React.ReactNode;
 }
 
-export const GlowAnimatedStats = forwardRef<HTMLDivElement, GlowAnimatedStatsProps>(
+export const GlowAnimatedStats = forwardRef<
+  HTMLDivElement,
+  GlowAnimatedStatsProps
+>(
   (
-    {
-      className,
-      variant = "bordered",
-      title,
-      stats,
-      action,
-      ...props
-    },
+    { className, variant = "bordered", title, stats, action, ...props },
     ref,
   ) => {
     return (
@@ -408,7 +415,8 @@ export const GlowAnimatedStats = forwardRef<HTMLDivElement, GlowAnimatedStatsPro
         {/* Stats */}
         <div className="p-4 flex flex-wrap gap-4">
           {stats.map((stat, index) => {
-            const glowColor = stat.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+            const glowColor =
+              stat.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
             return (
               <div
@@ -416,7 +424,7 @@ export const GlowAnimatedStats = forwardRef<HTMLDivElement, GlowAnimatedStatsPro
                 className={cn(
                   "flex-1 min-w-[140px] p-4 rounded-lg border border-border",
                   "transition-all duration-300",
-                  "hover:shadow-lg hover:scale-[1.02]"
+                  "hover:shadow-lg hover:scale-[1.02]",
                 )}
                 style={{
                   boxShadow: `0 0 0 0 ${glowColor}40`,
@@ -429,10 +437,7 @@ export const GlowAnimatedStats = forwardRef<HTMLDivElement, GlowAnimatedStatsPro
                 }}
               >
                 {stat.icon && (
-                  <span
-                    className="mb-2 block"
-                    style={{ color: glowColor }}
-                  >
+                  <span className="mb-2 block" style={{ color: glowColor }}>
                     {stat.icon}
                   </span>
                 )}

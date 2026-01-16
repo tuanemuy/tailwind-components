@@ -1,8 +1,8 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
+import { ProgressBar } from "@/components/atoms";
 import { cn } from "@/lib/utils";
 import { dataCardVariants } from "@/lib/variants/dataVisualization";
-import { ProgressBar } from "@/components/atoms";
-import type { VariantProps } from "class-variance-authority";
 
 // ============================================
 // Types
@@ -61,7 +61,9 @@ export const BrowsersCard = forwardRef<HTMLDivElement, BrowsersCardProps>(
                 <h3 className="text-sm font-medium text-foreground">{title}</h3>
               )}
               {subtitle && (
-                <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {subtitle}
+                </p>
               )}
             </div>
             {action && <div className="shrink-0">{action}</div>}
@@ -124,7 +126,10 @@ export interface CompactBrowsersCardProps
   action?: React.ReactNode;
 }
 
-export const CompactBrowsersCard = forwardRef<HTMLDivElement, CompactBrowsersCardProps>(
+export const CompactBrowsersCard = forwardRef<
+  HTMLDivElement,
+  CompactBrowsersCardProps
+>(
   (
     {
       className,
@@ -160,11 +165,12 @@ export const CompactBrowsersCard = forwardRef<HTMLDivElement, CompactBrowsersCar
                 key={browser.id}
                 className={cn(
                   "h-full transition-all",
-                  index > 0 && "border-l border-background"
+                  index > 0 && "border-l border-background",
                 )}
                 style={{
                   width: `${browser.percentage}%`,
-                  backgroundColor: browser.color || `hsl(var(--chart-${(index % 5) + 1}))`,
+                  backgroundColor:
+                    browser.color || `hsl(var(--chart-${(index % 5) + 1}))`,
                 }}
                 title={`${browser.name}: ${browser.percentage}%`}
               />
@@ -178,7 +184,8 @@ export const CompactBrowsersCard = forwardRef<HTMLDivElement, CompactBrowsersCar
                 <span
                   className="size-2.5 rounded-full"
                   style={{
-                    backgroundColor: browser.color || `hsl(var(--chart-${(index % 5) + 1}))`,
+                    backgroundColor:
+                      browser.color || `hsl(var(--chart-${(index % 5) + 1}))`,
                   }}
                 />
                 <span className="text-xs text-muted-foreground">

@@ -1,5 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { OrderStatusCard, ExchangeReturnCard, type OrderStatusStep } from "./index";
+import {
+  ExchangeReturnCard,
+  OrderStatusCard,
+  type OrderStatusStep,
+} from "./index";
 
 const meta: Meta<typeof OrderStatusCard> = {
   title: "Organisms/E-Commerce/OrderStatusCard",
@@ -17,7 +21,8 @@ const sampleItems = [
   {
     id: "1",
     name: "Guatemala Elephant Coffee",
-    image: "https://images.unsplash.com/photo-1615486629862-10b0890e79b3?w=200&h=200&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1615486629862-10b0890e79b3?w=200&h=200&fit=crop",
     price: 5.5,
     quantity: 2,
     variant: "250g, Ground",
@@ -25,7 +30,8 @@ const sampleItems = [
   {
     id: "2",
     name: "Colombia Premium Blend",
-    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=200&h=200&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=200&h=200&fit=crop",
     price: 8.99,
     quantity: 1,
     variant: "500g, Beans",
@@ -34,8 +40,19 @@ const sampleItems = [
 
 const orderSteps: OrderStatusStep[] = [
   { status: "confirmed", label: "Confirmed", date: "Jan 15", completed: true },
-  { status: "processing", label: "Processing", date: "Jan 16", completed: true },
-  { status: "shipped", label: "Shipped", date: "Jan 17", completed: true, current: true },
+  {
+    status: "processing",
+    label: "Processing",
+    date: "Jan 16",
+    completed: true,
+  },
+  {
+    status: "shipped",
+    label: "Shipped",
+    date: "Jan 17",
+    completed: true,
+    current: true,
+  },
   { status: "delivered", label: "Delivered", completed: false },
 ];
 
@@ -62,10 +79,26 @@ export const Delivered: Story = {
     orderDate: new Date("2024-01-10"),
     currentStatus: "delivered",
     steps: [
-      { status: "confirmed", label: "Confirmed", date: "Jan 10", completed: true },
-      { status: "processing", label: "Processing", date: "Jan 11", completed: true },
+      {
+        status: "confirmed",
+        label: "Confirmed",
+        date: "Jan 10",
+        completed: true,
+      },
+      {
+        status: "processing",
+        label: "Processing",
+        date: "Jan 11",
+        completed: true,
+      },
       { status: "shipped", label: "Shipped", date: "Jan 12", completed: true },
-      { status: "delivered", label: "Delivered", date: "Jan 14", completed: true, current: true },
+      {
+        status: "delivered",
+        label: "Delivered",
+        date: "Jan 14",
+        completed: true,
+        current: true,
+      },
     ],
     items: sampleItems,
     total: 19.99,
@@ -100,8 +133,19 @@ export const Cancelled: Story = {
     orderDate: new Date("2024-01-12"),
     currentStatus: "cancelled",
     steps: [
-      { status: "confirmed", label: "Confirmed", date: "Jan 12", completed: true },
-      { status: "cancelled", label: "Cancelled", date: "Jan 13", completed: true, current: true },
+      {
+        status: "confirmed",
+        label: "Confirmed",
+        date: "Jan 12",
+        completed: true,
+      },
+      {
+        status: "cancelled",
+        label: "Cancelled",
+        date: "Jan 13",
+        completed: true,
+        current: true,
+      },
     ],
     items: sampleItems,
     total: 19.99,
@@ -134,7 +178,8 @@ export const ReturnRequest: StoryObj<typeof ExchangeReturnCard> = {
         {
           id: "1",
           name: "Guatemala Elephant Coffee",
-          image: "https://images.unsplash.com/photo-1615486629862-10b0890e79b3?w=200&h=200&fit=crop",
+          image:
+            "https://images.unsplash.com/photo-1615486629862-10b0890e79b3?w=200&h=200&fit=crop",
           variant: "250g, Ground",
           quantity: 2,
           price: 5.5,
@@ -143,7 +188,8 @@ export const ReturnRequest: StoryObj<typeof ExchangeReturnCard> = {
         {
           id: "2",
           name: "Colombia Premium Blend",
-          image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=200&h=200&fit=crop",
+          image:
+            "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=200&h=200&fit=crop",
           variant: "500g, Beans",
           quantity: 1,
           price: 8.99,
@@ -168,7 +214,8 @@ export const ExchangeRequest: StoryObj<typeof ExchangeReturnCard> = {
         {
           id: "1",
           name: "Premium T-Shirt",
-          image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=200&h=200&fit=crop",
+          image:
+            "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=200&h=200&fit=crop",
           variant: "Size M, Black",
           quantity: 1,
           price: 29.99,

@@ -192,10 +192,7 @@ const addresses = [
 export const List: StoryObj<typeof AddressCardList> = {
   render: () => (
     <div className="w-[400px]">
-      <AddressCardList
-        addresses={addresses}
-        selectedId="1"
-      />
+      <AddressCardList addresses={addresses} selectedId="1" />
     </div>
   ),
 };
@@ -215,10 +212,7 @@ export const ListSelectable: StoryObj<typeof AddressCardList> = {
 export const ListCompact: StoryObj<typeof AddressCardList> = {
   render: () => (
     <div className="w-[400px]">
-      <AddressCardList
-        addresses={addresses}
-        variant="compact"
-      />
+      <AddressCardList addresses={addresses} variant="compact" />
     </div>
   ),
 };
@@ -226,11 +220,7 @@ export const ListCompact: StoryObj<typeof AddressCardList> = {
 export const ListInline: StoryObj<typeof AddressCardList> = {
   render: () => (
     <div className="w-[400px]">
-      <AddressCardList
-        addresses={addresses}
-        variant="inline"
-        selectedId="1"
-      />
+      <AddressCardList addresses={addresses} variant="inline" selectedId="1" />
     </div>
   ),
 };

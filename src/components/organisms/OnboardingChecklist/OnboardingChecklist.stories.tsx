@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { Button } from "@/components/atoms/Button";
+import { GiftIcon, StarIcon } from "@/lib/icons";
 import {
-  OnboardingChecklist,
   CompactChecklist,
   ExpandableChecklist,
   GamifiedChecklist,
+  OnboardingChecklist,
 } from "./index";
-import { Button } from "@/components/atoms/Button";
-import { GiftIcon, StarIcon } from "@/lib/icons";
 
 const meta: Meta<typeof OnboardingChecklist> = {
   title: "Organisms/PageSections/OnboardingChecklist",
@@ -186,7 +186,8 @@ export const Expandable: StoryObj<typeof ExpandableChecklist> = {
             content: (
               <div className="space-y-3">
                 <p className="text-sm text-muted-foreground">
-                  Connect your calendar, email, and other apps to get the most out of our platform.
+                  Connect your calendar, email, and other apps to get the most
+                  out of our platform.
                 </p>
                 <div className="flex gap-2">
                   <Button variant="outline" size="sm">
@@ -374,9 +375,7 @@ export const Interactive: Story = {
 
     const handleToggle = (id: string, completed: boolean) => {
       setItems((prev) =>
-        prev.map((item) =>
-          item.id === id ? { ...item, completed } : item
-        )
+        prev.map((item) => (item.id === id ? { ...item, completed } : item)),
       );
     };
 

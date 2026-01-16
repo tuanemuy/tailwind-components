@@ -1,29 +1,29 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { type ReactNode, useState } from "react";
+import { Avatar } from "@/components/atoms/Avatar";
+import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
-import { Badge } from "@/components/atoms/Badge";
-import { Avatar } from "@/components/atoms/Avatar";
 import {
-  SearchIcon,
-  MailIcon,
-  PhoneIcon,
-  MapPinIcon,
   CalendarIcon,
-  PlusIcon,
-  FilterIcon,
-  UsersIcon,
-  TagIcon,
-  FileIcon,
-  ClockIcon,
-  EditIcon,
-  TrashIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
+  ClockIcon,
+  EditIcon,
   ExternalLinkIcon,
+  FileIcon,
+  FilterIcon,
+  MailIcon,
+  MapPinIcon,
+  PhoneIcon,
+  PlusIcon,
+  SearchIcon,
+  TagIcon,
+  TrashIcon,
+  UsersIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // ============================================
 // Types
@@ -163,7 +163,7 @@ export const CRMLayout = ({
       <div
         className={cn(
           "flex flex-col border-r border-border bg-card shrink-0",
-          showDetails && selectedCustomer ? "w-80" : "flex-1"
+          showDetails && selectedCustomer ? "w-80" : "flex-1",
         )}
       >
         {/* Header */}
@@ -308,11 +308,12 @@ const CustomerListItem = ({
   };
 
   return (
+    // biome-ignore lint/a11y/useKeyWithClickEvents: Customer list item selection
     <div
       onClick={onClick}
       className={cn(
         "p-4 cursor-pointer transition-colors hover:bg-muted/50",
-        isSelected && "bg-muted"
+        isSelected && "bg-muted",
       )}
     >
       <div className="flex items-start gap-x-3">
@@ -326,7 +327,7 @@ const CustomerListItem = ({
           <span
             className={cn(
               "absolute -bottom-0.5 -right-0.5 size-3 rounded-full border-2 border-white",
-              statusColors[customer.status]
+              statusColors[customer.status],
             )}
           />
         </div>
@@ -420,7 +421,9 @@ const CustomerDetailsPanel = ({
               )}
               <div className="flex items-center gap-x-3 mt-2">
                 <Badge
-                  variant={customer.status === "active" ? "default" : "secondary"}
+                  variant={
+                    customer.status === "active" ? "default" : "secondary"
+                  }
                 >
                   {customer.status}
                 </Badge>
@@ -428,7 +431,11 @@ const CustomerDetailsPanel = ({
                   <Badge
                     key={tag.id}
                     variant="outline"
-                    style={tag.color ? { borderColor: tag.color, color: tag.color } : undefined}
+                    style={
+                      tag.color
+                        ? { borderColor: tag.color, color: tag.color }
+                        : undefined
+                    }
                   >
                     {tag.name}
                   </Badge>
@@ -453,12 +460,13 @@ const CustomerDetailsPanel = ({
           {tabs.map((tab) => (
             <button
               key={tab.id}
+              type="button"
               onClick={() => onTabChange(tab.id)}
               className={cn(
                 "px-4 py-3 text-sm font-medium border-b-2 transition-colors",
                 activeTab === tab.id
                   ? "border-primary text-primary"
-                  : "border-transparent text-muted-foreground hover:text-foreground"
+                  : "border-transparent text-muted-foreground hover:text-foreground",
               )}
             >
               {tab.label}
@@ -469,9 +477,7 @@ const CustomerDetailsPanel = ({
 
       {/* Tab Content */}
       <div className="flex-1 overflow-y-auto p-4 md:p-6">
-        {activeTab === "overview" && (
-          <CustomerOverview customer={customer} />
-        )}
+        {activeTab === "overview" && <CustomerOverview customer={customer} />}
         {activeTab === "activity" && (
           <CustomerActivityList activities={customer.activities || []} />
         )}
@@ -697,9 +703,7 @@ const CustomerOrdersList = ({ orders }: CustomerOrdersListProps) => {
           </div>
           <div className="flex items-center gap-x-3">
             <span className="font-medium">${order.total.toLocaleString()}</span>
-            <Badge className={statusColors[order.status]}>
-              {order.status}
-            </Badge>
+            <Badge className={statusColors[order.status]}>{order.status}</Badge>
           </div>
         </div>
       ))}
@@ -762,6 +766,7 @@ const CustomerNotesList = ({ notes }: CustomerNotesListProps) => {
 const CustomerListSkeleton = () => (
   <div className="divide-y divide-border">
     {Array.from({ length: 5 }).map((_, i) => (
+      // biome-ignore lint/suspicious/noArrayIndexKey: Skeleton uses fixed indices
       <div key={i} className="p-4 animate-pulse">
         <div className="flex items-start gap-x-3">
           <div className="size-10 rounded-full bg-muted" />

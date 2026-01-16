@@ -1,32 +1,32 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { type ReactNode, useState } from "react";
 import { Button } from "@/components/atoms/Button";
-import { Input } from "@/components/atoms/Input";
 import { Checkbox } from "@/components/atoms/Checkbox";
+import { Input } from "@/components/atoms/Input";
 import {
-  InboxThread,
-  CompactInboxItem,
-  InboxSidebar,
-  type EmailData,
-  type InboxFolder,
-} from "../InboxThread";
-import { EmailCompose } from "../ComposeThread";
-import {
-  SearchIcon,
-  MailIcon,
-  SendIcon,
-  FileIcon,
-  TrashIcon,
-  ArchiveIcon,
-  StarIcon,
   AlertTriangleIcon,
-  RefreshIcon,
-  FilterIcon,
+  ArchiveIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
+  FileIcon,
+  FilterIcon,
+  MailIcon,
+  RefreshIcon,
+  SearchIcon,
+  SendIcon,
+  StarIcon,
+  TrashIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
+import { EmailCompose } from "../ComposeThread";
+import {
+  CompactInboxItem,
+  type EmailData,
+  type InboxFolder,
+  InboxSidebar,
+  InboxThread,
+} from "../InboxThread";
 
 // ============================================
 // Types
@@ -61,7 +61,7 @@ export interface InboxLayoutProps {
   onSelectFolder?: (id: string) => void;
   onCompose?: () => void;
   onCloseCompose?: () => void;
-  onSendEmail?: (data: any) => void;
+  onSendEmail?: (data: Record<string, unknown>) => void;
   onRefresh?: () => void;
   onSearch?: (query: string) => void;
   onPageChange?: (page: number) => void;
@@ -154,7 +154,7 @@ export const InboxLayout = ({
 
   const handleSelectEmail = (id: string) => {
     setSelectedIds((prev) =>
-      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id],
     );
   };
 
@@ -205,7 +205,7 @@ export const InboxLayout = ({
           <div
             className={cn(
               "flex-1 overflow-y-auto",
-              showPreview && selectedEmail && "max-w-md border-r border-border"
+              showPreview && selectedEmail && "max-w-md border-r border-border",
             )}
           >
             {emails.length === 0 ? (
@@ -213,11 +213,12 @@ export const InboxLayout = ({
             ) : (
               <div className="divide-y divide-border">
                 {emails.map((email) => (
-                  <div
+                  <button
                     key={email.id}
+                    type="button"
                     className={cn(
-                      "flex items-start gap-x-3 p-3 hover:bg-muted/50 cursor-pointer transition-colors",
-                      selectedEmail?.id === email.id && "bg-muted"
+                      "flex items-start gap-x-3 p-3 hover:bg-muted/50 cursor-pointer transition-colors w-full text-left",
+                      selectedEmail?.id === email.id && "bg-muted",
                     )}
                     onClick={() => onSelectEmail?.(email.id)}
                   >
@@ -231,7 +232,7 @@ export const InboxLayout = ({
                       isSelected={selectedEmail?.id === email.id}
                       className="flex-1 p-0"
                     />
-                  </div>
+                  </button>
                 ))}
               </div>
             )}
@@ -360,9 +361,7 @@ const InboxToolbar = ({
           onClick={onRefresh}
           disabled={isLoading}
         >
-          <RefreshIcon
-            className={cn("size-4", isLoading && "animate-spin")}
-          />
+          <RefreshIcon className={cn("size-4", isLoading && "animate-spin")} />
         </Button>
       )}
     </div>
@@ -451,8 +450,6 @@ export const SplitInboxLayout = ({
   <InboxLayout
     {...props}
     showPreview={true}
-    className={cn(
-      previewPosition === "bottom" && "flex-col"
-    )}
+    className={cn(previewPosition === "bottom" && "flex-col")}
   />
 );

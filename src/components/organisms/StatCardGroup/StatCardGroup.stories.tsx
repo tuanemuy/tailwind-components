@@ -1,11 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { DownloadIcon, StoreIcon, TrendUpIcon, UsersIcon } from "@/lib/icons";
 import { StatCardGroup } from "./index";
-import {
-  UsersIcon,
-  StoreIcon,
-  TrendUpIcon,
-  DownloadIcon,
-} from "@/lib/icons";
 
 const meta: Meta<typeof StatCardGroup> = {
   title: "Organisms/StatCardGroup",

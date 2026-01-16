@@ -1,17 +1,17 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/atoms/Button";
 import { Badge } from "@/components/atoms/Badge";
-import { fileTypeColorConfig, type FileTypeColor } from "@/lib/variants";
+import { Button } from "@/components/atoms/Button";
 import {
-  FileIcon,
-  FileTextIcon,
-  ImageIcon,
   DownloadIcon,
   ExternalLinkIcon,
-  MoreHorizontalIcon,
+  FileIcon,
+  FileTextIcon,
   FolderIcon,
+  ImageIcon,
+  MoreHorizontalIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
+import { type FileTypeColor, fileTypeColorConfig } from "@/lib/variants";
 
 export type FileType = FileTypeColor;
 
@@ -61,7 +61,7 @@ export const FileSnippet = forwardRef<HTMLDivElement, FileSnippetProps>(
       onMoreClick,
       ...props
     },
-    ref
+    ref,
   ) => {
     const colorClass = fileTypeColorConfig[file.type];
     const Icon = fileTypeIcons[file.type];
@@ -72,14 +72,21 @@ export const FileSnippet = forwardRef<HTMLDivElement, FileSnippetProps>(
           ref={ref}
           className={cn(
             "inline-flex items-center gap-x-2 rounded-lg border border-border bg-card px-3 py-2",
-            className
+            className,
           )}
           {...props}
         >
-          <div className={cn("flex size-7 items-center justify-center rounded", colorClass)}>
+          <div
+            className={cn(
+              "flex size-7 items-center justify-center rounded",
+              colorClass,
+            )}
+          >
             <Icon className="size-4" />
           </div>
-          <span className="truncate text-sm font-medium text-foreground">{file.name}</span>
+          <span className="truncate text-sm font-medium text-foreground">
+            {file.name}
+          </span>
           {file.size && (
             <span className="text-xs text-muted-foreground">{file.size}</span>
           )}
@@ -103,16 +110,23 @@ export const FileSnippet = forwardRef<HTMLDivElement, FileSnippetProps>(
           ref={ref}
           className={cn(
             "flex items-center justify-between gap-x-3 rounded-lg border border-border bg-card p-3",
-            className
+            className,
           )}
           {...props}
         >
           <div className="flex items-center gap-x-3">
-            <div className={cn("flex size-9 items-center justify-center rounded-lg", colorClass)}>
+            <div
+              className={cn(
+                "flex size-9 items-center justify-center rounded-lg",
+                colorClass,
+              )}
+            >
               <Icon className="size-4" />
             </div>
             <div className="min-w-0">
-              <p className="truncate text-sm font-medium text-foreground">{file.name}</p>
+              <p className="truncate text-sm font-medium text-foreground">
+                {file.name}
+              </p>
               <div className="flex items-center gap-x-2 text-xs text-muted-foreground">
                 {file.extension && <span>{file.extension.toUpperCase()}</span>}
                 {file.size && <span>{file.size}</span>}
@@ -137,11 +151,15 @@ export const FileSnippet = forwardRef<HTMLDivElement, FileSnippetProps>(
       return (
         <div
           ref={ref}
-          className={cn("overflow-hidden rounded-xl border border-border bg-card", className)}
+          className={cn(
+            "overflow-hidden rounded-xl border border-border bg-card",
+            className,
+          )}
           {...props}
         >
-          <div
-            className="aspect-video cursor-pointer bg-muted"
+          <button
+            type="button"
+            className="aspect-video w-full cursor-pointer bg-muted"
             onClick={() => onPreview?.(file)}
           >
             {file.type === "image" ? (
@@ -155,11 +173,13 @@ export const FileSnippet = forwardRef<HTMLDivElement, FileSnippetProps>(
                 <Icon className="size-16 text-muted-foreground" />
               </div>
             )}
-          </div>
+          </button>
           <div className="p-4">
             <div className="flex items-start justify-between gap-x-3">
               <div className="min-w-0 flex-1">
-                <p className="truncate font-medium text-foreground">{file.name}</p>
+                <p className="truncate font-medium text-foreground">
+                  {file.name}
+                </p>
                 <div className="mt-1 flex items-center gap-x-2 text-xs text-muted-foreground">
                   {file.extension && (
                     <Badge variant="secondary" size="sm">
@@ -209,12 +229,17 @@ export const FileSnippet = forwardRef<HTMLDivElement, FileSnippetProps>(
         ref={ref}
         className={cn(
           "flex items-center justify-between gap-x-4 rounded-xl border border-border bg-card p-4",
-          className
+          className,
         )}
         {...props}
       >
         <div className="flex items-center gap-x-4">
-          <div className={cn("flex size-12 items-center justify-center rounded-xl", colorClass)}>
+          <div
+            className={cn(
+              "flex size-12 items-center justify-center rounded-xl",
+              colorClass,
+            )}
+          >
             <Icon className="size-6" />
           </div>
           <div className="min-w-0">
@@ -260,12 +285,13 @@ export const FileSnippet = forwardRef<HTMLDivElement, FileSnippetProps>(
         )}
       </div>
     );
-  }
+  },
 );
 FileSnippet.displayName = "FileSnippet";
 
 // List component for multiple file snippets
-export interface FileSnippetListProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FileSnippetListProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   files: FileSnippetData[];
   variant?: FileSnippetProps["variant"];
   showActions?: boolean;
@@ -286,14 +312,10 @@ export const FileSnippetList = forwardRef<HTMLDivElement, FileSnippetListProps>(
       onMoreClick,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
-      <div
-        ref={ref}
-        className={cn("space-y-2", className)}
-        {...props}
-      >
+      <div ref={ref} className={cn("space-y-2", className)} {...props}>
         {files.map((file) => (
           <FileSnippet
             key={file.id}
@@ -307,12 +329,13 @@ export const FileSnippetList = forwardRef<HTMLDivElement, FileSnippetListProps>(
         ))}
       </div>
     );
-  }
+  },
 );
 FileSnippetList.displayName = "FileSnippetList";
 
 // Grid component for preview variant
-export interface FileSnippetGridProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FileSnippetGridProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   files: FileSnippetData[];
   columns?: 2 | 3 | 4;
   showActions?: boolean;
@@ -339,7 +362,7 @@ export const FileSnippetGrid = forwardRef<HTMLDivElement, FileSnippetGridProps>(
       onMoreClick,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
@@ -360,6 +383,6 @@ export const FileSnippetGrid = forwardRef<HTMLDivElement, FileSnippetGridProps>(
         ))}
       </div>
     );
-  }
+  },
 );
 FileSnippetGrid.displayName = "FileSnippetGrid";

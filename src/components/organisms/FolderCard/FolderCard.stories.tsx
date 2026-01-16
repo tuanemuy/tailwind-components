@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import type { FolderColor } from "@/lib/variants";
 import { FolderCard, FolderCardGrid, FolderCardList } from "./index";
 
 const meta: Meta<typeof FolderCard> = {
@@ -130,14 +131,16 @@ export const Private: Story = {
 export const ColorVariants: Story = {
   render: () => (
     <div className="grid grid-cols-3 gap-4">
-      {["default", "blue", "green", "yellow", "red", "purple"].map((color) => (
+      {(
+        ["default", "blue", "green", "yellow", "red", "purple"] as FolderColor[]
+      ).map((color) => (
         <FolderCard
           key={color}
           folder={{
             id: color,
             name: `${color.charAt(0).toUpperCase() + color.slice(1)} Folder`,
             itemCount: 12,
-            color: color as any,
+            color,
           }}
           variant="grid"
         />
@@ -147,21 +150,64 @@ export const ColorVariants: Story = {
 };
 
 const folders = [
-  { id: "1", name: "Documents", itemCount: 24, size: "1.2 GB", modifiedDate: "Dec 15, 2025", isStarred: true, color: "default" as const },
-  { id: "2", name: "Images", itemCount: 156, size: "4.5 GB", modifiedDate: "Dec 14, 2025", color: "purple" as const },
-  { id: "3", name: "Projects", itemCount: 8, size: "890 MB", modifiedDate: "Dec 13, 2025", isShared: true, color: "blue" as const },
-  { id: "4", name: "Archive", itemCount: 45, size: "2.1 GB", modifiedDate: "Dec 10, 2025", color: "yellow" as const },
-  { id: "5", name: "Private", itemCount: 12, size: "450 MB", modifiedDate: "Dec 8, 2025", isPrivate: true, color: "red" as const },
-  { id: "6", name: "Shared", itemCount: 32, size: "1.8 GB", modifiedDate: "Dec 5, 2025", isShared: true, color: "green" as const },
+  {
+    id: "1",
+    name: "Documents",
+    itemCount: 24,
+    size: "1.2 GB",
+    modifiedDate: "Dec 15, 2025",
+    isStarred: true,
+    color: "default" as const,
+  },
+  {
+    id: "2",
+    name: "Images",
+    itemCount: 156,
+    size: "4.5 GB",
+    modifiedDate: "Dec 14, 2025",
+    color: "purple" as const,
+  },
+  {
+    id: "3",
+    name: "Projects",
+    itemCount: 8,
+    size: "890 MB",
+    modifiedDate: "Dec 13, 2025",
+    isShared: true,
+    color: "blue" as const,
+  },
+  {
+    id: "4",
+    name: "Archive",
+    itemCount: 45,
+    size: "2.1 GB",
+    modifiedDate: "Dec 10, 2025",
+    color: "yellow" as const,
+  },
+  {
+    id: "5",
+    name: "Private",
+    itemCount: 12,
+    size: "450 MB",
+    modifiedDate: "Dec 8, 2025",
+    isPrivate: true,
+    color: "red" as const,
+  },
+  {
+    id: "6",
+    name: "Shared",
+    itemCount: 32,
+    size: "1.8 GB",
+    modifiedDate: "Dec 5, 2025",
+    isShared: true,
+    color: "green" as const,
+  },
 ];
 
 export const FolderGridView: StoryObj<typeof FolderCardGrid> = {
   render: () => (
     <div className="w-[700px]">
-      <FolderCardGrid
-        folders={folders}
-        columns={4}
-      />
+      <FolderCardGrid folders={folders} columns={4} />
     </div>
   ),
 };
@@ -182,10 +228,7 @@ export const FolderGridSelectable: StoryObj<typeof FolderCardGrid> = {
 export const FolderListView: StoryObj<typeof FolderCardList> = {
   render: () => (
     <div className="w-[500px]">
-      <FolderCardList
-        folders={folders}
-        variant="list"
-      />
+      <FolderCardList folders={folders} variant="list" />
     </div>
   ),
 };
@@ -193,10 +236,7 @@ export const FolderListView: StoryObj<typeof FolderCardList> = {
 export const FolderListCompact: StoryObj<typeof FolderCardList> = {
   render: () => (
     <div className="w-[300px]">
-      <FolderCardList
-        folders={folders}
-        variant="compact"
-      />
+      <FolderCardList folders={folders} variant="compact" />
     </div>
   ),
 };

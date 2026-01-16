@@ -1,8 +1,8 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
+import { ProgressBar } from "@/components/atoms";
 import { cn } from "@/lib/utils";
 import { dataCardVariants } from "@/lib/variants/dataVisualization";
-import { ProgressBar } from "@/components/atoms";
-import type { VariantProps } from "class-variance-authority";
 
 // ============================================
 // Types
@@ -33,7 +33,10 @@ export interface ProgressbarsCardProps
   action?: React.ReactNode;
 }
 
-export const ProgressbarsCard = forwardRef<HTMLDivElement, ProgressbarsCardProps>(
+export const ProgressbarsCard = forwardRef<
+  HTMLDivElement,
+  ProgressbarsCardProps
+>(
   (
     {
       className,
@@ -62,7 +65,9 @@ export const ProgressbarsCard = forwardRef<HTMLDivElement, ProgressbarsCardProps
                 <h3 className="text-sm font-medium text-foreground">{title}</h3>
               )}
               {subtitle && (
-                <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {subtitle}
+                </p>
               )}
             </div>
             {action && <div className="shrink-0">{action}</div>}
@@ -74,7 +79,8 @@ export const ProgressbarsCard = forwardRef<HTMLDivElement, ProgressbarsCardProps
           {items.map((item, index) => {
             const max = item.max ?? 100;
             const percentage = Math.min((item.value / max) * 100, 100);
-            const barColor = item.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+            const barColor =
+              item.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
             return (
               <div key={item.id}>
@@ -136,16 +142,12 @@ export interface CircularProgressCardProps
   action?: React.ReactNode;
 }
 
-export const CircularProgressCard = forwardRef<HTMLDivElement, CircularProgressCardProps>(
+export const CircularProgressCard = forwardRef<
+  HTMLDivElement,
+  CircularProgressCardProps
+>(
   (
-    {
-      className,
-      variant = "bordered",
-      title,
-      items,
-      action,
-      ...props
-    },
+    { className, variant = "bordered", title, items, action, ...props },
     ref,
   ) => {
     return (
@@ -170,13 +172,16 @@ export const CircularProgressCard = forwardRef<HTMLDivElement, CircularProgressC
             const max = item.max ?? 100;
             const percentage = Math.min((item.value / max) * 100, 100);
             const circumference = 2 * Math.PI * 36;
-            const strokeDashoffset = circumference - (percentage / 100) * circumference;
-            const strokeColor = item.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+            const strokeDashoffset =
+              circumference - (percentage / 100) * circumference;
+            const strokeColor =
+              item.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
             return (
               <div key={item.id} className="flex flex-col items-center gap-y-2">
                 <div className="relative size-20">
                   <svg
+                    aria-hidden="true"
                     className="size-20 -rotate-90"
                     viewBox="0 0 80 80"
                     fill="none"
@@ -232,16 +237,12 @@ export interface CompactProgressListProps
   action?: React.ReactNode;
 }
 
-export const CompactProgressList = forwardRef<HTMLDivElement, CompactProgressListProps>(
+export const CompactProgressList = forwardRef<
+  HTMLDivElement,
+  CompactProgressListProps
+>(
   (
-    {
-      className,
-      variant = "bordered",
-      title,
-      items,
-      action,
-      ...props
-    },
+    { className, variant = "bordered", title, items, action, ...props },
     ref,
   ) => {
     return (
@@ -265,10 +266,14 @@ export const CompactProgressList = forwardRef<HTMLDivElement, CompactProgressLis
           {items.map((item, index) => {
             const max = item.max ?? 100;
             const percentage = Math.min((item.value / max) * 100, 100);
-            const barColor = item.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+            const barColor =
+              item.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
             return (
-              <div key={item.id} className="flex items-center gap-x-4 px-4 py-3">
+              <div
+                key={item.id}
+                className="flex items-center gap-x-4 px-4 py-3"
+              >
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-sm text-foreground truncate">

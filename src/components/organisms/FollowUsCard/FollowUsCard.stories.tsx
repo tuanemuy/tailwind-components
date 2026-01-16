@@ -14,11 +14,31 @@ export default meta;
 type Story = StoryObj<typeof FollowUsCard>;
 
 const socialLinks = [
-  { platform: "twitter" as const, url: "https://twitter.com", followers: 12500 },
-  { platform: "facebook" as const, url: "https://facebook.com", followers: 8200 },
-  { platform: "instagram" as const, url: "https://instagram.com", followers: 15800 },
-  { platform: "linkedin" as const, url: "https://linkedin.com", followers: 5400 },
-  { platform: "youtube" as const, url: "https://youtube.com", followers: 25000 },
+  {
+    platform: "twitter" as const,
+    url: "https://twitter.com",
+    followers: 12500,
+  },
+  {
+    platform: "facebook" as const,
+    url: "https://facebook.com",
+    followers: 8200,
+  },
+  {
+    platform: "instagram" as const,
+    url: "https://instagram.com",
+    followers: 15800,
+  },
+  {
+    platform: "linkedin" as const,
+    url: "https://linkedin.com",
+    followers: 5400,
+  },
+  {
+    platform: "youtube" as const,
+    url: "https://youtube.com",
+    followers: 25000,
+  },
   { platform: "github" as const, url: "https://github.com", followers: 3200 },
 ];
 

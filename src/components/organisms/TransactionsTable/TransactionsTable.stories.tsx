@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { TransactionsTable, type Transaction } from "./index";
+import { type Transaction, TransactionsTable } from "./index";
 
 // Sample transactions data
 const sampleTransactions: Transaction[] = [
@@ -12,7 +12,12 @@ const sampleTransactions: Transaction[] = [
     currency: "USD",
     description: "Salary Deposit",
     category: { id: "1", name: "Income" },
-    toAccount: { id: "1", name: "Checking Account", number: "****1234", type: "bank" },
+    toAccount: {
+      id: "1",
+      name: "Checking Account",
+      number: "****1234",
+      type: "bank",
+    },
     reference: "SAL-2024-001",
     date: "2024-01-15",
   },
@@ -24,7 +29,12 @@ const sampleTransactions: Transaction[] = [
     currency: "USD",
     description: "Electric Bill Payment",
     category: { id: "2", name: "Utilities" },
-    fromAccount: { id: "1", name: "Checking Account", number: "****1234", type: "bank" },
+    fromAccount: {
+      id: "1",
+      name: "Checking Account",
+      number: "****1234",
+      type: "bank",
+    },
     toAccount: { id: "3", name: "Electric Company", type: "bank" },
     reference: "UTIL-2024-001",
     date: "2024-01-14",
@@ -36,8 +46,18 @@ const sampleTransactions: Transaction[] = [
     amount: 500.0,
     currency: "USD",
     description: "Transfer to Savings",
-    fromAccount: { id: "1", name: "Checking Account", number: "****1234", type: "bank" },
-    toAccount: { id: "2", name: "Savings Account", number: "****5678", type: "bank" },
+    fromAccount: {
+      id: "1",
+      name: "Checking Account",
+      number: "****1234",
+      type: "bank",
+    },
+    toAccount: {
+      id: "2",
+      name: "Savings Account",
+      number: "****5678",
+      type: "bank",
+    },
     reference: "TRF-2024-001",
     date: "2024-01-13",
   },
@@ -49,7 +69,12 @@ const sampleTransactions: Transaction[] = [
     currency: "USD",
     description: "Netflix Subscription",
     category: { id: "3", name: "Entertainment" },
-    fromAccount: { id: "4", name: "Credit Card", number: "****9012", type: "card" },
+    fromAccount: {
+      id: "4",
+      name: "Credit Card",
+      number: "****9012",
+      type: "card",
+    },
     reference: "SUB-2024-001",
     date: "2024-01-12",
   },
@@ -61,7 +86,12 @@ const sampleTransactions: Transaction[] = [
     currency: "USD",
     description: "Product Return Refund",
     category: { id: "4", name: "Refunds" },
-    toAccount: { id: "4", name: "Credit Card", number: "****9012", type: "card" },
+    toAccount: {
+      id: "4",
+      name: "Credit Card",
+      number: "****9012",
+      type: "card",
+    },
     reference: "REF-2024-001",
     date: "2024-01-11",
   },
@@ -73,7 +103,12 @@ const sampleTransactions: Transaction[] = [
     currency: "USD",
     description: "ATM Withdrawal Fee",
     category: { id: "5", name: "Fees" },
-    fromAccount: { id: "1", name: "Checking Account", number: "****1234", type: "bank" },
+    fromAccount: {
+      id: "1",
+      name: "Checking Account",
+      number: "****1234",
+      type: "bank",
+    },
     reference: "FEE-2024-001",
     date: "2024-01-10",
   },
@@ -85,7 +120,12 @@ const sampleTransactions: Transaction[] = [
     currency: "USD",
     description: "Rent Payment",
     category: { id: "6", name: "Housing" },
-    fromAccount: { id: "1", name: "Checking Account", number: "****1234", type: "bank" },
+    fromAccount: {
+      id: "1",
+      name: "Checking Account",
+      number: "****1234",
+      type: "bank",
+    },
     reference: "RENT-2024-001",
     date: "2024-01-09",
   },
@@ -191,7 +231,7 @@ export const WithPagination: Story = {
 
     const paginatedTransactions = sampleTransactions.slice(
       (page - 1) * pageSize,
-      page * pageSize
+      page * pageSize,
     );
 
     return (

@@ -1,9 +1,9 @@
 "use client";
 
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
 import { Button, Separator } from "@/components/atoms";
-import { CheckCircleIcon, TruckIcon, PrinterIcon, MailIcon } from "@/lib/icons";
+import { CheckCircleIcon, MailIcon, PrinterIcon, TruckIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Types
 export interface OrderItem {
@@ -25,7 +25,8 @@ export interface ShippingAddress {
   phone?: string;
 }
 
-export interface OrderConfirmationProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface OrderConfirmationProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   orderNumber: string;
   orderDate?: Date;
   estimatedDelivery?: string;
@@ -45,7 +46,7 @@ export interface OrderConfirmationProps extends React.HTMLAttributes<HTMLDivElem
   onPrint?: () => void;
 }
 
-const formatPrice = (amount: number, currency: string = "USD"): string => {
+const formatPrice = (amount: number, currency = "USD"): string => {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency,
@@ -60,7 +61,10 @@ const formatDate = (date: Date): string => {
   }).format(date);
 };
 
-export const OrderConfirmation = forwardRef<HTMLDivElement, OrderConfirmationProps>(
+export const OrderConfirmation = forwardRef<
+  HTMLDivElement,
+  OrderConfirmationProps
+>(
   (
     {
       className,
@@ -121,7 +125,9 @@ export const OrderConfirmation = forwardRef<HTMLDivElement, OrderConfirmationPro
               </div>
               <div className="text-left sm:text-right">
                 <p className="text-sm text-muted-foreground">Order date</p>
-                <p className="font-medium text-foreground">{formatDate(orderDate)}</p>
+                <p className="font-medium text-foreground">
+                  {formatDate(orderDate)}
+                </p>
               </div>
             </div>
           </div>
@@ -134,8 +140,12 @@ export const OrderConfirmation = forwardRef<HTMLDivElement, OrderConfirmationPro
                   <TruckIcon className="size-5 text-muted-foreground" />
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Estimated delivery</p>
-                  <p className="font-medium text-foreground">{estimatedDelivery}</p>
+                  <p className="text-sm text-muted-foreground">
+                    Estimated delivery
+                  </p>
+                  <p className="font-medium text-foreground">
+                    {estimatedDelivery}
+                  </p>
                 </div>
               </div>
             </div>
@@ -159,9 +169,13 @@ export const OrderConfirmation = forwardRef<HTMLDivElement, OrderConfirmationPro
                   <div className="flex-1 min-w-0">
                     <p className="font-medium text-foreground">{item.name}</p>
                     {item.variant && (
-                      <p className="text-sm text-muted-foreground">{item.variant}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {item.variant}
+                      </p>
                     )}
-                    <p className="text-sm text-muted-foreground">Qty: {item.quantity}</p>
+                    <p className="text-sm text-muted-foreground">
+                      Qty: {item.quantity}
+                    </p>
                   </div>
                   <div className="text-right">
                     <p className="font-medium text-foreground">
@@ -178,18 +192,26 @@ export const OrderConfirmation = forwardRef<HTMLDivElement, OrderConfirmationPro
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Subtotal</span>
-                <span className="text-foreground">{formatPrice(subtotal, currency)}</span>
+                <span className="text-foreground">
+                  {formatPrice(subtotal, currency)}
+                </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Shipping</span>
-                <span className={shipping === 0 ? "text-success" : "text-foreground"}>
+                <span
+                  className={
+                    shipping === 0 ? "text-success" : "text-foreground"
+                  }
+                >
                   {shipping === 0 ? "Free" : formatPrice(shipping, currency)}
                 </span>
               </div>
               {tax > 0 && (
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Tax</span>
-                  <span className="text-foreground">{formatPrice(tax, currency)}</span>
+                  <span className="text-foreground">
+                    {formatPrice(tax, currency)}
+                  </span>
                 </div>
               )}
               {discount > 0 && (
@@ -201,7 +223,9 @@ export const OrderConfirmation = forwardRef<HTMLDivElement, OrderConfirmationPro
               <Separator className="my-2" />
               <div className="flex justify-between text-base font-medium">
                 <span className="text-foreground">Total</span>
-                <span className="text-foreground">{formatPrice(total, currency)}</span>
+                <span className="text-foreground">
+                  {formatPrice(total, currency)}
+                </span>
               </div>
             </div>
           </div>
@@ -211,13 +235,18 @@ export const OrderConfirmation = forwardRef<HTMLDivElement, OrderConfirmationPro
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
           {/* Shipping Address */}
           <div className="rounded-xl border border-border bg-card p-4 sm:p-6">
-            <h3 className="font-medium text-foreground mb-3">Shipping address</h3>
+            <h3 className="font-medium text-foreground mb-3">
+              Shipping address
+            </h3>
             <address className="not-italic text-sm text-muted-foreground space-y-1">
-              <p className="font-medium text-foreground">{shippingAddress.name}</p>
+              <p className="font-medium text-foreground">
+                {shippingAddress.name}
+              </p>
               <p>{shippingAddress.address}</p>
               <p>
                 {shippingAddress.city}
-                {shippingAddress.state && `, ${shippingAddress.state}`} {shippingAddress.zipCode}
+                {shippingAddress.state && `, ${shippingAddress.state}`}{" "}
+                {shippingAddress.zipCode}
               </p>
               <p>{shippingAddress.country}</p>
               {shippingAddress.phone && <p>{shippingAddress.phone}</p>}
@@ -232,11 +261,14 @@ export const OrderConfirmation = forwardRef<HTMLDivElement, OrderConfirmationPro
             </p>
             {billingAddress && (
               <address className="not-italic text-sm text-muted-foreground space-y-1 mt-3">
-                <p className="font-medium text-foreground">{billingAddress.name}</p>
+                <p className="font-medium text-foreground">
+                  {billingAddress.name}
+                </p>
                 <p>{billingAddress.address}</p>
                 <p>
                   {billingAddress.city}
-                  {billingAddress.state && `, ${billingAddress.state}`} {billingAddress.zipCode}
+                  {billingAddress.state && `, ${billingAddress.state}`}{" "}
+                  {billingAddress.zipCode}
                 </p>
               </address>
             )}
@@ -252,7 +284,11 @@ export const OrderConfirmation = forwardRef<HTMLDivElement, OrderConfirmationPro
             </Button>
           )}
           {onContinueShopping && (
-            <Button variant="outline" className="flex-1" onClick={onContinueShopping}>
+            <Button
+              variant="outline"
+              className="flex-1"
+              onClick={onContinueShopping}
+            >
               Continue shopping
             </Button>
           )}
@@ -270,7 +306,8 @@ export const OrderConfirmation = forwardRef<HTMLDivElement, OrderConfirmationPro
 OrderConfirmation.displayName = "OrderConfirmation";
 
 // Simplified Order Confirmation (minimal variant)
-export interface SimpleOrderConfirmationProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SimpleOrderConfirmationProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   orderNumber: string;
   email?: string;
   message?: string;
@@ -278,7 +315,10 @@ export interface SimpleOrderConfirmationProps extends React.HTMLAttributes<HTMLD
   onContinueShopping?: () => void;
 }
 
-export const SimpleOrderConfirmation = forwardRef<HTMLDivElement, SimpleOrderConfirmationProps>(
+export const SimpleOrderConfirmation = forwardRef<
+  HTMLDivElement,
+  SimpleOrderConfirmationProps
+>(
   (
     {
       className,
@@ -301,7 +341,9 @@ export const SimpleOrderConfirmation = forwardRef<HTMLDivElement, SimpleOrderCon
           <CheckCircleIcon className="size-8 text-success" />
         </div>
 
-        <h1 className="text-2xl font-semibold text-foreground mb-2">Order confirmed!</h1>
+        <h1 className="text-2xl font-semibold text-foreground mb-2">
+          Order confirmed!
+        </h1>
 
         <p className="text-muted-foreground mb-4">{message}</p>
 

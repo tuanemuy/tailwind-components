@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { ComposeModal } from "./index";
 import { Button } from "@/components/atoms/Button";
+import { ComposeModal } from "./index";
 
 const meta: Meta = {
   title: "Organisms/Overlays/ComposeModals",

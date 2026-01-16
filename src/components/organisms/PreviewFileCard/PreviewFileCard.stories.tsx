@@ -19,8 +19,10 @@ const sampleFile = {
   type: "image" as const,
   size: "2.4 MB",
   extension: "png",
-  previewUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-  thumbnailUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+  previewUrl:
+    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+  thumbnailUrl:
+    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
   downloadUrl: "#",
   modifiedDate: "Dec 15, 2025",
   description: "Main dashboard design mockup with analytics widgets",
@@ -30,7 +32,8 @@ const sampleFile = {
   downloads: 32,
   owner: {
     name: "John Doe",
-    avatarSrc: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+    avatarSrc:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
   },
 };
 
@@ -166,7 +169,8 @@ const files = [
     type: "image" as const,
     size: "2.4 MB",
     extension: "png",
-    previewUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600",
+    previewUrl:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600",
     downloadUrl: "#",
     modifiedDate: "Dec 15, 2025",
     isStarred: true,
@@ -178,7 +182,8 @@ const files = [
     type: "image" as const,
     size: "1.8 MB",
     extension: "png",
-    previewUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600",
+    previewUrl:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600",
     downloadUrl: "#",
     modifiedDate: "Dec 14, 2025",
     owner: { name: "Jane Smith" },
@@ -210,7 +215,8 @@ const files = [
     type: "image" as const,
     size: "3.1 MB",
     extension: "png",
-    previewUrl: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600",
+    previewUrl:
+      "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600",
     downloadUrl: "#",
     modifiedDate: "Dec 11, 2025",
     owner: { name: "Mike Brown" },
@@ -231,10 +237,7 @@ const files = [
 export const Grid: StoryObj<typeof PreviewFileCardGrid> = {
   render: () => (
     <div className="w-[900px]">
-      <PreviewFileCardGrid
-        files={files}
-        columns={3}
-      />
+      <PreviewFileCardGrid files={files} columns={3} />
     </div>
   ),
 };

@@ -1,25 +1,25 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/atoms/Button";
-import { Badge } from "@/components/atoms/Badge";
+import { type ReactNode, useState } from "react";
 import { Avatar } from "@/components/atoms/Avatar";
+import { Badge } from "@/components/atoms/Badge";
+import { Button } from "@/components/atoms/Button";
 import { ProgressBar } from "@/components/atoms/ProgressBar";
 import {
   BarChartIcon,
-  MailIcon,
-  UsersIcon,
-  GlobeIcon,
-  TicketIcon,
   CalendarIcon,
-  RefreshIcon,
   ChevronDownIcon,
-  TrendingUpIcon,
-  TrendingDownIcon,
-  SettingsIcon,
   DownloadIcon,
+  GlobeIcon,
+  MailIcon,
+  RefreshIcon,
+  SettingsIcon,
+  TicketIcon,
+  TrendingDownIcon,
+  TrendingUpIcon,
+  UsersIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // ============================================
 // Types
@@ -196,14 +196,21 @@ export const ReportsLayout = ({
               {charts.length > 0 && (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   {charts.map((chart) => (
-                    <ChartCard key={chart.id} chart={chart} isLoading={isLoading} />
+                    <ChartCard
+                      key={chart.id}
+                      chart={chart}
+                      isLoading={isLoading}
+                    />
                   ))}
                 </div>
               )}
 
               {/* Team Performance */}
               {selectedCategory === "team" && teamMembers.length > 0 && (
-                <TeamPerformanceTable members={teamMembers} isLoading={isLoading} />
+                <TeamPerformanceTable
+                  members={teamMembers}
+                  isLoading={isLoading}
+                />
               )}
 
               {/* Empty State */}
@@ -244,13 +251,14 @@ const ReportsSidebar = ({
     <nav className="flex-1 p-2 space-y-1 overflow-y-auto">
       {categories.map((category) => (
         <button
+          type="button"
           key={category.id}
           onClick={() => onCategoryChange(category.id)}
           className={cn(
             "w-full flex items-center gap-x-3 px-3 py-2 rounded-lg text-sm transition-colors",
             selectedCategory === category.id
               ? "bg-primary text-primary-foreground"
-              : "text-foreground hover:bg-muted"
+              : "text-foreground hover:bg-muted",
           )}
         >
           {category.icon}
@@ -398,7 +406,7 @@ const MetricCard = ({ metric, isLoading }: MetricCardProps) => (
                 "text-sm",
                 metric.changeType === "increase" && "text-green-500",
                 metric.changeType === "decrease" && "text-red-500",
-                metric.changeType === "neutral" && "text-muted-foreground"
+                metric.changeType === "neutral" && "text-muted-foreground",
               )}
             >
               {metric.change > 0 ? "+" : ""}
@@ -431,20 +439,23 @@ const ChartCard = ({ chart, isLoading }: ChartCardProps) => (
         {/* Simple bar chart visualization */}
         {chart.type === "bar" && (
           <div className="flex items-end justify-around h-full gap-2">
-            {chart.data.map((item, index) => {
+            {chart.data.map((item) => {
               const maxValue = Math.max(...chart.data.map((d) => d.value));
               const height = (item.value / maxValue) * 100;
               return (
                 <div
-                  key={index}
+                  key={item.label}
                   className="flex flex-col items-center gap-y-2 flex-1"
                 >
                   <div
                     className={cn(
                       "w-full rounded-t transition-all",
-                      item.color || "bg-primary"
+                      item.color || "bg-primary",
                     )}
-                    style={{ height: `${height}%`, backgroundColor: item.color }}
+                    style={{
+                      height: `${height}%`,
+                      backgroundColor: item.color,
+                    }}
                   />
                   <span className="text-xs text-muted-foreground truncate max-w-full">
                     {item.label}
@@ -475,12 +486,12 @@ const ChartCard = ({ chart, isLoading }: ChartCardProps) => (
         {/* Line chart placeholder */}
         {chart.type === "line" && (
           <div className="flex items-end justify-around h-full gap-1 border-b border-l border-border">
-            {chart.data.map((item, index) => {
+            {chart.data.map((item) => {
               const maxValue = Math.max(...chart.data.map((d) => d.value));
               const height = (item.value / maxValue) * 100;
               return (
                 <div
-                  key={index}
+                  key={item.label}
                   className="flex-1 flex items-end justify-center"
                   style={{ height: "100%" }}
                 >
@@ -534,69 +545,76 @@ const TeamPerformanceTable = ({
           </tr>
         </thead>
         <tbody>
-          {isLoading ? (
-            Array.from({ length: 3 }).map((_, i) => (
-              <tr key={i} className="border-b border-border">
-                <td className="p-4">
-                  <div className="animate-pulse flex items-center gap-x-3">
-                    <div className="size-8 rounded-full bg-muted" />
-                    <div className="h-4 w-24 bg-muted rounded" />
-                  </div>
-                </td>
-                <td className="p-4">
-                  <div className="animate-pulse h-4 w-12 bg-muted rounded" />
-                </td>
-                <td className="p-4">
-                  <div className="animate-pulse h-4 w-16 bg-muted rounded" />
-                </td>
-                <td className="p-4">
-                  <div className="animate-pulse h-4 w-20 bg-muted rounded" />
-                </td>
-              </tr>
-            ))
-          ) : (
-            members.map((member) => (
-              <tr key={member.id} className="border-b border-border last:border-b-0">
-                <td className="p-4">
-                  <div className="flex items-center gap-x-3">
-                    <Avatar
-                      src={member.avatar}
-                      alt={member.name}
-                      fallback={member.name.charAt(0)}
-                      size="sm"
-                    />
-                    <div>
-                      <p className="font-medium">{member.name}</p>
-                      <p className="text-sm text-muted-foreground">{member.role}</p>
+          {isLoading
+            ? Array.from({ length: 3 }).map((_, i) => (
+                <tr
+                  // biome-ignore lint/suspicious/noArrayIndexKey: Skeleton rows are positional placeholders
+                  key={`skeleton-${i}`}
+                  className="border-b border-border"
+                >
+                  <td className="p-4">
+                    <div className="animate-pulse flex items-center gap-x-3">
+                      <div className="size-8 rounded-full bg-muted" />
+                      <div className="h-4 w-24 bg-muted rounded" />
                     </div>
-                  </div>
-                </td>
-                <td className="p-4">
-                  <span className="font-medium">
-                    {member.metrics?.resolved || 0}
-                  </span>
-                </td>
-                <td className="p-4">
-                  <span className="text-muted-foreground">
-                    {member.metrics?.responseTime || "N/A"}
-                  </span>
-                </td>
-                <td className="p-4">
-                  <div className="flex items-center gap-x-2">
-                    <ProgressBar
-                      value={member.metrics?.satisfaction || 0}
-                      max={100}
-                      size="sm"
-                      className="w-20"
-                    />
-                    <span className="text-sm text-muted-foreground">
-                      {member.metrics?.satisfaction || 0}%
+                  </td>
+                  <td className="p-4">
+                    <div className="animate-pulse h-4 w-12 bg-muted rounded" />
+                  </td>
+                  <td className="p-4">
+                    <div className="animate-pulse h-4 w-16 bg-muted rounded" />
+                  </td>
+                  <td className="p-4">
+                    <div className="animate-pulse h-4 w-20 bg-muted rounded" />
+                  </td>
+                </tr>
+              ))
+            : members.map((member) => (
+                <tr
+                  key={member.id}
+                  className="border-b border-border last:border-b-0"
+                >
+                  <td className="p-4">
+                    <div className="flex items-center gap-x-3">
+                      <Avatar
+                        src={member.avatar}
+                        alt={member.name}
+                        fallback={member.name.charAt(0)}
+                        size="sm"
+                      />
+                      <div>
+                        <p className="font-medium">{member.name}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {member.role}
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="p-4">
+                    <span className="font-medium">
+                      {member.metrics?.resolved || 0}
                     </span>
-                  </div>
-                </td>
-              </tr>
-            ))
-          )}
+                  </td>
+                  <td className="p-4">
+                    <span className="text-muted-foreground">
+                      {member.metrics?.responseTime || "N/A"}
+                    </span>
+                  </td>
+                  <td className="p-4">
+                    <div className="flex items-center gap-x-2">
+                      <ProgressBar
+                        value={member.metrics?.satisfaction || 0}
+                        max={100}
+                        size="sm"
+                        className="w-20"
+                      />
+                      <span className="text-sm text-muted-foreground">
+                        {member.metrics?.satisfaction || 0}%
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              ))}
         </tbody>
       </table>
     </div>
@@ -629,12 +647,16 @@ export interface QuickStatsCardProps {
   className?: string;
 }
 
-export const QuickStatsCard = ({ title, stats, className }: QuickStatsCardProps) => (
+export const QuickStatsCard = ({
+  title,
+  stats,
+  className,
+}: QuickStatsCardProps) => (
   <div className={cn("bg-card border border-border rounded-lg p-4", className)}>
     <h3 className="text-sm font-medium mb-4">{title}</h3>
     <div className="space-y-3">
-      {stats.map((stat, index) => (
-        <div key={index} className="flex items-center justify-between">
+      {stats.map((stat) => (
+        <div key={stat.label} className="flex items-center justify-between">
           <span className="text-sm text-muted-foreground">{stat.label}</span>
           <span
             className="font-medium"

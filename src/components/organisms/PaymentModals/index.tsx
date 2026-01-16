@@ -1,11 +1,16 @@
-import { forwardRef, useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { forwardRef, type ReactNode, useState } from "react";
+import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import { Checkbox } from "@/components/atoms/Checkbox";
-import { Badge } from "@/components/atoms/Badge";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "@/components/organisms/Modal";
 import { FormField } from "@/components/molecules/FormField";
-import { CreditCardIcon, CheckIcon, TrashIcon, PlusIcon } from "@/lib/icons";
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "@/components/organisms/Modal";
+import { CheckIcon, CreditCardIcon, PlusIcon, TrashIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Card type detection
 const detectCardType = (number: string): string => {
@@ -88,7 +93,9 @@ export const AddCardModal = forwardRef<HTMLDivElement, AddCardModalProps>(
       name: "",
       setAsDefault: false,
     });
-    const [errors, setErrors] = useState<Partial<Record<keyof CardData, string>>>({});
+    const [errors, setErrors] = useState<
+      Partial<Record<keyof CardData, string>>
+    >({});
 
     const handleChange = (field: keyof CardData, value: string | boolean) => {
       setFormData((prev) => ({ ...prev, [field]: value }));
@@ -122,7 +129,13 @@ export const AddCardModal = forwardRef<HTMLDivElement, AddCardModalProps>(
     };
 
     const handleClose = () => {
-      setFormData({ number: "", expiry: "", cvc: "", name: "", setAsDefault: false });
+      setFormData({
+        number: "",
+        expiry: "",
+        cvc: "",
+        name: "",
+        setAsDefault: false,
+      });
       setErrors({});
       onClose();
     };
@@ -184,7 +197,10 @@ export const AddCardModal = forwardRef<HTMLDivElement, AddCardModalProps>(
                 inputProps={{
                   value: formData.cvc,
                   onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleChange("cvc", e.target.value.replace(/\D/g, "").slice(0, 4)),
+                    handleChange(
+                      "cvc",
+                      e.target.value.replace(/\D/g, "").slice(0, 4),
+                    ),
                   placeholder: "123",
                   disabled: loading,
                   autoComplete: "cc-csc",
@@ -209,7 +225,7 @@ export const AddCardModal = forwardRef<HTMLDivElement, AddCardModalProps>(
 
             {/* Set as default */}
             {showSetAsDefault && (
-              <label className="flex cursor-pointer items-center gap-3">
+              <span className="flex cursor-pointer items-center gap-3">
                 <Checkbox
                   checked={formData.setAsDefault}
                   onChange={(e) =>
@@ -220,7 +236,7 @@ export const AddCardModal = forwardRef<HTMLDivElement, AddCardModalProps>(
                 <span className="text-sm text-foreground">
                   Set as default payment method
                 </span>
-              </label>
+              </span>
             )}
 
             {/* Card preview */}
@@ -269,7 +285,10 @@ export interface ManageCardsModalProps {
   className?: string;
 }
 
-export const ManageCardsModal = forwardRef<HTMLDivElement, ManageCardsModalProps>(
+export const ManageCardsModal = forwardRef<
+  HTMLDivElement,
+  ManageCardsModalProps
+>(
   (
     {
       isOpen,
@@ -317,7 +336,9 @@ export const ManageCardsModal = forwardRef<HTMLDivElement, ManageCardsModalProps
                   key={card.id}
                   className={cn(
                     "flex items-center gap-3 rounded-lg border p-3",
-                    card.isDefault ? "border-primary bg-primary/5" : "border-border",
+                    card.isDefault
+                      ? "border-primary bg-primary/5"
+                      : "border-border",
                   )}
                 >
                   <CreditCardIcon className="size-8 text-muted-foreground" />
@@ -476,24 +497,20 @@ export const UpgradeModal = forwardRef<HTMLDivElement, UpgradeModalProps>(
                   )}
                 >
                   {plan.popular && (
-                    <Badge
-                      variant="default"
-                      className="absolute -top-2 end-2"
-                    >
+                    <Badge variant="default" className="absolute -top-2 end-2">
                       Popular
                     </Badge>
                   )}
                   {isCurrent && (
-                    <Badge
-                      soft
-                      className="absolute -top-2 end-2"
-                    >
+                    <Badge soft className="absolute -top-2 end-2">
                       Current plan
                     </Badge>
                   )}
 
                   <div className="mb-3">
-                    <h4 className="font-semibold text-foreground">{plan.name}</h4>
+                    <h4 className="font-semibold text-foreground">
+                      {plan.name}
+                    </h4>
                     {plan.description && (
                       <p className="text-xs text-muted-foreground">
                         {plan.description}
@@ -513,9 +530,9 @@ export const UpgradeModal = forwardRef<HTMLDivElement, UpgradeModalProps>(
                   </div>
 
                   <ul className="space-y-2">
-                    {plan.features.map((feature, index) => (
+                    {plan.features.map((feature) => (
                       <li
-                        key={index}
+                        key={feature.text}
                         className={cn(
                           "flex items-center gap-2 text-sm",
                           feature.included
@@ -526,7 +543,9 @@ export const UpgradeModal = forwardRef<HTMLDivElement, UpgradeModalProps>(
                         <CheckIcon
                           className={cn(
                             "size-4 shrink-0",
-                            feature.included ? "text-success" : "text-muted-foreground",
+                            feature.included
+                              ? "text-success"
+                              : "text-muted-foreground",
                           )}
                         />
                         {feature.text}
@@ -576,7 +595,10 @@ export interface PaymentMethod {
 export interface AddPaymentModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: { type: PaymentMethodType; details: Record<string, string> }) => void;
+  onSubmit: (data: {
+    type: PaymentMethodType;
+    details: Record<string, string>;
+  }) => void;
   title?: string;
   subtitle?: ReactNode;
   methods?: PaymentMethod[];
@@ -734,7 +756,10 @@ export const AddPaymentModal = forwardRef<HTMLDivElement, AddPaymentModalProps>(
                   inputProps={{
                     value: cardData.name,
                     onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-                      setCardData((prev) => ({ ...prev, name: e.target.value })),
+                      setCardData((prev) => ({
+                        ...prev,
+                        name: e.target.value,
+                      })),
                     placeholder: "John Doe",
                     disabled: loading,
                   }}

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { InboxLayout, SplitInboxLayout, type InboxStats } from "./index";
 import type { EmailData } from "../InboxThread";
+import { InboxLayout, type InboxStats, SplitInboxLayout } from "./index";
 
 const meta: Meta<typeof InboxLayout> = {
   title: "Organisms/InboxChatMessages/InboxLayout",
@@ -29,20 +29,20 @@ const sampleEmails: EmailData[] = [
     from: {
       name: "John Smith",
       email: "john.smith@example.com",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop",
+      avatar:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop",
     },
     to: [{ name: "Me", email: "me@example.com" }],
     subject: "Project Update - Q4 Planning",
-    preview: "Hi team, I wanted to share some updates on our Q4 planning process...",
+    preview:
+      "Hi team, I wanted to share some updates on our Q4 planning process...",
     content: `<p>Hi team,</p>
 <p>I wanted to share some updates on our Q4 planning process. We've made significant progress on the roadmap.</p>
 <p>Best regards,<br/>John</p>`,
     date: "Dec 15, 2024 10:30 AM",
     isRead: false,
     isStarred: true,
-    attachments: [
-      { name: "Q4-Planning.pdf", size: "2.4 MB", type: "pdf" },
-    ],
+    attachments: [{ name: "Q4-Planning.pdf", size: "2.4 MB", type: "pdf" }],
   },
   {
     id: "2",
@@ -52,7 +52,8 @@ const sampleEmails: EmailData[] = [
     },
     to: [{ name: "Me", email: "me@example.com" }],
     subject: "New Campaign Launch",
-    preview: "We're excited to announce the launch of our new marketing campaign...",
+    preview:
+      "We're excited to announce the launch of our new marketing campaign...",
     content: `<p>We're excited to announce the launch of our new marketing campaign.</p>`,
     date: "Dec 14, 2024 3:00 PM",
     isRead: true,
@@ -66,8 +67,10 @@ const sampleEmails: EmailData[] = [
     },
     to: [{ name: "Me", email: "me@example.com" }],
     subject: "Holiday Schedule Update",
-    preview: "Please find the updated holiday schedule for the upcoming year...",
-    content: `<p>Please find the updated holiday schedule for the upcoming year.</p>`,
+    preview:
+      "Please find the updated holiday schedule for the upcoming year...",
+    content:
+      "<p>Please find the updated holiday schedule for the upcoming year.</p>",
     date: "Dec 13, 2024 9:00 AM",
     isRead: true,
     isStarred: true,
@@ -77,7 +80,8 @@ const sampleEmails: EmailData[] = [
     from: {
       name: "Sarah Johnson",
       email: "sarah.j@example.com",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop",
+      avatar:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop",
     },
     to: [{ name: "Me", email: "me@example.com" }],
     subject: "Re: Design Review Feedback",
@@ -96,7 +100,8 @@ const sampleEmails: EmailData[] = [
     to: [{ name: "Me", email: "me@example.com" }],
     subject: "Sprint Retrospective Notes",
     preview: "Here are the key takeaways from our last sprint retrospective...",
-    content: `<p>Here are the key takeaways from our last sprint retrospective.</p>`,
+    content:
+      "<p>Here are the key takeaways from our last sprint retrospective.</p>",
     date: "Dec 11, 2024 2:00 PM",
     isRead: true,
     isStarred: false,

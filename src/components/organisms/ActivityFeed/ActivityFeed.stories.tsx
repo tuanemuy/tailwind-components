@@ -1,20 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { Badge } from "@/components/atoms/Badge";
+import {
+  CalendarIcon,
+  CheckIcon,
+  FileIcon,
+  HeartIcon,
+  MessageIcon,
+  ShareIcon,
+  UserPlusIcon,
+} from "@/lib/icons";
 import {
   ActivityFeed,
   CompactActivityFeed,
   GroupedActivityFeed,
   NotificationActivity,
 } from "./index";
-import { Badge } from "@/components/atoms/Badge";
-import {
-  MessageIcon,
-  CheckIcon,
-  HeartIcon,
-  ShareIcon,
-  UserPlusIcon,
-  CalendarIcon,
-  FileIcon,
-} from "@/lib/icons";
 
 const meta: Meta<typeof ActivityFeed> = {
   title: "Organisms/PageSections/ActivityFeed",
@@ -34,14 +34,16 @@ const sampleActivities = [
     type: "comment" as const,
     user: {
       name: "John Doe",
-      avatarSrc: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face",
+      avatarSrc:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face",
     },
     action: "commented on",
     target: { name: "Project Alpha", href: "#" },
     timestamp: "5 minutes ago",
     content: (
       <div className="rounded-lg bg-muted/50 p-3 text-sm text-muted-foreground">
-        "This looks great! Let's schedule a review meeting to discuss the next steps."
+        "This looks great! Let's schedule a review meeting to discuss the next
+        steps."
       </div>
     ),
   },
@@ -50,16 +52,21 @@ const sampleActivities = [
     type: "update" as const,
     user: {
       name: "Sarah Smith",
-      avatarSrc: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop&crop=face",
+      avatarSrc:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop&crop=face",
     },
     action: "updated the status of",
     target: { name: "Task #123" },
     timestamp: "1 hour ago",
     metadata: (
       <div className="flex items-center gap-x-2">
-        <Badge variant="warning" size="sm">In Progress</Badge>
+        <Badge variant="warning" size="sm">
+          In Progress
+        </Badge>
         <span className="text-muted-foreground">→</span>
-        <Badge variant="success" size="sm">Completed</Badge>
+        <Badge variant="success" size="sm">
+          Completed
+        </Badge>
       </div>
     ),
   },
@@ -78,7 +85,8 @@ const sampleActivities = [
     type: "assign" as const,
     user: {
       name: "Emily Wang",
-      avatarSrc: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face",
+      avatarSrc:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face",
     },
     action: "assigned",
     target: { name: "Bug Fix #456" },
@@ -151,7 +159,9 @@ export const Compact: StoryObj<typeof CompactActivityFeed> = {
             id: "1",
             icon: <MessageIcon className="size-full" />,
             text: (
-              <span><strong>John</strong> commented on your post</span>
+              <span>
+                <strong>John</strong> commented on your post
+              </span>
             ),
             timestamp: "5 min ago",
           },
@@ -159,7 +169,9 @@ export const Compact: StoryObj<typeof CompactActivityFeed> = {
             id: "2",
             icon: <HeartIcon className="size-full" />,
             text: (
-              <span><strong>Sarah</strong> liked your photo</span>
+              <span>
+                <strong>Sarah</strong> liked your photo
+              </span>
             ),
             timestamp: "1 hour ago",
           },
@@ -167,7 +179,9 @@ export const Compact: StoryObj<typeof CompactActivityFeed> = {
             id: "3",
             icon: <UserPlusIcon className="size-full" />,
             text: (
-              <span><strong>Mike</strong> started following you</span>
+              <span>
+                <strong>Mike</strong> started following you
+              </span>
             ),
             timestamp: "2 hours ago",
           },
@@ -175,7 +189,9 @@ export const Compact: StoryObj<typeof CompactActivityFeed> = {
             id: "4",
             icon: <ShareIcon className="size-full" />,
             text: (
-              <span><strong>Emily</strong> shared your post</span>
+              <span>
+                <strong>Emily</strong> shared your post
+              </span>
             ),
             timestamp: "Yesterday",
           },
@@ -197,7 +213,11 @@ export const Grouped: StoryObj<typeof GroupedActivityFeed> = {
               {
                 id: "1",
                 type: "comment",
-                user: { name: "John Doe", avatarSrc: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" },
+                user: {
+                  name: "John Doe",
+                  avatarSrc:
+                    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face",
+                },
                 action: "commented on",
                 target: { name: "Project Alpha" },
                 timestamp: "5 minutes ago",
@@ -254,9 +274,12 @@ export const Notifications: StoryObj<typeof NotificationActivity> = {
           {
             id: "1",
             icon: <MessageIcon className="size-4" />,
-            iconBg: "bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400",
+            iconBg:
+              "bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400",
             title: (
-              <span><strong>John Doe</strong> mentioned you in a comment</span>
+              <span>
+                <strong>John Doe</strong> mentioned you in a comment
+              </span>
             ),
             description: "Hey, can you take a look at this?",
             timestamp: "5 minutes ago",
@@ -269,7 +292,8 @@ export const Notifications: StoryObj<typeof NotificationActivity> = {
           {
             id: "2",
             icon: <CalendarIcon className="size-4" />,
-            iconBg: "bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400",
+            iconBg:
+              "bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400",
             title: "Meeting starting in 15 minutes",
             description: "Sprint Review with the team",
             timestamp: "10 minutes ago",
@@ -282,9 +306,12 @@ export const Notifications: StoryObj<typeof NotificationActivity> = {
           {
             id: "3",
             icon: <CheckIcon className="size-4" />,
-            iconBg: "bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400",
+            iconBg:
+              "bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400",
             title: (
-              <span><strong>Sarah</strong> completed the task you assigned</span>
+              <span>
+                <strong>Sarah</strong> completed the task you assigned
+              </span>
             ),
             description: "Bug Fix #456",
             timestamp: "1 hour ago",
@@ -293,7 +320,8 @@ export const Notifications: StoryObj<typeof NotificationActivity> = {
           {
             id: "4",
             icon: <FileIcon className="size-4" />,
-            iconBg: "bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400",
+            iconBg:
+              "bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400",
             title: "New document shared with you",
             description: "Q4 Financial Report.pdf",
             timestamp: "2 hours ago",
@@ -324,7 +352,11 @@ export const ProjectActivity: Story = {
         action: "added",
         target: { name: "Mike Chen" },
         timestamp: "Jan 16, 2024",
-        metadata: <span className="text-sm text-muted-foreground">as a team member</span>,
+        metadata: (
+          <span className="text-sm text-muted-foreground">
+            as a team member
+          </span>
+        ),
       },
       {
         id: "3",
@@ -334,7 +366,9 @@ export const ProjectActivity: Story = {
         target: { name: "Phase 1: Design" },
         timestamp: "Jan 20, 2024",
         metadata: (
-          <Badge variant="success" size="sm">Milestone Complete</Badge>
+          <Badge variant="success" size="sm">
+            Milestone Complete
+          </Badge>
         ),
       },
       {

@@ -1,11 +1,22 @@
-import { forwardRef, useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { forwardRef, type ReactNode, useState } from "react";
+import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
 import { KbdGroup } from "@/components/atoms/Kbd";
-import { Badge } from "@/components/atoms/Badge";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "@/components/organisms/Modal";
-import { SearchIcon, DownloadIcon, PrinterIcon, GlobeIcon, CheckIcon } from "@/lib/icons";
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "@/components/organisms/Modal";
+import {
+  CheckIcon,
+  DownloadIcon,
+  GlobeIcon,
+  PrinterIcon,
+  SearchIcon,
+} from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // KeyboardShortcutsModal
 export interface ShortcutCategory {
@@ -27,7 +38,10 @@ export interface KeyboardShortcutsModalProps {
   className?: string;
 }
 
-export const KeyboardShortcutsModal = forwardRef<HTMLDivElement, KeyboardShortcutsModalProps>(
+export const KeyboardShortcutsModal = forwardRef<
+  HTMLDivElement,
+  KeyboardShortcutsModalProps
+>(
   (
     {
       isOpen,
@@ -48,7 +62,9 @@ export const KeyboardShortcutsModal = forwardRef<HTMLDivElement, KeyboardShortcu
             ...category,
             shortcuts: category.shortcuts.filter(
               (shortcut) =>
-                shortcut.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                shortcut.label
+                  .toLowerCase()
+                  .includes(searchQuery.toLowerCase()) ||
                 shortcut.keys.some((key) =>
                   key.toLowerCase().includes(searchQuery.toLowerCase()),
                 ),
@@ -65,11 +81,7 @@ export const KeyboardShortcutsModal = forwardRef<HTMLDivElement, KeyboardShortcu
         size="lg"
         className={className}
       >
-        <ModalHeader
-          title={title}
-          subtitle={subtitle}
-          showCloseButton
-        />
+        <ModalHeader title={title} subtitle={subtitle} showCloseButton />
 
         <ModalBody padding="md">
           <div className="space-y-6">
@@ -96,9 +108,9 @@ export const KeyboardShortcutsModal = forwardRef<HTMLDivElement, KeyboardShortcu
                       {category.name}
                     </h3>
                     <div className="space-y-2">
-                      {category.shortcuts.map((shortcut, index) => (
+                      {category.shortcuts.map((shortcut) => (
                         <div
-                          key={index}
+                          key={shortcut.label}
                           className="flex items-center justify-between rounded-lg p-2 hover:bg-muted/50"
                         >
                           <div className="min-w-0 flex-1">
@@ -244,9 +256,11 @@ export const InvoiceModal = forwardRef<HTMLDivElement, InvoiceModalProps>(
                 <p className="mb-2 text-sm font-medium text-muted-foreground">
                   From
                 </p>
-                <p className="font-semibold text-foreground">{invoice.from.name}</p>
-                {invoice.from.address?.map((line, i) => (
-                  <p key={i} className="text-sm text-muted-foreground">
+                <p className="font-semibold text-foreground">
+                  {invoice.from.name}
+                </p>
+                {invoice.from.address?.map((line) => (
+                  <p key={line} className="text-sm text-muted-foreground">
                     {line}
                   </p>
                 ))}
@@ -265,9 +279,11 @@ export const InvoiceModal = forwardRef<HTMLDivElement, InvoiceModalProps>(
                 <p className="mb-2 text-sm font-medium text-muted-foreground">
                   Bill To
                 </p>
-                <p className="font-semibold text-foreground">{invoice.to.name}</p>
-                {invoice.to.address?.map((line, i) => (
-                  <p key={i} className="text-sm text-muted-foreground">
+                <p className="font-semibold text-foreground">
+                  {invoice.to.name}
+                </p>
+                {invoice.to.address?.map((line) => (
+                  <p key={line} className="text-sm text-muted-foreground">
                     {line}
                   </p>
                 ))}
@@ -299,9 +315,9 @@ export const InvoiceModal = forwardRef<HTMLDivElement, InvoiceModalProps>(
                   </tr>
                 </thead>
                 <tbody>
-                  {invoice.items.map((item, index) => (
+                  {invoice.items.map((item) => (
                     <tr
-                      key={index}
+                      key={item.description}
                       className="border-b border-border last:border-b-0"
                     >
                       <td className="px-4 py-3 text-sm text-foreground">
@@ -311,10 +327,12 @@ export const InvoiceModal = forwardRef<HTMLDivElement, InvoiceModalProps>(
                         {item.quantity}
                       </td>
                       <td className="px-4 py-3 text-end text-sm text-muted-foreground">
-                        {currency}{item.unitPrice.toFixed(2)}
+                        {currency}
+                        {item.unitPrice.toFixed(2)}
                       </td>
                       <td className="px-4 py-3 text-end text-sm font-medium text-foreground">
-                        {currency}{item.amount.toFixed(2)}
+                        {currency}
+                        {item.amount.toFixed(2)}
                       </td>
                     </tr>
                   ))}
@@ -328,14 +346,16 @@ export const InvoiceModal = forwardRef<HTMLDivElement, InvoiceModalProps>(
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Subtotal</span>
                   <span className="text-foreground">
-                    {currency}{invoice.subtotal.toFixed(2)}
+                    {currency}
+                    {invoice.subtotal.toFixed(2)}
                   </span>
                 </div>
                 {invoice.discount !== undefined && invoice.discount > 0 && (
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Discount</span>
                     <span className="text-success">
-                      -{currency}{invoice.discount.toFixed(2)}
+                      -{currency}
+                      {invoice.discount.toFixed(2)}
                     </span>
                   </div>
                 )}
@@ -345,14 +365,16 @@ export const InvoiceModal = forwardRef<HTMLDivElement, InvoiceModalProps>(
                       Tax {invoice.taxRate ? `(${invoice.taxRate}%)` : ""}
                     </span>
                     <span className="text-foreground">
-                      {currency}{invoice.tax.toFixed(2)}
+                      {currency}
+                      {invoice.tax.toFixed(2)}
                     </span>
                   </div>
                 )}
                 <div className="flex justify-between border-t border-border pt-2">
                   <span className="font-semibold text-foreground">Total</span>
                   <span className="text-lg font-bold text-foreground">
-                    {currency}{invoice.total.toFixed(2)}
+                    {currency}
+                    {invoice.total.toFixed(2)}
                   </span>
                 </div>
               </div>
@@ -374,7 +396,9 @@ export const InvoiceModal = forwardRef<HTMLDivElement, InvoiceModalProps>(
                 {invoice.notes && (
                   <div>
                     <p className="text-sm font-medium text-foreground">Notes</p>
-                    <p className="text-sm text-muted-foreground">{invoice.notes}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {invoice.notes}
+                    </p>
                   </div>
                 )}
               </div>
@@ -456,7 +480,9 @@ export const LocationModal = forwardRef<HTMLDivElement, LocationModalProps>(
       ? locations.filter(
           (location) =>
             location.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            location.address?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            location.address
+              ?.toLowerCase()
+              .includes(searchQuery.toLowerCase()) ||
             location.city?.toLowerCase().includes(searchQuery.toLowerCase()) ||
             location.country?.toLowerCase().includes(searchQuery.toLowerCase()),
         )

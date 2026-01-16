@@ -1,11 +1,15 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/atoms/Button";
 import { Badge } from "@/components/atoms/Badge";
+import { Button } from "@/components/atoms/Button";
 import { Switch } from "@/components/atoms/Switch";
 import { CheckCircleIcon, SettingsIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
-export type IntegrationStatus = "connected" | "disconnected" | "pending" | "error";
+export type IntegrationStatus =
+  | "connected"
+  | "disconnected"
+  | "pending"
+  | "error";
 
 export interface IntegrationData {
   id: string;
@@ -20,14 +24,21 @@ export interface IntegrationData {
   popular?: boolean;
 }
 
-const statusConfig: Record<IntegrationStatus, { label: string; variant: "default" | "secondary" | "destructive" | "warning" | "success" }> = {
+const statusConfig: Record<
+  IntegrationStatus,
+  {
+    label: string;
+    variant: "default" | "secondary" | "destructive" | "warning" | "success";
+  }
+> = {
   connected: { label: "Connected", variant: "success" },
   disconnected: { label: "Not Connected", variant: "secondary" },
   pending: { label: "Pending", variant: "warning" },
   error: { label: "Error", variant: "destructive" },
 };
 
-export interface IntegrationCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface IntegrationCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   integration: IntegrationData;
   variant?: "default" | "compact" | "detailed" | "list";
   onConnect?: (integration: IntegrationData) => void;
@@ -48,7 +59,7 @@ export const IntegrationCard = forwardRef<HTMLDivElement, IntegrationCardProps>(
       showStatus = true,
       ...props
     },
-    ref
+    ref,
   ) => {
     const statusInfo = statusConfig[integration.status];
     const isConnected = integration.status === "connected";
@@ -59,7 +70,7 @@ export const IntegrationCard = forwardRef<HTMLDivElement, IntegrationCardProps>(
           ref={ref}
           className={cn(
             "flex items-center justify-between gap-x-4 rounded-lg border border-border bg-card p-4",
-            className
+            className,
           )}
           {...props}
         >
@@ -77,9 +88,13 @@ export const IntegrationCard = forwardRef<HTMLDivElement, IntegrationCardProps>(
             ) : null}
             <div className="min-w-0">
               <div className="flex items-center gap-x-2">
-                <p className="truncate font-medium text-foreground">{integration.name}</p>
+                <p className="truncate font-medium text-foreground">
+                  {integration.name}
+                </p>
                 {integration.popular && (
-                  <Badge variant="default" size="sm">Popular</Badge>
+                  <Badge variant="default" size="sm">
+                    Popular
+                  </Badge>
                 )}
               </div>
               {integration.description && (
@@ -129,7 +144,7 @@ export const IntegrationCard = forwardRef<HTMLDivElement, IntegrationCardProps>(
           ref={ref}
           className={cn(
             "flex items-center justify-between gap-x-3 rounded-lg border border-border bg-card p-3",
-            className
+            className,
           )}
           {...props}
         >
@@ -145,7 +160,9 @@ export const IntegrationCard = forwardRef<HTMLDivElement, IntegrationCardProps>(
                 {integration.icon}
               </div>
             ) : null}
-            <span className="text-sm font-medium text-foreground">{integration.name}</span>
+            <span className="text-sm font-medium text-foreground">
+              {integration.name}
+            </span>
           </div>
           {isConnected ? (
             <CheckCircleIcon className="size-5 text-success" />
@@ -167,10 +184,7 @@ export const IntegrationCard = forwardRef<HTMLDivElement, IntegrationCardProps>(
       return (
         <div
           ref={ref}
-          className={cn(
-            "rounded-xl border border-border bg-card",
-            className
-          )}
+          className={cn("rounded-xl border border-border bg-card", className)}
           {...props}
         >
           <div className="p-4">
@@ -189,13 +203,19 @@ export const IntegrationCard = forwardRef<HTMLDivElement, IntegrationCardProps>(
                 ) : null}
                 <div>
                   <div className="flex items-center gap-x-2">
-                    <h3 className="font-semibold text-foreground">{integration.name}</h3>
+                    <h3 className="font-semibold text-foreground">
+                      {integration.name}
+                    </h3>
                     {integration.popular && (
-                      <Badge variant="default" size="sm">Popular</Badge>
+                      <Badge variant="default" size="sm">
+                        Popular
+                      </Badge>
                     )}
                   </div>
                   {integration.category && (
-                    <p className="text-sm text-muted-foreground">{integration.category}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {integration.category}
+                    </p>
                   )}
                 </div>
               </div>
@@ -216,8 +236,11 @@ export const IntegrationCard = forwardRef<HTMLDivElement, IntegrationCardProps>(
                   Features
                 </p>
                 <ul className="space-y-1.5">
-                  {integration.features.map((feature, index) => (
-                    <li key={index} className="flex items-center gap-x-2 text-sm text-foreground">
+                  {integration.features.map((feature) => (
+                    <li
+                      key={feature}
+                      className="flex items-center gap-x-2 text-sm text-foreground"
+                    >
                       <CheckCircleIcon className="size-4 text-success" />
                       {feature}
                     </li>
@@ -255,10 +278,7 @@ export const IntegrationCard = forwardRef<HTMLDivElement, IntegrationCardProps>(
                   Disconnect
                 </Button>
               ) : (
-                <Button
-                  size="sm"
-                  onClick={() => onConnect?.(integration)}
-                >
+                <Button size="sm" onClick={() => onConnect?.(integration)}>
                   Connect
                 </Button>
               )}
@@ -272,10 +292,7 @@ export const IntegrationCard = forwardRef<HTMLDivElement, IntegrationCardProps>(
     return (
       <div
         ref={ref}
-        className={cn(
-          "rounded-xl border border-border bg-card p-4",
-          className
-        )}
+        className={cn("rounded-xl border border-border bg-card p-4", className)}
         {...props}
       >
         <div className="flex items-start justify-between">
@@ -299,9 +316,13 @@ export const IntegrationCard = forwardRef<HTMLDivElement, IntegrationCardProps>(
 
         <div className="mt-4">
           <div className="flex items-center gap-x-2">
-            <h4 className="font-semibold text-foreground">{integration.name}</h4>
+            <h4 className="font-semibold text-foreground">
+              {integration.name}
+            </h4>
             {integration.popular && (
-              <Badge variant="secondary" size="sm">Popular</Badge>
+              <Badge variant="secondary" size="sm">
+                Popular
+              </Badge>
             )}
           </div>
           {integration.description && (
@@ -342,12 +363,13 @@ export const IntegrationCard = forwardRef<HTMLDivElement, IntegrationCardProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 IntegrationCard.displayName = "IntegrationCard";
 
 // Grid component for multiple integrations
-export interface IntegrationCardGridProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface IntegrationCardGridProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   integrations: IntegrationData[];
   variant?: IntegrationCardProps["variant"];
   columns?: 2 | 3 | 4;
@@ -363,7 +385,10 @@ const columnClasses: Record<number, string> = {
   4: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
 };
 
-export const IntegrationCardGrid = forwardRef<HTMLDivElement, IntegrationCardGridProps>(
+export const IntegrationCardGrid = forwardRef<
+  HTMLDivElement,
+  IntegrationCardGridProps
+>(
   (
     {
       className,
@@ -376,7 +401,7 @@ export const IntegrationCardGrid = forwardRef<HTMLDivElement, IntegrationCardGri
       showStatus = true,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
@@ -397,12 +422,13 @@ export const IntegrationCardGrid = forwardRef<HTMLDivElement, IntegrationCardGri
         ))}
       </div>
     );
-  }
+  },
 );
 IntegrationCardGrid.displayName = "IntegrationCardGrid";
 
 // List component for integrations
-export interface IntegrationCardListProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface IntegrationCardListProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   integrations: IntegrationData[];
   variant?: "list" | "compact";
   onConnect?: (integration: IntegrationData) => void;
@@ -411,7 +437,10 @@ export interface IntegrationCardListProps extends React.HTMLAttributes<HTMLDivEl
   showStatus?: boolean;
 }
 
-export const IntegrationCardList = forwardRef<HTMLDivElement, IntegrationCardListProps>(
+export const IntegrationCardList = forwardRef<
+  HTMLDivElement,
+  IntegrationCardListProps
+>(
   (
     {
       className,
@@ -423,14 +452,10 @@ export const IntegrationCardList = forwardRef<HTMLDivElement, IntegrationCardLis
       showStatus = true,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
-      <div
-        ref={ref}
-        className={cn("space-y-2", className)}
-        {...props}
-      >
+      <div ref={ref} className={cn("space-y-2", className)} {...props}>
         {integrations.map((integration) => (
           <IntegrationCard
             key={integration.id}
@@ -444,6 +469,6 @@ export const IntegrationCardList = forwardRef<HTMLDivElement, IntegrationCardLis
         ))}
       </div>
     );
-  }
+  },
 );
 IntegrationCardList.displayName = "IntegrationCardList";

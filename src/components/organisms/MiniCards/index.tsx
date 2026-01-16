@@ -1,19 +1,19 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/atoms/Button";
 import { Badge } from "@/components/atoms/Badge";
+import { Button } from "@/components/atoms/Button";
 import { ProgressBar } from "@/components/atoms/ProgressBar";
 import {
-  StarIcon,
-  RocketIcon,
-  VideoIcon,
+  CheckCircleIcon,
   ClockIcon,
+  ExternalLinkIcon,
   GiftIcon,
   InfoIcon,
-  ExternalLinkIcon,
+  RocketIcon,
+  StarIcon,
+  VideoIcon,
   XIcon,
-  CheckCircleIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // ========== CreditsCard ==========
 export interface CreditsCardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -35,7 +35,7 @@ export const CreditsCard = forwardRef<HTMLDivElement, CreditsCardProps>(
       onDismiss,
       ...props
     },
-    ref
+    ref,
   ) => {
     const percentage = Math.round((creditsUsed / creditsTotal) * 100);
     const isLow = percentage >= 80;
@@ -46,16 +46,20 @@ export const CreditsCard = forwardRef<HTMLDivElement, CreditsCardProps>(
         className={cn(
           "rounded-xl border bg-card p-4",
           isLow ? "border-warning/50 bg-warning/5" : "border-border",
-          className
+          className,
         )}
         {...props}
       >
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-x-2">
-            <div className={cn(
-              "flex size-8 items-center justify-center rounded-lg",
-              isLow ? "bg-warning/10 text-warning" : "bg-primary/10 text-primary"
-            )}>
+            <div
+              className={cn(
+                "flex size-8 items-center justify-center rounded-lg",
+                isLow
+                  ? "bg-warning/10 text-warning"
+                  : "bg-primary/10 text-primary",
+              )}
+            >
               <StarIcon className="size-4" />
             </div>
             <span className="text-sm font-medium text-foreground">{label}</span>
@@ -101,7 +105,7 @@ export const CreditsCard = forwardRef<HTMLDivElement, CreditsCardProps>(
         )}
       </div>
     );
-  }
+  },
 );
 CreditsCard.displayName = "CreditsCard";
 
@@ -113,22 +117,20 @@ export interface HelpResource {
   icon?: React.ReactNode;
 }
 
-export interface HelpResourcesCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface HelpResourcesCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
   resources: HelpResource[];
   onDismiss?: () => void;
 }
 
-export const HelpResourcesCard = forwardRef<HTMLDivElement, HelpResourcesCardProps>(
+export const HelpResourcesCard = forwardRef<
+  HTMLDivElement,
+  HelpResourcesCardProps
+>(
   (
-    {
-      className,
-      title = "Need Help?",
-      resources,
-      onDismiss,
-      ...props
-    },
-    ref
+    { className, title = "Need Help?", resources, onDismiss, ...props },
+    ref,
   ) => {
     return (
       <div
@@ -153,20 +155,26 @@ export const HelpResourcesCard = forwardRef<HTMLDivElement, HelpResourcesCardPro
           )}
         </div>
         <div className="divide-y divide-border">
-          {resources.map((resource, index) => (
+          {resources.map((resource) => (
             <a
-              key={index}
+              key={resource.url}
               href={resource.url}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-between p-4 transition-colors hover:bg-muted/50"
             >
               <div className="flex items-center gap-x-3">
-                {resource.icon || <InfoIcon className="size-4 text-muted-foreground" />}
+                {resource.icon || (
+                  <InfoIcon className="size-4 text-muted-foreground" />
+                )}
                 <div>
-                  <p className="text-sm font-medium text-foreground">{resource.title}</p>
+                  <p className="text-sm font-medium text-foreground">
+                    {resource.title}
+                  </p>
                   {resource.description && (
-                    <p className="text-xs text-muted-foreground">{resource.description}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {resource.description}
+                    </p>
                   )}
                 </div>
               </div>
@@ -176,12 +184,13 @@ export const HelpResourcesCard = forwardRef<HTMLDivElement, HelpResourcesCardPro
         </div>
       </div>
     );
-  }
+  },
 );
 HelpResourcesCard.displayName = "HelpResourcesCard";
 
 // ========== IntroVideoCard ==========
-export interface IntroVideoCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface IntroVideoCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
   description?: string;
   thumbnailUrl?: string;
@@ -202,16 +211,20 @@ export const IntroVideoCard = forwardRef<HTMLDivElement, IntroVideoCardProps>(
       onDismiss,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
         ref={ref}
-        className={cn("overflow-hidden rounded-xl border border-border bg-card", className)}
+        className={cn(
+          "overflow-hidden rounded-xl border border-border bg-card",
+          className,
+        )}
         {...props}
       >
-        <div
-          className="relative aspect-video cursor-pointer bg-muted"
+        <button
+          type="button"
+          className="relative aspect-video cursor-pointer bg-muted w-full"
           onClick={onPlay}
         >
           {thumbnailUrl ? (
@@ -248,14 +261,14 @@ export const IntroVideoCard = forwardRef<HTMLDivElement, IntroVideoCardProps>(
               <XIcon className="size-3.5" />
             </Button>
           )}
-        </div>
+        </button>
         <div className="p-4">
           <h4 className="font-medium text-foreground">{title}</h4>
           <p className="mt-1 text-sm text-muted-foreground">{description}</p>
         </div>
       </div>
     );
-  }
+  },
 );
 IntroVideoCard.displayName = "IntroVideoCard";
 
@@ -279,7 +292,7 @@ export const TrialCard = forwardRef<HTMLDivElement, TrialCardProps>(
       onDismiss,
       ...props
     },
-    ref
+    ref,
   ) => {
     const isEnding = daysRemaining <= 3;
     const percentage = ((totalDays - daysRemaining) / totalDays) * 100;
@@ -292,24 +305,30 @@ export const TrialCard = forwardRef<HTMLDivElement, TrialCardProps>(
           isEnding
             ? "border-destructive/50 bg-destructive/5"
             : "border-primary/50 bg-primary/5",
-          className
+          className,
         )}
         {...props}
       >
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-x-2">
-            <div className={cn(
-              "flex size-8 items-center justify-center rounded-lg",
-              isEnding ? "bg-destructive/10 text-destructive" : "bg-primary/10 text-primary"
-            )}>
+            <div
+              className={cn(
+                "flex size-8 items-center justify-center rounded-lg",
+                isEnding
+                  ? "bg-destructive/10 text-destructive"
+                  : "bg-primary/10 text-primary",
+              )}
+            >
               <ClockIcon className="size-4" />
             </div>
             <div>
               <p className="text-sm font-medium text-foreground">{planName}</p>
-              <p className={cn(
-                "text-xs",
-                isEnding ? "text-destructive" : "text-muted-foreground"
-              )}>
+              <p
+                className={cn(
+                  "text-xs",
+                  isEnding ? "text-destructive" : "text-muted-foreground",
+                )}
+              >
                 {daysRemaining} days remaining
               </p>
             </div>
@@ -329,7 +348,10 @@ export const TrialCard = forwardRef<HTMLDivElement, TrialCardProps>(
         <ProgressBar
           value={percentage}
           size="sm"
-          className={cn("mt-3", isEnding ? "[&>div]:bg-destructive" : "[&>div]:bg-primary")}
+          className={cn(
+            "mt-3",
+            isEnding ? "[&>div]:bg-destructive" : "[&>div]:bg-primary",
+          )}
         />
 
         {onUpgrade && (
@@ -344,12 +366,13 @@ export const TrialCard = forwardRef<HTMLDivElement, TrialCardProps>(
         )}
       </div>
     );
-  }
+  },
 );
 TrialCard.displayName = "TrialCard";
 
 // ========== UpgradeProCard ==========
-export interface UpgradeProCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface UpgradeProCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
   description?: string;
   features?: string[];
@@ -374,14 +397,14 @@ export const UpgradeProCard = forwardRef<HTMLDivElement, UpgradeProCardProps>(
       onDismiss,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
         ref={ref}
         className={cn(
           "rounded-xl border border-primary/50 bg-gradient-to-br from-primary/10 to-primary/5 p-4",
-          className
+          className,
         )}
         {...props}
       >
@@ -415,8 +438,11 @@ export const UpgradeProCard = forwardRef<HTMLDivElement, UpgradeProCardProps>(
 
         {features.length > 0 && (
           <ul className="mt-4 space-y-2">
-            {features.map((feature, index) => (
-              <li key={index} className="flex items-center gap-x-2 text-sm text-foreground">
+            {features.map((feature) => (
+              <li
+                key={feature}
+                className="flex items-center gap-x-2 text-sm text-foreground"
+              >
                 <CheckCircleIcon className="size-4 text-primary" />
                 {feature}
               </li>
@@ -439,7 +465,7 @@ export const UpgradeProCard = forwardRef<HTMLDivElement, UpgradeProCardProps>(
         )}
       </div>
     );
-  }
+  },
 );
 UpgradeProCard.displayName = "UpgradeProCard";
 
@@ -465,14 +491,14 @@ export const GiftCard = forwardRef<HTMLDivElement, GiftCardProps>(
       onDismiss,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
         ref={ref}
         className={cn(
           "rounded-xl border border-success/50 bg-gradient-to-br from-success/10 to-success/5 p-4",
-          className
+          className,
         )}
         {...props}
       >
@@ -500,7 +526,9 @@ export const GiftCard = forwardRef<HTMLDivElement, GiftCardProps>(
         {code && (
           <div className="mt-4 rounded-lg bg-background/50 p-3 text-center">
             <p className="text-xs text-muted-foreground">Use code</p>
-            <p className="mt-1 font-mono text-lg font-bold text-foreground">{code}</p>
+            <p className="mt-1 font-mono text-lg font-bold text-foreground">
+              {code}
+            </p>
           </div>
         )}
 
@@ -521,6 +549,6 @@ export const GiftCard = forwardRef<HTMLDivElement, GiftCardProps>(
         )}
       </div>
     );
-  }
+  },
 );
 GiftCard.displayName = "GiftCard";

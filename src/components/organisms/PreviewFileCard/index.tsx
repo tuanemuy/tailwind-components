@@ -1,24 +1,35 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/atoms/Button";
-import { Badge } from "@/components/atoms/Badge";
-import { Checkbox } from "@/components/atoms/Checkbox";
 import { Avatar } from "@/components/atoms/Avatar";
-import { fileTypeColorConfig } from "@/lib/variants";
+import { Badge } from "@/components/atoms/Badge";
+import { Button } from "@/components/atoms/Button";
+import { Checkbox } from "@/components/atoms/Checkbox";
 import {
+  DownloadIcon,
+  EyeIcon,
   FileIcon,
   FileTextIcon,
   ImageIcon,
-  DownloadIcon,
   MoreHorizontalIcon,
-  StarIcon,
   ShareIcon,
-  EyeIcon,
+  StarIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
+import { fileTypeColorConfig } from "@/lib/variants";
 
-export type PreviewFileType = "document" | "image" | "video" | "audio" | "code" | "spreadsheet" | "presentation" | "other";
+export type PreviewFileType =
+  | "document"
+  | "image"
+  | "video"
+  | "audio"
+  | "code"
+  | "spreadsheet"
+  | "presentation"
+  | "other";
 
-const previewFileTypeIcons: Record<PreviewFileType, React.FC<{ className?: string }>> = {
+const previewFileTypeIcons: Record<
+  PreviewFileType,
+  React.FC<{ className?: string }>
+> = {
   document: FileTextIcon,
   image: ImageIcon,
   video: FileIcon,
@@ -54,7 +65,8 @@ export interface PreviewFileData {
   downloads?: number;
 }
 
-export interface PreviewFileCardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect"> {
+export interface PreviewFileCardProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect"> {
   file: PreviewFileData;
   variant?: "default" | "compact" | "detailed" | "horizontal";
   selectable?: boolean;
@@ -85,7 +97,7 @@ export const PreviewFileCard = forwardRef<HTMLDivElement, PreviewFileCardProps>(
       actions,
       ...props
     },
-    ref
+    ref,
   ) => {
     const colorClass = fileTypeColorConfig[file.type];
     const Icon = previewFileTypeIcons[file.type];
@@ -102,9 +114,21 @@ export const PreviewFileCard = forwardRef<HTMLDivElement, PreviewFileCardProps>(
             "flex gap-x-4 rounded-xl border border-border bg-card p-4",
             onFileClick && "cursor-pointer hover:border-primary/50",
             selected && "ring-2 ring-primary",
-            className
+            className,
           )}
+          role={onFileClick ? "button" : undefined}
+          tabIndex={onFileClick ? 0 : undefined}
           onClick={() => onFileClick?.(file)}
+          onKeyDown={
+            onFileClick
+              ? (e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onFileClick?.(file);
+                  }
+                }
+              : undefined
+          }
           {...props}
         >
           {/* Preview/Thumbnail */}
@@ -119,7 +143,8 @@ export const PreviewFileCard = forwardRef<HTMLDivElement, PreviewFileCardProps>(
               </div>
             )}
             {file.thumbnailUrl || file.previewUrl ? (
-              <div
+              <button
+                type="button"
                 className="size-24 cursor-pointer overflow-hidden rounded-lg bg-muted"
                 onClick={(e) => {
                   e.stopPropagation();
@@ -131,9 +156,14 @@ export const PreviewFileCard = forwardRef<HTMLDivElement, PreviewFileCardProps>(
                   alt={file.name}
                   className="size-full object-cover"
                 />
-              </div>
+              </button>
             ) : (
-              <div className={cn("flex size-24 items-center justify-center rounded-lg", colorClass)}>
+              <div
+                className={cn(
+                  "flex size-24 items-center justify-center rounded-lg",
+                  colorClass,
+                )}
+              >
                 <Icon className="size-10" />
               </div>
             )}
@@ -144,7 +174,9 @@ export const PreviewFileCard = forwardRef<HTMLDivElement, PreviewFileCardProps>(
             <div className="flex items-start justify-between gap-x-4">
               <div className="min-w-0">
                 <div className="flex items-center gap-x-2">
-                  <h4 className="truncate font-medium text-foreground">{file.name}</h4>
+                  <h4 className="truncate font-medium text-foreground">
+                    {file.name}
+                  </h4>
                   {file.isStarred && (
                     <StarIcon className="size-4 shrink-0 fill-warning text-warning" />
                   )}
@@ -184,10 +216,14 @@ export const PreviewFileCard = forwardRef<HTMLDivElement, PreviewFileCardProps>(
                 <div className="flex items-center gap-x-2">
                   <Avatar
                     src={file.owner.avatarSrc}
-                    fallback={file.owner.avatarFallback || file.owner.name.charAt(0)}
+                    fallback={
+                      file.owner.avatarFallback || file.owner.name.charAt(0)
+                    }
                     size="xs"
                   />
-                  <span className="text-xs text-muted-foreground">{file.owner.name}</span>
+                  <span className="text-xs text-muted-foreground">
+                    {file.owner.name}
+                  </span>
                 </div>
               )}
             </div>
@@ -204,9 +240,21 @@ export const PreviewFileCard = forwardRef<HTMLDivElement, PreviewFileCardProps>(
             "flex items-center gap-x-3 rounded-lg border border-border bg-card p-3",
             onFileClick && "cursor-pointer hover:border-primary/50",
             selected && "ring-2 ring-primary",
-            className
+            className,
           )}
+          role={onFileClick ? "button" : undefined}
+          tabIndex={onFileClick ? 0 : undefined}
           onClick={() => onFileClick?.(file)}
+          onKeyDown={
+            onFileClick
+              ? (e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onFileClick?.(file);
+                  }
+                }
+              : undefined
+          }
           {...props}
         >
           {selectable && (
@@ -225,12 +273,19 @@ export const PreviewFileCard = forwardRef<HTMLDivElement, PreviewFileCardProps>(
               />
             </div>
           ) : (
-            <div className={cn("flex size-10 shrink-0 items-center justify-center rounded-lg", colorClass)}>
+            <div
+              className={cn(
+                "flex size-10 shrink-0 items-center justify-center rounded-lg",
+                colorClass,
+              )}
+            >
               <Icon className="size-5" />
             </div>
           )}
           <div className="min-w-0 flex-1">
-            <p className="truncate text-sm font-medium text-foreground">{file.name}</p>
+            <p className="truncate text-sm font-medium text-foreground">
+              {file.name}
+            </p>
             <p className="text-xs text-muted-foreground">{file.size}</p>
           </div>
           {file.isStarred && (
@@ -247,13 +302,14 @@ export const PreviewFileCard = forwardRef<HTMLDivElement, PreviewFileCardProps>(
           className={cn(
             "overflow-hidden rounded-xl border border-border bg-card",
             selected && "ring-2 ring-primary",
-            className
+            className,
           )}
           {...props}
         >
           {/* Preview Area */}
-          <div
-            className="relative aspect-[4/3] cursor-pointer bg-muted"
+          <button
+            type="button"
+            className="relative aspect-[4/3] cursor-pointer bg-muted w-full"
             onClick={() => onPreview?.(file)}
           >
             {selectable && (
@@ -268,6 +324,7 @@ export const PreviewFileCard = forwardRef<HTMLDivElement, PreviewFileCardProps>(
             )}
             {file.isStarred && (
               <button
+                type="button"
                 className="absolute right-3 top-3 z-10 rounded-full bg-background/80 p-1.5 backdrop-blur"
                 onClick={(e) => {
                   e.stopPropagation();
@@ -295,13 +352,15 @@ export const PreviewFileCard = forwardRef<HTMLDivElement, PreviewFileCardProps>(
                 Preview
               </Button>
             </div>
-          </div>
+          </button>
 
           {/* Content */}
           <div className="p-4">
             <div className="flex items-start justify-between gap-x-3">
               <div className="min-w-0 flex-1">
-                <h4 className="truncate font-medium text-foreground">{file.name}</h4>
+                <h4 className="truncate font-medium text-foreground">
+                  {file.name}
+                </h4>
                 {file.description && (
                   <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
                     {file.description}
@@ -329,7 +388,9 @@ export const PreviewFileCard = forwardRef<HTMLDivElement, PreviewFileCardProps>(
               )}
               {file.size && <span>{file.size}</span>}
               {file.views !== undefined && <span>{file.views} views</span>}
-              {file.downloads !== undefined && <span>{file.downloads} downloads</span>}
+              {file.downloads !== undefined && (
+                <span>{file.downloads} downloads</span>
+              )}
             </div>
 
             {file.owner && (
@@ -337,13 +398,19 @@ export const PreviewFileCard = forwardRef<HTMLDivElement, PreviewFileCardProps>(
                 <div className="flex items-center gap-x-2">
                   <Avatar
                     src={file.owner.avatarSrc}
-                    fallback={file.owner.avatarFallback || file.owner.name.charAt(0)}
+                    fallback={
+                      file.owner.avatarFallback || file.owner.name.charAt(0)
+                    }
                     size="sm"
                   />
                   <div>
-                    <p className="text-sm font-medium text-foreground">{file.owner.name}</p>
+                    <p className="text-sm font-medium text-foreground">
+                      {file.owner.name}
+                    </p>
                     {file.modifiedDate && (
-                      <p className="text-xs text-muted-foreground">{file.modifiedDate}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {file.modifiedDate}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -387,14 +454,27 @@ export const PreviewFileCard = forwardRef<HTMLDivElement, PreviewFileCardProps>(
           "overflow-hidden rounded-xl border border-border bg-card",
           onFileClick && "cursor-pointer hover:border-primary/50",
           selected && "ring-2 ring-primary",
-          className
+          className,
         )}
+        role={onFileClick ? "button" : undefined}
+        tabIndex={onFileClick ? 0 : undefined}
         onClick={() => onFileClick?.(file)}
+        onKeyDown={
+          onFileClick
+            ? (e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  onFileClick?.(file);
+                }
+              }
+            : undefined
+        }
         {...props}
       >
         {/* Preview Area */}
-        <div
-          className="relative aspect-video cursor-pointer bg-muted"
+        <button
+          type="button"
+          className="relative aspect-video cursor-pointer bg-muted w-full"
           onClick={(e) => {
             e.stopPropagation();
             onPreview?.(file);
@@ -421,14 +501,16 @@ export const PreviewFileCard = forwardRef<HTMLDivElement, PreviewFileCardProps>(
               <Icon className="size-16 text-muted-foreground/50" />
             </div>
           )}
-        </div>
+        </button>
 
         {/* Content */}
         <div className="p-4">
           <div className="flex items-start justify-between gap-x-3">
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-x-2">
-                <h4 className="truncate font-medium text-foreground">{file.name}</h4>
+                <h4 className="truncate font-medium text-foreground">
+                  {file.name}
+                </h4>
                 {file.isStarred && (
                   <StarIcon className="size-4 shrink-0 fill-warning text-warning" />
                 )}
@@ -473,12 +555,13 @@ export const PreviewFileCard = forwardRef<HTMLDivElement, PreviewFileCardProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 PreviewFileCard.displayName = "PreviewFileCard";
 
 // Grid component for multiple file cards
-export interface PreviewFileCardGridProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface PreviewFileCardGridProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   files: PreviewFileData[];
   variant?: PreviewFileCardProps["variant"];
   columns?: 2 | 3 | 4;
@@ -498,7 +581,10 @@ const columnClasses: Record<number, string> = {
   4: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
 };
 
-export const PreviewFileCardGrid = forwardRef<HTMLDivElement, PreviewFileCardGridProps>(
+export const PreviewFileCardGrid = forwardRef<
+  HTMLDivElement,
+  PreviewFileCardGridProps
+>(
   (
     {
       className,
@@ -515,13 +601,15 @@ export const PreviewFileCardGrid = forwardRef<HTMLDivElement, PreviewFileCardGri
       onMoreClick,
       ...props
     },
-    ref
+    ref,
   ) => {
     const handleSelect = (id: string, selected: boolean) => {
       if (selected) {
         onSelectionChange?.([...selectedIds, id]);
       } else {
-        onSelectionChange?.(selectedIds.filter((selectedId) => selectedId !== id));
+        onSelectionChange?.(
+          selectedIds.filter((selectedId) => selectedId !== id),
+        );
       }
     };
 
@@ -548,6 +636,6 @@ export const PreviewFileCardGrid = forwardRef<HTMLDivElement, PreviewFileCardGri
         ))}
       </div>
     );
-  }
+  },
 );
 PreviewFileCardGrid.displayName = "PreviewFileCardGrid";

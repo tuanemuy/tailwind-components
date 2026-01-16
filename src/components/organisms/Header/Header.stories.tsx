@@ -1,17 +1,21 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import {
-  Header,
-  HeaderNav,
-  HeaderNavItem,
-  HeaderLogo,
-  HeaderActions,
-} from "./index";
-import { Button } from "@/components/atoms/Button";
 import { Avatar } from "@/components/atoms/Avatar";
 import { Badge } from "@/components/atoms/Badge";
-import { Dropdown, DropdownItem, DropdownDivider } from "@/components/molecules/Dropdown";
+import { Button } from "@/components/atoms/Button";
+import {
+  Dropdown,
+  DropdownDivider,
+  DropdownItem,
+} from "@/components/molecules/Dropdown";
 import { BellIcon, SearchIcon, SettingsIcon } from "@/lib/icons";
+import {
+  Header,
+  HeaderActions,
+  HeaderLogo,
+  HeaderNav,
+  HeaderNavItem,
+} from "./index";
 
 const meta: Meta<typeof Header> = {
   title: "Organisms/Header",
@@ -92,7 +96,10 @@ export const WithUserMenu: Story = {
         userMenu={
           <Dropdown
             trigger={
-              <button className="flex items-center gap-2 focus:outline-none">
+              <button
+                type="button"
+                className="flex items-center gap-2 focus:outline-none"
+              >
                 <Avatar
                   src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=400"
                   alt="User"
@@ -131,13 +138,22 @@ export const Transparent: Story = {
           logo={<HeaderLogo href="#" text="Startup" className="text-white" />}
           navigation={
             <HeaderNav>
-              <HeaderNavItem href="#" className="text-white/80 hover:text-white hover:bg-white/10">
+              <HeaderNavItem
+                href="#"
+                className="text-white/80 hover:text-white hover:bg-white/10"
+              >
                 Features
               </HeaderNavItem>
-              <HeaderNavItem href="#" className="text-white/80 hover:text-white hover:bg-white/10">
+              <HeaderNavItem
+                href="#"
+                className="text-white/80 hover:text-white hover:bg-white/10"
+              >
                 Pricing
               </HeaderNavItem>
-              <HeaderNavItem href="#" className="text-white/80 hover:text-white hover:bg-white/10">
+              <HeaderNavItem
+                href="#"
+                className="text-white/80 hover:text-white hover:bg-white/10"
+              >
                 About
               </HeaderNavItem>
             </HeaderNav>

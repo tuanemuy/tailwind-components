@@ -1,19 +1,19 @@
 "use client";
 
-import { useState, useRef, type ChangeEvent, type KeyboardEvent } from "react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/atoms/Button";
-import { Input } from "@/components/atoms/Input";
+import { type ChangeEvent, type KeyboardEvent, useRef, useState } from "react";
 import { Avatar } from "@/components/atoms/Avatar";
 import { Badge } from "@/components/atoms/Badge";
+import { Button } from "@/components/atoms/Button";
+import { Input } from "@/components/atoms/Input";
 import {
-  SendIcon,
-  PaperclipIcon,
-  SmileIcon,
-  MicIcon,
-  XIcon,
   FileIcon,
+  MicIcon,
+  PaperclipIcon,
+  SendIcon,
+  SmileIcon,
+  XIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // ============================================
 // Types
@@ -123,7 +123,9 @@ export const ComposeThread = ({
       name: file.name,
       size: formatFileSize(file.size),
       type: file.type,
-      preview: file.type.startsWith("image/") ? URL.createObjectURL(file) : undefined,
+      preview: file.type.startsWith("image/")
+        ? URL.createObjectURL(file)
+        : undefined,
       file,
     }));
     setAttachments((prev) => [...prev, ...newAttachments]);
@@ -136,17 +138,10 @@ export const ComposeThread = ({
     setAttachments((prev) => prev.filter((a) => a.id !== id));
   };
 
-  const placeholderText = recipient
-    ? `Message ${recipient.name}`
-    : placeholder;
+  const placeholderText = recipient ? `Message ${recipient.name}` : placeholder;
 
   return (
-    <div
-      className={cn(
-        "rounded-2xl bg-card border border-border",
-        className
-      )}
-    >
+    <div className={cn("rounded-2xl bg-card border border-border", className)}>
       {/* Attachments Preview */}
       {attachments.length > 0 && (
         <div className="px-3 pt-3 flex flex-wrap gap-2">
@@ -237,7 +232,11 @@ export const ComposeThread = ({
               size="sm"
               className="size-8 p-0 rounded-full"
               onClick={handleSend}
-              disabled={disabled || loading || (!value.trim() && attachments.length === 0)}
+              disabled={
+                disabled ||
+                loading ||
+                (!value.trim() && attachments.length === 0)
+              }
             >
               {loading ? (
                 <span className="size-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -262,7 +261,10 @@ interface AttachmentPreviewProps {
   onRemove: () => void;
 }
 
-const AttachmentPreview = ({ attachment, onRemove }: AttachmentPreviewProps) => {
+const AttachmentPreview = ({
+  attachment,
+  onRemove,
+}: AttachmentPreviewProps) => {
   const isImage = attachment.type.startsWith("image/");
 
   return (
@@ -280,7 +282,9 @@ const AttachmentPreview = ({ attachment, onRemove }: AttachmentPreviewProps) => 
           <FileIcon className="size-4 text-muted-foreground" />
           <div className="min-w-0 max-w-32">
             <p className="text-xs font-medium truncate">{attachment.name}</p>
-            <p className="text-[10px] text-muted-foreground">{attachment.size}</p>
+            <p className="text-[10px] text-muted-foreground">
+              {attachment.size}
+            </p>
           </div>
         </div>
       )}
@@ -371,7 +375,7 @@ export const EmailCompose = ({
   const removeRecipient = (
     list: Recipient[],
     id: string,
-    onChange?: (recipients: Recipient[]) => void
+    onChange?: (recipients: Recipient[]) => void,
   ) => {
     onChange?.(list.filter((r) => r.id !== id));
   };
@@ -382,7 +386,9 @@ export const EmailCompose = ({
       <div className="p-4 border-b border-border">
         {/* To */}
         <div className="flex items-start gap-x-2 mb-2">
-          <span className="text-sm text-muted-foreground py-1.5 w-12 shrink-0">To:</span>
+          <span className="text-sm text-muted-foreground py-1.5 w-12 shrink-0">
+            To:
+          </span>
           <div className="flex-1 flex flex-wrap items-center gap-1">
             {to.map((recipient) => (
               <RecipientChip
@@ -425,7 +431,9 @@ export const EmailCompose = ({
         {/* Cc */}
         {showCc && (
           <div className="flex items-start gap-x-2 mb-2">
-            <span className="text-sm text-muted-foreground py-1.5 w-12 shrink-0">Cc:</span>
+            <span className="text-sm text-muted-foreground py-1.5 w-12 shrink-0">
+              Cc:
+            </span>
             <div className="flex-1 flex flex-wrap items-center gap-1">
               {cc.map((recipient) => (
                 <RecipientChip
@@ -447,13 +455,17 @@ export const EmailCompose = ({
         {/* Bcc */}
         {showBcc && (
           <div className="flex items-start gap-x-2 mb-2">
-            <span className="text-sm text-muted-foreground py-1.5 w-12 shrink-0">Bcc:</span>
+            <span className="text-sm text-muted-foreground py-1.5 w-12 shrink-0">
+              Bcc:
+            </span>
             <div className="flex-1 flex flex-wrap items-center gap-1">
               {bcc.map((recipient) => (
                 <RecipientChip
                   key={recipient.id}
                   recipient={recipient}
-                  onRemove={() => removeRecipient(bcc, recipient.id, onBccChange)}
+                  onRemove={() =>
+                    removeRecipient(bcc, recipient.id, onBccChange)
+                  }
                 />
               ))}
               <Input
@@ -468,7 +480,9 @@ export const EmailCompose = ({
 
         {/* Subject */}
         <div className="flex items-center gap-x-2">
-          <span className="text-sm text-muted-foreground py-1.5 w-12 shrink-0">Subject:</span>
+          <span className="text-sm text-muted-foreground py-1.5 w-12 shrink-0">
+            Subject:
+          </span>
           <Input
             type="text"
             value={subject}
@@ -538,10 +552,20 @@ export const EmailCompose = ({
         </div>
 
         <div className="flex items-center gap-x-2">
-          <Button variant="ghost" size="sm" onClick={onSaveDraft} disabled={disabled}>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onSaveDraft}
+            disabled={disabled}
+          >
             Save draft
           </Button>
-          <Button variant="ghost" size="sm" onClick={onDiscard} disabled={disabled}>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onDiscard}
+            disabled={disabled}
+          >
             <XIcon className="size-4" />
           </Button>
         </div>
@@ -584,5 +608,5 @@ const formatFileSize = (bytes: number): string => {
   const k = 1024;
   const sizes = ["B", "KB", "MB", "GB"];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(1))} ${sizes[i]}`;
+  return `${Number.parseFloat((bytes / k ** i).toFixed(1))} ${sizes[i]}`;
 };

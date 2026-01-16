@@ -1,9 +1,13 @@
 "use client";
 
 import { forwardRef, useMemo } from "react";
-import { cn } from "@/lib/utils";
-import { DataTable, type DataTableColumn, type DataTableProps } from "../DataTable";
 import { Avatar, Badge } from "@/components/atoms";
+import { cn } from "@/lib/utils";
+import {
+  DataTable,
+  type DataTableColumn,
+  type DataTableProps,
+} from "../DataTable";
 
 // ============================================
 // User Types
@@ -48,7 +52,10 @@ export interface UsersTableProps
 
 const statusConfig: Record<
   UserStatus,
-  { label: string; variant: "success" | "warning" | "destructive" | "secondary" }
+  {
+    label: string;
+    variant: "success" | "warning" | "destructive" | "secondary";
+  }
 > = {
   active: { label: "Active", variant: "success" },
   inactive: { label: "Inactive", variant: "secondary" },
@@ -81,7 +88,7 @@ export const UsersTable = forwardRef<HTMLDivElement, UsersTableProps>(
       customColumns,
       ...props
     },
-    ref
+    ref,
   ) => {
     const columns = useMemo<DataTableColumn<User>[]>(() => {
       const baseColumns: DataTableColumn<User>[] = [
@@ -102,14 +109,18 @@ export const UsersTable = forwardRef<HTMLDivElement, UsersTableProps>(
               />
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
-                  <span className="font-medium text-foreground">{user.name}</span>
+                  <span className="font-medium text-foreground">
+                    {user.name}
+                  </span>
                   {user.verified && (
                     <Badge variant="success" size="sm">
                       Verified
                     </Badge>
                   )}
                 </div>
-                <span className="text-sm text-muted-foreground">{user.email}</span>
+                <span className="text-sm text-muted-foreground">
+                  {user.email}
+                </span>
               </div>
             </div>
           ),
@@ -120,10 +131,12 @@ export const UsersTable = forwardRef<HTMLDivElement, UsersTableProps>(
           sortable: true,
           filterable: true,
           filterType: "select",
-          filterOptions: Object.entries(statusConfig).map(([value, { label }]) => ({
-            value,
-            label,
-          })),
+          filterOptions: Object.entries(statusConfig).map(
+            ([value, { label }]) => ({
+              value,
+              label,
+            }),
+          ),
           width: "120px",
           render: (_, user) => {
             const config = statusConfig[user.status];
@@ -140,10 +153,12 @@ export const UsersTable = forwardRef<HTMLDivElement, UsersTableProps>(
           sortable: true,
           filterable: true,
           filterType: "select",
-          filterOptions: Object.entries(roleConfig).map(([value, { label }]) => ({
-            value,
-            label,
-          })),
+          filterOptions: Object.entries(roleConfig).map(
+            ([value, { label }]) => ({
+              value,
+              label,
+            }),
+          ),
           width: "120px",
           render: (_, user) => {
             const config = roleConfig[user.role];
@@ -151,7 +166,7 @@ export const UsersTable = forwardRef<HTMLDivElement, UsersTableProps>(
               <span
                 className={cn(
                   "inline-flex items-center px-2 py-1 rounded text-xs font-medium",
-                  config.color
+                  config.color,
                 )}
               >
                 {config.label}
@@ -234,7 +249,9 @@ export const UsersTable = forwardRef<HTMLDivElement, UsersTableProps>(
               timeAgo = date.toLocaleDateString();
             }
 
-            return <span className="text-sm text-muted-foreground">{timeAgo}</span>;
+            return (
+              <span className="text-sm text-muted-foreground">{timeAgo}</span>
+            );
           },
         });
       }
@@ -275,7 +292,7 @@ export const UsersTable = forwardRef<HTMLDivElement, UsersTableProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
 UsersTable.displayName = "UsersTable";

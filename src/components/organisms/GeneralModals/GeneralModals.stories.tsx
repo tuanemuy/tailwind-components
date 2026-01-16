@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { KeyboardShortcutsModal, InvoiceModal, LocationModal } from "./index";
 import { Button } from "@/components/atoms/Button";
+import { InvoiceModal, KeyboardShortcutsModal, LocationModal } from "./index";
 
 const meta: Meta = {
   title: "Organisms/Overlays/GeneralModals",
@@ -61,43 +61,44 @@ export const KeyboardShortcuts: StoryObj<typeof KeyboardShortcutsModal> = {
   },
 };
 
-export const KeyboardShortcutsWindows: StoryObj<typeof KeyboardShortcutsModal> = {
-  render: () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const shortcuts = [
-      {
-        name: "General",
-        shortcuts: [
-          { label: "Open command palette", keys: ["Ctrl", "K"] },
-          { label: "Save changes", keys: ["Ctrl", "S"] },
-          { label: "Undo", keys: ["Ctrl", "Z"] },
-          { label: "Redo", keys: ["Ctrl", "Y"] },
-        ],
-      },
-      {
-        name: "Navigation",
-        shortcuts: [
-          { label: "Switch tabs", keys: ["Ctrl", "Tab"] },
-          { label: "Go back", keys: ["Alt", "←"] },
-          { label: "Go forward", keys: ["Alt", "→"] },
-          { label: "Refresh", keys: ["F5"] },
-        ],
-      },
-    ];
+export const KeyboardShortcutsWindows: StoryObj<typeof KeyboardShortcutsModal> =
+  {
+    render: () => {
+      const [isOpen, setIsOpen] = useState(false);
+      const shortcuts = [
+        {
+          name: "General",
+          shortcuts: [
+            { label: "Open command palette", keys: ["Ctrl", "K"] },
+            { label: "Save changes", keys: ["Ctrl", "S"] },
+            { label: "Undo", keys: ["Ctrl", "Z"] },
+            { label: "Redo", keys: ["Ctrl", "Y"] },
+          ],
+        },
+        {
+          name: "Navigation",
+          shortcuts: [
+            { label: "Switch tabs", keys: ["Ctrl", "Tab"] },
+            { label: "Go back", keys: ["Alt", "←"] },
+            { label: "Go forward", keys: ["Alt", "→"] },
+            { label: "Refresh", keys: ["F5"] },
+          ],
+        },
+      ];
 
-    return (
-      <>
-        <Button onClick={() => setIsOpen(true)}>Shortcuts (Windows)</Button>
-        <KeyboardShortcutsModal
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          categories={shortcuts}
-          title="Keyboard Shortcuts (Windows)"
-        />
-      </>
-    );
-  },
-};
+      return (
+        <>
+          <Button onClick={() => setIsOpen(true)}>Shortcuts (Windows)</Button>
+          <KeyboardShortcutsModal
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+            categories={shortcuts}
+            title="Keyboard Shortcuts (Windows)"
+          />
+        </>
+      );
+    },
+  };
 
 // Invoice Modal Stories
 export const Invoice: StoryObj<typeof InvoiceModal> = {

@@ -1,13 +1,13 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
+import { Badge } from "@/components/atoms/Badge";
+import { Button } from "@/components/atoms/Button";
 import { cn } from "@/lib/utils";
 import {
-  titleBarVariants,
-  titleBarTitleVariants,
   titleBarSubtitleVariants,
+  titleBarTitleVariants,
+  titleBarVariants,
 } from "@/lib/variants/titleBar";
-import { Button } from "@/components/atoms/Button";
-import { Badge } from "@/components/atoms/Badge";
-import type { VariantProps } from "class-variance-authority";
 
 export interface TitleBarProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "title">,
@@ -38,7 +38,7 @@ export const TitleBar = forwardRef<HTMLDivElement, TitleBarProps>(
       breadcrumb,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
@@ -57,10 +57,16 @@ export const TitleBar = forwardRef<HTMLDivElement, TitleBarProps>(
 
             {/* Icon */}
             {icon && (
-              <div className={cn(
-                "shrink-0 text-muted-foreground",
-                titleSize === "sm" ? "size-5" : titleSize === "lg" || titleSize === "xl" ? "size-8" : "size-6"
-              )}>
+              <div
+                className={cn(
+                  "shrink-0 text-muted-foreground",
+                  titleSize === "sm"
+                    ? "size-5"
+                    : titleSize === "lg" || titleSize === "xl"
+                      ? "size-8"
+                      : "size-6",
+                )}
+              >
                 {icon}
               </div>
             )}
@@ -76,21 +82,17 @@ export const TitleBar = forwardRef<HTMLDivElement, TitleBarProps>(
 
           {/* Subtitle */}
           {subtitle && (
-            <p className={cn(titleBarSubtitleVariants({ size }))}>
-              {subtitle}
-            </p>
+            <p className={cn(titleBarSubtitleVariants({ size }))}>{subtitle}</p>
           )}
         </div>
 
         {/* Actions */}
         {actions && (
-          <div className="flex items-center gap-x-2 shrink-0">
-            {actions}
-          </div>
+          <div className="flex items-center gap-x-2 shrink-0">{actions}</div>
         )}
       </div>
     );
-  }
+  },
 );
 TitleBar.displayName = "TitleBar";
 
@@ -109,8 +111,14 @@ export interface SimpleTitleBarProps {
   };
 }
 
-export const SimpleTitleBar = forwardRef<HTMLDivElement, SimpleTitleBarProps & Omit<React.HTMLAttributes<HTMLDivElement>, "title">>(
-  ({ title, description, primaryAction, secondaryAction, className, ...props }, ref) => {
+export const SimpleTitleBar = forwardRef<
+  HTMLDivElement,
+  SimpleTitleBarProps & Omit<React.HTMLAttributes<HTMLDivElement>, "title">
+>(
+  (
+    { title, description, primaryAction, secondaryAction, className, ...props },
+    ref,
+  ) => {
     return (
       <TitleBar
         ref={ref}
@@ -138,7 +146,7 @@ export const SimpleTitleBar = forwardRef<HTMLDivElement, SimpleTitleBarProps & O
         {...props}
       />
     );
-  }
+  },
 );
 SimpleTitleBar.displayName = "SimpleTitleBar";
 
@@ -156,32 +164,36 @@ export const TabbedTitleBar = forwardRef<HTMLDivElement, TabbedTitleBarProps>(
         {tabs && <div className="-mb-px">{tabs}</div>}
       </div>
     );
-  }
+  },
 );
 TabbedTitleBar.displayName = "TabbedTitleBar";
 
 // Title bar with filters/search
-export interface FilterableTitleBarProps extends Omit<TitleBarProps, "actions"> {
+export interface FilterableTitleBarProps
+  extends Omit<TitleBarProps, "actions"> {
   searchInput?: React.ReactNode;
   filters?: React.ReactNode;
   actions?: React.ReactNode;
 }
 
-export const FilterableTitleBar = forwardRef<HTMLDivElement, FilterableTitleBarProps>(
-  ({ searchInput, filters, actions, className, ...props }, ref) => {
-    return (
-      <div className={cn("space-y-4", className)}>
-        <TitleBar ref={ref} actions={actions} {...props} />
-        {(searchInput || filters) && (
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            {searchInput && <div className="sm:w-72">{searchInput}</div>}
-            {filters && <div className="flex items-center gap-x-2">{filters}</div>}
-          </div>
-        )}
-      </div>
-    );
-  }
-);
+export const FilterableTitleBar = forwardRef<
+  HTMLDivElement,
+  FilterableTitleBarProps
+>(({ searchInput, filters, actions, className, ...props }, ref) => {
+  return (
+    <div className={cn("space-y-4", className)}>
+      <TitleBar ref={ref} actions={actions} {...props} />
+      {(searchInput || filters) && (
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          {searchInput && <div className="sm:w-72">{searchInput}</div>}
+          {filters && (
+            <div className="flex items-center gap-x-2">{filters}</div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+});
 FilterableTitleBar.displayName = "FilterableTitleBar";
 
 // Page title bar with status badge
@@ -207,6 +219,6 @@ export const StatusTitleBar = forwardRef<HTMLDivElement, StatusTitleBarProps>(
         {...props}
       />
     );
-  }
+  },
 );
 StatusTitleBar.displayName = "StatusTitleBar";

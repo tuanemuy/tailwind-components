@@ -1,18 +1,32 @@
 import { forwardRef, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/atoms/Button";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "@/components/organisms/Modal";
-import { AlertCircleIcon, TrashIcon, XCircleIcon, CheckCircleIcon, InfoIcon } from "@/lib/icons";
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "@/components/organisms/Modal";
+import {
+  AlertCircleIcon,
+  CheckCircleIcon,
+  InfoIcon,
+  TrashIcon,
+  XCircleIcon,
+} from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // ConfirmModal variants
 export type ConfirmVariant = "danger" | "warning" | "info" | "success";
 
-const variantStyles: Record<ConfirmVariant, {
-  iconBg: string;
-  iconColor: string;
-  Icon: typeof AlertCircleIcon;
-  confirmButtonVariant: "destructive" | "primary" | "secondary";
-}> = {
+const variantStyles: Record<
+  ConfirmVariant,
+  {
+    iconBg: string;
+    iconColor: string;
+    Icon: typeof AlertCircleIcon;
+    confirmButtonVariant: "destructive" | "primary" | "secondary";
+  }
+> = {
   danger: {
     iconBg: "bg-destructive/10",
     iconColor: "text-destructive",
@@ -70,7 +84,8 @@ export const ConfirmModal = forwardRef<HTMLDivElement, ConfirmModalProps>(
     },
     ref,
   ) => {
-    const { iconBg, iconColor, Icon, confirmButtonVariant } = variantStyles[variant];
+    const { iconBg, iconColor, Icon, confirmButtonVariant } =
+      variantStyles[variant];
 
     return (
       <Modal
@@ -102,7 +117,11 @@ export const ConfirmModal = forwardRef<HTMLDivElement, ConfirmModalProps>(
           </ModalBody>
         )}
 
-        <ModalFooter bordered={false} align="center" className="flex-col gap-2 pt-4 sm:flex-row">
+        <ModalFooter
+          bordered={false}
+          align="center"
+          className="flex-col gap-2 pt-4 sm:flex-row"
+        >
           <Button
             variant="outline"
             onClick={onClose}
@@ -127,13 +146,17 @@ export const ConfirmModal = forwardRef<HTMLDivElement, ConfirmModalProps>(
 ConfirmModal.displayName = "ConfirmModal";
 
 // DeleteConfirmModal - Convenience component for delete confirmation
-export interface DeleteConfirmModalProps extends Omit<ConfirmModalProps, "variant" | "title" | "confirmText"> {
+export interface DeleteConfirmModalProps
+  extends Omit<ConfirmModalProps, "variant" | "title" | "confirmText"> {
   itemName?: string;
   title?: string;
   confirmText?: string;
 }
 
-export const DeleteConfirmModal = forwardRef<HTMLDivElement, DeleteConfirmModalProps>(
+export const DeleteConfirmModal = forwardRef<
+  HTMLDivElement,
+  DeleteConfirmModalProps
+>(
   (
     {
       itemName,
@@ -163,12 +186,16 @@ export const DeleteConfirmModal = forwardRef<HTMLDivElement, DeleteConfirmModalP
 DeleteConfirmModal.displayName = "DeleteConfirmModal";
 
 // CancelConfirmModal - Convenience component for cancel confirmation
-export interface CancelConfirmModalProps extends Omit<ConfirmModalProps, "variant" | "title" | "confirmText"> {
+export interface CancelConfirmModalProps
+  extends Omit<ConfirmModalProps, "variant" | "title" | "confirmText"> {
   title?: string;
   confirmText?: string;
 }
 
-export const CancelConfirmModal = forwardRef<HTMLDivElement, CancelConfirmModalProps>(
+export const CancelConfirmModal = forwardRef<
+  HTMLDivElement,
+  CancelConfirmModalProps
+>(
   (
     {
       title = "Discard changes",

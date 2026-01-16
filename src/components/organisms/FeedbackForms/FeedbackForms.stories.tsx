@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {
+  AlertCircleIcon,
+  MessageSquareIcon,
+  SmileIcon,
+  ZapIcon,
+} from "@/lib/icons";
+import {
+  type FeedbackCategory,
   FeedbackForm,
-  RatingForm,
   NPSSurvey,
   QuickFeedback,
-  type FeedbackCategory,
+  RatingForm,
 } from "./index";
-import {
-  MessageSquareIcon,
-  AlertCircleIcon,
-  ZapIcon,
-  SmileIcon,
-} from "@/lib/icons";
 
 const meta: Meta<typeof FeedbackForm> = {
   title: "Organisms/FeedbackForms",
@@ -221,7 +221,9 @@ export const QuickFeedbackDefault: StoryObj<typeof QuickFeedback> = {
       <p className="text-sm mb-4">
         This is some content that the user might find helpful or not.
       </p>
-      <QuickFeedback onFeedback={(positive) => console.log("Positive:", positive)} />
+      <QuickFeedback
+        onFeedback={(positive) => console.log("Positive:", positive)}
+      />
     </div>
   ),
 };

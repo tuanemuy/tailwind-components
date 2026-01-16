@@ -1,6 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { IntegrationCard, IntegrationCardGrid, IntegrationCardList } from "./index";
-import { MailIcon, CalendarIcon, DatabaseIcon, CloudIcon } from "@/lib/icons";
+import { CalendarIcon, CloudIcon, DatabaseIcon, MailIcon } from "@/lib/icons";
+import {
+  IntegrationCard,
+  IntegrationCardGrid,
+  IntegrationCardList,
+} from "./index";
 
 const meta: Meta<typeof IntegrationCard> = {
   title: "Organisms/Cards/IntegrationCard",
@@ -17,7 +21,8 @@ type Story = StoryObj<typeof IntegrationCard>;
 const sampleIntegration = {
   id: "1",
   name: "Slack",
-  description: "Connect your Slack workspace to receive notifications and updates",
+  description:
+    "Connect your Slack workspace to receive notifications and updates",
   status: "connected" as const,
   category: "Communication",
   lastSynced: "2 hours ago",
@@ -119,7 +124,7 @@ export const Pending: Story = {
   ],
 };
 
-export const Error: Story = {
+export const ErrorVariant: Story = {
   args: {
     integration: {
       ...sampleIntegration,
@@ -185,10 +190,7 @@ const integrations = [
 export const Grid: StoryObj<typeof IntegrationCardGrid> = {
   render: () => (
     <div className="w-[900px]">
-      <IntegrationCardGrid
-        integrations={integrations}
-        columns={3}
-      />
+      <IntegrationCardGrid integrations={integrations} columns={3} />
     </div>
   ),
 };
@@ -197,7 +199,7 @@ export const GridDetailed: StoryObj<typeof IntegrationCardGrid> = {
   render: () => (
     <div className="w-[900px]">
       <IntegrationCardGrid
-        integrations={integrations.slice(0, 2).map(i => ({
+        integrations={integrations.slice(0, 2).map((i) => ({
           ...i,
           features: ["Feature 1", "Feature 2", "Feature 3"],
           lastSynced: "2 hours ago",
@@ -212,10 +214,7 @@ export const GridDetailed: StoryObj<typeof IntegrationCardGrid> = {
 export const ListView: StoryObj<typeof IntegrationCardList> = {
   render: () => (
     <div className="w-[550px]">
-      <IntegrationCardList
-        integrations={integrations}
-        variant="list"
-      />
+      <IntegrationCardList integrations={integrations} variant="list" />
     </div>
   ),
 };
@@ -223,10 +222,7 @@ export const ListView: StoryObj<typeof IntegrationCardList> = {
 export const CompactList: StoryObj<typeof IntegrationCardList> = {
   render: () => (
     <div className="w-[320px]">
-      <IntegrationCardList
-        integrations={integrations}
-        variant="compact"
-      />
+      <IntegrationCardList integrations={integrations} variant="compact" />
     </div>
   ),
 };

@@ -1,9 +1,12 @@
 "use client";
 
 import { forwardRef, useMemo } from "react";
-import { cn } from "@/lib/utils";
-import { DataTable, type DataTableColumn, type DataTableProps } from "../DataTable";
 import { Avatar, Badge } from "@/components/atoms";
+import {
+  DataTable,
+  type DataTableColumn,
+  type DataTableProps,
+} from "../DataTable";
 
 // ============================================
 // Order Types
@@ -83,7 +86,10 @@ export interface OrdersTableProps
 
 const orderStatusConfig: Record<
   OrderStatus,
-  { label: string; variant: "success" | "warning" | "destructive" | "secondary" | "default" }
+  {
+    label: string;
+    variant: "success" | "warning" | "destructive" | "secondary" | "default";
+  }
 > = {
   pending: { label: "Pending", variant: "warning" },
   processing: { label: "Processing", variant: "default" },
@@ -95,7 +101,10 @@ const orderStatusConfig: Record<
 
 const paymentStatusConfig: Record<
   PaymentStatus,
-  { label: string; variant: "success" | "warning" | "destructive" | "secondary" }
+  {
+    label: string;
+    variant: "success" | "warning" | "destructive" | "secondary";
+  }
 > = {
   pending: { label: "Pending", variant: "warning" },
   paid: { label: "Paid", variant: "success" },
@@ -120,7 +129,7 @@ export const OrdersTable = forwardRef<HTMLDivElement, OrdersTableProps>(
       customColumns,
       ...props
     },
-    ref
+    ref,
   ) => {
     const columns = useMemo<DataTableColumn<Order>[]>(() => {
       const baseColumns: DataTableColumn<Order>[] = [
@@ -161,8 +170,12 @@ export const OrdersTable = forwardRef<HTMLDivElement, OrdersTableProps>(
                 size="sm"
               />
               <div className="flex flex-col">
-                <span className="font-medium text-foreground">{order.customer.name}</span>
-                <span className="text-sm text-muted-foreground">{order.customer.email}</span>
+                <span className="font-medium text-foreground">
+                  {order.customer.name}
+                </span>
+                <span className="text-sm text-muted-foreground">
+                  {order.customer.email}
+                </span>
               </div>
             </div>
           ),
@@ -175,10 +188,12 @@ export const OrdersTable = forwardRef<HTMLDivElement, OrdersTableProps>(
         sortable: true,
         filterable: true,
         filterType: "select",
-        filterOptions: Object.entries(orderStatusConfig).map(([value, { label }]) => ({
-          value,
-          label,
-        })),
+        filterOptions: Object.entries(orderStatusConfig).map(
+          ([value, { label }]) => ({
+            value,
+            label,
+          }),
+        ),
         width: "120px",
         render: (_, order) => {
           const config = orderStatusConfig[order.status];
@@ -197,10 +212,12 @@ export const OrdersTable = forwardRef<HTMLDivElement, OrdersTableProps>(
           sortable: true,
           filterable: true,
           filterType: "select",
-          filterOptions: Object.entries(paymentStatusConfig).map(([value, { label }]) => ({
-            value,
-            label,
-          })),
+          filterOptions: Object.entries(paymentStatusConfig).map(
+            ([value, { label }]) => ({
+              value,
+              label,
+            }),
+          ),
           width: "120px",
           render: (_, order) => {
             const config = paymentStatusConfig[order.paymentStatus];
@@ -219,7 +236,10 @@ export const OrdersTable = forwardRef<HTMLDivElement, OrdersTableProps>(
           header: "Items",
           width: "150px",
           render: (_, order) => {
-            const totalItems = order.items.reduce((sum, item) => sum + item.quantity, 0);
+            const totalItems = order.items.reduce(
+              (sum, item) => sum + item.quantity,
+              0,
+            );
             return (
               <div className="flex items-center gap-2">
                 <div className="flex -space-x-2">
@@ -296,7 +316,14 @@ export const OrdersTable = forwardRef<HTMLDivElement, OrdersTableProps>(
       }
 
       return baseColumns;
-    }, [showCustomer, showPaymentStatus, showItems, showShipping, customColumns, orders]);
+    }, [
+      showCustomer,
+      showPaymentStatus,
+      showItems,
+      showShipping,
+      customColumns,
+      orders,
+    ]);
 
     return (
       <DataTable<Order>
@@ -309,7 +336,7 @@ export const OrdersTable = forwardRef<HTMLDivElement, OrdersTableProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
 OrdersTable.displayName = "OrdersTable";

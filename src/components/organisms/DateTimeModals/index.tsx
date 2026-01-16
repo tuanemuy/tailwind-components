@@ -1,12 +1,17 @@
-import { forwardRef, useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { forwardRef, type ReactNode, useState } from "react";
 import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "@/components/organisms/Modal";
 import { DatePicker } from "@/components/molecules/DatePicker";
-import { TimePicker, type TimeValue } from "@/components/molecules/TimePicker";
 import { Select, type SelectOption } from "@/components/molecules/Select";
-import { ClockIcon, CheckIcon } from "@/lib/icons";
+import { TimePicker, type TimeValue } from "@/components/molecules/TimePicker";
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "@/components/organisms/Modal";
+import { CheckIcon, ClockIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // SnoozeModal
 export interface SnoozeOption {
@@ -56,7 +61,10 @@ export const SnoozeModal = forwardRef<HTMLDivElement, SnoozeModalProps>(
   ) => {
     const [selectedId, setSelectedId] = useState("");
     const [customDate, setCustomDate] = useState<Date | undefined>(undefined);
-    const [customTime, setCustomTime] = useState<TimeValue>({ hours: 9, minutes: 0 });
+    const [customTime, setCustomTime] = useState<TimeValue>({
+      hours: 9,
+      minutes: 0,
+    });
 
     const handleSubmit = () => {
       const option = options.find((o) => o.id === selectedId);
@@ -121,7 +129,9 @@ export const SnoozeModal = forwardRef<HTMLDivElement, SnoozeModalProps>(
                 )}
               >
                 <ClockIcon className="size-5 text-muted-foreground" />
-                <span className="flex-1 text-sm font-medium">{option.label}</span>
+                <span className="flex-1 text-sm font-medium">
+                  {option.label}
+                </span>
                 {selectedId === option.id && (
                   <CheckIcon className="size-5 text-primary" />
                 )}
@@ -236,8 +246,10 @@ export const ScheduleModal = forwardRef<HTMLDivElement, ScheduleModalProps>(
 
         <ModalBody padding="md">
           <div className="space-y-4">
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Date</label>
+            <div>
+              <span className="mb-2 block text-sm font-medium text-foreground">
+                Date
+              </span>
               <DatePicker
                 value={date}
                 onChange={setDate}
@@ -248,13 +260,11 @@ export const ScheduleModal = forwardRef<HTMLDivElement, ScheduleModalProps>(
               />
             </div>
 
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Time</label>
-              <TimePicker
-                value={time}
-                onChange={setTime}
-                disabled={loading}
-              />
+            <div>
+              <span className="mb-2 block text-sm font-medium text-foreground">
+                Time
+              </span>
+              <TimePicker value={time} onChange={setTime} disabled={loading} />
             </div>
 
             {/* Preview */}
@@ -296,7 +306,12 @@ export const ScheduleModal = forwardRef<HTMLDivElement, ScheduleModalProps>(
 ScheduleModal.displayName = "ScheduleModal";
 
 // RecurrenceModal
-export type RecurrenceFrequency = "daily" | "weekly" | "monthly" | "yearly" | "custom";
+export type RecurrenceFrequency =
+  | "daily"
+  | "weekly"
+  | "monthly"
+  | "yearly"
+  | "custom";
 
 export interface RecurrenceSettings {
   frequency: RecurrenceFrequency;
@@ -398,19 +413,17 @@ export const RecurrenceModal = forwardRef<HTMLDivElement, RecurrenceModalProps>(
       switch (frequency) {
         case "daily":
           return plural ? `Every ${interval} days` : "Every day";
-        case "weekly":
-          const days = daysOfWeek?.map((d) => daysOfWeekLabels[d]).join(", ") || "";
+        case "weekly": {
+          const days =
+            daysOfWeek?.map((d) => daysOfWeekLabels[d]).join(", ") || "";
           return plural
             ? `Every ${interval} weeks on ${days}`
             : `Weekly on ${days}`;
+        }
         case "monthly":
-          return plural
-            ? `Every ${interval} months`
-            : "Monthly";
+          return plural ? `Every ${interval} months` : "Monthly";
         case "yearly":
-          return plural
-            ? `Every ${interval} years`
-            : "Yearly";
+          return plural ? `Every ${interval} years` : "Yearly";
         default:
           return "Custom recurrence";
       }
@@ -435,10 +448,10 @@ export const RecurrenceModal = forwardRef<HTMLDivElement, RecurrenceModalProps>(
         <ModalBody padding="md">
           <div className="space-y-6">
             {/* Frequency */}
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">
+            <div>
+              <span className="mb-2 block text-sm font-medium text-foreground">
                 Repeat
-              </label>
+              </span>
               <Select
                 value={settings.frequency}
                 onChange={(value) =>
@@ -450,10 +463,10 @@ export const RecurrenceModal = forwardRef<HTMLDivElement, RecurrenceModalProps>(
             </div>
 
             {/* Interval */}
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">
+            <div>
+              <span className="mb-2 block text-sm font-medium text-foreground">
                 Every
-              </label>
+              </span>
               <div className="flex items-center gap-2">
                 <Input
                   type="number"
@@ -461,7 +474,10 @@ export const RecurrenceModal = forwardRef<HTMLDivElement, RecurrenceModalProps>(
                   max={99}
                   value={settings.interval}
                   onChange={(e) =>
-                    updateSettings("interval", Math.max(1, parseInt(e.target.value) || 1))
+                    updateSettings(
+                      "interval",
+                      Math.max(1, Number.parseInt(e.target.value, 10) || 1),
+                    )
                   }
                   disabled={loading}
                   className="w-20"
@@ -480,10 +496,10 @@ export const RecurrenceModal = forwardRef<HTMLDivElement, RecurrenceModalProps>(
 
             {/* Days of week (for weekly) */}
             {settings.frequency === "weekly" && (
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">
+              <div>
+                <span className="mb-2 block text-sm font-medium text-foreground">
                   On
-                </label>
+                </span>
                 <div className="flex flex-wrap gap-2">
                   {daysOfWeekLabels.map((day, index) => (
                     <button
@@ -506,10 +522,10 @@ export const RecurrenceModal = forwardRef<HTMLDivElement, RecurrenceModalProps>(
             )}
 
             {/* End type */}
-            <div className="space-y-3">
-              <label className="text-sm font-medium text-foreground">
+            <div>
+              <span className="mb-3 block text-sm font-medium text-foreground">
                 Ends
-              </label>
+              </span>
               <div className="space-y-2">
                 <label className="flex items-center gap-3">
                   <input
@@ -536,9 +552,7 @@ export const RecurrenceModal = forwardRef<HTMLDivElement, RecurrenceModalProps>(
                     <div className="ml-auto">
                       <DatePicker
                         value={settings.endDate}
-                        onChange={(date) =>
-                          updateSettings("endDate", date)
-                        }
+                        onChange={(date) => updateSettings("endDate", date)}
                         minDate={new Date()}
                         disabled={loading}
                       />
@@ -565,7 +579,10 @@ export const RecurrenceModal = forwardRef<HTMLDivElement, RecurrenceModalProps>(
                         onChange={(e) =>
                           updateSettings(
                             "occurrences",
-                            Math.max(1, parseInt(e.target.value) || 1),
+                            Math.max(
+                              1,
+                              Number.parseInt(e.target.value, 10) || 1,
+                            ),
                           )
                         }
                         disabled={loading}

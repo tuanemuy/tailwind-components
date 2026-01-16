@@ -1,8 +1,8 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
 import { ProgressBar } from "@/components/atoms";
 import { TrendIndicator } from "@/components/molecules";
 import type { TrendDirection, TrendVariant } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 export interface DataCardProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
@@ -161,7 +161,8 @@ export interface DataCardListItem {
   color?: string;
 }
 
-export interface DataCardListProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DataCardListProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   items: DataCardListItem[];
 }
 
@@ -207,7 +208,8 @@ export const DataCardList = forwardRef<HTMLDivElement, DataCardListProps>(
 DataCardList.displayName = "DataCardList";
 
 // DataCardMini for compact metrics display
-export interface DataCardMiniProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DataCardMiniProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   label: string;
   value: string | number;
   icon?: React.ReactNode;
@@ -229,9 +231,7 @@ export const DataCardMini = forwardRef<HTMLDivElement, DataCardMiniProps>(
         {...props}
       >
         <div className="flex items-center gap-x-3">
-          {icon && (
-            <div className="shrink-0 text-muted-foreground">{icon}</div>
-          )}
+          {icon && <div className="shrink-0 text-muted-foreground">{icon}</div>}
           <div>
             <p className="text-xs text-muted-foreground">{label}</p>
             <p className="text-lg font-semibold text-foreground">{value}</p>

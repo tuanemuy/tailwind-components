@@ -16,10 +16,10 @@ export interface PageLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const sidebarWidthValues = {
-  mini: "4rem",      // w-16
-  compact: "14rem",  // w-56
-  default: "16rem",  // w-64
-  wide: "20rem",     // w-80
+  mini: "4rem", // w-16
+  compact: "14rem", // w-56
+  default: "16rem", // w-64
+  wide: "20rem", // w-80
 };
 
 export const PageLayout = forwardRef<HTMLDivElement, PageLayoutProps>(
@@ -130,7 +130,7 @@ PageLayout.displayName = "PageLayout";
 
 // PageContent component for main content area
 export interface PageContentProps extends React.HTMLAttributes<HTMLDivElement> {
-  maxWidth?: "sm" | "md" | "lg" | "xl" | "2xl" | "full";
+  maxWidth?: "sm" | "md" | "lg" | "xl" | "2xl" | "4xl" | "5xl" | "6xl" | "full";
   padding?: "none" | "sm" | "md" | "lg";
   centered?: boolean;
 }
@@ -141,6 +141,9 @@ const contentMaxWidthClasses = {
   lg: "max-w-6xl",
   xl: "max-w-7xl",
   "2xl": "max-w-screen-2xl",
+  "4xl": "max-w-screen-2xl",
+  "5xl": "max-w-screen-2xl",
+  "6xl": "max-w-screen-2xl",
   full: "max-w-full",
 };
 
@@ -191,23 +194,26 @@ export interface PageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const PageHeader = forwardRef<HTMLDivElement, PageHeaderProps>(
-  ({ className, title, description, actions, breadcrumb, children, ...props }, ref) => {
+  (
+    { className, title, description, actions, breadcrumb, children, ...props },
+    ref,
+  ) => {
     return (
-      <div
-        ref={ref}
-        className={cn("mb-6 space-y-4", className)}
-        {...props}
-      >
+      <div ref={ref} className={cn("mb-6 space-y-4", className)} {...props}>
         {breadcrumb && <div className="mb-2">{breadcrumb}</div>}
         {children || (
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <h1 className="text-2xl font-bold text-foreground">{title}</h1>
               {description && (
-                <p className="mt-1 text-sm text-muted-foreground">{description}</p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {description}
+                </p>
               )}
             </div>
-            {actions && <div className="flex items-center gap-2 shrink-0">{actions}</div>}
+            {actions && (
+              <div className="flex items-center gap-2 shrink-0">{actions}</div>
+            )}
           </div>
         )}
       </div>
@@ -226,22 +232,24 @@ export interface PageSectionProps extends React.HTMLAttributes<HTMLElement> {
 export const PageSection = forwardRef<HTMLElement, PageSectionProps>(
   ({ className, title, description, actions, children, ...props }, ref) => {
     return (
-      <section
-        ref={ref}
-        className={cn("mb-8 last:mb-0", className)}
-        {...props}
-      >
+      <section ref={ref} className={cn("mb-8 last:mb-0", className)} {...props}>
         {(title || description || actions) && (
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
             <div>
               {title && (
-                <h2 className="text-lg font-semibold text-foreground">{title}</h2>
+                <h2 className="text-lg font-semibold text-foreground">
+                  {title}
+                </h2>
               )}
               {description && (
-                <p className="mt-1 text-sm text-muted-foreground">{description}</p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {description}
+                </p>
               )}
             </div>
-            {actions && <div className="flex items-center gap-2 shrink-0">{actions}</div>}
+            {actions && (
+              <div className="flex items-center gap-2 shrink-0">{actions}</div>
+            )}
           </div>
         )}
         {children}

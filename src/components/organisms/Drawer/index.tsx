@@ -1,15 +1,15 @@
 import {
-  forwardRef,
   createContext,
-  useContext,
+  forwardRef,
+  type ReactNode,
   useCallback,
+  useContext,
   useEffect,
   useState,
-  type ReactNode,
 } from "react";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/atoms/Button";
 import { XIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Drawer Context
 interface DrawerContextValue {
@@ -70,7 +70,10 @@ const sizeClasses: Record<DrawerPosition, Record<DrawerSize, string>> = {
   },
 };
 
-const translateClasses: Record<DrawerPosition, { open: string; closed: string }> = {
+const translateClasses: Record<
+  DrawerPosition,
+  { open: string; closed: string }
+> = {
   left: { open: "translate-x-0", closed: "-translate-x-full" },
   right: { open: "translate-x-0", closed: "translate-x-full" },
   top: { open: "translate-y-0", closed: "-translate-y-full" },
@@ -195,8 +198,10 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
               isAnimating
                 ? translateClasses[position].open
                 : translateClasses[position].closed,
-              (position === "left" || position === "right") && "border-x border-border",
-              (position === "top" || position === "bottom") && "border-y border-border",
+              (position === "left" || position === "right") &&
+                "border-x border-border",
+              (position === "top" || position === "bottom") &&
+                "border-y border-border",
               className,
             )}
           >
@@ -291,7 +296,11 @@ export const DrawerBody = forwardRef<HTMLDivElement, DrawerBodyProps>(
     return (
       <div
         ref={ref}
-        className={cn("flex-1 overflow-y-auto", bodyPaddingClasses[padding], className)}
+        className={cn(
+          "flex-1 overflow-y-auto",
+          bodyPaddingClasses[padding],
+          className,
+        )}
         {...props}
       >
         {children}
@@ -302,7 +311,8 @@ export const DrawerBody = forwardRef<HTMLDivElement, DrawerBodyProps>(
 DrawerBody.displayName = "DrawerBody";
 
 // DrawerFooter component
-export interface DrawerFooterProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DrawerFooterProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   bordered?: boolean;
   align?: "start" | "center" | "end" | "between";
 }

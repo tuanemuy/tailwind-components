@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { FileSnippet, FileSnippetList, FileSnippetGrid } from "./index";
+import { FileSnippet, FileSnippetGrid, FileSnippetList } from "./index";
 
 const meta: Meta<typeof FileSnippet> = {
   title: "Organisms/Cards/FileSnippet",
@@ -21,7 +21,8 @@ const sampleFile = {
   extension: "pdf",
   modifiedDate: "Dec 15, 2025",
   downloadUrl: "#",
-  description: "Annual project report with financial analysis and growth projections",
+  description:
+    "Annual project report with financial analysis and growth projections",
 };
 
 export const Default: Story = {
@@ -64,7 +65,8 @@ export const Preview: Story = {
       ...sampleFile,
       type: "image",
       name: "Dashboard_Screenshot.png",
-      previewUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+      previewUrl:
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
     },
     variant: "preview",
   },
@@ -134,11 +136,46 @@ export const WithoutActions: Story = {
 };
 
 const files = [
-  { id: "1", name: "Project_Report.pdf", type: "document" as const, size: "2.4 MB", extension: "pdf", downloadUrl: "#" },
-  { id: "2", name: "Design_Assets.zip", type: "archive" as const, size: "15.8 MB", extension: "zip", downloadUrl: "#" },
-  { id: "3", name: "Meeting_Notes.docx", type: "document" as const, size: "845 KB", extension: "docx", downloadUrl: "#" },
-  { id: "4", name: "Logo.svg", type: "image" as const, size: "12 KB", extension: "svg", downloadUrl: "#" },
-  { id: "5", name: "App_Mockup.fig", type: "other" as const, size: "8.2 MB", extension: "fig", downloadUrl: "#" },
+  {
+    id: "1",
+    name: "Project_Report.pdf",
+    type: "document" as const,
+    size: "2.4 MB",
+    extension: "pdf",
+    downloadUrl: "#",
+  },
+  {
+    id: "2",
+    name: "Design_Assets.zip",
+    type: "archive" as const,
+    size: "15.8 MB",
+    extension: "zip",
+    downloadUrl: "#",
+  },
+  {
+    id: "3",
+    name: "Meeting_Notes.docx",
+    type: "document" as const,
+    size: "845 KB",
+    extension: "docx",
+    downloadUrl: "#",
+  },
+  {
+    id: "4",
+    name: "Logo.svg",
+    type: "image" as const,
+    size: "12 KB",
+    extension: "svg",
+    downloadUrl: "#",
+  },
+  {
+    id: "5",
+    name: "App_Mockup.fig",
+    type: "other" as const,
+    size: "8.2 MB",
+    extension: "fig",
+    downloadUrl: "#",
+  },
 ];
 
 export const List: StoryObj<typeof FileSnippetList> = {
@@ -164,7 +201,8 @@ const previewFiles = [
     type: "image" as const,
     size: "1.2 MB",
     extension: "png",
-    previewUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+    previewUrl:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
     downloadUrl: "#",
     description: "Main dashboard view",
   },
@@ -174,7 +212,8 @@ const previewFiles = [
     type: "image" as const,
     size: "980 KB",
     extension: "png",
-    previewUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
+    previewUrl:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
     downloadUrl: "#",
     description: "Analytics page design",
   },

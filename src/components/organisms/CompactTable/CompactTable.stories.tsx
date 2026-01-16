@@ -150,7 +150,9 @@ const columns: CompactTableColumn<LogEntry>[] = [
     header: "Time",
     width: "100px",
     render: (value) => (
-      <span className="font-mono text-muted-foreground">{formatTime(value as string)}</span>
+      <span className="font-mono text-muted-foreground">
+        {formatTime(value as string)}
+      </span>
     ),
   },
   {
@@ -188,7 +190,9 @@ const columns: CompactTableColumn<LogEntry>[] = [
     key: "message",
     header: "Message",
     render: (value) => (
-      <span className="text-muted-foreground truncate block max-w-md">{String(value)}</span>
+      <span className="text-muted-foreground truncate block max-w-md">
+        {String(value)}
+      </span>
     ),
   },
   {
@@ -197,7 +201,9 @@ const columns: CompactTableColumn<LogEntry>[] = [
     width: "110px",
     hideInCompact: true,
     render: (value) => (
-      <span className="font-mono text-xs text-muted-foreground">{String(value)}</span>
+      <span className="font-mono text-xs text-muted-foreground">
+        {String(value)}
+      </span>
     ),
   },
   {
@@ -207,7 +213,12 @@ const columns: CompactTableColumn<LogEntry>[] = [
     align: "end",
     render: (value) => {
       const ms = value as number;
-      const color = ms > 1000 ? "text-red-600" : ms > 100 ? "text-yellow-600" : "text-green-600";
+      const color =
+        ms > 1000
+          ? "text-red-600"
+          : ms > 100
+            ? "text-yellow-600"
+            : "text-green-600";
       return <span className={`font-mono ${color}`}>{ms}ms</span>;
     },
   },
@@ -217,7 +228,9 @@ const columns: CompactTableColumn<LogEntry>[] = [
     width: "90px",
     hideInCompact: true,
     render: (value) => (
-      <span className="font-mono text-xs text-muted-foreground">{value ? String(value) : "-"}</span>
+      <span className="font-mono text-xs text-muted-foreground">
+        {value ? String(value) : "-"}
+      </span>
     ),
   },
 ];
@@ -362,7 +375,10 @@ export const WithSelection: Story = {
 // With Sorting
 export const WithSorting: Story = {
   render: function Render() {
-    const [sortState, setSortState] = useState({ key: "timestamp", direction: "desc" as const });
+    const [sortState, setSortState] = useState<{ key: string; direction: "asc" | "desc" }>({
+      key: "timestamp",
+      direction: "desc",
+    });
 
     const sortedData = [...sampleLogEntries].sort((a, b) => {
       const aVal = a[sortState.key as keyof LogEntry];
@@ -399,7 +415,7 @@ export const WithPagination: Story = {
 
     const paginatedData = sampleLogEntries.slice(
       (page - 1) * pageSize,
-      page * pageSize
+      page * pageSize,
     );
 
     return (
@@ -474,7 +490,10 @@ export const WithStickyHeader: Story = {
 export const FullFeatured: Story = {
   render: function Render() {
     const [selectedRows, setSelectedRows] = useState<LogEntry[]>([]);
-    const [sortState, setSortState] = useState({ key: "timestamp", direction: "desc" as const });
+    const [sortState, setSortState] = useState({
+      key: "timestamp",
+      direction: "desc" as "asc" | "desc",
+    });
     const [page, setPage] = useState(1);
     const pageSize = 5;
 
@@ -489,7 +508,7 @@ export const FullFeatured: Story = {
 
     const paginatedData = sortedData.slice(
       (page - 1) * pageSize,
-      page * pageSize
+      page * pageSize,
     );
 
     return (

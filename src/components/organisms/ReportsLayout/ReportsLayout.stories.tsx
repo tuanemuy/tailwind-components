@@ -1,17 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { ClockIcon, MailIcon, TicketIcon, UsersIcon } from "@/lib/icons";
 import {
-  ReportsLayout,
   QuickStatsCard,
-  type ReportMetric,
   type ReportChartData,
+  type ReportMetric,
+  ReportsLayout,
   type TeamMember,
 } from "./index";
-import {
-  MailIcon,
-  UsersIcon,
-  TicketIcon,
-  ClockIcon,
-} from "@/lib/icons";
 
 const meta: Meta<typeof ReportsLayout> = {
   title: "Organisms/InboxChatMessages/ReportsLayout",
@@ -116,7 +111,8 @@ const sampleTeamMembers: TeamMember[] = [
     id: "1",
     name: "Sarah Johnson",
     email: "sarah.j@company.com",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop",
     role: "Support Lead",
     metrics: {
       resolved: 156,
@@ -128,7 +124,8 @@ const sampleTeamMembers: TeamMember[] = [
     id: "2",
     name: "Mike Chen",
     email: "mike.c@company.com",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop",
     role: "Senior Agent",
     metrics: {
       resolved: 124,
@@ -140,7 +137,8 @@ const sampleTeamMembers: TeamMember[] = [
     id: "3",
     name: "Emily Davis",
     email: "emily.d@company.com",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop",
     role: "Support Agent",
     metrics: {
       resolved: 89,
@@ -152,7 +150,8 @@ const sampleTeamMembers: TeamMember[] = [
     id: "4",
     name: "Alex Thompson",
     email: "alex.t@company.com",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop",
     role: "Support Agent",
     metrics: {
       resolved: 67,

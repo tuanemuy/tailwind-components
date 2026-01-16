@@ -25,7 +25,10 @@ const paddingClasses = {
 };
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant = "bordered", padding = "none", children, ...props }, ref) => {
+  (
+    { className, variant = "bordered", padding = "none", children, ...props },
+    ref,
+  ) => {
     return (
       <div
         ref={ref}
@@ -45,7 +48,8 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
 Card.displayName = "Card";
 
 // CardHeader component
-export interface CardHeaderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
+export interface CardHeaderProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
   title?: React.ReactNode;
   subtitle?: React.ReactNode;
   action?: React.ReactNode;
@@ -53,7 +57,18 @@ export interface CardHeaderProps extends Omit<React.HTMLAttributes<HTMLDivElemen
 }
 
 export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
-  ({ className, title, subtitle, action, bordered = false, children, ...props }, ref) => {
+  (
+    {
+      className,
+      title,
+      subtitle,
+      action,
+      bordered = false,
+      children,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <div
         ref={ref}
@@ -68,7 +83,9 @@ export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
           <>
             <div className="min-w-0 flex-1">
               {title && (
-                <h3 className="text-lg font-semibold text-foreground">{title}</h3>
+                <h3 className="text-lg font-semibold text-foreground">
+                  {title}
+                </h3>
               )}
               {subtitle && (
                 <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>
@@ -137,7 +154,8 @@ export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
 CardFooter.displayName = "CardFooter";
 
 // CardImage component for cards with hero images
-export interface CardImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+export interface CardImageProps
+  extends React.ImgHTMLAttributes<HTMLImageElement> {
   aspectRatio?: "auto" | "video" | "square" | "wide";
   overlay?: React.ReactNode;
 }
@@ -152,7 +170,12 @@ const aspectRatioClasses = {
 export const CardImage = forwardRef<HTMLImageElement, CardImageProps>(
   ({ className, aspectRatio = "video", overlay, src, alt, ...props }, ref) => {
     return (
-      <div className={cn("relative overflow-hidden", aspectRatioClasses[aspectRatio])}>
+      <div
+        className={cn(
+          "relative overflow-hidden",
+          aspectRatioClasses[aspectRatio],
+        )}
+      >
         <img
           ref={ref}
           src={src}

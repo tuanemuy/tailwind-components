@@ -1,21 +1,27 @@
 "use client";
 
 import { forwardRef, useMemo } from "react";
-import { cn } from "@/lib/utils";
-import { DataTable, type DataTableColumn, type DataTableProps } from "../DataTable";
 import { Avatar, Badge } from "@/components/atoms";
 import { AvatarGroup } from "@/components/molecules";
+import { FileIcon, FolderIcon, ImageIcon } from "@/lib/icons";
 import {
-  FileIcon,
-  ImageIcon,
-  FolderIcon,
-} from "@/lib/icons";
+  DataTable,
+  type DataTableColumn,
+  type DataTableProps,
+} from "../DataTable";
 
 // ============================================
 // File Types
 // ============================================
 
-export type FileType = "document" | "image" | "video" | "audio" | "archive" | "folder" | "other";
+export type FileType =
+  | "document"
+  | "image"
+  | "video"
+  | "audio"
+  | "archive"
+  | "folder"
+  | "other";
 
 export interface FileOwner {
   id: string;
@@ -65,10 +71,10 @@ const formatFileSize = (bytes: number): string => {
   const k = 1024;
   const sizes = ["B", "KB", "MB", "GB", "TB"];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + " " + sizes[i];
+  return `${Number.parseFloat((bytes / k ** i).toFixed(1))} ${sizes[i]}`;
 };
 
-const getFileIcon = (type: FileType, mimeType?: string): React.ReactNode => {
+const getFileIcon = (type: FileType, _mimeType?: string): React.ReactNode => {
   switch (type) {
     case "folder":
       return <FolderIcon className="size-5 text-warning" />;
@@ -109,7 +115,7 @@ export const FilesTable = forwardRef<HTMLDivElement, FilesTableProps>(
       customColumns,
       ...props
     },
-    ref
+    ref,
   ) => {
     const columns = useMemo<DataTableColumn<FileData>[]>(() => {
       const baseColumns: DataTableColumn<FileData>[] = [
@@ -137,10 +143,10 @@ export const FilesTable = forwardRef<HTMLDivElement, FilesTableProps>(
               )}
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
-                  <span className="font-medium text-foreground">{file.name}</span>
-                  {file.isStarred && (
-                    <span className="text-warning">★</span>
-                  )}
+                  <span className="font-medium text-foreground">
+                    {file.name}
+                  </span>
+                  {file.isStarred && <span className="text-warning">★</span>}
                   {file.isShared && (
                     <Badge variant="secondary" size="sm">
                       Shared
@@ -148,7 +154,9 @@ export const FilesTable = forwardRef<HTMLDivElement, FilesTableProps>(
                   )}
                 </div>
                 <span className="text-sm text-muted-foreground">
-                  {file.type === "folder" ? "Folder" : getFileExtension(file.name)}
+                  {file.type === "folder"
+                    ? "Folder"
+                    : getFileExtension(file.name)}
                 </span>
               </div>
             </div>
@@ -171,7 +179,9 @@ export const FilesTable = forwardRef<HTMLDivElement, FilesTableProps>(
           ],
           width: "100px",
           render: (_, file) => (
-            <span className="text-sm text-muted-foreground capitalize">{file.type}</span>
+            <span className="text-sm text-muted-foreground capitalize">
+              {file.type}
+            </span>
           ),
         },
         {
@@ -206,7 +216,9 @@ export const FilesTable = forwardRef<HTMLDivElement, FilesTableProps>(
                   fallback={file.owner.name.slice(0, 2)}
                   size="xs"
                 />
-                <span className="text-sm text-muted-foreground">{file.owner.name}</span>
+                <span className="text-sm text-muted-foreground">
+                  {file.owner.name}
+                </span>
               </div>
             );
           },
@@ -295,7 +307,7 @@ export const FilesTable = forwardRef<HTMLDivElement, FilesTableProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
 FilesTable.displayName = "FilesTable";

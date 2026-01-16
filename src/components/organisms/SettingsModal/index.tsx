@@ -1,8 +1,13 @@
-import { forwardRef, useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { forwardRef, type ReactNode, useState } from "react";
 import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "@/components/organisms/Modal";
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "@/components/organisms/Modal";
+import { cn } from "@/lib/utils";
 
 // ============================================
 // SettingsModal
@@ -15,7 +20,10 @@ export interface SettingItem {
   value: string | boolean;
   options?: { value: string; label: string }[];
   disabled?: boolean;
-  customRender?: (value: string | boolean, onChange: (value: string | boolean) => void) => ReactNode;
+  customRender?: (
+    value: string | boolean,
+    onChange: (value: string | boolean) => void,
+  ) => ReactNode;
 }
 
 export interface SettingSection {
@@ -54,15 +62,17 @@ export const SettingsModal = forwardRef<HTMLDivElement, SettingsModalProps>(
     },
     ref,
   ) => {
-    const [settings, setSettings] = useState<Record<string, string | boolean>>(() => {
-      const initial: Record<string, string | boolean> = {};
-      sections.forEach((section) => {
-        section.items.forEach((item) => {
-          initial[item.id] = item.value;
+    const [settings, setSettings] = useState<Record<string, string | boolean>>(
+      () => {
+        const initial: Record<string, string | boolean> = {};
+        sections.forEach((section) => {
+          section.items.forEach((item) => {
+            initial[item.id] = item.value;
+          });
         });
-      });
-      return initial;
-    });
+        return initial;
+      },
+    );
     const [activeSection, setActiveSection] = useState(sections[0]?.id || "");
 
     const handleChange = (id: string, value: string | boolean) => {
@@ -141,7 +151,9 @@ export const SettingsModal = forwardRef<HTMLDivElement, SettingsModalProps>(
           );
 
         case "custom":
-          return item.customRender?.(value, (newValue) => handleChange(item.id, newValue));
+          return item.customRender?.(value, (newValue) =>
+            handleChange(item.id, newValue),
+          );
 
         default:
           return null;
@@ -227,7 +239,9 @@ export const SettingsModal = forwardRef<HTMLDivElement, SettingsModalProps>(
                               </p>
                             )}
                           </div>
-                          <div className="shrink-0">{renderSettingItem(item)}</div>
+                          <div className="shrink-0">
+                            {renderSettingItem(item)}
+                          </div>
                         </div>
                       ))}
                     </div>

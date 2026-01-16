@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@/components/atoms";
 import {
-  CTASection,
-  CTAContent,
-  CTATitle,
-  CTADescription,
+  BannerCTA,
   CTAActions,
   CTAButton,
+  CTAContent,
+  CTADescription,
+  CTASection,
   CTAStats,
+  CTATitle,
   SimpleCTA,
-  BannerCTA,
 } from ".";
 
 const meta: Meta<typeof CTASection> = {
@@ -44,14 +44,16 @@ export const Gradient: Story = {
   render: () => (
     <CTASection variant="gradient">
       <CTATitle>Start your free trial today</CTATitle>
-      <CTADescription>
-        No credit card required. Cancel anytime.
-      </CTADescription>
+      <CTADescription>No credit card required. Cancel anytime.</CTADescription>
       <CTAActions className="mt-6">
         <CTAButton inverted size="lg">
           Start Free Trial
         </CTAButton>
-        <CTAButton variant="ghost" size="lg" className="text-primary-foreground hover:bg-primary-foreground/10">
+        <CTAButton
+          variant="ghost"
+          size="lg"
+          className="text-primary-foreground hover:bg-primary-foreground/10"
+        >
           Schedule Demo
         </CTAButton>
       </CTAActions>
@@ -124,8 +126,14 @@ export const SimpleCTAExample: Story = {
     <SimpleCTA
       title="Ready to dive in?"
       description="Start your free trial today and see the difference."
-      primaryAction={{ label: "Get Started", onClick: () => console.log("clicked") }}
-      secondaryAction={{ label: "Learn More", onClick: () => console.log("learn more") }}
+      primaryAction={{
+        label: "Get Started",
+        onClick: () => console.log("clicked"),
+      }}
+      secondaryAction={{
+        label: "Learn More",
+        onClick: () => console.log("learn more"),
+      }}
     />
   ),
 };

@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { Badge } from "@/components/atoms/Badge";
+import { Button } from "@/components/atoms/Button";
+import { FilterIcon, SettingsIcon } from "@/lib/icons";
 import {
-  KanbanGroupHeading,
-  MinimalKanbanHeading,
   DraggableKanbanHeading,
   KanbanColumn,
+  KanbanGroupHeading,
+  MinimalKanbanHeading,
 } from "./index";
-import { Button } from "@/components/atoms/Button";
-import { Badge } from "@/components/atoms/Badge";
-import { FilterIcon, SettingsIcon } from "@/lib/icons";
 
 const meta: Meta<typeof KanbanGroupHeading> = {
   title: "Organisms/PageSections/KanbanGroupHeading",
@@ -53,8 +53,19 @@ export const WithIcon: Story = {
     title: "Completed",
     count: 12,
     icon: (
-      <svg className="size-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+      <svg
+        aria-hidden="true"
+        className="size-full"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M5 13l4 4L19 7"
+        />
       </svg>
     ),
     color: "#22c55e",
@@ -110,11 +121,7 @@ export const WithCustomActions: Story = {
 export const Minimal: StoryObj<typeof MinimalKanbanHeading> = {
   render: () => (
     <div className="w-72 group">
-      <MinimalKanbanHeading
-        title="To Do"
-        count={5}
-        dotColor="#3b82f6"
-      />
+      <MinimalKanbanHeading title="To Do" count={5} dotColor="#3b82f6" />
     </div>
   ),
 };
@@ -159,7 +166,9 @@ export const FullColumn: StoryObj<typeof KanbanColumn> = {
             This is a sample task description
           </p>
           <div className="mt-2 flex items-center gap-x-2">
-            <Badge variant="secondary" size="sm">Design</Badge>
+            <Badge variant="secondary" size="sm">
+              Design
+            </Badge>
           </div>
         </div>
       ))}
@@ -274,9 +283,7 @@ export const KanbanBoard: Story = {
             className="rounded-lg border border-border bg-card p-3 opacity-60 shadow-sm"
           >
             <h4 className="text-sm font-medium line-through">Completed {i}</h4>
-            <p className="mt-1 text-xs text-muted-foreground">
-              Finished task
-            </p>
+            <p className="mt-1 text-xs text-muted-foreground">Finished task</p>
           </div>
         ))}
       </KanbanColumn>

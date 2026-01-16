@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { AppDownloadCard } from "./";
 import { SmartphoneIcon } from "@/lib/icons";
+import { AppDownloadCard } from "./";
 
 const meta: Meta<typeof AppDownloadCard> = {
   title: "Organisms/AppDownloadCard",
@@ -18,7 +18,8 @@ export const Default: Story = {
   args: {
     appName: "Preline App",
     tagline: "Streamline your workflow",
-    description: "The all-in-one productivity app that helps you manage tasks, collaborate with your team, and stay organized.",
+    description:
+      "The all-in-one productivity app that helps you manage tasks, collaborate with your team, and stay organized.",
     rating: 4.8,
     reviewCount: "12.5K",
     version: "2.4.1",
@@ -32,12 +33,14 @@ export const Featured: Story = {
   args: {
     appName: "Preline Mobile",
     tagline: "Work from anywhere",
-    description: "Take your productivity on the go with our powerful mobile app. Sync across devices, work offline, and stay connected with your team wherever you are.",
+    description:
+      "Take your productivity on the go with our powerful mobile app. Sync across devices, work offline, and stay connected with your team wherever you are.",
     rating: 4.9,
     reviewCount: "25K",
     appStoreUrl: "#",
     playStoreUrl: "#",
-    mockupImage: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=300&h=600&fit=crop",
+    mockupImage:
+      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=300&h=600&fit=crop",
     variant: "featured",
     isNew: true,
     className: "w-[800px]",
@@ -48,12 +51,14 @@ export const FeaturedWithQR: Story = {
   args: {
     appName: "Preline Mobile",
     tagline: "Work from anywhere",
-    description: "Scan the QR code to download our mobile app and get started in seconds.",
+    description:
+      "Scan the QR code to download our mobile app and get started in seconds.",
     rating: 4.9,
     reviewCount: "25K",
     appStoreUrl: "#",
     playStoreUrl: "#",
-    qrCodeUrl: "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://example.com",
+    qrCodeUrl:
+      "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://example.com",
     variant: "featured",
     className: "w-[600px]",
   },

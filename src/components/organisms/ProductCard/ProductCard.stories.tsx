@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import {
-  ProductCard,
-  ProductCardImage,
-  ProductCardBody,
-  ProductCardTitle,
-  ProductCardCategory,
-  ProductCardRating,
-  ProductCardPrice,
-  ProductCardActions,
-  ProductAddToCartButton,
-} from "./index";
 import { Button } from "@/components/atoms";
+import {
+  ProductAddToCartButton,
+  ProductCard,
+  ProductCardActions,
+  ProductCardBody,
+  ProductCardCategory,
+  ProductCardImage,
+  ProductCardPrice,
+  ProductCardRating,
+  ProductCardTitle,
+} from "./index";
 
 const meta: Meta<typeof ProductCard> = {
   title: "Organisms/ProductCard",
@@ -30,7 +30,8 @@ const sampleProduct = {
   id: "1",
   name: "Classic Leather Jacket",
   category: "Outerwear",
-  image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=400&fit=crop",
+  image:
+    "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=400&fit=crop",
   price: { current: 299.99, original: 399.99, currency: "USD" },
   rating: { value: 4.5, count: 128 },
   badges: [{ type: "sale" as const, value: "-25%" }],
@@ -203,7 +204,8 @@ export const ProductGrid: Story = {
         id: "1",
         name: "Wireless Earbuds",
         category: "Electronics",
-        image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400&h=400&fit=crop",
+        image:
+          "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400&h=400&fit=crop",
         price: { current: 79.99, original: 99.99 },
         rating: { value: 4.3, count: 156 },
         badges: [{ type: "sale" as const, value: "-20%" }],
@@ -212,7 +214,8 @@ export const ProductGrid: Story = {
         id: "2",
         name: "Leather Backpack",
         category: "Bags",
-        image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop",
+        image:
+          "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop",
         price: { current: 149.99 },
         rating: { value: 4.8, count: 234 },
         badges: [{ type: "featured" as const }],
@@ -221,7 +224,8 @@ export const ProductGrid: Story = {
         id: "3",
         name: "Sunglasses",
         category: "Accessories",
-        image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400&h=400&fit=crop",
+        image:
+          "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400&h=400&fit=crop",
         price: { current: 59.99 },
         rating: { value: 4.1, count: 89 },
         badges: [{ type: "new" as const }],
@@ -230,7 +234,8 @@ export const ProductGrid: Story = {
         id: "4",
         name: "Mechanical Watch",
         category: "Watches",
-        image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400&h=400&fit=crop",
+        image:
+          "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400&h=400&fit=crop",
         price: { current: 299.99, original: 399.99 },
         rating: { value: 4.9, count: 567 },
         badges: [{ type: "sale" as const, value: "-25%" }],

@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
+import { Button } from "@/components/atoms/Button";
 import {
   ActivityDrawer,
-  UserDetailsDrawer,
   ChatUserDetailsDrawer,
   FilesInfoDrawer,
   TaskDetailsDrawer,
+  UserDetailsDrawer,
 } from "./index";
-import { Button } from "@/components/atoms/Button";
 
 const meta: Meta = {
   title: "Organisms/Overlays/DetailDrawers",
@@ -37,7 +37,10 @@ export const Activity: StoryObj<typeof ActivityDrawer> = {
         type: "update" as const,
         title: "Task updated",
         description: "Status changed from 'Todo' to 'In Progress'",
-        user: { name: "Jane Smith", avatar: "https://i.pravatar.cc/150?u=jane" },
+        user: {
+          name: "Jane Smith",
+          avatar: "https://i.pravatar.cc/150?u=jane",
+        },
         timestamp: "4 hours ago",
       },
       {
@@ -227,13 +230,19 @@ export const TaskDetails: StoryObj<typeof TaskDetailsDrawer> = {
       comments: [
         {
           id: "c1",
-          user: { name: "Bob Wilson", avatar: "https://i.pravatar.cc/150?u=bob" },
+          user: {
+            name: "Bob Wilson",
+            avatar: "https://i.pravatar.cc/150?u=bob",
+          },
           content: "Should we also consider adding 2FA support?",
           timestamp: "2 hours ago",
         },
         {
           id: "c2",
-          user: { name: "John Doe", avatar: "https://i.pravatar.cc/150?u=john" },
+          user: {
+            name: "John Doe",
+            avatar: "https://i.pravatar.cc/150?u=john",
+          },
           content: "Good idea! Let's add that as a follow-up task.",
           timestamp: "1 hour ago",
         },
@@ -249,7 +258,9 @@ export const TaskDetails: StoryObj<typeof TaskDetailsDrawer> = {
           task={task}
           onEdit={(t) => console.log("Edit task", t)}
           onDelete={(t) => console.log("Delete task", t)}
-          onStatusChange={(t, status) => console.log("Status change", t, status)}
+          onStatusChange={(t, status) =>
+            console.log("Status change", t, status)
+          }
         />
       </>
     );

@@ -1,24 +1,25 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import {
-  Sidebar,
-  SidebarSection,
-  SidebarItem,
-  SidebarGroup,
-  SidebarToggle,
-  SidebarLogo,
-} from "./index";
 import { Avatar } from "@/components/atoms/Avatar";
 import {
-  HomeIcon,
-  UsersIcon,
-  SettingsIcon,
-  FolderIcon,
-  FileTextIcon,
   BellIcon,
   CalendarIcon,
+  FileTextIcon,
+  FolderIcon,
+  HomeIcon,
   MailIcon,
+  SettingsIcon,
+  UsersIcon,
 } from "@/lib/icons";
+import {
+  Sidebar,
+  SidebarGroup,
+  SidebarHeader,
+  SidebarItem,
+  SidebarLogo,
+  SidebarSection,
+  SidebarToggle,
+} from "./index";
 
 const meta: Meta<typeof Sidebar> = {
   title: "Organisms/Sidebar",
@@ -61,7 +62,13 @@ export const Default: Story = {
 
         <SidebarSection title="Settings">
           <SidebarItem icon={<SettingsIcon />} label="Settings" href="#" />
-          <SidebarItem icon={<BellIcon />} label="Notifications" badge="New" badgeVariant="destructive" href="#" />
+          <SidebarItem
+            icon={<BellIcon />}
+            label="Notifications"
+            badge="New"
+            badgeVariant="destructive"
+            href="#"
+          />
         </SidebarSection>
       </Sidebar>
       <main className="flex-1 p-6 bg-muted/30">
@@ -86,17 +93,30 @@ export const Collapsible: Story = {
           collapsed={collapsed}
           onCollapsedChange={setCollapsed}
           header={
-            <div className="flex items-center justify-between">
-              <SidebarLogo href="#" text="App" />
-              <SidebarToggle />
-            </div>
+            <SidebarHeader logo={<SidebarLogo href="#" text="App" />} />
           }
         >
           <SidebarSection>
-            <SidebarItem icon={<HomeIcon />} label="Dashboard" active href="#" />
-            <SidebarItem icon={<UsersIcon />} label="Users" badge={5} href="#" />
+            <SidebarItem
+              icon={<HomeIcon />}
+              label="Dashboard"
+              active
+              href="#"
+            />
+            <SidebarItem
+              icon={<UsersIcon />}
+              label="Users"
+              badge={5}
+              href="#"
+            />
             <SidebarItem icon={<FolderIcon />} label="Projects" href="#" />
-            <SidebarItem icon={<MailIcon />} label="Messages" badge={99} badgeVariant="destructive" href="#" />
+            <SidebarItem
+              icon={<MailIcon />}
+              label="Messages"
+              badge={99}
+              badgeVariant="destructive"
+              href="#"
+            />
             <SidebarItem icon={<SettingsIcon />} label="Settings" href="#" />
           </SidebarSection>
         </Sidebar>
@@ -117,14 +137,31 @@ export const WithGroups: Story = {
       <Sidebar fixed={false} header={<SidebarLogo href="#" text="Workspace" />}>
         <SidebarSection>
           <SidebarItem icon={<HomeIcon />} label="Home" active href="#" />
-          <SidebarItem icon={<BellIcon />} label="Notifications" badge={3} href="#" />
+          <SidebarItem
+            icon={<BellIcon />}
+            label="Notifications"
+            badge={3}
+            href="#"
+          />
         </SidebarSection>
 
         <SidebarSection title="Content">
           <SidebarGroup icon={<FolderIcon />} label="Projects" defaultOpen>
-            <SidebarItem icon={<FileTextIcon />} label="Project Alpha" href="#" />
-            <SidebarItem icon={<FileTextIcon />} label="Project Beta" href="#" />
-            <SidebarItem icon={<FileTextIcon />} label="Project Gamma" href="#" />
+            <SidebarItem
+              icon={<FileTextIcon />}
+              label="Project Alpha"
+              href="#"
+            />
+            <SidebarItem
+              icon={<FileTextIcon />}
+              label="Project Beta"
+              href="#"
+            />
+            <SidebarItem
+              icon={<FileTextIcon />}
+              label="Project Gamma"
+              href="#"
+            />
           </SidebarGroup>
           <SidebarGroup icon={<UsersIcon />} label="Teams">
             <SidebarItem icon={<UsersIcon />} label="Design Team" href="#" />
@@ -174,7 +211,8 @@ export const MiniSidebar: Story = {
       <main className="flex-1 p-6 bg-muted/30">
         <h1 className="text-2xl font-bold">Mini Sidebar</h1>
         <p className="mt-2 text-muted-foreground">
-          A compact sidebar showing only icons. Hover over items to see tooltips.
+          A compact sidebar showing only icons. Hover over items to see
+          tooltips.
         </p>
       </main>
     </div>
@@ -198,16 +236,48 @@ export const WideSidebar: Story = {
         }
       >
         <SidebarSection title="Navigation">
-          <SidebarItem icon={<HomeIcon />} label="Dashboard Overview" active href="#" />
-          <SidebarItem icon={<UsersIcon />} label="Team Members" badge={24} href="#" />
-          <SidebarItem icon={<FolderIcon />} label="Project Management" href="#" />
-          <SidebarItem icon={<CalendarIcon />} label="Schedule & Events" href="#" />
-          <SidebarItem icon={<MailIcon />} label="Communications" badge={7} badgeVariant="destructive" href="#" />
+          <SidebarItem
+            icon={<HomeIcon />}
+            label="Dashboard Overview"
+            active
+            href="#"
+          />
+          <SidebarItem
+            icon={<UsersIcon />}
+            label="Team Members"
+            badge={24}
+            href="#"
+          />
+          <SidebarItem
+            icon={<FolderIcon />}
+            label="Project Management"
+            href="#"
+          />
+          <SidebarItem
+            icon={<CalendarIcon />}
+            label="Schedule & Events"
+            href="#"
+          />
+          <SidebarItem
+            icon={<MailIcon />}
+            label="Communications"
+            badge={7}
+            badgeVariant="destructive"
+            href="#"
+          />
         </SidebarSection>
 
         <SidebarSection title="Administration">
-          <SidebarItem icon={<SettingsIcon />} label="System Settings" href="#" />
-          <SidebarItem icon={<BellIcon />} label="Notification Center" href="#" />
+          <SidebarItem
+            icon={<SettingsIcon />}
+            label="System Settings"
+            href="#"
+          />
+          <SidebarItem
+            icon={<BellIcon />}
+            label="Notification Center"
+            href="#"
+          />
         </SidebarSection>
       </Sidebar>
       <main className="flex-1 p-6 bg-muted/30">

@@ -1,18 +1,24 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import {
-  timelineVariants,
-  timelineItemVariants,
-  timelineConnectorVariants,
-  timelineDotVariants,
-} from "@/lib/variants/timeline";
 import { Avatar } from "@/components/atoms/Avatar";
 import { CheckIcon } from "@/lib/icons";
-import type { VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+import {
+  timelineConnectorVariants,
+  timelineDotVariants,
+  timelineItemVariants,
+  timelineVariants,
+} from "@/lib/variants/timeline";
 
 type TimelineVariant = "default" | "compact" | "card";
 type TimelineOrientation = "vertical" | "horizontal";
-type TimelineDotVariant = "default" | "primary" | "success" | "warning" | "error" | "info";
+type TimelineDotVariant =
+  | "default"
+  | "primary"
+  | "success"
+  | "warning"
+  | "error"
+  | "info";
 type TimelineDotSize = "sm" | "md" | "lg";
 
 export interface TimelineItem {
@@ -47,7 +53,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
@@ -69,7 +75,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
           : children}
       </div>
     );
-  }
+  },
 );
 Timeline.displayName = "Timeline";
 
@@ -81,7 +87,11 @@ interface TimelineItemComponentProps extends TimelineItem {
   isLast?: boolean;
 }
 
-export const TimelineItemComponent = forwardRef<HTMLDivElement, TimelineItemComponentProps & Omit<React.HTMLAttributes<HTMLDivElement>, keyof TimelineItem>>(
+export const TimelineItemComponent = forwardRef<
+  HTMLDivElement,
+  TimelineItemComponentProps &
+    Omit<React.HTMLAttributes<HTMLDivElement>, keyof TimelineItem>
+>(
   (
     {
       className,
@@ -98,12 +108,15 @@ export const TimelineItemComponent = forwardRef<HTMLDivElement, TimelineItemComp
       content,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
         ref={ref}
-        className={cn(timelineItemVariants({ variant, orientation }), className)}
+        className={cn(
+          timelineItemVariants({ variant, orientation }),
+          className,
+        )}
         {...props}
       >
         {/* Connector line */}
@@ -133,7 +146,9 @@ export const TimelineItemComponent = forwardRef<HTMLDivElement, TimelineItemComp
             <div className="flex-1">
               <h4 className="font-medium text-foreground">{title}</h4>
               {description && (
-                <p className="mt-1 text-sm text-muted-foreground">{description}</p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {description}
+                </p>
               )}
             </div>
             {timestamp && (
@@ -146,7 +161,7 @@ export const TimelineItemComponent = forwardRef<HTMLDivElement, TimelineItemComp
         </div>
       </div>
     );
-  }
+  },
 );
 TimelineItemComponent.displayName = "TimelineItem";
 
@@ -156,7 +171,10 @@ export interface TimelineDotProps
     VariantProps<typeof timelineDotVariants> {}
 
 export const TimelineDot = forwardRef<HTMLDivElement, TimelineDotProps>(
-  ({ className, variant = "default", size = "md", children, ...props }, ref) => {
+  (
+    { className, variant = "default", size = "md", children, ...props },
+    ref,
+  ) => {
     return (
       <div
         ref={ref}
@@ -164,14 +182,16 @@ export const TimelineDot = forwardRef<HTMLDivElement, TimelineDotProps>(
         {...props}
       >
         {children ?? (
-          <div className={cn(
-            "rounded-full bg-current",
-            size === "sm" ? "size-2" : size === "lg" ? "size-3" : "size-2.5"
-          )} />
+          <div
+            className={cn(
+              "rounded-full bg-current",
+              size === "sm" ? "size-2" : size === "lg" ? "size-3" : "size-2.5",
+            )}
+          />
         )}
       </div>
     );
-  }
+  },
 );
 TimelineDot.displayName = "TimelineDot";
 
@@ -191,32 +211,33 @@ export interface ActivityTimelineProps extends Omit<TimelineProps, "items"> {
   }>;
 }
 
-export const ActivityTimeline = forwardRef<HTMLDivElement, ActivityTimelineProps>(
-  ({ activities, ...props }, ref) => {
-    const items = activities.map((activity) => ({
-      id: activity.id,
-      title: (
-        <span>
-          {activity.user && (
-            <span className="font-semibold">{activity.user.name}</span>
-          )}{" "}
-          <span className="text-muted-foreground">{activity.action}</span>
-          {activity.target && (
-            <span className="font-medium"> {activity.target}</span>
-          )}
-        </span>
-      ),
-      timestamp: activity.timestamp,
-      icon: activity.icon,
-      dotVariant: activity.dotVariant,
-      avatar: activity.user
-        ? { src: activity.user.avatarSrc, fallback: activity.user.name.charAt(0) }
-        : undefined,
-    }));
+export const ActivityTimeline = forwardRef<
+  HTMLDivElement,
+  ActivityTimelineProps
+>(({ activities, ...props }, ref) => {
+  const items = activities.map((activity) => ({
+    id: activity.id,
+    title: (
+      <span>
+        {activity.user && (
+          <span className="font-semibold">{activity.user.name}</span>
+        )}{" "}
+        <span className="text-muted-foreground">{activity.action}</span>
+        {activity.target && (
+          <span className="font-medium"> {activity.target}</span>
+        )}
+      </span>
+    ),
+    timestamp: activity.timestamp,
+    icon: activity.icon,
+    dotVariant: activity.dotVariant,
+    avatar: activity.user
+      ? { src: activity.user.avatarSrc, fallback: activity.user.name.charAt(0) }
+      : undefined,
+  }));
 
-    return <Timeline ref={ref} items={items} {...props} />;
-  }
-);
+  return <Timeline ref={ref} items={items} {...props} />;
+});
 ActivityTimeline.displayName = "ActivityTimeline";
 
 // Order Timeline (e-commerce tracking)
@@ -242,15 +263,21 @@ export const OrderTimeline = forwardRef<HTMLDivElement, OrderTimelineProps>(
           ? "primary"
           : ("default" as TimelineDotVariant),
       icon: step.completed ? (
-        <CheckIcon className={cn(
-          "size-3",
-          props.dotSize === "sm" ? "size-2" : props.dotSize === "lg" ? "size-4" : "size-3"
-        )} />
+        <CheckIcon
+          className={cn(
+            "size-3",
+            props.dotSize === "sm"
+              ? "size-2"
+              : props.dotSize === "lg"
+                ? "size-4"
+                : "size-3",
+          )}
+        />
       ) : undefined,
     }));
 
     return <Timeline ref={ref} items={items} {...props} />;
-  }
+  },
 );
 OrderTimeline.displayName = "OrderTimeline";
 
@@ -285,12 +312,19 @@ export const HistoryTimeline = forwardRef<HTMLDivElement, HistoryTimelineProps>(
         : undefined,
       content: entry.changes && entry.changes.length > 0 && (
         <div className="mt-2 space-y-1 rounded-lg bg-muted/50 p-3">
-          {entry.changes.map((change, i) => (
-            <div key={i} className="flex items-center gap-x-2 text-sm">
-              <span className="font-medium text-muted-foreground">{change.field}:</span>
+          {entry.changes.map((change) => (
+            <div
+              key={change.field}
+              className="flex items-center gap-x-2 text-sm"
+            >
+              <span className="font-medium text-muted-foreground">
+                {change.field}:
+              </span>
               {change.oldValue && (
                 <>
-                  <span className="text-muted-foreground line-through">{change.oldValue}</span>
+                  <span className="text-muted-foreground line-through">
+                    {change.oldValue}
+                  </span>
                   <span className="text-muted-foreground">→</span>
                 </>
               )}
@@ -302,6 +336,6 @@ export const HistoryTimeline = forwardRef<HTMLDivElement, HistoryTimelineProps>(
     }));
 
     return <Timeline ref={ref} items={items} {...props} />;
-  }
+  },
 );
 HistoryTimeline.displayName = "HistoryTimeline";

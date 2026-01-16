@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { ReviewModal, ProductReviewModal } from "./index";
 import { Button } from "@/components/atoms/Button";
+import { ProductReviewModal, ReviewModal } from "./index";
 
 const meta: Meta<typeof ReviewModal> = {
   title: "Organisms/Overlays/ReviewModal",

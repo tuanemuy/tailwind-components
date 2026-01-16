@@ -19,7 +19,8 @@ const sampleCustomers: Customer[] = [
     name: "John Smith",
     email: "john.smith@example.com",
     phone: "+1 (555) 123-4567",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop",
     type: "individual",
     status: "active",
     company: "Acme Inc.",
@@ -38,7 +39,8 @@ const sampleCustomers: Customer[] = [
     notes: [
       {
         id: "n1",
-        content: "Interested in upgrading to enterprise plan. Follow up next week.",
+        content:
+          "Interested in upgrading to enterprise plan. Follow up next week.",
         createdAt: "Dec 15, 2024 10:30 AM",
         createdBy: "Sarah Johnson",
       },
@@ -97,14 +99,13 @@ const sampleCustomers: Customer[] = [
     name: "Emily Davis",
     email: "emily.d@techcorp.com",
     phone: "+1 (555) 987-6543",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop",
     type: "company",
     status: "active",
     company: "TechCorp Solutions",
     jobTitle: "CTO",
-    tags: [
-      { id: "3", name: "Partner", color: "#f59e0b" },
-    ],
+    tags: [{ id: "3", name: "Partner", color: "#f59e0b" }],
     createdAt: "Sep 1, 2024",
     lastContactedAt: "Dec 13, 2024",
     totalSpent: 45000,
@@ -125,14 +126,13 @@ const sampleCustomers: Customer[] = [
     id: "4",
     name: "Sarah Johnson",
     email: "sarah.j@enterprise.com",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop",
     type: "company",
     status: "pending",
     company: "Enterprise Co.",
     jobTitle: "VP of Operations",
-    tags: [
-      { id: "4", name: "Prospect", color: "#8b5cf6" },
-    ],
+    tags: [{ id: "4", name: "Prospect", color: "#8b5cf6" }],
     createdAt: "Nov 20, 2024",
     ordersCount: 0,
   },
@@ -140,7 +140,8 @@ const sampleCustomers: Customer[] = [
     id: "5",
     name: "Alex Thompson",
     email: "alex.t@design.co",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop",
     type: "individual",
     status: "inactive",
     company: "Design Co.",

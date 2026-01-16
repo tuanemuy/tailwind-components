@@ -1,5 +1,4 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
 import { Avatar } from "@/components/atoms/Avatar";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
@@ -7,16 +6,17 @@ import { ProgressBar } from "@/components/atoms/ProgressBar";
 import { AvatarGroup } from "@/components/molecules/AvatarGroup";
 import {
   CalendarIcon,
-  ClockIcon,
   CheckIcon,
-  MoreHorizontalIcon,
-  TagIcon,
-  UsersIcon,
-  LinkIcon,
+  ClockIcon,
   EditIcon,
-  TrashIcon,
+  LinkIcon,
+  MoreHorizontalIcon,
   StarIcon,
+  TagIcon,
+  TrashIcon,
+  UsersIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 // Note: StarIcon is used in JSX
 
 export type ProjectDetailStatus =
@@ -30,7 +30,16 @@ export type ProjectDetailStatus =
 
 const statusConfig: Record<
   ProjectDetailStatus,
-  { label: string; variant: "default" | "secondary" | "destructive" | "outline" | "success" | "warning" }
+  {
+    label: string;
+    variant:
+      | "default"
+      | "secondary"
+      | "destructive"
+      | "outline"
+      | "success"
+      | "warning";
+  }
 > = {
   active: { label: "Active", variant: "success" },
   "in-progress": { label: "In Progress", variant: "default" },
@@ -89,7 +98,8 @@ export interface ProjectDetails {
   customFields?: { label: string; value: string }[];
 }
 
-export interface ProjectDetailsCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ProjectDetailsCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   project: ProjectDetails;
   variant?: "default" | "compact" | "detailed" | "horizontal";
   showProgress?: boolean;
@@ -117,7 +127,10 @@ const priorityLabels: Record<string, string> = {
   urgent: "Urgent",
 };
 
-export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardProps>(
+export const ProjectDetailsCard = forwardRef<
+  HTMLDivElement,
+  ProjectDetailsCardProps
+>(
   (
     {
       className,
@@ -134,7 +147,7 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
       actions,
       ...props
     },
-    ref
+    ref,
   ) => {
     const statusInfo = statusConfig[project.status];
     const budgetPercentage = project.budget
@@ -149,24 +162,42 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
           className={cn(
             "flex items-center justify-between gap-x-4 rounded-xl border border-border bg-card p-4",
             onProjectClick && "cursor-pointer hover:border-primary/50",
-            className
+            className,
           )}
+          role={onProjectClick ? "button" : undefined}
+          tabIndex={onProjectClick ? 0 : undefined}
           onClick={() => onProjectClick?.(project)}
+          onKeyDown={
+            onProjectClick
+              ? (e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onProjectClick?.(project);
+                  }
+                }
+              : undefined
+          }
           {...props}
         >
-          <div className="flex items-center gap-x-4">
+          <div className="flex min-w-0 flex-1 items-center gap-x-4">
             {project.icon && (
               <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-muted text-muted-foreground">
                 {project.icon}
               </div>
             )}
-            <div className="min-w-0">
+            <div className="min-w-0 flex-1">
               <div className="flex items-center gap-x-2">
-                <h4 className="truncate font-semibold text-foreground">{project.name}</h4>
-                {project.isStarred && <StarIcon className="size-4 fill-warning text-warning" />}
+                <h4 className="truncate font-semibold text-foreground">
+                  {project.name}
+                </h4>
+                {project.isStarred && (
+                  <StarIcon className="size-4 shrink-0 fill-warning text-warning" />
+                )}
               </div>
               {project.category && (
-                <p className="text-sm text-muted-foreground">{project.category}</p>
+                <p className="text-sm text-muted-foreground">
+                  {project.category}
+                </p>
               )}
               {project.description && (
                 <p className="mt-1 line-clamp-1 text-sm text-muted-foreground">
@@ -176,12 +207,14 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
             </div>
           </div>
 
-          <div className="flex items-center gap-x-6">
+          <div className="flex shrink-0 items-center gap-x-6">
             {showProgress && project.progress !== undefined && (
               <div className="w-32">
                 <div className="mb-1 flex items-center justify-between text-xs">
                   <span className="text-muted-foreground">Progress</span>
-                  <span className="font-medium text-foreground">{project.progress}%</span>
+                  <span className="font-medium text-foreground">
+                    {project.progress}%
+                  </span>
                 </div>
                 <ProgressBar value={project.progress} size="sm" />
               </div>
@@ -202,7 +235,12 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
             <Badge variant={statusInfo.variant}>{statusInfo.label}</Badge>
 
             {(actions || onEdit || onDelete) && (
-              <div className="flex items-center gap-x-1" onClick={(e) => e.stopPropagation()}>
+              <span
+                className="flex items-center gap-x-1"
+                onClick={(e) => e.stopPropagation()}
+                onKeyDown={(e) => e.stopPropagation()}
+                role="presentation"
+              >
                 {actions || (
                   <>
                     {onEdit && (
@@ -227,7 +265,7 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
                     )}
                   </>
                 )}
-              </div>
+              </span>
             )}
           </div>
         </div>
@@ -241,24 +279,41 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
           className={cn(
             "rounded-xl border border-border bg-card p-4",
             onProjectClick && "cursor-pointer hover:border-primary/50",
-            className
+            className,
           )}
+          role={onProjectClick ? "button" : undefined}
+          tabIndex={onProjectClick ? 0 : undefined}
           onClick={() => onProjectClick?.(project)}
+          onKeyDown={
+            onProjectClick
+              ? (e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onProjectClick?.(project);
+                  }
+                }
+              : undefined
+          }
           {...props}
         >
           <div className="flex items-start justify-between gap-x-4">
-            <div className="flex items-start gap-x-3">
+            <div className="flex min-w-0 flex-1 items-start gap-x-3">
               {project.icon && (
                 <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground">
                   {project.icon}
                 </div>
               )}
-              <div className="min-w-0">
+              <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-x-2">
-                  <h4 className="truncate font-medium text-foreground">{project.name}</h4>
+                  <h4 className="truncate font-medium text-foreground">
+                    {project.name}
+                  </h4>
                   {project.priority && (
                     <span
-                      className={cn("size-2 rounded-full", priorityColors[project.priority])}
+                      className={cn(
+                        "size-2 shrink-0 rounded-full",
+                        priorityColors[project.priority],
+                      )}
                     />
                   )}
                 </div>
@@ -270,7 +325,7 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
                 )}
               </div>
             </div>
-            <Badge variant={statusInfo.variant} size="sm">
+            <Badge variant={statusInfo.variant} size="sm" className="shrink-0">
               {statusInfo.label}
             </Badge>
           </div>
@@ -300,18 +355,22 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
           )}
 
           {/* Header */}
-          <div className="flex items-start justify-between p-4">
-            <div className="flex items-start gap-x-4">
+          <div className="flex items-start justify-between gap-x-4 p-4">
+            <div className="flex min-w-0 flex-1 items-start gap-x-4">
               {project.icon && (
                 <div className="flex size-14 shrink-0 items-center justify-center rounded-xl bg-muted text-muted-foreground">
                   {project.icon}
                 </div>
               )}
-              <div>
+              <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-x-2">
-                  <h3 className="font-semibold text-foreground">{project.name}</h3>
+                  <h3 className="truncate font-semibold text-foreground">
+                    {project.name}
+                  </h3>
                   {project.isStarred && (
                     <button
+                      type="button"
+                      className="shrink-0"
                       onClick={(e) => {
                         e.stopPropagation();
                         onStar?.(project, false);
@@ -322,9 +381,11 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
                   )}
                 </div>
                 {project.category && (
-                  <p className="text-sm text-muted-foreground">{project.category}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {project.category}
+                  </p>
                 )}
-                <div className="mt-1 flex items-center gap-x-2">
+                <div className="mt-1 flex flex-wrap items-center gap-2">
                   <Badge variant={statusInfo.variant} size="sm">
                     {statusInfo.label}
                   </Badge>
@@ -336,7 +397,7 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-x-2">
+            <div className="flex shrink-0 items-center gap-x-2">
               {actions || (
                 <Button variant="ghost" size="sm" className="size-8 p-0">
                   <MoreHorizontalIcon className="size-4" />
@@ -348,7 +409,9 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
           {/* Description */}
           {project.description && (
             <div className="px-4 pb-4">
-              <p className="text-sm text-muted-foreground">{project.description}</p>
+              <p className="text-sm text-muted-foreground">
+                {project.description}
+              </p>
             </div>
           )}
 
@@ -357,7 +420,9 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
             <div className="border-t border-border px-4 py-3">
               <div className="mb-2 flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">Progress</span>
-                <span className="font-medium text-foreground">{project.progress}%</span>
+                <span className="font-medium text-foreground">
+                  {project.progress}%
+                </span>
               </div>
               <ProgressBar value={project.progress} size="sm" />
             </div>
@@ -377,14 +442,15 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
                 <span>Due: {project.dueDate}</span>
               </div>
             )}
-            {project.tasksCompleted !== undefined && project.tasksTotal !== undefined && (
-              <div className="flex items-center gap-x-1.5 text-xs text-muted-foreground">
-                <CheckIcon className="size-3.5" />
-                <span>
-                  {project.tasksCompleted}/{project.tasksTotal} tasks
-                </span>
-              </div>
-            )}
+            {project.tasksCompleted !== undefined &&
+              project.tasksTotal !== undefined && (
+                <div className="flex items-center gap-x-1.5 text-xs text-muted-foreground">
+                  <CheckIcon className="size-3.5" />
+                  <span>
+                    {project.tasksCompleted}/{project.tasksTotal} tasks
+                  </span>
+                </div>
+              )}
           </div>
 
           {/* Budget */}
@@ -401,7 +467,13 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
               <ProgressBar
                 value={budgetPercentage}
                 size="sm"
-                color={budgetPercentage > 90 ? "destructive" : budgetPercentage > 75 ? "warning" : "default"}
+                color={
+                  budgetPercentage > 90
+                    ? "destructive"
+                    : budgetPercentage > 75
+                      ? "warning"
+                      : "default"
+                }
               />
             </div>
           )}
@@ -409,7 +481,9 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
           {/* Tasks Preview */}
           {showTasks && project.tasks && project.tasks.length > 0 && (
             <div className="border-t border-border px-4 py-3">
-              <h4 className="mb-2 text-sm font-medium text-foreground">Recent Tasks</h4>
+              <h4 className="mb-2 text-sm font-medium text-foreground">
+                Recent Tasks
+              </h4>
               <div className="space-y-2">
                 {project.tasks.slice(0, 3).map((task) => (
                   <div key={task.id} className="flex items-center gap-x-2">
@@ -418,17 +492,19 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
                         "size-4 rounded-full border flex items-center justify-center",
                         task.completed
                           ? "border-success bg-success"
-                          : "border-muted-foreground/30"
+                          : "border-muted-foreground/30",
                       )}
                     >
-                      {task.completed && <CheckIcon className="size-3 text-success-foreground" />}
+                      {task.completed && (
+                        <CheckIcon className="size-3 text-success-foreground" />
+                      )}
                     </div>
                     <span
                       className={cn(
                         "flex-1 truncate text-sm",
                         task.completed
                           ? "text-muted-foreground line-through"
-                          : "text-foreground"
+                          : "text-foreground",
                       )}
                     >
                       {task.title}
@@ -436,7 +512,10 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
                     {task.assignee && (
                       <Avatar
                         src={task.assignee.avatarSrc}
-                        fallback={task.assignee.avatarFallback || task.assignee.name.charAt(0)}
+                        fallback={
+                          task.assignee.avatarFallback ||
+                          task.assignee.name.charAt(0)
+                        }
                         size="xs"
                       />
                     )}
@@ -450,8 +529,8 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
           {project.tags && project.tags.length > 0 && (
             <div className="flex flex-wrap items-center gap-1.5 border-t border-border px-4 py-3">
               <TagIcon className="size-3.5 text-muted-foreground" />
-              {project.tags.map((tag, index) => (
-                <Badge key={index} variant="secondary" size="sm">
+              {project.tags.map((tag) => (
+                <Badge key={tag} variant="secondary" size="sm">
                   {tag}
                 </Badge>
               ))}
@@ -462,9 +541,9 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
           {project.links && project.links.length > 0 && (
             <div className="border-t border-border px-4 py-3">
               <div className="flex flex-wrap gap-2">
-                {project.links.map((link, index) => (
+                {project.links.map((link) => (
                   <a
-                    key={index}
+                    key={link.url}
                     href={link.url}
                     className="inline-flex items-center gap-x-1 text-xs text-primary hover:underline"
                     onClick={(e) => e.stopPropagation()}
@@ -483,12 +562,16 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
               <div className="flex items-center gap-x-2">
                 <Avatar
                   src={project.owner.avatarSrc}
-                  fallback={project.owner.avatarFallback || project.owner.name.charAt(0)}
+                  fallback={
+                    project.owner.avatarFallback || project.owner.name.charAt(0)
+                  }
                   size="sm"
                 />
                 <div>
                   <p className="text-xs text-muted-foreground">Owner</p>
-                  <p className="text-sm font-medium text-foreground">{project.owner.name}</p>
+                  <p className="text-sm font-medium text-foreground">
+                    {project.owner.name}
+                  </p>
                 </div>
               </div>
             )}
@@ -511,10 +594,12 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
           {/* Custom Fields */}
           {project.customFields && project.customFields.length > 0 && (
             <div className="grid grid-cols-2 gap-4 border-t border-border px-4 py-3">
-              {project.customFields.map((field, index) => (
-                <div key={index}>
+              {project.customFields.map((field) => (
+                <div key={field.label}>
                   <p className="text-xs text-muted-foreground">{field.label}</p>
-                  <p className="text-sm font-medium text-foreground">{field.value}</p>
+                  <p className="text-sm font-medium text-foreground">
+                    {field.value}
+                  </p>
                 </div>
               ))}
             </div>
@@ -530,35 +615,56 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
         className={cn(
           "rounded-xl border border-border bg-card",
           onProjectClick && "cursor-pointer hover:border-primary/50",
-          className
+          className,
         )}
+        role={onProjectClick ? "button" : undefined}
+        tabIndex={onProjectClick ? 0 : undefined}
         onClick={() => onProjectClick?.(project)}
+        onKeyDown={
+          onProjectClick
+            ? (e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  onProjectClick?.(project);
+                }
+              }
+            : undefined
+        }
         {...props}
       >
         <div className="p-4">
           <div className="flex items-start justify-between gap-x-4">
-            <div className="flex items-start gap-x-3">
+            <div className="flex min-w-0 flex-1 items-start gap-x-3">
               {project.icon && (
                 <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-muted text-muted-foreground">
                   {project.icon}
                 </div>
               )}
-              <div className="min-w-0">
+              <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-x-2">
-                  <h3 className="truncate font-semibold text-foreground">{project.name}</h3>
-                  {project.isStarred && <StarIcon className="size-4 fill-warning text-warning" />}
+                  <h3 className="truncate font-semibold text-foreground">
+                    {project.name}
+                  </h3>
+                  {project.isStarred && (
+                    <StarIcon className="size-4 shrink-0 fill-warning text-warning" />
+                  )}
                   {project.priority && (
                     <span
-                      className={cn("size-2 rounded-full", priorityColors[project.priority])}
+                      className={cn(
+                        "size-2 shrink-0 rounded-full",
+                        priorityColors[project.priority],
+                      )}
                     />
                   )}
                 </div>
                 {project.category && (
-                  <p className="text-sm text-muted-foreground">{project.category}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {project.category}
+                  </p>
                 )}
               </div>
             </div>
-            <div className="flex items-center gap-x-2">
+            <div className="flex shrink-0 items-center gap-x-2">
               <Badge variant={statusInfo.variant} size="sm">
                 {statusInfo.label}
               </Badge>
@@ -585,7 +691,9 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
             <div className="mt-4">
               <div className="mb-1.5 flex items-center justify-between text-xs">
                 <span className="text-muted-foreground">Progress</span>
-                <span className="font-medium text-foreground">{project.progress}%</span>
+                <span className="font-medium text-foreground">
+                  {project.progress}%
+                </span>
               </div>
               <ProgressBar value={project.progress} size="sm" />
             </div>
@@ -600,14 +708,15 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
                 <span>{project.dueDate}</span>
               </div>
             )}
-            {project.tasksCompleted !== undefined && project.tasksTotal !== undefined && (
-              <div className="flex items-center gap-x-1 text-xs text-muted-foreground">
-                <CheckIcon className="size-3.5" />
-                <span>
-                  {project.tasksCompleted}/{project.tasksTotal}
-                </span>
-              </div>
-            )}
+            {project.tasksCompleted !== undefined &&
+              project.tasksTotal !== undefined && (
+                <div className="flex items-center gap-x-1 text-xs text-muted-foreground">
+                  <CheckIcon className="size-3.5" />
+                  <span>
+                    {project.tasksCompleted}/{project.tasksTotal}
+                  </span>
+                </div>
+              )}
           </div>
           {showMembers && project.members && project.members.length > 0 && (
             <AvatarGroup
@@ -623,12 +732,13 @@ export const ProjectDetailsCard = forwardRef<HTMLDivElement, ProjectDetailsCardP
         </div>
       </div>
     );
-  }
+  },
 );
 ProjectDetailsCard.displayName = "ProjectDetailsCard";
 
 // Grid Layout
-export interface ProjectDetailsGridProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ProjectDetailsGridProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   projects: ProjectDetails[];
   variant?: ProjectDetailsCardProps["variant"];
   columns?: 2 | 3 | 4;
@@ -643,7 +753,10 @@ const gridColumnClasses = {
   4: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
 };
 
-export const ProjectDetailsGrid = forwardRef<HTMLDivElement, ProjectDetailsGridProps>(
+export const ProjectDetailsGrid = forwardRef<
+  HTMLDivElement,
+  ProjectDetailsGridProps
+>(
   (
     {
       className,
@@ -655,7 +768,7 @@ export const ProjectDetailsGrid = forwardRef<HTMLDivElement, ProjectDetailsGridP
       onProjectClick,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
@@ -675,12 +788,13 @@ export const ProjectDetailsGrid = forwardRef<HTMLDivElement, ProjectDetailsGridP
         ))}
       </div>
     );
-  }
+  },
 );
 ProjectDetailsGrid.displayName = "ProjectDetailsGrid";
 
 // List Layout
-export interface ProjectDetailsListProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ProjectDetailsListProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   projects: ProjectDetails[];
   showProgress?: boolean;
   showMembers?: boolean;
@@ -689,7 +803,10 @@ export interface ProjectDetailsListProps extends React.HTMLAttributes<HTMLDivEle
   onDelete?: (project: ProjectDetails) => void;
 }
 
-export const ProjectDetailsList = forwardRef<HTMLDivElement, ProjectDetailsListProps>(
+export const ProjectDetailsList = forwardRef<
+  HTMLDivElement,
+  ProjectDetailsListProps
+>(
   (
     {
       className,
@@ -701,7 +818,7 @@ export const ProjectDetailsList = forwardRef<HTMLDivElement, ProjectDetailsListP
       onDelete,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div ref={ref} className={cn("space-y-3", className)} {...props}>
@@ -719,6 +836,6 @@ export const ProjectDetailsList = forwardRef<HTMLDivElement, ProjectDetailsListP
         ))}
       </div>
     );
-  }
+  },
 );
 ProjectDetailsList.displayName = "ProjectDetailsList";

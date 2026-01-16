@@ -1,10 +1,10 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
+import { Badge } from "@/components/atoms";
+import { TrendIndicator } from "@/components/molecules";
+import type { TrendDirection, TrendVariant } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { dataCardVariants } from "@/lib/variants/dataVisualization";
-import { TrendIndicator } from "@/components/molecules";
-import { Badge } from "@/components/atoms";
-import type { VariantProps } from "class-variance-authority";
-import type { TrendDirection, TrendVariant } from "@/lib/types";
 
 // ============================================
 // Types
@@ -82,7 +82,9 @@ export const TieredStatsCard = forwardRef<HTMLDivElement, TieredStatsCardProps>(
                 <h3 className="text-sm font-medium text-foreground">{title}</h3>
               )}
               {subtitle && (
-                <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {subtitle}
+                </p>
               )}
             </div>
             {action && <div className="shrink-0">{action}</div>}
@@ -93,7 +95,9 @@ export const TieredStatsCard = forwardRef<HTMLDivElement, TieredStatsCardProps>(
         {totalLabel && (
           <div className="px-4 pt-4 pb-2">
             <p className="text-xs text-muted-foreground">{totalLabel}</p>
-            <p className="text-2xl font-bold text-foreground">{formatValue(total)}</p>
+            <p className="text-2xl font-bold text-foreground">
+              {formatValue(total)}
+            </p>
           </div>
         )}
 
@@ -101,7 +105,8 @@ export const TieredStatsCard = forwardRef<HTMLDivElement, TieredStatsCardProps>(
         <div className="p-4 space-y-3">
           {tiers.map((tier, index) => {
             const percentage = tier.percentage ?? (tier.count / total) * 100;
-            const tierColor = tier.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+            const tierColor =
+              tier.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
             return (
               <div key={tier.id} className="flex items-center gap-x-4">
@@ -178,7 +183,10 @@ export interface HierarchicalStatsCardProps
   formatValue?: (value: number) => string;
 }
 
-export const HierarchicalStatsCard = forwardRef<HTMLDivElement, HierarchicalStatsCardProps>(
+export const HierarchicalStatsCard = forwardRef<
+  HTMLDivElement,
+  HierarchicalStatsCardProps
+>(
   (
     {
       className,
@@ -191,7 +199,7 @@ export const HierarchicalStatsCard = forwardRef<HTMLDivElement, HierarchicalStat
     },
     ref,
   ) => {
-    const renderItem = (item: HierarchicalStatItem, depth: number = 0, index: number = 0) => {
+    const renderItem = (item: HierarchicalStatItem, depth = 0, index = 0) => {
       const itemColor = item.color || `hsl(var(--chart-${(index % 5) + 1}))`;
       const hasChildren = item.children && item.children.length > 0;
 
@@ -200,14 +208,14 @@ export const HierarchicalStatsCard = forwardRef<HTMLDivElement, HierarchicalStat
           <div
             className={cn(
               "flex items-center justify-between gap-x-3 py-2",
-              depth > 0 && "border-l-2 border-border ml-4 pl-3"
+              depth > 0 && "border-l-2 border-border ml-4 pl-3",
             )}
           >
             <div className="flex items-center gap-x-2 min-w-0">
               <span
                 className={cn(
                   "shrink-0 rounded-full",
-                  depth === 0 ? "size-2.5" : "size-2"
+                  depth === 0 ? "size-2.5" : "size-2",
                 )}
                 style={{ backgroundColor: itemColor }}
               />
@@ -216,7 +224,7 @@ export const HierarchicalStatsCard = forwardRef<HTMLDivElement, HierarchicalStat
                   "truncate",
                   depth === 0
                     ? "text-sm font-medium text-foreground"
-                    : "text-sm text-muted-foreground"
+                    : "text-sm text-muted-foreground",
                 )}
               >
                 {item.label}
@@ -236,7 +244,7 @@ export const HierarchicalStatsCard = forwardRef<HTMLDivElement, HierarchicalStat
                   "tabular-nums",
                   depth === 0
                     ? "text-sm font-semibold text-foreground"
-                    : "text-sm text-muted-foreground"
+                    : "text-sm text-muted-foreground",
                 )}
               >
                 {formatValue(item.value)}
@@ -250,8 +258,8 @@ export const HierarchicalStatsCard = forwardRef<HTMLDivElement, HierarchicalStat
           </div>
           {hasChildren && (
             <div className="ml-4">
-              {item.children!.map((child, childIndex) =>
-                renderItem(child, depth + 1, index + childIndex)
+              {item.children?.map((child, childIndex) =>
+                renderItem(child, depth + 1, index + childIndex),
               )}
             </div>
           )}
@@ -330,9 +338,10 @@ export const PyramidTierCard = forwardRef<HTMLDivElement, PyramidTierCardProps>(
         {/* Pyramid */}
         <div className="p-4 flex flex-col items-center gap-y-1">
           {tiers.map((tier, index) => {
-            const tierColor = tier.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+            const tierColor =
+              tier.color || `hsl(var(--chart-${(index % 5) + 1}))`;
             // Calculate width based on position (top = narrowest)
-            const widthPercent = 40 + ((index / (tiers.length - 1 || 1)) * 60);
+            const widthPercent = 40 + (index / (tiers.length - 1 || 1)) * 60;
 
             return (
               <div
@@ -356,7 +365,8 @@ export const PyramidTierCard = forwardRef<HTMLDivElement, PyramidTierCardProps>(
         {/* Legend */}
         <div className="px-4 pb-4 grid grid-cols-2 gap-2">
           {tiers.map((tier, index) => {
-            const tierColor = tier.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+            const tierColor =
+              tier.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
             return (
               <div key={tier.id} className="flex items-center gap-x-2">

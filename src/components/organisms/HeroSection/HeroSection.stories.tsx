@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { Button } from "@/components/atoms";
 import {
-  HeroSection,
-  HeroContent,
-  HeroBadge,
-  HeroTitle,
-  HeroSubtitle,
   HeroActions,
+  HeroBadge,
+  HeroContent,
   HeroImage,
+  HeroSection,
   HeroSplit,
   HeroStats,
+  HeroSubtitle,
+  HeroTitle,
   HeroTrustedBy,
 } from "./index";
-import { Button } from "@/components/atoms";
 
 const meta: Meta<typeof HeroSection> = {
   title: "Organisms/HeroSection",
@@ -45,8 +45,8 @@ export const Default: Story = {
       <HeroBadge>New Feature</HeroBadge>
       <HeroTitle>Build beautiful products faster</HeroTitle>
       <HeroSubtitle>
-        Create stunning websites and applications with our comprehensive design system.
-        Ship faster with pre-built components.
+        Create stunning websites and applications with our comprehensive design
+        system. Ship faster with pre-built components.
       </HeroSubtitle>
       <HeroActions>
         <Button variant="primary" size="lg">
@@ -105,8 +105,8 @@ export const SplitLayout: Story = {
           <HeroBadge>🚀 Just launched v2.0</HeroBadge>
           <HeroTitle size="lg">Ship products 10x faster</HeroTitle>
           <HeroSubtitle>
-            Our design system helps you build consistent, accessible, and beautiful
-            user interfaces without starting from scratch.
+            Our design system helps you build consistent, accessible, and
+            beautiful user interfaces without starting from scratch.
           </HeroSubtitle>
           <HeroActions align="left">
             <Button variant="primary" size="lg">
@@ -160,9 +160,7 @@ export const WithBackgroundImage: Story = {
       backgroundImage="https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1920&h=1080&fit=crop"
       overlayOpacity={80}
     >
-      <HeroTitle className="text-foreground">
-        Build the future of web
-      </HeroTitle>
+      <HeroTitle className="text-foreground">Build the future of web</HeroTitle>
       <HeroSubtitle>
         Join thousands of developers creating amazing products with our tools.
       </HeroSubtitle>
@@ -220,10 +218,22 @@ export const WithTrustedBy: Story = {
       <HeroTrustedBy
         title="Trusted by industry leaders"
         logos={[
-          { src: "https://via.placeholder.com/120x40?text=Company+1", alt: "Company 1" },
-          { src: "https://via.placeholder.com/120x40?text=Company+2", alt: "Company 2" },
-          { src: "https://via.placeholder.com/120x40?text=Company+3", alt: "Company 3" },
-          { src: "https://via.placeholder.com/120x40?text=Company+4", alt: "Company 4" },
+          {
+            src: "https://via.placeholder.com/120x40?text=Company+1",
+            alt: "Company 1",
+          },
+          {
+            src: "https://via.placeholder.com/120x40?text=Company+2",
+            alt: "Company 2",
+          },
+          {
+            src: "https://via.placeholder.com/120x40?text=Company+3",
+            alt: "Company 3",
+          },
+          {
+            src: "https://via.placeholder.com/120x40?text=Company+4",
+            alt: "Company 4",
+          },
         ]}
       />
     </HeroSection>
@@ -250,12 +260,10 @@ export const FullFeatured: Story = {
       <HeroSplit gap="lg">
         <HeroContent align="left">
           <HeroBadge>✨ Introducing Pro Plan</HeroBadge>
-          <HeroTitle size="lg">
-            The complete design system for React
-          </HeroTitle>
+          <HeroTitle size="lg">The complete design system for React</HeroTitle>
           <HeroSubtitle size="lg">
-            50+ beautifully crafted components. Fully accessible.
-            Dark mode included. Built with TypeScript.
+            50+ beautifully crafted components. Fully accessible. Dark mode
+            included. Built with TypeScript.
           </HeroSubtitle>
           <HeroStats
             stats={[
@@ -280,9 +288,18 @@ export const FullFeatured: Story = {
           />
           <HeroTrustedBy
             logos={[
-              { src: "https://via.placeholder.com/100x32?text=Logo+1", alt: "Logo 1" },
-              { src: "https://via.placeholder.com/100x32?text=Logo+2", alt: "Logo 2" },
-              { src: "https://via.placeholder.com/100x32?text=Logo+3", alt: "Logo 3" },
+              {
+                src: "https://via.placeholder.com/100x32?text=Logo+1",
+                alt: "Logo 1",
+              },
+              {
+                src: "https://via.placeholder.com/100x32?text=Logo+2",
+                alt: "Logo 2",
+              },
+              {
+                src: "https://via.placeholder.com/100x32?text=Logo+3",
+                alt: "Logo 3",
+              },
             ]}
           />
         </div>
@@ -296,13 +313,18 @@ export const DarkBackground: Story = {
     <HeroSection className="bg-slate-900" padding="xl">
       <HeroTitle className="text-white">Build faster with AI</HeroTitle>
       <HeroSubtitle className="text-slate-300">
-        Leverage the power of artificial intelligence to accelerate your development workflow.
+        Leverage the power of artificial intelligence to accelerate your
+        development workflow.
       </HeroSubtitle>
       <HeroActions>
         <Button variant="primary" size="lg">
           Try AI Assistant
         </Button>
-        <Button variant="outline" size="lg" className="border-slate-600 text-white hover:bg-slate-800">
+        <Button
+          variant="outline"
+          size="lg"
+          className="border-slate-600 text-white hover:bg-slate-800"
+        >
           Learn More
         </Button>
       </HeroActions>

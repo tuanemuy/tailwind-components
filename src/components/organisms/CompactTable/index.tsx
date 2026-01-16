@@ -1,25 +1,23 @@
 "use client";
 
 import { forwardRef, useCallback } from "react";
-import { cn } from "@/lib/utils";
+import { Button, Checkbox } from "@/components/atoms";
 import {
-  tableContainerVariants,
-  tableHeaderVariants,
-  tableHeaderCellVariants,
-  tableCellVariants,
-  tableRowVariants,
-  tablePaginationVariants,
-  tableEmptyStateVariants,
-  tableLoadingStateVariants,
-} from "@/lib/variants";
-import { Checkbox, Button } from "@/components/atoms";
-import {
+  ChevronDownIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   ChevronUpIcon,
-  ChevronDownIcon,
   SpinnerIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
+import {
+  tableContainerVariants,
+  tableEmptyStateVariants,
+  tableHeaderVariants,
+  tableLoadingStateVariants,
+  tablePaginationVariants,
+  tableRowVariants,
+} from "@/lib/variants";
 
 // ============================================
 // Column Types
@@ -155,7 +153,7 @@ function CompactTableInner<T>(
     showRowNumbers = false,
     ...props
   }: CompactTableProps<T>,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const config = densityConfig[density];
 
@@ -165,11 +163,12 @@ function CompactTableInner<T>(
   // Selection logic
   const isRowSelected = useCallback(
     (row: T) => selectedRows.includes(row),
-    [selectedRows]
+    [selectedRows],
   );
 
   const isAllSelected = data.length > 0 && selectedRows.length === data.length;
-  const isIndeterminate = selectedRows.length > 0 && selectedRows.length < data.length;
+  const isIndeterminate =
+    selectedRows.length > 0 && selectedRows.length < data.length;
 
   const handleSelectAll = useCallback(() => {
     if (isAllSelected) {
@@ -187,7 +186,7 @@ function CompactTableInner<T>(
         onSelectionChange?.([...selectedRows, row]);
       }
     },
-    [isRowSelected, selectedRows, onSelectionChange]
+    [isRowSelected, selectedRows, onSelectionChange],
   );
 
   // Sort logic
@@ -206,7 +205,7 @@ function CompactTableInner<T>(
 
       onSort({ key, direction });
     },
-    [sortState, onSort]
+    [sortState, onSort],
   );
 
   // Get cell value
@@ -221,7 +220,9 @@ function CompactTableInner<T>(
   };
 
   // Pagination
-  const totalPages = pagination ? Math.ceil(pagination.total / pagination.pageSize) : 0;
+  const totalPages = pagination
+    ? Math.ceil(pagination.total / pagination.pageSize)
+    : 0;
 
   const totalColumns =
     visibleColumns.length + (selectable ? 1 : 0) + (showRowNumbers ? 1 : 0);
@@ -234,14 +235,14 @@ function CompactTableInner<T>(
           <table
             className={cn(
               "min-w-full divide-y divide-border",
-              gridLines && "border-collapse"
+              gridLines && "border-collapse",
             )}
           >
             {/* Header */}
             <thead
               className={cn(
                 tableHeaderVariants({ sticky: stickyHeader }),
-                "bg-muted/50"
+                "bg-muted/50",
               )}
             >
               <tr>
@@ -252,7 +253,7 @@ function CompactTableInner<T>(
                       config.headerPadding,
                       config.fontSize,
                       "w-10 text-center font-medium text-muted-foreground",
-                      gridLines && "border-r border-border"
+                      gridLines && "border-r border-border",
                     )}
                   >
                     #
@@ -265,7 +266,7 @@ function CompactTableInner<T>(
                     className={cn(
                       config.headerPadding,
                       "w-8",
-                      gridLines && "border-r border-border"
+                      gridLines && "border-r border-border",
                     )}
                   >
                     <Checkbox
@@ -302,18 +303,21 @@ function CompactTableInner<T>(
                         "font-medium text-foreground whitespace-nowrap",
                         column.align === "center" && "text-center",
                         column.align === "end" && "text-end",
-                        isSortable && "cursor-pointer select-none hover:text-primary",
+                        isSortable &&
+                          "cursor-pointer select-none hover:text-primary",
                         gridLines &&
                           index < visibleColumns.length - 1 &&
-                          "border-r border-border"
+                          "border-r border-border",
                       )}
-                      onClick={isSortable ? () => handleSort(column.key) : undefined}
+                      onClick={
+                        isSortable ? () => handleSort(column.key) : undefined
+                      }
                     >
                       <div
                         className={cn(
                           "flex items-center gap-1",
                           column.align === "center" && "justify-center",
-                          column.align === "end" && "justify-end"
+                          column.align === "end" && "justify-end",
                         )}
                       >
                         {column.header}
@@ -333,11 +337,13 @@ function CompactTableInner<T>(
                     colSpan={totalColumns}
                     className={cn(
                       tableLoadingStateVariants({ variant: "spinner" }),
-                      "py-4"
+                      "py-4",
                     )}
                   >
                     <SpinnerIcon className="size-4 animate-spin text-muted-foreground" />
-                    <span className={cn(config.fontSize, "text-muted-foreground")}>
+                    <span
+                      className={cn(config.fontSize, "text-muted-foreground")}
+                    >
                       Loading...
                     </span>
                   </td>
@@ -349,7 +355,9 @@ function CompactTableInner<T>(
                     className={cn(tableEmptyStateVariants(), "py-4")}
                   >
                     {emptyState || (
-                      <span className={cn(config.fontSize, "text-muted-foreground")}>
+                      <span
+                        className={cn(config.fontSize, "text-muted-foreground")}
+                      >
                         No data available
                       </span>
                     )}
@@ -366,9 +374,11 @@ function CompactTableInner<T>(
                         clickable: !!onRowClick,
                         selected: isRowSelected(row),
                         striped,
-                      })
+                      }),
                     )}
-                    onClick={onRowClick ? () => onRowClick(row, rowIndex) : undefined}
+                    onClick={
+                      onRowClick ? () => onRowClick(row, rowIndex) : undefined
+                    }
                   >
                     {showRowNumbers && (
                       <td
@@ -376,7 +386,7 @@ function CompactTableInner<T>(
                           config.cellPadding,
                           config.fontSize,
                           "w-10 text-center text-muted-foreground font-mono",
-                          gridLines && "border-r border-border"
+                          gridLines && "border-r border-border",
                         )}
                       >
                         {rowIndex + 1}
@@ -388,9 +398,10 @@ function CompactTableInner<T>(
                         className={cn(
                           config.cellPadding,
                           "w-8",
-                          gridLines && "border-r border-border"
+                          gridLines && "border-r border-border",
                         )}
                         onClick={(e) => e.stopPropagation()}
+                        onKeyDown={(e) => e.stopPropagation()}
                       >
                         <Checkbox
                           checked={isRowSelected(row)}
@@ -414,7 +425,7 @@ function CompactTableInner<T>(
                             column.align === "end" && "text-end",
                             gridLines &&
                               colIndex < visibleColumns.length - 1 &&
-                              "border-r border-border"
+                              "border-r border-border",
                           )}
                         >
                           {column.render ? (
@@ -438,7 +449,10 @@ function CompactTableInner<T>(
       {/* Pagination */}
       {pagination && totalPages > 1 && (
         <div
-          className={cn(tablePaginationVariants({ variant: "compact" }), "py-2")}
+          className={cn(
+            tablePaginationVariants({ variant: "compact" }),
+            "py-2",
+          )}
         >
           <span className={cn(config.fontSize, "text-muted-foreground")}>
             {pagination.page} / {totalPages}
@@ -473,7 +487,7 @@ function CompactTableInner<T>(
 
 // Export with forwardRef workaround for generics
 export const CompactTable = forwardRef(CompactTableInner) as <T>(
-  props: CompactTableProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> }
+  props: CompactTableProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> },
 ) => React.ReactElement;
 
 (CompactTable as { displayName?: string }).displayName = "CompactTable";

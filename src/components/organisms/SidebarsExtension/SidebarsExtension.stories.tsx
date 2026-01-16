@@ -1,28 +1,28 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import {
+  BarChartIcon,
+  BellIcon,
+  CalendarIcon,
+  CreditCardIcon,
+  FileIcon,
+  FolderIcon,
+  HomeIcon,
+  LockIcon,
+  MailIcon,
+  SettingsIcon,
+  UserIcon,
+  UsersIcon,
+} from "@/lib/icons";
+import {
+  CollapsibleSidebar,
   DashboardSidebar,
   DetachedSidebar,
-  CollapsibleSidebar,
-  IconSidebar,
   DoubleSidebar,
   FilterSidebar,
+  IconSidebar,
   SettingsSidebar,
 } from "./index";
-import {
-  HomeIcon,
-  SettingsIcon,
-  UsersIcon,
-  FileIcon,
-  BarChartIcon,
-  MailIcon,
-  CalendarIcon,
-  FolderIcon,
-  BellIcon,
-  CreditCardIcon,
-  LockIcon,
-  UserIcon,
-} from "@/lib/icons";
 
 // ==============================================
 // Common data
@@ -31,7 +31,8 @@ import {
 const sampleUser = {
   name: "John Doe",
   email: "john@example.com",
-  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop",
+  avatar:
+    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop",
   initials: "JD",
   role: "Administrator",
 };
@@ -41,9 +42,23 @@ const sampleSections = [
     id: "main",
     title: "Main",
     items: [
-      { id: "dashboard", label: "Dashboard", icon: <HomeIcon className="size-5" />, active: true },
-      { id: "analytics", label: "Analytics", icon: <BarChartIcon className="size-5" />, badge: 3 },
-      { id: "projects", label: "Projects", icon: <FolderIcon className="size-5" /> },
+      {
+        id: "dashboard",
+        label: "Dashboard",
+        icon: <HomeIcon className="size-5" />,
+        active: true,
+      },
+      {
+        id: "analytics",
+        label: "Analytics",
+        icon: <BarChartIcon className="size-5" />,
+        badge: 3,
+      },
+      {
+        id: "projects",
+        label: "Projects",
+        icon: <FolderIcon className="size-5" />,
+      },
     ],
   },
   {
@@ -51,7 +66,11 @@ const sampleSections = [
     title: "Workspace",
     items: [
       { id: "team", label: "Team", icon: <UsersIcon className="size-5" /> },
-      { id: "calendar", label: "Calendar", icon: <CalendarIcon className="size-5" /> },
+      {
+        id: "calendar",
+        label: "Calendar",
+        icon: <CalendarIcon className="size-5" />,
+      },
       {
         id: "documents",
         label: "Documents",
@@ -68,7 +87,11 @@ const sampleSections = [
     id: "other",
     title: "Other",
     items: [
-      { id: "settings", label: "Settings", icon: <SettingsIcon className="size-5" /> },
+      {
+        id: "settings",
+        label: "Settings",
+        icon: <SettingsIcon className="size-5" />,
+      },
     ],
   },
 ];
@@ -136,7 +159,9 @@ export const DefaultDetachedSidebar: StoryObj<typeof DetachedSidebar> = {
           margin="md"
           rounded="xl"
         />
-        <div className={`transition-all duration-300 ${collapsed ? "ml-24" : "ml-72"} p-8`}>
+        <div
+          className={`transition-all duration-300 ${collapsed ? "ml-24" : "ml-72"} p-8`}
+        >
           <h1 className="text-2xl font-bold">Detached Sidebar Demo</h1>
           <p className="text-muted-foreground mt-2">
             The sidebar floats with a margin and rounded corners.
@@ -181,7 +206,9 @@ export const DefaultCollapsibleSidebar: StoryObj<typeof CollapsibleSidebar> = {
       <div className="h-screen flex">
         <CollapsibleSidebar
           logo={<span className="text-xl font-bold text-primary">Logo</span>}
-          collapsedLogo={<span className="text-xl font-bold text-primary">L</span>}
+          collapsedLogo={
+            <span className="text-xl font-bold text-primary">L</span>
+          }
           logoText="MyApp"
           sections={sampleSections}
           user={sampleUser}
@@ -204,35 +231,38 @@ export const DefaultCollapsibleSidebar: StoryObj<typeof CollapsibleSidebar> = {
   },
 };
 
-export const CollapsibleSidebarWithHover: StoryObj<typeof CollapsibleSidebar> = {
-  render: () => {
-    const [collapsed, setCollapsed] = useState(true);
-    return (
-      <div className="h-screen flex">
-        <CollapsibleSidebar
-          logo={<span className="text-xl font-bold text-primary">Logo</span>}
-          collapsedLogo={<span className="text-xl font-bold text-primary">L</span>}
-          logoText="MyApp"
-          sections={sampleSections}
-          user={sampleUser}
-          collapsed={collapsed}
-          onCollapsedChange={setCollapsed}
-          expandOnHover={true}
-          position="relative"
-        />
-        <div className="flex-1 p-8">
-          <h1 className="text-2xl font-bold">Hover to Expand</h1>
-          <p className="text-muted-foreground mt-2">
-            Hover over the sidebar to expand it temporarily.
-          </p>
+export const CollapsibleSidebarWithHover: StoryObj<typeof CollapsibleSidebar> =
+  {
+    render: () => {
+      const [collapsed, setCollapsed] = useState(true);
+      return (
+        <div className="h-screen flex">
+          <CollapsibleSidebar
+            logo={<span className="text-xl font-bold text-primary">Logo</span>}
+            collapsedLogo={
+              <span className="text-xl font-bold text-primary">L</span>
+            }
+            logoText="MyApp"
+            sections={sampleSections}
+            user={sampleUser}
+            collapsed={collapsed}
+            onCollapsedChange={setCollapsed}
+            expandOnHover={true}
+            position="relative"
+          />
+          <div className="flex-1 p-8">
+            <h1 className="text-2xl font-bold">Hover to Expand</h1>
+            <p className="text-muted-foreground mt-2">
+              Hover over the sidebar to expand it temporarily.
+            </p>
+          </div>
         </div>
-      </div>
-    );
-  },
-  parameters: {
-    layout: "fullscreen",
-  },
-};
+      );
+    },
+    parameters: {
+      layout: "fullscreen",
+    },
+  };
 
 // ==============================================
 // IconSidebar
@@ -244,16 +274,48 @@ export const DefaultIconSidebar: StoryObj<typeof IconSidebar> = {
       <IconSidebar
         logo={<span className="text-2xl font-bold text-primary">L</span>}
         items={[
-          { id: "home", label: "Home", icon: <HomeIcon className="size-5" />, active: true },
-          { id: "analytics", label: "Analytics", icon: <BarChartIcon className="size-5" />, badge: 5 },
-          { id: "projects", label: "Projects", icon: <FolderIcon className="size-5" /> },
+          {
+            id: "home",
+            label: "Home",
+            icon: <HomeIcon className="size-5" />,
+            active: true,
+          },
+          {
+            id: "analytics",
+            label: "Analytics",
+            icon: <BarChartIcon className="size-5" />,
+            badge: 5,
+          },
+          {
+            id: "projects",
+            label: "Projects",
+            icon: <FolderIcon className="size-5" />,
+          },
           { id: "team", label: "Team", icon: <UsersIcon className="size-5" /> },
-          { id: "calendar", label: "Calendar", icon: <CalendarIcon className="size-5" /> },
-          { id: "mail", label: "Mail", icon: <MailIcon className="size-5" />, badge: 12 },
+          {
+            id: "calendar",
+            label: "Calendar",
+            icon: <CalendarIcon className="size-5" />,
+          },
+          {
+            id: "mail",
+            label: "Mail",
+            icon: <MailIcon className="size-5" />,
+            badge: 12,
+          },
         ]}
         bottomItems={[
-          { id: "notifications", label: "Notifications", icon: <BellIcon className="size-5" />, badge: 3 },
-          { id: "settings", label: "Settings", icon: <SettingsIcon className="size-5" /> },
+          {
+            id: "notifications",
+            label: "Notifications",
+            icon: <BellIcon className="size-5" />,
+            badge: 3,
+          },
+          {
+            id: "settings",
+            label: "Settings",
+            icon: <SettingsIcon className="size-5" />,
+          },
         ]}
         user={sampleUser}
         position="relative"
@@ -279,7 +341,21 @@ export const DefaultDoubleSidebar: StoryObj<typeof DoubleSidebar> = {
   render: () => {
     const [selected, setSelected] = useState("projects");
 
-    const secondaryContent: Record<string, { title: string; sections: { title?: string; items: { id: string; label: string; icon?: React.ReactNode; active?: boolean }[] }[] }> = {
+    const secondaryContent: Record<
+      string,
+      {
+        title: string;
+        sections: {
+          title?: string;
+          items: {
+            id: string;
+            label: string;
+            icon?: React.ReactNode;
+            active?: boolean;
+          }[];
+        }[];
+      }
+    > = {
       home: {
         title: "Dashboard",
         sections: [
@@ -331,10 +407,27 @@ export const DefaultDoubleSidebar: StoryObj<typeof DoubleSidebar> = {
         <DoubleSidebar
           logo={<span className="text-2xl font-bold text-primary">D</span>}
           primaryItems={[
-            { id: "home", label: "Home", icon: <HomeIcon className="size-5" /> },
-            { id: "projects", label: "Projects", icon: <FolderIcon className="size-5" />, active: selected === "projects" },
-            { id: "team", label: "Team", icon: <UsersIcon className="size-5" /> },
-            { id: "calendar", label: "Calendar", icon: <CalendarIcon className="size-5" /> },
+            {
+              id: "home",
+              label: "Home",
+              icon: <HomeIcon className="size-5" />,
+            },
+            {
+              id: "projects",
+              label: "Projects",
+              icon: <FolderIcon className="size-5" />,
+              active: selected === "projects",
+            },
+            {
+              id: "team",
+              label: "Team",
+              icon: <UsersIcon className="size-5" />,
+            },
+            {
+              id: "calendar",
+              label: "Calendar",
+              icon: <CalendarIcon className="size-5" />,
+            },
           ]}
           selectedPrimaryId={selected}
           onPrimarySelect={(item) => setSelected(item.id)}
@@ -346,7 +439,8 @@ export const DefaultDoubleSidebar: StoryObj<typeof DoubleSidebar> = {
         <div className="flex-1 p-8">
           <h1 className="text-2xl font-bold">Double Sidebar</h1>
           <p className="text-muted-foreground mt-2">
-            Click on the primary sidebar items to change the secondary sidebar content.
+            Click on the primary sidebar items to change the secondary sidebar
+            content.
           </p>
         </div>
       </div>
@@ -375,7 +469,12 @@ export const DefaultFilterSidebar: StoryObj<typeof FilterSidebar> = {
               title: "Category",
               type: "checkbox",
               options: [
-                { id: "electronics", label: "Electronics", count: 124, checked: true },
+                {
+                  id: "electronics",
+                  label: "Electronics",
+                  count: 124,
+                  checked: true,
+                },
                 { id: "fashion", label: "Fashion", count: 89 },
                 { id: "home", label: "Home & Garden", count: 56 },
                 { id: "sports", label: "Sports", count: 34 },
@@ -508,7 +607,10 @@ export const DefaultSettingsSidebar: StoryObj<typeof SettingsSidebar> = {
           },
         ]}
         footer={
-          <button className="w-full px-4 py-2 text-sm text-destructive hover:bg-destructive/10 rounded-lg transition-colors">
+          <button
+            type="button"
+            className="w-full px-4 py-2 text-sm text-destructive hover:bg-destructive/10 rounded-lg transition-colors"
+          >
             Delete Account
           </button>
         }

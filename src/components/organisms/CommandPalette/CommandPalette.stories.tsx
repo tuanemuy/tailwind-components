@@ -1,26 +1,24 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import {
-  CommandPalette,
-  SearchModal,
-  SearchResults,
-  RecentSearches,
-  SearchSuggestions,
-  type CommandGroup,
-  type SearchResult,
-} from "./index";
 import { Button } from "@/components/atoms/Button";
 import { Kbd } from "@/components/atoms/Kbd";
 import {
   FileTextIcon,
-  UserIcon,
-  SettingsIcon,
-  SearchIcon,
   HomeIcon,
   MailIcon,
-  CalendarIcon,
-  HashIcon,
+  SearchIcon,
+  SettingsIcon,
+  UserIcon,
 } from "@/lib/icons";
+import {
+  type CommandGroup,
+  CommandPalette,
+  RecentSearches,
+  SearchModal,
+  type SearchResult,
+  SearchResults,
+  SearchSuggestions,
+} from "./index";
 
 const meta: Meta<typeof CommandPalette> = {
   title: "Organisms/CommandPalette",
@@ -215,8 +213,8 @@ export const SearchModalDefault: StoryObj<typeof SearchModal> = {
           searchResults.filter(
             (r) =>
               r.title.toLowerCase().includes(query.toLowerCase()) ||
-              r.description?.toLowerCase().includes(query.toLowerCase())
-          )
+              r.description?.toLowerCase().includes(query.toLowerCase()),
+          ),
         );
         setIsLoading(false);
       }, 300);
@@ -346,6 +344,7 @@ export const FullSearchExperience: StoryObj<typeof SearchModal> = {
           <div className="flex items-center justify-between">
             <h1 className="text-xl font-semibold">My App</h1>
             <button
+              type="button"
               onClick={() => setIsOpen(true)}
               className="flex items-center gap-2 rounded-lg border border-border px-3 py-1.5 text-sm text-muted-foreground hover:bg-muted transition-colors"
             >

@@ -1,27 +1,31 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { type ReactNode, useState } from "react";
 import { Avatar } from "@/components/atoms/Avatar";
+import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
-import { Badge } from "@/components/atoms/Badge";
-import { Dropdown, DropdownItem, DropdownDivider } from "@/components/molecules/Dropdown";
 import {
-  MessageGroup,
-  TypingIndicator,
-  type MessageData,
-} from "../MessageBubble";
-import { ComposeThread } from "../ComposeThread";
+  Dropdown,
+  DropdownDivider,
+  DropdownItem,
+} from "@/components/molecules/Dropdown";
 import {
-  SearchIcon,
+  InfoIcon,
   MoreVerticalIcon,
   PhoneIcon,
-  VideoIcon,
-  InfoIcon,
-  UsersIcon,
   PlusIcon,
+  SearchIcon,
+  UsersIcon,
+  VideoIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
+import { ComposeThread } from "../ComposeThread";
+import {
+  type MessageData,
+  MessageGroup,
+  TypingIndicator,
+} from "../MessageBubble";
 
 // ============================================
 // Types
@@ -106,11 +110,11 @@ export const ChatLayout = ({
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredContacts = contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(searchQuery.toLowerCase())
+    contact.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   const filteredRooms = rooms.filter((room) =>
-    room.name.toLowerCase().includes(searchQuery.toLowerCase())
+    room.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   const sidebarWidthClass = {
@@ -126,7 +130,7 @@ export const ChatLayout = ({
         <div
           className={cn(
             "flex flex-col border-r border-border bg-card",
-            sidebarWidthClass
+            sidebarWidthClass,
           )}
         >
           {sidebar || (
@@ -238,7 +242,12 @@ const ChatSidebar = ({
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold">Messages</h2>
         {onNewChat && (
-          <Button variant="ghost" size="sm" className="size-8 p-0" onClick={onNewChat}>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="size-8 p-0"
+            onClick={onNewChat}
+          >
             <PlusIcon className="size-4" />
           </Button>
         )}
@@ -343,7 +352,12 @@ const ChatHeader = ({
 
         <div className="flex items-center gap-x-1">
           {onCall && (
-            <Button variant="ghost" size="sm" className="size-8 p-0" onClick={onCall}>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="size-8 p-0"
+              onClick={onCall}
+            >
               <PhoneIcon className="size-4" />
             </Button>
           )}
@@ -408,7 +422,7 @@ const ContactItem = ({ contact, isSelected, onClick }: ContactItemProps) => (
     type="button"
     className={cn(
       "w-full p-3 flex items-center gap-x-3 text-left hover:bg-muted/50 transition-colors",
-      isSelected && "bg-muted"
+      isSelected && "bg-muted",
     )}
     onClick={onClick}
   >
@@ -452,7 +466,7 @@ const RoomItem = ({ room, isSelected, onClick }: RoomItemProps) => (
     type="button"
     className={cn(
       "w-full p-3 flex items-center gap-x-3 text-left hover:bg-muted/50 transition-colors",
-      isSelected && "bg-muted"
+      isSelected && "bg-muted",
     )}
     onClick={onClick}
   >
@@ -563,7 +577,11 @@ export const ChatInfoPanel = ({
           <h4 className="text-sm font-medium mb-2">Shared Media</h4>
           <div className="grid grid-cols-3 gap-1">
             {sharedMedia.slice(0, 9).map((src, index) => (
-              <div key={index} className="aspect-square rounded overflow-hidden">
+              <div
+                // biome-ignore lint/suspicious/noArrayIndexKey: Media URLs may not be unique
+                key={index}
+                className="aspect-square rounded overflow-hidden"
+              >
                 <img
                   src={src}
                   alt={`Shared media ${index + 1}`}

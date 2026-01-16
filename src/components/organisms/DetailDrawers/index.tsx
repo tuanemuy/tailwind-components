@@ -1,33 +1,45 @@
 import { forwardRef, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/atoms/Button";
-import { Badge } from "@/components/atoms/Badge";
 import { Avatar } from "@/components/atoms/Avatar";
-import { Drawer, DrawerHeader, DrawerBody, DrawerFooter } from "@/components/organisms/Drawer";
+import { Badge } from "@/components/atoms/Badge";
+import { Button } from "@/components/atoms/Button";
 import {
-  UserIcon,
-  MailIcon,
-  ClockIcon,
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+} from "@/components/organisms/Drawer";
+import {
+  AlertCircleIcon,
+  BellIcon,
   CalendarIcon,
+  CheckCircleIcon,
+  ClockIcon,
+  DownloadIcon,
+  EditIcon,
   FileIcon,
   FolderIcon,
   ImageIcon,
-  CheckCircleIcon,
-  AlertCircleIcon,
-  EditIcon,
-  TrashIcon,
-  TagIcon,
   LinkIcon,
-  DownloadIcon,
-  BellIcon,
+  MailIcon,
+  TagIcon,
+  TrashIcon,
+  UserIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // ============================================
 // ActivityDrawer
 // ============================================
 export interface ActivityItem {
   id: string;
-  type: "create" | "update" | "delete" | "comment" | "assign" | "status" | "custom";
+  type:
+    | "create"
+    | "update"
+    | "delete"
+    | "comment"
+    | "assign"
+    | "status"
+    | "custom";
   title: string;
   description?: string;
   user: {
@@ -52,14 +64,26 @@ export interface ActivityDrawerProps {
   className?: string;
 }
 
-const activityTypeStyles: Record<ActivityItem["type"], { icon: ReactNode; color: string }> = {
-  create: { icon: <CheckCircleIcon className="size-4" />, color: "text-success" },
+const activityTypeStyles: Record<
+  ActivityItem["type"],
+  { icon: ReactNode; color: string }
+> = {
+  create: {
+    icon: <CheckCircleIcon className="size-4" />,
+    color: "text-success",
+  },
   update: { icon: <EditIcon className="size-4" />, color: "text-info" },
   delete: { icon: <TrashIcon className="size-4" />, color: "text-destructive" },
   comment: { icon: <BellIcon className="size-4" />, color: "text-primary" },
   assign: { icon: <UserIcon className="size-4" />, color: "text-warning" },
-  status: { icon: <AlertCircleIcon className="size-4" />, color: "text-muted-foreground" },
-  custom: { icon: <BellIcon className="size-4" />, color: "text-muted-foreground" },
+  status: {
+    icon: <AlertCircleIcon className="size-4" />,
+    color: "text-muted-foreground",
+  },
+  custom: {
+    icon: <BellIcon className="size-4" />,
+    color: "text-muted-foreground",
+  },
 };
 
 export const ActivityDrawer = forwardRef<HTMLDivElement, ActivityDrawerProps>(
@@ -137,11 +161,13 @@ export const ActivityDrawer = forwardRef<HTMLDivElement, ActivityDrawerProps>(
                       {/* Metadata */}
                       {activity.metadata && (
                         <div className="mt-2 flex flex-wrap gap-2">
-                          {Object.entries(activity.metadata).map(([key, value]) => (
-                            <Badge key={key} soft className="text-xs">
-                              {key}: {value}
-                            </Badge>
-                          ))}
+                          {Object.entries(activity.metadata).map(
+                            ([key, value]) => (
+                              <Badge key={key} soft className="text-xs">
+                                {key}: {value}
+                              </Badge>
+                            ),
+                          )}
                         </div>
                       )}
 
@@ -230,7 +256,10 @@ const statusColors: Record<NonNullable<UserInfo["status"]>, string> = {
   busy: "bg-destructive",
 };
 
-export const UserDetailsDrawer = forwardRef<HTMLDivElement, UserDetailsDrawerProps>(
+export const UserDetailsDrawer = forwardRef<
+  HTMLDivElement,
+  UserDetailsDrawerProps
+>(
   (
     {
       isOpen,
@@ -278,7 +307,9 @@ export const UserDetailsDrawer = forwardRef<HTMLDivElement, UserDetailsDrawerPro
                 />
               )}
             </div>
-            <h3 className="text-lg font-semibold text-foreground">{user.name}</h3>
+            <h3 className="text-lg font-semibold text-foreground">
+              {user.name}
+            </h3>
             {user.role && (
               <p className="text-sm text-muted-foreground">{user.role}</p>
             )}
@@ -373,9 +404,14 @@ export const UserDetailsDrawer = forwardRef<HTMLDivElement, UserDetailsDrawerPro
                   Additional Information
                 </h4>
                 <div className="space-y-2">
-                  {user.customFields.map((field, index) => (
-                    <div key={index} className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">{field.label}</span>
+                  {user.customFields.map((field) => (
+                    <div
+                      key={`${field.label}-${field.value}`}
+                      className="flex justify-between text-sm"
+                    >
+                      <span className="text-muted-foreground">
+                        {field.label}
+                      </span>
                       <span className="text-foreground">{field.value}</span>
                     </div>
                   ))}
@@ -390,9 +426,9 @@ export const UserDetailsDrawer = forwardRef<HTMLDivElement, UserDetailsDrawerPro
                   Social Links
                 </h4>
                 <div className="flex flex-wrap gap-2">
-                  {user.socialLinks.map((link, index) => (
+                  {user.socialLinks.map((link) => (
                     <Button
-                      key={index}
+                      key={`${link.type}-${link.url}`}
                       variant="outline"
                       size="sm"
                       onClick={() => window.open(link.url, "_blank")}
@@ -425,13 +461,21 @@ export const UserDetailsDrawer = forwardRef<HTMLDivElement, UserDetailsDrawerPro
                 </div>
                 <div className="flex gap-2">
                   {onEdit && (
-                    <Button variant="outline" size="sm" onClick={() => onEdit(user)}>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => onEdit(user)}
+                    >
                       <EditIcon className="size-4" />
                       Edit
                     </Button>
                   )}
                   {onMessage && (
-                    <Button variant="primary" size="sm" onClick={() => onMessage(user)}>
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      onClick={() => onMessage(user)}
+                    >
                       <MailIcon className="size-4" />
                       Message
                     </Button>
@@ -470,7 +514,10 @@ export interface ChatUserDetailsDrawerProps {
   className?: string;
 }
 
-export const ChatUserDetailsDrawer = forwardRef<HTMLDivElement, ChatUserDetailsDrawerProps>(
+export const ChatUserDetailsDrawer = forwardRef<
+  HTMLDivElement,
+  ChatUserDetailsDrawerProps
+>(
   (
     {
       isOpen,
@@ -517,7 +564,9 @@ export const ChatUserDetailsDrawer = forwardRef<HTMLDivElement, ChatUserDetailsD
                 />
               )}
             </div>
-            <h3 className="text-lg font-semibold text-foreground">{user.name}</h3>
+            <h3 className="text-lg font-semibold text-foreground">
+              {user.name}
+            </h3>
             <p className="text-sm text-muted-foreground">{user.email}</p>
             {user.lastActive && (
               <p className="mt-1 text-xs text-muted-foreground">
@@ -537,7 +586,9 @@ export const ChatUserDetailsDrawer = forwardRef<HTMLDivElement, ChatUserDetailsD
               <span className="text-lg font-semibold text-foreground">
                 {user.sharedFiles || 0}
               </span>
-              <span className="text-xs text-muted-foreground">Shared Files</span>
+              <span className="text-xs text-muted-foreground">
+                Shared Files
+              </span>
             </button>
             <button
               type="button"
@@ -548,7 +599,9 @@ export const ChatUserDetailsDrawer = forwardRef<HTMLDivElement, ChatUserDetailsD
               <span className="text-lg font-semibold text-foreground">
                 {user.sharedMedia || 0}
               </span>
-              <span className="text-xs text-muted-foreground">Shared Media</span>
+              <span className="text-xs text-muted-foreground">
+                Shared Media
+              </span>
             </button>
           </div>
 
@@ -596,7 +649,9 @@ export const ChatUserDetailsDrawer = forwardRef<HTMLDivElement, ChatUserDetailsD
                   onClick={() => onMute(user)}
                 >
                   <BellIcon className="size-4" />
-                  {user.mutedUntil ? `Muted until ${user.mutedUntil}` : "Mute notifications"}
+                  {user.mutedUntil
+                    ? `Muted until ${user.mutedUntil}`
+                    : "Mute notifications"}
                 </Button>
               )}
               {onClearChat && (
@@ -680,7 +735,11 @@ const fileTypeIcons: Record<string, ReactNode> = {
 function getFileTypeIcon(type: string): ReactNode {
   if (type.startsWith("image/")) return fileTypeIcons.image;
   if (type === "folder") return fileTypeIcons.folder;
-  if (type.includes("document") || type.includes("pdf") || type.includes("text")) {
+  if (
+    type.includes("document") ||
+    type.includes("pdf") ||
+    type.includes("text")
+  ) {
     return fileTypeIcons.document;
   }
   return fileTypeIcons.default;
@@ -730,7 +789,9 @@ export const FilesInfoDrawer = forwardRef<HTMLDivElement, FilesInfoDrawerProps>(
                 {getFileTypeIcon(file.type)}
               </div>
             )}
-            <h3 className="text-lg font-semibold text-foreground">{file.name}</h3>
+            <h3 className="text-lg font-semibold text-foreground">
+              {file.name}
+            </h3>
             <p className="text-sm text-muted-foreground">{file.type}</p>
           </div>
 
@@ -753,7 +814,9 @@ export const FilesInfoDrawer = forwardRef<HTMLDivElement, FilesInfoDrawerProps>(
                 {file.path && (
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Location</span>
-                    <span className="truncate text-foreground">{file.path}</span>
+                    <span className="truncate text-foreground">
+                      {file.path}
+                    </span>
                   </div>
                 )}
                 {file.createdAt && (
@@ -777,7 +840,9 @@ export const FilesInfoDrawer = forwardRef<HTMLDivElement, FilesInfoDrawerProps>(
                 <h4 className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                   Description
                 </h4>
-                <p className="text-sm text-muted-foreground">{file.description}</p>
+                <p className="text-sm text-muted-foreground">
+                  {file.description}
+                </p>
               </div>
             )}
 
@@ -794,7 +859,9 @@ export const FilesInfoDrawer = forwardRef<HTMLDivElement, FilesInfoDrawerProps>(
                     size="sm"
                     fallback={file.owner.name.charAt(0)}
                   />
-                  <span className="text-sm text-foreground">{file.owner.name}</span>
+                  <span className="text-sm text-foreground">
+                    {file.owner.name}
+                  </span>
                 </div>
               </div>
             )}
@@ -806,9 +873,9 @@ export const FilesInfoDrawer = forwardRef<HTMLDivElement, FilesInfoDrawerProps>(
                   Shared with ({file.sharedWith.length})
                 </h4>
                 <div className="flex flex-wrap gap-2">
-                  {file.sharedWith.map((user, index) => (
+                  {file.sharedWith.map((user) => (
                     <div
-                      key={index}
+                      key={user.name}
                       className="flex items-center gap-2 rounded-full bg-muted px-3 py-1"
                     >
                       <Avatar
@@ -817,7 +884,9 @@ export const FilesInfoDrawer = forwardRef<HTMLDivElement, FilesInfoDrawerProps>(
                         size="xs"
                         fallback={user.name.charAt(0)}
                       />
-                      <span className="text-xs text-foreground">{user.name}</span>
+                      <span className="text-xs text-foreground">
+                        {user.name}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -848,9 +917,9 @@ export const FilesInfoDrawer = forwardRef<HTMLDivElement, FilesInfoDrawerProps>(
                   Version History
                 </h4>
                 <div className="space-y-2">
-                  {file.versions.map((version, index) => (
+                  {file.versions.map((version) => (
                     <div
-                      key={index}
+                      key={version.version}
                       className="flex items-center justify-between rounded-lg bg-muted/50 p-2 text-xs"
                     >
                       <div>
@@ -861,7 +930,9 @@ export const FilesInfoDrawer = forwardRef<HTMLDivElement, FilesInfoDrawerProps>(
                           by {version.user}
                         </span>
                       </div>
-                      <span className="text-muted-foreground">{version.date}</span>
+                      <span className="text-muted-foreground">
+                        {version.date}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -901,7 +972,11 @@ export const FilesInfoDrawer = forwardRef<HTMLDivElement, FilesInfoDrawerProps>(
               </Button>
             )}
             {onDownload && (
-              <Button variant="primary" size="sm" onClick={() => onDownload(file)}>
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => onDownload(file)}
+              >
                 <DownloadIcon className="size-4" />
                 Download
               </Button>
@@ -992,7 +1067,10 @@ const statusLabels: Record<TaskStatus, string> = {
   blocked: "Blocked",
 };
 
-export const TaskDetailsDrawer = forwardRef<HTMLDivElement, TaskDetailsDrawerProps>(
+export const TaskDetailsDrawer = forwardRef<
+  HTMLDivElement,
+  TaskDetailsDrawerProps
+>(
   (
     {
       isOpen,
@@ -1008,7 +1086,8 @@ export const TaskDetailsDrawer = forwardRef<HTMLDivElement, TaskDetailsDrawerPro
   ) => {
     if (!task) return null;
 
-    const completedSubtasks = task.subtasks?.filter((s) => s.completed).length || 0;
+    const completedSubtasks =
+      task.subtasks?.filter((s) => s.completed).length || 0;
     const totalSubtasks = task.subtasks?.length || 0;
 
     return (
@@ -1077,7 +1156,9 @@ export const TaskDetailsDrawer = forwardRef<HTMLDivElement, TaskDetailsDrawerPro
                 {task.estimatedTime && (
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Estimated</span>
-                    <span className="text-foreground">{task.estimatedTime}</span>
+                    <span className="text-foreground">
+                      {task.estimatedTime}
+                    </span>
                   </div>
                 )}
                 {task.loggedTime && (
@@ -1096,9 +1177,9 @@ export const TaskDetailsDrawer = forwardRef<HTMLDivElement, TaskDetailsDrawerPro
                   Assignees
                 </h4>
                 <div className="flex flex-wrap gap-2">
-                  {task.assignees.map((assignee, index) => (
+                  {task.assignees.map((assignee) => (
                     <div
-                      key={index}
+                      key={assignee.name}
                       className="flex items-center gap-2 rounded-full bg-muted px-3 py-1"
                     >
                       <Avatar
@@ -1107,7 +1188,9 @@ export const TaskDetailsDrawer = forwardRef<HTMLDivElement, TaskDetailsDrawerPro
                         size="xs"
                         fallback={assignee.name.charAt(0)}
                       />
-                      <span className="text-xs text-foreground">{assignee.name}</span>
+                      <span className="text-xs text-foreground">
+                        {assignee.name}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -1176,9 +1259,9 @@ export const TaskDetailsDrawer = forwardRef<HTMLDivElement, TaskDetailsDrawerPro
                   Attachments
                 </h4>
                 <div className="space-y-2">
-                  {task.attachments.map((attachment, index) => (
+                  {task.attachments.map((attachment) => (
                     <a
-                      key={index}
+                      key={`${attachment.name}-${attachment.url}`}
                       href={attachment.url}
                       target="_blank"
                       rel="noopener noreferrer"

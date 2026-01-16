@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { SetupFlow, SetupProgress } from "./index";
 import { Button } from "@/components/atoms/Button";
 import {
-  UserIcon,
-  MailIcon,
-  CreditCardIcon,
-  ShieldIcon,
   BellIcon,
   CheckIcon,
+  CreditCardIcon,
+  MailIcon,
+  ShieldIcon,
+  UserIcon,
 } from "@/lib/icons";
+import { SetupFlow, SetupProgress } from "./index";
 
 const meta: Meta<typeof SetupFlow> = {
   title: "Organisms/PageSections/SetupFlow",
@@ -202,7 +202,10 @@ export const AllCompleted: Story = {
     title: "Setup Complete!",
     description: "You've completed all the setup steps",
     variant: "list",
-    steps: basicSteps.map((step) => ({ ...step, status: "completed" as const })),
+    steps: basicSteps.map((step) => ({
+      ...step,
+      status: "completed" as const,
+    })),
   },
   decorators: Default.decorators,
 };

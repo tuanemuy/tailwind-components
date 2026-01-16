@@ -1,24 +1,24 @@
 "use client";
 
 import { forwardRef, useCallback } from "react";
-import { cn } from "@/lib/utils";
+import { Button, Checkbox } from "@/components/atoms";
 import {
-  tableContainerVariants,
-  tableHeaderCellVariants,
-  tableCellVariants,
-  tableRowVariants,
-  tablePaginationVariants,
-  tableEmptyStateVariants,
-  tableLoadingStateVariants,
-} from "@/lib/variants";
-import { Checkbox, Button } from "@/components/atoms";
-import {
+  ChevronDownIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   ChevronUpIcon,
-  ChevronDownIcon,
   SpinnerIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
+import {
+  tableCellVariants,
+  tableContainerVariants,
+  tableEmptyStateVariants,
+  tableHeaderCellVariants,
+  tableLoadingStateVariants,
+  tablePaginationVariants,
+  tableRowVariants,
+} from "@/lib/variants";
 
 // ============================================
 // Column Types
@@ -111,14 +111,18 @@ function StickyTableInner<T>(
     onRowClick,
     ...props
   }: StickyTableProps<T>,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const size = compact ? "compact" : "default";
 
   // Calculate sticky positions
-  const getStickyPosition = (columnIndex: number, direction: "left" | "right") => {
+  const getStickyPosition = (
+    columnIndex: number,
+    direction: "left" | "right",
+  ) => {
     let position = 0;
     const targetColumns = columns.filter((col) => col.sticky === direction);
+    void targetColumns;
 
     if (direction === "left") {
       // Add checkbox column width if selectable
@@ -129,18 +133,20 @@ function StickyTableInner<T>(
       for (let i = 0; i < columnIndex; i++) {
         const col = columns[i];
         if (col.sticky === "left") {
-          position += parseInt(col.width || "150", 10);
+          position += Number.parseInt(col.width || "150", 10);
         }
       }
     } else {
       // Right sticky
-      const rightStickyColumns = columns.filter((col) => col.sticky === "right");
+      const rightStickyColumns = columns.filter(
+        (col) => col.sticky === "right",
+      );
       const currentIndex = rightStickyColumns.findIndex(
-        (col) => col.key === columns[columnIndex].key
+        (col) => col.key === columns[columnIndex].key,
       );
 
       for (let i = currentIndex + 1; i < rightStickyColumns.length; i++) {
-        position += parseInt(rightStickyColumns[i].width || "150", 10);
+        position += Number.parseInt(rightStickyColumns[i].width || "150", 10);
       }
     }
 
@@ -150,11 +156,12 @@ function StickyTableInner<T>(
   // Selection logic
   const isRowSelected = useCallback(
     (row: T) => selectedRows.includes(row),
-    [selectedRows]
+    [selectedRows],
   );
 
   const isAllSelected = data.length > 0 && selectedRows.length === data.length;
-  const isIndeterminate = selectedRows.length > 0 && selectedRows.length < data.length;
+  const isIndeterminate =
+    selectedRows.length > 0 && selectedRows.length < data.length;
 
   const handleSelectAll = useCallback(() => {
     if (isAllSelected) {
@@ -172,7 +179,7 @@ function StickyTableInner<T>(
         onSelectionChange?.([...selectedRows, row]);
       }
     },
-    [isRowSelected, selectedRows, onSelectionChange]
+    [isRowSelected, selectedRows, onSelectionChange],
   );
 
   // Sort logic
@@ -191,7 +198,7 @@ function StickyTableInner<T>(
 
       onSort({ key, direction });
     },
-    [sortState, onSort]
+    [sortState, onSort],
   );
 
   // Get cell value
@@ -206,7 +213,9 @@ function StickyTableInner<T>(
   };
 
   // Pagination
-  const totalPages = pagination ? Math.ceil(pagination.total / pagination.pageSize) : 0;
+  const totalPages = pagination
+    ? Math.ceil(pagination.total / pagination.pageSize)
+    : 0;
 
   const stickyBaseClass = "sticky z-10 bg-card";
   const stickyShadowLeft = "shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)]";
@@ -216,12 +225,10 @@ function StickyTableInner<T>(
     <div ref={ref} className={cn("w-full", className)} {...props}>
       {/* Table Container */}
       <div
-        className={cn(
-          tableContainerVariants({ bordered }),
-          "relative"
-        )}
+        className={cn(tableContainerVariants({ bordered }), "relative")}
         style={{
-          maxHeight: typeof maxHeight === "number" ? `${maxHeight}px` : maxHeight,
+          maxHeight:
+            typeof maxHeight === "number" ? `${maxHeight}px` : maxHeight,
         }}
       >
         <div className="min-w-full inline-block align-middle">
@@ -234,7 +241,7 @@ function StickyTableInner<T>(
                     scope="col"
                     className={cn(
                       "w-[52px] ps-4 py-3 sticky left-0 z-30 bg-card",
-                      stickyShadowLeft
+                      stickyShadowLeft,
                     )}
                   >
                     <Checkbox
@@ -261,7 +268,10 @@ function StickyTableInner<T>(
 
                   const stickyStyle = column.sticky
                     ? {
-                        [column.sticky]: getStickyPosition(index, column.sticky),
+                        [column.sticky]: getStickyPosition(
+                          index,
+                          column.sticky,
+                        ),
                       }
                     : undefined;
 
@@ -282,7 +292,7 @@ function StickyTableInner<T>(
                         }),
                         column.sticky && stickyBaseClass,
                         column.sticky === "left" && stickyShadowLeft,
-                        column.sticky === "right" && stickyShadowRight
+                        column.sticky === "right" && stickyShadowRight,
                       )}
                     >
                       {isSortable ? (
@@ -311,10 +321,14 @@ function StickyTableInner<T>(
                 <tr>
                   <td
                     colSpan={columns.length + (selectable ? 1 : 0)}
-                    className={cn(tableLoadingStateVariants({ variant: "spinner" }))}
+                    className={cn(
+                      tableLoadingStateVariants({ variant: "spinner" }),
+                    )}
                   >
                     <SpinnerIcon className="size-5 animate-spin text-muted-foreground" />
-                    <span className="text-sm text-muted-foreground">Loading...</span>
+                    <span className="text-sm text-muted-foreground">
+                      Loading...
+                    </span>
                   </td>
                 </tr>
               ) : data.length === 0 ? (
@@ -334,23 +348,38 @@ function StickyTableInner<T>(
                 data.map((row, rowIndex) => (
                   <tr
                     key={getRowKey(row, rowIndex)}
+                    role={onRowClick ? "button" : undefined}
+                    tabIndex={onRowClick ? 0 : undefined}
                     className={cn(
                       tableRowVariants({
                         hoverable,
                         clickable: !!onRowClick,
                         selected: isRowSelected(row),
                         striped,
-                      })
+                      }),
                     )}
-                    onClick={onRowClick ? () => onRowClick(row, rowIndex) : undefined}
+                    onClick={
+                      onRowClick ? () => onRowClick(row, rowIndex) : undefined
+                    }
+                    onKeyDown={
+                      onRowClick
+                        ? (e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault();
+                              onRowClick(row, rowIndex);
+                            }
+                          }
+                        : undefined
+                    }
                   >
                     {selectable && (
                       <td
                         className={cn(
                           "w-[52px] whitespace-nowrap ps-4 py-3 sticky left-0 z-10 bg-card",
-                          stickyShadowLeft
+                          stickyShadowLeft,
                         )}
                         onClick={(e) => e.stopPropagation()}
+                        onKeyDown={(e) => e.stopPropagation()}
                       >
                         <Checkbox
                           checked={isRowSelected(row)}
@@ -365,7 +394,10 @@ function StickyTableInner<T>(
 
                       const stickyStyle = column.sticky
                         ? {
-                            [column.sticky]: getStickyPosition(colIndex, column.sticky),
+                            [column.sticky]: getStickyPosition(
+                              colIndex,
+                              column.sticky,
+                            ),
                           }
                         : undefined;
 
@@ -378,7 +410,9 @@ function StickyTableInner<T>(
                             column.sticky && stickyBaseClass,
                             column.sticky === "left" && stickyShadowLeft,
                             column.sticky === "right" && stickyShadowRight,
-                            isRowSelected(row) && column.sticky && "bg-primary/5"
+                            isRowSelected(row) &&
+                              column.sticky &&
+                              "bg-primary/5",
                           )}
                         >
                           {column.render ? (
@@ -403,7 +437,9 @@ function StickyTableInner<T>(
       {pagination && totalPages > 1 && (
         <div
           className={cn(
-            tablePaginationVariants({ variant: compact ? "compact" : "default" })
+            tablePaginationVariants({
+              variant: compact ? "compact" : "default",
+            }),
           )}
         >
           <span className="text-sm text-muted-foreground">
@@ -437,7 +473,7 @@ function StickyTableInner<T>(
 
 // Export with forwardRef workaround for generics
 export const StickyTable = forwardRef(StickyTableInner) as <T>(
-  props: StickyTableProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> }
+  props: StickyTableProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> },
 ) => React.ReactElement;
 
 (StickyTable as { displayName?: string }).displayName = "StickyTable";

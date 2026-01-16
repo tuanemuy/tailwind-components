@@ -1,13 +1,13 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/atoms/Button";
 import { Badge } from "@/components/atoms/Badge";
+import { Button } from "@/components/atoms/Button";
 import {
   ArrowRightIcon,
+  CheckIcon,
   ExternalLinkIcon,
   RocketIcon,
-  CheckIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 export interface FeaturePreviewData {
   id: string;
@@ -17,7 +17,13 @@ export interface FeaturePreviewData {
   image?: string;
   video?: string;
   badge?: string;
-  badgeVariant?: "default" | "secondary" | "destructive" | "outline" | "success" | "warning";
+  badgeVariant?:
+    | "default"
+    | "secondary"
+    | "destructive"
+    | "outline"
+    | "success"
+    | "warning";
   features?: string[];
   ctaText?: string;
   ctaUrl?: string;
@@ -26,14 +32,18 @@ export interface FeaturePreviewData {
   releaseDate?: string;
 }
 
-export interface FeaturePreviewCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FeaturePreviewCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   feature: FeaturePreviewData;
   variant?: "default" | "compact" | "horizontal" | "featured" | "media";
   onCtaClick?: (feature: FeaturePreviewData) => void;
   onDismiss?: (feature: FeaturePreviewData) => void;
 }
 
-export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardProps>(
+export const FeaturePreviewCard = forwardRef<
+  HTMLDivElement,
+  FeaturePreviewCardProps
+>(
   (
     {
       className,
@@ -43,7 +53,7 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
       onDismiss,
       ...props
     },
-    ref
+    ref,
   ) => {
     const handleCtaClick = () => {
       onCtaClick?.(feature);
@@ -56,7 +66,7 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
           ref={ref}
           className={cn(
             "group overflow-hidden rounded-xl border border-border bg-card",
-            className
+            className,
           )}
           {...props}
         >
@@ -79,16 +89,22 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
               />
             ) : (
               <div className="flex h-full w-full items-center justify-center">
-                {feature.icon || <RocketIcon className="size-12 text-muted-foreground" />}
+                {feature.icon || (
+                  <RocketIcon className="size-12 text-muted-foreground" />
+                )}
               </div>
             )}
 
             {/* Badges */}
             <div className="absolute left-3 top-3 flex gap-x-2">
               {feature.isNew && <Badge variant="default">New</Badge>}
-              {feature.isComingSoon && <Badge variant="secondary">Coming Soon</Badge>}
+              {feature.isComingSoon && (
+                <Badge variant="secondary">Coming Soon</Badge>
+              )}
               {feature.badge && (
-                <Badge variant={feature.badgeVariant || "default"}>{feature.badge}</Badge>
+                <Badge variant={feature.badgeVariant || "default"}>
+                  {feature.badge}
+                </Badge>
               )}
             </div>
           </div>
@@ -104,8 +120,11 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
 
             {feature.features && feature.features.length > 0 && (
               <ul className="mt-3 space-y-1">
-                {feature.features.slice(0, 3).map((item, index) => (
-                  <li key={index} className="flex items-center gap-x-2 text-sm text-muted-foreground">
+                {feature.features.slice(0, 3).map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-center gap-x-2 text-sm text-muted-foreground"
+                  >
                     <CheckIcon className="size-3.5 text-success" />
                     <span>{item}</span>
                   </li>
@@ -113,8 +132,8 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
               </ul>
             )}
 
-            {(feature.ctaText || feature.ctaUrl) && (
-              feature.ctaUrl ? (
+            {(feature.ctaText || feature.ctaUrl) &&
+              (feature.ctaUrl ? (
                 <a
                   href={feature.ctaUrl}
                   className="mt-4 inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-background px-3 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground"
@@ -132,8 +151,7 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
                   {feature.ctaText || "Learn more"}
                   <ArrowRightIcon className="ml-1.5 size-4" />
                 </Button>
-              )
-            )}
+              ))}
           </div>
         </div>
       );
@@ -146,7 +164,7 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
           ref={ref}
           className={cn(
             "overflow-hidden rounded-xl bg-gradient-to-br from-primary/10 via-primary/5 to-background border border-border",
-            className
+            className,
           )}
           {...props}
         >
@@ -155,9 +173,13 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
             <div className="flex-1 p-6 md:p-8">
               <div className="flex items-start gap-x-2">
                 {feature.isNew && <Badge variant="default">New</Badge>}
-                {feature.isComingSoon && <Badge variant="secondary">Coming Soon</Badge>}
+                {feature.isComingSoon && (
+                  <Badge variant="secondary">Coming Soon</Badge>
+                )}
                 {feature.badge && (
-                  <Badge variant={feature.badgeVariant || "default"}>{feature.badge}</Badge>
+                  <Badge variant={feature.badgeVariant || "default"}>
+                    {feature.badge}
+                  </Badge>
                 )}
               </div>
 
@@ -167,17 +189,24 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
                     {feature.icon}
                   </div>
                 )}
-                <h3 className="text-xl font-bold text-foreground">{feature.title}</h3>
+                <h3 className="text-xl font-bold text-foreground">
+                  {feature.title}
+                </h3>
               </div>
 
               {feature.description && (
-                <p className="mt-3 text-muted-foreground">{feature.description}</p>
+                <p className="mt-3 text-muted-foreground">
+                  {feature.description}
+                </p>
               )}
 
               {feature.features && feature.features.length > 0 && (
                 <ul className="mt-4 space-y-2">
-                  {feature.features.map((item, index) => (
-                    <li key={index} className="flex items-center gap-x-2 text-sm text-foreground">
+                  {feature.features.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-center gap-x-2 text-sm text-foreground"
+                    >
                       <CheckIcon className="size-4 text-success" />
                       <span>{item}</span>
                     </li>
@@ -192,8 +221,8 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
               )}
 
               <div className="mt-6 flex gap-x-3">
-                {(feature.ctaText || feature.ctaUrl) && (
-                  feature.ctaUrl ? (
+                {(feature.ctaText || feature.ctaUrl) &&
+                  (feature.ctaUrl ? (
                     <a
                       href={feature.ctaUrl}
                       className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
@@ -206,8 +235,7 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
                       {feature.ctaText || "Learn more"}
                       <ArrowRightIcon className="ml-1.5 size-4" />
                     </Button>
-                  )
-                )}
+                  ))}
                 {onDismiss && (
                   <Button variant="ghost" onClick={() => onDismiss(feature)}>
                     Dismiss
@@ -238,7 +266,7 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
           ref={ref}
           className={cn(
             "flex items-center gap-x-4 rounded-xl border border-border bg-card p-4",
-            className
+            className,
           )}
           {...props}
         >
@@ -258,9 +286,19 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
           {/* Content */}
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-x-2">
-              <h4 className="truncate font-semibold text-foreground">{feature.title}</h4>
-              {feature.isNew && <Badge variant="default" size="sm">New</Badge>}
-              {feature.isComingSoon && <Badge variant="secondary" size="sm">Soon</Badge>}
+              <h4 className="truncate font-semibold text-foreground">
+                {feature.title}
+              </h4>
+              {feature.isNew && (
+                <Badge variant="default" size="sm">
+                  New
+                </Badge>
+              )}
+              {feature.isComingSoon && (
+                <Badge variant="secondary" size="sm">
+                  Soon
+                </Badge>
+              )}
             </div>
             {feature.description && (
               <p className="mt-0.5 truncate text-sm text-muted-foreground">
@@ -270,8 +308,8 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
           </div>
 
           {/* CTA */}
-          {(feature.ctaText || feature.ctaUrl) && (
-            feature.ctaUrl ? (
+          {(feature.ctaText || feature.ctaUrl) &&
+            (feature.ctaUrl ? (
               <a
                 href={feature.ctaUrl}
                 className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-background px-3 py-1.5 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground"
@@ -284,8 +322,7 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
                 {feature.ctaText || "View"}
                 <ExternalLinkIcon className="ml-1.5 size-3.5" />
               </Button>
-            )
-          )}
+            ))}
         </div>
       );
     }
@@ -297,7 +334,7 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
           ref={ref}
           className={cn(
             "flex items-center gap-x-3 rounded-lg border border-border bg-card p-3",
-            className
+            className,
           )}
           {...props}
         >
@@ -308,8 +345,14 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
           )}
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-x-2">
-              <h4 className="truncate text-sm font-medium text-foreground">{feature.title}</h4>
-              {feature.isNew && <Badge variant="default" size="sm">New</Badge>}
+              <h4 className="truncate text-sm font-medium text-foreground">
+                {feature.title}
+              </h4>
+              {feature.isNew && (
+                <Badge variant="default" size="sm">
+                  New
+                </Badge>
+              )}
             </div>
           </div>
           <ArrowRightIcon className="size-4 text-muted-foreground" />
@@ -321,10 +364,7 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
     return (
       <div
         ref={ref}
-        className={cn(
-          "rounded-xl border border-border bg-card p-6",
-          className
-        )}
+        className={cn("rounded-xl border border-border bg-card p-6", className)}
         {...props}
       >
         <div className="flex items-start justify-between gap-x-4">
@@ -336,12 +376,24 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
             )}
             <div>
               <div className="flex items-center gap-x-2">
-                <h3 className="font-semibold text-foreground">{feature.title}</h3>
-                {feature.isNew && <Badge variant="default" size="sm">New</Badge>}
-                {feature.isComingSoon && <Badge variant="secondary" size="sm">Coming Soon</Badge>}
+                <h3 className="font-semibold text-foreground">
+                  {feature.title}
+                </h3>
+                {feature.isNew && (
+                  <Badge variant="default" size="sm">
+                    New
+                  </Badge>
+                )}
+                {feature.isComingSoon && (
+                  <Badge variant="secondary" size="sm">
+                    Coming Soon
+                  </Badge>
+                )}
               </div>
               {feature.description && (
-                <p className="mt-1 text-sm text-muted-foreground">{feature.description}</p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {feature.description}
+                </p>
               )}
             </div>
           </div>
@@ -359,8 +411,11 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
 
         {feature.features && feature.features.length > 0 && (
           <ul className="mt-4 space-y-1.5">
-            {feature.features.map((item, index) => (
-              <li key={index} className="flex items-center gap-x-2 text-sm text-muted-foreground">
+            {feature.features.map((item) => (
+              <li
+                key={item}
+                className="flex items-center gap-x-2 text-sm text-muted-foreground"
+              >
                 <CheckIcon className="size-3.5 text-success" />
                 <span>{item}</span>
               </li>
@@ -385,7 +440,11 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
               </Button>
             )}
             {onDismiss && (
-              <Button variant="ghost" size="sm" onClick={() => onDismiss(feature)}>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => onDismiss(feature)}
+              >
                 Dismiss
               </Button>
             )}
@@ -393,12 +452,13 @@ export const FeaturePreviewCard = forwardRef<HTMLDivElement, FeaturePreviewCardP
         )}
       </div>
     );
-  }
+  },
 );
 FeaturePreviewCard.displayName = "FeaturePreviewCard";
 
 // Grid for multiple feature previews
-export interface FeaturePreviewGridProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FeaturePreviewGridProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   features: FeaturePreviewData[];
   variant?: FeaturePreviewCardProps["variant"];
   columns?: 2 | 3;
@@ -410,7 +470,10 @@ const gridColumnClasses = {
   3: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
 };
 
-export const FeaturePreviewGrid = forwardRef<HTMLDivElement, FeaturePreviewGridProps>(
+export const FeaturePreviewGrid = forwardRef<
+  HTMLDivElement,
+  FeaturePreviewGridProps
+>(
   (
     {
       className,
@@ -420,7 +483,7 @@ export const FeaturePreviewGrid = forwardRef<HTMLDivElement, FeaturePreviewGridP
       onCtaClick,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
@@ -438,6 +501,6 @@ export const FeaturePreviewGrid = forwardRef<HTMLDivElement, FeaturePreviewGridP
         ))}
       </div>
     );
-  }
+  },
 );
 FeaturePreviewGrid.displayName = "FeaturePreviewGrid";

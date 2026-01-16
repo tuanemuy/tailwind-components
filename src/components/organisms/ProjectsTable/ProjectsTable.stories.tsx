@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { ProjectsTable, type Project } from "./index";
+import { type Project, ProjectsTable } from "./index";
 
 // Sample projects data
 const sampleProjects: Project[] = [
@@ -14,8 +14,16 @@ const sampleProjects: Project[] = [
     dueDate: "2024-03-31",
     members: [
       { id: "1", name: "John Doe", avatar: "https://i.pravatar.cc/150?u=john" },
-      { id: "2", name: "Jane Smith", avatar: "https://i.pravatar.cc/150?u=jane" },
-      { id: "3", name: "Bob Johnson", avatar: "https://i.pravatar.cc/150?u=bob" },
+      {
+        id: "2",
+        name: "Jane Smith",
+        avatar: "https://i.pravatar.cc/150?u=jane",
+      },
+      {
+        id: "3",
+        name: "Bob Johnson",
+        avatar: "https://i.pravatar.cc/150?u=bob",
+      },
     ],
     budget: 50000,
     spent: 35000,
@@ -30,7 +38,11 @@ const sampleProjects: Project[] = [
     startDate: "2024-02-01",
     dueDate: "2024-06-30",
     members: [
-      { id: "4", name: "Alice Brown", avatar: "https://i.pravatar.cc/150?u=alice" },
+      {
+        id: "4",
+        name: "Alice Brown",
+        avatar: "https://i.pravatar.cc/150?u=alice",
+      },
       { id: "5", name: "Charlie Wilson" },
     ],
     budget: 120000,
@@ -45,7 +57,9 @@ const sampleProjects: Project[] = [
     progress: 100,
     startDate: "2024-01-15",
     dueDate: "2024-02-28",
-    members: [{ id: "1", name: "John Doe", avatar: "https://i.pravatar.cc/150?u=john" }],
+    members: [
+      { id: "1", name: "John Doe", avatar: "https://i.pravatar.cc/150?u=john" },
+    ],
     priority: "low",
   },
   {
@@ -57,8 +71,16 @@ const sampleProjects: Project[] = [
     startDate: "2024-01-20",
     dueDate: "2024-04-15",
     members: [
-      { id: "2", name: "Jane Smith", avatar: "https://i.pravatar.cc/150?u=jane" },
-      { id: "3", name: "Bob Johnson", avatar: "https://i.pravatar.cc/150?u=bob" },
+      {
+        id: "2",
+        name: "Jane Smith",
+        avatar: "https://i.pravatar.cc/150?u=jane",
+      },
+      {
+        id: "3",
+        name: "Bob Johnson",
+        avatar: "https://i.pravatar.cc/150?u=bob",
+      },
     ],
     budget: 25000,
     spent: 8000,
@@ -174,7 +196,7 @@ export const WithPagination: Story = {
 
     const paginatedProjects = sampleProjects.slice(
       (page - 1) * pageSize,
-      page * pageSize
+      page * pageSize,
     );
 
     return (

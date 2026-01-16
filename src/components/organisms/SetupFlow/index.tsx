@@ -1,15 +1,15 @@
 "use client";
 
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import {
-  setupFlowVariants,
-  setupFlowStepVariants,
-  setupFlowIndicatorVariants,
-} from "@/lib/variants/setupFlow";
 import { Button } from "@/components/atoms/Button";
 import { CheckIcon } from "@/lib/icons";
-import type { VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+import {
+  setupFlowIndicatorVariants,
+  setupFlowStepVariants,
+  setupFlowVariants,
+} from "@/lib/variants/setupFlow";
 
 type SetupFlowVariant = "list" | "timeline" | "accordion" | "card";
 type StepStatus = "pending" | "current" | "completed";
@@ -49,7 +49,7 @@ export const SetupFlow = forwardRef<HTMLDivElement, SetupFlowProps>(
       size = "md",
       ...props
     },
-    ref
+    ref,
   ) => {
     const isCardVariant = variant === "card";
 
@@ -58,13 +58,24 @@ export const SetupFlow = forwardRef<HTMLDivElement, SetupFlowProps>(
         {/* Header */}
         {(title || description) && (
           <div className="space-y-1">
-            {title && <h3 className="text-lg font-semibold text-foreground">{title}</h3>}
-            {description && <p className="text-sm text-muted-foreground">{description}</p>}
+            {title && (
+              <h3 className="text-lg font-semibold text-foreground">{title}</h3>
+            )}
+            {description && (
+              <p className="text-sm text-muted-foreground">{description}</p>
+            )}
           </div>
         )}
 
         {/* Steps */}
-        <div className={cn(setupFlowVariants({ variant, columns: isCardVariant ? columns : undefined }))}>
+        <div
+          className={cn(
+            setupFlowVariants({
+              variant,
+              columns: isCardVariant ? columns : undefined,
+            }),
+          )}
+        >
           {steps.map((step, index) => (
             <SetupFlowStep
               key={step.id}
@@ -78,7 +89,7 @@ export const SetupFlow = forwardRef<HTMLDivElement, SetupFlowProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 SetupFlow.displayName = "SetupFlow";
 
@@ -91,14 +102,23 @@ interface SetupFlowStepProps {
   isLast?: boolean;
 }
 
-export const SetupFlowStep = forwardRef<HTMLDivElement, SetupFlowStepProps & React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, step, variant, size, stepNumber, isLast = false, ...props }, ref) => {
+export const SetupFlowStep = forwardRef<
+  HTMLDivElement,
+  SetupFlowStepProps & React.HTMLAttributes<HTMLDivElement>
+>(
+  (
+    { className, step, variant, size, stepNumber, isLast = false, ...props },
+    ref,
+  ) => {
     const showConnector = variant === "timeline" && !isLast;
 
     return (
       <div
         ref={ref}
-        className={cn(setupFlowStepVariants({ variant, status: step.status }), className)}
+        className={cn(
+          setupFlowStepVariants({ variant, status: step.status }),
+          className,
+        )}
         {...props}
       >
         {/* Timeline connector */}
@@ -117,11 +137,15 @@ export const SetupFlowStep = forwardRef<HTMLDivElement, SetupFlowStepProps & Rea
         {/* Content */}
         <div className="flex-1 space-y-2">
           <div className="flex flex-wrap items-center gap-x-2">
-            <h4 className={cn(
-              "font-medium",
-              step.status === "completed" ? "text-muted-foreground" : "text-foreground",
-              size === "sm" ? "text-sm" : "text-base"
-            )}>
+            <h4
+              className={cn(
+                "font-medium",
+                step.status === "completed"
+                  ? "text-muted-foreground"
+                  : "text-foreground",
+                size === "sm" ? "text-sm" : "text-base",
+              )}
+            >
               {step.title}
             </h4>
             {step.optional && (
@@ -130,17 +154,17 @@ export const SetupFlowStep = forwardRef<HTMLDivElement, SetupFlowStepProps & Rea
           </div>
 
           {step.description && (
-            <p className={cn(
-              "text-muted-foreground",
-              size === "sm" ? "text-xs" : "text-sm"
-            )}>
+            <p
+              className={cn(
+                "text-muted-foreground",
+                size === "sm" ? "text-xs" : "text-sm",
+              )}
+            >
               {step.description}
             </p>
           )}
 
-          {step.content && (
-            <div className="mt-2">{step.content}</div>
-          )}
+          {step.content && <div className="mt-2">{step.content}</div>}
 
           {step.action && step.status !== "completed" && (
             <Button
@@ -155,7 +179,7 @@ export const SetupFlowStep = forwardRef<HTMLDivElement, SetupFlowStepProps & Rea
         </div>
       </div>
     );
-  }
+  },
 );
 SetupFlowStep.displayName = "SetupFlowStep";
 
@@ -166,8 +190,14 @@ interface SetupFlowIndicatorProps
   icon?: React.ReactNode;
 }
 
-export const SetupFlowIndicator = forwardRef<HTMLDivElement, SetupFlowIndicatorProps & React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, status = "pending", size = "md", stepNumber, icon, ...props }, ref) => {
+export const SetupFlowIndicator = forwardRef<
+  HTMLDivElement,
+  SetupFlowIndicatorProps & React.HTMLAttributes<HTMLDivElement>
+>(
+  (
+    { className, status = "pending", size = "md", stepNumber, icon, ...props },
+    ref,
+  ) => {
     return (
       <div
         ref={ref}
@@ -175,13 +205,17 @@ export const SetupFlowIndicator = forwardRef<HTMLDivElement, SetupFlowIndicatorP
         {...props}
       >
         {status === "completed" ? (
-          <CheckIcon className={cn(
-            size === "sm" ? "size-3" : size === "lg" ? "size-5" : "size-4"
-          )} />
+          <CheckIcon
+            className={cn(
+              size === "sm" ? "size-3" : size === "lg" ? "size-5" : "size-4",
+            )}
+          />
         ) : icon ? (
-          <span className={cn(
-            size === "sm" ? "size-3" : size === "lg" ? "size-5" : "size-4"
-          )}>
+          <span
+            className={cn(
+              size === "sm" ? "size-3" : size === "lg" ? "size-5" : "size-4",
+            )}
+          >
             {icon}
           </span>
         ) : (
@@ -189,12 +223,13 @@ export const SetupFlowIndicator = forwardRef<HTMLDivElement, SetupFlowIndicatorP
         )}
       </div>
     );
-  }
+  },
 );
 SetupFlowIndicator.displayName = "SetupFlowIndicator";
 
 // Progress indicator for setup flow
-export interface SetupProgressProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SetupProgressProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   steps: SetupStep[];
   currentStep?: number;
 }
@@ -220,6 +255,6 @@ export const SetupProgress = forwardRef<HTMLDivElement, SetupProgressProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 SetupProgress.displayName = "SetupProgress";

@@ -1,9 +1,9 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
+import { TrendIndicator } from "@/components/molecules";
+import type { TrendDirection, TrendVariant } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { dataCardVariants } from "@/lib/variants/dataVisualization";
-import { TrendIndicator } from "@/components/molecules";
-import type { VariantProps } from "class-variance-authority";
-import type { TrendDirection, TrendVariant } from "@/lib/types";
 
 // ============================================
 // Types
@@ -49,7 +49,10 @@ export interface StackedProgressCardProps
   formatValue?: (value: number) => string;
 }
 
-export const StackedProgressCard = forwardRef<HTMLDivElement, StackedProgressCardProps>(
+export const StackedProgressCard = forwardRef<
+  HTMLDivElement,
+  StackedProgressCardProps
+>(
   (
     {
       className,
@@ -78,7 +81,9 @@ export const StackedProgressCard = forwardRef<HTMLDivElement, StackedProgressCar
                 <h3 className="text-sm font-medium text-foreground">{title}</h3>
               )}
               {subtitle && (
-                <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {subtitle}
+                </p>
               )}
             </div>
             {action && <div className="shrink-0">{action}</div>}
@@ -88,8 +93,12 @@ export const StackedProgressCard = forwardRef<HTMLDivElement, StackedProgressCar
         {/* Progress Items */}
         <div className="p-4 space-y-5">
           {items.map((item, index) => {
-            const percentage = Math.min((item.current / item.target) * 100, 100);
-            const barColor = item.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+            const percentage = Math.min(
+              (item.current / item.target) * 100,
+              100,
+            );
+            const barColor =
+              item.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
             return (
               <div key={item.id}>
@@ -167,7 +176,10 @@ export interface HorizontalStackedCardProps
   formatValue?: (value: number) => string;
 }
 
-export const HorizontalStackedCard = forwardRef<HTMLDivElement, HorizontalStackedCardProps>(
+export const HorizontalStackedCard = forwardRef<
+  HTMLDivElement,
+  HorizontalStackedCardProps
+>(
   (
     {
       className,
@@ -182,9 +194,10 @@ export const HorizontalStackedCard = forwardRef<HTMLDivElement, HorizontalStacke
     ref,
   ) => {
     const maxTotal = Math.max(
-      ...items.map(item =>
-        item.total ?? item.segments.reduce((sum, seg) => sum + seg.value, 0)
-      )
+      ...items.map(
+        (item) =>
+          item.total ?? item.segments.reduce((sum, seg) => sum + seg.value, 0),
+      ),
     );
 
     return (
@@ -212,7 +225,9 @@ export const HorizontalStackedCard = forwardRef<HTMLDivElement, HorizontalStacke
                   className="size-2.5 rounded-full"
                   style={{ backgroundColor: item.color }}
                 />
-                <span className="text-xs text-muted-foreground">{item.label}</span>
+                <span className="text-xs text-muted-foreground">
+                  {item.label}
+                </span>
               </div>
             ))}
           </div>
@@ -221,21 +236,31 @@ export const HorizontalStackedCard = forwardRef<HTMLDivElement, HorizontalStacke
         {/* Stacked Bars */}
         <div className="px-4 pb-4 space-y-3">
           {items.map((item) => {
-            const itemTotal = item.total ?? item.segments.reduce((sum, seg) => sum + seg.value, 0);
+            const itemTotal =
+              item.total ??
+              item.segments.reduce((sum, seg) => sum + seg.value, 0);
             const maxWidth = (itemTotal / maxTotal) * 100;
 
             return (
               <div key={item.id}>
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-sm text-foreground truncate">{item.label}</span>
+                  <span className="text-sm text-foreground truncate">
+                    {item.label}
+                  </span>
                   <span className="text-xs text-muted-foreground tabular-nums ml-2">
                     {formatValue(itemTotal)}
                   </span>
                 </div>
-                <div className="flex h-4 rounded overflow-hidden bg-muted" style={{ width: `${maxWidth}%` }}>
+                <div
+                  className="flex h-4 rounded overflow-hidden bg-muted"
+                  style={{ width: `${maxWidth}%` }}
+                >
                   {item.segments.map((segment, segIndex) => {
                     const segmentPercentage = (segment.value / itemTotal) * 100;
-                    const segmentColor = segment.color || legend[segIndex]?.color || `hsl(var(--chart-${(segIndex % 5) + 1}))`;
+                    const segmentColor =
+                      segment.color ||
+                      legend[segIndex]?.color ||
+                      `hsl(var(--chart-${(segIndex % 5) + 1}))`;
 
                     return (
                       <div
@@ -274,7 +299,10 @@ export interface VerticalStackedCardProps
   action?: React.ReactNode;
 }
 
-export const VerticalStackedCard = forwardRef<HTMLDivElement, VerticalStackedCardProps>(
+export const VerticalStackedCard = forwardRef<
+  HTMLDivElement,
+  VerticalStackedCardProps
+>(
   (
     {
       className,
@@ -289,9 +317,10 @@ export const VerticalStackedCard = forwardRef<HTMLDivElement, VerticalStackedCar
     ref,
   ) => {
     const maxTotal = Math.max(
-      ...items.map(item =>
-        item.total ?? item.segments.reduce((sum, seg) => sum + seg.value, 0)
-      )
+      ...items.map(
+        (item) =>
+          item.total ?? item.segments.reduce((sum, seg) => sum + seg.value, 0),
+      ),
     );
 
     return (
@@ -317,18 +346,27 @@ export const VerticalStackedCard = forwardRef<HTMLDivElement, VerticalStackedCar
             style={{ height: maxHeight }}
           >
             {items.map((item) => {
-              const itemTotal = item.total ?? item.segments.reduce((sum, seg) => sum + seg.value, 0);
+              const itemTotal =
+                item.total ??
+                item.segments.reduce((sum, seg) => sum + seg.value, 0);
               const barHeight = (itemTotal / maxTotal) * 100;
 
               return (
-                <div key={item.id} className="flex flex-col items-center gap-y-2 flex-1">
+                <div
+                  key={item.id}
+                  className="flex flex-col items-center gap-y-2 flex-1"
+                >
                   <div
                     className="w-full max-w-16 flex flex-col-reverse rounded overflow-hidden"
                     style={{ height: `${barHeight}%` }}
                   >
                     {item.segments.map((segment, segIndex) => {
-                      const segmentPercentage = (segment.value / itemTotal) * 100;
-                      const segmentColor = segment.color || legend[segIndex]?.color || `hsl(var(--chart-${(segIndex % 5) + 1}))`;
+                      const segmentPercentage =
+                        (segment.value / itemTotal) * 100;
+                      const segmentColor =
+                        segment.color ||
+                        legend[segIndex]?.color ||
+                        `hsl(var(--chart-${(segIndex % 5) + 1}))`;
 
                       return (
                         <div
@@ -358,7 +396,9 @@ export const VerticalStackedCard = forwardRef<HTMLDivElement, VerticalStackedCar
                   className="size-2.5 rounded-full"
                   style={{ backgroundColor: item.color }}
                 />
-                <span className="text-xs text-muted-foreground">{item.label}</span>
+                <span className="text-xs text-muted-foreground">
+                  {item.label}
+                </span>
               </div>
             ))}
           </div>

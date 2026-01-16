@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Table } from "./index";
-import type { TableColumn, SortState, PaginationProps } from "./index";
+import { useState } from "react";
 import { Avatar, Badge, Button } from "@/components/atoms";
 import { Dropdown, DropdownItem } from "@/components/molecules";
-import { MoreHorizontalIcon, EditIcon, TrashIcon } from "@/lib/icons";
+import { EditIcon, MoreHorizontalIcon, TrashIcon } from "@/lib/icons";
+import type { PaginationProps, SortState, TableColumn } from "./index";
+import { Table } from "./index";
 
 // Sample data type
 interface User {

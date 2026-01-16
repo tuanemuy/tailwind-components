@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import {
-  PricingSection,
-  PricingSectionHeader,
-  PricingSectionTitle,
-  PricingSectionSubtitle,
+  CompletePricingSection,
   PricingBillingToggle,
+  PricingFAQ,
   PricingGrid,
   PricingPlanCard,
-  PricingFAQ,
-  CompletePricingSection,
+  PricingSection,
+  PricingSectionHeader,
   type PricingSectionPlan,
+  PricingSectionSubtitle,
+  PricingSectionTitle,
 } from ".";
 
 const meta: Meta<typeof PricingSection> = {
@@ -77,15 +77,18 @@ const samplePlans: PricingSectionPlan[] = [
 const sampleFAQ = [
   {
     question: "Can I change my plan later?",
-    answer: "Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately.",
+    answer:
+      "Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately.",
   },
   {
     question: "What payment methods do you accept?",
-    answer: "We accept all major credit cards, PayPal, and bank transfers for enterprise plans.",
+    answer:
+      "We accept all major credit cards, PayPal, and bank transfers for enterprise plans.",
   },
   {
     question: "Is there a free trial?",
-    answer: "Yes, all plans come with a 14-day free trial. No credit card required.",
+    answer:
+      "Yes, all plans come with a 14-day free trial. No credit card required.",
   },
 ];
 
@@ -114,7 +117,9 @@ export const Default: Story = {
 
 export const WithBillingToggle: Story = {
   render: function Render() {
-    const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly");
+    const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">(
+      "monthly",
+    );
 
     return (
       <PricingSection>
@@ -227,7 +232,9 @@ export const CompletePricingSectionExample: Story = {
       subtitle="Simple, transparent pricing that grows with you"
       plans={samplePlans}
       faq={sampleFAQ}
-      onSelectPlan={(planId, billing) => console.log(`Selected: ${planId}, Billing: ${billing}`)}
+      onSelectPlan={(planId, billing) =>
+        console.log(`Selected: ${planId}, Billing: ${billing}`)
+      }
     />
   ),
 };

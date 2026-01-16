@@ -1,17 +1,17 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import { ProgressBar } from "@/components/atoms/ProgressBar";
 import { AvatarGroup } from "@/components/molecules/AvatarGroup";
 import {
-  MoreHorizontalIcon,
-  StarIcon,
   CalendarIcon,
   CheckIcon,
-  FolderIcon,
   ExternalLinkIcon,
+  FolderIcon,
+  MoreHorizontalIcon,
+  StarIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 export type ProjectCardStatus =
   | "active"
@@ -22,7 +22,16 @@ export type ProjectCardStatus =
 
 const statusConfig: Record<
   ProjectCardStatus,
-  { label: string; variant: "default" | "secondary" | "destructive" | "outline" | "success" | "warning" }
+  {
+    label: string;
+    variant:
+      | "default"
+      | "secondary"
+      | "destructive"
+      | "outline"
+      | "success"
+      | "warning";
+  }
 > = {
   active: { label: "Active", variant: "success" },
   completed: { label: "Completed", variant: "secondary" },
@@ -59,7 +68,8 @@ export interface ProjectCardData {
   externalUrl?: string;
 }
 
-export interface ProjectCardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onClick"> {
+export interface ProjectCardProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onClick"> {
   project: ProjectCardData;
   variant?: "default" | "compact" | "featured" | "horizontal";
   showProgress?: boolean;
@@ -82,7 +92,7 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
       actions,
       ...props
     },
-    ref
+    ref,
   ) => {
     const statusInfo = statusConfig[project.status];
 
@@ -94,9 +104,21 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
           className={cn(
             "group overflow-hidden rounded-xl border border-border bg-card",
             onClick && "cursor-pointer",
-            className
+            className,
           )}
+          role={onClick ? "button" : undefined}
+          tabIndex={onClick ? 0 : undefined}
           onClick={() => onClick?.(project)}
+          onKeyDown={
+            onClick
+              ? (e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onClick?.(project);
+                  }
+                }
+              : undefined
+          }
           {...props}
         >
           {/* Cover */}
@@ -104,15 +126,20 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
             className="relative h-40 bg-muted"
             style={
               project.coverImage
-                ? { backgroundImage: `url(${project.coverImage})`, backgroundSize: "cover", backgroundPosition: "center" }
+                ? {
+                    backgroundImage: `url(${project.coverImage})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }
                 : project.color
-                ? { backgroundColor: project.color }
-                : undefined
+                  ? { backgroundColor: project.color }
+                  : undefined
             }
           >
             {/* Star Button */}
             {onStar && (
               <button
+                type="button"
                 className="absolute right-3 top-3 rounded-lg bg-background/80 p-1.5 opacity-0 backdrop-blur-sm transition-opacity hover:bg-background group-hover:opacity-100"
                 onClick={(e) => {
                   e.stopPropagation();
@@ -122,7 +149,9 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
                 <StarIcon
                   className={cn(
                     "size-4",
-                    project.isStarred ? "fill-warning text-warning" : "text-muted-foreground"
+                    project.isStarred
+                      ? "fill-warning text-warning"
+                      : "text-muted-foreground",
                   )}
                 />
               </button>
@@ -143,7 +172,9 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
             <div className="flex items-start justify-between gap-x-3">
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-x-2">
-                  <h3 className="truncate font-semibold text-foreground">{project.name}</h3>
+                  <h3 className="truncate font-semibold text-foreground">
+                    {project.name}
+                  </h3>
                   {project.externalUrl && (
                     <a
                       href={project.externalUrl}
@@ -155,7 +186,9 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
                   )}
                 </div>
                 {project.category && (
-                  <p className="text-sm text-muted-foreground">{project.category}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {project.category}
+                  </p>
                 )}
               </div>
               <Badge variant={statusInfo.variant} size="sm">
@@ -173,7 +206,9 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
               <div className="mt-4">
                 <div className="mb-1.5 flex items-center justify-between text-xs">
                   <span className="text-muted-foreground">Progress</span>
-                  <span className="font-medium text-foreground">{project.progress}%</span>
+                  <span className="font-medium text-foreground">
+                    {project.progress}%
+                  </span>
                 </div>
                 <ProgressBar value={project.progress} size="sm" />
               </div>
@@ -187,14 +222,15 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
                     <span>{project.dueDate}</span>
                   </div>
                 )}
-                {project.tasksCompleted !== undefined && project.tasksTotal !== undefined && (
-                  <div className="flex items-center gap-x-1 text-xs text-muted-foreground">
-                    <CheckIcon className="size-3.5" />
-                    <span>
-                      {project.tasksCompleted}/{project.tasksTotal}
-                    </span>
-                  </div>
-                )}
+                {project.tasksCompleted !== undefined &&
+                  project.tasksTotal !== undefined && (
+                    <div className="flex items-center gap-x-1 text-xs text-muted-foreground">
+                      <CheckIcon className="size-3.5" />
+                      <span>
+                        {project.tasksCompleted}/{project.tasksTotal}
+                      </span>
+                    </div>
+                  )}
               </div>
               {showMembers && project.members && project.members.length > 0 && (
                 <AvatarGroup
@@ -221,27 +257,49 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
           className={cn(
             "flex items-center gap-x-4 rounded-xl border border-border bg-card p-4",
             onClick && "cursor-pointer hover:border-primary/50",
-            className
+            className,
           )}
+          role={onClick ? "button" : undefined}
+          tabIndex={onClick ? 0 : undefined}
           onClick={() => onClick?.(project)}
+          onKeyDown={
+            onClick
+              ? (e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onClick?.(project);
+                  }
+                }
+              : undefined
+          }
           {...props}
         >
           {/* Icon */}
           <div
             className="flex size-12 shrink-0 items-center justify-center rounded-xl"
-            style={project.color ? { backgroundColor: project.color } : undefined}
+            style={
+              project.color ? { backgroundColor: project.color } : undefined
+            }
           >
-            {project.icon || <FolderIcon className="size-6 text-muted-foreground" />}
+            {project.icon || (
+              <FolderIcon className="size-6 text-muted-foreground" />
+            )}
           </div>
 
           {/* Info */}
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-x-2">
-              <h4 className="truncate font-medium text-foreground">{project.name}</h4>
-              {project.isStarred && <StarIcon className="size-3.5 fill-warning text-warning" />}
+              <h4 className="truncate font-medium text-foreground">
+                {project.name}
+              </h4>
+              {project.isStarred && (
+                <StarIcon className="size-3.5 fill-warning text-warning" />
+              )}
             </div>
             {project.description && (
-              <p className="truncate text-sm text-muted-foreground">{project.description}</p>
+              <p className="truncate text-sm text-muted-foreground">
+                {project.description}
+              </p>
             )}
           </div>
 
@@ -294,19 +352,37 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
           className={cn(
             "flex items-center gap-x-3 rounded-lg border border-border bg-card p-3",
             onClick && "cursor-pointer hover:border-primary/50",
-            className
+            className,
           )}
+          role={onClick ? "button" : undefined}
+          tabIndex={onClick ? 0 : undefined}
           onClick={() => onClick?.(project)}
+          onKeyDown={
+            onClick
+              ? (e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onClick?.(project);
+                  }
+                }
+              : undefined
+          }
           {...props}
         >
           <div
             className="flex size-8 shrink-0 items-center justify-center rounded-lg"
-            style={project.color ? { backgroundColor: project.color } : undefined}
+            style={
+              project.color ? { backgroundColor: project.color } : undefined
+            }
           >
-            {project.icon || <FolderIcon className="size-4 text-muted-foreground" />}
+            {project.icon || (
+              <FolderIcon className="size-4 text-muted-foreground" />
+            )}
           </div>
           <div className="min-w-0 flex-1">
-            <h4 className="truncate text-sm font-medium text-foreground">{project.name}</h4>
+            <h4 className="truncate text-sm font-medium text-foreground">
+              {project.name}
+            </h4>
           </div>
           <Badge variant={statusInfo.variant} size="sm">
             {statusInfo.label}
@@ -322,26 +398,48 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
         className={cn(
           "rounded-xl border border-border bg-card p-4",
           onClick && "cursor-pointer hover:border-primary/50",
-          className
+          className,
         )}
+        role={onClick ? "button" : undefined}
+        tabIndex={onClick ? 0 : undefined}
         onClick={() => onClick?.(project)}
+        onKeyDown={
+          onClick
+            ? (e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  onClick?.(project);
+                }
+              }
+            : undefined
+        }
         {...props}
       >
         <div className="flex items-start justify-between gap-x-3">
           <div className="flex items-start gap-x-3">
             <div
               className="flex size-10 shrink-0 items-center justify-center rounded-xl"
-              style={project.color ? { backgroundColor: project.color } : undefined}
+              style={
+                project.color ? { backgroundColor: project.color } : undefined
+              }
             >
-              {project.icon || <FolderIcon className="size-5 text-muted-foreground" />}
+              {project.icon || (
+                <FolderIcon className="size-5 text-muted-foreground" />
+              )}
             </div>
             <div className="min-w-0">
               <div className="flex items-center gap-x-2">
-                <h4 className="truncate font-semibold text-foreground">{project.name}</h4>
-                {project.isStarred && <StarIcon className="size-3.5 fill-warning text-warning" />}
+                <h4 className="truncate font-semibold text-foreground">
+                  {project.name}
+                </h4>
+                {project.isStarred && (
+                  <StarIcon className="size-3.5 fill-warning text-warning" />
+                )}
               </div>
               {project.category && (
-                <p className="text-sm text-muted-foreground">{project.category}</p>
+                <p className="text-sm text-muted-foreground">
+                  {project.category}
+                </p>
               )}
             </div>
           </div>
@@ -363,14 +461,18 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
         </div>
 
         {project.description && (
-          <p className="mt-3 line-clamp-2 text-sm text-muted-foreground">{project.description}</p>
+          <p className="mt-3 line-clamp-2 text-sm text-muted-foreground">
+            {project.description}
+          </p>
         )}
 
         {showProgress && project.progress !== undefined && (
           <div className="mt-4">
             <div className="mb-1.5 flex items-center justify-between text-xs">
               <span className="text-muted-foreground">Progress</span>
-              <span className="font-medium text-foreground">{project.progress}%</span>
+              <span className="font-medium text-foreground">
+                {project.progress}%
+              </span>
             </div>
             <ProgressBar value={project.progress} size="sm" />
           </div>
@@ -384,14 +486,15 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
                 <span>{project.dueDate}</span>
               </div>
             )}
-            {project.tasksCompleted !== undefined && project.tasksTotal !== undefined && (
-              <div className="flex items-center gap-x-1 text-xs text-muted-foreground">
-                <CheckIcon className="size-3.5" />
-                <span>
-                  {project.tasksCompleted}/{project.tasksTotal}
-                </span>
-              </div>
-            )}
+            {project.tasksCompleted !== undefined &&
+              project.tasksTotal !== undefined && (
+                <div className="flex items-center gap-x-1 text-xs text-muted-foreground">
+                  <CheckIcon className="size-3.5" />
+                  <span>
+                    {project.tasksCompleted}/{project.tasksTotal}
+                  </span>
+                </div>
+              )}
           </div>
           {showMembers && project.members && project.members.length > 0 && (
             <AvatarGroup
@@ -407,12 +510,13 @@ export const ProjectCard = forwardRef<HTMLDivElement, ProjectCardProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 ProjectCard.displayName = "ProjectCard";
 
 // Grid Layout
-export interface ProjectCardGridProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ProjectCardGridProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   projects: ProjectCardData[];
   variant?: ProjectCardProps["variant"];
   columns?: 2 | 3 | 4;
@@ -441,7 +545,7 @@ export const ProjectCardGrid = forwardRef<HTMLDivElement, ProjectCardGridProps>(
       onStar,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
@@ -462,12 +566,13 @@ export const ProjectCardGrid = forwardRef<HTMLDivElement, ProjectCardGridProps>(
         ))}
       </div>
     );
-  }
+  },
 );
 ProjectCardGrid.displayName = "ProjectCardGrid";
 
 // List Layout
-export interface ProjectCardListProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ProjectCardListProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   projects: ProjectCardData[];
   showProgress?: boolean;
   showMembers?: boolean;
@@ -484,7 +589,7 @@ export const ProjectCardList = forwardRef<HTMLDivElement, ProjectCardListProps>(
       onProjectClick,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div ref={ref} className={cn("space-y-2", className)} {...props}>
@@ -500,6 +605,6 @@ export const ProjectCardList = forwardRef<HTMLDivElement, ProjectCardListProps>(
         ))}
       </div>
     );
-  }
+  },
 );
 ProjectCardList.displayName = "ProjectCardList";

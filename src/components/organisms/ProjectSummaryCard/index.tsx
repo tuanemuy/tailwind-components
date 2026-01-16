@@ -1,14 +1,36 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
 import { Badge } from "@/components/atoms/Badge";
-import { ProgressBar } from "@/components/atoms/ProgressBar";
 import { Button } from "@/components/atoms/Button";
+import { ProgressBar } from "@/components/atoms/ProgressBar";
 import { AvatarGroup } from "@/components/molecules/AvatarGroup";
-import { CalendarIcon, MoreHorizontalIcon, CheckIcon, ClockIcon } from "@/lib/icons";
+import {
+  CalendarIcon,
+  CheckIcon,
+  ClockIcon,
+  MoreHorizontalIcon,
+} from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
-export type ProjectStatus = "active" | "completed" | "on-hold" | "cancelled" | "pending";
+export type ProjectStatus =
+  | "active"
+  | "completed"
+  | "on-hold"
+  | "cancelled"
+  | "pending";
 
-const statusConfig: Record<ProjectStatus, { label: string; variant: "default" | "secondary" | "destructive" | "outline" | "success" | "warning" }> = {
+const statusConfig: Record<
+  ProjectStatus,
+  {
+    label: string;
+    variant:
+      | "default"
+      | "secondary"
+      | "destructive"
+      | "outline"
+      | "success"
+      | "warning";
+  }
+> = {
   active: { label: "Active", variant: "success" },
   completed: { label: "Completed", variant: "default" },
   "on-hold": { label: "On Hold", variant: "warning" },
@@ -38,7 +60,8 @@ export interface ProjectSummary {
   icon?: React.ReactNode;
 }
 
-export interface ProjectSummaryCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ProjectSummaryCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   project: ProjectSummary;
   variant?: "default" | "compact" | "detailed" | "mini";
   showProgress?: boolean;
@@ -54,7 +77,10 @@ const priorityColors: Record<string, string> = {
   urgent: "bg-destructive",
 };
 
-export const ProjectSummaryCard = forwardRef<HTMLDivElement, ProjectSummaryCardProps>(
+export const ProjectSummaryCard = forwardRef<
+  HTMLDivElement,
+  ProjectSummaryCardProps
+>(
   (
     {
       className,
@@ -66,7 +92,7 @@ export const ProjectSummaryCard = forwardRef<HTMLDivElement, ProjectSummaryCardP
       onProjectClick,
       ...props
     },
-    ref
+    ref,
   ) => {
     const statusInfo = statusConfig[project.status];
 
@@ -77,9 +103,19 @@ export const ProjectSummaryCard = forwardRef<HTMLDivElement, ProjectSummaryCardP
           className={cn(
             "flex items-center justify-between rounded-lg border border-border bg-card p-3",
             onProjectClick && "cursor-pointer hover:border-primary/50",
-            className
+            className,
           )}
-          onClick={() => onProjectClick?.(project)}
+          {...(onProjectClick && {
+            role: "button",
+            tabIndex: 0,
+            onClick: () => onProjectClick(project),
+            onKeyDown: (e: React.KeyboardEvent) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onProjectClick(project);
+              }
+            },
+          })}
           {...props}
         >
           <div className="flex items-center gap-x-3">
@@ -89,12 +125,15 @@ export const ProjectSummaryCard = forwardRef<HTMLDivElement, ProjectSummaryCardP
               </div>
             )}
             <div className="min-w-0">
-              <p className="truncate text-sm font-medium text-foreground">{project.name}</p>
-              {project.tasksCompleted !== undefined && project.tasksTotal !== undefined && (
-                <p className="text-xs text-muted-foreground">
-                  {project.tasksCompleted}/{project.tasksTotal} tasks
-                </p>
-              )}
+              <p className="truncate text-sm font-medium text-foreground">
+                {project.name}
+              </p>
+              {project.tasksCompleted !== undefined &&
+                project.tasksTotal !== undefined && (
+                  <p className="text-xs text-muted-foreground">
+                    {project.tasksCompleted}/{project.tasksTotal} tasks
+                  </p>
+                )}
             </div>
           </div>
           <Badge variant={statusInfo.variant} size="sm">
@@ -111,18 +150,35 @@ export const ProjectSummaryCard = forwardRef<HTMLDivElement, ProjectSummaryCardP
           className={cn(
             "rounded-xl border border-border bg-card p-4",
             onProjectClick && "cursor-pointer hover:border-primary/50",
-            className
+            className,
           )}
-          onClick={() => onProjectClick?.(project)}
+          {...(onProjectClick && {
+            role: "button",
+            tabIndex: 0,
+            onClick: () => onProjectClick(project),
+            onKeyDown: (e: React.KeyboardEvent) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onProjectClick(project);
+              }
+            },
+          })}
           {...props}
         >
           <div className="flex items-start justify-between gap-x-4">
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-x-2">
                 {project.priority && (
-                  <span className={cn("size-2 rounded-full", priorityColors[project.priority])} />
+                  <span
+                    className={cn(
+                      "size-2 rounded-full",
+                      priorityColors[project.priority],
+                    )}
+                  />
                 )}
-                <h4 className="truncate font-medium text-foreground">{project.name}</h4>
+                <h4 className="truncate font-medium text-foreground">
+                  {project.name}
+                </h4>
               </div>
               {project.description && (
                 <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
@@ -139,7 +195,9 @@ export const ProjectSummaryCard = forwardRef<HTMLDivElement, ProjectSummaryCardP
             <div className="mt-3">
               <div className="mb-1 flex items-center justify-between text-xs">
                 <span className="text-muted-foreground">Progress</span>
-                <span className="font-medium text-foreground">{project.progress}%</span>
+                <span className="font-medium text-foreground">
+                  {project.progress}%
+                </span>
               </div>
               <ProgressBar value={project.progress} size="sm" />
             </div>
@@ -154,7 +212,7 @@ export const ProjectSummaryCard = forwardRef<HTMLDivElement, ProjectSummaryCardP
             )}
             {showMembers && project.members && project.members.length > 0 && (
               <AvatarGroup
-                items={project.members.map(m => ({
+                items={project.members.map((m) => ({
                   src: m.avatarSrc,
                   initials: m.avatarFallback || m.name.charAt(0),
                   alt: m.name,
@@ -175,9 +233,19 @@ export const ProjectSummaryCard = forwardRef<HTMLDivElement, ProjectSummaryCardP
           className={cn(
             "rounded-xl border border-border bg-card",
             onProjectClick && "cursor-pointer hover:border-primary/50",
-            className
+            className,
           )}
-          onClick={() => onProjectClick?.(project)}
+          {...(onProjectClick && {
+            role: "button",
+            tabIndex: 0,
+            onClick: () => onProjectClick(project),
+            onKeyDown: (e: React.KeyboardEvent) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onProjectClick(project);
+              }
+            },
+          })}
           {...props}
         >
           <div className="flex items-start justify-between p-4">
@@ -189,16 +257,27 @@ export const ProjectSummaryCard = forwardRef<HTMLDivElement, ProjectSummaryCardP
               )}
               <div>
                 <div className="flex items-center gap-x-2">
-                  <h3 className="font-semibold text-foreground">{project.name}</h3>
+                  <h3 className="font-semibold text-foreground">
+                    {project.name}
+                  </h3>
                   {project.priority && (
-                    <span className={cn("size-2 rounded-full", priorityColors[project.priority])} />
+                    <span
+                      className={cn(
+                        "size-2 rounded-full",
+                        priorityColors[project.priority],
+                      )}
+                    />
                   )}
                 </div>
                 {project.category && (
-                  <p className="text-sm text-muted-foreground">{project.category}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {project.category}
+                  </p>
                 )}
                 {project.description && (
-                  <p className="mt-2 text-sm text-muted-foreground">{project.description}</p>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    {project.description}
+                  </p>
                 )}
               </div>
             </div>
@@ -218,7 +297,9 @@ export const ProjectSummaryCard = forwardRef<HTMLDivElement, ProjectSummaryCardP
             <div className="border-t border-border px-4 py-3">
               <div className="mb-2 flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">Progress</span>
-                <span className="font-medium text-foreground">{project.progress}%</span>
+                <span className="font-medium text-foreground">
+                  {project.progress}%
+                </span>
               </div>
               <ProgressBar value={project.progress} size="sm" />
             </div>
@@ -238,16 +319,19 @@ export const ProjectSummaryCard = forwardRef<HTMLDivElement, ProjectSummaryCardP
                   <span>{project.dueDate}</span>
                 </div>
               )}
-              {project.tasksCompleted !== undefined && project.tasksTotal !== undefined && (
-                <div className="flex items-center gap-x-1 text-xs text-muted-foreground">
-                  <CheckIcon className="size-3.5" />
-                  <span>{project.tasksCompleted}/{project.tasksTotal} tasks</span>
-                </div>
-              )}
+              {project.tasksCompleted !== undefined &&
+                project.tasksTotal !== undefined && (
+                  <div className="flex items-center gap-x-1 text-xs text-muted-foreground">
+                    <CheckIcon className="size-3.5" />
+                    <span>
+                      {project.tasksCompleted}/{project.tasksTotal} tasks
+                    </span>
+                  </div>
+                )}
             </div>
             {showMembers && project.members && project.members.length > 0 && (
               <AvatarGroup
-                items={project.members.map(m => ({
+                items={project.members.map((m) => ({
                   src: m.avatarSrc,
                   initials: m.avatarFallback || m.name.charAt(0),
                   alt: m.name,
@@ -268,9 +352,19 @@ export const ProjectSummaryCard = forwardRef<HTMLDivElement, ProjectSummaryCardP
         className={cn(
           "rounded-xl border border-border bg-card p-4",
           onProjectClick && "cursor-pointer hover:border-primary/50",
-          className
+          className,
         )}
-        onClick={() => onProjectClick?.(project)}
+        {...(onProjectClick && {
+          role: "button",
+          tabIndex: 0,
+          onClick: () => onProjectClick(project),
+          onKeyDown: (e: React.KeyboardEvent) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              onProjectClick(project);
+            }
+          },
+        })}
         {...props}
       >
         <div className="flex items-start justify-between gap-x-4">
@@ -282,13 +376,22 @@ export const ProjectSummaryCard = forwardRef<HTMLDivElement, ProjectSummaryCardP
             )}
             <div className="min-w-0">
               <div className="flex items-center gap-x-2">
-                <h4 className="truncate font-semibold text-foreground">{project.name}</h4>
+                <h4 className="truncate font-semibold text-foreground">
+                  {project.name}
+                </h4>
                 {project.priority && (
-                  <span className={cn("size-2 rounded-full", priorityColors[project.priority])} />
+                  <span
+                    className={cn(
+                      "size-2 rounded-full",
+                      priorityColors[project.priority],
+                    )}
+                  />
                 )}
               </div>
               {project.category && (
-                <p className="text-sm text-muted-foreground">{project.category}</p>
+                <p className="text-sm text-muted-foreground">
+                  {project.category}
+                </p>
               )}
             </div>
           </div>
@@ -307,7 +410,9 @@ export const ProjectSummaryCard = forwardRef<HTMLDivElement, ProjectSummaryCardP
           <div className="mt-4">
             <div className="mb-1.5 flex items-center justify-between text-xs">
               <span className="text-muted-foreground">Progress</span>
-              <span className="font-medium text-foreground">{project.progress}%</span>
+              <span className="font-medium text-foreground">
+                {project.progress}%
+              </span>
             </div>
             <ProgressBar value={project.progress} size="sm" />
           </div>
@@ -321,16 +426,19 @@ export const ProjectSummaryCard = forwardRef<HTMLDivElement, ProjectSummaryCardP
                 <span>{project.dueDate}</span>
               </div>
             )}
-            {project.tasksCompleted !== undefined && project.tasksTotal !== undefined && (
-              <div className="flex items-center gap-x-1 text-xs text-muted-foreground">
-                <CheckIcon className="size-3.5" />
-                <span>{project.tasksCompleted}/{project.tasksTotal}</span>
-              </div>
-            )}
+            {project.tasksCompleted !== undefined &&
+              project.tasksTotal !== undefined && (
+                <div className="flex items-center gap-x-1 text-xs text-muted-foreground">
+                  <CheckIcon className="size-3.5" />
+                  <span>
+                    {project.tasksCompleted}/{project.tasksTotal}
+                  </span>
+                </div>
+              )}
           </div>
           {showMembers && project.members && project.members.length > 0 && (
             <AvatarGroup
-              items={project.members.map(m => ({
+              items={project.members.map((m) => ({
                 src: m.avatarSrc,
                 initials: m.avatarFallback || m.name.charAt(0),
                 alt: m.name,
@@ -341,15 +449,18 @@ export const ProjectSummaryCard = forwardRef<HTMLDivElement, ProjectSummaryCardP
           )}
         </div>
 
-        {actions && <div className="mt-4 border-t border-border pt-4">{actions}</div>}
+        {actions && (
+          <div className="mt-4 border-t border-border pt-4">{actions}</div>
+        )}
       </div>
     );
-  }
+  },
 );
 ProjectSummaryCard.displayName = "ProjectSummaryCard";
 
 // Grid component for multiple project cards
-export interface ProjectSummaryGridProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ProjectSummaryGridProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   projects: ProjectSummary[];
   variant?: ProjectSummaryCardProps["variant"];
   columns?: 2 | 3 | 4;
@@ -364,7 +475,10 @@ const columnClasses = {
   4: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
 };
 
-export const ProjectSummaryGrid = forwardRef<HTMLDivElement, ProjectSummaryGridProps>(
+export const ProjectSummaryGrid = forwardRef<
+  HTMLDivElement,
+  ProjectSummaryGridProps
+>(
   (
     {
       className,
@@ -376,7 +490,7 @@ export const ProjectSummaryGrid = forwardRef<HTMLDivElement, ProjectSummaryGridP
       onProjectClick,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
@@ -396,6 +510,6 @@ export const ProjectSummaryGrid = forwardRef<HTMLDivElement, ProjectSummaryGridP
         ))}
       </div>
     );
-  }
+  },
 );
 ProjectSummaryGrid.displayName = "ProjectSummaryGrid";

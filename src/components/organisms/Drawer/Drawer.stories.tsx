@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { Drawer, DrawerHeader, DrawerBody, DrawerFooter } from "./index";
-import { Button } from "@/components/atoms/Button";
 import { Avatar } from "@/components/atoms/Avatar";
 import { Badge } from "@/components/atoms/Badge";
+import { Button } from "@/components/atoms/Button";
 import { Separator } from "@/components/atoms/Separator";
+import { Drawer, DrawerBody, DrawerFooter, DrawerHeader } from "./index";
 
 const meta: Meta<typeof Drawer> = {
   title: "Organisms/Drawer",
@@ -112,7 +112,9 @@ export const UserProfile: Story = {
             {/* Profile Details */}
             <div className="p-6 space-y-4">
               <div>
-                <h4 className="text-sm font-semibold text-foreground mb-2">About</h4>
+                <h4 className="text-sm font-semibold text-foreground mb-2">
+                  About
+                </h4>
                 <dl className="space-y-2">
                   <div className="flex items-center gap-3 text-sm">
                     <dt className="text-muted-foreground">Email:</dt>
@@ -132,7 +134,9 @@ export const UserProfile: Story = {
               <Separator />
 
               <div>
-                <h4 className="text-sm font-semibold text-foreground mb-2">Skills</h4>
+                <h4 className="text-sm font-semibold text-foreground mb-2">
+                  Skills
+                </h4>
                 <div className="flex flex-wrap gap-2">
                   <Badge variant="secondary">UI Design</Badge>
                   <Badge variant="secondary">UX Research</Badge>
@@ -161,7 +165,11 @@ export const FilterDrawer: Story = {
     return (
       <div>
         <Button onClick={() => setIsOpen(true)}>Open Filters</Button>
-        <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)} position="left">
+        <Drawer
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          position="left"
+        >
           <DrawerHeader title="Filters" />
           <DrawerBody>
             <div className="space-y-6">
@@ -174,7 +182,7 @@ export const FilterDrawer: Story = {
                         <input type="checkbox" className="rounded" />
                         <span className="text-sm">{item}</span>
                       </label>
-                    )
+                    ),
                   )}
                 </div>
               </div>
@@ -184,12 +192,18 @@ export const FilterDrawer: Story = {
               <div>
                 <h4 className="text-sm font-semibold mb-3">Price Range</h4>
                 <div className="space-y-2">
-                  {["$0 - $25", "$25 - $50", "$50 - $100", "$100+"].map((item) => (
-                    <label key={item} className="flex items-center gap-2">
-                      <input type="radio" name="price" className="rounded-full" />
-                      <span className="text-sm">{item}</span>
-                    </label>
-                  ))}
+                  {["$0 - $25", "$25 - $50", "$50 - $100", "$100+"].map(
+                    (item) => (
+                      <label key={item} className="flex items-center gap-2">
+                        <input
+                          type="radio"
+                          name="price"
+                          className="rounded-full"
+                        />
+                        <span className="text-sm">{item}</span>
+                      </label>
+                    ),
+                  )}
                 </div>
               </div>
 
@@ -198,12 +212,14 @@ export const FilterDrawer: Story = {
               <div>
                 <h4 className="text-sm font-semibold mb-3">Rating</h4>
                 <div className="space-y-2">
-                  {["4+ stars", "3+ stars", "2+ stars", "1+ stars"].map((item) => (
-                    <label key={item} className="flex items-center gap-2">
-                      <input type="checkbox" className="rounded" />
-                      <span className="text-sm">{item}</span>
-                    </label>
-                  ))}
+                  {["4+ stars", "3+ stars", "2+ stars", "1+ stars"].map(
+                    (item) => (
+                      <label key={item} className="flex items-center gap-2">
+                        <input type="checkbox" className="rounded" />
+                        <span className="text-sm">{item}</span>
+                      </label>
+                    ),
+                  )}
                 </div>
               </div>
             </div>
@@ -226,7 +242,9 @@ export const NoOverlay: Story = {
 
     return (
       <div>
-        <Button onClick={() => setIsOpen(true)}>Open Drawer (No Overlay)</Button>
+        <Button onClick={() => setIsOpen(true)}>
+          Open Drawer (No Overlay)
+        </Button>
         <Drawer
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}

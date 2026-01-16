@@ -1,6 +1,6 @@
-import { forwardRef, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { forwardRef } from "react";
 import { Button } from "@/components/atoms";
+import { cn } from "@/lib/utils";
 
 // CTASection component
 export interface CTASectionProps extends React.HTMLAttributes<HTMLElement> {
@@ -46,20 +46,26 @@ export const CTASection = forwardRef<HTMLElement, CTASectionProps>(
           "relative overflow-hidden",
           paddingClasses[padding],
           !isGradient && !hasImage && backgroundClasses[backgroundColor],
-          isGradient && "bg-gradient-to-r from-primary via-primary/90 to-primary/80 text-primary-foreground",
+          isGradient &&
+            "bg-gradient-to-r from-primary via-primary/90 to-primary/80 text-primary-foreground",
           hasImage && "bg-cover bg-center bg-no-repeat",
           className,
         )}
-        style={hasImage ? { backgroundImage: `url(${backgroundImage})` } : undefined}
+        style={
+          hasImage ? { backgroundImage: `url(${backgroundImage})` } : undefined
+        }
         {...props}
       >
         {/* Overlay for image variant */}
-        {hasImage && (
-          <div className="absolute inset-0 bg-background/80" />
-        )}
+        {hasImage && <div className="absolute inset-0 bg-background/80" />}
 
         {/* Content */}
-        <div className={cn("relative container mx-auto px-4", variant === "split" && "")}>
+        <div
+          className={cn(
+            "relative container mx-auto px-4",
+            variant === "split" && "",
+          )}
+        >
           {variant === "split" ? (
             <div className="flex flex-col items-center justify-between gap-8 lg:flex-row">
               {children}
@@ -69,9 +75,7 @@ export const CTASection = forwardRef<HTMLElement, CTASectionProps>(
               {children}
             </div>
           ) : (
-            <div className="mx-auto max-w-3xl text-center">
-              {children}
-            </div>
+            <div className="mx-auto max-w-3xl text-center">{children}</div>
           )}
         </div>
       </section>
@@ -105,7 +109,8 @@ export const CTAContent = forwardRef<HTMLDivElement, CTAContentProps>(
 CTAContent.displayName = "CTAContent";
 
 // CTATitle component
-export interface CTATitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+export interface CTATitleProps
+  extends React.HTMLAttributes<HTMLHeadingElement> {
   as?: "h2" | "h3";
   size?: "sm" | "md" | "lg";
 }
@@ -117,11 +122,18 @@ const titleSizeClasses = {
 };
 
 export const CTATitle = forwardRef<HTMLHeadingElement, CTATitleProps>(
-  ({ className, as: Component = "h2", size = "md", children, ...props }, ref) => {
+  (
+    { className, as: Component = "h2", size = "md", children, ...props },
+    ref,
+  ) => {
     return (
       <Component
         ref={ref}
-        className={cn("font-bold tracking-tight", titleSizeClasses[size], className)}
+        className={cn(
+          "font-bold tracking-tight",
+          titleSizeClasses[size],
+          className,
+        )}
         {...props}
       >
         {children}
@@ -132,7 +144,8 @@ export const CTATitle = forwardRef<HTMLHeadingElement, CTATitleProps>(
 CTATitle.displayName = "CTATitle";
 
 // CTADescription component
-export interface CTADescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {
+export interface CTADescriptionProps
+  extends React.HTMLAttributes<HTMLParagraphElement> {
   size?: "sm" | "md" | "lg";
 }
 
@@ -142,19 +155,20 @@ const descriptionSizeClasses = {
   lg: "text-lg md:text-xl",
 };
 
-export const CTADescription = forwardRef<HTMLParagraphElement, CTADescriptionProps>(
-  ({ className, size = "md", children, ...props }, ref) => {
-    return (
-      <p
-        ref={ref}
-        className={cn("opacity-90", descriptionSizeClasses[size], className)}
-        {...props}
-      >
-        {children}
-      </p>
-    );
-  },
-);
+export const CTADescription = forwardRef<
+  HTMLParagraphElement,
+  CTADescriptionProps
+>(({ className, size = "md", children, ...props }, ref) => {
+  return (
+    <p
+      ref={ref}
+      className={cn("opacity-90", descriptionSizeClasses[size], className)}
+      {...props}
+    >
+      {children}
+    </p>
+  );
+});
 CTADescription.displayName = "CTADescription";
 
 // CTAActions component
@@ -170,7 +184,10 @@ const alignClasses = {
 };
 
 export const CTAActions = forwardRef<HTMLDivElement, CTAActionsProps>(
-  ({ className, direction = "row", align = "center", children, ...props }, ref) => {
+  (
+    { className, direction = "row", align = "center", children, ...props },
+    ref,
+  ) => {
     return (
       <div
         ref={ref}
@@ -226,10 +243,14 @@ export const CTAStats = forwardRef<HTMLDivElement, CTAStatsProps>(
     return (
       <div
         ref={ref}
-        className={cn("flex flex-wrap justify-center gap-8 md:gap-12", className)}
+        className={cn(
+          "flex flex-wrap justify-center gap-8 md:gap-12",
+          className,
+        )}
         {...props}
       >
         {stats.map((stat, index) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: Stats don't have unique IDs
           <div key={index} className="text-center">
             <div className="text-3xl font-bold md:text-4xl">{stat.value}</div>
             <div className="mt-1 text-sm opacity-75">{stat.label}</div>
@@ -276,13 +297,23 @@ export const SimpleCTA = forwardRef<HTMLElement, SimpleCTAProps>(
     const isPrimaryBg = variant === "gradient" || backgroundColor === "primary";
 
     return (
-      <CTASection ref={ref} variant={variant} backgroundColor={backgroundColor} className={className} {...props}>
+      <CTASection
+        ref={ref}
+        variant={variant}
+        backgroundColor={backgroundColor}
+        className={className}
+        {...props}
+      >
         <CTATitle>{title}</CTATitle>
         {description && <CTADescription>{description}</CTADescription>}
         {(primaryAction || secondaryAction) && (
           <CTAActions className="mt-6">
             {primaryAction && (
-              <CTAButton inverted={isPrimaryBg} onClick={primaryAction.onClick} size="lg">
+              <CTAButton
+                inverted={isPrimaryBg}
+                onClick={primaryAction.onClick}
+                size="lg"
+              >
                 {primaryAction.label}
               </CTAButton>
             )}
@@ -291,7 +322,11 @@ export const SimpleCTA = forwardRef<HTMLElement, SimpleCTAProps>(
                 variant={isPrimaryBg ? "ghost" : "outline"}
                 onClick={secondaryAction.onClick}
                 size="lg"
-                className={isPrimaryBg ? "text-primary-foreground hover:bg-primary-foreground/10" : ""}
+                className={
+                  isPrimaryBg
+                    ? "text-primary-foreground hover:bg-primary-foreground/10"
+                    : ""
+                }
               >
                 {secondaryAction.label}
               </CTAButton>
@@ -361,8 +396,20 @@ export const BannerCTA = forwardRef<HTMLDivElement, BannerCTAProps>(
               onClick={onDismiss}
               className="rounded-lg p-2 hover:bg-primary-foreground/10"
             >
-              <svg className="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="size-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                role="img"
+                aria-label="Close"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           )}

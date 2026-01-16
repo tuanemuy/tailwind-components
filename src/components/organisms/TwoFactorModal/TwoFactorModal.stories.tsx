@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { TwoFactorModal } from "./index";
 import { Button } from "@/components/atoms/Button";
+import { TwoFactorModal } from "./index";
 
 const meta: Meta<typeof TwoFactorModal> = {
   title: "Organisms/Overlays/TwoFactorModal",

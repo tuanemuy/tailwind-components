@@ -1,16 +1,25 @@
 "use client";
 
 import { forwardRef, useMemo } from "react";
-import { cn } from "@/lib/utils";
-import { DataTable, type DataTableColumn, type DataTableProps } from "../DataTable";
-import { Avatar, Badge, ProgressBar } from "@/components/atoms";
+import { Badge, ProgressBar } from "@/components/atoms";
 import { AvatarGroup } from "@/components/molecules";
+import { cn } from "@/lib/utils";
+import {
+  DataTable,
+  type DataTableColumn,
+  type DataTableProps,
+} from "../DataTable";
 
 // ============================================
 // Project Types
 // ============================================
 
-export type ProjectStatus = "active" | "completed" | "on_hold" | "cancelled" | "draft";
+export type ProjectStatus =
+  | "active"
+  | "completed"
+  | "on_hold"
+  | "cancelled"
+  | "draft";
 
 export interface ProjectMember {
   id: string;
@@ -39,10 +48,7 @@ export interface Project {
 // ============================================
 
 export interface ProjectsTableProps
-  extends Omit<
-    DataTableProps<Project>,
-    "data" | "columns" | "getRowKey"
-  > {
+  extends Omit<DataTableProps<Project>, "data" | "columns" | "getRowKey"> {
   projects: Project[];
   showProgress?: boolean;
   showMembers?: boolean;
@@ -58,7 +64,10 @@ export interface ProjectsTableProps
 
 const statusConfig: Record<
   ProjectStatus,
-  { label: string; variant: "success" | "warning" | "destructive" | "secondary" | "default" }
+  {
+    label: string;
+    variant: "success" | "warning" | "destructive" | "secondary" | "default";
+  }
 > = {
   active: { label: "Active", variant: "success" },
   completed: { label: "Completed", variant: "default" },
@@ -93,7 +102,7 @@ export const ProjectsTable = forwardRef<HTMLDivElement, ProjectsTableProps>(
       customColumns,
       ...props
     },
-    ref
+    ref,
   ) => {
     const columns = useMemo<DataTableColumn<Project>[]>(() => {
       const baseColumns: DataTableColumn<Project>[] = [
@@ -106,7 +115,9 @@ export const ProjectsTable = forwardRef<HTMLDivElement, ProjectsTableProps>(
           minWidth: "200px",
           render: (_, project) => (
             <div className="flex flex-col">
-              <span className="font-medium text-foreground">{project.name}</span>
+              <span className="font-medium text-foreground">
+                {project.name}
+              </span>
               {project.description && (
                 <span className="text-sm text-muted-foreground truncate max-w-xs">
                   {project.description}
@@ -121,10 +132,12 @@ export const ProjectsTable = forwardRef<HTMLDivElement, ProjectsTableProps>(
           sortable: true,
           filterable: true,
           filterType: "select",
-          filterOptions: Object.entries(statusConfig).map(([value, { label }]) => ({
-            value,
-            label,
-          })),
+          filterOptions: Object.entries(statusConfig).map(
+            ([value, { label }]) => ({
+              value,
+              label,
+            }),
+          ),
           width: "120px",
           render: (_, project) => {
             const config = statusConfig[project.status];
@@ -145,8 +158,14 @@ export const ProjectsTable = forwardRef<HTMLDivElement, ProjectsTableProps>(
           width: "150px",
           render: (_, project) => (
             <div className="flex items-center gap-2">
-              <ProgressBar value={project.progress} size="sm" className="w-24" />
-              <span className="text-sm text-muted-foreground">{project.progress}%</span>
+              <ProgressBar
+                value={project.progress}
+                size="sm"
+                className="w-24"
+              />
+              <span className="text-sm text-muted-foreground">
+                {project.progress}%
+              </span>
             </div>
           ),
         });
@@ -187,9 +206,15 @@ export const ProjectsTable = forwardRef<HTMLDivElement, ProjectsTableProps>(
               return <span className="text-muted-foreground">-</span>;
             }
             const date = new Date(project.dueDate);
-            const isOverdue = date < new Date() && project.status !== "completed";
+            const isOverdue =
+              date < new Date() && project.status !== "completed";
             return (
-              <span className={cn("text-sm", isOverdue && "text-destructive font-medium")}>
+              <span
+                className={cn(
+                  "text-sm",
+                  isOverdue && "text-destructive font-medium",
+                )}
+              >
                 {date.toLocaleDateString()}
               </span>
             );
@@ -213,7 +238,12 @@ export const ProjectsTable = forwardRef<HTMLDivElement, ProjectsTableProps>(
             const isOverBudget = percentage > 100;
             return (
               <div className="text-end">
-                <div className={cn("text-sm font-medium", isOverBudget && "text-destructive")}>
+                <div
+                  className={cn(
+                    "text-sm font-medium",
+                    isOverBudget && "text-destructive",
+                  )}
+                >
                   ${spent.toLocaleString()} / ${project.budget.toLocaleString()}
                 </div>
                 <div className="text-xs text-muted-foreground">
@@ -231,10 +261,12 @@ export const ProjectsTable = forwardRef<HTMLDivElement, ProjectsTableProps>(
         sortable: true,
         filterable: true,
         filterType: "select",
-        filterOptions: Object.entries(priorityConfig).map(([value, { label }]) => ({
-          value,
-          label,
-        })),
+        filterOptions: Object.entries(priorityConfig).map(
+          ([value, { label }]) => ({
+            value,
+            label,
+          }),
+        ),
         width: "100px",
         render: (_, project) => {
           if (!project.priority) {
@@ -268,7 +300,7 @@ export const ProjectsTable = forwardRef<HTMLDivElement, ProjectsTableProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
 ProjectsTable.displayName = "ProjectsTable";

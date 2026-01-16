@@ -1,13 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import {
-  VideoPlayer,
   AudioPlayer,
-  VideoCall,
   MediaControls,
+  VideoCall,
   type VideoCallParticipant,
+  VideoCallSettings,
+  VideoPlayer,
+  VoiceMessage,
 } from "./index";
-import { Button } from "@/components/atoms/Button";
 
 const meta: Meta<typeof VideoPlayer> = {
   title: "Organisms/MediaPlayer",
@@ -217,11 +218,29 @@ export const VideoCallManyParticipants: StoryObj<typeof VideoCall> = {
   render: function Render() {
     const manyParticipants: VideoCallParticipant[] = [
       ...participants,
-      { id: "5", name: "Alex Brown", avatar: "https://i.pravatar.cc/200?img=6" },
-      { id: "6", name: "Emily Davis", avatar: "https://i.pravatar.cc/200?img=7", isMuted: true },
+      {
+        id: "5",
+        name: "Alex Brown",
+        avatar: "https://i.pravatar.cc/200?img=6",
+      },
+      {
+        id: "6",
+        name: "Emily Davis",
+        avatar: "https://i.pravatar.cc/200?img=7",
+        isMuted: true,
+      },
       { id: "7", name: "Chris Lee", avatar: "https://i.pravatar.cc/200?img=8" },
-      { id: "8", name: "Pat Miller", avatar: "https://i.pravatar.cc/200?img=9", isVideoOff: true },
-      { id: "9", name: "Jordan Taylor", avatar: "https://i.pravatar.cc/200?img=10" },
+      {
+        id: "8",
+        name: "Pat Miller",
+        avatar: "https://i.pravatar.cc/200?img=9",
+        isVideoOff: true,
+      },
+      {
+        id: "9",
+        name: "Jordan Taylor",
+        avatar: "https://i.pravatar.cc/200?img=10",
+      },
     ];
 
     return (
@@ -303,19 +322,22 @@ export const MusicPlayerFull: StoryObj<typeof AudioPlayer> = {
       {
         title: "Sunset Dreams",
         artist: "Chillwave",
-        cover: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop",
+        cover:
+          "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop",
         src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
       },
       {
         title: "Ocean Breeze",
         artist: "Ambient Sounds",
-        cover: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=300&h=300&fit=crop",
+        cover:
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=300&h=300&fit=crop",
         src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
       },
       {
         title: "Mountain Echo",
         artist: "Nature Mix",
-        cover: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=300&fit=crop",
+        cover:
+          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=300&fit=crop",
         src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
       },
     ];
@@ -333,7 +355,9 @@ export const MusicPlayerFull: StoryObj<typeof AudioPlayer> = {
 
         {/* Track Info */}
         <div className="p-4 text-center">
-          <h3 className="font-semibold text-lg">{tracks[currentTrack].title}</h3>
+          <h3 className="font-semibold text-lg">
+            {tracks[currentTrack].title}
+          </h3>
           <p className="text-sm text-muted-foreground">
             {tracks[currentTrack].artist}
           </p>
@@ -365,7 +389,8 @@ export const MusicPlayerFull: StoryObj<typeof AudioPlayer> = {
           <div className="space-y-2">
             {tracks.map((track, index) => (
               <button
-                key={index}
+                type="button"
+                key={track.title}
                 className={`w-full flex items-center gap-3 p-2 rounded-lg transition-colors ${
                   index === currentTrack
                     ? "bg-primary/10 text-primary"
@@ -380,12 +405,221 @@ export const MusicPlayerFull: StoryObj<typeof AudioPlayer> = {
                 />
                 <div className="text-left">
                   <p className="text-sm font-medium">{track.title}</p>
-                  <p className="text-xs text-muted-foreground">{track.artist}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {track.artist}
+                  </p>
                 </div>
               </button>
             ))}
           </div>
         </div>
+      </div>
+    );
+  },
+};
+
+// =============================================================================
+// VoiceMessage Stories
+// =============================================================================
+
+export const VoiceMessageDefault: StoryObj<typeof VoiceMessage> = {
+  render: () => (
+    <div className="w-[400px] space-y-4">
+      <VoiceMessage duration={45} timestamp="10:30 AM" />
+    </div>
+  ),
+};
+
+export const VoiceMessageSent: StoryObj<typeof VoiceMessage> = {
+  render: () => (
+    <div className="w-[400px] flex justify-end">
+      <div className="max-w-[300px]">
+        <VoiceMessage duration={32} variant="sent" timestamp="10:32 AM" />
+      </div>
+    </div>
+  ),
+};
+
+export const VoiceMessageReceived: StoryObj<typeof VoiceMessage> = {
+  render: () => (
+    <div className="w-[400px]">
+      <VoiceMessage
+        duration={67}
+        variant="received"
+        senderName="John Doe"
+        senderAvatar="https://i.pravatar.cc/200?img=1"
+        timestamp="10:35 AM"
+      />
+    </div>
+  ),
+};
+
+export const VoiceMessageCRM: StoryObj<typeof VoiceMessage> = {
+  render: () => (
+    <div className="w-[500px] space-y-4">
+      <VoiceMessage
+        duration={120}
+        variant="crm"
+        senderName="Sarah Wilson"
+        senderAvatar="https://i.pravatar.cc/200?img=4"
+        timestamp="Yesterday, 2:45 PM"
+        status="played"
+      />
+      <VoiceMessage
+        duration={45}
+        variant="crm"
+        senderName="Mike Johnson"
+        senderAvatar="https://i.pravatar.cc/200?img=3"
+        timestamp="Today, 9:15 AM"
+        status="unplayed"
+      />
+    </div>
+  ),
+};
+
+export const VoiceMessageSizes: StoryObj<typeof VoiceMessage> = {
+  render: () => (
+    <div className="w-[500px] space-y-6">
+      <div>
+        <p className="text-sm text-muted-foreground mb-2">Small</p>
+        <VoiceMessage duration={30} size="sm" />
+      </div>
+      <div>
+        <p className="text-sm text-muted-foreground mb-2">Medium (Default)</p>
+        <VoiceMessage duration={45} size="md" />
+      </div>
+      <div>
+        <p className="text-sm text-muted-foreground mb-2">Large</p>
+        <VoiceMessage duration={60} size="lg" />
+      </div>
+    </div>
+  ),
+};
+
+export const VoiceMessageConversation: StoryObj<typeof VoiceMessage> = {
+  render: () => (
+    <div className="w-[500px] space-y-3 bg-muted/30 p-4 rounded-xl">
+      {/* Received message */}
+      <div className="max-w-[80%]">
+        <VoiceMessage
+          duration={25}
+          variant="received"
+          senderAvatar="https://i.pravatar.cc/200?img=2"
+          timestamp="10:30 AM"
+          status="played"
+        />
+      </div>
+
+      {/* Sent message */}
+      <div className="flex justify-end">
+        <div className="max-w-[80%]">
+          <VoiceMessage duration={18} variant="sent" timestamp="10:32 AM" />
+        </div>
+      </div>
+
+      {/* Received message */}
+      <div className="max-w-[80%]">
+        <VoiceMessage
+          duration={42}
+          variant="received"
+          senderAvatar="https://i.pravatar.cc/200?img=2"
+          timestamp="10:35 AM"
+          status="unplayed"
+        />
+      </div>
+    </div>
+  ),
+};
+
+// =============================================================================
+// VideoCallSettings Stories
+// =============================================================================
+
+export const VideoCallSettingsDefault: StoryObj<typeof VideoCallSettings> = {
+  render: function Render() {
+    const [isMicEnabled, setIsMicEnabled] = useState(true);
+    const [isCameraEnabled, setIsCameraEnabled] = useState(true);
+    const [selectedCamera, setSelectedCamera] = useState("default");
+    const [selectedMic, setSelectedMic] = useState("default");
+    const [selectedSpeaker, setSelectedSpeaker] = useState("default");
+    const [selectedBackground, setSelectedBackground] = useState("none");
+
+    return (
+      <div className="w-[500px]">
+        <VideoCallSettings
+          isMicEnabled={isMicEnabled}
+          isCameraEnabled={isCameraEnabled}
+          selectedVideoDevice={selectedCamera}
+          selectedAudioInput={selectedMic}
+          selectedAudioOutput={selectedSpeaker}
+          selectedBackground={selectedBackground}
+          onMicToggle={() => setIsMicEnabled(!isMicEnabled)}
+          onCameraToggle={() => setIsCameraEnabled(!isCameraEnabled)}
+          onVideoDeviceChange={setSelectedCamera}
+          onAudioInputChange={setSelectedMic}
+          onAudioOutputChange={setSelectedSpeaker}
+          onBackgroundChange={setSelectedBackground}
+          onClose={() => console.log("Close")}
+        />
+      </div>
+    );
+  },
+};
+
+export const VideoCallSettingsCompact: StoryObj<typeof VideoCallSettings> = {
+  render: function Render() {
+    const [isMicEnabled, setIsMicEnabled] = useState(true);
+    const [isCameraEnabled, setIsCameraEnabled] = useState(false);
+
+    return (
+      <div className="w-[400px]">
+        <VideoCallSettings
+          variant="compact"
+          isMicEnabled={isMicEnabled}
+          isCameraEnabled={isCameraEnabled}
+          onMicToggle={() => setIsMicEnabled(!isMicEnabled)}
+          onCameraToggle={() => setIsCameraEnabled(!isCameraEnabled)}
+          showPreview={true}
+        />
+      </div>
+    );
+  },
+};
+
+export const VideoCallSettingsModal: StoryObj<typeof VideoCallSettings> = {
+  render: function Render() {
+    const [isMicEnabled, setIsMicEnabled] = useState(true);
+    const [isCameraEnabled, setIsCameraEnabled] = useState(true);
+
+    return (
+      <div className="w-[500px] p-8 bg-muted/30 rounded-xl">
+        <VideoCallSettings
+          variant="modal"
+          isMicEnabled={isMicEnabled}
+          isCameraEnabled={isCameraEnabled}
+          onMicToggle={() => setIsMicEnabled(!isMicEnabled)}
+          onCameraToggle={() => setIsCameraEnabled(!isCameraEnabled)}
+          onClose={() => console.log("Close modal")}
+        />
+      </div>
+    );
+  },
+};
+
+export const VideoCallSettingsNoPreview: StoryObj<typeof VideoCallSettings> = {
+  render: function Render() {
+    const [selectedCamera, setSelectedCamera] = useState("default");
+    const [selectedMic, setSelectedMic] = useState("default");
+
+    return (
+      <div className="w-[400px]">
+        <VideoCallSettings
+          showPreview={false}
+          selectedVideoDevice={selectedCamera}
+          selectedAudioInput={selectedMic}
+          onVideoDeviceChange={setSelectedCamera}
+          onAudioInputChange={setSelectedMic}
+        />
       </div>
     );
   },

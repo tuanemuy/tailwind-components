@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { EditUserModal, EditEventModal, CreateProjectModal } from "./index";
 import { Button } from "@/components/atoms/Button";
+import { CreateProjectModal, EditEventModal, EditUserModal } from "./index";
 
 const meta: Meta = {
   title: "Organisms/Overlays/EditFormModals",
@@ -238,13 +238,18 @@ export const EditProject: StoryObj<typeof CreateProjectModal> = {
           submitText="Save Changes"
           initialData={{
             name: "Website Redesign",
-            description: "Complete overhaul of the company website with modern design.",
+            description:
+              "Complete overhaul of the company website with modern design.",
             startDate: new Date(),
             endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
             status: "active",
             priority: "high",
             visibility: "team",
-            teamMembers: ["john@example.com", "jane@example.com", "bob@example.com"],
+            teamMembers: [
+              "john@example.com",
+              "jane@example.com",
+              "bob@example.com",
+            ],
             tags: ["Design", "Frontend", "Marketing"],
           }}
         />

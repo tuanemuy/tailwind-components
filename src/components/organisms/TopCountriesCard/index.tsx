@@ -1,10 +1,13 @@
-import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { dataCardVariants, getRankingBadgeStyle } from "@/lib/variants/dataVisualization";
-import { TrendIndicator } from "@/components/molecules";
-import { Badge, ProgressBar } from "@/components/atoms";
 import type { VariantProps } from "class-variance-authority";
+import { forwardRef } from "react";
+import { Badge, ProgressBar } from "@/components/atoms";
+import { TrendIndicator } from "@/components/molecules";
 import type { TrendDirection, TrendVariant } from "@/lib/types";
+import { cn } from "@/lib/utils";
+import {
+  dataCardVariants,
+  getRankingBadgeStyle,
+} from "@/lib/variants/dataVisualization";
 
 // ============================================
 // Types
@@ -44,7 +47,10 @@ export interface TopCountriesCardProps
   formatValue?: (value: number) => string;
 }
 
-export const TopCountriesCard = forwardRef<HTMLDivElement, TopCountriesCardProps>(
+export const TopCountriesCard = forwardRef<
+  HTMLDivElement,
+  TopCountriesCardProps
+>(
   (
     {
       className,
@@ -81,7 +87,9 @@ export const TopCountriesCard = forwardRef<HTMLDivElement, TopCountriesCardProps
                 <h3 className="text-sm font-medium text-foreground">{title}</h3>
               )}
               {subtitle && (
-                <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {subtitle}
+                </p>
               )}
             </div>
             {action && <div className="shrink-0">{action}</div>}
@@ -91,9 +99,11 @@ export const TopCountriesCard = forwardRef<HTMLDivElement, TopCountriesCardProps
         {/* Countries List */}
         <div className="divide-y divide-border">
           {displayCountries.map((country, index) => {
-            const percentage = country.percentage ?? (country.value / total) * 100;
+            const percentage =
+              country.percentage ?? (country.value / total) * 100;
             const progressWidth = (country.value / maxValue) * 100;
-            const barColor = country.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+            const barColor =
+              country.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
             return (
               <div key={country.id} className="px-4 py-3">
@@ -102,15 +112,15 @@ export const TopCountriesCard = forwardRef<HTMLDivElement, TopCountriesCardProps
                   <span
                     className={cn(
                       "size-5 shrink-0 flex items-center justify-center rounded text-xs font-semibold",
-                      getRankingBadgeStyle(index + 1)
+                      getRankingBadgeStyle(index + 1),
                     )}
                   >
                     {index + 1}
                   </span>
 
                   {/* Flag */}
-                  {showFlag && (
-                    country.flag ? (
+                  {showFlag &&
+                    (country.flag ? (
                       <img
                         src={country.flag}
                         alt={country.name}
@@ -120,8 +130,7 @@ export const TopCountriesCard = forwardRef<HTMLDivElement, TopCountriesCardProps
                       <span className="text-lg shrink-0">
                         {getFlagEmoji(country.code)}
                       </span>
-                    )
-                  )}
+                    ))}
 
                   {/* Country Name */}
                   <div className="flex-1 min-w-0">
@@ -148,7 +157,9 @@ export const TopCountriesCard = forwardRef<HTMLDivElement, TopCountriesCardProps
                         {formatValue(country.value)}
                       </span>
                       {valueLabel && (
-                        <p className="text-xs text-muted-foreground">{valueLabel}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {valueLabel}
+                        </p>
                       )}
                     </div>
                     {showPercentage && (
@@ -225,7 +236,8 @@ export const CountryMapCard = forwardRef<HTMLDivElement, CountryMapCardProps>(
     },
     ref,
   ) => {
-    const calculatedTotal = total ?? countries.reduce((sum, c) => sum + c.value, 0);
+    const calculatedTotal =
+      total ?? countries.reduce((sum, c) => sum + c.value, 0);
 
     return (
       <div
@@ -254,8 +266,10 @@ export const CountryMapCard = forwardRef<HTMLDivElement, CountryMapCardProps>(
         <div className="border-t border-border px-4 py-3">
           <div className="grid grid-cols-2 gap-3">
             {countries.slice(0, 6).map((country, index) => {
-              const percentage = country.percentage ?? (country.value / calculatedTotal) * 100;
-              const barColor = country.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+              const percentage =
+                country.percentage ?? (country.value / calculatedTotal) * 100;
+              const barColor =
+                country.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
               return (
                 <div key={country.id} className="flex items-center gap-x-2">
@@ -300,7 +314,10 @@ export interface RegionBreakdownCardProps
   formatValue?: (value: number) => string;
 }
 
-export const RegionBreakdownCard = forwardRef<HTMLDivElement, RegionBreakdownCardProps>(
+export const RegionBreakdownCard = forwardRef<
+  HTMLDivElement,
+  RegionBreakdownCardProps
+>(
   (
     {
       className,
@@ -315,8 +332,10 @@ export const RegionBreakdownCard = forwardRef<HTMLDivElement, RegionBreakdownCar
   ) => {
     const grandTotal = regions.reduce(
       (sum, region) =>
-        sum + (region.totalValue ?? region.countries.reduce((s, c) => s + c.value, 0)),
-      0
+        sum +
+        (region.totalValue ??
+          region.countries.reduce((s, c) => s + c.value, 0)),
+      0,
     );
 
     return (
@@ -337,7 +356,9 @@ export const RegionBreakdownCard = forwardRef<HTMLDivElement, RegionBreakdownCar
 
         {/* Regions */}
         {regions.map((region, regionIndex) => {
-          const regionTotal = region.totalValue ?? region.countries.reduce((s, c) => s + c.value, 0);
+          const regionTotal =
+            region.totalValue ??
+            region.countries.reduce((s, c) => s + c.value, 0);
           const regionPercentage = (regionTotal / grandTotal) * 100;
           const regionColor = `hsl(var(--chart-${(regionIndex % 5) + 1}))`;
 
@@ -367,22 +388,22 @@ export const RegionBreakdownCard = forwardRef<HTMLDivElement, RegionBreakdownCar
               {/* Region Countries */}
               <div className="divide-y divide-border">
                 {region.countries.slice(0, 3).map((country) => (
-                    <div
-                      key={country.id}
-                      className="flex items-center justify-between gap-x-3 px-4 py-2 pl-8"
-                    >
-                      <div className="flex items-center gap-x-2 min-w-0">
-                        <span className="text-base shrink-0">
-                          {getFlagEmoji(country.code)}
-                        </span>
-                        <span className="text-sm text-muted-foreground truncate">
-                          {country.name}
-                        </span>
-                      </div>
-                      <span className="text-sm text-muted-foreground tabular-nums">
-                        {formatValue(country.value)}
+                  <div
+                    key={country.id}
+                    className="flex items-center justify-between gap-x-3 px-4 py-2 pl-8"
+                  >
+                    <div className="flex items-center gap-x-2 min-w-0">
+                      <span className="text-base shrink-0">
+                        {getFlagEmoji(country.code)}
+                      </span>
+                      <span className="text-sm text-muted-foreground truncate">
+                        {country.name}
                       </span>
                     </div>
+                    <span className="text-sm text-muted-foreground tabular-nums">
+                      {formatValue(country.value)}
+                    </span>
+                  </div>
                 ))}
                 {region.countries.length > 3 && (
                   <div className="px-4 py-1.5 pl-8">

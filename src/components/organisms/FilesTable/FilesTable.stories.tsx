@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { FilesTable, type FileData } from "./index";
+import { type FileData, FilesTable } from "./index";
 
 // Sample files data
 const sampleFiles: FileData[] = [
@@ -17,8 +17,16 @@ const sampleFiles: FileData[] = [
       avatar: "https://i.pravatar.cc/150?u=john",
     },
     sharedWith: [
-      { id: "2", name: "Jane Smith", avatar: "https://i.pravatar.cc/150?u=jane" },
-      { id: "3", name: "Bob Johnson", avatar: "https://i.pravatar.cc/150?u=bob" },
+      {
+        id: "2",
+        name: "Jane Smith",
+        avatar: "https://i.pravatar.cc/150?u=jane",
+      },
+      {
+        id: "3",
+        name: "Bob Johnson",
+        avatar: "https://i.pravatar.cc/150?u=bob",
+      },
     ],
     createdAt: "2024-01-10",
     updatedAt: "2024-01-14",
@@ -54,7 +62,11 @@ const sampleFiles: FileData[] = [
       avatar: "https://i.pravatar.cc/150?u=john",
     },
     sharedWith: [
-      { id: "4", name: "Alice Brown", avatar: "https://i.pravatar.cc/150?u=alice" },
+      {
+        id: "4",
+        name: "Alice Brown",
+        avatar: "https://i.pravatar.cc/150?u=alice",
+      },
     ],
     createdAt: "2024-01-05",
     updatedAt: "2024-01-12",
@@ -65,7 +77,8 @@ const sampleFiles: FileData[] = [
     id: "4",
     name: "Presentation.pptx",
     type: "document",
-    mimeType: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    mimeType:
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation",
     size: 5242880,
     url: "/files/presentation.pptx",
     owner: {
@@ -237,7 +250,7 @@ export const WithPagination: Story = {
 
     const paginatedFiles = sampleFiles.slice(
       (page - 1) * pageSize,
-      page * pageSize
+      page * pageSize,
     );
 
     return (

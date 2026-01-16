@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { OrdersTable, type Order } from "./index";
+import { type Order, OrdersTable } from "./index";
 
 // Sample orders data
 const sampleOrders: Order[] = [
@@ -17,12 +17,18 @@ const sampleOrders: Order[] = [
     status: "delivered",
     paymentStatus: "paid",
     items: [
-      { id: "1", name: "Wireless Headphones", quantity: 1, price: 199.99, image: "https://picsum.photos/seed/headphones/100" },
+      {
+        id: "1",
+        name: "Wireless Headphones",
+        quantity: 1,
+        price: 199.99,
+        image: "https://picsum.photos/seed/headphones/100",
+      },
       { id: "2", name: "Phone Case", quantity: 2, price: 29.99 },
     ],
     subtotal: 259.97,
     shipping: 9.99,
-    tax: 21.60,
+    tax: 21.6,
     total: 291.56,
     currency: "USD",
     createdAt: "2024-01-10T10:30:00Z",
@@ -40,7 +46,13 @@ const sampleOrders: Order[] = [
     status: "shipped",
     paymentStatus: "paid",
     items: [
-      { id: "3", name: "Laptop Stand", quantity: 1, price: 79.99, image: "https://picsum.photos/seed/stand/100" },
+      {
+        id: "3",
+        name: "Laptop Stand",
+        quantity: 1,
+        price: 79.99,
+        image: "https://picsum.photos/seed/stand/100",
+      },
     ],
     subtotal: 79.99,
     shipping: 5.99,
@@ -61,13 +73,25 @@ const sampleOrders: Order[] = [
     status: "processing",
     paymentStatus: "paid",
     items: [
-      { id: "4", name: "Mechanical Keyboard", quantity: 1, price: 149.99, image: "https://picsum.photos/seed/keyboard/100" },
+      {
+        id: "4",
+        name: "Mechanical Keyboard",
+        quantity: 1,
+        price: 149.99,
+        image: "https://picsum.photos/seed/keyboard/100",
+      },
       { id: "5", name: "Mouse Pad XL", quantity: 1, price: 24.99 },
-      { id: "6", name: "USB-C Hub", quantity: 1, price: 59.99, image: "https://picsum.photos/seed/hub/100" },
+      {
+        id: "6",
+        name: "USB-C Hub",
+        quantity: 1,
+        price: 59.99,
+        image: "https://picsum.photos/seed/hub/100",
+      },
     ],
     subtotal: 234.97,
     shipping: 0,
-    tax: 18.80,
+    tax: 18.8,
     total: 253.77,
     currency: "USD",
     createdAt: "2024-01-14T09:00:00Z",
@@ -83,9 +107,7 @@ const sampleOrders: Order[] = [
     },
     status: "pending",
     paymentStatus: "pending",
-    items: [
-      { id: "7", name: "Webcam HD", quantity: 1, price: 89.99 },
-    ],
+    items: [{ id: "7", name: "Webcam HD", quantity: 1, price: 89.99 }],
     subtotal: 89.99,
     shipping: 7.99,
     tax: 7.84,
@@ -103,12 +125,10 @@ const sampleOrders: Order[] = [
     },
     status: "cancelled",
     paymentStatus: "refunded",
-    items: [
-      { id: "8", name: "Monitor 27\"", quantity: 1, price: 399.99 },
-    ],
+    items: [{ id: "8", name: 'Monitor 27"', quantity: 1, price: 399.99 }],
     subtotal: 399.99,
     shipping: 29.99,
-    tax: 34.40,
+    tax: 34.4,
     total: 464.38,
     currency: "USD",
     createdAt: "2024-01-08T11:20:00Z",
@@ -213,7 +233,7 @@ export const WithPagination: Story = {
 
     const paginatedOrders = sampleOrders.slice(
       (page - 1) * pageSize,
-      page * pageSize
+      page * pageSize,
     );
 
     return (

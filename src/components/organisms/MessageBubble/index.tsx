@@ -1,25 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import { cn } from "@/lib/utils";
 import { Avatar } from "@/components/atoms/Avatar";
 import { Button } from "@/components/atoms/Button";
 import { Dropdown, DropdownItem } from "@/components/molecules/Dropdown";
 import {
-  MoreVerticalIcon,
-  EditIcon,
-  TrashIcon,
-  CopyIcon,
-  ReplyIcon,
-  ForwardIcon,
-  PlayIcon,
-  PauseIcon,
   CheckCheckIcon,
   CheckIcon,
-  FileIcon,
-  DownloadIcon,
   ClockIcon,
+  CopyIcon,
+  DownloadIcon,
+  EditIcon,
+  FileIcon,
+  ForwardIcon,
+  MoreVerticalIcon,
+  PauseIcon,
+  PlayIcon,
+  ReplyIcon,
+  TrashIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // ============================================
 // Types
@@ -127,7 +127,7 @@ export const MessageBubble = ({
       className={cn(
         "max-w-md flex gap-x-2",
         isSelf && "ms-auto flex-row-reverse",
-        className
+        className,
       )}
     >
       {/* Avatar */}
@@ -148,7 +148,7 @@ export const MessageBubble = ({
           <p
             className={cn(
               "mb-1.5 text-xs text-muted-foreground",
-              isSelf ? "pe-2.5" : "ps-2.5"
+              isSelf ? "pe-2.5" : "ps-2.5",
             )}
           >
             {message.senderName}
@@ -192,7 +192,7 @@ const MessageContent = ({
     <div
       className={cn(
         "group flex gap-x-2",
-        isSelf ? "justify-end" : "justify-start"
+        isSelf ? "justify-end" : "justify-start",
       )}
       style={{ wordBreak: "break-word" }}
     >
@@ -202,7 +202,7 @@ const MessageContent = ({
           "inline-block rounded-xl pt-2 pb-1.5 px-2.5",
           isSelf
             ? "order-2 text-start bg-primary/10 dark:bg-primary/20"
-            : "order-1 bg-muted"
+            : "order-1 bg-muted",
         )}
       >
         <div className="text-sm text-foreground">
@@ -247,7 +247,7 @@ const MessageContent = ({
         <div
           className={cn(
             "lg:opacity-0 lg:group-hover:opacity-100 transition-opacity",
-            isSelf ? "order-1" : "order-2"
+            isSelf ? "order-1" : "order-2",
           )}
         >
           <Dropdown
@@ -335,20 +335,20 @@ const ImageContent = ({
           "grid gap-1 mb-2",
           images.length === 1 && "grid-cols-1",
           images.length === 2 && "grid-cols-2",
-          images.length >= 3 && "grid-cols-2"
+          images.length >= 3 && "grid-cols-2",
         )}
       >
         {images.slice(0, 4).map((src, index) => (
           <div
-            key={index}
+            key={src}
             className={cn(
               "relative rounded-lg overflow-hidden",
-              images.length === 3 && index === 0 && "col-span-2"
+              images.length === 3 && index === 0 && "col-span-2",
             )}
           >
             <img
               src={src}
-              alt={`Image ${index + 1}`}
+              alt={`Attachment ${index + 1}`}
               className="w-full h-auto object-cover"
             />
             {images.length > 4 && index === 3 && (
@@ -407,7 +407,8 @@ const VoiceContent = ({ voice }: { voice: VoiceMessage }) => {
       <div className="flex-1 flex items-center gap-0.5 h-8">
         {(voice.waveform || Array(30).fill(0.5)).map((height, index) => (
           <div
-            key={index}
+            // biome-ignore lint/suspicious/noArrayIndexKey: Waveform bars are positional visual elements without unique identifiers
+            key={`waveform-${index}`}
             className="w-1 bg-primary/40 rounded-full"
             style={{
               height: `${Math.max(20, (height || Math.random()) * 100)}%`,
@@ -482,7 +483,9 @@ const MessageFooter = ({
     {isEdited && (
       <span className="text-[11px] text-muted-foreground italic">edited</span>
     )}
-    <span className="text-[11px] text-muted-foreground italic">{timestamp}</span>
+    <span className="text-[11px] text-muted-foreground italic">
+      {timestamp}
+    </span>
     {showStatus && status && <StatusIcon status={status} />}
   </span>
 );
@@ -490,7 +493,9 @@ const MessageFooter = ({
 const StatusIcon = ({ status }: { status: MessageStatus }) => {
   switch (status) {
     case "sending":
-      return <ClockIcon className="size-4 text-muted-foreground animate-pulse" />;
+      return (
+        <ClockIcon className="size-4 text-muted-foreground animate-pulse" />
+      );
     case "sent":
       return <CheckIcon className="size-4 text-muted-foreground" />;
     case "delivered":

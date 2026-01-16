@@ -1,9 +1,9 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
+import { TrendIndicator } from "@/components/molecules";
+import type { TrendDirection, TrendVariant } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { dataCardVariants } from "@/lib/variants/dataVisualization";
-import { TrendIndicator } from "@/components/molecules";
-import type { VariantProps } from "class-variance-authority";
-import type { TrendDirection, TrendVariant } from "@/lib/types";
 
 // ============================================
 // Types
@@ -74,7 +74,9 @@ export const ListBarCard = forwardRef<HTMLDivElement, ListBarCardProps>(
                 <h3 className="text-sm font-medium text-foreground">{title}</h3>
               )}
               {subtitle && (
-                <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {subtitle}
+                </p>
               )}
             </div>
             {action && <div className="shrink-0">{action}</div>}
@@ -85,7 +87,8 @@ export const ListBarCard = forwardRef<HTMLDivElement, ListBarCardProps>(
         <div className="divide-y divide-border">
           {items.map((item, index) => {
             const percentage = item.percentage ?? (item.value / max) * 100;
-            const barColor = item.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+            const barColor =
+              item.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
             return (
               <div key={item.id} className="px-4 py-3">
@@ -159,16 +162,12 @@ export interface HorizontalListBarCardProps
   action?: React.ReactNode;
 }
 
-export const HorizontalListBarCard = forwardRef<HTMLDivElement, HorizontalListBarCardProps>(
+export const HorizontalListBarCard = forwardRef<
+  HTMLDivElement,
+  HorizontalListBarCardProps
+>(
   (
-    {
-      className,
-      variant = "bordered",
-      title,
-      items,
-      action,
-      ...props
-    },
+    { className, variant = "bordered", title, items, action, ...props },
     ref,
   ) => {
     const total = items.reduce((sum, item) => sum + item.value, 0);
@@ -194,7 +193,8 @@ export const HorizontalListBarCard = forwardRef<HTMLDivElement, HorizontalListBa
           <div className="flex h-4 rounded-full overflow-hidden bg-muted">
             {items.map((item, index) => {
               const percentage = (item.value / total) * 100;
-              const barColor = item.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+              const barColor =
+                item.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
               return (
                 <div
@@ -214,7 +214,8 @@ export const HorizontalListBarCard = forwardRef<HTMLDivElement, HorizontalListBa
           <div className="mt-4 grid grid-cols-2 gap-3">
             {items.map((item, index) => {
               const percentage = (item.value / total) * 100;
-              const barColor = item.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+              const barColor =
+                item.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
               return (
                 <div key={item.id} className="flex items-center gap-x-2">

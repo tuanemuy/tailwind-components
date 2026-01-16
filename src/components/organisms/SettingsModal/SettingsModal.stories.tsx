@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { SettingsModal } from "./index";
 import { Button } from "@/components/atoms/Button";
+import { SettingsModal } from "./index";
 
 const meta: Meta<typeof SettingsModal> = {
   title: "Organisms/Overlays/SettingsModal",

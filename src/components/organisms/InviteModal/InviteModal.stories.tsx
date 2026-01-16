@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { InviteModal, TeamInviteModal } from "./index";
-import type { InviteRole, InvitedUser } from "./index";
 import { Button } from "@/components/atoms/Button";
+import type { InvitedUser, InviteRole } from "./index";
+import { InviteModal, TeamInviteModal } from "./index";
 
 const meta: Meta<typeof InviteModal> = {
   title: "Organisms/Overlays/InviteModal",
@@ -73,7 +73,9 @@ export const WithExistingUsers: Story = {
           }}
           existingUsers={existingUsers}
           onRemoveUser={(id: string) => console.log("Remove user:", id)}
-          onUpdateRole={(id: string, role: InviteRole) => console.log("Change role:", { id, role })}
+          onUpdateRole={(id: string, role: InviteRole) =>
+            console.log("Change role:", { id, role })
+          }
           title="Manage Team Members"
         />
       </>
@@ -113,7 +115,9 @@ export const CustomRoles: Story = {
 
     return (
       <>
-        <Button onClick={() => setIsOpen(true)}>Invite with Custom Roles</Button>
+        <Button onClick={() => setIsOpen(true)}>
+          Invite with Custom Roles
+        </Button>
         <InviteModal
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
@@ -134,7 +138,11 @@ export const WithLoading: Story = {
     const [isOpen, setIsOpen] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const handleInvite = (data: { emails: string[]; role: InviteRole; message?: string }) => {
+    const handleInvite = (data: {
+      emails: string[];
+      role: InviteRole;
+      message?: string;
+    }) => {
       setLoading(true);
       setTimeout(() => {
         console.log("Invited:", data);

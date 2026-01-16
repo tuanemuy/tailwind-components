@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import {
-  PricingTable,
   PricingCard,
-  PricingToggle,
   PricingHeader,
   type PricingPlan,
+  PricingTable,
+  PricingToggle,
 } from "./index";
 
 const meta: Meta<typeof PricingTable> = {
@@ -164,7 +164,8 @@ export const WithToggle: Story = {
       { ...samplePlans[2], price: 990, period: "year" },
     ];
 
-    const currentPlans = billingPeriod === "monthly" ? monthlyPlans : yearlyPlans;
+    const currentPlans =
+      billingPeriod === "monthly" ? monthlyPlans : yearlyPlans;
 
     return (
       <div className="space-y-8">

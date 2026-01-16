@@ -1,23 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  BalanceCard,
-  TransactionList,
-  PaymentCard,
-  TransferForm,
-  AccountCard,
-  ReceiptTimeline,
-  CurrencySelect,
-  type Transaction,
-  type Currency,
-  type ReceiptItem,
-} from "./index";
 import { Button } from "@/components/atoms/Button";
+import { DollarSignIcon } from "@/lib/icons";
 import {
-  WalletIcon,
-  CreditCardIcon,
-  DollarSignIcon,
-  ShoppingBagIcon,
-} from "@/lib/icons";
+  AccountCard,
+  BalanceCard,
+  type Currency,
+  CurrencySelect,
+  PaymentCard,
+  type ReceiptItem,
+  ReceiptTimeline,
+  type Transaction,
+  TransactionList,
+  TransferForm,
+} from "./index";
 
 // =============================================================================
 // BalanceCard Stories

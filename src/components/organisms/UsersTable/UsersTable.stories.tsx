@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { UsersTable, type User } from "./index";
+import { type User, UsersTable } from "./index";
 
 // Sample users data
 const sampleUsers: User[] = [
@@ -170,7 +170,7 @@ export const WithPagination: Story = {
 
     const paginatedUsers = sampleUsers.slice(
       (page - 1) * pageSize,
-      page * pageSize
+      page * pageSize,
     );
 
     return (

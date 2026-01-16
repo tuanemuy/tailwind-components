@@ -1,10 +1,10 @@
 "use client";
 
-import { forwardRef, useState, createContext, useContext, useId } from "react";
-import { cn } from "@/lib/utils";
+import { createContext, forwardRef, useContext, useId, useState } from "react";
 import { Button, Input, Radio, Separator } from "@/components/atoms";
 import { FormField } from "@/components/molecules";
-import { LockIcon, CheckIcon, TagIcon } from "@/lib/icons";
+import { CheckIcon, LockIcon, TagIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Checkout context
 interface CheckoutContextValue {
@@ -20,7 +20,8 @@ export const useCheckoutContext = () => useContext(CheckoutContext);
 type CheckoutVariant = "default" | "card" | "steps";
 
 // Main CheckoutForm component
-export interface CheckoutFormProps extends React.FormHTMLAttributes<HTMLFormElement> {
+export interface CheckoutFormProps
+  extends React.FormHTMLAttributes<HTMLFormElement> {
   variant?: CheckoutVariant;
   currentStep?: number;
   onStepChange?: (step: number) => void;
@@ -72,7 +73,8 @@ export const CheckoutForm = forwardRef<HTMLFormElement, CheckoutFormProps>(
 CheckoutForm.displayName = "CheckoutForm";
 
 // CheckoutSection component
-export interface CheckoutSectionProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CheckoutSectionProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
   description?: string;
   icon?: React.ReactNode;
@@ -110,6 +112,7 @@ export const CheckoutSection = forwardRef<HTMLDivElement, CheckoutSectionProps>(
         {...props}
       >
         {(title || icon) && (
+          // biome-ignore lint/a11y/useKeyWithClickEvents: Section header toggle
           <div
             className={cn(
               "flex items-start gap-x-3 mb-4",
@@ -149,7 +152,9 @@ export const CheckoutSection = forwardRef<HTMLDivElement, CheckoutSectionProps>(
             )}
           </div>
         )}
-        {(!collapsible || isOpen) && <div className="space-y-4">{children}</div>}
+        {(!collapsible || isOpen) && (
+          <div className="space-y-4">{children}</div>
+        )}
       </div>
     );
   },
@@ -189,9 +194,10 @@ export const ShippingForm = forwardRef<HTMLDivElement, ShippingFormProps>(
     },
     ref,
   ) => {
-    const handleChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      onChange?.(field, e.target.value);
-    };
+    const handleChange =
+      (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+        onChange?.(field, e.target.value);
+      };
 
     return (
       <div ref={ref} className={cn("space-y-4", className)} {...props}>
@@ -306,12 +312,26 @@ export interface PaymentMethodOptionProps
   onChange?: (value: string) => void;
 }
 
-export const PaymentMethodOption = forwardRef<HTMLLabelElement, PaymentMethodOptionProps>(
+export const PaymentMethodOption = forwardRef<
+  HTMLLabelElement,
+  PaymentMethodOptionProps
+>(
   (
-    { className, name, value, label, description, icon, selected, onChange, ...props },
+    {
+      className,
+      name,
+      value,
+      label,
+      description,
+      icon,
+      selected,
+      onChange,
+      ...props
+    },
     ref,
   ) => {
     return (
+      // biome-ignore lint/a11y/noLabelWithoutControl: Label contains Radio input
       <label
         ref={ref}
         className={cn(
@@ -360,29 +380,33 @@ export interface CreditCardFormProps
 
 export const CreditCardForm = forwardRef<HTMLDivElement, CreditCardFormProps>(
   ({ className, values = {}, onChange, errors = {}, ...props }, ref) => {
-    const handleChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      let value = e.target.value;
+    const handleChange =
+      (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+        let value = e.target.value;
 
-      // Format card number with spaces
-      if (field === "cardNumber") {
-        value = value.replace(/\D/g, "").replace(/(.{4})/g, "$1 ").trim();
-      }
+        // Format card number with spaces
+        if (field === "cardNumber") {
+          value = value
+            .replace(/\D/g, "")
+            .replace(/(.{4})/g, "$1 ")
+            .trim();
+        }
 
-      // Format expiry date
-      if (field === "expiryDate") {
-        value = value
-          .replace(/\D/g, "")
-          .replace(/^(.{2})/, "$1/")
-          .substring(0, 5);
-      }
+        // Format expiry date
+        if (field === "expiryDate") {
+          value = value
+            .replace(/\D/g, "")
+            .replace(/^(.{2})/, "$1/")
+            .substring(0, 5);
+        }
 
-      // Limit CVV
-      if (field === "cvv") {
-        value = value.replace(/\D/g, "").substring(0, 4);
-      }
+        // Limit CVV
+        if (field === "cvv") {
+          value = value.replace(/\D/g, "").substring(0, 4);
+        }
 
-      onChange?.(field, value);
-    };
+        onChange?.(field, value);
+      };
 
     return (
       <div ref={ref} className={cn("space-y-4", className)} {...props}>
@@ -455,7 +479,8 @@ export interface OrderItem {
   variant?: string;
 }
 
-export interface OrderSummaryProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface OrderSummaryProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   items: OrderItem[];
   subtotal: number;
   shipping?: number;
@@ -487,11 +512,7 @@ export const OrderSummary = forwardRef<HTMLDivElement, OrderSummaryProps>(
     const formatPrice = (price: number) => `${currency}${price.toFixed(2)}`;
 
     return (
-      <div
-        ref={ref}
-        className={cn("space-y-4", className)}
-        {...props}
-      >
+      <div ref={ref} className={cn("space-y-4", className)} {...props}>
         {/* Header */}
         <div className="flex items-center justify-between">
           <h3 className="font-medium text-foreground">Order Summary</h3>
@@ -516,11 +537,17 @@ export const OrderSummary = forwardRef<HTMLDivElement, OrderSummaryProps>(
                 </div>
               )}
               <div className="flex-1 min-w-0">
-                <p className="font-medium text-foreground truncate">{item.name}</p>
+                <p className="font-medium text-foreground truncate">
+                  {item.name}
+                </p>
                 {item.variant && (
-                  <p className="text-sm text-muted-foreground">{item.variant}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {item.variant}
+                  </p>
                 )}
-                <p className="text-sm text-muted-foreground">Qty: {item.quantity}</p>
+                <p className="text-sm text-muted-foreground">
+                  Qty: {item.quantity}
+                </p>
               </div>
               <div className="text-right">
                 <p className="font-medium text-foreground">
@@ -621,7 +648,9 @@ export const CouponInput = forwardRef<HTMLDivElement, CouponInputProps>(
               <TagIcon className="size-4 text-success" />
               <span className="font-medium text-success">{appliedCode}</span>
               {discount && (
-                <span className="text-sm text-success">(-${discount.toFixed(2)})</span>
+                <span className="text-sm text-success">
+                  (-${discount.toFixed(2)})
+                </span>
               )}
             </div>
             {onRemove && (
@@ -681,7 +710,10 @@ export interface ShippingMethodOptionProps
   onChange?: (value: string) => void;
 }
 
-export const ShippingMethodOption = forwardRef<HTMLLabelElement, ShippingMethodOptionProps>(
+export const ShippingMethodOption = forwardRef<
+  HTMLLabelElement,
+  ShippingMethodOptionProps
+>(
   (
     {
       className,
@@ -698,6 +730,7 @@ export const ShippingMethodOption = forwardRef<HTMLLabelElement, ShippingMethodO
     ref,
   ) => {
     return (
+      // biome-ignore lint/a11y/noLabelWithoutControl: Label contains Radio input
       <label
         ref={ref}
         className={cn(
@@ -726,7 +759,12 @@ export const ShippingMethodOption = forwardRef<HTMLLabelElement, ShippingMethodO
             )}
           </div>
         </div>
-        <span className={cn("font-medium", price === "free" ? "text-success" : "text-foreground")}>
+        <span
+          className={cn(
+            "font-medium",
+            price === "free" ? "text-success" : "text-foreground",
+          )}
+        >
           {price === "free" ? "Free" : `$${price.toFixed(2)}`}
         </span>
       </label>

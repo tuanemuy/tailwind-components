@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {
-  LogoCloudSection,
+  CompleteLogoCloudSection,
   LogoCloudHeader,
+  LogoCloudSection,
   LogoCloudTitle,
   LogoGrid,
-  LogoRow,
+  type LogoItem,
   LogoItemComponent,
   LogoMarquee,
+  LogoRow,
   SimpleLogoCloud,
-  CompleteLogoCloudSection,
-  type LogoItem,
 } from ".";
 
 const meta: Meta<typeof LogoCloudSection> = {

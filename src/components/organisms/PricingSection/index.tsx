@@ -1,7 +1,7 @@
-import { forwardRef, useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { forwardRef, useState } from "react";
 import { Badge, Button } from "@/components/atoms";
 import { CheckIcon, XIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Types
 export interface PricingSectionFeature {
@@ -43,11 +43,24 @@ const backgroundClasses = {
 };
 
 export const PricingSection = forwardRef<HTMLElement, PricingSectionProps>(
-  ({ className, padding = "lg", backgroundColor = "default", children, ...props }, ref) => {
+  (
+    {
+      className,
+      padding = "lg",
+      backgroundColor = "default",
+      children,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <section
         ref={ref}
-        className={cn(paddingClasses[padding], backgroundClasses[backgroundColor], className)}
+        className={cn(
+          paddingClasses[padding],
+          backgroundClasses[backgroundColor],
+          className,
+        )}
         {...props}
       >
         <div className="container mx-auto px-4">{children}</div>
@@ -58,65 +71,81 @@ export const PricingSection = forwardRef<HTMLElement, PricingSectionProps>(
 PricingSection.displayName = "PricingSection";
 
 // PricingSectionHeader component
-export interface PricingSectionHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface PricingSectionHeaderProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   align?: "left" | "center";
 }
 
-export const PricingSectionHeader = forwardRef<HTMLDivElement, PricingSectionHeaderProps>(
-  ({ className, align = "center", children, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "mb-12 md:mb-16",
-          align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-2xl text-left",
-          className,
-        )}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  },
-);
+export const PricingSectionHeader = forwardRef<
+  HTMLDivElement,
+  PricingSectionHeaderProps
+>(({ className, align = "center", children, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "mb-12 md:mb-16",
+        align === "center"
+          ? "mx-auto max-w-3xl text-center"
+          : "max-w-2xl text-left",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+});
 PricingSectionHeader.displayName = "PricingSectionHeader";
 
 // PricingSectionTitle component
-export interface PricingSectionTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+export interface PricingSectionTitleProps
+  extends React.HTMLAttributes<HTMLHeadingElement> {
   as?: "h2" | "h3";
 }
 
-export const PricingSectionTitle = forwardRef<HTMLHeadingElement, PricingSectionTitleProps>(
-  ({ className, as: Component = "h2", children, ...props }, ref) => {
-    return (
-      <Component
-        ref={ref}
-        className={cn("text-3xl font-bold text-foreground md:text-4xl", className)}
-        {...props}
-      >
-        {children}
-      </Component>
-    );
-  },
-);
+export const PricingSectionTitle = forwardRef<
+  HTMLHeadingElement,
+  PricingSectionTitleProps
+>(({ className, as: Component = "h2", children, ...props }, ref) => {
+  return (
+    <Component
+      ref={ref}
+      className={cn(
+        "text-3xl font-bold text-foreground md:text-4xl",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </Component>
+  );
+});
 PricingSectionTitle.displayName = "PricingSectionTitle";
 
 // PricingSectionSubtitle component
-export interface PricingSectionSubtitleProps extends React.HTMLAttributes<HTMLParagraphElement> {}
+export interface PricingSectionSubtitleProps
+  extends React.HTMLAttributes<HTMLParagraphElement> {}
 
-export const PricingSectionSubtitle = forwardRef<HTMLParagraphElement, PricingSectionSubtitleProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <p ref={ref} className={cn("mt-4 text-lg text-muted-foreground", className)} {...props}>
-        {children}
-      </p>
-    );
-  },
-);
+export const PricingSectionSubtitle = forwardRef<
+  HTMLParagraphElement,
+  PricingSectionSubtitleProps
+>(({ className, children, ...props }, ref) => {
+  return (
+    <p
+      ref={ref}
+      className={cn("mt-4 text-lg text-muted-foreground", className)}
+      {...props}
+    >
+      {children}
+    </p>
+  );
+});
 PricingSectionSubtitle.displayName = "PricingSectionSubtitle";
 
 // PricingBillingToggle component
-export interface PricingBillingToggleProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
+export interface PricingBillingToggleProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   value: "monthly" | "yearly";
   onChange: (value: "monthly" | "yearly") => void;
   monthlyLabel?: string;
@@ -124,7 +153,10 @@ export interface PricingBillingToggleProps extends Omit<React.HTMLAttributes<HTM
   yearlyDiscount?: string;
 }
 
-export const PricingBillingToggle = forwardRef<HTMLDivElement, PricingBillingToggleProps>(
+export const PricingBillingToggle = forwardRef<
+  HTMLDivElement,
+  PricingBillingToggleProps
+>(
   (
     {
       className,
@@ -148,7 +180,9 @@ export const PricingBillingToggle = forwardRef<HTMLDivElement, PricingBillingTog
           onClick={() => onChange("monthly")}
           className={cn(
             "px-4 py-2 text-sm font-medium transition-colors",
-            value === "monthly" ? "text-foreground" : "text-muted-foreground hover:text-foreground",
+            value === "monthly"
+              ? "text-foreground"
+              : "text-muted-foreground hover:text-foreground",
           )}
         >
           {monthlyLabel}
@@ -168,7 +202,9 @@ export const PricingBillingToggle = forwardRef<HTMLDivElement, PricingBillingTog
           onClick={() => onChange("yearly")}
           className={cn(
             "flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors",
-            value === "yearly" ? "text-foreground" : "text-muted-foreground hover:text-foreground",
+            value === "yearly"
+              ? "text-foreground"
+              : "text-muted-foreground hover:text-foreground",
           )}
         >
           {yearlyLabel}
@@ -207,7 +243,12 @@ export const PricingGrid = forwardRef<HTMLDivElement, PricingGridProps>(
     return (
       <div
         ref={ref}
-        className={cn("grid", columnClasses[columns], gapClasses[gap], className)}
+        className={cn(
+          "grid",
+          columnClasses[columns],
+          gapClasses[gap],
+          className,
+        )}
         {...props}
       >
         {children}
@@ -218,7 +259,8 @@ export const PricingGrid = forwardRef<HTMLDivElement, PricingGridProps>(
 PricingGrid.displayName = "PricingGrid";
 
 // PricingPlanCard component
-export interface PricingPlanCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface PricingPlanCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   plan: PricingSectionPlan;
   billingCycle?: "monthly" | "yearly";
   onSelectPlan?: (planId: string) => void;
@@ -243,11 +285,12 @@ export const PricingPlanCard = forwardRef<HTMLDivElement, PricingPlanCardProps>(
     },
     ref,
   ) => {
-    const price = billingCycle === "yearly" && plan.yearlyPrice !== undefined
-      ? plan.yearlyPrice
-      : plan.monthlyPrice;
+    const price =
+      billingCycle === "yearly" && plan.yearlyPrice !== undefined
+        ? plan.yearlyPrice
+        : plan.monthlyPrice;
 
-    const formatPrice = (price: number | string, currency: string = "USD") => {
+    const formatPrice = (price: number | string, currency = "USD") => {
       if (typeof price === "string") return price;
       return new Intl.NumberFormat("en-US", {
         style: "currency",
@@ -281,7 +324,9 @@ export const PricingPlanCard = forwardRef<HTMLDivElement, PricingPlanCardProps>(
         <div className="text-center">
           <h3 className="text-lg font-semibold text-foreground">{plan.name}</h3>
           {plan.description && (
-            <p className="mt-1 text-sm text-muted-foreground">{plan.description}</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {plan.description}
+            </p>
           )}
         </div>
 
@@ -299,8 +344,8 @@ export const PricingPlanCard = forwardRef<HTMLDivElement, PricingPlanCardProps>(
 
         {/* Features */}
         <ul className="mt-6 flex-1 space-y-3">
-          {plan.features.map((feature, index) => (
-            <li key={index} className="flex items-start gap-x-3">
+          {plan.features.map((feature) => (
+            <li key={feature.text} className="flex items-start gap-x-3">
               {feature.included ? (
                 <CheckIcon className="mt-0.5 size-5 shrink-0 text-success" />
               ) : (
@@ -309,7 +354,9 @@ export const PricingPlanCard = forwardRef<HTMLDivElement, PricingPlanCardProps>(
               <span
                 className={cn(
                   "text-sm",
-                  feature.included ? "text-foreground" : "text-muted-foreground",
+                  feature.included
+                    ? "text-foreground"
+                    : "text-muted-foreground",
                 )}
               >
                 {feature.text}
@@ -320,7 +367,9 @@ export const PricingPlanCard = forwardRef<HTMLDivElement, PricingPlanCardProps>(
 
         {/* CTA Button */}
         <Button
-          variant={plan.ctaVariant || (plan.highlighted ? "primary" : "outline")}
+          variant={
+            plan.ctaVariant || (plan.highlighted ? "primary" : "outline")
+          }
           onClick={() => onSelectPlan?.(plan.id)}
           className="mt-6 w-full"
         >
@@ -344,13 +393,22 @@ export interface PricingFAQProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const PricingFAQ = forwardRef<HTMLDivElement, PricingFAQProps>(
-  ({ className, items, title = "Frequently asked questions", ...props }, ref) => {
+  (
+    { className, items, title = "Frequently asked questions", ...props },
+    ref,
+  ) => {
     return (
-      <div ref={ref} className={cn("mx-auto mt-16 max-w-3xl", className)} {...props}>
-        <h3 className="mb-8 text-center text-2xl font-bold text-foreground">{title}</h3>
+      <div
+        ref={ref}
+        className={cn("mx-auto mt-16 max-w-3xl", className)}
+        {...props}
+      >
+        <h3 className="mb-8 text-center text-2xl font-bold text-foreground">
+          {title}
+        </h3>
         <dl className="space-y-6">
-          {items.map((item, index) => (
-            <div key={index}>
+          {items.map((item) => (
+            <div key={item.question}>
               <dt className="font-semibold text-foreground">{item.question}</dt>
               <dd className="mt-2 text-muted-foreground">{item.answer}</dd>
             </div>
@@ -363,7 +421,8 @@ export const PricingFAQ = forwardRef<HTMLDivElement, PricingFAQProps>(
 PricingFAQ.displayName = "PricingFAQ";
 
 // CompletePricingSection component - pre-composed full pricing section
-export interface CompletePricingSectionProps extends React.HTMLAttributes<HTMLElement> {
+export interface CompletePricingSectionProps
+  extends React.HTMLAttributes<HTMLElement> {
   title: string;
   subtitle?: string;
   plans: PricingSectionPlan[];
@@ -373,7 +432,10 @@ export interface CompletePricingSectionProps extends React.HTMLAttributes<HTMLEl
   onSelectPlan?: (planId: string, billingCycle: "monthly" | "yearly") => void;
 }
 
-export const CompletePricingSection = forwardRef<HTMLElement, CompletePricingSectionProps>(
+export const CompletePricingSection = forwardRef<
+  HTMLElement,
+  CompletePricingSectionProps
+>(
   (
     {
       className,
@@ -388,13 +450,17 @@ export const CompletePricingSection = forwardRef<HTMLElement, CompletePricingSec
     },
     ref,
   ) => {
-    const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly");
+    const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">(
+      "monthly",
+    );
 
     return (
       <PricingSection ref={ref} className={className} {...props}>
         <PricingSectionHeader>
           <PricingSectionTitle>{title}</PricingSectionTitle>
-          {subtitle && <PricingSectionSubtitle>{subtitle}</PricingSectionSubtitle>}
+          {subtitle && (
+            <PricingSectionSubtitle>{subtitle}</PricingSectionSubtitle>
+          )}
           {enableBillingToggle && (
             <div className="mt-8">
               <PricingBillingToggle

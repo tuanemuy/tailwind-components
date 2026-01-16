@@ -1,8 +1,8 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
+import { Badge } from "@/components/atoms";
 import { cn } from "@/lib/utils";
 import { dataCardVariants } from "@/lib/variants/dataVisualization";
-import { Badge } from "@/components/atoms";
-import type { VariantProps } from "class-variance-authority";
 
 // ============================================
 // Types
@@ -59,7 +59,8 @@ export const SurveyDataCard = forwardRef<HTMLDivElement, SurveyDataCardProps>(
     },
     ref,
   ) => {
-    const total = totalResponses ?? options.reduce((sum, opt) => sum + opt.votes, 0);
+    const total =
+      totalResponses ?? options.reduce((sum, opt) => sum + opt.votes, 0);
 
     return (
       <div
@@ -75,7 +76,9 @@ export const SurveyDataCard = forwardRef<HTMLDivElement, SurveyDataCardProps>(
                 <h3 className="text-sm font-medium text-foreground">{title}</h3>
               )}
               {subtitle && (
-                <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {subtitle}
+                </p>
               )}
             </div>
             {action && <div className="shrink-0">{action}</div>}
@@ -96,8 +99,10 @@ export const SurveyDataCard = forwardRef<HTMLDivElement, SurveyDataCardProps>(
         {orientation === "vertical" ? (
           <div className="px-4 pb-4 space-y-3">
             {options.map((option, index) => {
-              const percentage = option.percentage ?? (option.votes / total) * 100;
-              const barColor = option.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+              const percentage =
+                option.percentage ?? (option.votes / total) * 100;
+              const barColor =
+                option.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
               return (
                 <div key={option.id}>
@@ -136,8 +141,10 @@ export const SurveyDataCard = forwardRef<HTMLDivElement, SurveyDataCardProps>(
             {/* Horizontal Stacked Bar */}
             <div className="h-8 rounded-full overflow-hidden flex bg-muted">
               {options.map((option, index) => {
-                const percentage = option.percentage ?? (option.votes / total) * 100;
-                const barColor = option.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+                const percentage =
+                  option.percentage ?? (option.votes / total) * 100;
+                const barColor =
+                  option.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
                 return (
                   <div
@@ -157,8 +164,10 @@ export const SurveyDataCard = forwardRef<HTMLDivElement, SurveyDataCardProps>(
             {/* Legend */}
             <div className="mt-3 grid grid-cols-2 gap-2">
               {options.map((option, index) => {
-                const percentage = option.percentage ?? (option.votes / total) * 100;
-                const barColor = option.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+                const percentage =
+                  option.percentage ?? (option.votes / total) * 100;
+                const barColor =
+                  option.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
                 return (
                   <div key={option.id} className="flex items-center gap-x-2">
@@ -196,16 +205,12 @@ export interface MultiQuestionSurveyCardProps
   action?: React.ReactNode;
 }
 
-export const MultiQuestionSurveyCard = forwardRef<HTMLDivElement, MultiQuestionSurveyCardProps>(
+export const MultiQuestionSurveyCard = forwardRef<
+  HTMLDivElement,
+  MultiQuestionSurveyCardProps
+>(
   (
-    {
-      className,
-      variant = "bordered",
-      title,
-      questions,
-      action,
-      ...props
-    },
+    { className, variant = "bordered", title, questions, action, ...props },
     ref,
   ) => {
     return (
@@ -227,18 +232,28 @@ export const MultiQuestionSurveyCard = forwardRef<HTMLDivElement, MultiQuestionS
         {/* Questions */}
         <div className="divide-y divide-border">
           {questions.map((q, qIndex) => {
-            const total = q.totalResponses ?? q.options.reduce((sum, opt) => sum + opt.votes, 0);
+            const total =
+              q.totalResponses ??
+              q.options.reduce((sum, opt) => sum + opt.votes, 0);
 
             return (
               <div key={q.id} className="p-4">
-                <p className="text-sm font-medium text-foreground mb-3">{q.question}</p>
+                <p className="text-sm font-medium text-foreground mb-3">
+                  {q.question}
+                </p>
                 <div className="space-y-2">
                   {q.options.map((option, oIndex) => {
-                    const percentage = option.percentage ?? (option.votes / total) * 100;
-                    const barColor = option.color || `hsl(var(--chart-${((qIndex + oIndex) % 5) + 1}))`;
+                    const percentage =
+                      option.percentage ?? (option.votes / total) * 100;
+                    const barColor =
+                      option.color ||
+                      `hsl(var(--chart-${((qIndex + oIndex) % 5) + 1}))`;
 
                     return (
-                      <div key={option.id} className="flex items-center gap-x-3">
+                      <div
+                        key={option.id}
+                        className="flex items-center gap-x-3"
+                      >
                         <span
                           className="size-2 shrink-0 rounded-full"
                           style={{ backgroundColor: barColor }}
@@ -304,7 +319,7 @@ export const NPSSurveyCard = forwardRef<HTMLDivElement, NPSSurveyCardProps>(
     },
     ref,
   ) => {
-    const total = totalResponses ?? (detractors + passives + promoters);
+    const total = totalResponses ?? detractors + passives + promoters;
     const detractorsPerc = (detractors / total) * 100;
     const passivesPerc = (passives / total) * 100;
     const promotersPerc = (promoters / total) * 100;
@@ -340,11 +355,19 @@ export const NPSSurveyCard = forwardRef<HTMLDivElement, NPSSurveyCardProps>(
 
         {/* Score */}
         <div className="p-4 text-center">
-          <div className={cn("text-5xl font-bold tabular-nums", getScoreColor(score))}>
-            {score > 0 ? "+" : ""}{score}
+          <div
+            className={cn(
+              "text-5xl font-bold tabular-nums",
+              getScoreColor(score),
+            )}
+          >
+            {score > 0 ? "+" : ""}
+            {score}
           </div>
           <Badge
-            variant={score >= 50 ? "success" : score >= 0 ? "warning" : "destructive"}
+            variant={
+              score >= 50 ? "success" : score >= 0 ? "warning" : "destructive"
+            }
             className="mt-2"
           >
             {getScoreLabel(score)}

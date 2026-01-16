@@ -1,24 +1,24 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  TitleBar,
-  SimpleTitleBar,
-  TabbedTitleBar,
-  FilterableTitleBar,
-  StatusTitleBar,
-} from "./index";
-import { Button } from "@/components/atoms/Button";
 import { Badge } from "@/components/atoms/Badge";
+import { Button } from "@/components/atoms/Button";
 import { SectionNav } from "@/components/organisms/SectionNav";
 import {
-  PlusIcon,
-  SettingsIcon,
-  DownloadIcon,
-  FilterIcon,
   ChevronLeftIcon,
-  SearchIcon,
+  DownloadIcon,
   FileIcon,
+  FilterIcon,
   FolderIcon,
+  PlusIcon,
+  SearchIcon,
+  SettingsIcon,
 } from "@/lib/icons";
+import {
+  FilterableTitleBar,
+  SimpleTitleBar,
+  StatusTitleBar,
+  TabbedTitleBar,
+  TitleBar,
+} from "./index";
 
 const meta: Meta<typeof TitleBar> = {
   title: "Organisms/PageSections/TitleBar",
@@ -77,11 +77,7 @@ export const Bordered: Story = {
     title: "Settings",
     subtitle: "Manage your account settings and preferences",
     variant: "bordered",
-    actions: (
-      <Button variant="primary">
-        Save Changes
-      </Button>
-    ),
+    actions: <Button variant="primary">Save Changes</Button>,
   },
 };
 
@@ -116,7 +112,11 @@ export const WithIcon: Story = {
 export const WithBadge: Story = {
   args: {
     title: "Notifications",
-    badge: <Badge variant="default" size="sm">12 new</Badge>,
+    badge: (
+      <Badge variant="default" size="sm">
+        12 new
+      </Badge>
+    ),
     actions: (
       <Button variant="ghost" size="sm">
         Mark all read
@@ -146,9 +146,17 @@ export const TitleSizes: Story = {
   render: () => (
     <div className="space-y-8">
       <TitleBar title="Small Title" titleSize="sm" subtitle="With sm size" />
-      <TitleBar title="Medium Title" titleSize="md" subtitle="With md size (default)" />
+      <TitleBar
+        title="Medium Title"
+        titleSize="md"
+        subtitle="With md size (default)"
+      />
       <TitleBar title="Large Title" titleSize="lg" subtitle="With lg size" />
-      <TitleBar title="Extra Large Title" titleSize="xl" subtitle="With xl size" />
+      <TitleBar
+        title="Extra Large Title"
+        titleSize="xl"
+        subtitle="With xl size"
+      />
     </div>
   ),
 };
@@ -178,11 +186,7 @@ export const WithTabs: StoryObj<typeof TabbedTitleBar> = {
     <TabbedTitleBar
       title="Project Settings"
       subtitle="Configure your project"
-      actions={
-        <Button variant="primary">
-          Save Changes
-        </Button>
-      }
+      actions={<Button variant="primary">Save Changes</Button>}
       tabs={
         <SectionNav
           variant="underline"
@@ -287,7 +291,11 @@ export const ProjectDetail: Story = {
   args: {
     title: "E-Commerce Platform",
     icon: <FileIcon className="size-full" />,
-    badge: <Badge variant="success" size="sm">Active</Badge>,
+    badge: (
+      <Badge variant="success" size="sm">
+        Active
+      </Badge>
+    ),
     subtitle: "Created on Jan 15, 2024 • Last updated 2 hours ago",
     backButton: (
       <Button variant="ghost" size="sm" className="-ml-2">

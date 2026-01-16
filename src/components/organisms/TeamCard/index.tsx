@@ -1,16 +1,16 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
 import { Avatar } from "@/components/atoms/Avatar";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import { AvatarGroup } from "@/components/molecules/AvatarGroup";
 import {
-  UsersIcon,
   MoreHorizontalIcon,
   SettingsIcon,
-  UserPlusIcon,
   StarIcon,
+  UserPlusIcon,
+  UsersIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 export interface TeamMember {
   id: string;
@@ -39,7 +39,8 @@ export interface TeamCardData {
   tags?: string[];
 }
 
-export interface TeamCardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onClick"> {
+export interface TeamCardProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onClick"> {
   team: TeamCardData;
   variant?: "default" | "compact" | "featured" | "horizontal";
   showMembers?: boolean;
@@ -66,7 +67,7 @@ export const TeamCard = forwardRef<HTMLDivElement, TeamCardProps>(
       actions,
       ...props
     },
-    ref
+    ref,
   ) => {
     const memberCount = team.memberCount ?? team.members?.length ?? 0;
 
@@ -78,9 +79,19 @@ export const TeamCard = forwardRef<HTMLDivElement, TeamCardProps>(
           className={cn(
             "group overflow-hidden rounded-xl border border-border bg-card",
             onClick && "cursor-pointer",
-            className
+            className,
           )}
-          onClick={() => onClick?.(team)}
+          {...(onClick && {
+            role: "button",
+            tabIndex: 0,
+            onClick: () => onClick(team),
+            onKeyDown: (e: React.KeyboardEvent) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onClick(team);
+              }
+            },
+          })}
           {...props}
         >
           {/* Cover */}
@@ -88,16 +99,21 @@ export const TeamCard = forwardRef<HTMLDivElement, TeamCardProps>(
             className="relative h-32"
             style={
               team.coverImage
-                ? { backgroundImage: `url(${team.coverImage})`, backgroundSize: "cover", backgroundPosition: "center" }
+                ? {
+                    backgroundImage: `url(${team.coverImage})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }
                 : team.color
-                ? { backgroundColor: team.color }
-                : { backgroundColor: "#6366F1" }
+                  ? { backgroundColor: team.color }
+                  : { backgroundColor: "#6366F1" }
             }
           >
             {/* Actions overlay */}
             <div className="absolute right-3 top-3 flex items-center gap-x-1 opacity-0 transition-opacity group-hover:opacity-100">
               {onStar && (
                 <button
+                  type="button"
                   className="rounded-lg bg-background/80 p-1.5 backdrop-blur-sm hover:bg-background"
                   onClick={(e) => {
                     e.stopPropagation();
@@ -107,7 +123,9 @@ export const TeamCard = forwardRef<HTMLDivElement, TeamCardProps>(
                   <StarIcon
                     className={cn(
                       "size-4",
-                      team.isStarred ? "fill-warning text-warning" : "text-muted-foreground"
+                      team.isStarred
+                        ? "fill-warning text-warning"
+                        : "text-muted-foreground",
                     )}
                   />
                 </button>
@@ -117,7 +135,9 @@ export const TeamCard = forwardRef<HTMLDivElement, TeamCardProps>(
             {/* Icon */}
             {team.icon && !team.coverImage && (
               <div className="flex h-full items-center justify-center">
-                <div className="rounded-2xl bg-white/20 p-4 backdrop-blur-sm">{team.icon}</div>
+                <div className="rounded-2xl bg-white/20 p-4 backdrop-blur-sm">
+                  {team.icon}
+                </div>
               </div>
             )}
 
@@ -135,7 +155,9 @@ export const TeamCard = forwardRef<HTMLDivElement, TeamCardProps>(
           <div className="p-4">
             <div className="flex items-start justify-between gap-x-3">
               <div className="min-w-0 flex-1">
-                <h3 className="truncate font-semibold text-foreground">{team.name}</h3>
+                <h3 className="truncate font-semibold text-foreground">
+                  {team.name}
+                </h3>
                 {team.description && (
                   <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
                     {team.description}
@@ -195,15 +217,29 @@ export const TeamCard = forwardRef<HTMLDivElement, TeamCardProps>(
           className={cn(
             "flex items-center gap-x-4 rounded-xl border border-border bg-card p-4",
             onClick && "cursor-pointer hover:border-primary/50",
-            className
+            className,
           )}
-          onClick={() => onClick?.(team)}
+          {...(onClick && {
+            role: "button",
+            tabIndex: 0,
+            onClick: () => onClick(team),
+            onKeyDown: (e: React.KeyboardEvent) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onClick(team);
+              }
+            },
+          })}
           {...props}
         >
           {/* Icon */}
           <div
             className="flex size-12 shrink-0 items-center justify-center rounded-xl"
-            style={team.color ? { backgroundColor: team.color } : { backgroundColor: "#6366F1" }}
+            style={
+              team.color
+                ? { backgroundColor: team.color }
+                : { backgroundColor: "#6366F1" }
+            }
           >
             {team.icon || <UsersIcon className="size-6 text-white" />}
           </div>
@@ -211,8 +247,12 @@ export const TeamCard = forwardRef<HTMLDivElement, TeamCardProps>(
           {/* Info */}
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-x-2">
-              <h4 className="truncate font-medium text-foreground">{team.name}</h4>
-              {team.isStarred && <StarIcon className="size-3.5 fill-warning text-warning" />}
+              <h4 className="truncate font-medium text-foreground">
+                {team.name}
+              </h4>
+              {team.isStarred && (
+                <StarIcon className="size-3.5 fill-warning text-warning" />
+              )}
               {team.isPrivate && (
                 <Badge variant="outline" size="sm">
                   Private
@@ -220,7 +260,9 @@ export const TeamCard = forwardRef<HTMLDivElement, TeamCardProps>(
               )}
             </div>
             {team.description && (
-              <p className="truncate text-sm text-muted-foreground">{team.description}</p>
+              <p className="truncate text-sm text-muted-foreground">
+                {team.description}
+              </p>
             )}
           </div>
 
@@ -247,7 +289,9 @@ export const TeamCard = forwardRef<HTMLDivElement, TeamCardProps>(
           {/* Actions */}
           <div
             className="flex items-center gap-x-1"
+            role="none"
             onClick={(e) => e.stopPropagation()}
+            onKeyDown={(e) => e.stopPropagation()}
           >
             {actions || (
               <>
@@ -289,19 +333,35 @@ export const TeamCard = forwardRef<HTMLDivElement, TeamCardProps>(
           className={cn(
             "flex items-center gap-x-3 rounded-lg border border-border bg-card p-3",
             onClick && "cursor-pointer hover:border-primary/50",
-            className
+            className,
           )}
-          onClick={() => onClick?.(team)}
+          {...(onClick && {
+            role: "button",
+            tabIndex: 0,
+            onClick: () => onClick(team),
+            onKeyDown: (e: React.KeyboardEvent) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onClick(team);
+              }
+            },
+          })}
           {...props}
         >
           <div
             className="flex size-8 shrink-0 items-center justify-center rounded-lg"
-            style={team.color ? { backgroundColor: team.color } : { backgroundColor: "#6366F1" }}
+            style={
+              team.color
+                ? { backgroundColor: team.color }
+                : { backgroundColor: "#6366F1" }
+            }
           >
             {team.icon || <UsersIcon className="size-4 text-white" />}
           </div>
           <div className="min-w-0 flex-1">
-            <h4 className="truncate text-sm font-medium text-foreground">{team.name}</h4>
+            <h4 className="truncate text-sm font-medium text-foreground">
+              {team.name}
+            </h4>
           </div>
           <span className="text-xs text-muted-foreground">{memberCount}</span>
         </div>
@@ -315,28 +375,53 @@ export const TeamCard = forwardRef<HTMLDivElement, TeamCardProps>(
         className={cn(
           "rounded-xl border border-border bg-card p-4",
           onClick && "cursor-pointer hover:border-primary/50",
-          className
+          className,
         )}
-        onClick={() => onClick?.(team)}
+        {...(onClick && {
+          role: "button",
+          tabIndex: 0,
+          onClick: () => onClick(team),
+          onKeyDown: (e: React.KeyboardEvent) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              onClick(team);
+            }
+          },
+        })}
         {...props}
       >
         <div className="flex items-start justify-between gap-x-4">
           <div className="flex items-start gap-x-3">
             <div
               className="flex size-12 shrink-0 items-center justify-center rounded-xl"
-              style={team.color ? { backgroundColor: team.color } : { backgroundColor: "#6366F1" }}
+              style={
+                team.color
+                  ? { backgroundColor: team.color }
+                  : { backgroundColor: "#6366F1" }
+              }
             >
               {team.icon || <UsersIcon className="size-6 text-white" />}
             </div>
             <div className="min-w-0">
               <div className="flex items-center gap-x-2">
-                <h3 className="truncate font-semibold text-foreground">{team.name}</h3>
-                {team.isStarred && <StarIcon className="size-3.5 fill-warning text-warning" />}
+                <h3 className="truncate font-semibold text-foreground">
+                  {team.name}
+                </h3>
+                {team.isStarred && (
+                  <StarIcon className="size-3.5 fill-warning text-warning" />
+                )}
               </div>
-              <p className="text-sm text-muted-foreground">{memberCount} members</p>
+              <p className="text-sm text-muted-foreground">
+                {memberCount} members
+              </p>
             </div>
           </div>
-          <div className="flex items-center gap-x-2" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="flex items-center gap-x-2"
+            role="none"
+            onClick={(e) => e.stopPropagation()}
+            onKeyDown={(e) => e.stopPropagation()}
+          >
             {team.isPrivate && (
               <Badge variant="outline" size="sm">
                 Private
@@ -351,13 +436,15 @@ export const TeamCard = forwardRef<HTMLDivElement, TeamCardProps>(
         </div>
 
         {team.description && (
-          <p className="mt-3 line-clamp-2 text-sm text-muted-foreground">{team.description}</p>
+          <p className="mt-3 line-clamp-2 text-sm text-muted-foreground">
+            {team.description}
+          </p>
         )}
 
         {team.tags && team.tags.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-1.5">
-            {team.tags.map((tag, index) => (
-              <Badge key={index} variant="secondary" size="sm">
+            {team.tags.map((tag) => (
+              <Badge key={tag} variant="secondary" size="sm">
                 {tag}
               </Badge>
             ))}
@@ -374,46 +461,52 @@ export const TeamCard = forwardRef<HTMLDivElement, TeamCardProps>(
             />
             <div>
               <p className="text-xs text-muted-foreground">Team Lead</p>
-              <p className="text-sm font-medium text-foreground">{team.lead.name}</p>
+              <p className="text-sm font-medium text-foreground">
+                {team.lead.name}
+              </p>
             </div>
           </div>
         )}
 
         {/* Members */}
-        {showMembers && team.members && team.members.length > 0 && !team.lead && (
-          <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
-            <AvatarGroup
-              items={team.members.slice(0, maxVisibleMembers).map((m) => ({
-                src: m.avatarSrc,
-                fallback: m.avatarFallback || m.name.charAt(0),
-                alt: m.name,
-              }))}
-              size="sm"
-              max={maxVisibleMembers}
-            />
-            {onInvite && (
-              <Button
-                variant="ghost"
+        {showMembers &&
+          team.members &&
+          team.members.length > 0 &&
+          !team.lead && (
+            <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
+              <AvatarGroup
+                items={team.members.slice(0, maxVisibleMembers).map((m) => ({
+                  src: m.avatarSrc,
+                  fallback: m.avatarFallback || m.name.charAt(0),
+                  alt: m.name,
+                }))}
                 size="sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onInvite(team);
-                }}
-              >
-                <UserPlusIcon className="mr-1.5 size-4" />
-                Invite
-              </Button>
-            )}
-          </div>
-        )}
+                max={maxVisibleMembers}
+              />
+              {onInvite && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onInvite(team);
+                  }}
+                >
+                  <UserPlusIcon className="mr-1.5 size-4" />
+                  Invite
+                </Button>
+              )}
+            </div>
+          )}
       </div>
     );
-  }
+  },
 );
 TeamCard.displayName = "TeamCard";
 
 // Grid Layout
-export interface TeamCardGridProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TeamCardGridProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   teams: TeamCardData[];
   variant?: TeamCardProps["variant"];
   columns?: 2 | 3 | 4;
@@ -442,7 +535,7 @@ export const TeamCardGrid = forwardRef<HTMLDivElement, TeamCardGridProps>(
       onStar,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
@@ -463,12 +556,13 @@ export const TeamCardGrid = forwardRef<HTMLDivElement, TeamCardGridProps>(
         ))}
       </div>
     );
-  }
+  },
 );
 TeamCardGrid.displayName = "TeamCardGrid";
 
 // List Layout
-export interface TeamCardListProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TeamCardListProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   teams: TeamCardData[];
   showMembers?: boolean;
   onTeamClick?: (team: TeamCardData) => void;
@@ -487,7 +581,7 @@ export const TeamCardList = forwardRef<HTMLDivElement, TeamCardListProps>(
       onSettings,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div ref={ref} className={cn("space-y-2", className)} {...props}>
@@ -504,6 +598,6 @@ export const TeamCardList = forwardRef<HTMLDivElement, TeamCardListProps>(
         ))}
       </div>
     );
-  }
+  },
 );
 TeamCardList.displayName = "TeamCardList";

@@ -1,10 +1,10 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
+import { Badge, ProgressBar } from "@/components/atoms";
+import { TrendIndicator } from "@/components/molecules";
+import type { TrendDirection, TrendVariant } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { dataCardVariants } from "@/lib/variants/dataVisualization";
-import { TrendIndicator } from "@/components/molecules";
-import { Badge, ProgressBar } from "@/components/atoms";
-import type { VariantProps } from "class-variance-authority";
-import type { TrendDirection, TrendVariant } from "@/lib/types";
 
 // ============================================
 // Common Types
@@ -53,7 +53,10 @@ export interface ChatReportsStatsProps
   action?: React.ReactNode;
 }
 
-export const ChatReportsStats = forwardRef<HTMLDivElement, ChatReportsStatsProps>(
+export const ChatReportsStats = forwardRef<
+  HTMLDivElement,
+  ChatReportsStatsProps
+>(
   (
     {
       className,
@@ -66,7 +69,9 @@ export const ChatReportsStats = forwardRef<HTMLDivElement, ChatReportsStatsProps
     },
     ref,
   ) => {
-    const resolutionRate = Math.round((data.resolvedConversations / data.totalConversations) * 100);
+    const resolutionRate = Math.round(
+      (data.resolvedConversations / data.totalConversations) * 100,
+    );
 
     return (
       <div
@@ -80,7 +85,11 @@ export const ChatReportsStats = forwardRef<HTMLDivElement, ChatReportsStatsProps
             <h3 className="text-sm font-medium text-foreground">{title}</h3>
           </div>
           <div className="flex items-center gap-x-2">
-            {period && <Badge variant="secondary" size="sm">{period}</Badge>}
+            {period && (
+              <Badge variant="secondary" size="sm">
+                {period}
+              </Badge>
+            )}
             {action}
           </div>
         </div>
@@ -155,7 +164,10 @@ export interface InboxContactsStatsProps
   action?: React.ReactNode;
 }
 
-export const InboxContactsStats = forwardRef<HTMLDivElement, InboxContactsStatsProps>(
+export const InboxContactsStats = forwardRef<
+  HTMLDivElement,
+  InboxContactsStatsProps
+>(
   (
     {
       className,
@@ -168,7 +180,9 @@ export const InboxContactsStats = forwardRef<HTMLDivElement, InboxContactsStatsP
     },
     ref,
   ) => {
-    const activePercentage = Math.round((data.activeContacts / data.totalContacts) * 100);
+    const activePercentage = Math.round(
+      (data.activeContacts / data.totalContacts) * 100,
+    );
 
     return (
       <div
@@ -182,7 +196,11 @@ export const InboxContactsStats = forwardRef<HTMLDivElement, InboxContactsStatsP
             <h3 className="text-sm font-medium text-foreground">{title}</h3>
           </div>
           <div className="flex items-center gap-x-2">
-            {period && <Badge variant="secondary" size="sm">{period}</Badge>}
+            {period && (
+              <Badge variant="secondary" size="sm">
+                {period}
+              </Badge>
+            )}
             {action}
           </div>
         </div>
@@ -270,7 +288,10 @@ export interface InboxReportsStatsProps
   action?: React.ReactNode;
 }
 
-export const InboxReportsStats = forwardRef<HTMLDivElement, InboxReportsStatsProps>(
+export const InboxReportsStats = forwardRef<
+  HTMLDivElement,
+  InboxReportsStatsProps
+>(
   (
     {
       className,
@@ -283,7 +304,9 @@ export const InboxReportsStats = forwardRef<HTMLDivElement, InboxReportsStatsPro
     },
     ref,
   ) => {
-    const readRate = Math.round(((data.totalEmails - data.unreadEmails) / data.totalEmails) * 100);
+    const readRate = Math.round(
+      ((data.totalEmails - data.unreadEmails) / data.totalEmails) * 100,
+    );
 
     return (
       <div
@@ -297,7 +320,11 @@ export const InboxReportsStats = forwardRef<HTMLDivElement, InboxReportsStatsPro
             <h3 className="text-sm font-medium text-foreground">{title}</h3>
           </div>
           <div className="flex items-center gap-x-2">
-            {period && <Badge variant="secondary" size="sm">{period}</Badge>}
+            {period && (
+              <Badge variant="secondary" size="sm">
+                {period}
+              </Badge>
+            )}
             {action}
           </div>
         </div>
@@ -332,7 +359,9 @@ export const InboxReportsStats = forwardRef<HTMLDivElement, InboxReportsStatsPro
         <div className="p-4">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm text-muted-foreground">Read Rate</span>
-            <span className="text-sm font-medium text-foreground">{readRate}%</span>
+            <span className="text-sm font-medium text-foreground">
+              {readRate}%
+            </span>
           </div>
           <ProgressBar value={readRate} size="md" variant="success" />
           <div className="flex items-center justify-between mt-2 text-xs text-muted-foreground">
@@ -390,7 +419,9 @@ export const BrandSalesStats = forwardRef<HTMLDivElement, BrandSalesStatsProps>(
     ref,
   ) => {
     const currency = data.currency || "$";
-    const format = formatAmount ?? ((amount: number) => `${currency}${amount.toLocaleString()}`);
+    const format =
+      formatAmount ??
+      ((amount: number) => `${currency}${amount.toLocaleString()}`);
 
     return (
       <div
@@ -404,7 +435,11 @@ export const BrandSalesStats = forwardRef<HTMLDivElement, BrandSalesStatsProps>(
             <h3 className="text-sm font-medium text-foreground">{title}</h3>
           </div>
           <div className="flex items-center gap-x-2">
-            {period && <Badge variant="secondary" size="sm">{period}</Badge>}
+            {period && (
+              <Badge variant="secondary" size="sm">
+                {period}
+              </Badge>
+            )}
             {action}
           </div>
         </div>
@@ -485,7 +520,10 @@ export interface ProjectReportsStatsProps
   action?: React.ReactNode;
 }
 
-export const ProjectReportsStats = forwardRef<HTMLDivElement, ProjectReportsStatsProps>(
+export const ProjectReportsStats = forwardRef<
+  HTMLDivElement,
+  ProjectReportsStatsProps
+>(
   (
     {
       className,
@@ -510,7 +548,11 @@ export const ProjectReportsStats = forwardRef<HTMLDivElement, ProjectReportsStat
             <h3 className="text-sm font-medium text-foreground">{title}</h3>
           </div>
           <div className="flex items-center gap-x-2">
-            {period && <Badge variant="secondary" size="sm">{period}</Badge>}
+            {period && (
+              <Badge variant="secondary" size="sm">
+                {period}
+              </Badge>
+            )}
             {action}
           </div>
         </div>
@@ -536,7 +578,9 @@ export const ProjectReportsStats = forwardRef<HTMLDivElement, ProjectReportsStat
         {/* Completion Rate */}
         <div className="px-4 py-3 border-b border-border">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm text-muted-foreground">Completion Rate</span>
+            <span className="text-sm text-muted-foreground">
+              Completion Rate
+            </span>
             <span className="text-sm font-medium text-foreground">
               {data.completionRate}%
             </span>
@@ -548,8 +592,8 @@ export const ProjectReportsStats = forwardRef<HTMLDivElement, ProjectReportsStat
               data.completionRate >= 80
                 ? "success"
                 : data.completionRate >= 50
-                ? "warning"
-                : "error"
+                  ? "warning"
+                  : "error"
             }
           />
         </div>
@@ -604,7 +648,10 @@ export interface CompactReportStatsProps
   action?: React.ReactNode;
 }
 
-export const CompactReportStats = forwardRef<HTMLDivElement, CompactReportStatsProps>(
+export const CompactReportStats = forwardRef<
+  HTMLDivElement,
+  CompactReportStatsProps
+>(
   (
     {
       className,
@@ -636,7 +683,9 @@ export const CompactReportStats = forwardRef<HTMLDivElement, CompactReportStatsP
         </div>
 
         {/* Metrics Grid */}
-        <div className={cn("grid divide-x divide-border", columnClasses[columns])}>
+        <div
+          className={cn("grid divide-x divide-border", columnClasses[columns])}
+        >
           {metrics.map((metric) => (
             <div key={metric.id} className="p-4 text-center">
               {metric.icon && (

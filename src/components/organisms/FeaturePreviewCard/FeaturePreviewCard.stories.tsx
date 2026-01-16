@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { FeaturePreviewCard, FeaturePreviewGrid } from "./";
+import { CodeIcon, PaletteIcon, RocketIcon, ShieldIcon } from "@/lib/icons";
 import type { FeaturePreviewData } from "./";
-import { RocketIcon, CodeIcon, PaletteIcon, ShieldIcon } from "@/lib/icons";
+import { FeaturePreviewCard, FeaturePreviewGrid } from "./";
 
 const meta: Meta<typeof FeaturePreviewCard> = {
   title: "Organisms/FeaturePreviewCard",
@@ -18,7 +18,8 @@ type Story = StoryObj<typeof FeaturePreviewCard>;
 const sampleFeature: FeaturePreviewData = {
   id: "1",
   title: "AI-Powered Analytics",
-  description: "Get intelligent insights from your data with our new AI-powered analytics engine.",
+  description:
+    "Get intelligent insights from your data with our new AI-powered analytics engine.",
   icon: <RocketIcon className="size-6" />,
   features: [
     "Automatic trend detection",
@@ -44,7 +45,8 @@ export const WithImage: Story = {
   args: {
     feature: {
       ...sampleFeature,
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
     },
     className: "w-[380px]",
   },
@@ -54,7 +56,8 @@ export const Featured: Story = {
   args: {
     feature: {
       ...sampleFeature,
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
     },
     variant: "featured",
     onCtaClick: (feature) => console.log("CTA clicked:", feature.title),
@@ -67,7 +70,8 @@ export const Media: Story = {
   args: {
     feature: {
       ...sampleFeature,
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop",
     },
     variant: "media",
     className: "w-[350px]",

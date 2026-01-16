@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { ProductDetailModal, SizeGuideModal, ViewLookModal } from "./index";
-import type { ProductDetail, SizeChartRow, LookItem } from "./index";
 import { Button } from "@/components/atoms/Button";
+import type { LookItem, ProductDetail, SizeChartRow } from "./index";
+import { ProductDetailModal, SizeGuideModal, ViewLookModal } from "./index";
 
 const meta: Meta = {
   title: "Organisms/Overlays/ECommerceModals",
@@ -93,7 +93,8 @@ export const ProductOutOfStock: StoryObj<typeof ProductDetailModal> = {
     const product: ProductDetail = {
       id: "2",
       name: "Limited Edition Sneakers",
-      description: "Exclusive limited edition sneakers. Premium materials and unique design.",
+      description:
+        "Exclusive limited edition sneakers. Premium materials and unique design.",
       price: 189.99,
       currency: "$",
       images: [
@@ -143,11 +144,61 @@ export const SizeGuide: StoryObj<typeof SizeGuideModal> = {
     const [isOpen, setIsOpen] = useState(false);
     const headers = ["Size", "US", "UK", "EU", "Bust", "Waist", "Hips"];
     const rows: SizeChartRow[] = [
-      { size: "XS", measurements: { "US": "0-2", "UK": "4-6", "EU": "32-34", "Bust": "32\"", "Waist": "24\"", "Hips": "34\"" } },
-      { size: "S", measurements: { "US": "4-6", "UK": "8-10", "EU": "36-38", "Bust": "34\"", "Waist": "26\"", "Hips": "36\"" } },
-      { size: "M", measurements: { "US": "8-10", "UK": "12-14", "EU": "40-42", "Bust": "36\"", "Waist": "28\"", "Hips": "38\"" } },
-      { size: "L", measurements: { "US": "12-14", "UK": "16-18", "EU": "44-46", "Bust": "38\"", "Waist": "30\"", "Hips": "40\"" } },
-      { size: "XL", measurements: { "US": "16-18", "UK": "20-22", "EU": "48-50", "Bust": "40\"", "Waist": "32\"", "Hips": "42\"" } },
+      {
+        size: "XS",
+        measurements: {
+          US: "0-2",
+          UK: "4-6",
+          EU: "32-34",
+          Bust: '32"',
+          Waist: '24"',
+          Hips: '34"',
+        },
+      },
+      {
+        size: "S",
+        measurements: {
+          US: "4-6",
+          UK: "8-10",
+          EU: "36-38",
+          Bust: '34"',
+          Waist: '26"',
+          Hips: '36"',
+        },
+      },
+      {
+        size: "M",
+        measurements: {
+          US: "8-10",
+          UK: "12-14",
+          EU: "40-42",
+          Bust: '36"',
+          Waist: '28"',
+          Hips: '38"',
+        },
+      },
+      {
+        size: "L",
+        measurements: {
+          US: "12-14",
+          UK: "16-18",
+          EU: "44-46",
+          Bust: '38"',
+          Waist: '30"',
+          Hips: '40"',
+        },
+      },
+      {
+        size: "XL",
+        measurements: {
+          US: "16-18",
+          UK: "20-22",
+          EU: "48-50",
+          Bust: '40"',
+          Waist: '32"',
+          Hips: '42"',
+        },
+      },
     ];
     const notes = [
       "Bust: Measure around the fullest part of your bust",
@@ -177,13 +228,13 @@ export const ShoesSizeGuide: StoryObj<typeof SizeGuideModal> = {
     const [isOpen, setIsOpen] = useState(false);
     const headers = ["US", "UK", "EU", "CM"];
     const rows: SizeChartRow[] = [
-      { size: "6", measurements: { "UK": "5.5", "EU": "39", "CM": "24" } },
-      { size: "7", measurements: { "UK": "6.5", "EU": "40", "CM": "25" } },
-      { size: "8", measurements: { "UK": "7.5", "EU": "41", "CM": "26" } },
-      { size: "9", measurements: { "UK": "8.5", "EU": "42", "CM": "27" } },
-      { size: "10", measurements: { "UK": "9.5", "EU": "43", "CM": "28" } },
-      { size: "11", measurements: { "UK": "10.5", "EU": "44", "CM": "29" } },
-      { size: "12", measurements: { "UK": "11.5", "EU": "45", "CM": "30" } },
+      { size: "6", measurements: { UK: "5.5", EU: "39", CM: "24" } },
+      { size: "7", measurements: { UK: "6.5", EU: "40", CM: "25" } },
+      { size: "8", measurements: { UK: "7.5", EU: "41", CM: "26" } },
+      { size: "9", measurements: { UK: "8.5", EU: "42", CM: "27" } },
+      { size: "10", measurements: { UK: "9.5", EU: "43", CM: "28" } },
+      { size: "11", measurements: { UK: "10.5", EU: "44", CM: "29" } },
+      { size: "12", measurements: { UK: "11.5", EU: "45", CM: "30" } },
     ];
     const notes = [
       "Stand on a piece of paper and trace your foot",
@@ -216,35 +267,40 @@ export const ViewLook: StoryObj<typeof ViewLookModal> = {
         id: "1",
         name: "Classic White Shirt",
         price: 79.99,
-        image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=300",
+        image:
+          "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=300",
         category: "Tops",
       },
       {
         id: "2",
         name: "Navy Blazer",
         price: 199.99,
-        image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=300",
+        image:
+          "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=300",
         category: "Outerwear",
       },
       {
         id: "3",
         name: "Slim Fit Chinos",
         price: 89.99,
-        image: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=300",
+        image:
+          "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=300",
         category: "Bottoms",
       },
       {
         id: "4",
         name: "Leather Belt",
         price: 49.99,
-        image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300",
+        image:
+          "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300",
         category: "Accessories",
       },
       {
         id: "5",
         name: "Oxford Shoes",
         price: 149.99,
-        image: "https://images.unsplash.com/photo-1614252369475-531eba835eb1?w=300",
+        image:
+          "https://images.unsplash.com/photo-1614252369475-531eba835eb1?w=300",
         category: "Footwear",
       },
     ];
@@ -280,21 +336,24 @@ export const CasualLook: StoryObj<typeof ViewLookModal> = {
         id: "1",
         name: "Graphic Tee",
         price: 29.99,
-        image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300",
+        image:
+          "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300",
         category: "Tops",
       },
       {
         id: "2",
         name: "Denim Jacket",
         price: 89.99,
-        image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=300",
+        image:
+          "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=300",
         category: "Outerwear",
       },
       {
         id: "3",
         name: "Jogger Pants",
         price: 59.99,
-        image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=300",
+        image:
+          "https://images.unsplash.com/photo-1542272604-787c3835535d?w=300",
         category: "Bottoms",
       },
     ];

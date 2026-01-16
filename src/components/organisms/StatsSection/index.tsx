@@ -1,6 +1,6 @@
 import { forwardRef, type ReactNode } from "react";
+import { TrendingDownIcon, TrendingUpIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
-import { TrendingUpIcon, TrendingDownIcon } from "@/lib/icons";
 
 // Types
 export interface StatItem {
@@ -35,15 +35,29 @@ const backgroundClasses = {
   default: "bg-background",
   muted: "bg-muted/50",
   primary: "bg-primary text-primary-foreground",
-  gradient: "bg-gradient-to-r from-primary via-primary/90 to-primary/80 text-primary-foreground",
+  gradient:
+    "bg-gradient-to-r from-primary via-primary/90 to-primary/80 text-primary-foreground",
 };
 
 export const StatsSection = forwardRef<HTMLElement, StatsSectionProps>(
-  ({ className, padding = "md", backgroundColor = "default", children, ...props }, ref) => {
+  (
+    {
+      className,
+      padding = "md",
+      backgroundColor = "default",
+      children,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <section
         ref={ref}
-        className={cn(paddingClasses[padding], backgroundClasses[backgroundColor], className)}
+        className={cn(
+          paddingClasses[padding],
+          backgroundClasses[backgroundColor],
+          className,
+        )}
         {...props}
       >
         <div className="container mx-auto px-4">{children}</div>
@@ -54,61 +68,73 @@ export const StatsSection = forwardRef<HTMLElement, StatsSectionProps>(
 StatsSection.displayName = "StatsSection";
 
 // StatsSectionHeader component
-export interface StatsSectionHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface StatsSectionHeaderProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   align?: "left" | "center";
 }
 
-export const StatsSectionHeader = forwardRef<HTMLDivElement, StatsSectionHeaderProps>(
-  ({ className, align = "center", children, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "mb-12 md:mb-16",
-          align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-2xl text-left",
-          className,
-        )}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  },
-);
+export const StatsSectionHeader = forwardRef<
+  HTMLDivElement,
+  StatsSectionHeaderProps
+>(({ className, align = "center", children, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "mb-12 md:mb-16",
+        align === "center"
+          ? "mx-auto max-w-3xl text-center"
+          : "max-w-2xl text-left",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+});
 StatsSectionHeader.displayName = "StatsSectionHeader";
 
 // StatsSectionTitle component
-export interface StatsSectionTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+export interface StatsSectionTitleProps
+  extends React.HTMLAttributes<HTMLHeadingElement> {
   as?: "h2" | "h3";
 }
 
-export const StatsSectionTitle = forwardRef<HTMLHeadingElement, StatsSectionTitleProps>(
-  ({ className, as: Component = "h2", children, ...props }, ref) => {
-    return (
-      <Component
-        ref={ref}
-        className={cn("text-3xl font-bold md:text-4xl", className)}
-        {...props}
-      >
-        {children}
-      </Component>
-    );
-  },
-);
+export const StatsSectionTitle = forwardRef<
+  HTMLHeadingElement,
+  StatsSectionTitleProps
+>(({ className, as: Component = "h2", children, ...props }, ref) => {
+  return (
+    <Component
+      ref={ref}
+      className={cn("text-3xl font-bold md:text-4xl", className)}
+      {...props}
+    >
+      {children}
+    </Component>
+  );
+});
 StatsSectionTitle.displayName = "StatsSectionTitle";
 
 // StatsSectionSubtitle component
-export interface StatsSectionSubtitleProps extends React.HTMLAttributes<HTMLParagraphElement> {}
+export interface StatsSectionSubtitleProps
+  extends React.HTMLAttributes<HTMLParagraphElement> {}
 
-export const StatsSectionSubtitle = forwardRef<HTMLParagraphElement, StatsSectionSubtitleProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <p ref={ref} className={cn("mt-4 text-lg opacity-80", className)} {...props}>
-        {children}
-      </p>
-    );
-  },
-);
+export const StatsSectionSubtitle = forwardRef<
+  HTMLParagraphElement,
+  StatsSectionSubtitleProps
+>(({ className, children, ...props }, ref) => {
+  return (
+    <p
+      ref={ref}
+      className={cn("mt-4 text-lg opacity-80", className)}
+      {...props}
+    >
+      {children}
+    </p>
+  );
+});
 StatsSectionSubtitle.displayName = "StatsSectionSubtitle";
 
 // StatsGrid component
@@ -131,14 +157,25 @@ const gapClasses = {
 };
 
 export const StatsGrid = forwardRef<HTMLDivElement, StatsGridProps>(
-  ({ className, columns = 4, gap = "md", variant = "simple", children, ...props }, ref) => {
+  (
+    {
+      className,
+      columns = 4,
+      gap = "md",
+      variant = "simple",
+      children,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <div
         ref={ref}
         className={cn(
           "grid",
           columnClasses[columns],
-          variant === "divided" && "divide-y sm:divide-x sm:divide-y-0 divide-border",
+          variant === "divided" &&
+            "divide-y sm:divide-x sm:divide-y-0 divide-border",
           variant !== "divided" && gapClasses[gap],
           className,
         )}
@@ -192,7 +229,11 @@ export const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
     },
     ref,
   ) => {
-    const formatValue = (value: string | number, prefix?: string, suffix?: string) => {
+    const formatValue = (
+      value: string | number,
+      prefix?: string,
+      suffix?: string,
+    ) => {
       return `${prefix || ""}${value}${suffix || ""}`;
     };
 
@@ -209,7 +250,9 @@ export const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
       >
         {/* Icon */}
         {variant === "icon" && stat.icon && (
-          <div className={cn("mb-4", align === "center" && "flex justify-center")}>
+          <div
+            className={cn("mb-4", align === "center" && "flex justify-center")}
+          >
             <div className="inline-flex size-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
               {stat.icon}
             </div>
@@ -236,7 +279,9 @@ export const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
           <div
             className={cn(
               "mt-2 inline-flex items-center gap-1 text-sm",
-              stat.trend.direction === "up" ? "text-success" : "text-destructive",
+              stat.trend.direction === "up"
+                ? "text-success"
+                : "text-destructive",
             )}
           >
             {stat.trend.direction === "up" ? (
@@ -267,7 +312,10 @@ export const StatsRow = forwardRef<HTMLDivElement, StatsRowProps>(
     return (
       <div
         ref={ref}
-        className={cn("flex flex-wrap items-center justify-center gap-8 md:gap-12", className)}
+        className={cn(
+          "flex flex-wrap items-center justify-center gap-8 md:gap-12",
+          className,
+        )}
         {...props}
       >
         {stats.map((stat, index) => (
@@ -275,11 +323,15 @@ export const StatsRow = forwardRef<HTMLDivElement, StatsRowProps>(
             key={stat.id}
             className={cn(
               "text-center",
-              separator && index !== stats.length - 1 && "border-r border-border pr-8 md:pr-12",
+              separator &&
+                index !== stats.length - 1 &&
+                "border-r border-border pr-8 md:pr-12",
             )}
           >
             <div className="text-3xl font-bold md:text-4xl">
-              {stat.prefix}{stat.value}{stat.suffix}
+              {stat.prefix}
+              {stat.value}
+              {stat.suffix}
             </div>
             <div className="mt-1 text-sm opacity-75">{stat.label}</div>
           </div>
@@ -291,20 +343,29 @@ export const StatsRow = forwardRef<HTMLDivElement, StatsRowProps>(
 StatsRow.displayName = "StatsRow";
 
 // AnimatedStatValue component
-export interface AnimatedStatValueProps extends React.HTMLAttributes<HTMLSpanElement> {
+export interface AnimatedStatValueProps
+  extends React.HTMLAttributes<HTMLSpanElement> {
   value: number;
   prefix?: string;
   suffix?: string;
   duration?: number;
 }
 
-export const AnimatedStatValue = forwardRef<HTMLSpanElement, AnimatedStatValueProps>(
-  ({ className, value, prefix = "", suffix = "", duration = 2000, ...props }, ref) => {
+export const AnimatedStatValue = forwardRef<
+  HTMLSpanElement,
+  AnimatedStatValueProps
+>(
+  (
+    { className, value, prefix = "", suffix = "", duration = 2000, ...props },
+    ref,
+  ) => {
     // Note: Animation would typically be implemented with a counter animation library
     // For simplicity, we're just showing the final value
     return (
       <span ref={ref} className={className} {...props}>
-        {prefix}{value.toLocaleString()}{suffix}
+        {prefix}
+        {value.toLocaleString()}
+        {suffix}
       </span>
     );
   },
@@ -312,7 +373,8 @@ export const AnimatedStatValue = forwardRef<HTMLSpanElement, AnimatedStatValuePr
 AnimatedStatValue.displayName = "AnimatedStatValue";
 
 // CompleteStatsSection component - pre-composed full stats section
-export interface CompleteStatsSectionProps extends React.HTMLAttributes<HTMLElement> {
+export interface CompleteStatsSectionProps
+  extends React.HTMLAttributes<HTMLElement> {
   title?: string;
   subtitle?: string;
   stats: StatItem[];
@@ -322,7 +384,10 @@ export interface CompleteStatsSectionProps extends React.HTMLAttributes<HTMLElem
   showTrend?: boolean;
 }
 
-export const CompleteStatsSection = forwardRef<HTMLElement, CompleteStatsSectionProps>(
+export const CompleteStatsSection = forwardRef<
+  HTMLElement,
+  CompleteStatsSectionProps
+>(
   (
     {
       className,
@@ -337,18 +402,29 @@ export const CompleteStatsSection = forwardRef<HTMLElement, CompleteStatsSection
     },
     ref,
   ) => {
-    const effectiveColumns = columns || (stats.length <= 3 ? (stats.length as 2 | 3) : 4);
+    const effectiveColumns =
+      columns || (stats.length <= 3 ? (stats.length as 2 | 3) : 4);
 
     return (
-      <StatsSection ref={ref} backgroundColor={backgroundColor} className={className} {...props}>
+      <StatsSection
+        ref={ref}
+        backgroundColor={backgroundColor}
+        className={className}
+        {...props}
+      >
         {(title || subtitle) && (
           <StatsSectionHeader>
             {title && <StatsSectionTitle>{title}</StatsSectionTitle>}
-            {subtitle && <StatsSectionSubtitle>{subtitle}</StatsSectionSubtitle>}
+            {subtitle && (
+              <StatsSectionSubtitle>{subtitle}</StatsSectionSubtitle>
+            )}
           </StatsSectionHeader>
         )}
 
-        <StatsGrid columns={effectiveColumns} variant={variant === "simple" ? "divided" : "simple"}>
+        <StatsGrid
+          columns={effectiveColumns}
+          variant={variant === "simple" ? "divided" : "simple"}
+        >
           {stats.map((stat) => (
             <StatCard
               key={stat.id}
@@ -365,7 +441,8 @@ export const CompleteStatsSection = forwardRef<HTMLElement, CompleteStatsSection
 CompleteStatsSection.displayName = "CompleteStatsSection";
 
 // SimpleStatsBar component - compact inline stats bar
-export interface SimpleStatsBarProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SimpleStatsBarProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   stats: { value: string; label: string }[];
 }
 
@@ -380,8 +457,8 @@ export const SimpleStatsBar = forwardRef<HTMLDivElement, SimpleStatsBarProps>(
         )}
         {...props}
       >
-        {stats.map((stat, index) => (
-          <div key={index} className="text-center">
+        {stats.map((stat) => (
+          <div key={stat.label} className="text-center">
             <div className="text-2xl font-bold md:text-3xl">{stat.value}</div>
             <div className="text-sm opacity-75">{stat.label}</div>
           </div>

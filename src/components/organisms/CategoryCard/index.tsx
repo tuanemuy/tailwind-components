@@ -1,8 +1,8 @@
 "use client";
 
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
 import { ChevronRightIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Types
 export interface CategoryData {
@@ -17,7 +17,8 @@ export interface CategoryData {
 }
 
 // CategoryCard - Grid layout with multiple images
-export interface CategoryCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CategoryCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   category: CategoryData;
   variant?: "default" | "overlay" | "minimal";
   imageLayout?: "grid" | "stacked" | "single";
@@ -36,7 +37,7 @@ export const CategoryCard = forwardRef<HTMLDivElement, CategoryCardProps>(
     },
     ref,
   ) => {
-    const formatPrice = (amount: number, currency: string = "USD"): string => {
+    const formatPrice = (amount: number, currency = "USD"): string => {
       return new Intl.NumberFormat("en-US", {
         style: "currency",
         currency,
@@ -48,6 +49,7 @@ export const CategoryCard = forwardRef<HTMLDivElement, CategoryCardProps>(
     };
 
     return (
+      // biome-ignore lint/a11y/useKeyWithClickEvents: Category card selection
       <div
         ref={ref}
         className={cn(
@@ -112,7 +114,9 @@ export const CategoryCard = forwardRef<HTMLDivElement, CategoryCardProps>(
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-6">
             <h3 className="text-lg font-medium text-white">{category.name}</h3>
             {category.itemCount !== undefined && (
-              <p className="text-sm text-white/80">{category.itemCount} items</p>
+              <p className="text-sm text-white/80">
+                {category.itemCount} items
+              </p>
             )}
           </div>
         )}
@@ -120,10 +124,13 @@ export const CategoryCard = forwardRef<HTMLDivElement, CategoryCardProps>(
         {/* Default & Minimal variant body */}
         {variant !== "overlay" && (
           <div className="p-6 text-center">
-            <h4 className="font-medium text-lg text-foreground">{category.name}</h4>
+            <h4 className="font-medium text-lg text-foreground">
+              {category.name}
+            </h4>
             {category.startingPrice !== undefined && (
               <p className="mt-1 text-sm text-muted-foreground">
-                Starting from {formatPrice(category.startingPrice, category.currency)}
+                Starting from{" "}
+                {formatPrice(category.startingPrice, category.currency)}
               </p>
             )}
             {category.itemCount !== undefined && variant !== "minimal" && (
@@ -153,7 +160,8 @@ export const CategoryCard = forwardRef<HTMLDivElement, CategoryCardProps>(
 CategoryCard.displayName = "CategoryCard";
 
 // CategoryGrid - Grid of category cards
-export interface CategoryGridProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CategoryGridProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   categories: CategoryData[];
   columns?: 2 | 3 | 4;
   variant?: "default" | "overlay" | "minimal";
@@ -181,7 +189,11 @@ export const CategoryGrid = forwardRef<HTMLDivElement, CategoryGridProps>(
     };
 
     return (
-      <div ref={ref} className={cn("grid gap-5", gridCols[columns], className)} {...props}>
+      <div
+        ref={ref}
+        className={cn("grid gap-5", gridCols[columns], className)}
+        {...props}
+      >
         {categories.map((category) => (
           <CategoryCard
             key={category.id}
@@ -198,75 +210,82 @@ export const CategoryGrid = forwardRef<HTMLDivElement, CategoryGridProps>(
 CategoryGrid.displayName = "CategoryGrid";
 
 // CategoryCircular - Circular category navigation
-export interface CategoryCircularProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CategoryCircularProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   categories: CategoryData[];
   size?: "sm" | "md" | "lg";
   onCategoryClick?: (category: CategoryData) => void;
 }
 
-export const CategoryCircular = forwardRef<HTMLDivElement, CategoryCircularProps>(
-  ({ className, categories, size = "md", onCategoryClick, ...props }, ref) => {
-    const sizeClasses = {
-      sm: "size-16",
-      md: "size-20",
-      lg: "size-24",
-    };
+export const CategoryCircular = forwardRef<
+  HTMLDivElement,
+  CategoryCircularProps
+>(({ className, categories, size = "md", onCategoryClick, ...props }, ref) => {
+  const sizeClasses = {
+    sm: "size-16",
+    md: "size-20",
+    lg: "size-24",
+  };
 
-    const textSize = {
-      sm: "text-xs",
-      md: "text-sm",
-      lg: "text-base",
-    };
+  const textSize = {
+    sm: "text-xs",
+    md: "text-sm",
+    lg: "text-base",
+  };
 
-    return (
-      <div
-        ref={ref}
-        className={cn("flex flex-wrap gap-6 justify-center", className)}
-        {...props}
-      >
-        {categories.map((category) => (
-          <button
-            key={category.id}
-            className="flex flex-col items-center gap-2 group"
-            onClick={() => onCategoryClick?.(category)}
+  return (
+    <div
+      ref={ref}
+      className={cn("flex flex-wrap gap-6 justify-center", className)}
+      {...props}
+    >
+      {categories.map((category) => (
+        <button
+          key={category.id}
+          type="button"
+          className="flex flex-col items-center gap-2 group"
+          onClick={() => onCategoryClick?.(category)}
+        >
+          <div
+            className={cn(
+              "rounded-full overflow-hidden border-2 border-border group-hover:border-primary transition-colors",
+              sizeClasses[size],
+            )}
           >
-            <div
-              className={cn(
-                "rounded-full overflow-hidden border-2 border-border group-hover:border-primary transition-colors",
-                sizeClasses[size],
-              )}
-            >
-              <img
-                src={category.images[0]}
-                alt={category.name}
-                className="size-full object-cover"
-              />
-            </div>
-            <span
-              className={cn(
-                "font-medium text-foreground group-hover:text-primary transition-colors",
-                textSize[size],
-              )}
-            >
-              {category.name}
-            </span>
-          </button>
-        ))}
-      </div>
-    );
-  },
-);
+            <img
+              src={category.images[0]}
+              alt={category.name}
+              className="size-full object-cover"
+            />
+          </div>
+          <span
+            className={cn(
+              "font-medium text-foreground group-hover:text-primary transition-colors",
+              textSize[size],
+            )}
+          >
+            {category.name}
+          </span>
+        </button>
+      ))}
+    </div>
+  );
+});
 CategoryCircular.displayName = "CategoryCircular";
 
 // CategoryPill - Pill-style category navigation
-export interface CategoryPillProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CategoryPillProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   categories: CategoryData[];
   variant?: "default" | "outlined" | "filled";
   onCategoryClick?: (category: CategoryData) => void;
 }
 
 export const CategoryPill = forwardRef<HTMLDivElement, CategoryPillProps>(
-  ({ className, categories, variant = "default", onCategoryClick, ...props }, ref) => {
+  (
+    { className, categories, variant = "default", onCategoryClick, ...props },
+    ref,
+  ) => {
     const pillVariants = {
       default:
         "bg-card border border-border hover:border-primary hover:bg-primary/5",
@@ -275,10 +294,15 @@ export const CategoryPill = forwardRef<HTMLDivElement, CategoryPillProps>(
     };
 
     return (
-      <div ref={ref} className={cn("flex flex-wrap gap-3", className)} {...props}>
+      <div
+        ref={ref}
+        className={cn("flex flex-wrap gap-3", className)}
+        {...props}
+      >
         {categories.map((category) => (
           <button
             key={category.id}
+            type="button"
             className={cn(
               "inline-flex items-center gap-2 px-4 py-2 rounded-full transition-colors",
               pillVariants[variant],
@@ -294,7 +318,9 @@ export const CategoryPill = forwardRef<HTMLDivElement, CategoryPillProps>(
             )}
             <span className="font-medium text-sm">{category.name}</span>
             {category.itemCount !== undefined && (
-              <span className="text-xs text-muted-foreground">({category.itemCount})</span>
+              <span className="text-xs text-muted-foreground">
+                ({category.itemCount})
+              </span>
             )}
           </button>
         ))}
@@ -305,7 +331,8 @@ export const CategoryPill = forwardRef<HTMLDivElement, CategoryPillProps>(
 CategoryPill.displayName = "CategoryPill";
 
 // CategorySlider - Horizontal scrolling categories
-export interface CategorySliderProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CategorySliderProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   categories: CategoryData[];
   cardSize?: "sm" | "md" | "lg";
   showArrows?: boolean;
@@ -340,6 +367,7 @@ export const CategorySlider = forwardRef<HTMLDivElement, CategorySliderProps>(
       <div ref={ref} className={cn("relative", className)} {...props}>
         <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
           {categories.map((category) => (
+            // biome-ignore lint/a11y/useKeyWithClickEvents: Category card selection
             <div
               key={category.id}
               className={cn(
@@ -364,7 +392,9 @@ export const CategorySlider = forwardRef<HTMLDivElement, CategorySliderProps>(
                 {category.name}
               </h4>
               {category.itemCount !== undefined && (
-                <p className="text-sm text-muted-foreground">{category.itemCount} items</p>
+                <p className="text-sm text-muted-foreground">
+                  {category.itemCount} items
+                </p>
               )}
             </div>
           ))}

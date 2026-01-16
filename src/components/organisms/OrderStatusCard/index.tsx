@@ -1,19 +1,26 @@
 "use client";
 
 import { forwardRef, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
 import { Button, Separator } from "@/components/atoms";
 import {
   CheckCircleIcon,
-  TruckIcon,
-  PackageIcon,
-  ClockIcon,
-  XCircleIcon,
   ChevronRightIcon,
+  ClockIcon,
+  PackageIcon,
+  TruckIcon,
+  XCircleIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Types
-export type OrderStatus = "pending" | "confirmed" | "processing" | "shipped" | "delivered" | "cancelled" | "returned";
+export type OrderStatus =
+  | "pending"
+  | "confirmed"
+  | "processing"
+  | "shipped"
+  | "delivered"
+  | "cancelled"
+  | "returned";
 
 export interface OrderStatusStep {
   status: OrderStatus;
@@ -33,7 +40,8 @@ export interface OrderItem {
   variant?: string;
 }
 
-export interface OrderStatusCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface OrderStatusCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   orderNumber: string;
   orderDate: Date;
   currentStatus: OrderStatus;
@@ -92,7 +100,7 @@ const statusConfig: Record<
   },
 };
 
-const formatPrice = (amount: number, currency: string = "USD"): string => {
+const formatPrice = (amount: number, currency = "USD"): string => {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency,
@@ -149,15 +157,20 @@ export const OrderStatusCard = forwardRef<HTMLDivElement, OrderStatusCardProps>(
                 <span className={config.color}>{config.icon}</span>
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Order #{orderNumber}</p>
+                <p className="text-sm text-muted-foreground">
+                  Order #{orderNumber}
+                </p>
                 <p className={cn("font-medium", config.color)}>
-                  {currentStatus.charAt(0).toUpperCase() + currentStatus.slice(1)}
+                  {currentStatus.charAt(0).toUpperCase() +
+                    currentStatus.slice(1)}
                 </p>
               </div>
             </div>
             <div className="text-left sm:text-right">
               <p className="text-sm text-muted-foreground">Placed on</p>
-              <p className="font-medium text-foreground">{formatDate(orderDate)}</p>
+              <p className="font-medium text-foreground">
+                {formatDate(orderDate)}
+              </p>
             </div>
           </div>
         </div>
@@ -214,7 +227,9 @@ export const OrderStatusCard = forwardRef<HTMLDivElement, OrderStatusCardProps>(
                         {step.label}
                       </p>
                       {step.date && (
-                        <p className="text-xs text-muted-foreground">{step.date}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {step.date}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -230,17 +245,25 @@ export const OrderStatusCard = forwardRef<HTMLDivElement, OrderStatusCardProps>(
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               {trackingNumber && (
                 <div>
-                  <p className="text-sm text-muted-foreground">Tracking number</p>
+                  <p className="text-sm text-muted-foreground">
+                    Tracking number
+                  </p>
                   <p className="font-mono font-medium text-foreground">
-                    {carrier && <span className="text-muted-foreground">{carrier}: </span>}
+                    {carrier && (
+                      <span className="text-muted-foreground">{carrier}: </span>
+                    )}
                     {trackingNumber}
                   </p>
                 </div>
               )}
               {estimatedDelivery && (
                 <div className="sm:text-right">
-                  <p className="text-sm text-muted-foreground">Estimated delivery</p>
-                  <p className="font-medium text-foreground">{estimatedDelivery}</p>
+                  <p className="text-sm text-muted-foreground">
+                    Estimated delivery
+                  </p>
+                  <p className="font-medium text-foreground">
+                    {estimatedDelivery}
+                  </p>
                 </div>
               )}
             </div>
@@ -250,7 +273,9 @@ export const OrderStatusCard = forwardRef<HTMLDivElement, OrderStatusCardProps>(
         {/* Order Items */}
         {items && items.length > 0 && !compact && (
           <div className="p-4 sm:p-6 border-b border-border">
-            <h4 className="font-medium text-foreground mb-4">Items in this order</h4>
+            <h4 className="font-medium text-foreground mb-4">
+              Items in this order
+            </h4>
             <div className="space-y-4">
               {items.map((item) => (
                 <div key={item.id} className="flex gap-4">
@@ -266,9 +291,13 @@ export const OrderStatusCard = forwardRef<HTMLDivElement, OrderStatusCardProps>(
                   <div className="flex-1 min-w-0">
                     <p className="font-medium text-foreground">{item.name}</p>
                     {item.variant && (
-                      <p className="text-sm text-muted-foreground">{item.variant}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {item.variant}
+                      </p>
                     )}
-                    <p className="text-sm text-muted-foreground">Qty: {item.quantity}</p>
+                    <p className="text-sm text-muted-foreground">
+                      Qty: {item.quantity}
+                    </p>
                   </div>
                   <div className="text-right">
                     <p className="font-medium text-foreground">
@@ -283,7 +312,9 @@ export const OrderStatusCard = forwardRef<HTMLDivElement, OrderStatusCardProps>(
                 <Separator className="my-4" />
                 <div className="flex justify-between font-medium">
                   <span className="text-foreground">Order total</span>
-                  <span className="text-foreground">{formatPrice(total, currency)}</span>
+                  <span className="text-foreground">
+                    {formatPrice(total, currency)}
+                  </span>
                 </div>
               </>
             )}
@@ -304,11 +335,12 @@ export const OrderStatusCard = forwardRef<HTMLDivElement, OrderStatusCardProps>(
               <ChevronRightIcon className="size-4 ml-2" />
             </Button>
           )}
-          {onCancelOrder && (currentStatus === "pending" || currentStatus === "confirmed") && (
-            <Button variant="ghost" size="sm" onClick={onCancelOrder}>
-              Cancel order
-            </Button>
-          )}
+          {onCancelOrder &&
+            (currentStatus === "pending" || currentStatus === "confirmed") && (
+              <Button variant="ghost" size="sm" onClick={onCancelOrder}>
+                Cancel order
+              </Button>
+            )}
           {onReturnOrder && currentStatus === "delivered" && (
             <Button variant="ghost" size="sm" onClick={onReturnOrder}>
               Return items
@@ -333,7 +365,8 @@ export interface ExchangeItem {
   reason?: string;
 }
 
-export interface ExchangeReturnCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ExchangeReturnCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   orderNumber: string;
   items: ExchangeItem[];
   type: "exchange" | "return";
@@ -345,7 +378,10 @@ export interface ExchangeReturnCardProps extends React.HTMLAttributes<HTMLDivEle
   isSubmitting?: boolean;
 }
 
-export const ExchangeReturnCard = forwardRef<HTMLDivElement, ExchangeReturnCardProps>(
+export const ExchangeReturnCard = forwardRef<
+  HTMLDivElement,
+  ExchangeReturnCardProps
+>(
   (
     {
       className,
@@ -370,12 +406,16 @@ export const ExchangeReturnCard = forwardRef<HTMLDivElement, ExchangeReturnCardP
     ref,
   ) => {
     const selectedItems = items.filter((item) => item.selected);
-    const canSubmit = selectedItems.length > 0 && selectedItems.every((item) => item.reason);
+    const canSubmit =
+      selectedItems.length > 0 && selectedItems.every((item) => item.reason);
 
     return (
       <div
         ref={ref}
-        className={cn("rounded-xl border border-border bg-card overflow-hidden", className)}
+        className={cn(
+          "rounded-xl border border-border bg-card overflow-hidden",
+          className,
+        )}
         {...props}
       >
         {/* Header */}
@@ -419,18 +459,26 @@ export const ExchangeReturnCard = forwardRef<HTMLDivElement, ExchangeReturnCardP
                 <div className="flex-1 min-w-0">
                   <p className="font-medium text-foreground">{item.name}</p>
                   {item.variant && (
-                    <p className="text-sm text-muted-foreground">{item.variant}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {item.variant}
+                    </p>
                   )}
-                  <p className="text-sm text-muted-foreground">Qty: {item.quantity}</p>
+                  <p className="text-sm text-muted-foreground">
+                    Qty: {item.quantity}
+                  </p>
                 </div>
               </div>
 
               {item.selected && (
                 <div className="mt-4 pl-6">
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label
+                    htmlFor={`reason-${item.id}`}
+                    className="block text-sm font-medium text-foreground mb-2"
+                  >
                     Reason for {type}
                   </label>
                   <select
+                    id={`reason-${item.id}`}
                     className="w-full py-2 px-3 border border-border rounded-lg text-sm bg-background focus:border-primary focus:ring-primary"
                     value={item.reason || ""}
                     onChange={(e) => onReasonChange?.(item.id, e.target.value)}
@@ -455,9 +503,7 @@ export const ExchangeReturnCard = forwardRef<HTMLDivElement, ExchangeReturnCardP
             disabled={!canSubmit || isSubmitting}
             onClick={onSubmit}
           >
-            {isSubmitting
-              ? "Processing..."
-              : `Submit ${type} request`}
+            {isSubmitting ? "Processing..." : `Submit ${type} request`}
           </Button>
           <Button variant="outline" onClick={onCancel}>
             Cancel

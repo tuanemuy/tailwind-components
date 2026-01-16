@@ -1,9 +1,12 @@
 "use client";
 
-import { forwardRef, createContext, useContext, useState } from "react";
-import { cn } from "@/lib/utils";
-import { sectionNavVariants, sectionNavItemVariants } from "@/lib/variants/sectionNav";
 import type { VariantProps } from "class-variance-authority";
+import { createContext, forwardRef, useContext, useState } from "react";
+import { cn } from "@/lib/utils";
+import {
+  sectionNavItemVariants,
+  sectionNavVariants,
+} from "@/lib/variants/sectionNav";
 
 type SectionNavVariant = "underline" | "pills" | "segment" | "bordered";
 type SectionNavSize = "sm" | "md" | "lg";
@@ -48,7 +51,7 @@ export const SectionNav = forwardRef<HTMLDivElement, SectionNavProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [internalValue, setInternalValue] = useState(defaultValue);
     const activeValue = value ?? internalValue;
@@ -71,8 +74,10 @@ export const SectionNav = forwardRef<HTMLDivElement, SectionNavProps>(
       >
         <nav
           ref={ref}
-          role="navigation"
-          className={cn(sectionNavVariants({ variant, orientation }), className)}
+          className={cn(
+            sectionNavVariants({ variant, orientation }),
+            className,
+          )}
           {...props}
         >
           {items
@@ -86,16 +91,14 @@ export const SectionNav = forwardRef<HTMLDivElement, SectionNavProps>(
                     <span className="mr-2 size-4">{item.icon}</span>
                   )}
                   {item.label}
-                  {item.badge && (
-                    <span className="ml-2">{item.badge}</span>
-                  )}
+                  {item.badge && <span className="ml-2">{item.badge}</span>}
                 </SectionNavItem>
               ))
             : children}
         </nav>
       </SectionNavContext.Provider>
     );
-  }
+  },
 );
 SectionNav.displayName = "SectionNav";
 
@@ -107,33 +110,34 @@ export interface SectionNavItemProps
   asChild?: boolean;
 }
 
-export const SectionNavItem = forwardRef<HTMLButtonElement, SectionNavItemProps>(
-  ({ className, value, disabled, children, ...props }, ref) => {
-    const context = useContext(SectionNavContext);
-    if (!context) {
-      throw new Error("SectionNavItem must be used within SectionNav");
-    }
-
-    const { activeValue, onValueChange, variant, size } = context;
-    const isActive = activeValue === value;
-
-    return (
-      <button
-        ref={ref}
-        type="button"
-        role="tab"
-        aria-selected={isActive}
-        data-active={isActive}
-        disabled={disabled}
-        onClick={() => onValueChange?.(value)}
-        className={cn(sectionNavItemVariants({ variant, size }), className)}
-        {...props}
-      >
-        {children}
-      </button>
-    );
+export const SectionNavItem = forwardRef<
+  HTMLButtonElement,
+  SectionNavItemProps
+>(({ className, value, disabled, children, ...props }, ref) => {
+  const context = useContext(SectionNavContext);
+  if (!context) {
+    throw new Error("SectionNavItem must be used within SectionNav");
   }
-);
+
+  const { activeValue, onValueChange, variant, size } = context;
+  const isActive = activeValue === value;
+
+  return (
+    <button
+      ref={ref}
+      type="button"
+      role="tab"
+      aria-selected={isActive}
+      data-active={isActive}
+      disabled={disabled}
+      onClick={() => onValueChange?.(value)}
+      className={cn(sectionNavItemVariants({ variant, size }), className)}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+});
 SectionNavItem.displayName = "SectionNavItem";
 
 // Link variant for routing
@@ -146,7 +150,10 @@ export interface SectionNavLinkProps
   badge?: React.ReactNode;
 }
 
-export const SectionNavLink = forwardRef<HTMLAnchorElement, SectionNavLinkProps>(
+export const SectionNavLink = forwardRef<
+  HTMLAnchorElement,
+  SectionNavLinkProps
+>(
   (
     {
       className,
@@ -158,7 +165,7 @@ export const SectionNavLink = forwardRef<HTMLAnchorElement, SectionNavLinkProps>
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <a
@@ -172,31 +179,33 @@ export const SectionNavLink = forwardRef<HTMLAnchorElement, SectionNavLinkProps>
         {badge && <span className="ml-2">{badge}</span>}
       </a>
     );
-  }
+  },
 );
 SectionNavLink.displayName = "SectionNavLink";
 
 // Vertical navigation with header
-export interface VerticalSectionNavProps extends Omit<SectionNavProps, "orientation"> {
+export interface VerticalSectionNavProps
+  extends Omit<SectionNavProps, "orientation"> {
   title?: string;
   description?: string;
 }
 
-export const VerticalSectionNav = forwardRef<HTMLDivElement, VerticalSectionNavProps>(
-  ({ title, description, className, ...props }, ref) => {
-    return (
-      <div className={cn("space-y-4", className)}>
-        {(title || description) && (
-          <div>
-            {title && <h3 className="font-medium text-foreground">{title}</h3>}
-            {description && (
-              <p className="mt-1 text-sm text-muted-foreground">{description}</p>
-            )}
-          </div>
-        )}
-        <SectionNav ref={ref} orientation="vertical" {...props} />
-      </div>
-    );
-  }
-);
+export const VerticalSectionNav = forwardRef<
+  HTMLDivElement,
+  VerticalSectionNavProps
+>(({ title, description, className, ...props }, ref) => {
+  return (
+    <div className={cn("space-y-4", className)}>
+      {(title || description) && (
+        <div>
+          {title && <h3 className="font-medium text-foreground">{title}</h3>}
+          {description && (
+            <p className="mt-1 text-sm text-muted-foreground">{description}</p>
+          )}
+        </div>
+      )}
+      <SectionNav ref={ref} orientation="vertical" {...props} />
+    </div>
+  );
+});
 VerticalSectionNav.displayName = "VerticalSectionNav";

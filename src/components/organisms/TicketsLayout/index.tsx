@@ -1,33 +1,48 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { type ReactNode, useState } from "react";
 import { Avatar } from "@/components/atoms/Avatar";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
-import { Dropdown, DropdownItem, DropdownDivider } from "@/components/molecules/Dropdown";
-import { MessageGroup, type MessageData } from "../MessageBubble";
-import { ComposeThread } from "../ComposeThread";
 import {
-  SearchIcon,
-  FilterIcon,
-  PlusIcon,
-  MoreVerticalIcon,
-  ClockIcon,
-  CheckCircleIcon,
+  Dropdown,
+  DropdownDivider,
+  DropdownItem,
+} from "@/components/molecules/Dropdown";
+import {
   AlertCircleIcon,
-  UserIcon,
-  TagIcon,
   CalendarIcon,
+  CheckCircleIcon,
+  ClockIcon,
+  FilterIcon,
+  MoreVerticalIcon,
+  PlusIcon,
+  SearchIcon,
+  TagIcon,
+  UserIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
+import { ComposeThread } from "../ComposeThread";
+import { type MessageData, MessageGroup } from "../MessageBubble";
 
 // ============================================
 // Types
 // ============================================
 
 export type TicketPriority = "low" | "medium" | "high" | "urgent";
-export type TicketStatus = "open" | "in_progress" | "pending" | "resolved" | "closed";
+export type TicketStatus =
+  | "open"
+  | "in_progress"
+  | "pending"
+  | "resolved"
+  | "closed";
+
+export interface TicketFilters {
+  status?: TicketStatus[];
+  priority?: TicketPriority[];
+  assignee?: string;
+}
 
 export interface TicketTag {
   id: string;
@@ -87,10 +102,12 @@ export interface Ticket {
 // ============================================
 
 // Helper function to get ticket title (supports both 'title' and 'subject')
-const getTicketTitle = (ticket: Ticket): string => ticket.title || ticket.subject || "";
+const getTicketTitle = (ticket: Ticket): string =>
+  ticket.title || ticket.subject || "";
 
 // Helper function to get ticket requester (supports both 'customer' and 'requester')
-const getTicketRequester = (ticket: Ticket) => ticket.customer || ticket.requester;
+const getTicketRequester = (ticket: Ticket) =>
+  ticket.customer || ticket.requester;
 
 // Helper function to get tag display name
 const getTagName = (tag: string | TicketTag): string =>
@@ -99,11 +116,7 @@ const getTagName = (tag: string | TicketTag): string =>
 export interface TicketsLayoutProps {
   tickets?: Ticket[];
   selectedTicket?: Ticket;
-  filters?: {
-    status?: TicketStatus[];
-    priority?: TicketPriority[];
-    assignee?: string;
-  };
+  filters?: TicketFilters;
   activeStatus?: TicketStatus;
   activePriority?: TicketPriority;
   showSidebar?: boolean;
@@ -115,7 +128,7 @@ export interface TicketsLayoutProps {
   onDeleteTicket?: (id: string) => void;
   onSendMessage?: (ticketId: string, message: string) => void;
   onAddComment?: (ticketId: string, comment: string) => void;
-  onFilterChange?: (filters: any) => void;
+  onFilterChange?: (filters: TicketFilters) => void;
   onSearch?: (query: string) => void;
   onStatusChange?: (status: TicketStatus) => void;
   onPriorityChange?: (priority: TicketPriority) => void;
@@ -186,7 +199,7 @@ export const TicketsLayout = ({
           <div
             className={cn(
               "overflow-y-auto",
-              selectedTicket ? "w-96 border-r border-border" : "flex-1"
+              selectedTicket ? "w-96 border-r border-border" : "flex-1",
             )}
           >
             {tickets.length === 0 ? (
@@ -219,7 +232,8 @@ export const TicketsLayout = ({
 
               {/* Messages */}
               <div className="flex-1 overflow-y-auto p-4">
-                {selectedTicket.messages && selectedTicket.messages.length > 0 ? (
+                {selectedTicket.messages &&
+                selectedTicket.messages.length > 0 ? (
                   <MessageGroup
                     messages={selectedTicket.messages}
                     showDivider={true}
@@ -263,12 +277,8 @@ export const TicketsLayout = ({
 // ============================================
 
 interface TicketsSidebarProps {
-  filters?: {
-    status?: TicketStatus[];
-    priority?: TicketPriority[];
-    assignee?: string;
-  };
-  onFilterChange?: (filters: any) => void;
+  filters?: TicketFilters;
+  onFilterChange?: (filters: TicketFilters) => void;
   onCreateTicket?: () => void;
 }
 
@@ -277,7 +287,11 @@ const TicketsSidebar = ({
   onFilterChange,
   onCreateTicket,
 }: TicketsSidebarProps) => {
-  const statusOptions: { value: TicketStatus; label: string; count?: number }[] = [
+  const statusOptions: {
+    value: TicketStatus;
+    label: string;
+    count?: number;
+  }[] = [
     { value: "open", label: "Open" },
     { value: "in_progress", label: "In Progress" },
     { value: "pending", label: "Pending" },
@@ -296,7 +310,11 @@ const TicketsSidebar = ({
     <div className="p-4">
       {/* New Ticket Button */}
       {onCreateTicket && (
-        <Button variant="primary" className="w-full mb-4" onClick={onCreateTicket}>
+        <Button
+          variant="primary"
+          className="w-full mb-4"
+          onClick={onCreateTicket}
+        >
           <PlusIcon className="size-4 me-2" />
           New Ticket
         </Button>
@@ -316,7 +334,7 @@ const TicketsSidebar = ({
                 "w-full px-3 py-2 text-sm text-left rounded-lg transition-colors",
                 filters?.status?.includes(option.value)
                   ? "bg-primary/10 text-primary"
-                  : "hover:bg-muted"
+                  : "hover:bg-muted",
               )}
               onClick={() => {
                 const current = filters?.status || [];
@@ -349,7 +367,7 @@ const TicketsSidebar = ({
                 "w-full px-3 py-2 text-sm text-left rounded-lg transition-colors",
                 filters?.priority?.includes(option.value)
                   ? "bg-primary/10 text-primary"
-                  : "hover:bg-muted"
+                  : "hover:bg-muted",
               )}
               onClick={() => {
                 const current = filters?.priority || [];
@@ -427,7 +445,7 @@ const TicketItem = ({ ticket, isSelected, onClick }: TicketItemProps) => (
     type="button"
     className={cn(
       "w-full p-4 text-left hover:bg-muted/50 transition-colors",
-      isSelected && "bg-muted"
+      isSelected && "bg-muted",
     )}
     onClick={onClick}
   >
@@ -435,13 +453,16 @@ const TicketItem = ({ ticket, isSelected, onClick }: TicketItemProps) => (
       <StatusIcon status={ticket.status} className="size-5 mt-0.5" />
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between gap-x-2 mb-1">
-          <span className="text-sm font-medium truncate">{getTicketTitle(ticket)}</span>
+          <span className="text-sm font-medium truncate">
+            {getTicketTitle(ticket)}
+          </span>
           <span className="text-xs text-muted-foreground shrink-0">
             {ticket.updatedAt}
           </span>
         </div>
         <p className="text-xs text-muted-foreground truncate mb-2">
-          {ticket.description || `From: ${getTicketRequester(ticket)?.name || "Unknown"}`}
+          {ticket.description ||
+            `From: ${getTicketRequester(ticket)?.name || "Unknown"}`}
         </p>
         <div className="flex items-center gap-x-2">
           <PriorityBadge priority={ticket.priority} size="sm" />
@@ -480,60 +501,61 @@ const TicketConversationHeader = ({
 }: TicketConversationHeaderProps) => {
   const requester = getTicketRequester(ticket);
   return (
-  <div className="h-16 px-4 flex items-center justify-between border-b border-border">
-    <div className="flex items-center gap-x-3 min-w-0">
-      <Avatar
-        src={requester?.avatar}
-        name={requester?.name}
-        size="sm"
-      />
-      <div className="min-w-0">
-        <h3 className="text-sm font-semibold truncate">{getTicketTitle(ticket)}</h3>
-        <p className="text-xs text-muted-foreground truncate">
-          {requester?.name} • {requester?.email}
-        </p>
+    <div className="h-16 px-4 flex items-center justify-between border-b border-border">
+      <div className="flex items-center gap-x-3 min-w-0">
+        <Avatar src={requester?.avatar} name={requester?.name} size="sm" />
+        <div className="min-w-0">
+          <h3 className="text-sm font-semibold truncate">
+            {getTicketTitle(ticket)}
+          </h3>
+          <p className="text-xs text-muted-foreground truncate">
+            {requester?.name} • {requester?.email}
+          </p>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-x-2">
+        <Dropdown
+          trigger={
+            <Button variant="outline" size="sm">
+              <StatusIcon status={ticket.status} className="size-4 me-1" />
+              {statusLabels[ticket.status]}
+            </Button>
+          }
+          align="end"
+        >
+          {Object.entries(statusLabels).map(([value, label]) => (
+            <DropdownItem
+              key={value}
+              onClick={() => onUpdateStatus(value as TicketStatus)}
+            >
+              <StatusIcon
+                status={value as TicketStatus}
+                className="size-4 me-2"
+              />
+              {label}
+            </DropdownItem>
+          ))}
+        </Dropdown>
+
+        <Dropdown
+          trigger={
+            <Button variant="ghost" size="sm" className="size-8 p-0">
+              <MoreVerticalIcon className="size-4" />
+            </Button>
+          }
+          align="end"
+        >
+          <DropdownItem>Assign to...</DropdownItem>
+          <DropdownItem>Add tags...</DropdownItem>
+          <DropdownItem>Set due date...</DropdownItem>
+          <DropdownDivider />
+          <DropdownItem variant="destructive" onClick={onDelete}>
+            Delete ticket
+          </DropdownItem>
+        </Dropdown>
       </div>
     </div>
-
-    <div className="flex items-center gap-x-2">
-      <Dropdown
-        trigger={
-          <Button variant="outline" size="sm">
-            <StatusIcon status={ticket.status} className="size-4 me-1" />
-            {statusLabels[ticket.status]}
-          </Button>
-        }
-        align="end"
-      >
-        {Object.entries(statusLabels).map(([value, label]) => (
-          <DropdownItem
-            key={value}
-            onClick={() => onUpdateStatus(value as TicketStatus)}
-          >
-            <StatusIcon status={value as TicketStatus} className="size-4 me-2" />
-            {label}
-          </DropdownItem>
-        ))}
-      </Dropdown>
-
-      <Dropdown
-        trigger={
-          <Button variant="ghost" size="sm" className="size-8 p-0">
-            <MoreVerticalIcon className="size-4" />
-          </Button>
-        }
-        align="end"
-      >
-        <DropdownItem>Assign to...</DropdownItem>
-        <DropdownItem>Add tags...</DropdownItem>
-        <DropdownItem>Set due date...</DropdownItem>
-        <DropdownDivider />
-        <DropdownItem variant="destructive" onClick={onDelete}>
-          Delete ticket
-        </DropdownItem>
-      </Dropdown>
-    </div>
-  </div>
   );
 };
 
@@ -591,8 +613,8 @@ const TicketDetailsPanel = ({ ticket }: TicketDetailsPanelProps) => (
         {ticket.tags && ticket.tags.length > 0 ? (
           <div className="flex flex-wrap gap-1">
             {ticket.tags.map((tag, index) => {
-              const tagId = typeof tag === 'string' ? tag : tag.id;
-              const tagName = typeof tag === 'string' ? tag : tag.name;
+              const tagId = typeof tag === "string" ? tag : tag.id;
+              const tagName = typeof tag === "string" ? tag : tag.name;
               return (
                 <Badge key={tagId || index} variant="secondary" size="sm">
                   {tagName}
@@ -657,7 +679,9 @@ const StatusIcon = ({
     case "resolved":
       return <CheckCircleIcon className={cn("text-green-500", className)} />;
     case "closed":
-      return <CheckCircleIcon className={cn("text-muted-foreground", className)} />;
+      return (
+        <CheckCircleIcon className={cn("text-muted-foreground", className)} />
+      );
     default:
       return <AlertCircleIcon className={className} />;
   }
@@ -670,7 +694,10 @@ const PriorityBadge = ({
   priority: TicketPriority;
   size?: "sm" | "md";
 }) => {
-  const variants: Record<TicketPriority, "destructive" | "warning" | "secondary" | "outline"> = {
+  const variants: Record<
+    TicketPriority,
+    "destructive" | "warning" | "secondary" | "outline"
+  > = {
     urgent: "destructive",
     high: "warning",
     medium: "secondary",
@@ -718,7 +745,13 @@ export interface KanbanTicketsLayoutProps {
   className?: string;
 }
 
-const kanbanStatuses: TicketStatus[] = ["open", "in_progress", "pending", "resolved", "closed"];
+const kanbanStatuses: TicketStatus[] = [
+  "open",
+  "in_progress",
+  "pending",
+  "resolved",
+  "closed",
+];
 
 export const KanbanTicketsLayout = ({
   tickets = [],
@@ -746,7 +779,9 @@ export const KanbanTicketsLayout = ({
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-x-2">
                   <StatusIcon status={status} className="size-4" />
-                  <span className="font-medium text-sm">{statusLabels[status]}</span>
+                  <span className="font-medium text-sm">
+                    {statusLabels[status]}
+                  </span>
                   <Badge variant="secondary" size="sm">
                     {statusTickets.length}
                   </Badge>
@@ -799,12 +834,15 @@ const KanbanCard = ({ ticket, onClick, onMove }: KanbanCardProps) => {
   const requester = getTicketRequester(ticket);
 
   return (
-    <div
-      className="p-3 bg-card border border-border rounded-lg cursor-pointer hover:shadow-sm transition-shadow"
+    <button
+      type="button"
+      className="w-full text-left p-3 bg-card border border-border rounded-lg cursor-pointer hover:shadow-sm transition-shadow"
       onClick={onClick}
     >
       <div className="flex items-start justify-between gap-x-2 mb-2">
-        <span className="text-sm font-medium line-clamp-2">{getTicketTitle(ticket)}</span>
+        <span className="text-sm font-medium line-clamp-2">
+          {getTicketTitle(ticket)}
+        </span>
         <Dropdown
           trigger={
             <Button
@@ -857,8 +895,12 @@ const KanbanCard = ({ ticket, onClick, onMove }: KanbanCardProps) => {
 
       {ticket.tags && ticket.tags.length > 0 && (
         <div className="flex flex-wrap gap-1 mt-2">
-          {ticket.tags.slice(0, 3).map((tag, index) => (
-            <Badge key={index} variant="secondary" size="sm">
+          {ticket.tags.slice(0, 3).map((tag) => (
+            <Badge
+              key={typeof tag === "string" ? tag : tag.id}
+              variant="secondary"
+              size="sm"
+            >
               {getTagName(tag)}
             </Badge>
           ))}
@@ -869,14 +911,18 @@ const KanbanCard = ({ ticket, onClick, onMove }: KanbanCardProps) => {
           )}
         </div>
       )}
-    </div>
+    </button>
   );
 };
 
 const KanbanCardSkeleton = () => (
   <div className="space-y-2">
     {Array.from({ length: 3 }).map((_, i) => (
-      <div key={i} className="p-3 bg-card border border-border rounded-lg animate-pulse">
+      <div
+        // biome-ignore lint/suspicious/noArrayIndexKey: Skeleton cards are positional placeholders
+        key={`skeleton-${i}`}
+        className="p-3 bg-card border border-border rounded-lg animate-pulse"
+      >
         <div className="h-4 w-3/4 bg-muted rounded mb-2" />
         <div className="h-3 w-full bg-muted rounded mb-2" />
         <div className="flex justify-between">

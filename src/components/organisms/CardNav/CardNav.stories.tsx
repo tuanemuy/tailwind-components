@@ -1,28 +1,28 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
+import { Badge } from "@/components/atoms/Badge";
+import {
+  CloudIcon,
+  CodeIcon,
+  DatabaseIcon,
+  FileIcon,
+  FolderIcon,
+  HomeIcon,
+  ImageIcon,
+  LayoutIcon,
+  MusicIcon,
+  PaletteIcon,
+  SettingsIcon,
+  UserIcon,
+  VideoIcon,
+} from "@/lib/icons";
 import {
   CardNav,
   CardNavItem,
   CardNavLink,
-  HorizontalCardNav,
   FeatureSelection,
+  HorizontalCardNav,
 } from "./index";
-import { Badge } from "@/components/atoms/Badge";
-import {
-  HomeIcon,
-  UserIcon,
-  SettingsIcon,
-  FileIcon,
-  FolderIcon,
-  ImageIcon,
-  VideoIcon,
-  MusicIcon,
-  DatabaseIcon,
-  CloudIcon,
-  CodeIcon,
-  LayoutIcon,
-  PaletteIcon,
-} from "@/lib/icons";
 
 const meta: Meta<typeof CardNav> = {
   title: "Organisms/PageSections/CardNav",
@@ -129,7 +129,11 @@ export const WithBadges: Story = {
         icon: <FileIcon className="size-full" />,
         title: "Documents",
         description: "12 files",
-        badge: <Badge variant="default" size="sm">New</Badge>,
+        badge: (
+          <Badge variant="default" size="sm">
+            New
+          </Badge>
+        ),
       },
       {
         value: "images",
@@ -148,7 +152,11 @@ export const WithBadges: Story = {
         icon: <MusicIcon className="size-full" />,
         title: "Music",
         description: "156 files",
-        badge: <Badge variant="success" size="sm">Pro</Badge>,
+        badge: (
+          <Badge variant="success" size="sm">
+            Pro
+          </Badge>
+        ),
       },
     ],
   },
@@ -159,11 +167,36 @@ export const FileTypes: Story = {
     defaultValue: "all",
     columns: "auto",
     items: [
-      { value: "all", icon: <FolderIcon className="size-full" />, title: "All Files", description: "224 items" },
-      { value: "documents", icon: <FileIcon className="size-full" />, title: "Documents", description: "89 items" },
-      { value: "images", icon: <ImageIcon className="size-full" />, title: "Images", description: "67 items" },
-      { value: "videos", icon: <VideoIcon className="size-full" />, title: "Videos", description: "23 items" },
-      { value: "music", icon: <MusicIcon className="size-full" />, title: "Music", description: "45 items" },
+      {
+        value: "all",
+        icon: <FolderIcon className="size-full" />,
+        title: "All Files",
+        description: "224 items",
+      },
+      {
+        value: "documents",
+        icon: <FileIcon className="size-full" />,
+        title: "Documents",
+        description: "89 items",
+      },
+      {
+        value: "images",
+        icon: <ImageIcon className="size-full" />,
+        title: "Images",
+        description: "67 items",
+      },
+      {
+        value: "videos",
+        icon: <VideoIcon className="size-full" />,
+        title: "Videos",
+        description: "23 items",
+      },
+      {
+        value: "music",
+        icon: <MusicIcon className="size-full" />,
+        title: "Music",
+        description: "45 items",
+      },
     ],
   },
 };
@@ -173,9 +206,25 @@ export const WithDisabled: Story = {
     defaultValue: "basic",
     columns: 3,
     items: [
-      { value: "basic", icon: <LayoutIcon className="size-full" />, title: "Basic", description: "Free tier" },
-      { value: "pro", icon: <CodeIcon className="size-full" />, title: "Pro", description: "Advanced features" },
-      { value: "enterprise", icon: <DatabaseIcon className="size-full" />, title: "Enterprise", description: "Coming soon", disabled: true },
+      {
+        value: "basic",
+        icon: <LayoutIcon className="size-full" />,
+        title: "Basic",
+        description: "Free tier",
+      },
+      {
+        value: "pro",
+        icon: <CodeIcon className="size-full" />,
+        title: "Pro",
+        description: "Advanced features",
+      },
+      {
+        value: "enterprise",
+        icon: <DatabaseIcon className="size-full" />,
+        title: "Enterprise",
+        description: "Coming soon",
+        disabled: true,
+      },
     ],
   },
 };
@@ -190,14 +239,30 @@ export const Controlled: Story = {
           onValueChange={setValue}
           columns={3}
           items={[
-            { value: "option1", icon: <CloudIcon className="size-full" />, title: "Option 1", description: "First option" },
-            { value: "option2", icon: <DatabaseIcon className="size-full" />, title: "Option 2", description: "Second option" },
-            { value: "option3", icon: <CodeIcon className="size-full" />, title: "Option 3", description: "Third option" },
+            {
+              value: "option1",
+              icon: <CloudIcon className="size-full" />,
+              title: "Option 1",
+              description: "First option",
+            },
+            {
+              value: "option2",
+              icon: <DatabaseIcon className="size-full" />,
+              title: "Option 2",
+              description: "Second option",
+            },
+            {
+              value: "option3",
+              icon: <CodeIcon className="size-full" />,
+              title: "Option 3",
+              description: "Third option",
+            },
           ]}
         />
         <div className="rounded-lg border border-border p-4">
           <p className="text-sm text-muted-foreground">
-            Selected: <span className="font-medium text-foreground">{value}</span>
+            Selected:{" "}
+            <span className="font-medium text-foreground">{value}</span>
           </p>
         </div>
       </div>
@@ -210,11 +275,31 @@ export const Horizontal: StoryObj<typeof HorizontalCardNav> = {
     <HorizontalCardNav
       defaultValue="all"
       items={[
-        { value: "all", icon: <FolderIcon className="size-full" />, title: "All" },
-        { value: "docs", icon: <FileIcon className="size-full" />, title: "Docs" },
-        { value: "images", icon: <ImageIcon className="size-full" />, title: "Images" },
-        { value: "videos", icon: <VideoIcon className="size-full" />, title: "Videos" },
-        { value: "music", icon: <MusicIcon className="size-full" />, title: "Music" },
+        {
+          value: "all",
+          icon: <FolderIcon className="size-full" />,
+          title: "All",
+        },
+        {
+          value: "docs",
+          icon: <FileIcon className="size-full" />,
+          title: "Docs",
+        },
+        {
+          value: "images",
+          icon: <ImageIcon className="size-full" />,
+          title: "Images",
+        },
+        {
+          value: "videos",
+          icon: <VideoIcon className="size-full" />,
+          title: "Videos",
+        },
+        {
+          value: "music",
+          icon: <MusicIcon className="size-full" />,
+          title: "Music",
+        },
       ]}
     />
   ),
@@ -227,12 +312,36 @@ export const HorizontalScrollable: StoryObj<typeof HorizontalCardNav> = {
         scrollable
         defaultValue="all"
         items={[
-          { value: "all", icon: <FolderIcon className="size-full" />, title: "All" },
-          { value: "docs", icon: <FileIcon className="size-full" />, title: "Docs" },
-          { value: "images", icon: <ImageIcon className="size-full" />, title: "Images" },
-          { value: "videos", icon: <VideoIcon className="size-full" />, title: "Videos" },
-          { value: "music", icon: <MusicIcon className="size-full" />, title: "Music" },
-          { value: "archives", icon: <DatabaseIcon className="size-full" />, title: "Archives" },
+          {
+            value: "all",
+            icon: <FolderIcon className="size-full" />,
+            title: "All",
+          },
+          {
+            value: "docs",
+            icon: <FileIcon className="size-full" />,
+            title: "Docs",
+          },
+          {
+            value: "images",
+            icon: <ImageIcon className="size-full" />,
+            title: "Images",
+          },
+          {
+            value: "videos",
+            icon: <VideoIcon className="size-full" />,
+            title: "Videos",
+          },
+          {
+            value: "music",
+            icon: <MusicIcon className="size-full" />,
+            title: "Music",
+          },
+          {
+            value: "archives",
+            icon: <DatabaseIcon className="size-full" />,
+            title: "Archives",
+          },
         ]}
       />
     </div>
@@ -339,7 +448,11 @@ export const Composable: Story = {
         icon={<UserIcon className="size-full" />}
         title="Profile"
         description="View your profile"
-        badge={<Badge variant="success" size="sm">New</Badge>}
+        badge={
+          <Badge variant="success" size="sm">
+            New
+          </Badge>
+        }
       />
       <CardNavItem
         value="settings"

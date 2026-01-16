@@ -1,22 +1,22 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {
-  TestimonialCard,
-  TestimonialQuote,
-  TestimonialContent,
-  TestimonialRating,
   TestimonialAuthor,
   TestimonialAuthorAvatar,
   TestimonialAuthorInfo,
   TestimonialAuthorName,
   TestimonialAuthorTitle,
-  TestimonialSection,
-  TestimonialSectionHeader,
-  TestimonialSectionTitle,
-  TestimonialSectionSubtitle,
-  TestimonialGrid,
+  TestimonialCard,
   TestimonialCarousel,
   TestimonialCarouselItem,
+  TestimonialContent,
   TestimonialFeatured,
+  TestimonialGrid,
+  TestimonialQuote,
+  TestimonialRating,
+  TestimonialSection,
+  TestimonialSectionHeader,
+  TestimonialSectionSubtitle,
+  TestimonialSectionTitle,
 } from "./index";
 
 const meta: Meta<typeof TestimonialCard> = {
@@ -51,7 +51,8 @@ const testimonials = [
       name: "Sarah Chen",
       title: "Product Manager",
       company: "TechCorp",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
+      avatar:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
     },
     rating: 5,
   },
@@ -63,7 +64,8 @@ const testimonials = [
       name: "Michael Roberts",
       title: "CTO",
       company: "StartupXYZ",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
     },
     rating: 5,
   },
@@ -75,7 +77,8 @@ const testimonials = [
       name: "Emily Watson",
       title: "Engineering Lead",
       company: "Enterprise Inc",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
+      avatar:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
     },
     rating: 4,
   },
@@ -106,7 +109,9 @@ export const Default: Story = {
             alt={testimonials[0].author.name}
           />
           <TestimonialAuthorInfo>
-            <TestimonialAuthorName>{testimonials[0].author.name}</TestimonialAuthorName>
+            <TestimonialAuthorName>
+              {testimonials[0].author.name}
+            </TestimonialAuthorName>
             <TestimonialAuthorTitle>
               {testimonials[0].author.title} at {testimonials[0].author.company}
             </TestimonialAuthorTitle>
@@ -129,7 +134,9 @@ export const WithRating: Story = {
             alt={testimonials[1].author.name}
           />
           <TestimonialAuthorInfo>
-            <TestimonialAuthorName>{testimonials[1].author.name}</TestimonialAuthorName>
+            <TestimonialAuthorName>
+              {testimonials[1].author.name}
+            </TestimonialAuthorName>
             <TestimonialAuthorTitle>
               {testimonials[1].author.title}, {testimonials[1].author.company}
             </TestimonialAuthorTitle>
@@ -143,7 +150,9 @@ export const WithRating: Story = {
 export const QuoteVariant: Story = {
   render: () => (
     <TestimonialCard variant="quote" className="max-w-md">
-      <TestimonialContent size="lg">{testimonials[0].content}</TestimonialContent>
+      <TestimonialContent size="lg">
+        {testimonials[0].content}
+      </TestimonialContent>
       <div className="mt-6">
         <TestimonialAuthor>
           <TestimonialAuthorAvatar
@@ -151,7 +160,9 @@ export const QuoteVariant: Story = {
             alt={testimonials[0].author.name}
           />
           <TestimonialAuthorInfo>
-            <TestimonialAuthorName>{testimonials[0].author.name}</TestimonialAuthorName>
+            <TestimonialAuthorName>
+              {testimonials[0].author.name}
+            </TestimonialAuthorName>
             <TestimonialAuthorTitle>
               {testimonials[0].author.title}
             </TestimonialAuthorTitle>
@@ -174,7 +185,9 @@ export const ElevatedVariant: Story = {
           alt={testimonials[2].author.name}
         />
         <TestimonialAuthorInfo>
-          <TestimonialAuthorName>{testimonials[2].author.name}</TestimonialAuthorName>
+          <TestimonialAuthorName>
+            {testimonials[2].author.name}
+          </TestimonialAuthorName>
           <TestimonialAuthorTitle>
             {testimonials[2].author.title}
           </TestimonialAuthorTitle>
@@ -196,7 +209,9 @@ export const WithInitials: Story = {
             alt={testimonials[3].author.name}
           />
           <TestimonialAuthorInfo>
-            <TestimonialAuthorName>{testimonials[3].author.name}</TestimonialAuthorName>
+            <TestimonialAuthorName>
+              {testimonials[3].author.name}
+            </TestimonialAuthorName>
             <TestimonialAuthorTitle>
               {testimonials[3].author.title}
             </TestimonialAuthorTitle>
@@ -217,7 +232,9 @@ export const VerticalLayout: Story = {
           size="lg"
         />
         <TestimonialAuthorInfo>
-          <TestimonialAuthorName>{testimonials[0].author.name}</TestimonialAuthorName>
+          <TestimonialAuthorName>
+            {testimonials[0].author.name}
+          </TestimonialAuthorName>
           <TestimonialAuthorTitle>
             {testimonials[0].author.title}
           </TestimonialAuthorTitle>
@@ -238,9 +255,12 @@ export const TestimonialGridLayout: Story = {
   render: () => (
     <TestimonialSection>
       <TestimonialSectionHeader>
-        <TestimonialSectionTitle>What our customers say</TestimonialSectionTitle>
+        <TestimonialSectionTitle>
+          What our customers say
+        </TestimonialSectionTitle>
         <TestimonialSectionSubtitle>
-          Don&apos;t just take our word for it. See what our customers have to say.
+          Don&apos;t just take our word for it. See what our customers have to
+          say.
         </TestimonialSectionSubtitle>
       </TestimonialSectionHeader>
       <TestimonialGrid columns={3}>
@@ -256,7 +276,9 @@ export const TestimonialGridLayout: Story = {
                   alt={testimonial.author.name}
                 />
                 <TestimonialAuthorInfo>
-                  <TestimonialAuthorName>{testimonial.author.name}</TestimonialAuthorName>
+                  <TestimonialAuthorName>
+                    {testimonial.author.name}
+                  </TestimonialAuthorName>
                   <TestimonialAuthorTitle>
                     {testimonial.author.title}
                   </TestimonialAuthorTitle>
@@ -277,13 +299,17 @@ export const TwoColumnGrid: Story = {
   render: () => (
     <TestimonialSection className="bg-muted/50">
       <TestimonialSectionHeader>
-        <TestimonialSectionTitle>Loved by teams worldwide</TestimonialSectionTitle>
+        <TestimonialSectionTitle>
+          Loved by teams worldwide
+        </TestimonialSectionTitle>
       </TestimonialSectionHeader>
       <TestimonialGrid columns={2} gap="lg">
         {testimonials.slice(0, 2).map((testimonial) => (
           <TestimonialCard key={testimonial.id} variant="elevated" size="lg">
             <TestimonialQuote>
-              <TestimonialContent size="lg">{testimonial.content}</TestimonialContent>
+              <TestimonialContent size="lg">
+                {testimonial.content}
+              </TestimonialContent>
             </TestimonialQuote>
             <div className="mt-8">
               <TestimonialAuthor>
@@ -293,7 +319,9 @@ export const TwoColumnGrid: Story = {
                   size="lg"
                 />
                 <TestimonialAuthorInfo>
-                  <TestimonialAuthorName>{testimonial.author.name}</TestimonialAuthorName>
+                  <TestimonialAuthorName>
+                    {testimonial.author.name}
+                  </TestimonialAuthorName>
                   <TestimonialAuthorTitle>
                     {testimonial.author.title} at {testimonial.author.company}
                   </TestimonialAuthorTitle>
@@ -333,7 +361,9 @@ export const CarouselLayout: Story = {
                     alt={testimonial.author.name}
                   />
                   <TestimonialAuthorInfo>
-                    <TestimonialAuthorName>{testimonial.author.name}</TestimonialAuthorName>
+                    <TestimonialAuthorName>
+                      {testimonial.author.name}
+                    </TestimonialAuthorName>
                     <TestimonialAuthorTitle>
                       {testimonial.author.title}
                     </TestimonialAuthorTitle>
@@ -358,10 +388,14 @@ export const FeaturedTestimonial: Story = {
         <div className="text-center">
           <TestimonialRating rating={5} className="mb-6 justify-center" />
           <TestimonialQuote showIcon={false}>
-            <TestimonialContent size="lg" className="text-xl md:text-2xl font-medium">
-              &ldquo;This product has completely transformed how our team works. The intuitive
-              interface and powerful features have boosted our productivity by 40%. I can&apos;t
-              imagine going back to how we worked before.&rdquo;
+            <TestimonialContent
+              size="lg"
+              className="text-xl md:text-2xl font-medium"
+            >
+              &ldquo;This product has completely transformed how our team works.
+              The intuitive interface and powerful features have boosted our
+              productivity by 40%. I can&apos;t imagine going back to how we
+              worked before.&rdquo;
             </TestimonialContent>
           </TestimonialQuote>
           <div className="mt-8">
@@ -376,7 +410,8 @@ export const FeaturedTestimonial: Story = {
                   {testimonials[0].author.name}
                 </TestimonialAuthorName>
                 <TestimonialAuthorTitle>
-                  {testimonials[0].author.title} at {testimonials[0].author.company}
+                  {testimonials[0].author.title} at{" "}
+                  {testimonials[0].author.company}
                 </TestimonialAuthorTitle>
               </TestimonialAuthorInfo>
             </TestimonialAuthor>
@@ -389,7 +424,11 @@ export const FeaturedTestimonial: Story = {
 
 export const MinimalStyle: Story = {
   render: () => (
-    <TestimonialCard variant="default" size="sm" className="max-w-sm border-none">
+    <TestimonialCard
+      variant="default"
+      size="sm"
+      className="max-w-sm border-none"
+    >
       <TestimonialContent size="sm" className="italic text-muted-foreground">
         &ldquo;{testimonials[0].content}&rdquo;
       </TestimonialContent>

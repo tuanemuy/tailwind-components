@@ -1,8 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { FileList } from "./index";
 import { Button } from "@/components/atoms";
-import { Dropdown, DropdownItem, DropdownDivider } from "@/components/molecules";
-import { MoreHorizontalIcon, DownloadIcon, EditIcon, TrashIcon, CopyIcon } from "@/lib/icons";
+import {
+  Dropdown,
+  DropdownDivider,
+  DropdownItem,
+} from "@/components/molecules";
+import {
+  CopyIcon,
+  DownloadIcon,
+  EditIcon,
+  MoreHorizontalIcon,
+  TrashIcon,
+} from "@/lib/icons";
+import { FileList } from "./index";
 
 const meta: Meta<typeof FileList> = {
   title: "Organisms/FileList",
@@ -223,10 +233,30 @@ export const Empty: Story = {
 export const FoldersOnly: Story = {
   args: {
     files: [
-      { id: "folder-docs", name: "Documents", isFolder: true, date: "Dec 12, 2024" },
-      { id: "folder-images", name: "Images", isFolder: true, date: "Dec 10, 2024" },
-      { id: "folder-videos", name: "Videos", isFolder: true, date: "Dec 8, 2024" },
-      { id: "folder-archives", name: "Archives", isFolder: true, date: "Dec 5, 2024" },
+      {
+        id: "folder-docs",
+        name: "Documents",
+        isFolder: true,
+        date: "Dec 12, 2024",
+      },
+      {
+        id: "folder-images",
+        name: "Images",
+        isFolder: true,
+        date: "Dec 10, 2024",
+      },
+      {
+        id: "folder-videos",
+        name: "Videos",
+        isFolder: true,
+        date: "Dec 8, 2024",
+      },
+      {
+        id: "folder-archives",
+        name: "Archives",
+        isFolder: true,
+        date: "Dec 5, 2024",
+      },
     ],
     layout: "grid",
     columns: 4,

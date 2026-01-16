@@ -182,84 +182,108 @@ const columns: StickyTableColumn<SalesData>[] = [
     header: "Jan",
     width: "100px",
     align: "end",
-    render: (value) => <span className="text-sm">{formatCurrency(value as number)}</span>,
+    render: (value) => (
+      <span className="text-sm">{formatCurrency(value as number)}</span>
+    ),
   },
   {
     key: "feb",
     header: "Feb",
     width: "100px",
     align: "end",
-    render: (value) => <span className="text-sm">{formatCurrency(value as number)}</span>,
+    render: (value) => (
+      <span className="text-sm">{formatCurrency(value as number)}</span>
+    ),
   },
   {
     key: "mar",
     header: "Mar",
     width: "100px",
     align: "end",
-    render: (value) => <span className="text-sm">{formatCurrency(value as number)}</span>,
+    render: (value) => (
+      <span className="text-sm">{formatCurrency(value as number)}</span>
+    ),
   },
   {
     key: "apr",
     header: "Apr",
     width: "100px",
     align: "end",
-    render: (value) => <span className="text-sm">{formatCurrency(value as number)}</span>,
+    render: (value) => (
+      <span className="text-sm">{formatCurrency(value as number)}</span>
+    ),
   },
   {
     key: "may",
     header: "May",
     width: "100px",
     align: "end",
-    render: (value) => <span className="text-sm">{formatCurrency(value as number)}</span>,
+    render: (value) => (
+      <span className="text-sm">{formatCurrency(value as number)}</span>
+    ),
   },
   {
     key: "jun",
     header: "Jun",
     width: "100px",
     align: "end",
-    render: (value) => <span className="text-sm">{formatCurrency(value as number)}</span>,
+    render: (value) => (
+      <span className="text-sm">{formatCurrency(value as number)}</span>
+    ),
   },
   {
     key: "jul",
     header: "Jul",
     width: "100px",
     align: "end",
-    render: (value) => <span className="text-sm">{formatCurrency(value as number)}</span>,
+    render: (value) => (
+      <span className="text-sm">{formatCurrency(value as number)}</span>
+    ),
   },
   {
     key: "aug",
     header: "Aug",
     width: "100px",
     align: "end",
-    render: (value) => <span className="text-sm">{formatCurrency(value as number)}</span>,
+    render: (value) => (
+      <span className="text-sm">{formatCurrency(value as number)}</span>
+    ),
   },
   {
     key: "sep",
     header: "Sep",
     width: "100px",
     align: "end",
-    render: (value) => <span className="text-sm">{formatCurrency(value as number)}</span>,
+    render: (value) => (
+      <span className="text-sm">{formatCurrency(value as number)}</span>
+    ),
   },
   {
     key: "oct",
     header: "Oct",
     width: "100px",
     align: "end",
-    render: (value) => <span className="text-sm">{formatCurrency(value as number)}</span>,
+    render: (value) => (
+      <span className="text-sm">{formatCurrency(value as number)}</span>
+    ),
   },
   {
     key: "nov",
     header: "Nov",
     width: "100px",
     align: "end",
-    render: (value) => <span className="text-sm">{formatCurrency(value as number)}</span>,
+    render: (value) => (
+      <span className="text-sm">{formatCurrency(value as number)}</span>
+    ),
   },
   {
     key: "dec",
     header: "Dec",
     width: "100px",
     align: "end",
-    render: (value) => <span className="text-sm">{formatCurrency(value as number)}</span>,
+    render: (value) => (
+      <span className="text-sm">{formatCurrency(value as number)}</span>
+    ),
   },
   {
     key: "total",
@@ -268,7 +292,9 @@ const columns: StickyTableColumn<SalesData>[] = [
     align: "end",
     sticky: "right",
     render: (value) => (
-      <span className="font-semibold text-foreground">{formatCurrency(value as number)}</span>
+      <span className="font-semibold text-foreground">
+        {formatCurrency(value as number)}
+      </span>
     ),
   },
   {
@@ -281,22 +307,55 @@ const columns: StickyTableColumn<SalesData>[] = [
       const icons = {
         up: (
           <span className="text-green-600 dark:text-green-400">
-            <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            <svg
+              aria-hidden="true"
+              className="size-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 10l7-7m0 0l7 7m-7-7v18"
+              />
             </svg>
           </span>
         ),
         down: (
           <span className="text-red-600 dark:text-red-400">
-            <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            <svg
+              aria-hidden="true"
+              className="size-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 14l-7 7m0 0l-7-7m7 7V3"
+              />
             </svg>
           </span>
         ),
         stable: (
           <span className="text-gray-600 dark:text-gray-400">
-            <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14" />
+            <svg
+              aria-hidden="true"
+              className="size-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 12h14"
+              />
             </svg>
           </span>
         ),
@@ -324,21 +383,27 @@ const simpleColumns: StickyTableColumn<SalesData>[] = [
     header: "Jan",
     width: "100px",
     align: "end",
-    render: (value) => <span className="text-sm">{formatCurrency(value as number)}</span>,
+    render: (value) => (
+      <span className="text-sm">{formatCurrency(value as number)}</span>
+    ),
   },
   {
     key: "feb",
     header: "Feb",
     width: "100px",
     align: "end",
-    render: (value) => <span className="text-sm">{formatCurrency(value as number)}</span>,
+    render: (value) => (
+      <span className="text-sm">{formatCurrency(value as number)}</span>
+    ),
   },
   {
     key: "mar",
     header: "Mar",
     width: "100px",
     align: "end",
-    render: (value) => <span className="text-sm">{formatCurrency(value as number)}</span>,
+    render: (value) => (
+      <span className="text-sm">{formatCurrency(value as number)}</span>
+    ),
   },
   {
     key: "total",
@@ -346,7 +411,9 @@ const simpleColumns: StickyTableColumn<SalesData>[] = [
     width: "120px",
     align: "end",
     render: (value) => (
-      <span className="font-semibold text-foreground">{formatCurrency(value as number)}</span>
+      <span className="font-semibold text-foreground">
+        {formatCurrency(value as number)}
+      </span>
     ),
   },
 ];
@@ -414,7 +481,10 @@ export const WithSelection: Story = {
 // With Sorting
 export const WithSorting: Story = {
   render: function Render() {
-    const [sortState, setSortState] = useState({ key: "total", direction: "desc" as const });
+    const [sortState, setSortState] = useState({
+      key: "total",
+      direction: "desc" as "asc" | "desc",
+    });
 
     const sortedData = [...sampleSalesData].sort((a, b) => {
       const aVal = a[sortState.key as keyof SalesData];
@@ -473,7 +543,7 @@ export const WithPagination: Story = {
 
     const paginatedData = sampleSalesData.slice(
       (page - 1) * pageSize,
-      page * pageSize
+      page * pageSize,
     );
 
     return (

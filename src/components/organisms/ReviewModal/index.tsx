@@ -1,8 +1,13 @@
-import { forwardRef, useState, type ReactNode } from "react";
+import { forwardRef, type ReactNode, useState } from "react";
 import { Button } from "@/components/atoms/Button";
 import { Textarea } from "@/components/atoms/Textarea";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "@/components/organisms/Modal";
 import { Rating } from "@/components/molecules/Rating";
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "@/components/organisms/Modal";
 
 export interface ReviewModalProps {
   isOpen: boolean;
@@ -50,8 +55,8 @@ export const ReviewModal = forwardRef<HTMLDivElement, ReviewModalProps>(
     const [rating, setRating] = useState(initialRating);
     const [review, setReview] = useState(initialReview);
 
-    const canSubmit = rating > 0 &&
-      (!requireReview || review.trim().length >= minReviewLength);
+    const canSubmit =
+      rating > 0 && (!requireReview || review.trim().length >= minReviewLength);
 
     const handleSubmit = () => {
       if (canSubmit) {
@@ -103,9 +108,9 @@ export const ReviewModal = forwardRef<HTMLDivElement, ReviewModalProps>(
 
             {/* Rating */}
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-foreground">
+              <span className="block text-sm font-medium text-foreground">
                 Rating
-              </label>
+              </span>
               <div className="flex items-center gap-3">
                 <Rating
                   value={rating}
@@ -123,10 +128,15 @@ export const ReviewModal = forwardRef<HTMLDivElement, ReviewModalProps>(
 
             {/* Review text */}
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-foreground">
-                Review {requireReview && <span className="text-destructive">*</span>}
+              <label
+                htmlFor="review-textarea"
+                className="block text-sm font-medium text-foreground"
+              >
+                Review{" "}
+                {requireReview && <span className="text-destructive">*</span>}
               </label>
               <Textarea
+                id="review-textarea"
                 value={review}
                 onChange={(e) => setReview(e.target.value)}
                 placeholder={placeholder}
@@ -136,7 +146,8 @@ export const ReviewModal = forwardRef<HTMLDivElement, ReviewModalProps>(
               {requireReview && minReviewLength > 0 && (
                 <p className="text-xs text-muted-foreground">
                   Minimum {minReviewLength} characters
-                  {review.length > 0 && ` (${review.length}/${minReviewLength})`}
+                  {review.length > 0 &&
+                    ` (${review.length}/${minReviewLength})`}
                 </p>
               )}
             </div>
@@ -144,11 +155,7 @@ export const ReviewModal = forwardRef<HTMLDivElement, ReviewModalProps>(
         </ModalBody>
 
         <ModalFooter>
-          <Button
-            variant="outline"
-            onClick={handleClose}
-            disabled={loading}
-          >
+          <Button variant="outline" onClick={handleClose} disabled={loading}>
             {cancelText}
           </Button>
           <Button
@@ -167,22 +174,24 @@ export const ReviewModal = forwardRef<HTMLDivElement, ReviewModalProps>(
 ReviewModal.displayName = "ReviewModal";
 
 // ProductReviewModal - Convenience component for product reviews
-export interface ProductReviewModalProps extends Omit<ReviewModalProps, "title"> {
+export interface ProductReviewModalProps
+  extends Omit<ReviewModalProps, "title"> {
   productName: string;
   productImage?: string;
 }
 
-export const ProductReviewModal = forwardRef<HTMLDivElement, ProductReviewModalProps>(
-  ({ productName, productImage, ...props }, ref) => {
-    return (
-      <ReviewModal
-        ref={ref}
-        title="Review this product"
-        itemName={productName}
-        itemImage={productImage}
-        {...props}
-      />
-    );
-  },
-);
+export const ProductReviewModal = forwardRef<
+  HTMLDivElement,
+  ProductReviewModalProps
+>(({ productName, productImage, ...props }, ref) => {
+  return (
+    <ReviewModal
+      ref={ref}
+      title="Review this product"
+      itemName={productName}
+      itemImage={productImage}
+      {...props}
+    />
+  );
+});
 ProductReviewModal.displayName = "ProductReviewModal";

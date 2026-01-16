@@ -1,15 +1,15 @@
 "use client";
 
 import { forwardRef, useCallback } from "react";
-import { cn } from "@/lib/utils";
-import { Checkbox, Button } from "@/components/atoms";
+import { Button, Checkbox } from "@/components/atoms";
 import {
+  ChevronDownIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   ChevronUpIcon,
-  ChevronDownIcon,
   SpinnerIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Column definition
 export interface TableColumn<T> {
@@ -40,7 +40,8 @@ export interface PaginationProps {
 }
 
 // Main Table props
-export interface TableProps<T> extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
+export interface TableProps<T>
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
   data: T[];
   columns: TableColumn<T>[];
   selectable?: boolean;
@@ -100,7 +101,8 @@ function TableInner<T>(
   );
 
   const isAllSelected = data.length > 0 && selectedRows.length === data.length;
-  const isIndeterminate = selectedRows.length > 0 && selectedRows.length < data.length;
+  const isIndeterminate =
+    selectedRows.length > 0 && selectedRows.length < data.length;
 
   const handleSelectAll = useCallback(() => {
     if (isAllSelected) {
@@ -152,7 +154,9 @@ function TableInner<T>(
   };
 
   // Pagination
-  const totalPages = pagination ? Math.ceil(pagination.total / pagination.pageSize) : 0;
+  const totalPages = pagination
+    ? Math.ceil(pagination.total / pagination.pageSize)
+    : 0;
 
   return (
     <div ref={ref} className={cn("w-full", className)} {...props}>
@@ -188,15 +192,16 @@ function TableInner<T>(
                 )}
                 {columns.map((column) => {
                   const isSortable = sortable || column.sortable;
-                  const sortIcon = isSortable && sortState?.key === column.key && (
-                    <span className="shrink-0">
-                      {sortState.direction === "asc" ? (
-                        <ChevronUpIcon className="size-4" />
-                      ) : sortState.direction === "desc" ? (
-                        <ChevronDownIcon className="size-4" />
-                      ) : null}
-                    </span>
-                  );
+                  const sortIcon = isSortable &&
+                    sortState?.key === column.key && (
+                      <span className="shrink-0">
+                        {sortState.direction === "asc" ? (
+                          <ChevronUpIcon className="size-4" />
+                        ) : sortState.direction === "desc" ? (
+                          <ChevronDownIcon className="size-4" />
+                        ) : null}
+                      </span>
+                    );
 
                   return (
                     <th
@@ -247,7 +252,9 @@ function TableInner<T>(
                   >
                     <div className="flex items-center justify-center gap-x-2">
                       <SpinnerIcon className="size-5 animate-spin text-muted-foreground" />
-                      <span className="text-sm text-muted-foreground">Loading...</span>
+                      <span className="text-sm text-muted-foreground">
+                        Loading...
+                      </span>
                     </div>
                   </td>
                 </tr>
@@ -258,7 +265,9 @@ function TableInner<T>(
                     className="px-4 py-8 text-center"
                   >
                     {emptyState || (
-                      <span className="text-sm text-muted-foreground">No data available</span>
+                      <span className="text-sm text-muted-foreground">
+                        No data available
+                      </span>
                     )}
                   </td>
                 </tr>
@@ -272,7 +281,9 @@ function TableInner<T>(
                       onRowClick && "cursor-pointer",
                       isRowSelected(row) && "bg-primary/5",
                     )}
-                    onClick={onRowClick ? () => onRowClick(row, rowIndex) : undefined}
+                    onClick={
+                      onRowClick ? () => onRowClick(row, rowIndex) : undefined
+                    }
                   >
                     {selectable && (
                       <td

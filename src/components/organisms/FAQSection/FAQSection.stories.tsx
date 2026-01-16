@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
 import {
+  CompleteFAQSection,
+  FAQAccordionItem,
+  FAQCategories,
+  FAQGrid,
+  type FAQItem,
+  FAQList,
   FAQSection,
   FAQSectionHeader,
-  FAQSectionTitle,
   FAQSectionSubtitle,
-  FAQList,
-  FAQAccordionItem,
+  FAQSectionTitle,
   FAQSimpleItem,
-  FAQGrid,
-  FAQCategories,
-  CompleteFAQSection,
-  type FAQItem,
 } from ".";
-import { useState } from "react";
 
 const meta: Meta<typeof FAQSection> = {
   title: "Organisms/Marketing/FAQSection",
@@ -29,37 +29,43 @@ const sampleFAQs: FAQItem[] = [
   {
     id: "1",
     question: "What payment methods do you accept?",
-    answer: "We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers for enterprise customers.",
+    answer:
+      "We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers for enterprise customers.",
     category: "Billing",
   },
   {
     id: "2",
     question: "Can I cancel my subscription at any time?",
-    answer: "Yes, you can cancel your subscription at any time. Your access will continue until the end of your current billing period.",
+    answer:
+      "Yes, you can cancel your subscription at any time. Your access will continue until the end of your current billing period.",
     category: "Billing",
   },
   {
     id: "3",
     question: "Is there a free trial available?",
-    answer: "Yes, we offer a 14-day free trial for all our plans. No credit card required to start.",
+    answer:
+      "Yes, we offer a 14-day free trial for all our plans. No credit card required to start.",
     category: "Billing",
   },
   {
     id: "4",
     question: "How do I get started?",
-    answer: "Simply sign up for an account, choose your plan, and you'll be guided through the onboarding process. Our team is available to help if you have any questions.",
+    answer:
+      "Simply sign up for an account, choose your plan, and you'll be guided through the onboarding process. Our team is available to help if you have any questions.",
     category: "Getting Started",
   },
   {
     id: "5",
     question: "Do you offer customer support?",
-    answer: "Yes, we offer 24/7 customer support via email and live chat. Enterprise customers also get access to phone support and a dedicated account manager.",
+    answer:
+      "Yes, we offer 24/7 customer support via email and live chat. Enterprise customers also get access to phone support and a dedicated account manager.",
     category: "Support",
   },
   {
     id: "6",
     question: "Can I upgrade or downgrade my plan?",
-    answer: "Yes, you can change your plan at any time. Upgrades take effect immediately, and downgrades take effect at the start of your next billing cycle.",
+    answer:
+      "Yes, you can change your plan at any time. Upgrades take effect immediately, and downgrades take effect at the start of your next billing cycle.",
     category: "Billing",
   },
 ];
@@ -200,7 +206,9 @@ export const WithCategories: Story = {
     const categories = ["Billing", "Getting Started", "Support"];
     const [activeCategory, setActiveCategory] = useState(categories[0]);
 
-    const filteredFAQs = sampleFAQs.filter((faq) => faq.category === activeCategory);
+    const filteredFAQs = sampleFAQs.filter(
+      (faq) => faq.category === activeCategory,
+    );
 
     return (
       <FAQSection>

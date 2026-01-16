@@ -1,10 +1,13 @@
-import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { dataCardVariants, getRankingBadgeStyle } from "@/lib/variants/dataVisualization";
-import { TrendIndicator, AvatarGroup } from "@/components/molecules";
-import { Avatar, Badge, ProgressBar } from "@/components/atoms";
 import type { VariantProps } from "class-variance-authority";
+import { forwardRef } from "react";
+import { Avatar, Badge, ProgressBar } from "@/components/atoms";
+import { AvatarGroup, TrendIndicator } from "@/components/molecules";
 import type { TrendDirection, TrendVariant } from "@/lib/types";
+import { cn } from "@/lib/utils";
+import {
+  dataCardVariants,
+  getRankingBadgeStyle,
+} from "@/lib/variants/dataVisualization";
 
 // ============================================
 // Types
@@ -44,7 +47,10 @@ export interface AvatarGroupStatsProps
   action?: React.ReactNode;
 }
 
-export const AvatarGroupStats = forwardRef<HTMLDivElement, AvatarGroupStatsProps>(
+export const AvatarGroupStats = forwardRef<
+  HTMLDivElement,
+  AvatarGroupStatsProps
+>(
   (
     {
       className,
@@ -71,7 +77,9 @@ export const AvatarGroupStats = forwardRef<HTMLDivElement, AvatarGroupStatsProps
                 <h3 className="text-sm font-medium text-foreground">{title}</h3>
               )}
               {subtitle && (
-                <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {subtitle}
+                </p>
               )}
             </div>
             {action && <div className="shrink-0">{action}</div>}
@@ -168,7 +176,9 @@ export const TeamStatsCard = forwardRef<HTMLDivElement, TeamStatsCardProps>(
     },
     ref,
   ) => {
-    const activePercentage = Math.round((data.activeMembers / data.totalMembers) * 100);
+    const activePercentage = Math.round(
+      (data.activeMembers / data.totalMembers) * 100,
+    );
     const onlineMembers = data.members.filter((m) => m.status === "online");
 
     return (
@@ -280,7 +290,10 @@ export interface ContributorsStatsCardProps
   action?: React.ReactNode;
 }
 
-export const ContributorsStatsCard = forwardRef<HTMLDivElement, ContributorsStatsCardProps>(
+export const ContributorsStatsCard = forwardRef<
+  HTMLDivElement,
+  ContributorsStatsCardProps
+>(
   (
     {
       className,
@@ -295,8 +308,12 @@ export const ContributorsStatsCard = forwardRef<HTMLDivElement, ContributorsStat
     ref,
   ) => {
     const displayContributors = contributors.slice(0, limit);
-    const total = totalContributions ?? contributors.reduce((sum, c) => sum + c.contributions, 0);
-    const maxContributions = Math.max(...displayContributors.map((c) => c.contributions));
+    const total =
+      totalContributions ??
+      contributors.reduce((sum, c) => sum + c.contributions, 0);
+    const maxContributions = Math.max(
+      ...displayContributors.map((c) => c.contributions),
+    );
 
     return (
       <div
@@ -318,7 +335,8 @@ export const ContributorsStatsCard = forwardRef<HTMLDivElement, ContributorsStat
         {/* Contributors */}
         <div className="divide-y divide-border">
           {displayContributors.map((contributor, index) => {
-            const percentage = (contributor.contributions / maxContributions) * 100;
+            const percentage =
+              (contributor.contributions / maxContributions) * 100;
 
             return (
               <div key={contributor.id} className="px-4 py-3">
@@ -327,7 +345,7 @@ export const ContributorsStatsCard = forwardRef<HTMLDivElement, ContributorsStat
                   <span
                     className={cn(
                       "size-5 shrink-0 flex items-center justify-center rounded text-xs font-semibold",
-                      getRankingBadgeStyle(index + 1)
+                      getRankingBadgeStyle(index + 1),
                     )}
                   >
                     {index + 1}
@@ -348,11 +366,15 @@ export const ContributorsStatsCard = forwardRef<HTMLDivElement, ContributorsStat
                         {contributor.name}
                       </span>
                       {contributor.isTopContributor && (
-                        <Badge variant="success" size="sm">Top</Badge>
+                        <Badge variant="success" size="sm">
+                          Top
+                        </Badge>
                       )}
                     </div>
                     {contributor.role && (
-                      <p className="text-xs text-muted-foreground">{contributor.role}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {contributor.role}
+                      </p>
                     )}
                   </div>
 
@@ -407,7 +429,10 @@ export interface UserActivityStatsProps
   action?: React.ReactNode;
 }
 
-export const UserActivityStats = forwardRef<HTMLDivElement, UserActivityStatsProps>(
+export const UserActivityStats = forwardRef<
+  HTMLDivElement,
+  UserActivityStatsProps
+>(
   (
     {
       className,
@@ -437,7 +462,10 @@ export const UserActivityStats = forwardRef<HTMLDivElement, UserActivityStatsPro
         {/* Activities */}
         <div className="divide-y divide-border">
           {displayActivities.map((activity) => (
-            <div key={activity.id} className="flex items-start gap-x-3 px-4 py-3">
+            <div
+              key={activity.id}
+              className="flex items-start gap-x-3 px-4 py-3"
+            >
               <Avatar
                 src={activity.user.avatar}
                 alt={activity.user.name}
@@ -447,8 +475,8 @@ export const UserActivityStats = forwardRef<HTMLDivElement, UserActivityStatsPro
               />
               <div className="flex-1 min-w-0">
                 <p className="text-sm text-foreground">
-                  <span className="font-medium">{activity.user.name}</span>
-                  {" "}{activity.action}
+                  <span className="font-medium">{activity.user.name}</span>{" "}
+                  {activity.action}
                   {activity.target && (
                     <span className="font-medium"> {activity.target}</span>
                   )}

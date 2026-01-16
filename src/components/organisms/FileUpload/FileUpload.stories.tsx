@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState, useCallback } from "react";
+import { useCallback, useState } from "react";
 import { FileUpload, FileUploadPreview, type UploadFile } from "./index";
 
 const meta: Meta<typeof FileUpload> = {
@@ -314,26 +314,30 @@ export const ImageGridPreview: Story = {
         id: "1",
         file: new File([""], "image1.jpg", { type: "image/jpeg" }),
         status: "complete",
-        preview: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=200&h=200&fit=crop",
+        preview:
+          "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=200&h=200&fit=crop",
       },
       {
         id: "2",
         file: new File([""], "image2.jpg", { type: "image/jpeg" }),
         status: "complete",
-        preview: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=200&h=200&fit=crop",
+        preview:
+          "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=200&h=200&fit=crop",
       },
       {
         id: "3",
         file: new File([""], "image3.jpg", { type: "image/jpeg" }),
         status: "uploading",
         progress: 45,
-        preview: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=200&h=200&fit=crop",
+        preview:
+          "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=200&h=200&fit=crop",
       },
       {
         id: "4",
         file: new File([""], "image4.jpg", { type: "image/jpeg" }),
         status: "error",
-        preview: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=200&h=200&fit=crop",
+        preview:
+          "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=200&h=200&fit=crop",
       },
     ]);
 
@@ -348,7 +352,7 @@ export const ImageGridPreview: Story = {
     }, []);
 
     const handleRemove = useCallback((file: UploadFile) => {
-      if (file.preview && file.preview.startsWith("blob:")) {
+      if (file.preview?.startsWith("blob:")) {
         URL.revokeObjectURL(file.preview);
       }
       setFiles((prev) => prev.filter((f) => f.id !== file.id));

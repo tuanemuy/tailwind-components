@@ -1,32 +1,31 @@
 "use client";
 
 import { forwardRef, useCallback, useMemo, useState } from "react";
-import { cn } from "@/lib/utils";
-import {
-  tableContainerVariants,
-  tableHeaderVariants,
-  tableHeaderCellVariants,
-  tableCellVariants,
-  tableRowVariants,
-  tableFilterBarVariants,
-  tableToolbarVariants,
-  tablePaginationVariants,
-  tableEmptyStateVariants,
-  tableLoadingStateVariants,
-} from "@/lib/variants";
-import { Checkbox, Button, Input, Badge } from "@/components/atoms";
+import { Badge, Button, Checkbox, Input } from "@/components/atoms";
 import { Select } from "@/components/molecules";
 import {
+  ChevronDownIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   ChevronUpIcon,
-  ChevronDownIcon,
-  SpinnerIcon,
-  SearchIcon,
-  XIcon,
   FilterIcon,
-  DownloadIcon,
+  SearchIcon,
+  SpinnerIcon,
+  XIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
+import {
+  tableCellVariants,
+  tableContainerVariants,
+  tableEmptyStateVariants,
+  tableFilterBarVariants,
+  tableHeaderCellVariants,
+  tableHeaderVariants,
+  tableLoadingStateVariants,
+  tablePaginationVariants,
+  tableRowVariants,
+  tableToolbarVariants,
+} from "@/lib/variants";
 
 // ============================================
 // Column Types
@@ -92,7 +91,8 @@ export interface PaginationProps extends PaginationState {
 // DataTable Props
 // ============================================
 
-export interface DataTableProps<T> extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
+export interface DataTableProps<T>
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
   data: T[];
   columns: DataTableColumn<T>[];
 
@@ -185,21 +185,24 @@ function DataTableInner<T>(
     bulkActions,
     ...props
   }: DataTableProps<T>,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const [showFilterBar, setShowFilterBar] = useState(false);
-  const [activeFilters, setActiveFilters] = useState<FilterValue[]>(filterState.filters);
+  const [activeFilters, setActiveFilters] = useState<FilterValue[]>(
+    filterState.filters,
+  );
 
   const size = compact ? "compact" : "default";
 
   // Selection logic
   const isRowSelected = useCallback(
     (row: T) => selectedRows.includes(row),
-    [selectedRows]
+    [selectedRows],
   );
 
   const isAllSelected = data.length > 0 && selectedRows.length === data.length;
-  const isIndeterminate = selectedRows.length > 0 && selectedRows.length < data.length;
+  const isIndeterminate =
+    selectedRows.length > 0 && selectedRows.length < data.length;
 
   const handleSelectAll = useCallback(() => {
     if (isAllSelected) {
@@ -217,7 +220,7 @@ function DataTableInner<T>(
         onSelectionChange?.([...selectedRows, row]);
       }
     },
-    [isRowSelected, selectedRows, onSelectionChange]
+    [isRowSelected, selectedRows, onSelectionChange],
   );
 
   // Sort logic
@@ -236,7 +239,7 @@ function DataTableInner<T>(
 
       onSort({ key, direction });
     },
-    [sortState, onSort]
+    [sortState, onSort],
   );
 
   // Filter logic
@@ -244,7 +247,7 @@ function DataTableInner<T>(
     (value: string) => {
       onFilterChange?.({ ...filterState, search: value });
     },
-    [filterState, onFilterChange]
+    [filterState, onFilterChange],
   );
 
   const handleFilterAdd = useCallback(
@@ -253,7 +256,7 @@ function DataTableInner<T>(
       setActiveFilters(newFilters);
       onFilterChange?.({ ...filterState, filters: newFilters });
     },
-    [activeFilters, filterState, onFilterChange]
+    [activeFilters, filterState, onFilterChange],
   );
 
   const handleFilterRemove = useCallback(
@@ -262,7 +265,7 @@ function DataTableInner<T>(
       setActiveFilters(newFilters);
       onFilterChange?.({ ...filterState, filters: newFilters });
     },
-    [activeFilters, filterState, onFilterChange]
+    [activeFilters, filterState, onFilterChange],
   );
 
   const handleClearFilters = useCallback(() => {
@@ -284,11 +287,13 @@ function DataTableInner<T>(
   // Filterable columns
   const filterableColumns = useMemo(
     () => columns.filter((col) => col.filterable),
-    [columns]
+    [columns],
   );
 
   // Pagination
-  const totalPages = pagination ? Math.ceil(pagination.total / pagination.pageSize) : 0;
+  const totalPages = pagination
+    ? Math.ceil(pagination.total / pagination.pageSize)
+    : 0;
 
   const hasActiveFilters = filterState.search || activeFilters.length > 0;
 
@@ -344,10 +349,14 @@ function DataTableInner<T>(
                 <span className="text-sm text-muted-foreground">
                   {selectedRows.length} selected
                 </span>
-                {bulkActions.map((action, index) => (
+                {bulkActions.map((action) => (
                   <Button
-                    key={index}
-                    variant={action.variant === "destructive" ? "destructive" : "outline"}
+                    key={action.label}
+                    variant={
+                      action.variant === "destructive"
+                        ? "destructive"
+                        : "outline"
+                    }
                     size="sm"
                     onClick={() => action.onClick(selectedRows)}
                   >
@@ -371,13 +380,10 @@ function DataTableInner<T>(
             {onExport && (
               <Select
                 value=""
-                onValueChange={(value) => onExport(value as "csv" | "json" | "xlsx")}
-                placeholder={
-                  <span className="flex items-center gap-2">
-                    <DownloadIcon className="size-4" />
-                    Export
-                  </span>
+                onValueChange={(value) =>
+                  onExport(value as "csv" | "json" | "xlsx")
                 }
+                placeholder="Export"
                 options={exportFormats.map((format) => ({
                   value: format,
                   label: format.toUpperCase(),
@@ -404,7 +410,11 @@ function DataTableInner<T>(
                 <Select
                   value=""
                   onValueChange={(value) =>
-                    handleFilterAdd({ column: column.key, value, operator: "eq" })
+                    handleFilterAdd({
+                      column: column.key,
+                      value,
+                      operator: "eq",
+                    })
                   }
                   placeholder="Select..."
                   options={column.filterOptions}
@@ -438,15 +448,19 @@ function DataTableInner<T>(
       {/* Active Filters */}
       {activeFilters.length > 0 && (
         <div className="flex flex-wrap items-center gap-2 px-4 py-2 border-b border-border">
-          {activeFilters.map((filter, index) => {
+          {activeFilters.map((filter, filterIndex) => {
             const column = columns.find((col) => col.key === filter.column);
             return (
-              <Badge key={index} variant="secondary" className="gap-1">
+              <Badge
+                key={`${filter.column}-${String(filter.value)}`}
+                variant="secondary"
+                className="gap-1"
+              >
                 <span className="font-medium">{column?.header}:</span>
                 <span>{String(filter.value)}</span>
                 <button
                   type="button"
-                  onClick={() => handleFilterRemove(index)}
+                  onClick={() => handleFilterRemove(filterIndex)}
                   className="ml-1 hover:text-foreground"
                 >
                   <XIcon className="size-3" />
@@ -462,7 +476,9 @@ function DataTableInner<T>(
         <div className="min-w-full inline-block align-middle">
           <table className="min-w-full divide-y divide-border">
             {/* Header */}
-            <thead className={cn(tableHeaderVariants({ sticky: stickyHeader }))}>
+            <thead
+              className={cn(tableHeaderVariants({ sticky: stickyHeader }))}
+            >
               <tr>
                 {selectable && (
                   <th scope="col" className="w-px ps-4 py-3">
@@ -497,7 +513,7 @@ function DataTableInner<T>(
                           size,
                           align: column.align,
                           sortable: isSortable,
-                        })
+                        }),
                       )}
                     >
                       {isSortable ? (
@@ -526,10 +542,14 @@ function DataTableInner<T>(
                 <tr>
                   <td
                     colSpan={columns.length + (selectable ? 1 : 0)}
-                    className={cn(tableLoadingStateVariants({ variant: "spinner" }))}
+                    className={cn(
+                      tableLoadingStateVariants({ variant: "spinner" }),
+                    )}
                   >
                     <SpinnerIcon className="size-5 animate-spin text-muted-foreground" />
-                    <span className="text-sm text-muted-foreground">Loading...</span>
+                    <span className="text-sm text-muted-foreground">
+                      Loading...
+                    </span>
                   </td>
                 </tr>
               ) : data.length === 0 ? (
@@ -555,14 +575,17 @@ function DataTableInner<T>(
                         clickable: !!onRowClick,
                         selected: isRowSelected(row),
                         striped,
-                      })
+                      }),
                     )}
-                    onClick={onRowClick ? () => onRowClick(row, rowIndex) : undefined}
+                    onClick={
+                      onRowClick ? () => onRowClick(row, rowIndex) : undefined
+                    }
                   >
                     {selectable && (
                       <td
                         className="w-px whitespace-nowrap ps-4 py-3"
                         onClick={(e) => e.stopPropagation()}
+                        onKeyDown={(e) => e.stopPropagation()}
                       >
                         <Checkbox
                           checked={isRowSelected(row)}
@@ -577,7 +600,7 @@ function DataTableInner<T>(
                         <td
                           key={column.key}
                           className={cn(
-                            tableCellVariants({ size, align: column.align })
+                            tableCellVariants({ size, align: column.align }),
                           )}
                         >
                           {column.render ? (
@@ -600,19 +623,30 @@ function DataTableInner<T>(
 
       {/* Pagination */}
       {pagination && totalPages > 0 && (
-        <div className={cn(tablePaginationVariants({ variant: compact ? "compact" : "default" }))}>
+        <div
+          className={cn(
+            tablePaginationVariants({
+              variant: compact ? "compact" : "default",
+            }),
+          )}
+        >
           <div className="flex items-center gap-4">
             <span className="text-sm text-muted-foreground">
               Showing {(pagination.page - 1) * pagination.pageSize + 1} to{" "}
-              {Math.min(pagination.page * pagination.pageSize, pagination.total)} of{" "}
-              {pagination.total} results
+              {Math.min(
+                pagination.page * pagination.pageSize,
+                pagination.total,
+              )}{" "}
+              of {pagination.total} results
             </span>
             {pagination.onPageSizeChange && pagination.pageSizeOptions && (
               <div className="flex items-center gap-2">
                 <span className="text-sm text-muted-foreground">Show</span>
                 <Select
                   value={String(pagination.pageSize)}
-                  onValueChange={(value) => pagination.onPageSizeChange?.(Number(value))}
+                  onValueChange={(value) =>
+                    pagination.onPageSizeChange?.(Number(value))
+                  }
                   options={pagination.pageSizeOptions.map((size) => ({
                     value: String(size),
                     label: String(size),
@@ -673,7 +707,7 @@ function DataTableInner<T>(
 
 // Export with forwardRef workaround for generics
 export const DataTable = forwardRef(DataTableInner) as <T>(
-  props: DataTableProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> }
+  props: DataTableProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> },
 ) => React.ReactElement;
 
 (DataTable as { displayName?: string }).displayName = "DataTable";

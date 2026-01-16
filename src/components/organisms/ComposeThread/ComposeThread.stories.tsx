@@ -85,9 +85,7 @@ export const EmailComposeWithRecipients: Story = {
   render: () => (
     <div className="w-[600px]">
       <EmailCompose
-        to={[
-          { id: "1", name: "John Smith", email: "john.smith@example.com" },
-        ]}
+        to={[{ id: "1", name: "John Smith", email: "john.smith@example.com" }]}
         subject="Project Update"
         content="Hi John,\n\nHere's the project update you requested.\n\nBest regards"
         onSend={() => console.log("Reply sent")}
@@ -101,12 +99,8 @@ export const EmailComposeWithCcBcc: Story = {
   render: () => (
     <div className="w-[600px]">
       <EmailCompose
-        to={[
-          { id: "1", name: "John Smith", email: "john.smith@example.com" },
-        ]}
-        cc={[
-          { id: "2", name: "Jane Doe", email: "jane.doe@example.com" },
-        ]}
+        to={[{ id: "1", name: "John Smith", email: "john.smith@example.com" }]}
+        cc={[{ id: "2", name: "Jane Doe", email: "jane.doe@example.com" }]}
         showCc={true}
         showBcc={true}
         subject="Team Meeting"
@@ -121,9 +115,7 @@ export const EmailComposeLoading: Story = {
   render: () => (
     <div className="w-[600px]">
       <EmailCompose
-        to={[
-          { id: "1", name: "John Smith", email: "john.smith@example.com" },
-        ]}
+        to={[{ id: "1", name: "John Smith", email: "john.smith@example.com" }]}
         subject="Sending email..."
         loading={true}
         onSend={() => console.log("Email sent")}

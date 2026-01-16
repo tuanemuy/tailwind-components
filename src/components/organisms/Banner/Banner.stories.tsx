@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Banner, GiftBanner, AuthBanner, NewsBanner } from "./index";
 import { Button } from "@/components/atoms/Button";
 import { BellIcon } from "@/lib/icons";
+import { AuthBanner, Banner, GiftBanner, NewsBanner } from "./index";
 
 const meta: Meta<typeof Banner> = {
   title: "Organisms/PageSections/Banner",
@@ -13,7 +13,15 @@ const meta: Meta<typeof Banner> = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["default", "primary", "info", "success", "warning", "error", "gradient"],
+      options: [
+        "default",
+        "primary",
+        "info",
+        "success",
+        "warning",
+        "error",
+        "gradient",
+      ],
     },
     size: {
       control: "select",
@@ -72,7 +80,7 @@ export const Warning: Story = {
   },
 };
 
-export const Error: Story = {
+export const ErrorVariant: Story = {
   args: {
     variant: "error",
     children: "Payment failed. Please update your payment method.",
@@ -147,11 +155,7 @@ export const Gift: StoryObj<typeof GiftBanner> = {
 // Auth Banner Stories
 export const Auth: StoryObj<typeof AuthBanner> = {
   render: () => (
-    <AuthBanner
-      loginHref="/login"
-      registerHref="/register"
-      closable
-    >
+    <AuthBanner loginHref="/login" registerHref="/register" closable>
       Join thousands of developers building with our platform.
     </AuthBanner>
   ),
@@ -173,13 +177,27 @@ export const News: StoryObj<typeof NewsBanner> = {
 export const AllVariants: Story = {
   render: () => (
     <div className="space-y-1">
-      <Banner variant="default" closable>Default banner</Banner>
-      <Banner variant="primary" closable>Primary banner</Banner>
-      <Banner variant="info" closable>Info banner</Banner>
-      <Banner variant="success" closable>Success banner</Banner>
-      <Banner variant="warning" closable>Warning banner</Banner>
-      <Banner variant="error" closable>Error banner</Banner>
-      <Banner variant="gradient" closable>Gradient banner</Banner>
+      <Banner variant="default" closable>
+        Default banner
+      </Banner>
+      <Banner variant="primary" closable>
+        Primary banner
+      </Banner>
+      <Banner variant="info" closable>
+        Info banner
+      </Banner>
+      <Banner variant="success" closable>
+        Success banner
+      </Banner>
+      <Banner variant="warning" closable>
+        Warning banner
+      </Banner>
+      <Banner variant="error" closable>
+        Error banner
+      </Banner>
+      <Banner variant="gradient" closable>
+        Gradient banner
+      </Banner>
     </div>
   ),
 };

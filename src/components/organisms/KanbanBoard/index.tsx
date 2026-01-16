@@ -1,30 +1,30 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
-import {
-  kanbanBoardVariants,
-  kanbanColumnVariants,
-  kanbanColumnHeaderVariants,
-  kanbanColumnContentVariants,
-  kanbanCardVariants,
-  kanbanHeaderVariants,
-  columnColorVariants,
-  kanbanTagVariants,
-} from "@/lib/variants";
-import { Button } from "@/components/atoms/Button";
-import { Badge } from "@/components/atoms/Badge";
+import type { VariantProps } from "class-variance-authority";
+import type { ReactNode } from "react";
 import { Avatar } from "@/components/atoms/Avatar";
+import { Badge } from "@/components/atoms/Badge";
+import { Button } from "@/components/atoms/Button";
 import { Checkbox } from "@/components/atoms/Checkbox";
 import {
-  MoreHorizontalIcon,
-  PlusIcon,
-  GripIcon,
   ClockIcon,
+  GripIcon,
   MessageSquareIcon,
+  MoreHorizontalIcon,
   PaperclipIcon,
+  PlusIcon,
 } from "@/lib/icons";
-import type { VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+import {
+  columnColorVariants,
+  kanbanBoardVariants,
+  kanbanCardVariants,
+  kanbanColumnContentVariants,
+  kanbanColumnHeaderVariants,
+  kanbanColumnVariants,
+  kanbanHeaderVariants,
+  kanbanTagVariants,
+} from "@/lib/variants";
 
 // =============================================================================
 // Types
@@ -87,7 +87,7 @@ export interface KanbanBoardProps
     cardId: string,
     fromColumnId: string,
     toColumnId: string,
-    index: number
+    index: number,
   ) => void;
   onAddCard?: (columnId: string) => void;
   onAddColumn?: () => void;
@@ -98,7 +98,7 @@ export interface KanbanBoardProps
 export function KanbanBoard({
   columns,
   onCardClick,
-  onCardMove,
+  onCardMove: _onCardMove,
   onAddCard,
   onAddColumn,
   renderCard,
@@ -118,6 +118,7 @@ export function KanbanBoard({
       ))}
       {onAddColumn && (
         <button
+          type="button"
           className="flex min-w-[280px] items-center justify-center gap-2 rounded-xl border-2 border-dashed border-border p-4 text-muted-foreground hover:border-primary hover:text-primary transition-colors"
           onClick={onAddColumn}
         >
@@ -148,8 +149,8 @@ export function KanbanColumn({
   column,
   onCardClick,
   onAddCard,
-  onEditColumn,
-  onDeleteColumn,
+  onEditColumn: _onEditColumn,
+  onDeleteColumn: _onDeleteColumn,
   renderCard,
   variant,
   size,
@@ -226,19 +227,8 @@ export function KanbanCard({
   priority,
   className,
 }: KanbanCardProps) {
-  return (
-    <div
-      className={cn(
-        kanbanCardVariants({
-          variant,
-          priority: priority || card.priority,
-          dragging: isDragging,
-        }),
-        onClick && "cursor-pointer",
-        className
-      )}
-      onClick={onClick}
-    >
+  const cardContent = (
+    <>
       {card.coverImage && (
         <img
           src={card.coverImage}
@@ -258,7 +248,7 @@ export function KanbanCard({
           <p
             className={cn(
               "font-medium",
-              card.completed && "line-through text-muted-foreground"
+              card.completed && "line-through text-muted-foreground",
             )}
           >
             {card.title}
@@ -269,9 +259,14 @@ export function KanbanCard({
             </p>
           )}
         </div>
-        <div className="cursor-grab" onClick={(e) => e.stopPropagation()}>
+        <button
+          type="button"
+          aria-label="Drag handle"
+          className="cursor-grab"
+          onClick={(e) => e.stopPropagation()}
+        >
           <GripIcon className="size-4 text-muted-foreground" />
-        </div>
+        </button>
       </div>
 
       {card.tags && card.tags.length > 0 && (
@@ -327,8 +322,31 @@ export function KanbanCard({
           </div>
         )}
       </div>
-    </div>
+    </>
   );
+
+  const baseClassName = cn(
+    kanbanCardVariants({
+      variant,
+      priority: priority || card.priority,
+      dragging: isDragging,
+    }),
+    className,
+  );
+
+  if (onClick) {
+    return (
+      <button
+        type="button"
+        className={cn(baseClassName, "cursor-pointer text-left w-full")}
+        onClick={onClick}
+      >
+        {cardContent}
+      </button>
+    );
+  }
+
+  return <div className={baseClassName}>{cardContent}</div>;
 }
 
 // =============================================================================
@@ -390,15 +408,4 @@ export function KanbanHeader({
   );
 }
 
-// =============================================================================
-// Exports
-// =============================================================================
-
-export type {
-  KanbanPriority,
-  KanbanColor,
-  KanbanTag,
-  KanbanMember,
-  KanbanCardData,
-  KanbanColumnData,
-};
+// Types are exported at their definitions above

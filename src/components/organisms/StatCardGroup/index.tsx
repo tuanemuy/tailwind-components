@@ -1,13 +1,14 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { StatCard } from "@/components/molecules";
 import type { StatCardProps } from "@/components/molecules";
+import { StatCard } from "@/components/molecules";
+import { cn } from "@/lib/utils";
 
 export interface StatCardGroupItem extends StatCardProps {
   id: string;
 }
 
-export interface StatCardGroupProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface StatCardGroupProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   stats: StatCardGroupItem[];
   columns?: 1 | 2 | 3 | 4 | "auto";
   gap?: "sm" | "md" | "lg";
@@ -32,7 +33,12 @@ export const StatCardGroup = forwardRef<HTMLDivElement, StatCardGroupProps>(
     return (
       <div
         ref={ref}
-        className={cn("grid", columnClasses[columns], gapClasses[gap], className)}
+        className={cn(
+          "grid",
+          columnClasses[columns],
+          gapClasses[gap],
+          className,
+        )}
         {...props}
       >
         {stats.map(({ id, ...stat }) => (

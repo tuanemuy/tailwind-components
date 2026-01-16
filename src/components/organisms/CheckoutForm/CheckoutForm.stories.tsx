@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
+import { Button, Separator } from "@/components/atoms";
+import { BuildingIcon, CreditCardIcon, WalletIcon } from "@/lib/icons";
 import {
   CheckoutForm,
   CheckoutSection,
-  ShippingForm,
-  PaymentMethodOption,
-  CreditCardForm,
-  OrderSummary,
   CouponInput,
-  ShippingMethodOption,
+  CreditCardForm,
   type OrderItem,
+  OrderSummary,
+  PaymentMethodOption,
+  ShippingForm,
+  ShippingMethodOption,
 } from "./index";
-import { Button, Separator } from "@/components/atoms";
-import { CreditCardIcon, WalletIcon, BuildingIcon } from "@/lib/icons";
 
 const meta: Meta<typeof CheckoutForm> = {
   title: "Organisms/CheckoutForm",
@@ -31,7 +31,8 @@ const sampleItems: OrderItem[] = [
   {
     id: "1",
     name: "Wireless Bluetooth Headphones",
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100&h=100&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100&h=100&fit=crop",
     quantity: 1,
     price: 79.99,
     variant: "Black",
@@ -39,7 +40,8 @@ const sampleItems: OrderItem[] = [
   {
     id: "2",
     name: "USB-C Charging Cable",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=100&h=100&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=100&h=100&fit=crop",
     quantity: 2,
     price: 12.99,
   },
@@ -219,9 +221,23 @@ export const WithSteps: Story = {
             <OrderSummary
               items={sampleItems}
               subtotal={105.97}
-              shipping={shippingMethod === "standard" ? 0 : shippingMethod === "express" ? 9.99 : 19.99}
+              shipping={
+                shippingMethod === "standard"
+                  ? 0
+                  : shippingMethod === "express"
+                    ? 9.99
+                    : 19.99
+              }
               tax={8.48}
-              total={105.97 + (shippingMethod === "standard" ? 0 : shippingMethod === "express" ? 9.99 : 19.99) + 8.48}
+              total={
+                105.97 +
+                (shippingMethod === "standard"
+                  ? 0
+                  : shippingMethod === "express"
+                    ? 9.99
+                    : 19.99) +
+                8.48
+              }
               editable
               onEditCart={() => console.log("Edit cart")}
             />
@@ -290,7 +306,8 @@ export const OrderSummaryOnly: Story = {
           {
             id: "1",
             name: "Premium Wireless Earbuds",
-            image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=100&h=100&fit=crop",
+            image:
+              "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=100&h=100&fit=crop",
             quantity: 1,
             price: 149.99,
             variant: "White",
@@ -298,7 +315,8 @@ export const OrderSummaryOnly: Story = {
           {
             id: "2",
             name: "Charging Case",
-            image: "https://images.unsplash.com/photo-1608156639585-b3a776ea2b30?w=100&h=100&fit=crop",
+            image:
+              "https://images.unsplash.com/photo-1608156639585-b3a776ea2b30?w=100&h=100&fit=crop",
             quantity: 1,
             price: 29.99,
           },
@@ -311,8 +329,8 @@ export const OrderSummaryOnly: Story = {
         ]}
         subtotal={199.96}
         shipping={5.99}
-        tax={16.50}
-        discount={20.00}
+        tax={16.5}
+        discount={20.0}
         total={202.45}
         editable
         onEditCart={() => console.log("Edit cart")}

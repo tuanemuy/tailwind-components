@@ -1,15 +1,25 @@
 "use client";
 
 import { forwardRef, useMemo } from "react";
-import { cn } from "@/lib/utils";
-import { DataTable, type DataTableColumn, type DataTableProps } from "../DataTable";
 import { Avatar, Badge } from "@/components/atoms";
+import { cn } from "@/lib/utils";
+import {
+  DataTable,
+  type DataTableColumn,
+  type DataTableProps,
+} from "../DataTable";
 
 // ============================================
 // Invoice Types
 // ============================================
 
-export type InvoiceStatus = "draft" | "sent" | "paid" | "overdue" | "cancelled" | "refunded";
+export type InvoiceStatus =
+  | "draft"
+  | "sent"
+  | "paid"
+  | "overdue"
+  | "cancelled"
+  | "refunded";
 
 export interface InvoiceClient {
   id: string;
@@ -62,7 +72,10 @@ export interface InvoicesTableProps
 
 const statusConfig: Record<
   InvoiceStatus,
-  { label: string; variant: "success" | "warning" | "destructive" | "secondary" | "default" }
+  {
+    label: string;
+    variant: "success" | "warning" | "destructive" | "secondary" | "default";
+  }
 > = {
   draft: { label: "Draft", variant: "secondary" },
   sent: { label: "Sent", variant: "default" },
@@ -88,7 +101,7 @@ export const InvoicesTable = forwardRef<HTMLDivElement, InvoicesTableProps>(
       customColumns,
       ...props
     },
-    ref
+    ref,
   ) => {
     const columns = useMemo<DataTableColumn<Invoice>[]>(() => {
       const baseColumns: DataTableColumn<Invoice>[] = [
@@ -124,7 +137,9 @@ export const InvoicesTable = forwardRef<HTMLDivElement, InvoicesTableProps>(
                 size="sm"
               />
               <div className="flex flex-col">
-                <span className="font-medium text-foreground">{invoice.client.name}</span>
+                <span className="font-medium text-foreground">
+                  {invoice.client.name}
+                </span>
                 {invoice.client.company && (
                   <span className="text-sm text-muted-foreground">
                     {invoice.client.company}
@@ -142,10 +157,12 @@ export const InvoicesTable = forwardRef<HTMLDivElement, InvoicesTableProps>(
         sortable: true,
         filterable: true,
         filterType: "select",
-        filterOptions: Object.entries(statusConfig).map(([value, { label }]) => ({
-          value,
-          label,
-        })),
+        filterOptions: Object.entries(statusConfig).map(
+          ([value, { label }]) => ({
+            value,
+            label,
+          }),
+        ),
         width: "120px",
         render: (_, invoice) => {
           const config = statusConfig[invoice.status];
@@ -213,7 +230,9 @@ export const InvoicesTable = forwardRef<HTMLDivElement, InvoicesTableProps>(
               <span
                 className={cn(
                   "text-sm",
-                  isOverdue ? "text-destructive font-medium" : "text-muted-foreground"
+                  isOverdue
+                    ? "text-destructive font-medium"
+                    : "text-muted-foreground",
                 )}
               >
                 {dueDate.toLocaleDateString()}
@@ -275,7 +294,7 @@ export const InvoicesTable = forwardRef<HTMLDivElement, InvoicesTableProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
 InvoicesTable.displayName = "InvoicesTable";

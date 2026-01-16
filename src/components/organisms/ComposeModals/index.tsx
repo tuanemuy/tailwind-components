@@ -1,19 +1,24 @@
-import { forwardRef, useState, useRef } from "react";
-import { cn } from "@/lib/utils";
+import { forwardRef, useRef, useState } from "react";
+import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
 import { Textarea } from "@/components/atoms/Textarea";
-import { Badge } from "@/components/atoms/Badge";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "@/components/organisms/Modal";
 import { FormField } from "@/components/molecules/FormField";
 import {
-  MailIcon,
-  PlusIcon,
-  XIcon,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "@/components/organisms/Modal";
+import {
   FileIcon,
   ImageIcon,
+  MailIcon,
+  PlusIcon,
   TrashIcon,
+  XIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // ============================================
 // ComposeModal (Email/Message Composer)
@@ -104,8 +109,14 @@ export const ComposeModal = forwardRef<HTMLDivElement, ComposeModalProps>(
     const [showBccField, setShowBccField] = useState(
       initialData.bcc && initialData.bcc.length > 0,
     );
-    const [newRecipient, setNewRecipient] = useState({ to: "", cc: "", bcc: "" });
-    const [errors, setErrors] = useState<Partial<Record<keyof ComposeData, string>>>({});
+    const [newRecipient, setNewRecipient] = useState({
+      to: "",
+      cc: "",
+      bcc: "",
+    });
+    const [errors, setErrors] = useState<
+      Partial<Record<keyof ComposeData, string>>
+    >({});
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const addRecipient = (field: "to" | "cc" | "bcc") => {
@@ -215,7 +226,7 @@ export const ComposeModal = forwardRef<HTMLDivElement, ComposeModalProps>(
     const renderRecipientField = (
       field: "to" | "cc" | "bcc",
       label: string,
-      show: boolean = true,
+      show = true,
     ) => {
       if (!show) return null;
 
@@ -230,7 +241,10 @@ export const ComposeModal = forwardRef<HTMLDivElement, ComposeModalProps>(
                 type="email"
                 value={newRecipient[field]}
                 onChange={(e) =>
-                  setNewRecipient((prev) => ({ ...prev, [field]: e.target.value }))
+                  setNewRecipient((prev) => ({
+                    ...prev,
+                    [field]: e.target.value,
+                  }))
                 }
                 placeholder={`Add ${label.toLowerCase()}`}
                 onKeyDown={(e) => {
@@ -347,7 +361,9 @@ export const ComposeModal = forwardRef<HTMLDivElement, ComposeModalProps>(
                     <button
                       key={priority}
                       type="button"
-                      onClick={() => setFormData((prev) => ({ ...prev, priority }))}
+                      onClick={() =>
+                        setFormData((prev) => ({ ...prev, priority }))
+                      }
                       disabled={loading}
                       className={cn(
                         "rounded-lg border px-3 py-1.5 text-sm transition-colors",
@@ -377,11 +393,11 @@ export const ComposeModal = forwardRef<HTMLDivElement, ComposeModalProps>(
             </FormField>
 
             {/* Attachments */}
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <label className="text-sm font-medium text-foreground">
+            <div>
+              <div className="mb-2 flex items-center justify-between">
+                <span className="block text-sm font-medium text-foreground">
                   Attachments
-                </label>
+                </span>
                 <Button
                   variant="ghost"
                   size="sm"

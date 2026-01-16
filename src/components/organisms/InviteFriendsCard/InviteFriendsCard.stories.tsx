@@ -34,7 +34,8 @@ export const Default: Story = {
 export const Featured: Story = {
   args: {
     title: "Invite Friends & Earn Rewards",
-    description: "Share your unique referral code and earn rewards when your friends sign up and make their first purchase.",
+    description:
+      "Share your unique referral code and earn rewards when your friends sign up and make their first purchase.",
     referralCode: "PRELINE2024",
     referralLink: "https://app.example.com/ref/PRELINE2024",
     reward: {

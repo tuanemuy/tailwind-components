@@ -1,42 +1,39 @@
 "use client";
 
-import { useState, type ReactNode, type ComponentProps } from "react";
-import { cn } from "@/lib/utils";
-import {
-  balanceCardVariants,
-  transactionItemVariants,
-  transactionAmountVariants,
-  paymentCardVariants,
-  transferFormVariants,
-  accountCardVariants,
-  receiptTimelineVariants,
-  receiptItemVariants,
-  currencySelectVariants,
-} from "@/lib/variants";
+import type { VariantProps } from "class-variance-authority";
+import { type ReactNode, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
-import { Badge } from "@/components/atoms/Badge";
-import { Avatar } from "@/components/atoms/Avatar";
 import { Label } from "@/components/atoms/Label";
 import { Select } from "@/components/molecules/Select";
 import {
-  DollarSignIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
   ArrowRightIcon,
-  CreditCardIcon,
+  CheckCircleIcon,
   CheckIcon,
+  ChevronDownIcon,
+  ClockIcon,
+  DollarSignIcon,
   EyeIcon,
   EyeOffIcon,
-  PlusIcon,
-  TrendUpIcon,
   TrendDownIcon,
-  ClockIcon,
-  CheckCircleIcon,
-  XCircleIcon,
+  TrendUpIcon,
   WalletIcon,
+  XCircleIcon,
 } from "@/lib/icons";
-import type { VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+import {
+  accountCardVariants,
+  balanceCardVariants,
+  currencySelectVariants,
+  paymentCardVariants,
+  receiptItemVariants,
+  receiptTimelineVariants,
+  transactionAmountVariants,
+  transactionItemVariants,
+  transferFormVariants,
+} from "@/lib/variants";
 
 // =============================================================================
 // BalanceCard
@@ -98,7 +95,7 @@ export function BalanceCard({
                 className={cn(
                   trend.direction === "up"
                     ? "text-success"
-                    : "text-destructive"
+                    : "text-destructive",
                 )}
               >
                 {trend.value}
@@ -108,6 +105,7 @@ export function BalanceCard({
           )}
         </div>
         <button
+          type="button"
           onClick={handleToggle}
           className="p-2 rounded-full hover:bg-black/10 transition-colors"
         >
@@ -175,9 +173,19 @@ export function TransactionList({
               variant,
               status: transaction.status,
             }),
-            onTransactionClick && "cursor-pointer hover:bg-muted/50"
+            onTransactionClick && "cursor-pointer hover:bg-muted/50",
           )}
-          onClick={() => onTransactionClick?.(transaction)}
+          {...(onTransactionClick && {
+            role: "button",
+            tabIndex: 0,
+            onClick: () => onTransactionClick(transaction),
+            onKeyDown: (e: React.KeyboardEvent) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onTransactionClick(transaction);
+              }
+            },
+          })}
         >
           <div className="flex size-10 items-center justify-center rounded-full bg-muted">
             {transaction.icon || <DollarSignIcon className="size-5" />}
@@ -193,7 +201,7 @@ export function TransactionList({
           <div className="text-right">
             <p
               className={cn(
-                transactionAmountVariants({ type: transaction.type })
+                transactionAmountVariants({ type: transaction.type }),
               )}
             >
               {transaction.type === "credit" ? "+" : "-"}
@@ -262,9 +270,19 @@ export function PaymentCard({
           selected,
         }),
         onSelect && "cursor-pointer",
-        className
+        className,
       )}
-      onClick={onSelect}
+      {...(onSelect && {
+        role: "button",
+        tabIndex: 0,
+        onClick: onSelect,
+        onKeyDown: (e: React.KeyboardEvent) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onSelect();
+          }
+        },
+      })}
     >
       <div className="flex items-start justify-between">
         <div className="text-sm opacity-80">
@@ -462,9 +480,20 @@ export function AccountCard({
           variant: isSelected ? "selected" : variant,
           size,
         }),
-        className
+        onClick && "cursor-pointer",
+        className,
       )}
-      onClick={onClick}
+      {...(onClick && {
+        role: "button",
+        tabIndex: 0,
+        onClick: onClick,
+        onKeyDown: (e: React.KeyboardEvent) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onClick();
+          }
+        },
+      })}
     >
       <div className="flex items-center gap-3">
         <div className="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -520,12 +549,14 @@ export function ReceiptTimeline({
   className,
 }: ReceiptTimelineProps) {
   return (
-    <div className={cn("rounded-xl border border-border bg-card p-4", className)}>
+    <div
+      className={cn("rounded-xl border border-border bg-card p-4", className)}
+    >
       {title && <h3 className="font-semibold mb-4">{title}</h3>}
       <div
         className={cn(
           receiptTimelineVariants({ variant }),
-          "border-l-2 border-border"
+          "border-l-2 border-border",
         )}
       >
         {items.map((item) => (
@@ -584,11 +615,132 @@ export function CurrencySelect({
   className,
 }: CurrencySelectProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [position, setPosition] = useState({ top: 0, left: 0 });
+  const [positioned, setPositioned] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
   const selectedCurrency = currencies.find((c) => c.code === value);
 
+  // Reset positioned when closing
+  useEffect(() => {
+    if (!isOpen) {
+      setPositioned(false);
+    }
+  }, [isOpen]);
+
+  // Calculate position when open
+  useLayoutEffect(() => {
+    if (!isOpen || !triggerRef.current || !listRef.current) return;
+
+    const updatePosition = () => {
+      if (!triggerRef.current || !listRef.current) return;
+      const triggerRect = triggerRef.current.getBoundingClientRect();
+      const listRect = listRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+
+      let top = triggerRect.bottom + 4;
+      const left = triggerRect.left;
+
+      // Check if list would overflow below viewport
+      if (top + listRect.height > viewportHeight) {
+        if (triggerRect.top > viewportHeight - triggerRect.bottom) {
+          top = triggerRect.top - listRect.height - 4;
+        }
+      }
+
+      if (top < 8) top = 8;
+
+      setPosition({ top, left });
+      setPositioned(true);
+    };
+
+    updatePosition();
+    window.addEventListener("scroll", updatePosition, true);
+    window.addEventListener("resize", updatePosition);
+
+    return () => {
+      window.removeEventListener("scroll", updatePosition, true);
+      window.removeEventListener("resize", updatePosition);
+    };
+  }, [isOpen]);
+
+  // Close on click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(target) &&
+        listRef.current &&
+        !listRef.current.contains(target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isOpen]);
+
+  // Close on escape
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("keydown", handleEscape);
+    }
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [isOpen]);
+
+  const listContent = isOpen ? (
+    <div
+      ref={listRef}
+      className="fixed z-[9999] w-48 rounded-lg border border-border bg-card shadow-lg"
+      style={{
+        top: position.top,
+        left: position.left,
+        visibility: positioned ? "visible" : "hidden",
+      }}
+    >
+      {currencies.map((currency) => (
+        <button
+          key={currency.code}
+          type="button"
+          className={cn(
+            "flex w-full items-center gap-2 px-3 py-2 text-left hover:bg-muted transition-colors",
+            currency.code === value && "bg-primary/10",
+          )}
+          onClick={() => {
+            onChange?.(currency);
+            setIsOpen(false);
+          }}
+        >
+          {currency.flag && (
+            <span className="text-lg">{currency.flag}</span>
+          )}
+          <div className="flex-1">
+            <p className="font-medium">{currency.code}</p>
+            <p className="text-xs text-muted-foreground">{currency.name}</p>
+          </div>
+          {currency.code === value && (
+            <CheckIcon className="size-4 text-primary" />
+          )}
+        </button>
+      ))}
+    </div>
+  ) : null;
+
   return (
-    <div className="relative">
+    <div ref={containerRef} className="relative">
       <button
+        ref={triggerRef}
         type="button"
         className={cn(currencySelectVariants({ variant }), className)}
         onClick={() => setIsOpen(!isOpen)}
@@ -600,52 +752,14 @@ export function CurrencySelect({
           {selectedCurrency?.code || "Select"}
         </span>
         <ChevronDownIcon
-          className={cn(
-            "size-4 transition-transform",
-            isOpen && "rotate-180"
-          )}
+          className={cn("size-4 transition-transform", isOpen && "rotate-180")}
         />
       </button>
-      {isOpen && (
-        <div className="absolute top-full left-0 mt-1 w-48 rounded-lg border border-border bg-card shadow-lg z-10">
-          {currencies.map((currency) => (
-            <button
-              key={currency.code}
-              type="button"
-              className={cn(
-                "flex w-full items-center gap-2 px-3 py-2 text-left hover:bg-muted transition-colors",
-                currency.code === value && "bg-primary/10"
-              )}
-              onClick={() => {
-                onChange?.(currency);
-                setIsOpen(false);
-              }}
-            >
-              {currency.flag && <span className="text-lg">{currency.flag}</span>}
-              <div className="flex-1">
-                <p className="font-medium">{currency.code}</p>
-                <p className="text-xs text-muted-foreground">{currency.name}</p>
-              </div>
-              {currency.code === value && (
-                <CheckIcon className="size-4 text-primary" />
-              )}
-            </button>
-          ))}
-        </div>
-      )}
+      {typeof document !== "undefined" &&
+        listContent &&
+        createPortal(listContent, document.body)}
     </div>
   );
 }
 
-// =============================================================================
-// Exports
-// =============================================================================
-
-export type {
-  TransactionType,
-  TransactionStatus,
-  Transaction,
-  CardType,
-  ReceiptItem,
-  Currency,
-};
+// Types are exported at their definitions above

@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import {
-  NewsletterSection,
-  NewsletterContent,
-  NewsletterTitle,
-  NewsletterDescription,
-  NewsletterForm,
-  NewsletterSuccess,
-  NewsletterFeatures,
-  NewsletterPrivacy,
-  SimpleNewsletter,
   CompleteNewsletterSection,
+  NewsletterContent,
+  NewsletterDescription,
+  NewsletterFeatures,
+  NewsletterForm,
+  NewsletterPrivacy,
+  NewsletterSection,
+  NewsletterSuccess,
+  NewsletterTitle,
+  SimpleNewsletter,
 } from ".";
 
 const meta: Meta<typeof NewsletterSection> = {
@@ -32,7 +32,9 @@ export const Default: Story = {
         <NewsletterDescription>
           Get the latest updates and insights delivered to your inbox.
         </NewsletterDescription>
-        <NewsletterForm onSubmit={(email) => console.log("Subscribed:", email)} />
+        <NewsletterForm
+          onSubmit={(email) => console.log("Subscribed:", email)}
+        />
         <NewsletterPrivacy />
       </NewsletterContent>
     </NewsletterSection>
@@ -138,7 +140,9 @@ export const LeftAligned: Story = {
         <NewsletterDescription>
           Stay up to date with the latest news, announcements, and articles.
         </NewsletterDescription>
-        <NewsletterForm onSubmit={(email) => console.log("Subscribed:", email)} />
+        <NewsletterForm
+          onSubmit={(email) => console.log("Subscribed:", email)}
+        />
         <NewsletterPrivacy />
       </NewsletterContent>
     </NewsletterSection>
@@ -295,7 +299,9 @@ export const SmallPadding: Story = {
     <NewsletterSection padding="sm">
       <NewsletterContent maxWidth="sm">
         <NewsletterTitle size="sm">Quick subscribe</NewsletterTitle>
-        <NewsletterForm onSubmit={(email) => console.log("Subscribed:", email)} />
+        <NewsletterForm
+          onSubmit={(email) => console.log("Subscribed:", email)}
+        />
       </NewsletterContent>
     </NewsletterSection>
   ),
@@ -307,7 +313,8 @@ export const LargePadding: Story = {
       <NewsletterContent>
         <NewsletterTitle size="lg">Join Our Newsletter</NewsletterTitle>
         <NewsletterDescription>
-          Subscribe to receive the latest updates, articles, and resources directly in your inbox.
+          Subscribe to receive the latest updates, articles, and resources
+          directly in your inbox.
         </NewsletterDescription>
         <NewsletterForm
           onSubmit={(email) => console.log("Subscribed:", email)}

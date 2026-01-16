@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { UserHeroCard } from "./";
 import type { UserHeroData } from "./";
+import { UserHeroCard } from "./";
 
 const meta: Meta<typeof UserHeroCard> = {
   title: "Organisms/UserHeroCard",
@@ -26,7 +26,8 @@ const sampleUser: UserHeroData = {
   location: "San Francisco, CA",
   website: "https://sarahchen.design",
   avatarFallback: "SC",
-  coverImage: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=1200&h=400&fit=crop",
+  coverImage:
+    "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=1200&h=400&fit=crop",
   isVerified: true,
   isOnline: true,
   status: "available",

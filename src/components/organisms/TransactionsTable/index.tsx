@@ -1,17 +1,30 @@
 "use client";
 
 import { forwardRef, useMemo } from "react";
+import { Badge } from "@/components/atoms";
+import { TrendingDownIcon, TrendingUpIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
-import { DataTable, type DataTableColumn, type DataTableProps } from "../DataTable";
-import { Avatar, Badge } from "@/components/atoms";
-import { TrendingUpIcon, TrendingDownIcon } from "@/lib/icons";
+import {
+  DataTable,
+  type DataTableColumn,
+  type DataTableProps,
+} from "../DataTable";
 
 // ============================================
 // Transaction Types
 // ============================================
 
-export type TransactionType = "credit" | "debit" | "transfer" | "refund" | "fee";
-export type TransactionStatus = "completed" | "pending" | "failed" | "cancelled";
+export type TransactionType =
+  | "credit"
+  | "debit"
+  | "transfer"
+  | "refund"
+  | "fee";
+export type TransactionStatus =
+  | "completed"
+  | "pending"
+  | "failed"
+  | "cancelled";
 
 export interface TransactionAccount {
   id: string;
@@ -74,7 +87,10 @@ const typeConfig: Record<
 
 const statusConfig: Record<
   TransactionStatus,
-  { label: string; variant: "success" | "warning" | "destructive" | "secondary" }
+  {
+    label: string;
+    variant: "success" | "warning" | "destructive" | "secondary";
+  }
 > = {
   completed: { label: "Completed", variant: "success" },
   pending: { label: "Pending", variant: "warning" },
@@ -86,7 +102,10 @@ const statusConfig: Record<
 // TransactionsTable Component
 // ============================================
 
-export const TransactionsTable = forwardRef<HTMLDivElement, TransactionsTableProps>(
+export const TransactionsTable = forwardRef<
+  HTMLDivElement,
+  TransactionsTableProps
+>(
   (
     {
       className,
@@ -98,7 +117,7 @@ export const TransactionsTable = forwardRef<HTMLDivElement, TransactionsTablePro
       customColumns,
       ...props
     },
-    ref
+    ref,
   ) => {
     const columns = useMemo<DataTableColumn<Transaction>[]>(() => {
       const baseColumns: DataTableColumn<Transaction>[] = [
@@ -117,11 +136,13 @@ export const TransactionsTable = forwardRef<HTMLDivElement, TransactionsTablePro
                 <div
                   className={cn(
                     "size-10 rounded-full flex items-center justify-center",
-                    transaction.type === "credit" || transaction.type === "refund"
+                    transaction.type === "credit" ||
+                      transaction.type === "refund"
                       ? "bg-success/10"
-                      : transaction.type === "debit" || transaction.type === "fee"
-                      ? "bg-destructive/10"
-                      : "bg-primary/10"
+                      : transaction.type === "debit" ||
+                          transaction.type === "fee"
+                        ? "bg-destructive/10"
+                        : "bg-primary/10",
                   )}
                 >
                   <Icon className={cn("size-5", config.color)} />
@@ -148,14 +169,20 @@ export const TransactionsTable = forwardRef<HTMLDivElement, TransactionsTablePro
           sortable: true,
           filterable: true,
           filterType: "select",
-          filterOptions: Object.entries(typeConfig).map(([value, { label }]) => ({
-            value,
-            label,
-          })),
+          filterOptions: Object.entries(typeConfig).map(
+            ([value, { label }]) => ({
+              value,
+              label,
+            }),
+          ),
           width: "100px",
           render: (_, transaction) => {
             const config = typeConfig[transaction.type];
-            return <span className={cn("text-sm font-medium", config.color)}>{config.label}</span>;
+            return (
+              <span className={cn("text-sm font-medium", config.color)}>
+                {config.label}
+              </span>
+            );
           },
         },
         {
@@ -164,10 +191,12 @@ export const TransactionsTable = forwardRef<HTMLDivElement, TransactionsTablePro
           sortable: true,
           filterable: true,
           filterType: "select",
-          filterOptions: Object.entries(statusConfig).map(([value, { label }]) => ({
-            value,
-            label,
-          })),
+          filterOptions: Object.entries(statusConfig).map(
+            ([value, { label }]) => ({
+              value,
+              label,
+            }),
+          ),
           width: "120px",
           render: (_, transaction) => {
             const config = statusConfig[transaction.status];
@@ -270,7 +299,7 @@ export const TransactionsTable = forwardRef<HTMLDivElement, TransactionsTablePro
             <span
               className={cn(
                 "font-medium",
-                isPositive ? "text-success" : "text-foreground"
+                isPositive ? "text-success" : "text-foreground",
               )}
             >
               {isPositive ? "+" : "-"}
@@ -317,7 +346,7 @@ export const TransactionsTable = forwardRef<HTMLDivElement, TransactionsTablePro
         {...props}
       />
     );
-  }
+  },
 );
 
 TransactionsTable.displayName = "TransactionsTable";

@@ -1,9 +1,9 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
+import { TrendIndicator } from "@/components/molecules";
+import type { TrendDirection, TrendVariant } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { dataCardVariants } from "@/lib/variants/dataVisualization";
-import { TrendIndicator } from "@/components/molecules";
-import type { VariantProps } from "class-variance-authority";
-import type { TrendDirection, TrendVariant } from "@/lib/types";
 
 // ============================================
 // Types
@@ -48,7 +48,10 @@ export interface ProjectCostsCardProps
   formatAmount?: (amount: number) => string;
 }
 
-export const ProjectCostsCard = forwardRef<HTMLDivElement, ProjectCostsCardProps>(
+export const ProjectCostsCard = forwardRef<
+  HTMLDivElement,
+  ProjectCostsCardProps
+>(
   (
     {
       className,
@@ -66,8 +69,11 @@ export const ProjectCostsCard = forwardRef<HTMLDivElement, ProjectCostsCardProps
     },
     ref,
   ) => {
-    const calculatedTotal = total ?? items.reduce((sum, item) => sum + item.amount, 0);
-    const format = formatAmount ?? ((amount: number) => `${currency}${amount.toLocaleString()}`);
+    const calculatedTotal =
+      total ?? items.reduce((sum, item) => sum + item.amount, 0);
+    const format =
+      formatAmount ??
+      ((amount: number) => `${currency}${amount.toLocaleString()}`);
 
     return (
       <div
@@ -83,7 +89,9 @@ export const ProjectCostsCard = forwardRef<HTMLDivElement, ProjectCostsCardProps
                 <h3 className="text-sm font-medium text-foreground">{title}</h3>
               )}
               {subtitle && (
-                <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {subtitle}
+                </p>
               )}
             </div>
             {action && <div className="shrink-0">{action}</div>}
@@ -93,8 +101,10 @@ export const ProjectCostsCard = forwardRef<HTMLDivElement, ProjectCostsCardProps
         {/* Cost Items */}
         <div className="divide-y divide-border">
           {items.map((item, index) => {
-            const percentage = item.percentage ?? (item.amount / calculatedTotal) * 100;
-            const barColor = item.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+            const percentage =
+              item.percentage ?? (item.amount / calculatedTotal) * 100;
+            const barColor =
+              item.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
             return (
               <div key={item.id} className="px-4 py-3">
@@ -139,7 +149,9 @@ export const ProjectCostsCard = forwardRef<HTMLDivElement, ProjectCostsCardProps
 
         {/* Total */}
         <div className="flex items-center justify-between gap-x-4 border-t border-border bg-muted/30 px-4 py-3">
-          <span className="text-sm font-medium text-foreground">{totalLabel}</span>
+          <span className="text-sm font-medium text-foreground">
+            {totalLabel}
+          </span>
           <span className="text-base font-semibold text-foreground tabular-nums">
             {format(calculatedTotal)}
           </span>
@@ -166,7 +178,10 @@ export interface CategorizedCostsCardProps
   formatAmount?: (amount: number) => string;
 }
 
-export const CategorizedCostsCard = forwardRef<HTMLDivElement, CategorizedCostsCardProps>(
+export const CategorizedCostsCard = forwardRef<
+  HTMLDivElement,
+  CategorizedCostsCardProps
+>(
   (
     {
       className,
@@ -182,11 +197,16 @@ export const CategorizedCostsCard = forwardRef<HTMLDivElement, CategorizedCostsC
     },
     ref,
   ) => {
-    const calculatedTotal = total ?? categories.reduce(
-      (sum, cat) => sum + (cat.subtotal ?? cat.items.reduce((s, i) => s + i.amount, 0)),
-      0
-    );
-    const format = formatAmount ?? ((amount: number) => `${currency}${amount.toLocaleString()}`);
+    const calculatedTotal =
+      total ??
+      categories.reduce(
+        (sum, cat) =>
+          sum + (cat.subtotal ?? cat.items.reduce((s, i) => s + i.amount, 0)),
+        0,
+      );
+    const format =
+      formatAmount ??
+      ((amount: number) => `${currency}${amount.toLocaleString()}`);
 
     return (
       <div
@@ -206,7 +226,9 @@ export const CategorizedCostsCard = forwardRef<HTMLDivElement, CategorizedCostsC
 
         {/* Categories */}
         {categories.map((category, catIndex) => {
-          const categoryTotal = category.subtotal ?? category.items.reduce((s, i) => s + i.amount, 0);
+          const categoryTotal =
+            category.subtotal ??
+            category.items.reduce((s, i) => s + i.amount, 0);
 
           return (
             <div key={category.id}>
@@ -223,10 +245,15 @@ export const CategorizedCostsCard = forwardRef<HTMLDivElement, CategorizedCostsC
               {/* Category Items */}
               <div className="divide-y divide-border">
                 {category.items.map((item, itemIndex) => {
-                  const barColor = item.color || `hsl(var(--chart-${((catIndex * 2 + itemIndex) % 5) + 1}))`;
+                  const barColor =
+                    item.color ||
+                    `hsl(var(--chart-${((catIndex * 2 + itemIndex) % 5) + 1}))`;
 
                   return (
-                    <div key={item.id} className="flex items-center justify-between gap-x-3 px-4 py-2.5">
+                    <div
+                      key={item.id}
+                      className="flex items-center justify-between gap-x-3 px-4 py-2.5"
+                    >
                       <div className="flex items-center gap-x-3 min-w-0">
                         <span
                           className="size-2 shrink-0 rounded-full"
@@ -249,7 +276,9 @@ export const CategorizedCostsCard = forwardRef<HTMLDivElement, CategorizedCostsC
 
         {/* Total */}
         <div className="flex items-center justify-between gap-x-4 border-t border-border bg-muted/30 px-4 py-3">
-          <span className="text-sm font-medium text-foreground">{totalLabel}</span>
+          <span className="text-sm font-medium text-foreground">
+            {totalLabel}
+          </span>
           <span className="text-base font-semibold text-foreground tabular-nums">
             {format(calculatedTotal)}
           </span>
@@ -282,7 +311,10 @@ export interface BudgetVsActualCardProps
   formatAmount?: (amount: number) => string;
 }
 
-export const BudgetVsActualCard = forwardRef<HTMLDivElement, BudgetVsActualCardProps>(
+export const BudgetVsActualCard = forwardRef<
+  HTMLDivElement,
+  BudgetVsActualCardProps
+>(
   (
     {
       className,
@@ -296,7 +328,9 @@ export const BudgetVsActualCard = forwardRef<HTMLDivElement, BudgetVsActualCardP
     },
     ref,
   ) => {
-    const format = formatAmount ?? ((amount: number) => `${currency}${amount.toLocaleString()}`);
+    const format =
+      formatAmount ??
+      ((amount: number) => `${currency}${amount.toLocaleString()}`);
     const totalBudget = items.reduce((sum, item) => sum + item.budget, 0);
     const totalActual = items.reduce((sum, item) => sum + item.actual, 0);
 
@@ -331,7 +365,10 @@ export const BudgetVsActualCard = forwardRef<HTMLDivElement, BudgetVsActualCardP
             const isOverBudget = variance < 0;
 
             return (
-              <div key={item.id} className="grid grid-cols-4 gap-x-2 px-4 py-2.5">
+              <div
+                key={item.id}
+                className="grid grid-cols-4 gap-x-2 px-4 py-2.5"
+              >
                 <div className="col-span-1 flex items-center gap-x-2 min-w-0">
                   {item.icon && (
                     <span className="shrink-0 text-muted-foreground">
@@ -351,10 +388,11 @@ export const BudgetVsActualCard = forwardRef<HTMLDivElement, BudgetVsActualCardP
                 <span
                   className={cn(
                     "text-sm text-right tabular-nums",
-                    isOverBudget ? "text-error" : "text-success"
+                    isOverBudget ? "text-error" : "text-success",
                   )}
                 >
-                  {isOverBudget ? "-" : "+"}{format(Math.abs(variance))}
+                  {isOverBudget ? "-" : "+"}
+                  {format(Math.abs(variance))}
                 </span>
               </div>
             );
@@ -363,7 +401,9 @@ export const BudgetVsActualCard = forwardRef<HTMLDivElement, BudgetVsActualCardP
 
         {/* Totals */}
         <div className="grid grid-cols-4 gap-x-2 border-t border-border bg-muted/30 px-4 py-3">
-          <span className="col-span-1 text-sm font-medium text-foreground">Total</span>
+          <span className="col-span-1 text-sm font-medium text-foreground">
+            Total
+          </span>
           <span className="text-sm font-medium text-muted-foreground text-right tabular-nums">
             {format(totalBudget)}
           </span>
@@ -373,7 +413,7 @@ export const BudgetVsActualCard = forwardRef<HTMLDivElement, BudgetVsActualCardP
           <span
             className={cn(
               "text-sm font-semibold text-right tabular-nums",
-              totalBudget - totalActual < 0 ? "text-error" : "text-success"
+              totalBudget - totalActual < 0 ? "text-error" : "text-success",
             )}
           >
             {totalBudget - totalActual < 0 ? "-" : "+"}

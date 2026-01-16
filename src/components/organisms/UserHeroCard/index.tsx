@@ -1,18 +1,18 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
 import { Avatar } from "@/components/atoms/Avatar";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import {
-  MailIcon,
-  PhoneIcon,
-  MapPinIcon,
-  GlobeIcon,
-  LinkIcon,
-  MoreHorizontalIcon,
   CheckCircleIcon,
   EditIcon,
+  GlobeIcon,
+  LinkIcon,
+  MailIcon,
+  MapPinIcon,
+  MoreHorizontalIcon,
+  PhoneIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 export interface SocialLink {
   type: "twitter" | "linkedin" | "github" | "instagram" | "website" | "other";
@@ -48,7 +48,8 @@ export interface UserHeroData {
   tags?: string[];
 }
 
-export interface UserHeroCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface UserHeroCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   user: UserHeroData;
   variant?: "default" | "compact" | "wide" | "centered";
   showActions?: boolean;
@@ -82,14 +83,17 @@ export const UserHeroCard = forwardRef<HTMLDivElement, UserHeroCardProps>(
       actions,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Centered variant (Profile header style)
     if (variant === "centered") {
       return (
         <div
           ref={ref}
-          className={cn("overflow-hidden rounded-xl border border-border bg-card", className)}
+          className={cn(
+            "overflow-hidden rounded-xl border border-border bg-card",
+            className,
+          )}
           {...props}
         >
           {/* Cover */}
@@ -97,7 +101,11 @@ export const UserHeroCard = forwardRef<HTMLDivElement, UserHeroCardProps>(
             className="h-32 w-full sm:h-40"
             style={
               user.coverImage
-                ? { backgroundImage: `url(${user.coverImage})`, backgroundSize: "cover", backgroundPosition: "center" }
+                ? {
+                    backgroundImage: `url(${user.coverImage})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }
                 : { backgroundColor: user.coverColor || "#6366F1" }
             }
           />
@@ -116,11 +124,17 @@ export const UserHeroCard = forwardRef<HTMLDivElement, UserHeroCardProps>(
 
             <div className="mt-3">
               <div className="flex items-center justify-center gap-x-2">
-                <h2 className="text-xl font-bold text-foreground">{user.name}</h2>
-                {user.isVerified && <CheckCircleIcon className="size-5 text-primary" />}
+                <h2 className="text-xl font-bold text-foreground">
+                  {user.name}
+                </h2>
+                {user.isVerified && (
+                  <CheckCircleIcon className="size-5 text-primary" />
+                )}
               </div>
               {user.username && (
-                <p className="text-sm text-muted-foreground">@{user.username}</p>
+                <p className="text-sm text-muted-foreground">
+                  @{user.username}
+                </p>
               )}
               {user.role && (
                 <p className="mt-1 text-sm text-muted-foreground">
@@ -131,16 +145,22 @@ export const UserHeroCard = forwardRef<HTMLDivElement, UserHeroCardProps>(
             </div>
 
             {user.bio && (
-              <p className="mx-auto mt-3 max-w-md text-sm text-muted-foreground">{user.bio}</p>
+              <p className="mx-auto mt-3 max-w-md text-sm text-muted-foreground">
+                {user.bio}
+              </p>
             )}
 
             {/* Stats */}
             {showStats && user.stats && user.stats.length > 0 && (
               <div className="mt-4 flex justify-center divide-x divide-border">
-                {user.stats.map((stat, index) => (
-                  <div key={index} className="px-6 text-center">
-                    <p className="text-lg font-semibold text-foreground">{stat.value}</p>
-                    <p className="text-xs text-muted-foreground">{stat.label}</p>
+                {user.stats.map((stat) => (
+                  <div key={stat.label} className="px-6 text-center">
+                    <p className="text-lg font-semibold text-foreground">
+                      {stat.value}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {stat.label}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -174,7 +194,10 @@ export const UserHeroCard = forwardRef<HTMLDivElement, UserHeroCardProps>(
       return (
         <div
           ref={ref}
-          className={cn("overflow-hidden rounded-xl border border-border bg-card", className)}
+          className={cn(
+            "overflow-hidden rounded-xl border border-border bg-card",
+            className,
+          )}
           {...props}
         >
           {/* Cover */}
@@ -182,7 +205,11 @@ export const UserHeroCard = forwardRef<HTMLDivElement, UserHeroCardProps>(
             className="relative h-48"
             style={
               user.coverImage
-                ? { backgroundImage: `url(${user.coverImage})`, backgroundSize: "cover", backgroundPosition: "center" }
+                ? {
+                    backgroundImage: `url(${user.coverImage})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }
                 : { backgroundColor: user.coverColor || "#6366F1" }
             }
           >
@@ -212,8 +239,12 @@ export const UserHeroCard = forwardRef<HTMLDivElement, UserHeroCardProps>(
                 />
                 <div className="mb-2">
                   <div className="flex items-center gap-x-2">
-                    <h2 className="text-2xl font-bold text-foreground">{user.name}</h2>
-                    {user.isVerified && <CheckCircleIcon className="size-5 text-primary" />}
+                    <h2 className="text-2xl font-bold text-foreground">
+                      {user.name}
+                    </h2>
+                    {user.isVerified && (
+                      <CheckCircleIcon className="size-5 text-primary" />
+                    )}
                   </div>
                   {user.role && (
                     <p className="text-muted-foreground">
@@ -232,7 +263,10 @@ export const UserHeroCard = forwardRef<HTMLDivElement, UserHeroCardProps>(
                         <Button onClick={() => onFollow(user)}>Follow</Button>
                       )}
                       {onMessage && (
-                        <Button variant="outline" onClick={() => onMessage(user)}>
+                        <Button
+                          variant="outline"
+                          onClick={() => onMessage(user)}
+                        >
                           <MailIcon className="mr-1.5 size-4" />
                           Message
                         </Button>
@@ -274,9 +308,11 @@ export const UserHeroCard = forwardRef<HTMLDivElement, UserHeroCardProps>(
             {/* Stats */}
             {showStats && user.stats && user.stats.length > 0 && (
               <div className="mt-4 flex gap-x-6">
-                {user.stats.map((stat, index) => (
-                  <div key={index}>
-                    <span className="font-semibold text-foreground">{stat.value}</span>{" "}
+                {user.stats.map((stat) => (
+                  <div key={stat.label}>
+                    <span className="font-semibold text-foreground">
+                      {stat.value}
+                    </span>{" "}
                     <span className="text-muted-foreground">{stat.label}</span>
                   </div>
                 ))}
@@ -294,7 +330,7 @@ export const UserHeroCard = forwardRef<HTMLDivElement, UserHeroCardProps>(
           ref={ref}
           className={cn(
             "flex items-center gap-x-4 rounded-xl border border-border bg-card p-4",
-            className
+            className,
           )}
           {...props}
         >
@@ -306,11 +342,17 @@ export const UserHeroCard = forwardRef<HTMLDivElement, UserHeroCardProps>(
           />
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-x-2">
-              <h4 className="truncate font-semibold text-foreground">{user.name}</h4>
-              {user.isVerified && <CheckCircleIcon className="size-4 text-primary" />}
+              <h4 className="truncate font-semibold text-foreground">
+                {user.name}
+              </h4>
+              {user.isVerified && (
+                <CheckCircleIcon className="size-4 text-primary" />
+              )}
             </div>
             {user.role && (
-              <p className="truncate text-sm text-muted-foreground">{user.role}</p>
+              <p className="truncate text-sm text-muted-foreground">
+                {user.role}
+              </p>
             )}
           </div>
           {showActions && (
@@ -342,7 +384,10 @@ export const UserHeroCard = forwardRef<HTMLDivElement, UserHeroCardProps>(
     return (
       <div
         ref={ref}
-        className={cn("overflow-hidden rounded-xl border border-border bg-card", className)}
+        className={cn(
+          "overflow-hidden rounded-xl border border-border bg-card",
+          className,
+        )}
         {...props}
       >
         {/* Cover */}
@@ -350,7 +395,11 @@ export const UserHeroCard = forwardRef<HTMLDivElement, UserHeroCardProps>(
           className="h-24"
           style={
             user.coverImage
-              ? { backgroundImage: `url(${user.coverImage})`, backgroundSize: "cover", backgroundPosition: "center" }
+              ? {
+                  backgroundImage: `url(${user.coverImage})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }
               : { backgroundColor: user.coverColor || "#6366F1" }
           }
         />
@@ -393,10 +442,15 @@ export const UserHeroCard = forwardRef<HTMLDivElement, UserHeroCardProps>(
           <div className="mt-3">
             <div className="flex items-center gap-x-2">
               <h3 className="font-semibold text-foreground">{user.name}</h3>
-              {user.isVerified && <CheckCircleIcon className="size-4 text-primary" />}
+              {user.isVerified && (
+                <CheckCircleIcon className="size-4 text-primary" />
+              )}
               {user.status && (
                 <span
-                  className={cn("size-2 rounded-full", statusColors[user.status])}
+                  className={cn(
+                    "size-2 rounded-full",
+                    statusColors[user.status],
+                  )}
                   title={user.status}
                 />
               )}
@@ -410,7 +464,9 @@ export const UserHeroCard = forwardRef<HTMLDivElement, UserHeroCardProps>(
           </div>
 
           {user.bio && (
-            <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{user.bio}</p>
+            <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
+              {user.bio}
+            </p>
           )}
 
           {/* Contact Info */}
@@ -418,7 +474,10 @@ export const UserHeroCard = forwardRef<HTMLDivElement, UserHeroCardProps>(
             {user.email && (
               <div className="flex items-center gap-x-2 text-sm text-muted-foreground">
                 <MailIcon className="size-4" />
-                <a href={`mailto:${user.email}`} className="hover:text-foreground">
+                <a
+                  href={`mailto:${user.email}`}
+                  className="hover:text-foreground"
+                >
                   {user.email}
                 </a>
               </div>
@@ -450,8 +509,8 @@ export const UserHeroCard = forwardRef<HTMLDivElement, UserHeroCardProps>(
           {/* Tags */}
           {user.tags && user.tags.length > 0 && (
             <div className="mt-4 flex flex-wrap gap-1.5">
-              {user.tags.map((tag, index) => (
-                <Badge key={index} variant="secondary" size="sm">
+              {user.tags.map((tag) => (
+                <Badge key={tag} variant="secondary" size="sm">
                   {tag}
                 </Badge>
               ))}
@@ -461,8 +520,8 @@ export const UserHeroCard = forwardRef<HTMLDivElement, UserHeroCardProps>(
           {/* Stats */}
           {showStats && user.stats && user.stats.length > 0 && (
             <div className="mt-4 flex gap-4 border-t border-border pt-4">
-              {user.stats.map((stat, index) => (
-                <div key={index}>
+              {user.stats.map((stat) => (
+                <div key={stat.label}>
                   <p className="font-semibold text-foreground">{stat.value}</p>
                   <p className="text-xs text-muted-foreground">{stat.label}</p>
                 </div>
@@ -472,6 +531,6 @@ export const UserHeroCard = forwardRef<HTMLDivElement, UserHeroCardProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 UserHeroCard.displayName = "UserHeroCard";

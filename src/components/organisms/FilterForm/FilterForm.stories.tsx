@@ -1,19 +1,19 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
+import { Badge, Checkbox, Input, Radio } from "@/components/atoms";
+import { Select } from "@/components/molecules";
 import {
-  FilterForm,
-  FilterHeader,
+  DateRangeFilter,
+  FilterActions,
   FilterBody,
-  FilterSection,
-  FilterGroup,
   FilterChip,
   FilterChipGroup,
-  FilterActions,
-  DateRangeFilter,
+  FilterForm,
+  FilterGroup,
+  FilterHeader,
+  FilterSection,
   PriceRangeFilter,
 } from "./index";
-import { Select } from "@/components/molecules";
-import { Checkbox, Radio, Input, Badge } from "@/components/atoms";
 
 const meta: Meta<typeof FilterForm> = {
   title: "Organisms/FilterForm",
@@ -35,22 +35,22 @@ export const Default: Story = {
       <FilterBody>
         <FilterSection title="Category">
           <div className="space-y-2">
-            <label className="flex items-center gap-x-2">
+            <div className="flex items-center gap-x-2">
               <Checkbox defaultChecked />
               <span className="text-sm text-foreground">Electronics</span>
-            </label>
-            <label className="flex items-center gap-x-2">
+            </div>
+            <div className="flex items-center gap-x-2">
               <Checkbox />
               <span className="text-sm text-foreground">Clothing</span>
-            </label>
-            <label className="flex items-center gap-x-2">
+            </div>
+            <div className="flex items-center gap-x-2">
               <Checkbox defaultChecked />
               <span className="text-sm text-foreground">Home & Garden</span>
-            </label>
-            <label className="flex items-center gap-x-2">
+            </div>
+            <div className="flex items-center gap-x-2">
               <Checkbox />
               <span className="text-sm text-foreground">Sports</span>
-            </label>
+            </div>
           </div>
         </FilterSection>
 
@@ -70,7 +70,10 @@ export const Default: Story = {
           />
         </FilterSection>
       </FilterBody>
-      <FilterActions onClear={() => console.log("Clear")} onApply={() => console.log("Apply")} />
+      <FilterActions
+        onClear={() => console.log("Clear")}
+        onApply={() => console.log("Apply")}
+      />
     </FilterForm>
   ),
 };
@@ -81,53 +84,74 @@ export const Sidebar: Story = {
     <FilterForm variant="sidebar" className="w-64 border-r border-border">
       <FilterHeader title="Filters" activeCount={3} />
       <FilterBody>
-        <FilterSection title="Status" badge={<Badge variant="secondary" size="sm" soft>1</Badge>}>
+        <FilterSection
+          title="Status"
+          badge={
+            <Badge variant="secondary" size="sm" soft>
+              1
+            </Badge>
+          }
+        >
           <div className="space-y-2">
-            <label className="flex items-center gap-x-2">
+            <div className="flex items-center gap-x-2">
               <Checkbox defaultChecked />
               <span className="text-sm text-foreground">Active</span>
-            </label>
-            <label className="flex items-center gap-x-2">
+            </div>
+            <div className="flex items-center gap-x-2">
               <Checkbox />
               <span className="text-sm text-foreground">Pending</span>
-            </label>
-            <label className="flex items-center gap-x-2">
+            </div>
+            <div className="flex items-center gap-x-2">
               <Checkbox />
               <span className="text-sm text-foreground">Completed</span>
-            </label>
-            <label className="flex items-center gap-x-2">
+            </div>
+            <div className="flex items-center gap-x-2">
               <Checkbox />
               <span className="text-sm text-foreground">Cancelled</span>
-            </label>
+            </div>
           </div>
         </FilterSection>
 
-        <FilterSection title="Date Range" badge={<Badge variant="secondary" size="sm" soft>1</Badge>}>
+        <FilterSection
+          title="Date Range"
+          badge={
+            <Badge variant="secondary" size="sm" soft>
+              1
+            </Badge>
+          }
+        >
           <DateRangeFilter label="" />
         </FilterSection>
 
         <FilterSection title="Payment Method">
           <div className="space-y-2">
-            <label className="flex items-center gap-x-2">
+            <div className="flex items-center gap-x-2">
               <Radio name="payment" value="all" defaultChecked />
               <span className="text-sm text-foreground">All</span>
-            </label>
-            <label className="flex items-center gap-x-2">
+            </div>
+            <div className="flex items-center gap-x-2">
               <Radio name="payment" value="credit" />
               <span className="text-sm text-foreground">Credit Card</span>
-            </label>
-            <label className="flex items-center gap-x-2">
+            </div>
+            <div className="flex items-center gap-x-2">
               <Radio name="payment" value="debit" />
               <span className="text-sm text-foreground">Debit Card</span>
-            </label>
-            <label className="flex items-center gap-x-2">
+            </div>
+            <div className="flex items-center gap-x-2">
               <Radio name="payment" value="paypal" />
               <span className="text-sm text-foreground">PayPal</span>
-            </label>
+            </div>
           </div>
         </FilterSection>
 
-        <FilterSection title="Amount" badge={<Badge variant="secondary" size="sm" soft>1</Badge>}>
+        <FilterSection
+          title="Amount"
+          badge={
+            <Badge variant="secondary" size="sm" soft>
+              1
+            </Badge>
+          }
+        >
           <PriceRangeFilter label="" />
         </FilterSection>
       </FilterBody>
@@ -199,9 +223,7 @@ export const WithFilterChips: Story = {
           ))}
         </FilterChipGroup>
 
-        <p className="text-sm text-muted-foreground">
-          Showing 24 results
-        </p>
+        <p className="text-sm text-muted-foreground">Showing 24 results</p>
       </div>
     );
   },
@@ -210,39 +232,43 @@ export const WithFilterChips: Story = {
 // Product Filter
 export const ProductFilter: Story = {
   render: () => (
-    <FilterForm variant="card" className="w-80" onClear={() => console.log("Clear")}>
+    <FilterForm
+      variant="card"
+      className="w-80"
+      onClear={() => console.log("Clear")}
+    >
       <FilterHeader title="Product Filters" activeCount={4} />
       <FilterBody>
         <FilterSection title="Categories">
           <div className="space-y-2">
-            <label className="flex items-center justify-between gap-x-2">
+            <span className="flex items-center justify-between gap-x-2">
               <span className="flex items-center gap-x-2">
                 <Checkbox defaultChecked />
                 <span className="text-sm text-foreground">Smartphones</span>
               </span>
               <span className="text-xs text-muted-foreground">124</span>
-            </label>
-            <label className="flex items-center justify-between gap-x-2">
+            </span>
+            <span className="flex items-center justify-between gap-x-2">
               <span className="flex items-center gap-x-2">
                 <Checkbox defaultChecked />
                 <span className="text-sm text-foreground">Laptops</span>
               </span>
               <span className="text-xs text-muted-foreground">89</span>
-            </label>
-            <label className="flex items-center justify-between gap-x-2">
+            </span>
+            <span className="flex items-center justify-between gap-x-2">
               <span className="flex items-center gap-x-2">
                 <Checkbox />
                 <span className="text-sm text-foreground">Tablets</span>
               </span>
               <span className="text-xs text-muted-foreground">45</span>
-            </label>
-            <label className="flex items-center justify-between gap-x-2">
+            </span>
+            <span className="flex items-center justify-between gap-x-2">
               <span className="flex items-center gap-x-2">
                 <Checkbox />
                 <span className="text-sm text-foreground">Accessories</span>
               </span>
               <span className="text-xs text-muted-foreground">230</span>
-            </label>
+            </span>
           </div>
         </FilterSection>
 
@@ -252,48 +278,51 @@ export const ProductFilter: Story = {
 
         <FilterSection title="Rating">
           <div className="space-y-2">
-            <label className="flex items-center gap-x-2">
+            <div className="flex items-center gap-x-2">
               <Radio name="rating" value="4" />
               <span className="flex items-center gap-x-1 text-sm text-foreground">
                 4 stars & up
                 <span className="text-yellow-500">{"★".repeat(4)}</span>
               </span>
-            </label>
-            <label className="flex items-center gap-x-2">
+            </div>
+            <div className="flex items-center gap-x-2">
               <Radio name="rating" value="3" />
               <span className="flex items-center gap-x-1 text-sm text-foreground">
                 3 stars & up
                 <span className="text-yellow-500">{"★".repeat(3)}</span>
               </span>
-            </label>
-            <label className="flex items-center gap-x-2">
+            </div>
+            <div className="flex items-center gap-x-2">
               <Radio name="rating" value="2" />
               <span className="flex items-center gap-x-1 text-sm text-foreground">
                 2 stars & up
                 <span className="text-yellow-500">{"★".repeat(2)}</span>
               </span>
-            </label>
+            </div>
           </div>
         </FilterSection>
 
         <FilterSection title="Availability">
           <div className="space-y-2">
-            <label className="flex items-center gap-x-2">
+            <div className="flex items-center gap-x-2">
               <Checkbox defaultChecked />
               <span className="text-sm text-foreground">In Stock</span>
-            </label>
-            <label className="flex items-center gap-x-2">
+            </div>
+            <div className="flex items-center gap-x-2">
               <Checkbox defaultChecked />
               <span className="text-sm text-foreground">Free Shipping</span>
-            </label>
-            <label className="flex items-center gap-x-2">
+            </div>
+            <div className="flex items-center gap-x-2">
               <Checkbox />
               <span className="text-sm text-foreground">On Sale</span>
-            </label>
+            </div>
           </div>
         </FilterSection>
       </FilterBody>
-      <FilterActions onClear={() => console.log("Clear")} onApply={() => console.log("Apply")} />
+      <FilterActions
+        onClear={() => console.log("Clear")}
+        onApply={() => console.log("Apply")}
+      />
     </FilterForm>
   ),
 };
@@ -315,36 +344,39 @@ export const Collapsible: Story = {
         <FilterBody collapsed={isCollapsed}>
           <FilterSection title="Type" defaultExpanded>
             <div className="space-y-2">
-              <label className="flex items-center gap-x-2">
+              <div className="flex items-center gap-x-2">
                 <Checkbox defaultChecked />
                 <span className="text-sm text-foreground">Option 1</span>
-              </label>
-              <label className="flex items-center gap-x-2">
+              </div>
+              <div className="flex items-center gap-x-2">
                 <Checkbox />
                 <span className="text-sm text-foreground">Option 2</span>
-              </label>
+              </div>
             </div>
           </FilterSection>
 
           <FilterSection title="Size" defaultExpanded={false}>
             <div className="space-y-2">
-              <label className="flex items-center gap-x-2">
+              <div className="flex items-center gap-x-2">
                 <Checkbox />
                 <span className="text-sm text-foreground">Small</span>
-              </label>
-              <label className="flex items-center gap-x-2">
+              </div>
+              <div className="flex items-center gap-x-2">
                 <Checkbox defaultChecked />
                 <span className="text-sm text-foreground">Medium</span>
-              </label>
-              <label className="flex items-center gap-x-2">
+              </div>
+              <div className="flex items-center gap-x-2">
                 <Checkbox />
                 <span className="text-sm text-foreground">Large</span>
-              </label>
+              </div>
             </div>
           </FilterSection>
         </FilterBody>
         {!isCollapsed && (
-          <FilterActions onClear={() => console.log("Clear")} onApply={() => console.log("Apply")} />
+          <FilterActions
+            onClear={() => console.log("Clear")}
+            onApply={() => console.log("Apply")}
+          />
         )}
       </FilterForm>
     );
@@ -359,14 +391,14 @@ export const TransactionFilter: Story = {
       <FilterBody>
         <FilterGroup label="Transaction Type">
           <div className="grid grid-cols-2 gap-2">
-            <label className="flex items-center gap-x-2 p-2 rounded-lg border border-border cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+            <span className="flex items-center gap-x-2 p-2 rounded-lg border border-border cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/5">
               <Checkbox />
               <span className="text-sm text-foreground">Incoming</span>
-            </label>
-            <label className="flex items-center gap-x-2 p-2 rounded-lg border border-border cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+            </span>
+            <span className="flex items-center gap-x-2 p-2 rounded-lg border border-border cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/5">
               <Checkbox />
               <span className="text-sm text-foreground">Outgoing</span>
-            </label>
+            </span>
           </div>
         </FilterGroup>
 
@@ -393,22 +425,22 @@ export const TransactionFilter: Story = {
 
         <FilterGroup label="Payment Method">
           <div className="space-y-2">
-            <label className="flex items-center gap-x-2">
+            <div className="flex items-center gap-x-2">
               <Checkbox defaultChecked />
               <span className="text-sm text-foreground">Credit Card</span>
-            </label>
-            <label className="flex items-center gap-x-2">
+            </div>
+            <div className="flex items-center gap-x-2">
               <Checkbox defaultChecked />
               <span className="text-sm text-foreground">Debit Card</span>
-            </label>
-            <label className="flex items-center gap-x-2">
+            </div>
+            <div className="flex items-center gap-x-2">
               <Checkbox />
               <span className="text-sm text-foreground">Bank Transfer</span>
-            </label>
-            <label className="flex items-center gap-x-2">
+            </div>
+            <div className="flex items-center gap-x-2">
               <Checkbox />
               <span className="text-sm text-foreground">PayPal</span>
-            </label>
+            </div>
           </div>
         </FilterGroup>
       </FilterBody>

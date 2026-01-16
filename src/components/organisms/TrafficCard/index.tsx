@@ -1,10 +1,10 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
+import { Badge } from "@/components/atoms";
+import { TrendIndicator } from "@/components/molecules";
+import type { TrendDirection, TrendVariant } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { dataCardVariants } from "@/lib/variants/dataVisualization";
-import { TrendIndicator } from "@/components/molecules";
-import { Badge } from "@/components/atoms";
-import type { VariantProps } from "class-variance-authority";
-import type { TrendDirection, TrendVariant } from "@/lib/types";
 
 // ============================================
 // Types
@@ -73,7 +73,8 @@ export const TrafficCard = forwardRef<HTMLDivElement, TrafficCardProps>(
     },
     ref,
   ) => {
-    const total = totalSessions ?? sources.reduce((sum, s) => sum + s.sessions, 0);
+    const total =
+      totalSessions ?? sources.reduce((sum, s) => sum + s.sessions, 0);
     const maxSessions = Math.max(...sources.map((s) => s.sessions));
 
     return (
@@ -90,7 +91,9 @@ export const TrafficCard = forwardRef<HTMLDivElement, TrafficCardProps>(
                 <h3 className="text-sm font-medium text-foreground">{title}</h3>
               )}
               {subtitle && (
-                <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {subtitle}
+                </p>
               )}
             </div>
             <div className="flex items-center gap-x-2">
@@ -115,9 +118,11 @@ export const TrafficCard = forwardRef<HTMLDivElement, TrafficCardProps>(
         {/* Sources */}
         <div className="divide-y divide-border">
           {sources.map((source, index) => {
-            const percentage = source.percentage ?? (source.sessions / total) * 100;
+            const percentage =
+              source.percentage ?? (source.sessions / total) * 100;
             const progressWidth = (source.sessions / maxSessions) * 100;
-            const barColor = source.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+            const barColor =
+              source.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
             return (
               <div key={source.id} className="px-4 py-3">
@@ -126,7 +131,10 @@ export const TrafficCard = forwardRef<HTMLDivElement, TrafficCardProps>(
                   {source.icon && (
                     <span
                       className="shrink-0 size-8 rounded-lg flex items-center justify-center"
-                      style={{ backgroundColor: `${barColor}20`, color: barColor }}
+                      style={{
+                        backgroundColor: `${barColor}20`,
+                        color: barColor,
+                      }}
                     >
                       {source.icon}
                     </span>
@@ -162,7 +170,12 @@ export const TrafficCard = forwardRef<HTMLDivElement, TrafficCardProps>(
 
                 {/* Progress Bar */}
                 {showProgress && (
-                  <div className={cn("mt-2 h-1.5 rounded-full bg-muted overflow-hidden", source.icon && "ml-11")}>
+                  <div
+                    className={cn(
+                      "mt-2 h-1.5 rounded-full bg-muted overflow-hidden",
+                      source.icon && "ml-11",
+                    )}
+                  >
                     <div
                       className="h-full rounded-full transition-all duration-500"
                       style={{
@@ -195,7 +208,10 @@ export interface TrafficOverviewCardProps
   action?: React.ReactNode;
 }
 
-export const TrafficOverviewCard = forwardRef<HTMLDivElement, TrafficOverviewCardProps>(
+export const TrafficOverviewCard = forwardRef<
+  HTMLDivElement,
+  TrafficOverviewCardProps
+>(
   (
     {
       className,
@@ -238,16 +254,15 @@ export const TrafficOverviewCard = forwardRef<HTMLDivElement, TrafficOverviewCar
           {metrics.map((metric, index) => (
             <div
               key={metric.id}
-              className={cn(
-                "p-4",
-                index >= 2 && "border-t border-border"
-              )}
+              className={cn("p-4", index >= 2 && "border-t border-border")}
             >
               <div className="flex items-center gap-x-2 mb-1">
                 {metric.icon && (
                   <span className="text-muted-foreground">{metric.icon}</span>
                 )}
-                <span className="text-xs text-muted-foreground">{metric.label}</span>
+                <span className="text-xs text-muted-foreground">
+                  {metric.label}
+                </span>
               </div>
               <div className="flex items-end gap-x-2">
                 <span className="text-xl font-bold text-foreground tabular-nums">
@@ -335,7 +350,8 @@ export const ReferrersCard = forwardRef<HTMLDivElement, ReferrersCardProps>(
         {/* Referrers */}
         <div className="divide-y divide-border">
           {displayReferrers.map((referrer, index) => {
-            const percentage = referrer.percentage ?? (referrer.sessions / total) * 100;
+            const percentage =
+              referrer.percentage ?? (referrer.sessions / total) * 100;
             const progressWidth = (referrer.sessions / maxSessions) * 100;
             const barColor = `hsl(var(--chart-${(index % 5) + 1}))`;
 
@@ -423,7 +439,10 @@ export interface DeviceBreakdownCardProps
   formatValue?: (value: number) => string;
 }
 
-export const DeviceBreakdownCard = forwardRef<HTMLDivElement, DeviceBreakdownCardProps>(
+export const DeviceBreakdownCard = forwardRef<
+  HTMLDivElement,
+  DeviceBreakdownCardProps
+>(
   (
     {
       className,
@@ -465,7 +484,8 @@ export const DeviceBreakdownCard = forwardRef<HTMLDivElement, DeviceBreakdownCar
         <div className="px-4 pt-4 pb-2">
           <div className="h-8 rounded-full overflow-hidden flex bg-muted">
             {devices.map((device) => {
-              const percentage = device.percentage ?? (device.sessions / total) * 100;
+              const percentage =
+                device.percentage ?? (device.sessions / total) * 100;
               const color = deviceColors[device.type] || deviceColors.other;
 
               return (

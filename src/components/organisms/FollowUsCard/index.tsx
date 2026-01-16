@@ -1,17 +1,17 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/atoms/Button";
-import { socialPlatformConfig, type SocialPlatform } from "@/lib/variants";
 import {
-  TwitterIcon,
+  DiscordIcon,
   FacebookIcon,
+  GitHubIcon,
   InstagramIcon,
   LinkedInIcon,
-  YouTubeIcon,
-  GitHubIcon,
-  DiscordIcon,
   TikTokIcon,
+  TwitterIcon,
+  YouTubeIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
+import { type SocialPlatform, socialPlatformConfig } from "@/lib/variants";
 
 export interface SocialLink {
   platform: SocialPlatform;
@@ -20,7 +20,10 @@ export interface SocialLink {
   label?: string;
 }
 
-const iconComponents: Record<SocialPlatform, React.FC<{ className?: string }>> = {
+const iconComponents: Record<
+  SocialPlatform,
+  React.FC<{ className?: string }>
+> = {
   twitter: TwitterIcon,
   facebook: FacebookIcon,
   instagram: InstagramIcon,
@@ -31,7 +34,8 @@ const iconComponents: Record<SocialPlatform, React.FC<{ className?: string }>> =
   tiktok: TikTokIcon,
 };
 
-export interface FollowUsCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FollowUsCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
   description?: string;
   socialLinks: SocialLink[];
@@ -48,7 +52,7 @@ export const FollowUsCard = forwardRef<HTMLDivElement, FollowUsCardProps>(
       variant = "default",
       ...props
     },
-    ref
+    ref,
   ) => {
     if (variant === "compact") {
       return (
@@ -56,7 +60,7 @@ export const FollowUsCard = forwardRef<HTMLDivElement, FollowUsCardProps>(
           ref={ref}
           className={cn(
             "rounded-xl border border-border bg-card p-4",
-            className
+            className,
           )}
           {...props}
         >
@@ -74,7 +78,7 @@ export const FollowUsCard = forwardRef<HTMLDivElement, FollowUsCardProps>(
                   className={cn(
                     "flex size-9 items-center justify-center rounded-lg transition-colors",
                     config.color,
-                    config.hoverColor
+                    config.hoverColor,
                   )}
                   aria-label={config.name}
                 >
@@ -91,17 +95,18 @@ export const FollowUsCard = forwardRef<HTMLDivElement, FollowUsCardProps>(
       return (
         <div
           ref={ref}
-          className={cn(
-            "rounded-xl border border-border bg-card",
-            className
-          )}
+          className={cn("rounded-xl border border-border bg-card", className)}
           {...props}
         >
           {(title || description) && (
             <div className="border-b border-border p-4">
-              {title && <h3 className="font-semibold text-foreground">{title}</h3>}
+              {title && (
+                <h3 className="font-semibold text-foreground">{title}</h3>
+              )}
               {description && (
-                <p className="mt-1 text-sm text-muted-foreground">{description}</p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {description}
+                </p>
               )}
             </div>
           )}
@@ -121,7 +126,7 @@ export const FollowUsCard = forwardRef<HTMLDivElement, FollowUsCardProps>(
                     <div
                       className={cn(
                         "flex size-10 items-center justify-center rounded-lg",
-                        config.color
+                        config.color,
                       )}
                     >
                       <Icon className="size-5" />
@@ -156,15 +161,19 @@ export const FollowUsCard = forwardRef<HTMLDivElement, FollowUsCardProps>(
           ref={ref}
           className={cn(
             "rounded-xl border border-border bg-card p-4",
-            className
+            className,
           )}
           {...props}
         >
           {(title || description) && (
             <div className="mb-4 text-center">
-              {title && <h3 className="font-semibold text-foreground">{title}</h3>}
+              {title && (
+                <h3 className="font-semibold text-foreground">{title}</h3>
+              )}
               {description && (
-                <p className="mt-1 text-sm text-muted-foreground">{description}</p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {description}
+                </p>
               )}
             </div>
           )}
@@ -181,7 +190,7 @@ export const FollowUsCard = forwardRef<HTMLDivElement, FollowUsCardProps>(
                   className={cn(
                     "flex flex-col items-center justify-center rounded-lg p-4 transition-colors",
                     config.color,
-                    config.hoverColor
+                    config.hoverColor,
                   )}
                 >
                   <Icon className="size-6" />
@@ -205,10 +214,7 @@ export const FollowUsCard = forwardRef<HTMLDivElement, FollowUsCardProps>(
     return (
       <div
         ref={ref}
-        className={cn(
-          "rounded-xl border border-border bg-card p-6",
-          className
-        )}
+        className={cn("rounded-xl border border-border bg-card p-6", className)}
         {...props}
       >
         <div className="mb-4 text-center">
@@ -230,7 +236,7 @@ export const FollowUsCard = forwardRef<HTMLDivElement, FollowUsCardProps>(
                 className={cn(
                   "flex size-12 items-center justify-center rounded-full transition-colors",
                   config.color,
-                  config.hoverColor
+                  config.hoverColor,
                 )}
                 aria-label={config.name}
               >
@@ -241,6 +247,6 @@ export const FollowUsCard = forwardRef<HTMLDivElement, FollowUsCardProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 FollowUsCard.displayName = "FollowUsCard";

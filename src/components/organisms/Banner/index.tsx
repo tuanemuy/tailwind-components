@@ -1,13 +1,20 @@
 "use client";
 
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
+import { Button } from "@/components/atoms/Button";
+import { GiftIcon, InfoIcon, MegaphoneIcon, XIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { bannerVariants } from "@/lib/variants/banner";
-import { XIcon, GiftIcon, InfoIcon, MegaphoneIcon } from "@/lib/icons";
-import { Button } from "@/components/atoms/Button";
-import type { VariantProps } from "class-variance-authority";
 
-type BannerVariant = "default" | "primary" | "info" | "success" | "warning" | "error" | "gradient";
+type BannerVariant =
+  | "default"
+  | "primary"
+  | "info"
+  | "success"
+  | "warning"
+  | "error"
+  | "gradient";
 
 export interface BannerProps
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -22,7 +29,10 @@ export interface BannerProps
   onLinkClick?: () => void;
 }
 
-const variantIcons: Record<BannerVariant, React.ComponentType<{ className?: string }>> = {
+const variantIcons: Record<
+  BannerVariant,
+  React.ComponentType<{ className?: string }>
+> = {
   default: InfoIcon,
   primary: MegaphoneIcon,
   info: InfoIcon,
@@ -50,7 +60,7 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const IconComponent = variantIcons[variant ?? "default"];
 
@@ -62,7 +72,12 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(
       >
         {/* Icon */}
         {showIcon && (
-          <div className={cn("shrink-0", size === "sm" ? "size-4" : size === "lg" ? "size-6" : "size-5")}>
+          <div
+            className={cn(
+              "shrink-0",
+              size === "sm" ? "size-4" : size === "lg" ? "size-6" : "size-5",
+            )}
+          >
             {icon ?? <IconComponent className="size-full" />}
           </div>
         )}
@@ -93,12 +108,16 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(
             className="shrink-0 rounded p-1 opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-white/30"
             aria-label="Dismiss banner"
           >
-            <XIcon className={cn(size === "sm" ? "size-3" : size === "lg" ? "size-5" : "size-4")} />
+            <XIcon
+              className={cn(
+                size === "sm" ? "size-3" : size === "lg" ? "size-5" : "size-4",
+              )}
+            />
           </button>
         )}
       </div>
     );
-  }
+  },
 );
 Banner.displayName = "Banner";
 
@@ -112,7 +131,12 @@ export interface GiftBannerProps extends Omit<BannerProps, "variant"> {
 export const GiftBanner = forwardRef<HTMLDivElement, GiftBannerProps>(
   ({ offerText, discount, code, children, ...props }, ref) => {
     return (
-      <Banner ref={ref} variant="gradient" icon={<GiftIcon className="size-full" />} {...props}>
+      <Banner
+        ref={ref}
+        variant="gradient"
+        icon={<GiftIcon className="size-full" />}
+        {...props}
+      >
         <span className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
           {offerText && <span>{offerText}</span>}
           {discount && <span className="font-bold">{discount}</span>}
@@ -125,7 +149,7 @@ export const GiftBanner = forwardRef<HTMLDivElement, GiftBannerProps>(
         </span>
       </Banner>
     );
-  }
+  },
 );
 GiftBanner.displayName = "GiftBanner";
 
@@ -151,7 +175,7 @@ export const AuthBanner = forwardRef<HTMLDivElement, AuthBannerProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <Banner
@@ -186,7 +210,7 @@ export const AuthBanner = forwardRef<HTMLDivElement, AuthBannerProps>(
         {children}
       </Banner>
     );
-  }
+  },
 );
 AuthBanner.displayName = "AuthBanner";
 
@@ -197,7 +221,10 @@ export interface NewsBannerProps extends Omit<BannerProps, "variant"> {
 }
 
 export const NewsBanner = forwardRef<HTMLDivElement, NewsBannerProps>(
-  ({ badge, newsText, linkText, linkHref, onLinkClick, children, ...props }, ref) => {
+  (
+    { badge, newsText, linkText, linkHref, onLinkClick, children, ...props },
+    ref,
+  ) => {
     return (
       <Banner
         ref={ref}
@@ -219,6 +246,6 @@ export const NewsBanner = forwardRef<HTMLDivElement, NewsBannerProps>(
         </span>
       </Banner>
     );
-  }
+  },
 );
 NewsBanner.displayName = "NewsBanner";

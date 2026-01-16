@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { DataCard, DataCardList, DataCardMini } from "./index";
 import { Button } from "@/components/atoms";
 import { Dropdown, DropdownItem } from "@/components/molecules";
 import {
-  UsersIcon,
-  StoreIcon,
   DownloadIcon,
-  TrendUpIcon,
   MoreHorizontalIcon,
+  StoreIcon,
+  TrendUpIcon,
+  UsersIcon,
 } from "@/lib/icons";
+import { DataCard, DataCardList, DataCardMini } from "./index";
 
 const meta: Meta<typeof DataCard> = {
   title: "Organisms/DataCard",
@@ -191,10 +191,34 @@ export const ListVariant: Story = {
       </h3>
       <DataCardList
         items={[
-          { id: "direct", label: "Direct", value: "42%", percentage: 42, color: "#6366f1" },
-          { id: "organic", label: "Organic", value: "28%", percentage: 28, color: "#22c55e" },
-          { id: "referral", label: "Referral", value: "18%", percentage: 18, color: "#f59e0b" },
-          { id: "social", label: "Social", value: "12%", percentage: 12, color: "#ec4899" },
+          {
+            id: "direct",
+            label: "Direct",
+            value: "42%",
+            percentage: 42,
+            color: "#6366f1",
+          },
+          {
+            id: "organic",
+            label: "Organic",
+            value: "28%",
+            percentage: 28,
+            color: "#22c55e",
+          },
+          {
+            id: "referral",
+            label: "Referral",
+            value: "18%",
+            percentage: 18,
+            color: "#f59e0b",
+          },
+          {
+            id: "social",
+            label: "Social",
+            value: "12%",
+            percentage: 12,
+            color: "#ec4899",
+          },
         ]}
       />
     </div>
@@ -310,7 +334,9 @@ export const DashboardCard: Story = {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-x-1">
             <span className="text-xs text-success">+$3,200</span>
-            <span className="text-xs text-muted-foreground">from yesterday</span>
+            <span className="text-xs text-muted-foreground">
+              from yesterday
+            </span>
           </div>
           <Button variant="ghost" size="sm">
             View Report

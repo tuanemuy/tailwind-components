@@ -1,22 +1,27 @@
 "use client";
 
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { Button, Badge } from "@/components/atoms";
+import { Badge, Button } from "@/components/atoms";
 import { IconButton } from "@/components/molecules";
 import {
-  ProductCard,
-  ProductCardImage,
-  ProductCardBody,
-  ProductCardTitle,
-  ProductCardPrice,
-  ProductCardRating,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  HeartIcon,
+  StarIcon,
+} from "@/lib/icons";
+import { cn } from "@/lib/utils";
+import {
   ProductAddToCartButton,
   type ProductBadge,
-  type ProductRating,
+  ProductCard,
+  ProductCardBody,
+  ProductCardImage,
+  ProductCardPrice,
+  ProductCardRating,
+  ProductCardTitle,
   type ProductPrice,
+  type ProductRating,
 } from "../ProductCard";
-import { HeartIcon, ChevronLeftIcon, ChevronRightIcon, StarIcon } from "@/lib/icons";
 
 // Types
 export interface ProductListingItem {
@@ -32,7 +37,8 @@ export interface ProductListingItem {
   href?: string;
 }
 
-export interface ProductListingProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ProductListingProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   products: ProductListingItem[];
   variant?: "grid" | "list" | "slider";
   columns?: 2 | 3 | 4 | 5;
@@ -108,16 +114,28 @@ export const ProductListing = forwardRef<HTMLDivElement, ProductListingProps>(
     }
 
     return (
-      <div ref={ref} className={cn("grid gap-4", gridCols[columns], className)} {...props}>
+      <div
+        ref={ref}
+        className={cn("grid gap-4", gridCols[columns], className)}
+        {...props}
+      >
         {products.map((product) => (
-          <ProductCard key={product.id} className="cursor-pointer" onClick={() => onProductClick?.(product)}>
+          <ProductCard
+            key={product.id}
+            className="cursor-pointer"
+            onClick={() => onProductClick?.(product)}
+          >
             <ProductCardImage
               src={product.image}
               alt={product.name}
               badges={product.badges}
               showQuickActions={showQuickActions}
-              onFavoriteClick={onAddToWishlist ? () => onAddToWishlist(product) : undefined}
-              onQuickViewClick={onQuickView ? () => onQuickView(product) : undefined}
+              onFavoriteClick={
+                onAddToWishlist ? () => onAddToWishlist(product) : undefined
+              }
+              onQuickViewClick={
+                onQuickView ? () => onQuickView(product) : undefined
+              }
             />
             <ProductCardBody>
               {showCategory && product.category && (
@@ -126,10 +144,17 @@ export const ProductListing = forwardRef<HTMLDivElement, ProductListingProps>(
                 </span>
               )}
               <ProductCardTitle>{product.name}</ProductCardTitle>
-              {showRating && product.rating && <ProductCardRating rating={product.rating} />}
+              {showRating && product.rating && (
+                <ProductCardRating rating={product.rating} />
+              )}
               <ProductCardPrice price={product.price} />
               {onAddToCart && (
-                <ProductAddToCartButton onClick={(e) => { e.stopPropagation(); onAddToCart(product); }} />
+                <ProductAddToCartButton
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onAddToCart(product);
+                  }}
+                />
               )}
             </ProductCardBody>
           </ProductCard>
@@ -160,26 +185,37 @@ const ProductListItem = ({
   onAddToWishlist,
   onAddToCart,
 }: ProductListItemProps) => {
-  const formatPrice = (amount: number, currency: string = "USD"): string => {
+  const formatPrice = (amount: number, currency = "USD"): string => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency,
     }).format(amount);
   };
 
-  const hasDiscount = product.price.original && product.price.original > product.price.current;
+  const hasDiscount =
+    product.price.original && product.price.original > product.price.current;
 
   return (
-    <div
-      className="flex gap-4 p-4 rounded-xl border border-border bg-card hover:shadow-md transition-shadow cursor-pointer"
+    <button
+      type="button"
+      className="flex gap-4 p-4 rounded-xl border border-border bg-card hover:shadow-md transition-shadow cursor-pointer text-left w-full"
       onClick={() => onProductClick?.(product)}
     >
       {/* Image */}
       <div className="relative flex-shrink-0 w-32 h-32 sm:w-40 sm:h-40 rounded-lg overflow-hidden bg-muted">
-        <img src={product.image} alt={product.name} className="size-full object-cover" />
+        <img
+          src={product.image}
+          alt={product.name}
+          className="size-full object-cover"
+        />
         {product.badges && product.badges.length > 0 && (
           <div className="absolute top-2 left-2">
-            <Badge variant={product.badges[0].type === "sale" ? "destructive" : "default"} size="sm">
+            <Badge
+              variant={
+                product.badges[0].type === "sale" ? "destructive" : "default"
+              }
+              size="sm"
+            >
               {product.badges[0].label || product.badges[0].value}
             </Badge>
           </div>
@@ -200,28 +236,36 @@ const ProductListItem = ({
           <div className="flex items-center gap-1 mt-1">
             {Array.from({ length: 5 }).map((_, i) => (
               <StarIcon
-                key={i}
+                // biome-ignore lint/suspicious/noArrayIndexKey: Star position is the unique identifier
+                key={`star-${i}`}
                 className={cn(
                   "size-4",
-                  i < Math.floor(product.rating!.value)
+                  i < Math.floor(product.rating?.value ?? 0)
                     ? "fill-warning text-warning"
                     : "text-muted-foreground/30",
                 )}
               />
             ))}
             {product.rating.count !== undefined && (
-              <span className="text-sm text-muted-foreground">({product.rating.count})</span>
+              <span className="text-sm text-muted-foreground">
+                ({product.rating.count})
+              </span>
             )}
           </div>
         )}
         <div className="mt-auto pt-2 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className={cn("font-semibold", hasDiscount ? "text-destructive" : "text-foreground")}>
+            <span
+              className={cn(
+                "font-semibold",
+                hasDiscount ? "text-destructive" : "text-foreground",
+              )}
+            >
               {formatPrice(product.price.current, product.price.currency)}
             </span>
-            {hasDiscount && (
+            {hasDiscount && product.price.original && (
               <span className="text-sm text-muted-foreground line-through">
-                {formatPrice(product.price.original!, product.price.currency)}
+                {formatPrice(product.price.original, product.price.currency)}
               </span>
             )}
           </div>
@@ -231,7 +275,10 @@ const ProductListItem = ({
                 icon={<HeartIcon className="size-4" />}
                 variant="ghost"
                 size="sm"
-                onClick={(e) => { e.stopPropagation(); onAddToWishlist(product); }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onAddToWishlist(product);
+                }}
                 label="Add to wishlist"
               />
             )}
@@ -239,7 +286,10 @@ const ProductListItem = ({
               <Button
                 variant="primary"
                 size="sm"
-                onClick={(e) => { e.stopPropagation(); onAddToCart(product); }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onAddToCart(product);
+                }}
               >
                 Add to Cart
               </Button>
@@ -247,17 +297,21 @@ const ProductListItem = ({
           </div>
         </div>
       </div>
-    </div>
+    </button>
   );
 };
 
 // Product Listing Slider
-export interface ProductListingSliderProps extends Omit<ProductListingProps, "variant" | "columns"> {
+export interface ProductListingSliderProps
+  extends Omit<ProductListingProps, "variant" | "columns"> {
   showArrows?: boolean;
   autoplay?: boolean;
 }
 
-export const ProductListingSlider = forwardRef<HTMLDivElement, ProductListingSliderProps>(
+export const ProductListingSlider = forwardRef<
+  HTMLDivElement,
+  ProductListingSliderProps
+>(
   (
     {
       className,
@@ -278,10 +332,16 @@ export const ProductListingSlider = forwardRef<HTMLDivElement, ProductListingSli
       <div ref={ref} className={cn("relative group", className)} {...props}>
         {showArrows && (
           <>
-            <button className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 p-2 rounded-full bg-background border border-border shadow-md opacity-0 group-hover:opacity-100 transition-opacity hover:bg-muted">
+            <button
+              type="button"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 p-2 rounded-full bg-background border border-border shadow-md opacity-0 group-hover:opacity-100 transition-opacity hover:bg-muted"
+            >
               <ChevronLeftIcon className="size-5" />
             </button>
-            <button className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 p-2 rounded-full bg-background border border-border shadow-md opacity-0 group-hover:opacity-100 transition-opacity hover:bg-muted">
+            <button
+              type="button"
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 p-2 rounded-full bg-background border border-border shadow-md opacity-0 group-hover:opacity-100 transition-opacity hover:bg-muted"
+            >
               <ChevronRightIcon className="size-5" />
             </button>
           </>
@@ -289,14 +349,21 @@ export const ProductListingSlider = forwardRef<HTMLDivElement, ProductListingSli
         <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
           {products.map((product) => (
             <div key={product.id} className="flex-shrink-0 w-64">
-              <ProductCard className="cursor-pointer" onClick={() => onProductClick?.(product)}>
+              <ProductCard
+                className="cursor-pointer"
+                onClick={() => onProductClick?.(product)}
+              >
                 <ProductCardImage
                   src={product.image}
                   alt={product.name}
                   badges={product.badges}
                   showQuickActions={showQuickActions}
-                  onFavoriteClick={onAddToWishlist ? () => onAddToWishlist(product) : undefined}
-                  onQuickViewClick={onQuickView ? () => onQuickView(product) : undefined}
+                  onFavoriteClick={
+                    onAddToWishlist ? () => onAddToWishlist(product) : undefined
+                  }
+                  onQuickViewClick={
+                    onQuickView ? () => onQuickView(product) : undefined
+                  }
                 />
                 <ProductCardBody>
                   {showCategory && product.category && (
@@ -305,7 +372,9 @@ export const ProductListingSlider = forwardRef<HTMLDivElement, ProductListingSli
                     </span>
                   )}
                   <ProductCardTitle>{product.name}</ProductCardTitle>
-                  {showRating && product.rating && <ProductCardRating rating={product.rating} />}
+                  {showRating && product.rating && (
+                    <ProductCardRating rating={product.rating} />
+                  )}
                   <ProductCardPrice price={product.price} />
                 </ProductCardBody>
               </ProductCard>
@@ -326,18 +395,30 @@ export interface ProductListingGridProps extends ProductListingProps {
   onViewAll?: () => void;
 }
 
-export const ProductListingGrid = forwardRef<HTMLDivElement, ProductListingGridProps>(
-  ({ className, title, description, viewAllLink, onViewAll, ...props }, ref) => {
+export const ProductListingGrid = forwardRef<
+  HTMLDivElement,
+  ProductListingGridProps
+>(
+  (
+    { className, title, description, viewAllLink, onViewAll, ...props },
+    ref,
+  ) => {
     return (
       <div ref={ref} className={cn("space-y-6", className)}>
         {(title || description) && (
           <div className="flex items-end justify-between">
             <div>
-              {title && <h2 className="text-2xl font-semibold text-foreground">{title}</h2>}
-              {description && <p className="mt-1 text-muted-foreground">{description}</p>}
+              {title && (
+                <h2 className="text-2xl font-semibold text-foreground">
+                  {title}
+                </h2>
+              )}
+              {description && (
+                <p className="mt-1 text-muted-foreground">{description}</p>
+              )}
             </div>
-            {(viewAllLink || onViewAll) && (
-              viewAllLink ? (
+            {(viewAllLink || onViewAll) &&
+              (viewAllLink ? (
                 <a
                   href={viewAllLink}
                   className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground rounded-lg transition-colors"
@@ -348,8 +429,7 @@ export const ProductListingGrid = forwardRef<HTMLDivElement, ProductListingGridP
                 <Button variant="ghost" onClick={onViewAll}>
                   View all
                 </Button>
-              )
-            )}
+              ))}
           </div>
         )}
         <ProductListing {...props} />

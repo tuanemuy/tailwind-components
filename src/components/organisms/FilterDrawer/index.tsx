@@ -1,13 +1,26 @@
-import { forwardRef, useState, useEffect } from "react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/atoms/Button";
+import { forwardRef, useEffect, useState } from "react";
 import { Badge } from "@/components/atoms/Badge";
+import { Button } from "@/components/atoms/Button";
 import { Checkbox } from "@/components/atoms/Checkbox";
-import { Drawer, DrawerHeader, DrawerBody, DrawerFooter } from "@/components/organisms/Drawer";
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/molecules/Accordion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/molecules/Accordion";
+import {
+  type DateRange,
+  DateRangePicker,
+} from "@/components/molecules/DateRangePicker";
 import { RangeSlider } from "@/components/molecules/RangeSlider";
-import { DateRangePicker, type DateRange } from "@/components/molecules/DateRangePicker";
+import {
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+} from "@/components/organisms/Drawer";
 import { FilterIcon, XIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 export interface FilterOption {
   id: string;
@@ -84,17 +97,20 @@ export const FilterDrawer = forwardRef<HTMLDivElement, FilterDrawerProps>(
       }
     }, [isOpen, initialValues]);
 
-    const handleCheckboxChange = (sectionId: string, optionId: string, checked: boolean) => {
+    const handleCheckboxChange = (
+      sectionId: string,
+      optionId: string,
+      checked: boolean,
+    ) => {
       setValues((prev) => {
         const currentValues = (prev[sectionId] as string[]) || [];
         if (checked) {
           return { ...prev, [sectionId]: [...currentValues, optionId] };
-        } else {
-          return {
-            ...prev,
-            [sectionId]: currentValues.filter((v) => v !== optionId),
-          };
         }
+        return {
+          ...prev,
+          [sectionId]: currentValues.filter((v) => v !== optionId),
+        };
       });
     };
 
@@ -102,7 +118,10 @@ export const FilterDrawer = forwardRef<HTMLDivElement, FilterDrawerProps>(
       setValues((prev) => ({ ...prev, [sectionId]: range }));
     };
 
-    const handleDateRangeChange = (sectionId: string, range: DateRange | undefined) => {
+    const handleDateRangeChange = (
+      sectionId: string,
+      range: DateRange | undefined,
+    ) => {
       if (range) {
         setValues((prev) => ({ ...prev, [sectionId]: range }));
       }
@@ -117,15 +136,22 @@ export const FilterDrawer = forwardRef<HTMLDivElement, FilterDrawerProps>(
       onApply(values);
     };
 
-    const activeFilterCount = Object.entries(values).reduce((count, [_, value]) => {
-      if (Array.isArray(value) && value.length > 0) {
-        return count + (typeof value[0] === "string" ? value.length : 1);
-      }
-      if (value && typeof value === "object" && ("from" in value || "to" in value)) {
-        return count + 1;
-      }
-      return count;
-    }, 0);
+    const activeFilterCount = Object.entries(values).reduce(
+      (count, [_, value]) => {
+        if (Array.isArray(value) && value.length > 0) {
+          return count + (typeof value[0] === "string" ? value.length : 1);
+        }
+        if (
+          value &&
+          typeof value === "object" &&
+          ("from" in value || "to" in value)
+        ) {
+          return count + 1;
+        }
+        return count;
+      },
+      0,
+    );
 
     return (
       <Drawer
@@ -165,11 +191,11 @@ export const FilterDrawer = forwardRef<HTMLDivElement, FilterDrawerProps>(
                 value={section.id}
                 className="border-b border-border"
               >
-                <AccordionTrigger className="px-4 py-3 text-sm font-medium">
-                  {section.label}
+                <AccordionTrigger className="gap-2 px-4 py-3 text-sm font-medium">
+                  <span className="flex-1">{section.label}</span>
                   {section.type === "checkbox" &&
                     (values[section.id] as string[])?.length > 0 && (
-                      <Badge soft className="ml-auto mr-2 text-xs">
+                      <Badge soft className="mr-2 text-xs">
                         {(values[section.id] as string[]).length}
                       </Badge>
                     )}
@@ -178,15 +204,17 @@ export const FilterDrawer = forwardRef<HTMLDivElement, FilterDrawerProps>(
                   {section.type === "checkbox" && section.options && (
                     <div className="space-y-2">
                       {section.options.map((option) => {
-                        const isChecked = (values[section.id] as string[])?.includes(
-                          option.id,
-                        );
+                        const isChecked = (
+                          values[section.id] as string[]
+                        )?.includes(option.id);
                         return (
                           <label
                             key={option.id}
+                            htmlFor={`filter-${section.id}-${option.id}`}
                             className="flex cursor-pointer items-center gap-3"
                           >
                             <Checkbox
+                              id={`filter-${section.id}-${option.id}`}
                               checked={isChecked}
                               onChange={(e) =>
                                 handleCheckboxChange(
@@ -291,7 +319,12 @@ export const ActiveFilters = ({
   onClearAll,
   className,
 }: ActiveFiltersProps) => {
-  const activeFilters: { sectionId: string; sectionLabel: string; optionId?: string; label: string }[] = [];
+  const activeFilters: {
+    sectionId: string;
+    sectionLabel: string;
+    optionId?: string;
+    label: string;
+  }[] = [];
 
   for (const section of sections) {
     const value = values[section.id];
@@ -326,7 +359,12 @@ export const ActiveFilters = ({
         activeFilters.push({
           sectionId: section.id,
           sectionLabel: section.label,
-          label: start && end ? `${startStr} - ${endStr}` : start ? `From ${startStr}` : `Until ${endStr}`,
+          label:
+            start && end
+              ? `${startStr} - ${endStr}`
+              : start
+                ? `From ${startStr}`
+                : `Until ${endStr}`,
         });
       }
     }

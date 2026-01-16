@@ -1,11 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  ProjectDetailsCard,
-  ProjectDetailsGrid,
-  ProjectDetailsList,
-} from "./";
+import { CodeIcon, FolderIcon, PaletteIcon, RocketIcon } from "@/lib/icons";
 import type { ProjectDetails } from "./";
-import { FolderIcon, CodeIcon, RocketIcon, PaletteIcon } from "@/lib/icons";
+import { ProjectDetailsCard, ProjectDetailsGrid, ProjectDetailsList } from "./";
 
 const meta: Meta<typeof ProjectDetailsCard> = {
   title: "Organisms/ProjectDetailsCard",
@@ -88,7 +84,8 @@ export const Detailed: Story = {
   args: {
     project: {
       ...sampleProject,
-      coverImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=200&fit=crop",
+      coverImage:
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=200&fit=crop",
     },
     variant: "detailed",
     showTasks: true,
@@ -256,7 +253,15 @@ export const AllStatuses: Story = {
   render: () => (
     <div className="grid gap-4">
       {(
-        ["active", "in-progress", "completed", "on-hold", "cancelled", "pending", "archived"] as const
+        [
+          "active",
+          "in-progress",
+          "completed",
+          "on-hold",
+          "cancelled",
+          "pending",
+          "archived",
+        ] as const
       ).map((status) => (
         <ProjectDetailsCard
           key={status}

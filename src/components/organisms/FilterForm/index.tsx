@@ -1,9 +1,9 @@
 "use client";
 
-import { forwardRef, useState, createContext, useContext, useId } from "react";
+import { createContext, forwardRef, useContext, useId, useState } from "react";
+import { Badge, Button, Input } from "@/components/atoms";
+import { ChevronDownIcon, FilterIcon, XIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
-import { Button, Badge, Input } from "@/components/atoms";
-import { ChevronDownIcon, XIcon, FilterIcon } from "@/lib/icons";
 
 // Filter context for state management
 interface FilterContextValue {
@@ -48,15 +48,14 @@ export const FilterForm = forwardRef<HTMLDivElement, FilterFormProps>(
   ) => {
     return (
       <FilterContext.Provider value={{ onClear, onApply }}>
-        <div
+        <search
           ref={ref}
           className={cn(filterFormVariants[variant], className)}
-          role="search"
           aria-label="Filters"
           {...props}
         >
           {children}
-        </div>
+        </search>
       </FilterContext.Provider>
     );
   },
@@ -156,11 +155,7 @@ export const FilterBody = forwardRef<HTMLDivElement, FilterBodyProps>(
     if (collapsed) return null;
 
     return (
-      <div
-        ref={ref}
-        className={cn("p-4 space-y-4", className)}
-        {...props}
-      >
+      <div ref={ref} className={cn("p-4 space-y-4", className)} {...props}>
         {children}
       </div>
     );
@@ -169,14 +164,18 @@ export const FilterBody = forwardRef<HTMLDivElement, FilterBodyProps>(
 FilterBody.displayName = "FilterBody";
 
 // FilterSection component - collapsible section for filter groups
-export interface FilterSectionProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FilterSectionProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
   defaultExpanded?: boolean;
   badge?: React.ReactNode;
 }
 
 export const FilterSection = forwardRef<HTMLDivElement, FilterSectionProps>(
-  ({ className, title, defaultExpanded = true, badge, children, ...props }, ref) => {
+  (
+    { className, title, defaultExpanded = true, badge, children, ...props },
+    ref,
+  ) => {
     const [isExpanded, setIsExpanded] = useState(defaultExpanded);
     const id = useId();
     const contentId = `${id}-content`;
@@ -220,9 +219,11 @@ export interface FilterGroupProps extends React.HTMLAttributes<HTMLDivElement> {
 export const FilterGroup = forwardRef<HTMLDivElement, FilterGroupProps>(
   ({ className, label, children, ...props }, ref) => {
     return (
-      <div ref={ref} className={cn("space-y-2", className)} {...props}>
+      <div ref={ref} className={cn(className)} {...props}>
         {label && (
-          <label className="text-sm font-medium text-foreground">{label}</label>
+          <span className="mb-2 block text-sm font-medium text-foreground">
+            {label}
+          </span>
         )}
         {children}
       </div>
@@ -232,7 +233,8 @@ export const FilterGroup = forwardRef<HTMLDivElement, FilterGroupProps>(
 FilterGroup.displayName = "FilterGroup";
 
 // FilterChip component - for active filter display
-export interface FilterChipProps extends React.HTMLAttributes<HTMLButtonElement> {
+export interface FilterChipProps
+  extends React.HTMLAttributes<HTMLButtonElement> {
   label: string;
   value?: string;
   onRemove?: () => void;
@@ -249,7 +251,11 @@ export const FilterChip = forwardRef<HTMLButtonElement, FilterChipProps>(
           className,
         )}
         onClick={onRemove}
-        aria-label={onRemove ? `Remove filter: ${label}${value ? ` ${value}` : ""}` : undefined}
+        aria-label={
+          onRemove
+            ? `Remove filter: ${label}${value ? ` ${value}` : ""}`
+            : undefined
+        }
         {...props}
       >
         <span>{label}</span>
@@ -269,7 +275,8 @@ export const FilterChip = forwardRef<HTMLButtonElement, FilterChipProps>(
 FilterChip.displayName = "FilterChip";
 
 // FilterChipGroup component - container for filter chips
-export interface FilterChipGroupProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FilterChipGroupProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   onClearAll?: () => void;
 }
 
@@ -298,7 +305,8 @@ export const FilterChipGroup = forwardRef<HTMLDivElement, FilterChipGroupProps>(
 FilterChipGroup.displayName = "FilterChipGroup";
 
 // FilterActions component - apply/clear buttons
-export interface FilterActionsProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FilterActionsProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   showClear?: boolean;
   showApply?: boolean;
   clearText?: string;
@@ -356,7 +364,8 @@ export const FilterActions = forwardRef<HTMLDivElement, FilterActionsProps>(
 FilterActions.displayName = "FilterActions";
 
 // DateRangeFilter component - common filter type
-export interface DateRangeFilterProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DateRangeFilterProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   label?: string;
   startDate?: string;
   endDate?: string;
@@ -378,9 +387,11 @@ export const DateRangeFilter = forwardRef<HTMLDivElement, DateRangeFilterProps>(
     ref,
   ) => {
     return (
-      <div ref={ref} className={cn("space-y-2", className)} {...props}>
+      <div ref={ref} className={cn(className)} {...props}>
         {label && (
-          <label className="text-sm font-medium text-foreground">{label}</label>
+          <span className="mb-2 block text-sm font-medium text-foreground">
+            {label}
+          </span>
         )}
         <div className="grid grid-cols-2 gap-2">
           <Input
@@ -405,7 +416,8 @@ export const DateRangeFilter = forwardRef<HTMLDivElement, DateRangeFilterProps>(
 DateRangeFilter.displayName = "DateRangeFilter";
 
 // PriceRangeFilter component - common filter type
-export interface PriceRangeFilterProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface PriceRangeFilterProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   label?: string;
   minValue?: number;
   maxValue?: number;
@@ -414,7 +426,10 @@ export interface PriceRangeFilterProps extends React.HTMLAttributes<HTMLDivEleme
   onMaxChange?: (value: number) => void;
 }
 
-export const PriceRangeFilter = forwardRef<HTMLDivElement, PriceRangeFilterProps>(
+export const PriceRangeFilter = forwardRef<
+  HTMLDivElement,
+  PriceRangeFilterProps
+>(
   (
     {
       className,
@@ -429,9 +444,11 @@ export const PriceRangeFilter = forwardRef<HTMLDivElement, PriceRangeFilterProps
     ref,
   ) => {
     return (
-      <div ref={ref} className={cn("space-y-2", className)} {...props}>
+      <div ref={ref} className={cn(className)} {...props}>
         {label && (
-          <label className="text-sm font-medium text-foreground">{label}</label>
+          <span className="mb-2 block text-sm font-medium text-foreground">
+            {label}
+          </span>
         )}
         <div className="grid grid-cols-2 gap-2">
           <Input
@@ -440,7 +457,7 @@ export const PriceRangeFilter = forwardRef<HTMLDivElement, PriceRangeFilterProps
             leftIcon={<span className="text-sm">{currency}</span>}
             placeholder="Min"
             value={minValue ?? ""}
-            onChange={(e) => onMinChange?.(parseFloat(e.target.value))}
+            onChange={(e) => onMinChange?.(Number.parseFloat(e.target.value))}
             min={0}
           />
           <Input
@@ -449,7 +466,7 @@ export const PriceRangeFilter = forwardRef<HTMLDivElement, PriceRangeFilterProps
             leftIcon={<span className="text-sm">{currency}</span>}
             placeholder="Max"
             value={maxValue ?? ""}
-            onChange={(e) => onMaxChange?.(parseFloat(e.target.value))}
+            onChange={(e) => onMaxChange?.(Number.parseFloat(e.target.value))}
             min={0}
           />
         </div>

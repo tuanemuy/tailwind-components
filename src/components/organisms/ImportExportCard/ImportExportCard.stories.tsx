@@ -124,10 +124,30 @@ export const WithCustomFormats: Story = {
   args: {
     mode: "export",
     exportFormats: [
-      { format: "csv", label: "CSV", description: "Standard CSV format", available: true },
-      { format: "json", label: "JSON", description: "For developers", available: true },
-      { format: "xlsx", label: "Excel", description: "Excel 2007+ format", available: true },
-      { format: "pdf", label: "PDF Report", description: "Formatted report", available: false },
+      {
+        format: "csv",
+        label: "CSV",
+        description: "Standard CSV format",
+        available: true,
+      },
+      {
+        format: "json",
+        label: "JSON",
+        description: "For developers",
+        available: true,
+      },
+      {
+        format: "xlsx",
+        label: "Excel",
+        description: "Excel 2007+ format",
+        available: true,
+      },
+      {
+        format: "pdf",
+        label: "PDF Report",
+        description: "Formatted report",
+        available: false,
+      },
     ],
     selectedFormats: [],
   },

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ProjectSummaryCard, ProjectSummaryGrid } from "./index";
-import { FolderIcon, CodeIcon, LayoutIcon, DatabaseIcon } from "@/lib/icons";
 import { Button } from "@/components/atoms/Button";
+import { CodeIcon, DatabaseIcon, FolderIcon, LayoutIcon } from "@/lib/icons";
+import { ProjectSummaryCard, ProjectSummaryGrid } from "./index";
 
 const meta: Meta<typeof ProjectSummaryCard> = {
   title: "Organisms/Cards/ProjectSummaryCard",
@@ -18,7 +18,8 @@ type Story = StoryObj<typeof ProjectSummaryCard>;
 const sampleProject = {
   id: "1",
   name: "Website Redesign",
-  description: "Complete overhaul of the company website with modern design and improved UX",
+  description:
+    "Complete overhaul of the company website with modern design and improved UX",
   status: "active" as const,
   progress: 65,
   dueDate: "Jan 15, 2026",
@@ -29,9 +30,21 @@ const sampleProject = {
   tasksCompleted: 16,
   icon: <LayoutIcon className="size-5" />,
   members: [
-    { name: "John Doe", avatarSrc: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" },
-    { name: "Jane Smith", avatarSrc: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face" },
-    { name: "Bob Wilson", avatarSrc: "https://images.unsplash.com/photo-1599566150163-29194dcabd36?w=150&h=150&fit=crop&crop=face" },
+    {
+      name: "John Doe",
+      avatarSrc:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+    },
+    {
+      name: "Jane Smith",
+      avatarSrc:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
+    },
+    {
+      name: "Bob Wilson",
+      avatarSrc:
+        "https://images.unsplash.com/photo-1599566150163-29194dcabd36?w=150&h=150&fit=crop&crop=face",
+    },
   ],
 };
 
@@ -123,7 +136,9 @@ export const WithActions: Story = {
     project: sampleProject,
     actions: (
       <div className="flex justify-end gap-x-2">
-        <Button variant="outline" size="sm">View Details</Button>
+        <Button variant="outline" size="sm">
+          View Details
+        </Button>
         <Button size="sm">Open</Button>
       </div>
     ),
@@ -185,8 +200,16 @@ const projects = [
     tasksCompleted: 16,
     icon: <LayoutIcon className="size-5" />,
     members: [
-      { name: "John Doe", avatarSrc: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150" },
-      { name: "Jane Smith", avatarSrc: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150" },
+      {
+        name: "John Doe",
+        avatarSrc:
+          "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150",
+      },
+      {
+        name: "Jane Smith",
+        avatarSrc:
+          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
+      },
     ],
   },
   {
@@ -201,7 +224,11 @@ const projects = [
     tasksCompleted: 8,
     icon: <CodeIcon className="size-5" />,
     members: [
-      { name: "Bob Wilson", avatarSrc: "https://images.unsplash.com/photo-1599566150163-29194dcabd36?w=150" },
+      {
+        name: "Bob Wilson",
+        avatarSrc:
+          "https://images.unsplash.com/photo-1599566150163-29194dcabd36?w=150",
+      },
     ],
   },
   {
@@ -216,8 +243,16 @@ const projects = [
     tasksCompleted: 12,
     icon: <DatabaseIcon className="size-5" />,
     members: [
-      { name: "Sarah Johnson", avatarSrc: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150" },
-      { name: "Mike Brown", avatarSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150" },
+      {
+        name: "Sarah Johnson",
+        avatarSrc:
+          "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150",
+      },
+      {
+        name: "Mike Brown",
+        avatarSrc:
+          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
+      },
     ],
   },
   {
@@ -232,7 +267,11 @@ const projects = [
     tasksCompleted: 6,
     icon: <FolderIcon className="size-5" />,
     members: [
-      { name: "Emily Davis", avatarSrc: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150" },
+      {
+        name: "Emily Davis",
+        avatarSrc:
+          "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150",
+      },
     ],
   },
 ];
@@ -240,10 +279,7 @@ const projects = [
 export const Grid: StoryObj<typeof ProjectSummaryGrid> = {
   render: () => (
     <div className="w-[900px]">
-      <ProjectSummaryGrid
-        projects={projects}
-        columns={3}
-      />
+      <ProjectSummaryGrid projects={projects} columns={3} />
     </div>
   ),
 };
@@ -251,11 +287,7 @@ export const Grid: StoryObj<typeof ProjectSummaryGrid> = {
 export const GridCompact: StoryObj<typeof ProjectSummaryGrid> = {
   render: () => (
     <div className="w-[700px]">
-      <ProjectSummaryGrid
-        projects={projects}
-        variant="compact"
-        columns={2}
-      />
+      <ProjectSummaryGrid projects={projects} variant="compact" columns={2} />
     </div>
   ),
 };
@@ -263,11 +295,7 @@ export const GridCompact: StoryObj<typeof ProjectSummaryGrid> = {
 export const GridMini: StoryObj<typeof ProjectSummaryGrid> = {
   render: () => (
     <div className="w-[400px]">
-      <ProjectSummaryGrid
-        projects={projects}
-        variant="mini"
-        columns={2}
-      />
+      <ProjectSummaryGrid projects={projects} variant="mini" columns={2} />
     </div>
   ),
 };

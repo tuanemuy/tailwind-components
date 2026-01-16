@@ -1,136 +1,167 @@
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
-import {
-  userProfileCardVariants,
-  userProfileCardCoverVariants,
-  userProfileCardContentVariants,
-  userProfileCardStatsVariants,
-  userProfileCardStatVariants,
-} from "@/lib/variants/userProfileCard";
 import { Avatar } from "@/components/atoms/Avatar";
-import { Badge } from "@/components/atoms/Badge";
-import type { VariantProps } from "class-variance-authority";
+import { Button } from "@/components/atoms/Button";
 
-type UserProfileCardSize = "sm" | "md" | "lg";
+export interface UserProfileCardDetail {
+  label: string;
+  value: React.ReactNode;
+}
 
 export interface UserProfileCardProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof userProfileCardVariants> {
-  user: {
-    name: string;
-    username?: string;
-    email?: string;
-    avatarSrc?: string;
-    avatarFallback?: string;
-    coverSrc?: string;
-    bio?: string;
-    role?: string;
-    location?: string;
-    verified?: boolean;
-  };
-  stats?: Array<{
-    label: string;
-    value: string | number;
-  }>;
-  actions?: React.ReactNode;
-  size?: UserProfileCardSize;
-  showCover?: boolean;
+  extends React.HTMLAttributes<HTMLDivElement> {
+  avatarSrc?: string;
+  avatarFallback?: string;
+  details: UserProfileCardDetail[];
+  onDelete?: () => void;
+  onCancel?: () => void;
+  onSubmit?: () => void;
+  submitLabel?: string;
+  deleteLabel?: string;
+  cancelLabel?: string;
+  showFooter?: boolean;
 }
+
+// SVG Header Background Component
+const SvgHeaderBackground = () => (
+  <figure className="shrink-0 h-40 overflow-hidden rounded-t-xl">
+    <svg
+      className="w-full h-40 rounded-t-xl"
+      preserveAspectRatio="xMidYMid slice"
+      width="1113"
+      height="161"
+      viewBox="0 0 1113 161"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g clipPath="url(#clip0_697_201879)">
+        <rect x="1" width="1112" height="348" fill="#B2E7FE" />
+        <rect
+          width="185.209"
+          height="704.432"
+          transform="matrix(0.50392 0.86375 -0.860909 0.508759 435.452 -177.87)"
+          fill="#FF8F5D"
+        />
+        <rect
+          width="184.653"
+          height="378.667"
+          transform="matrix(0.849839 -0.527043 0.522157 0.852849 -10.4556 -16.4521)"
+          fill="#3ECEED"
+        />
+        <rect
+          width="184.653"
+          height="189.175"
+          transform="matrix(0.849839 -0.527043 0.522157 0.852849 35.4456 58.5195)"
+          fill="#4C48FF"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_697_201879">
+          <rect x="0.5" width="1112" height="161" rx="12" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+  </figure>
+);
 
 export const UserProfileCard = forwardRef<HTMLDivElement, UserProfileCardProps>(
   (
     {
       className,
-      variant = "default",
-      user,
-      stats,
-      actions,
-      size = "md",
-      showCover = true,
+      avatarSrc,
+      avatarFallback = "U",
+      details,
+      onDelete,
+      onCancel,
+      onSubmit,
+      submitLabel = "Add user",
+      deleteLabel = "Delete",
+      cancelLabel = "Cancel",
+      showFooter = true,
       ...props
     },
     ref
   ) => {
-    const alignProps = variant === "minimal" ? "left" : "center";
-    const avatarPosition = variant === "minimal" ? "left" : "center";
-
     return (
       <div
         ref={ref}
-        className={cn(userProfileCardVariants({ variant }), className)}
+        className={cn(
+          "bg-card border border-border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700",
+          className
+        )}
         {...props}
       >
-        {/* Cover Image */}
-        {showCover && variant !== "minimal" && (
-          <UserProfileCardCover
-            size={size}
-            coverSrc={user.coverSrc}
-          />
-        )}
+        {/* SVG Background Element */}
+        <SvgHeaderBackground />
 
         {/* Avatar */}
-        <div className={cn(
-          "px-4",
-          showCover && variant !== "minimal" ? "" : "pt-4"
-        )}>
-          <UserProfileCardAvatar
-            size={size}
-            position={avatarPosition}
-            src={user.avatarSrc}
-            fallback={user.avatarFallback || user.name.charAt(0)}
-            showCover={showCover && variant !== "minimal"}
-          />
+        <div className="-mt-24">
+          <div className="relative flex size-30 mx-auto border-4 border-background rounded-full dark:border-neutral-800">
+            <Avatar
+              src={avatarSrc}
+              fallback={avatarFallback}
+              className="size-full"
+            />
+          </div>
         </div>
 
-        {/* Content */}
-        <UserProfileCardContent align={alignProps} padding={size}>
-          <div className="flex items-center justify-center gap-x-2">
-            <h3 className={cn(
-              "font-semibold text-foreground",
-              size === "sm" ? "text-base" : size === "lg" ? "text-xl" : "text-lg"
-            )}>
-              {user.name}
-            </h3>
-            {user.verified && (
-              <Badge variant="default" size="sm">Verified</Badge>
-            )}
+        {/* Body - Description List */}
+        <div className="p-4 sm:p-8">
+          <dl className="grid grid-cols-2 gap-y-2 gap-x-4">
+            {details.map((detail, index) => (
+              <div key={index} className="contents">
+                <dt className="py-1 text-end text-sm text-muted-foreground">
+                  {detail.label}:
+                </dt>
+                <dd className="py-1 font-medium text-sm text-foreground">
+                  {detail.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        {/* Footer */}
+        {showFooter && (
+          <div className="p-4 flex flex-wrap justify-between gap-2 border-t border-border">
+            <div>
+              {onDelete && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={onDelete}
+                  className="text-destructive hover:text-destructive"
+                >
+                  {deleteLabel}
+                </Button>
+              )}
+            </div>
+
+            <div className="flex-1 flex justify-end items-center gap-2">
+              {onCancel && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={onCancel}
+                >
+                  {cancelLabel}
+                </Button>
+              )}
+
+              {onSubmit && (
+                <Button
+                  type="button"
+                  variant="primary"
+                  size="sm"
+                  onClick={onSubmit}
+                >
+                  {submitLabel}
+                </Button>
+              )}
+            </div>
           </div>
-
-          {user.username && (
-            <p className="text-sm text-muted-foreground">@{user.username}</p>
-          )}
-
-          {user.role && (
-            <p className={cn(
-              "text-muted-foreground",
-              size === "sm" ? "text-xs" : "text-sm"
-            )}>
-              {user.role}
-            </p>
-          )}
-
-          {user.bio && (
-            <p className={cn(
-              "mt-2 text-muted-foreground",
-              size === "sm" ? "text-xs" : "text-sm"
-            )}>
-              {user.bio}
-            </p>
-          )}
-
-          {user.location && (
-            <p className="mt-1 text-xs text-muted-foreground">
-              {user.location}
-            </p>
-          )}
-
-          {/* Actions */}
-          {actions && <div className="mt-4">{actions}</div>}
-        </UserProfileCardContent>
-
-        {/* Stats */}
-        {stats && stats.length > 0 && (
-          <UserProfileCardStats stats={stats} size={size} />
         )}
       </div>
     );
@@ -138,195 +169,69 @@ export const UserProfileCard = forwardRef<HTMLDivElement, UserProfileCardProps>(
 );
 UserProfileCard.displayName = "UserProfileCard";
 
-// Cover component
-interface UserProfileCardCoverProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof userProfileCardCoverVariants> {
-  coverSrc?: string;
+// Country flag component for displaying country with flag
+export interface CountryValueProps {
+  countryCode: "gb" | "us" | "jp" | "de" | "fr";
+  countryName: string;
 }
 
-export const UserProfileCardCover = forwardRef<HTMLDivElement, UserProfileCardCoverProps>(
-  ({ className, size = "md", coverSrc, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(userProfileCardCoverVariants({ size }), className)}
-        {...props}
-      >
-        {coverSrc && (
-          <img
-            src={coverSrc}
-            alt=""
-            className="absolute inset-0 size-full object-cover"
-          />
-        )}
-      </div>
-    );
-  }
+const flagPaths: Record<string, React.ReactNode> = {
+  gb: (
+    <>
+      <path fill="#012169" d="M0 0h512v512H0z" />
+      <path
+        fill="#FFF"
+        d="M512 0v64L322 256l190 187v69h-67L254 324 68 512H0v-68l186-187L0 74V0h62l192 188L440 0z"
+      />
+      <path
+        fill="#C8102E"
+        d="M184 324l11 34L42 512H0v-3l184-185zm124-12l54 8 150 147v45L308 312zM512 0L320 196l-4-44L466 0h46zM0 1l193 189-59-8L0 49V1z"
+      />
+      <path fill="#FFF" d="M176 0v512h160V0H176zM0 176v160h512V176H0z" />
+      <path fill="#C8102E" d="M0 208v96h512v-96H0zM208 0v512h96V0h-96z" />
+    </>
+  ),
+  us: (
+    <>
+      <path fill="#B22234" d="M0 0h512v512H0z" />
+      <path
+        fill="#fff"
+        d="M0 59h512v39H0zm0 78h512v39H0zm0 78h512v39H0zm0 78h512v39H0zm0 78h512v39H0zm0 78h512v39H0z"
+      />
+      <path fill="#3C3B6E" d="M0 0h205v275H0z" />
+    </>
+  ),
+  jp: (
+    <>
+      <path fill="#fff" d="M0 0h512v512H0z" />
+      <circle cx="256" cy="256" r="111" fill="#bc002d" />
+    </>
+  ),
+  de: (
+    <>
+      <path fill="#000" d="M0 0h512v171H0z" />
+      <path fill="#D00" d="M0 171h512v170H0z" />
+      <path fill="#FFCE00" d="M0 341h512v171H0z" />
+    </>
+  ),
+  fr: (
+    <>
+      <path fill="#002395" d="M0 0h171v512H0z" />
+      <path fill="#fff" d="M171 0h170v512H171z" />
+      <path fill="#ED2939" d="M341 0h171v512H341z" />
+    </>
+  ),
+};
+
+export const CountryValue = ({ countryCode, countryName }: CountryValueProps) => (
+  <span className="flex items-center gap-x-1.5">
+    <svg
+      className="shrink-0 size-4 rounded-full"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+    >
+      {flagPaths[countryCode]}
+    </svg>
+    {countryName}
+  </span>
 );
-UserProfileCardCover.displayName = "UserProfileCardCover";
-
-// Avatar wrapper component
-interface UserProfileCardAvatarProps {
-  size?: UserProfileCardSize;
-  position?: "center" | "left";
-  src?: string;
-  fallback?: string;
-  showCover?: boolean;
-}
-
-export const UserProfileCardAvatar = forwardRef<HTMLDivElement, UserProfileCardAvatarProps & React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, size = "md", position = "center", src, fallback, showCover = true, ...props }, ref) => {
-    const avatarSize = size === "sm" ? "lg" : size === "lg" ? "xl" : "xl";
-    const marginTop = showCover
-      ? size === "sm" ? "-mt-8" : size === "lg" ? "-mt-16" : "-mt-12"
-      : "";
-
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          marginTop,
-          position === "center" ? "mx-auto" : "ml-0",
-          className
-        )}
-        {...props}
-      >
-        <Avatar
-          src={src}
-          fallback={fallback}
-          size={avatarSize}
-          className="border-4 border-background"
-        />
-      </div>
-    );
-  }
-);
-UserProfileCardAvatar.displayName = "UserProfileCardAvatar";
-
-// Content component
-interface UserProfileCardContentProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof userProfileCardContentVariants> {}
-
-export const UserProfileCardContent = forwardRef<HTMLDivElement, UserProfileCardContentProps>(
-  ({ className, align = "center", padding = "md", children, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(userProfileCardContentVariants({ align, padding }), className)}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  }
-);
-UserProfileCardContent.displayName = "UserProfileCardContent";
-
-// Stats component
-interface UserProfileCardStatsProps
-  extends React.HTMLAttributes<HTMLDivElement> {
-  stats: Array<{
-    label: string;
-    value: string | number;
-  }>;
-  size?: UserProfileCardSize;
-}
-
-export const UserProfileCardStats = forwardRef<HTMLDivElement, UserProfileCardStatsProps>(
-  ({ className, stats, size = "md", ...props }, ref) => {
-    const columns = stats.length <= 4 ? stats.length : 3;
-
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          userProfileCardStatsVariants({ columns: columns as 2 | 3 | 4 }),
-          className
-        )}
-        {...props}
-      >
-        {stats.map((stat, index) => (
-          <UserProfileCardStat key={index} size={size}>
-            <span className={cn(
-              "font-semibold text-foreground",
-              size === "sm" ? "text-lg" : size === "lg" ? "text-2xl" : "text-xl"
-            )}>
-              {stat.value}
-            </span>
-            <span className={cn(
-              "text-muted-foreground",
-              size === "sm" ? "text-xs" : "text-sm"
-            )}>
-              {stat.label}
-            </span>
-          </UserProfileCardStat>
-        ))}
-      </div>
-    );
-  }
-);
-UserProfileCardStats.displayName = "UserProfileCardStats";
-
-// Single stat component
-interface UserProfileCardStatProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof userProfileCardStatVariants> {}
-
-export const UserProfileCardStat = forwardRef<HTMLDivElement, UserProfileCardStatProps>(
-  ({ className, size = "md", children, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(userProfileCardStatVariants({ size }), className)}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  }
-);
-UserProfileCardStat.displayName = "UserProfileCardStat";
-
-// Mini profile card (inline/horizontal)
-export interface MiniProfileCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  user: {
-    name: string;
-    avatarSrc?: string;
-    avatarFallback?: string;
-    subtitle?: string;
-  };
-  action?: React.ReactNode;
-}
-
-export const MiniProfileCard = forwardRef<HTMLDivElement, MiniProfileCardProps>(
-  ({ className, user, action, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "flex items-center justify-between gap-x-4 rounded-lg border border-border bg-card p-4",
-          className
-        )}
-        {...props}
-      >
-        <div className="flex items-center gap-x-3">
-          <Avatar
-            src={user.avatarSrc}
-            fallback={user.avatarFallback || user.name.charAt(0)}
-            size="md"
-          />
-          <div>
-            <p className="font-medium text-foreground">{user.name}</p>
-            {user.subtitle && (
-              <p className="text-sm text-muted-foreground">{user.subtitle}</p>
-            )}
-          </div>
-        </div>
-        {action}
-      </div>
-    );
-  }
-);
-MiniProfileCard.displayName = "MiniProfileCard";

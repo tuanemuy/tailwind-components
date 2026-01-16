@@ -1,7 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { ChatWidget, ChatWidgetToggle, type Conversation, type HelpArticle, type ChatUser } from "./index";
 import type { MessageData } from "../MessageBubble";
+import {
+  type ChatUser,
+  ChatWidget,
+  ChatWidgetToggle,
+  type Conversation,
+  type HelpArticle,
+} from "./index";
 
 const meta: Meta<typeof ChatWidget> = {
   title: "Organisms/InboxChatMessages/ChatWidget",
@@ -19,13 +25,15 @@ const sampleAgents: ChatUser[] = [
   {
     id: "1",
     name: "Sarah Johnson",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop",
     status: "online",
   },
   {
     id: "2",
     name: "Mike Chen",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop",
     status: "online",
   },
 ];
@@ -37,7 +45,8 @@ const sampleMessages: MessageData[] = [
     content: "Hello! How can I help you today?",
     sender: "other",
     senderName: "Sarah Johnson",
-    senderAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop",
+    senderAvatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop",
     timestamp: "2:30 PM",
     status: "read",
   },
@@ -56,7 +65,8 @@ const sampleMessages: MessageData[] = [
     content: "Of course! Could you please provide your order number?",
     sender: "other",
     senderName: "Sarah Johnson",
-    senderAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop",
+    senderAvatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop",
     timestamp: "2:32 PM",
     status: "read",
   },
@@ -73,7 +83,8 @@ const sampleConversations: Conversation[] = [
   {
     id: "2",
     user: sampleAgents[1],
-    lastMessage: "Your issue has been resolved. Is there anything else I can help with?",
+    lastMessage:
+      "Your issue has been resolved. Is there anything else I can help with?",
     lastMessageTime: "Yesterday",
     unreadCount: 1,
   },

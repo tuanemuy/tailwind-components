@@ -1,18 +1,18 @@
 import { forwardRef, useState } from "react";
-import { cn } from "@/lib/utils";
+import { Avatar } from "@/components/atoms/Avatar";
+import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
-import { Badge } from "@/components/atoms/Badge";
-import { Avatar } from "@/components/atoms/Avatar";
 import {
-  UserPlusIcon,
-  CopyIcon,
   CheckIcon,
-  MailIcon,
+  CopyIcon,
   GiftIcon,
-  ShareIcon,
   LinkIcon,
+  MailIcon,
+  ShareIcon,
+  UserPlusIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 export interface InviteReward {
   type: "discount" | "credits" | "subscription" | "custom";
@@ -20,7 +20,8 @@ export interface InviteReward {
   description?: string;
 }
 
-export interface InviteFriendsCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface InviteFriendsCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "default" | "compact" | "featured" | "horizontal";
   title?: string;
   description?: string;
@@ -29,14 +30,21 @@ export interface InviteFriendsCardProps extends React.HTMLAttributes<HTMLDivElem
   reward?: InviteReward;
   invitesSent?: number;
   invitesAccepted?: number;
-  recentInvites?: { name: string; avatarFallback?: string; status: "pending" | "accepted" }[];
+  recentInvites?: {
+    name: string;
+    avatarFallback?: string;
+    status: "pending" | "accepted";
+  }[];
   onInviteByEmail?: (email: string) => void;
   onCopyCode?: (code: string) => void;
   onCopyLink?: (link: string) => void;
   onShare?: () => void;
 }
 
-export const InviteFriendsCard = forwardRef<HTMLDivElement, InviteFriendsCardProps>(
+export const InviteFriendsCard = forwardRef<
+  HTMLDivElement,
+  InviteFriendsCardProps
+>(
   (
     {
       className,
@@ -55,7 +63,7 @@ export const InviteFriendsCard = forwardRef<HTMLDivElement, InviteFriendsCardPro
       onShare,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [email, setEmail] = useState("");
     const [codeCopied, setCodeCopied] = useState(false);
@@ -93,7 +101,7 @@ export const InviteFriendsCard = forwardRef<HTMLDivElement, InviteFriendsCardPro
           ref={ref}
           className={cn(
             "overflow-hidden rounded-xl bg-gradient-to-br from-primary/10 via-primary/5 to-background border border-border",
-            className
+            className,
           )}
           {...props}
         >
@@ -116,9 +124,13 @@ export const InviteFriendsCard = forwardRef<HTMLDivElement, InviteFriendsCardPro
                     <GiftIcon className="size-5" />
                   </div>
                   <div>
-                    <p className="font-semibold text-foreground">{reward.value}</p>
+                    <p className="font-semibold text-foreground">
+                      {reward.value}
+                    </p>
                     {reward.description && (
-                      <p className="text-sm text-muted-foreground">{reward.description}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {reward.description}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -128,9 +140,9 @@ export const InviteFriendsCard = forwardRef<HTMLDivElement, InviteFriendsCardPro
             {/* Email Invite */}
             {onInviteByEmail && (
               <div className="mt-6">
-                <label className="mb-2 block text-sm font-medium text-foreground">
+                <span className="mb-2 block text-sm font-medium text-foreground">
                   Invite by email
-                </label>
+                </span>
                 <div className="flex gap-x-2">
                   <Input
                     type="email"
@@ -150,9 +162,9 @@ export const InviteFriendsCard = forwardRef<HTMLDivElement, InviteFriendsCardPro
             {/* Referral Code */}
             {referralCode && (
               <div className="mt-6">
-                <label className="mb-2 block text-sm font-medium text-foreground">
+                <span className="mb-2 block text-sm font-medium text-foreground">
                   Your referral code
-                </label>
+                </span>
                 <div className="flex items-center gap-x-2 rounded-lg border border-border bg-muted/50 p-3">
                   <code className="flex-1 font-mono text-lg font-semibold text-foreground">
                     {referralCode}
@@ -177,9 +189,9 @@ export const InviteFriendsCard = forwardRef<HTMLDivElement, InviteFriendsCardPro
             {/* Referral Link */}
             {referralLink && (
               <div className="mt-4">
-                <label className="mb-2 block text-sm font-medium text-foreground">
+                <span className="mb-2 block text-sm font-medium text-foreground">
                   Or share your link
-                </label>
+                </span>
                 <div className="flex items-center gap-x-2">
                   <Input
                     value={referralLink}
@@ -207,13 +219,19 @@ export const InviteFriendsCard = forwardRef<HTMLDivElement, InviteFriendsCardPro
               <div className="mt-6 flex gap-x-6 border-t border-border pt-6">
                 {invitesSent !== undefined && (
                   <div>
-                    <p className="text-2xl font-bold text-foreground">{invitesSent}</p>
-                    <p className="text-sm text-muted-foreground">Invites sent</p>
+                    <p className="text-2xl font-bold text-foreground">
+                      {invitesSent}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Invites sent
+                    </p>
                   </div>
                 )}
                 {invitesAccepted !== undefined && (
                   <div>
-                    <p className="text-2xl font-bold text-success">{invitesAccepted}</p>
+                    <p className="text-2xl font-bold text-success">
+                      {invitesAccepted}
+                    </p>
                     <p className="text-sm text-muted-foreground">Joined</p>
                   </div>
                 )}
@@ -231,7 +249,7 @@ export const InviteFriendsCard = forwardRef<HTMLDivElement, InviteFriendsCardPro
           ref={ref}
           className={cn(
             "flex items-center justify-between gap-x-4 rounded-xl border border-border bg-card p-4",
-            className
+            className,
           )}
           {...props}
         >
@@ -254,7 +272,11 @@ export const InviteFriendsCard = forwardRef<HTMLDivElement, InviteFriendsCardPro
                 {referralCode}
               </code>
               <Button variant="outline" size="sm" onClick={handleCopyCode}>
-                {codeCopied ? <CheckIcon className="size-4" /> : <CopyIcon className="size-4" />}
+                {codeCopied ? (
+                  <CheckIcon className="size-4" />
+                ) : (
+                  <CopyIcon className="size-4" />
+                )}
               </Button>
             </div>
           )}
@@ -269,7 +291,7 @@ export const InviteFriendsCard = forwardRef<HTMLDivElement, InviteFriendsCardPro
           ref={ref}
           className={cn(
             "rounded-xl border border-border bg-card p-4",
-            className
+            className,
           )}
           {...props}
         >
@@ -280,7 +302,9 @@ export const InviteFriendsCard = forwardRef<HTMLDivElement, InviteFriendsCardPro
             <div className="min-w-0 flex-1">
               <h4 className="truncate font-medium text-foreground">{title}</h4>
               {reward && (
-                <p className="text-xs text-muted-foreground">Get {reward.value}</p>
+                <p className="text-xs text-muted-foreground">
+                  Get {reward.value}
+                </p>
               )}
             </div>
             <Button size="sm" onClick={onShare}>
@@ -295,10 +319,7 @@ export const InviteFriendsCard = forwardRef<HTMLDivElement, InviteFriendsCardPro
     return (
       <div
         ref={ref}
-        className={cn(
-          "rounded-xl border border-border bg-card p-6",
-          className
-        )}
+        className={cn("rounded-xl border border-border bg-card p-6", className)}
         {...props}
       >
         <div className="flex items-start gap-x-3">
@@ -314,16 +335,24 @@ export const InviteFriendsCard = forwardRef<HTMLDivElement, InviteFriendsCardPro
         {reward && (
           <div className="mt-4 flex items-center gap-x-2 rounded-lg bg-success/10 px-3 py-2">
             <GiftIcon className="size-4 text-success" />
-            <span className="text-sm font-medium text-foreground">{reward.value}</span>
+            <span className="text-sm font-medium text-foreground">
+              {reward.value}
+            </span>
           </div>
         )}
 
         {referralCode && (
           <div className="mt-4">
             <div className="flex items-center justify-between rounded-lg border border-border bg-muted/50 px-3 py-2">
-              <code className="font-mono font-semibold text-foreground">{referralCode}</code>
+              <code className="font-mono font-semibold text-foreground">
+                {referralCode}
+              </code>
               <Button variant="ghost" size="sm" onClick={handleCopyCode}>
-                {codeCopied ? <CheckIcon className="size-4" /> : <CopyIcon className="size-4" />}
+                {codeCopied ? (
+                  <CheckIcon className="size-4" />
+                ) : (
+                  <CopyIcon className="size-4" />
+                )}
               </Button>
             </div>
           </div>
@@ -344,19 +373,28 @@ export const InviteFriendsCard = forwardRef<HTMLDivElement, InviteFriendsCardPro
 
         {recentInvites && recentInvites.length > 0 && (
           <div className="mt-4 border-t border-border pt-4">
-            <p className="mb-2 text-xs font-medium text-muted-foreground">Recent invites</p>
+            <p className="mb-2 text-xs font-medium text-muted-foreground">
+              Recent invites
+            </p>
             <div className="space-y-2">
-              {recentInvites.slice(0, 3).map((invite, index) => (
-                <div key={index} className="flex items-center justify-between">
+              {recentInvites.slice(0, 3).map((invite) => (
+                <div
+                  key={`${invite.name}-${invite.status}`}
+                  className="flex items-center justify-between"
+                >
                   <div className="flex items-center gap-x-2">
                     <Avatar
                       fallback={invite.avatarFallback || invite.name.charAt(0)}
                       size="xs"
                     />
-                    <span className="text-sm text-foreground">{invite.name}</span>
+                    <span className="text-sm text-foreground">
+                      {invite.name}
+                    </span>
                   </div>
                   <Badge
-                    variant={invite.status === "accepted" ? "success" : "secondary"}
+                    variant={
+                      invite.status === "accepted" ? "success" : "secondary"
+                    }
                     size="sm"
                   >
                     {invite.status}
@@ -368,6 +406,6 @@ export const InviteFriendsCard = forwardRef<HTMLDivElement, InviteFriendsCardPro
         )}
       </div>
     );
-  }
+  },
 );
 InviteFriendsCard.displayName = "InviteFriendsCard";

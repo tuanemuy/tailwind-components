@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { BarChartIcon, DollarSignIcon, GlobeIcon, UsersIcon } from "@/lib/icons";
 import {
-  StatsSection,
-  StatsSectionHeader,
-  StatsSectionTitle,
-  StatsSectionSubtitle,
-  StatsGrid,
-  StatCard,
-  StatsRow,
   CompleteStatsSection,
   SimpleStatsBar,
+  StatCard,
   type StatItem,
+  StatsGrid,
+  StatsRow,
+  StatsSection,
+  StatsSectionHeader,
+  StatsSectionSubtitle,
+  StatsSectionTitle,
 } from ".";
-import { UsersIcon, DollarSignIcon, ChartIcon, GlobeIcon } from "@/lib/icons";
 
 const meta: Meta<typeof StatsSection> = {
   title: "Organisms/Marketing/StatsSection",
@@ -46,7 +46,7 @@ const sampleStats: StatItem[] = [
     value: "99.9%",
     label: "Uptime",
     description: "System reliability",
-    icon: <ChartIcon className="size-6" />,
+    icon: <BarChartIcon className="size-6" />,
   },
   {
     id: "4",
@@ -114,9 +114,7 @@ export const WithIcons: Story = {
     <StatsSection>
       <StatsSectionHeader>
         <StatsSectionTitle>Platform Highlights</StatsSectionTitle>
-        <StatsSectionSubtitle>
-          See what makes us different
-        </StatsSectionSubtitle>
+        <StatsSectionSubtitle>See what makes us different</StatsSectionSubtitle>
       </StatsSectionHeader>
 
       <StatsGrid columns={4}>

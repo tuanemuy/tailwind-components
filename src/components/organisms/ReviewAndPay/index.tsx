@@ -1,13 +1,9 @@
 "use client";
 
 import { forwardRef, type ReactNode } from "react";
+import { Badge, Button, Checkbox, Radio, Separator } from "@/components/atoms";
+import { CreditCardIcon, ShieldIcon, TruckIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
-import { Button, Checkbox, Badge, Separator, Radio } from "@/components/atoms";
-import {
-  CreditCardIcon,
-  TruckIcon,
-  ShieldIcon,
-} from "@/lib/icons";
 
 // Types
 export interface OrderItem {
@@ -46,7 +42,8 @@ export interface ShippingMethod {
   estimatedDays: string;
 }
 
-export interface ReviewAndPayProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ReviewAndPayProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   items: OrderItem[];
   shippingInfo: ShippingInfo;
   paymentInfo?: PaymentInfo;
@@ -68,7 +65,7 @@ export interface ReviewAndPayProps extends React.HTMLAttributes<HTMLDivElement> 
   termsLink?: ReactNode;
 }
 
-const formatPrice = (amount: number, currency: string = "USD"): string => {
+const formatPrice = (amount: number, currency = "USD"): string => {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency,
@@ -128,9 +125,13 @@ export const ReviewAndPay = forwardRef<HTMLDivElement, ReviewAndPayProps>(
                     <div className="flex-1 min-w-0">
                       <p className="font-medium text-foreground">{item.name}</p>
                       {item.variant && (
-                        <p className="text-sm text-muted-foreground">{item.variant}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {item.variant}
+                        </p>
                       )}
-                      <p className="text-sm text-muted-foreground">Qty: {item.quantity}</p>
+                      <p className="text-sm text-muted-foreground">
+                        Qty: {item.quantity}
+                      </p>
                     </div>
                     <div className="text-right">
                       <p className="font-medium text-foreground">
@@ -149,12 +150,15 @@ export const ReviewAndPay = forwardRef<HTMLDivElement, ReviewAndPayProps>(
               onEdit={onEditShipping}
             >
               <address className="not-italic text-sm text-muted-foreground space-y-1">
-                <p className="font-medium text-foreground">{shippingInfo.name}</p>
+                <p className="font-medium text-foreground">
+                  {shippingInfo.name}
+                </p>
                 {shippingInfo.email && <p>{shippingInfo.email}</p>}
                 <p>{shippingInfo.address}</p>
                 <p>
                   {shippingInfo.city}
-                  {shippingInfo.state && `, ${shippingInfo.state}`} {shippingInfo.zipCode}
+                  {shippingInfo.state && `, ${shippingInfo.state}`}{" "}
+                  {shippingInfo.zipCode}
                 </p>
                 <p>{shippingInfo.country}</p>
                 {shippingInfo.phone && <p>{shippingInfo.phone}</p>}
@@ -166,7 +170,7 @@ export const ReviewAndPay = forwardRef<HTMLDivElement, ReviewAndPayProps>(
               <ReviewSection title="Shipping method">
                 <div className="space-y-3">
                   {shippingMethods.map((method) => (
-                    <label
+                    <span
                       key={method.id}
                       className={cn(
                         "flex items-center justify-between p-4 rounded-lg border cursor-pointer transition-colors",
@@ -183,7 +187,9 @@ export const ReviewAndPay = forwardRef<HTMLDivElement, ReviewAndPayProps>(
                           onChange={() => onShippingMethodChange?.(method.id)}
                         />
                         <div>
-                          <p className="font-medium text-foreground">{method.name}</p>
+                          <p className="font-medium text-foreground">
+                            {method.name}
+                          </p>
                           <p className="text-sm text-muted-foreground">
                             {method.description} - {method.estimatedDays}
                           </p>
@@ -192,12 +198,16 @@ export const ReviewAndPay = forwardRef<HTMLDivElement, ReviewAndPayProps>(
                       <span
                         className={cn(
                           "font-medium",
-                          method.price === 0 ? "text-success" : "text-foreground",
+                          method.price === 0
+                            ? "text-success"
+                            : "text-foreground",
                         )}
                       >
-                        {method.price === 0 ? "Free" : formatPrice(method.price, currency)}
+                        {method.price === 0
+                          ? "Free"
+                          : formatPrice(method.price, currency)}
                       </span>
-                    </label>
+                    </span>
                   ))}
                 </div>
               </ReviewSection>
@@ -216,10 +226,13 @@ export const ReviewAndPay = forwardRef<HTMLDivElement, ReviewAndPayProps>(
                   </div>
                   <div>
                     <p className="font-medium text-foreground">
-                      {paymentInfo.brand || "Card"} ending in {paymentInfo.lastFourDigits}
+                      {paymentInfo.brand || "Card"} ending in{" "}
+                      {paymentInfo.lastFourDigits}
                     </p>
                     {paymentInfo.cardHolder && (
-                      <p className="text-sm text-muted-foreground">{paymentInfo.cardHolder}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {paymentInfo.cardHolder}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -230,23 +243,33 @@ export const ReviewAndPay = forwardRef<HTMLDivElement, ReviewAndPayProps>(
           {/* Right Column - Order Summary */}
           <div className="lg:col-span-1">
             <div className="sticky top-6 rounded-xl border border-border bg-card p-6">
-              <h3 className="font-semibold text-foreground mb-4">Order summary</h3>
+              <h3 className="font-semibold text-foreground mb-4">
+                Order summary
+              </h3>
 
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Subtotal</span>
-                  <span className="text-foreground">{formatPrice(subtotal, currency)}</span>
+                  <span className="text-foreground">
+                    {formatPrice(subtotal, currency)}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Shipping</span>
-                  <span className={shipping === 0 ? "text-success" : "text-foreground"}>
+                  <span
+                    className={
+                      shipping === 0 ? "text-success" : "text-foreground"
+                    }
+                  >
                     {shipping === 0 ? "Free" : formatPrice(shipping, currency)}
                   </span>
                 </div>
                 {tax > 0 && (
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Tax</span>
-                    <span className="text-foreground">{formatPrice(tax, currency)}</span>
+                    <span className="text-foreground">
+                      {formatPrice(tax, currency)}
+                    </span>
                   </div>
                 )}
                 {discount > 0 && (
@@ -260,13 +283,15 @@ export const ReviewAndPay = forwardRef<HTMLDivElement, ReviewAndPayProps>(
 
                 <div className="flex justify-between text-base font-semibold">
                   <span className="text-foreground">Total</span>
-                  <span className="text-foreground">{formatPrice(total, currency)}</span>
+                  <span className="text-foreground">
+                    {formatPrice(total, currency)}
+                  </span>
                 </div>
               </div>
 
               {/* Terms */}
               <div className="mt-6">
-                <label className="flex items-start gap-3 cursor-pointer">
+                <span className="flex items-start gap-3 cursor-pointer">
                   <Checkbox
                     checked={termsAccepted}
                     onChange={(e) => onTermsChange?.(e.target.checked)}
@@ -274,7 +299,7 @@ export const ReviewAndPay = forwardRef<HTMLDivElement, ReviewAndPayProps>(
                   <span className="text-sm text-muted-foreground">
                     I agree to the {termsLink || "terms and conditions"}
                   </span>
-                </label>
+                </span>
               </div>
 
               {/* Place Order Button */}
@@ -310,7 +335,13 @@ interface ReviewSectionProps {
   children: ReactNode;
 }
 
-const ReviewSection = ({ title, icon, badge, onEdit, children }: ReviewSectionProps) => (
+const ReviewSection = ({
+  title,
+  icon,
+  badge,
+  onEdit,
+  children,
+}: ReviewSectionProps) => (
   <div className="rounded-xl border border-border bg-card overflow-hidden">
     <div className="flex items-center justify-between p-4 border-b border-border bg-muted/30">
       <div className="flex items-center gap-2">

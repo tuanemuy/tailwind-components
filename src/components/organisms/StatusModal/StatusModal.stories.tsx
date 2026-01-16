@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { StatusModal, AvailabilityStatusModal, TaskStatusModal } from "./index";
-import type { StatusOption } from "./index";
 import { Button } from "@/components/atoms/Button";
+import type { StatusOption } from "./index";
+import { AvailabilityStatusModal, StatusModal, TaskStatusModal } from "./index";
 
 const meta: Meta<typeof StatusModal> = {
   title: "Organisms/Overlays/StatusModal",

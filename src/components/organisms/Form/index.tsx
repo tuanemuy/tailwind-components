@@ -1,8 +1,14 @@
 "use client";
 
-import { forwardRef, createContext, useContext, useCallback, useId } from "react";
-import { cn } from "@/lib/utils";
+import {
+  createContext,
+  forwardRef,
+  useCallback,
+  useContext,
+  useId,
+} from "react";
 import { Button } from "@/components/atoms";
+import { cn } from "@/lib/utils";
 
 // Form context for sharing form state
 interface FormContextValue {
@@ -97,10 +103,14 @@ export const FormHeader = forwardRef<HTMLDivElement, FormHeaderProps>(
           <>
             <div className="min-w-0 flex-1">
               {title && (
-                <h3 className="text-lg font-semibold text-foreground">{title}</h3>
+                <h3 className="text-lg font-semibold text-foreground">
+                  {title}
+                </h3>
               )}
               {description && (
-                <p className="mt-1 text-sm text-muted-foreground">{description}</p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {description}
+                </p>
               )}
             </div>
             {action && <div className="shrink-0">{action}</div>}
@@ -138,7 +148,9 @@ export const FormBody = forwardRef<HTMLDivElement, FormBodyProps>(
         ref={ref}
         className={cn(
           "p-4 sm:p-5",
-          columns ? cn("grid", columnsClasses[columns], gapClasses[gap]) : "space-y-4",
+          columns
+            ? cn("grid", columnsClasses[columns], gapClasses[gap])
+            : "space-y-4",
           className,
         )}
         {...props}
@@ -151,7 +163,8 @@ export const FormBody = forwardRef<HTMLDivElement, FormBodyProps>(
 FormBody.displayName = "FormBody";
 
 // FormSection component - for grouping related fields
-export interface FormSectionProps extends React.HTMLAttributes<HTMLFieldSetElement> {
+export interface FormSectionProps
+  extends React.HTMLAttributes<HTMLFieldSetElement> {
   title?: string;
   description?: string;
   columns?: 1 | 2 | 3 | 4;
@@ -159,7 +172,10 @@ export interface FormSectionProps extends React.HTMLAttributes<HTMLFieldSetEleme
 }
 
 export const FormSection = forwardRef<HTMLFieldSetElement, FormSectionProps>(
-  ({ className, title, description, columns, gap = "md", children, ...props }, ref) => {
+  (
+    { className, title, description, columns, gap = "md", children, ...props },
+    ref,
+  ) => {
     const id = useId();
 
     return (
@@ -172,10 +188,15 @@ export const FormSection = forwardRef<HTMLFieldSetElement, FormSectionProps>(
         {(title || description) && (
           <div className="mb-4">
             {title && (
-              <legend className="text-base font-medium text-foreground">{title}</legend>
+              <legend className="text-base font-medium text-foreground">
+                {title}
+              </legend>
             )}
             {description && (
-              <p id={`${id}-description`} className="mt-1 text-sm text-muted-foreground">
+              <p
+                id={`${id}-description`}
+                className="mt-1 text-sm text-muted-foreground"
+              >
                 {description}
               </p>
             )}
@@ -183,7 +204,9 @@ export const FormSection = forwardRef<HTMLFieldSetElement, FormSectionProps>(
         )}
         <div
           className={cn(
-            columns ? cn("grid", columnsClasses[columns], gapClasses[gap]) : "space-y-4",
+            columns
+              ? cn("grid", columnsClasses[columns], gapClasses[gap])
+              : "space-y-4",
           )}
         >
           {children}
@@ -205,7 +228,12 @@ export const FormRow = forwardRef<HTMLDivElement, FormRowProps>(
     return (
       <div
         ref={ref}
-        className={cn("grid", columnsClasses[columns], gapClasses[gap], className)}
+        className={cn(
+          "grid",
+          columnsClasses[columns],
+          gapClasses[gap],
+          className,
+        )}
         {...props}
       >
         {children}
@@ -259,7 +287,11 @@ export const FormDivider = forwardRef<HTMLHRElement, FormDividerProps>(
       return (
         <div className={cn("relative my-6", className)}>
           <div className="absolute inset-0 flex items-center">
-            <hr ref={ref} className="w-full border-t border-border" {...props} />
+            <hr
+              ref={ref}
+              className="w-full border-t border-border"
+              {...props}
+            />
           </div>
           <div className="relative flex justify-center">
             <span className="bg-background px-3 text-sm text-muted-foreground">
@@ -289,7 +321,10 @@ export interface SubmitButtonProps
 }
 
 export const SubmitButton = forwardRef<HTMLButtonElement, SubmitButtonProps>(
-  ({ loading, loadingText = "Submitting...", disabled, children, ...props }, ref) => {
+  (
+    { loading, loadingText = "Submitting...", disabled, children, ...props },
+    ref,
+  ) => {
     const { disabled: formDisabled } = useFormContext();
 
     return (

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { TeamCard, TeamCardGrid, TeamCardList } from "./";
+import { CodeIcon, PaletteIcon, RocketIcon, UsersIcon } from "@/lib/icons";
 import type { TeamCardData } from "./";
-import { UsersIcon, CodeIcon, PaletteIcon, RocketIcon } from "@/lib/icons";
+import { TeamCard, TeamCardGrid, TeamCardList } from "./";
 
 const meta: Meta<typeof TeamCard> = {
   title: "Organisms/TeamCard",
@@ -22,16 +22,36 @@ const sampleTeam: TeamCardData = {
   color: "#3B82F6",
   icon: <CodeIcon className="size-6 text-white" />,
   members: [
-    { id: "m1", name: "Alex Johnson", avatarFallback: "AJ", role: "Lead Engineer" },
-    { id: "m2", name: "Maria Garcia", avatarFallback: "MG", role: "Senior Dev" },
+    {
+      id: "m1",
+      name: "Alex Johnson",
+      avatarFallback: "AJ",
+      role: "Lead Engineer",
+    },
+    {
+      id: "m2",
+      name: "Maria Garcia",
+      avatarFallback: "MG",
+      role: "Senior Dev",
+    },
     { id: "m3", name: "David Kim", avatarFallback: "DK", role: "Backend Dev" },
-    { id: "m4", name: "Emily Brown", avatarFallback: "EB", role: "Frontend Dev" },
+    {
+      id: "m4",
+      name: "Emily Brown",
+      avatarFallback: "EB",
+      role: "Frontend Dev",
+    },
     { id: "m5", name: "Sarah Chen", avatarFallback: "SC", role: "DevOps" },
   ],
   projectCount: 12,
   isPrivate: false,
   isStarred: true,
-  lead: { id: "m1", name: "Alex Johnson", avatarFallback: "AJ", role: "Lead Engineer" },
+  lead: {
+    id: "m1",
+    name: "Alex Johnson",
+    avatarFallback: "AJ",
+    role: "Lead Engineer",
+  },
   tags: ["Engineering", "Core Platform"],
 };
 
@@ -47,7 +67,8 @@ export const Featured: Story = {
   args: {
     team: {
       ...sampleTeam,
-      coverImage: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=300&fit=crop",
+      coverImage:
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=300&fit=crop",
     },
     variant: "featured",
     onStar: (team, starred) => console.log("Star:", team.name, starred),
@@ -111,7 +132,8 @@ const sampleTeams: TeamCardData[] = [
     ],
     projectCount: 12,
     isStarred: true,
-    coverImage: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=300&fit=crop",
+    coverImage:
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=300&fit=crop",
   },
   {
     id: "2",
@@ -146,9 +168,7 @@ const sampleTeams: TeamCardData[] = [
     description: "Defining the roadmap",
     color: "#F59E0B",
     icon: <UsersIcon className="size-6 text-white" />,
-    members: [
-      { id: "m10", name: "Peter", avatarFallback: "P" },
-    ],
+    members: [{ id: "m10", name: "Peter", avatarFallback: "P" }],
     projectCount: 3,
     isStarred: true,
   },

@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
 import { Avatar } from "@/components/atoms";
 import { QuoteIcon, StarIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Types
 export interface Testimonial {
@@ -20,7 +20,8 @@ export interface Testimonial {
 }
 
 // TestimonialCard component
-export interface TestimonialCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TestimonialCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "default" | "bordered" | "elevated" | "quote";
   size?: "sm" | "md" | "lg";
 }
@@ -39,7 +40,10 @@ const sizeClasses = {
 };
 
 export const TestimonialCard = forwardRef<HTMLDivElement, TestimonialCardProps>(
-  ({ className, variant = "bordered", size = "md", children, ...props }, ref) => {
+  (
+    { className, variant = "bordered", size = "md", children, ...props },
+    ref,
+  ) => {
     return (
       <div
         ref={ref}
@@ -59,13 +63,20 @@ export const TestimonialCard = forwardRef<HTMLDivElement, TestimonialCardProps>(
 TestimonialCard.displayName = "TestimonialCard";
 
 // TestimonialQuote component
-export interface TestimonialQuoteProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TestimonialQuoteProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   showIcon?: boolean;
   iconPosition?: "top" | "inline";
 }
 
-export const TestimonialQuote = forwardRef<HTMLDivElement, TestimonialQuoteProps>(
-  ({ className, showIcon = true, iconPosition = "top", children, ...props }, ref) => {
+export const TestimonialQuote = forwardRef<
+  HTMLDivElement,
+  TestimonialQuoteProps
+>(
+  (
+    { className, showIcon = true, iconPosition = "top", children, ...props },
+    ref,
+  ) => {
     return (
       <div ref={ref} className={cn("relative", className)} {...props}>
         {showIcon && iconPosition === "top" && (
@@ -89,7 +100,8 @@ export const TestimonialQuote = forwardRef<HTMLDivElement, TestimonialQuoteProps
 TestimonialQuote.displayName = "TestimonialQuote";
 
 // TestimonialContent component
-export interface TestimonialContentProps extends React.HTMLAttributes<HTMLParagraphElement> {
+export interface TestimonialContentProps
+  extends React.HTMLAttributes<HTMLParagraphElement> {
   size?: "sm" | "md" | "lg";
 }
 
@@ -99,72 +111,91 @@ const contentSizeClasses = {
   lg: "text-lg",
 };
 
-export const TestimonialContent = forwardRef<HTMLParagraphElement, TestimonialContentProps>(
-  ({ className, size = "md", children, ...props }, ref) => {
-    return (
-      <p
-        ref={ref}
-        className={cn("leading-relaxed text-foreground", contentSizeClasses[size], className)}
-        {...props}
-      >
-        {children}
-      </p>
-    );
-  },
-);
+export const TestimonialContent = forwardRef<
+  HTMLParagraphElement,
+  TestimonialContentProps
+>(({ className, size = "md", children, ...props }, ref) => {
+  return (
+    <p
+      ref={ref}
+      className={cn(
+        "leading-relaxed text-foreground",
+        contentSizeClasses[size],
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </p>
+  );
+});
 TestimonialContent.displayName = "TestimonialContent";
 
 // TestimonialRating component
-export interface TestimonialRatingProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TestimonialRatingProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   rating: number;
   max?: number;
 }
 
-export const TestimonialRating = forwardRef<HTMLDivElement, TestimonialRatingProps>(
-  ({ className, rating, max = 5, ...props }, ref) => {
-    return (
-      <div ref={ref} className={cn("flex items-center gap-x-0.5", className)} {...props}>
-        {Array.from({ length: max }).map((_, i) => (
-          <StarIcon
-            key={i}
-            className={cn(
-              "size-4",
-              i < rating ? "fill-warning text-warning" : "text-muted-foreground/30",
-            )}
-          />
-        ))}
-      </div>
-    );
-  },
-);
+export const TestimonialRating = forwardRef<
+  HTMLDivElement,
+  TestimonialRatingProps
+>(({ className, rating, max = 5, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn("flex items-center gap-x-0.5", className)}
+      {...props}
+    >
+      {Array.from({ length: max }).map((_, i) => (
+        <StarIcon
+          // biome-ignore lint/suspicious/noArrayIndexKey: Star position is the unique identifier
+          key={`star-${i}`}
+          className={cn(
+            "size-4",
+            i < rating
+              ? "fill-warning text-warning"
+              : "text-muted-foreground/30",
+          )}
+        />
+      ))}
+    </div>
+  );
+});
 TestimonialRating.displayName = "TestimonialRating";
 
 // TestimonialAuthor component
-export interface TestimonialAuthorProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TestimonialAuthorProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   layout?: "horizontal" | "vertical";
 }
 
-export const TestimonialAuthor = forwardRef<HTMLDivElement, TestimonialAuthorProps>(
-  ({ className, layout = "horizontal", children, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "flex gap-3",
-          layout === "vertical" ? "flex-col items-center text-center" : "items-center",
-          className,
-        )}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  },
-);
+export const TestimonialAuthor = forwardRef<
+  HTMLDivElement,
+  TestimonialAuthorProps
+>(({ className, layout = "horizontal", children, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "flex gap-3",
+        layout === "vertical"
+          ? "flex-col items-center text-center"
+          : "items-center",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+});
 TestimonialAuthor.displayName = "TestimonialAuthor";
 
 // TestimonialAuthorAvatar component
-export interface TestimonialAuthorAvatarProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TestimonialAuthorAvatarProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   src?: string;
   alt: string;
   initials?: string;
@@ -177,61 +208,82 @@ const avatarSizeMap = {
   lg: "lg" as const,
 };
 
-export const TestimonialAuthorAvatar = forwardRef<HTMLDivElement, TestimonialAuthorAvatarProps>(
-  ({ className, src, alt, initials, size = "md", ...props }, ref) => {
-    return (
-      <div ref={ref} className={className} {...props}>
-        <Avatar src={src} alt={alt} initials={initials} size={avatarSizeMap[size]} />
-      </div>
-    );
-  },
-);
+export const TestimonialAuthorAvatar = forwardRef<
+  HTMLDivElement,
+  TestimonialAuthorAvatarProps
+>(({ className, src, alt, initials, size = "md", ...props }, ref) => {
+  return (
+    <div ref={ref} className={className} {...props}>
+      <Avatar
+        src={src}
+        alt={alt}
+        initials={initials}
+        size={avatarSizeMap[size]}
+      />
+    </div>
+  );
+});
 TestimonialAuthorAvatar.displayName = "TestimonialAuthorAvatar";
 
 // TestimonialAuthorInfo component
-export interface TestimonialAuthorInfoProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface TestimonialAuthorInfoProps
+  extends React.HTMLAttributes<HTMLDivElement> {}
 
-export const TestimonialAuthorInfo = forwardRef<HTMLDivElement, TestimonialAuthorInfoProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <div ref={ref} className={cn("min-w-0", className)} {...props}>
-        {children}
-      </div>
-    );
-  },
-);
+export const TestimonialAuthorInfo = forwardRef<
+  HTMLDivElement,
+  TestimonialAuthorInfoProps
+>(({ className, children, ...props }, ref) => {
+  return (
+    <div ref={ref} className={cn("min-w-0", className)} {...props}>
+      {children}
+    </div>
+  );
+});
 TestimonialAuthorInfo.displayName = "TestimonialAuthorInfo";
 
 // TestimonialAuthorName component
-export interface TestimonialAuthorNameProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface TestimonialAuthorNameProps
+  extends React.HTMLAttributes<HTMLDivElement> {}
 
-export const TestimonialAuthorName = forwardRef<HTMLDivElement, TestimonialAuthorNameProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <div ref={ref} className={cn("font-semibold text-foreground", className)} {...props}>
-        {children}
-      </div>
-    );
-  },
-);
+export const TestimonialAuthorName = forwardRef<
+  HTMLDivElement,
+  TestimonialAuthorNameProps
+>(({ className, children, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn("font-semibold text-foreground", className)}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+});
 TestimonialAuthorName.displayName = "TestimonialAuthorName";
 
 // TestimonialAuthorTitle component
-export interface TestimonialAuthorTitleProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface TestimonialAuthorTitleProps
+  extends React.HTMLAttributes<HTMLDivElement> {}
 
-export const TestimonialAuthorTitle = forwardRef<HTMLDivElement, TestimonialAuthorTitleProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <div ref={ref} className={cn("text-sm text-muted-foreground", className)} {...props}>
-        {children}
-      </div>
-    );
-  },
-);
+export const TestimonialAuthorTitle = forwardRef<
+  HTMLDivElement,
+  TestimonialAuthorTitleProps
+>(({ className, children, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn("text-sm text-muted-foreground", className)}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+});
 TestimonialAuthorTitle.displayName = "TestimonialAuthorTitle";
 
 // TestimonialSection component
-export interface TestimonialSectionProps extends React.HTMLAttributes<HTMLElement> {
+export interface TestimonialSectionProps
+  extends React.HTMLAttributes<HTMLElement> {
   padding?: "sm" | "md" | "lg" | "xl";
 }
 
@@ -242,75 +294,96 @@ const paddingClasses = {
   xl: "py-32 md:py-40",
 };
 
-export const TestimonialSection = forwardRef<HTMLElement, TestimonialSectionProps>(
-  ({ className, padding = "lg", children, ...props }, ref) => {
-    return (
-      <section ref={ref} className={cn(paddingClasses[padding], className)} {...props}>
-        <div className="container mx-auto px-4">{children}</div>
-      </section>
-    );
-  },
-);
+export const TestimonialSection = forwardRef<
+  HTMLElement,
+  TestimonialSectionProps
+>(({ className, padding = "lg", children, ...props }, ref) => {
+  return (
+    <section
+      ref={ref}
+      className={cn(paddingClasses[padding], className)}
+      {...props}
+    >
+      <div className="container mx-auto px-4">{children}</div>
+    </section>
+  );
+});
 TestimonialSection.displayName = "TestimonialSection";
 
 // TestimonialSectionHeader component
-export interface TestimonialSectionHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TestimonialSectionHeaderProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   align?: "left" | "center";
 }
 
-export const TestimonialSectionHeader = forwardRef<HTMLDivElement, TestimonialSectionHeaderProps>(
-  ({ className, align = "center", children, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "mb-12 md:mb-16",
-          align === "center" ? "text-center max-w-3xl mx-auto" : "text-left max-w-2xl",
-          className,
-        )}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  },
-);
+export const TestimonialSectionHeader = forwardRef<
+  HTMLDivElement,
+  TestimonialSectionHeaderProps
+>(({ className, align = "center", children, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "mb-12 md:mb-16",
+        align === "center"
+          ? "text-center max-w-3xl mx-auto"
+          : "text-left max-w-2xl",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+});
 TestimonialSectionHeader.displayName = "TestimonialSectionHeader";
 
 // TestimonialSectionTitle component
-export interface TestimonialSectionTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {}
+export interface TestimonialSectionTitleProps
+  extends React.HTMLAttributes<HTMLHeadingElement> {}
 
-export const TestimonialSectionTitle = forwardRef<HTMLHeadingElement, TestimonialSectionTitleProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <h2
-        ref={ref}
-        className={cn("text-3xl font-bold text-foreground md:text-4xl", className)}
-        {...props}
-      >
-        {children}
-      </h2>
-    );
-  },
-);
+export const TestimonialSectionTitle = forwardRef<
+  HTMLHeadingElement,
+  TestimonialSectionTitleProps
+>(({ className, children, ...props }, ref) => {
+  return (
+    <h2
+      ref={ref}
+      className={cn(
+        "text-3xl font-bold text-foreground md:text-4xl",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </h2>
+  );
+});
 TestimonialSectionTitle.displayName = "TestimonialSectionTitle";
 
 // TestimonialSectionSubtitle component
-export interface TestimonialSectionSubtitleProps extends React.HTMLAttributes<HTMLParagraphElement> {}
+export interface TestimonialSectionSubtitleProps
+  extends React.HTMLAttributes<HTMLParagraphElement> {}
 
-export const TestimonialSectionSubtitle = forwardRef<HTMLParagraphElement, TestimonialSectionSubtitleProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <p ref={ref} className={cn("mt-4 text-lg text-muted-foreground", className)} {...props}>
-        {children}
-      </p>
-    );
-  },
-);
+export const TestimonialSectionSubtitle = forwardRef<
+  HTMLParagraphElement,
+  TestimonialSectionSubtitleProps
+>(({ className, children, ...props }, ref) => {
+  return (
+    <p
+      ref={ref}
+      className={cn("mt-4 text-lg text-muted-foreground", className)}
+      {...props}
+    >
+      {children}
+    </p>
+  );
+});
 TestimonialSectionSubtitle.displayName = "TestimonialSectionSubtitle";
 
 // TestimonialGrid component
-export interface TestimonialGridProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TestimonialGridProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   columns?: 1 | 2 | 3;
   gap?: "sm" | "md" | "lg";
 }
@@ -332,7 +405,12 @@ export const TestimonialGrid = forwardRef<HTMLDivElement, TestimonialGridProps>(
     return (
       <div
         ref={ref}
-        className={cn("grid", columnClasses[columns], gapClasses[gap], className)}
+        className={cn(
+          "grid",
+          columnClasses[columns],
+          gapClasses[gap],
+          className,
+        )}
         {...props}
       >
         {children}
@@ -343,25 +421,31 @@ export const TestimonialGrid = forwardRef<HTMLDivElement, TestimonialGridProps>(
 TestimonialGrid.displayName = "TestimonialGrid";
 
 // TestimonialCarousel component (simple)
-export interface TestimonialCarouselProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface TestimonialCarouselProps
+  extends React.HTMLAttributes<HTMLDivElement> {}
 
-export const TestimonialCarousel = forwardRef<HTMLDivElement, TestimonialCarouselProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn("flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory", className)}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  },
-);
+export const TestimonialCarousel = forwardRef<
+  HTMLDivElement,
+  TestimonialCarouselProps
+>(({ className, children, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+});
 TestimonialCarousel.displayName = "TestimonialCarousel";
 
 // TestimonialCarouselItem component
-export interface TestimonialCarouselItemProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TestimonialCarouselItemProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   width?: "sm" | "md" | "lg";
 }
 
@@ -371,38 +455,45 @@ const carouselItemWidths = {
   lg: "min-w-[400px]",
 };
 
-export const TestimonialCarouselItem = forwardRef<HTMLDivElement, TestimonialCarouselItemProps>(
-  ({ className, width = "md", children, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn("shrink-0 snap-center", carouselItemWidths[width], className)}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  },
-);
+export const TestimonialCarouselItem = forwardRef<
+  HTMLDivElement,
+  TestimonialCarouselItemProps
+>(({ className, width = "md", children, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "shrink-0 snap-center",
+        carouselItemWidths[width],
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+});
 TestimonialCarouselItem.displayName = "TestimonialCarouselItem";
 
 // TestimonialFeatured component (for single featured testimonial)
-export interface TestimonialFeaturedProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface TestimonialFeaturedProps
+  extends React.HTMLAttributes<HTMLDivElement> {}
 
-export const TestimonialFeatured = forwardRef<HTMLDivElement, TestimonialFeaturedProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "mx-auto max-w-4xl rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 p-8 md:p-12",
-          className,
-        )}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  },
-);
+export const TestimonialFeatured = forwardRef<
+  HTMLDivElement,
+  TestimonialFeaturedProps
+>(({ className, children, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "mx-auto max-w-4xl rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 p-8 md:p-12",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+});
 TestimonialFeatured.displayName = "TestimonialFeatured";

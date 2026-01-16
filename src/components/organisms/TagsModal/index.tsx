@@ -1,10 +1,15 @@
-import { forwardRef, useState, useEffect, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/atoms/Button";
+import { forwardRef, type ReactNode, useEffect, useState } from "react";
 import { Badge } from "@/components/atoms/Badge";
+import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "@/components/organisms/Modal";
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "@/components/organisms/Modal";
 import { CheckIcon, PlusIcon, TagIcon, XIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 export interface TagItem {
   id: string;
@@ -147,11 +152,7 @@ export const TagsModal = forwardRef<HTMLDivElement, TagsModalProps>(
                 {allTags
                   .filter((tag) => selectedIds.has(tag.id))
                   .map((tag) => (
-                    <Badge
-                      key={tag.id}
-                      soft
-                      className={cn("gap-1", tag.color)}
-                    >
+                    <Badge key={tag.id} soft className={cn("gap-1", tag.color)}>
                       {tag.label}
                       <button
                         type="button"
@@ -212,10 +213,10 @@ export const TagsModal = forwardRef<HTMLDivElement, TagsModalProps>(
                       disabled={loading || (!isSelected && !canAddMore)}
                       className={cn(
                         "flex w-full items-center gap-3 rounded-lg p-2 text-start transition-colors",
-                        isSelected
-                          ? "bg-primary/5"
-                          : "hover:bg-muted/50",
-                        !isSelected && !canAddMore && "cursor-not-allowed opacity-50",
+                        isSelected ? "bg-primary/5" : "hover:bg-muted/50",
+                        !isSelected &&
+                          !canAddMore &&
+                          "cursor-not-allowed opacity-50",
                       )}
                     >
                       <div
@@ -228,10 +229,7 @@ export const TagsModal = forwardRef<HTMLDivElement, TagsModalProps>(
                       >
                         {isSelected && <CheckIcon className="size-4" />}
                       </div>
-                      <Badge
-                        soft
-                        className={cn("font-normal", tag.color)}
-                      >
+                      <Badge soft className={cn("font-normal", tag.color)}>
                         {tag.label}
                       </Badge>
                     </button>
@@ -246,11 +244,7 @@ export const TagsModal = forwardRef<HTMLDivElement, TagsModalProps>(
           <Button variant="outline" onClick={handleClose} disabled={loading}>
             {cancelText}
           </Button>
-          <Button
-            variant="primary"
-            onClick={handleSubmit}
-            loading={loading}
-          >
+          <Button variant="primary" onClick={handleSubmit} loading={loading}>
             {submitText}
           </Button>
         </ModalFooter>
@@ -263,13 +257,17 @@ TagsModal.displayName = "TagsModal";
 // Preset colors for tags
 export const tagColors = {
   red: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
-  orange: "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400",
-  yellow: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
+  orange:
+    "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400",
+  yellow:
+    "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
   green: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
   teal: "bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-400",
   blue: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
-  indigo: "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400",
-  purple: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
+  indigo:
+    "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400",
+  purple:
+    "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
   pink: "bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-400",
   gray: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300",
 };

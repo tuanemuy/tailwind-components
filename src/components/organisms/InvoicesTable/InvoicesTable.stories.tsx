@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { InvoicesTable, type Invoice } from "./index";
+import { type Invoice, InvoicesTable } from "./index";
 
 // Sample invoices data
 const sampleInvoices: Invoice[] = [
@@ -23,7 +23,12 @@ const sampleInvoices: Invoice[] = [
     dueDate: "2024-01-31",
     paidDate: "2024-01-28",
     items: [
-      { description: "Web Development", quantity: 30, unitPrice: 150, total: 4500 },
+      {
+        description: "Web Development",
+        quantity: 30,
+        unitPrice: 150,
+        total: 4500,
+      },
     ],
   },
   {
@@ -43,7 +48,12 @@ const sampleInvoices: Invoice[] = [
     issueDate: "2024-01-10",
     dueDate: "2024-02-10",
     items: [
-      { description: "Mobile App Design", quantity: 50, unitPrice: 150, total: 7500 },
+      {
+        description: "Mobile App Design",
+        quantity: 50,
+        unitPrice: 150,
+        total: 7500,
+      },
     ],
   },
   {
@@ -84,7 +94,12 @@ const sampleInvoices: Invoice[] = [
     issueDate: "2024-01-15",
     dueDate: "2024-02-15",
     items: [
-      { description: "Full Stack Development", quantity: 80, unitPrice: 150, total: 12000 },
+      {
+        description: "Full Stack Development",
+        quantity: 80,
+        unitPrice: 150,
+        total: 12000,
+      },
     ],
   },
   {
@@ -106,7 +121,12 @@ const sampleInvoices: Invoice[] = [
     dueDate: "2023-12-15",
     paidDate: "2023-12-10",
     items: [
-      { description: "Branding Package", quantity: 1, unitPrice: 3000, total: 3000 },
+      {
+        description: "Branding Package",
+        quantity: 1,
+        unitPrice: 3000,
+        total: 3000,
+      },
     ],
   },
 ];
@@ -206,7 +226,7 @@ export const WithPagination: Story = {
 
     const paginatedInvoices = sampleInvoices.slice(
       (page - 1) * pageSize,
-      page * pageSize
+      page * pageSize,
     );
 
     return (

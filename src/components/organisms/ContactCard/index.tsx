@@ -1,10 +1,10 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
 import { Avatar } from "@/components/atoms/Avatar";
 import { Badge } from "@/components/atoms/Badge";
-import { Checkbox } from "@/components/atoms/Checkbox";
 import { Button } from "@/components/atoms/Button";
-import { MailIcon, PhoneIcon, MoreHorizontalIcon } from "@/lib/icons";
+import { Checkbox } from "@/components/atoms/Checkbox";
+import { MailIcon, MoreHorizontalIcon, PhoneIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Contact information type
 export interface Contact {
@@ -22,7 +22,8 @@ export interface Contact {
 }
 
 // Main ContactCard component
-export interface ContactCardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect"> {
+export interface ContactCardProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect"> {
   contact: Contact;
   variant?: "default" | "compact" | "detailed" | "horizontal";
   selectable?: boolean;
@@ -45,7 +46,7 @@ export const ContactCard = forwardRef<HTMLDivElement, ContactCardProps>(
       showStatus = true,
       ...props
     },
-    ref
+    ref,
   ) => {
     const handleSelect = () => {
       onSelect?.(contact.id, !selected);
@@ -58,7 +59,7 @@ export const ContactCard = forwardRef<HTMLDivElement, ContactCardProps>(
           className={cn(
             "flex items-center justify-between gap-x-4 rounded-xl border border-border bg-card p-4",
             selected && "ring-2 ring-primary",
-            className
+            className,
           )}
           {...props}
         >
@@ -77,9 +78,13 @@ export const ContactCard = forwardRef<HTMLDivElement, ContactCardProps>(
               status={showStatus ? contact.status : undefined}
             />
             <div className="min-w-0">
-              <p className="truncate font-medium text-foreground">{contact.name}</p>
+              <p className="truncate font-medium text-foreground">
+                {contact.name}
+              </p>
               {contact.role && (
-                <p className="truncate text-sm text-muted-foreground">{contact.role}</p>
+                <p className="truncate text-sm text-muted-foreground">
+                  {contact.role}
+                </p>
               )}
             </div>
           </div>
@@ -107,7 +112,7 @@ export const ContactCard = forwardRef<HTMLDivElement, ContactCardProps>(
           className={cn(
             "flex items-center gap-x-3 rounded-lg border border-border bg-card p-3",
             selected && "ring-2 ring-primary",
-            className
+            className,
           )}
           {...props}
         >
@@ -125,9 +130,13 @@ export const ContactCard = forwardRef<HTMLDivElement, ContactCardProps>(
             status={showStatus ? contact.status : undefined}
           />
           <div className="min-w-0 flex-1">
-            <p className="truncate text-sm font-medium text-foreground">{contact.name}</p>
+            <p className="truncate text-sm font-medium text-foreground">
+              {contact.name}
+            </p>
             {contact.email && (
-              <p className="truncate text-xs text-muted-foreground">{contact.email}</p>
+              <p className="truncate text-xs text-muted-foreground">
+                {contact.email}
+              </p>
             )}
           </div>
           {actions}
@@ -142,7 +151,7 @@ export const ContactCard = forwardRef<HTMLDivElement, ContactCardProps>(
           className={cn(
             "rounded-xl border border-border bg-card",
             selected && "ring-2 ring-primary",
-            className
+            className,
           )}
           {...props}
         >
@@ -163,12 +172,18 @@ export const ContactCard = forwardRef<HTMLDivElement, ContactCardProps>(
                 status={showStatus ? contact.status : undefined}
               />
               <div>
-                <h3 className="font-semibold text-foreground">{contact.name}</h3>
+                <h3 className="font-semibold text-foreground">
+                  {contact.name}
+                </h3>
                 {contact.role && (
-                  <p className="text-sm text-muted-foreground">{contact.role}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {contact.role}
+                  </p>
                 )}
                 {contact.department && (
-                  <p className="text-xs text-muted-foreground">{contact.department}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {contact.department}
+                  </p>
                 )}
               </div>
             </div>
@@ -196,8 +211,8 @@ export const ContactCard = forwardRef<HTMLDivElement, ContactCardProps>(
 
           {contact.tags && contact.tags.length > 0 && (
             <div className="flex flex-wrap gap-1.5 border-t border-border px-4 py-3">
-              {contact.tags.map((tag, index) => (
-                <Badge key={index} variant="secondary" size="sm">
+              {contact.tags.map((tag) => (
+                <Badge key={tag} variant="secondary" size="sm">
                   {tag}
                 </Badge>
               ))}
@@ -214,7 +229,7 @@ export const ContactCard = forwardRef<HTMLDivElement, ContactCardProps>(
         className={cn(
           "flex flex-col items-center rounded-xl border border-border bg-card p-4 text-center",
           selected && "ring-2 ring-primary",
-          className
+          className,
         )}
         {...props}
       >
@@ -243,12 +258,13 @@ export const ContactCard = forwardRef<HTMLDivElement, ContactCardProps>(
         {actions && <div className="mt-3">{actions}</div>}
       </div>
     );
-  }
+  },
 );
 ContactCard.displayName = "ContactCard";
 
 // ContactCardGrid for displaying multiple contacts
-export interface ContactCardGridProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ContactCardGridProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   contacts: Contact[];
   variant?: ContactCardProps["variant"];
   columns?: 2 | 3 | 4 | 5 | 6;
@@ -281,13 +297,15 @@ export const ContactCardGrid = forwardRef<HTMLDivElement, ContactCardGridProps>(
       showStatus = true,
       ...props
     },
-    ref
+    ref,
   ) => {
     const handleSelect = (id: string, selected: boolean) => {
       if (selected) {
         onSelectionChange?.([...selectedIds, id]);
       } else {
-        onSelectionChange?.(selectedIds.filter((selectedId) => selectedId !== id));
+        onSelectionChange?.(
+          selectedIds.filter((selectedId) => selectedId !== id),
+        );
       }
     };
 
@@ -311,12 +329,13 @@ export const ContactCardGrid = forwardRef<HTMLDivElement, ContactCardGridProps>(
         ))}
       </div>
     );
-  }
+  },
 );
 ContactCardGrid.displayName = "ContactCardGrid";
 
 // ContactCardList for list view
-export interface ContactCardListProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ContactCardListProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   contacts: Contact[];
   variant?: "compact" | "horizontal" | "detailed";
   selectable?: boolean;
@@ -339,22 +358,20 @@ export const ContactCardList = forwardRef<HTMLDivElement, ContactCardListProps>(
       showStatus = true,
       ...props
     },
-    ref
+    ref,
   ) => {
     const handleSelect = (id: string, selected: boolean) => {
       if (selected) {
         onSelectionChange?.([...selectedIds, id]);
       } else {
-        onSelectionChange?.(selectedIds.filter((selectedId) => selectedId !== id));
+        onSelectionChange?.(
+          selectedIds.filter((selectedId) => selectedId !== id),
+        );
       }
     };
 
     return (
-      <div
-        ref={ref}
-        className={cn("space-y-2", className)}
-        {...props}
-      >
+      <div ref={ref} className={cn("space-y-2", className)} {...props}>
         {contacts.map((contact) => (
           <ContactCard
             key={contact.id}
@@ -369,6 +386,6 @@ export const ContactCardList = forwardRef<HTMLDivElement, ContactCardListProps>(
         ))}
       </div>
     );
-  }
+  },
 );
 ContactCardList.displayName = "ContactCardList";

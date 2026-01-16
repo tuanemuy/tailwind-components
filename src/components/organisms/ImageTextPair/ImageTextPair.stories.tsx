@@ -15,7 +15,8 @@ type Story = StoryObj<typeof ImageTextPair>;
 
 export const Default: Story = {
   args: {
-    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=600&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=600&fit=crop",
     imageAlt: "Modern retail store",
     title: "Shop the Latest Collection",
     subtitle: "New Arrivals",
@@ -34,7 +35,8 @@ export const Default: Story = {
 
 export const WithFeatures: Story = {
   args: {
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=600&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=600&fit=crop",
     imageAlt: "Free shipping",
     title: "Free Shipping on All Orders",
     subtitle: "Limited Time Offer",
@@ -55,7 +57,8 @@ export const WithFeatures: Story = {
 
 export const WithPrice: Story = {
   args: {
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop",
     imageAlt: "Premium watch",
     title: "Classic Timepiece Collection",
     subtitle: "Luxury Watches",
@@ -80,7 +83,8 @@ export const WithPrice: Story = {
 
 export const ImageRight: Story = {
   args: {
-    image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=600&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=600&fit=crop",
     imageAlt: "Sustainable fashion",
     imageSide: "right",
     title: "Sustainable Fashion",
@@ -102,7 +106,8 @@ export const ImageRight: Story = {
 
 export const CardVariant: Story = {
   args: {
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=600&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=600&fit=crop",
     imageAlt: "Running shoes",
     variant: "card",
     title: "Performance Running Shoes",
@@ -126,7 +131,8 @@ export const CardVariant: Story = {
 
 export const FullWidthVariant: Story = {
   args: {
-    image: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&h=600&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&h=600&fit=crop",
     imageAlt: "Fashion collection",
     variant: "fullwidth",
     aspectRatio: "auto",
@@ -148,7 +154,8 @@ export const FullWidthVariant: Story = {
 
 export const LandscapeAspect: Story = {
   args: {
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=450&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=450&fit=crop",
     imageAlt: "Coffee beans",
     aspectRatio: "landscape",
     title: "Artisan Coffee Collection",
@@ -173,7 +180,8 @@ export const AlternatingGrid: StoryObj<typeof ImageTextPairGrid> = {
     <ImageTextPairGrid
       items={[
         {
-          image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=600&fit=crop",
+          image:
+            "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=600&fit=crop",
           title: "Shop the Latest Collection",
           subtitle: "New Arrivals",
           description:
@@ -184,7 +192,8 @@ export const AlternatingGrid: StoryObj<typeof ImageTextPairGrid> = {
           },
         },
         {
-          image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=600&fit=crop",
+          image:
+            "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=600&fit=crop",
           title: "Free Shipping Worldwide",
           subtitle: "Special Offer",
           description:
@@ -196,7 +205,8 @@ export const AlternatingGrid: StoryObj<typeof ImageTextPairGrid> = {
           },
         },
         {
-          image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=600&fit=crop",
+          image:
+            "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=600&fit=crop",
           title: "Sustainable Fashion",
           subtitle: "Eco-Friendly",
           description:
@@ -218,7 +228,8 @@ export const CardGrid: StoryObj<typeof ImageTextPairGrid> = {
     <ImageTextPairGrid
       items={[
         {
-          image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=600&fit=crop",
+          image:
+            "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=600&fit=crop",
           title: "Running Shoes",
           subtitle: "Athletic",
           description: "Performance footwear for serious runners.",
@@ -226,7 +237,8 @@ export const CardGrid: StoryObj<typeof ImageTextPairGrid> = {
           primaryAction: { label: "Shop Now" },
         },
         {
-          image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop",
+          image:
+            "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop",
           title: "Classic Watches",
           subtitle: "Accessories",
           description: "Timeless elegance for every occasion.",

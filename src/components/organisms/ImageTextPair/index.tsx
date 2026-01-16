@@ -1,12 +1,13 @@
 "use client";
 
 import { forwardRef, type ReactNode } from "react";
+import { Badge, Button } from "@/components/atoms";
+import { CheckIcon, ChevronRightIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
-import { Button, Badge } from "@/components/atoms";
-import { ChevronRightIcon, CheckIcon } from "@/lib/icons";
 
 // Types
-export interface ImageTextPairProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ImageTextPairProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   image: string;
   imageAlt?: string;
   imageSide?: "left" | "right";
@@ -35,7 +36,7 @@ export interface ImageTextPairProps extends React.HTMLAttributes<HTMLDivElement>
   imageOverlay?: ReactNode;
 }
 
-const formatPrice = (amount: number, currency: string = "USD"): string => {
+const formatPrice = (amount: number, currency = "USD"): string => {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency,
@@ -80,7 +81,11 @@ export const ImageTextPair = forwardRef<HTMLDivElement, ImageTextPairProps>(
     };
 
     return (
-      <div ref={ref} className={cn(containerClasses[variant], className)} {...props}>
+      <div
+        ref={ref}
+        className={cn(containerClasses[variant], className)}
+        {...props}
+      >
         {/* Image */}
         <div
           className={cn(
@@ -90,7 +95,11 @@ export const ImageTextPair = forwardRef<HTMLDivElement, ImageTextPairProps>(
             variant === "card" ? "bg-muted" : "",
           )}
         >
-          <div className={cn(aspectRatio !== "auto" && aspectRatioClasses[aspectRatio])}>
+          <div
+            className={cn(
+              aspectRatio !== "auto" && aspectRatioClasses[aspectRatio],
+            )}
+          >
             <img
               src={image}
               alt={imageAlt || title}
@@ -124,16 +133,23 @@ export const ImageTextPair = forwardRef<HTMLDivElement, ImageTextPairProps>(
             </p>
           )}
 
-          <h2 className="text-2xl lg:text-3xl font-semibold text-foreground">{title}</h2>
+          <h2 className="text-2xl lg:text-3xl font-semibold text-foreground">
+            {title}
+          </h2>
 
           {description && (
-            <p className="mt-4 text-muted-foreground leading-relaxed">{description}</p>
+            <p className="mt-4 text-muted-foreground leading-relaxed">
+              {description}
+            </p>
           )}
 
           {features && features.length > 0 && (
             <ul className="mt-6 space-y-2">
-              {features.map((feature, index) => (
-                <li key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
+              {features.map((feature) => (
+                <li
+                  key={feature}
+                  className="flex items-center gap-2 text-sm text-muted-foreground"
+                >
                   <CheckIcon className="size-4 text-success" />
                   {feature}
                 </li>
@@ -151,9 +167,9 @@ export const ImageTextPair = forwardRef<HTMLDivElement, ImageTextPairProps>(
               >
                 {formatPrice(price.current, price.currency)}
               </span>
-              {hasDiscount && (
+              {hasDiscount && price.original && (
                 <span className="text-lg text-muted-foreground line-through">
-                  {formatPrice(price.original!, price.currency)}
+                  {formatPrice(price.original, price.currency)}
                 </span>
               )}
             </div>
@@ -161,8 +177,8 @@ export const ImageTextPair = forwardRef<HTMLDivElement, ImageTextPairProps>(
 
           {(primaryAction || secondaryAction) && (
             <div className="mt-8 flex flex-wrap gap-4">
-              {primaryAction && (
-                primaryAction.href ? (
+              {primaryAction &&
+                (primaryAction.href ? (
                   <a
                     href={primaryAction.href}
                     className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
@@ -173,10 +189,9 @@ export const ImageTextPair = forwardRef<HTMLDivElement, ImageTextPairProps>(
                   <Button variant="primary" onClick={primaryAction.onClick}>
                     {primaryAction.label}
                   </Button>
-                )
-              )}
-              {secondaryAction && (
-                secondaryAction.href ? (
+                ))}
+              {secondaryAction &&
+                (secondaryAction.href ? (
                   <a
                     href={secondaryAction.href}
                     className="inline-flex items-center justify-center rounded-lg border border-input bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors"
@@ -189,8 +204,7 @@ export const ImageTextPair = forwardRef<HTMLDivElement, ImageTextPairProps>(
                     {secondaryAction.label}
                     <ChevronRightIcon className="size-4 ml-2" />
                   </Button>
-                )
-              )}
+                ))}
             </div>
           )}
         </div>
@@ -201,22 +215,31 @@ export const ImageTextPair = forwardRef<HTMLDivElement, ImageTextPairProps>(
 ImageTextPair.displayName = "ImageTextPair";
 
 // ImageTextPairGrid - Multiple image-text pairs in a grid
-export interface ImageTextPairGridProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ImageTextPairGridProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   items: Omit<ImageTextPairProps, "variant">[];
   variant?: "default" | "card";
   alternating?: boolean;
 }
 
-export const ImageTextPairGrid = forwardRef<HTMLDivElement, ImageTextPairGridProps>(
-  ({ className, items, variant = "default", alternating = true, ...props }, ref) => {
+export const ImageTextPairGrid = forwardRef<
+  HTMLDivElement,
+  ImageTextPairGridProps
+>(
+  (
+    { className, items, variant = "default", alternating = true, ...props },
+    ref,
+  ) => {
     return (
       <div ref={ref} className={cn("space-y-16", className)} {...props}>
         {items.map((item, index) => (
           <ImageTextPair
-            key={index}
+            key={item.title}
             {...item}
             variant={variant}
-            imageSide={alternating ? (index % 2 === 0 ? "left" : "right") : "left"}
+            imageSide={
+              alternating ? (index % 2 === 0 ? "left" : "right") : "left"
+            }
           />
         ))}
       </div>

@@ -1,10 +1,10 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
+import { Badge } from "@/components/atoms";
+import { TrendIndicator } from "@/components/molecules";
+import type { TrendDirection, TrendVariant } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { dataCardVariants } from "@/lib/variants/dataVisualization";
-import { TrendIndicator } from "@/components/molecules";
-import { Badge } from "@/components/atoms";
-import type { VariantProps } from "class-variance-authority";
-import type { TrendDirection, TrendVariant } from "@/lib/types";
 
 // ============================================
 // Types
@@ -81,7 +81,9 @@ export const SalesStatsCard = forwardRef<HTMLDivElement, SalesStatsCardProps>(
     },
     ref,
   ) => {
-    const format = formatAmount ?? ((amount: number) => `${currency}${amount.toLocaleString()}`);
+    const format =
+      formatAmount ??
+      ((amount: number) => `${currency}${amount.toLocaleString()}`);
 
     return (
       <div
@@ -97,7 +99,9 @@ export const SalesStatsCard = forwardRef<HTMLDivElement, SalesStatsCardProps>(
                 <h3 className="text-sm font-medium text-foreground">{title}</h3>
               )}
               {subtitle && (
-                <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {subtitle}
+                </p>
               )}
             </div>
             <div className="flex items-center gap-x-2">
@@ -141,11 +145,16 @@ export const SalesStatsCard = forwardRef<HTMLDivElement, SalesStatsCardProps>(
           <div className="border-t border-border">
             <div className="divide-y divide-border">
               {breakdown.map((item, index) => {
-                const barColor = item.color || `hsl(var(--chart-${(index % 5) + 1}))`;
-                const percentage = item.percentage ?? (item.value / totalSales) * 100;
+                const barColor =
+                  item.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+                const percentage =
+                  item.percentage ?? (item.value / totalSales) * 100;
 
                 return (
-                  <div key={item.id} className="flex items-center justify-between gap-x-4 px-4 py-3">
+                  <div
+                    key={item.id}
+                    className="flex items-center justify-between gap-x-4 px-4 py-3"
+                  >
                     <div className="flex items-center gap-x-3 min-w-0">
                       <span
                         className="size-2.5 shrink-0 rounded-full"
@@ -204,7 +213,10 @@ export interface SalesLeaderboardCardProps
   formatAmount?: (amount: number) => string;
 }
 
-export const SalesLeaderboardCard = forwardRef<HTMLDivElement, SalesLeaderboardCardProps>(
+export const SalesLeaderboardCard = forwardRef<
+  HTMLDivElement,
+  SalesLeaderboardCardProps
+>(
   (
     {
       className,
@@ -220,7 +232,9 @@ export const SalesLeaderboardCard = forwardRef<HTMLDivElement, SalesLeaderboardC
     },
     ref,
   ) => {
-    const format = formatAmount ?? ((amount: number) => `${currency}${amount.toLocaleString()}`);
+    const format =
+      formatAmount ??
+      ((amount: number) => `${currency}${amount.toLocaleString()}`);
     const maxSales = Math.max(...salesReps.map((rep) => rep.sales));
 
     return (
@@ -256,10 +270,10 @@ export const SalesLeaderboardCard = forwardRef<HTMLDivElement, SalesLeaderboardC
                       index === 0
                         ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400"
                         : index === 1
-                        ? "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300"
-                        : index === 2
-                        ? "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400"
-                        : "bg-muted text-muted-foreground"
+                          ? "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+                          : index === 2
+                            ? "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400"
+                            : "bg-muted text-muted-foreground",
                     )}
                   >
                     {index + 1}
@@ -312,16 +326,17 @@ export const SalesLeaderboardCard = forwardRef<HTMLDivElement, SalesLeaderboardC
                           progressPercentage >= 100
                             ? "bg-success"
                             : progressPercentage >= 75
-                            ? "bg-primary"
-                            : progressPercentage >= 50
-                            ? "bg-warning"
-                            : "bg-error"
+                              ? "bg-primary"
+                              : progressPercentage >= 50
+                                ? "bg-warning"
+                                : "bg-error",
                         )}
                         style={{ width: `${progressPercentage}%` }}
                       />
                     </div>
                     <p className="mt-1 text-xs text-muted-foreground tabular-nums">
-                      {Math.round(progressPercentage)}% of {format(rep.target)} target
+                      {Math.round(progressPercentage)}% of {format(rep.target)}{" "}
+                      target
                     </p>
                   </div>
                 )}
@@ -356,7 +371,10 @@ export interface SalesComparisonCardProps
   formatAmount?: (amount: number) => string;
 }
 
-export const SalesComparisonCard = forwardRef<HTMLDivElement, SalesComparisonCardProps>(
+export const SalesComparisonCard = forwardRef<
+  HTMLDivElement,
+  SalesComparisonCardProps
+>(
   (
     {
       className,
@@ -371,9 +389,14 @@ export const SalesComparisonCard = forwardRef<HTMLDivElement, SalesComparisonCar
     },
     ref,
   ) => {
-    const format = formatAmount ?? ((amount: number) => `${currency}${amount.toLocaleString()}`);
+    const format =
+      formatAmount ??
+      ((amount: number) => `${currency}${amount.toLocaleString()}`);
     const difference = currentPeriod.value - previousPeriod.value;
-    const percentageChange = ((difference / previousPeriod.value) * 100).toFixed(1);
+    const percentageChange = (
+      (difference / previousPeriod.value) *
+      100
+    ).toFixed(1);
     const isIncrease = difference >= 0;
     const maxValue = Math.max(currentPeriod.value, previousPeriod.value);
 
@@ -398,7 +421,9 @@ export const SalesComparisonCard = forwardRef<HTMLDivElement, SalesComparisonCar
           {/* Current Period */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-foreground">{currentPeriod.label}</span>
+              <span className="text-sm text-foreground">
+                {currentPeriod.label}
+              </span>
               <span className="text-sm font-semibold text-foreground tabular-nums">
                 {format(currentPeriod.value)}
               </span>
@@ -417,7 +442,9 @@ export const SalesComparisonCard = forwardRef<HTMLDivElement, SalesComparisonCar
           {/* Previous Period */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-muted-foreground">{previousPeriod.label}</span>
+              <span className="text-sm text-muted-foreground">
+                {previousPeriod.label}
+              </span>
               <span className="text-sm text-muted-foreground tabular-nums">
                 {format(previousPeriod.value)}
               </span>
@@ -427,7 +454,8 @@ export const SalesComparisonCard = forwardRef<HTMLDivElement, SalesComparisonCar
                 className="h-full rounded-full transition-all"
                 style={{
                   width: `${(previousPeriod.value / maxValue) * 100}%`,
-                  backgroundColor: previousPeriod.color || "hsl(var(--muted-foreground))",
+                  backgroundColor:
+                    previousPeriod.color || "hsl(var(--muted-foreground))",
                 }}
               />
             </div>
@@ -441,10 +469,11 @@ export const SalesComparisonCard = forwardRef<HTMLDivElement, SalesComparisonCar
             <span
               className={cn(
                 "text-sm font-medium tabular-nums",
-                isIncrease ? "text-success" : "text-error"
+                isIncrease ? "text-success" : "text-error",
               )}
             >
-              {isIncrease ? "+" : ""}{format(difference)}
+              {isIncrease ? "+" : ""}
+              {format(difference)}
             </span>
             <TrendIndicator
               value={`${Math.abs(Number(percentageChange))}%`}

@@ -1,12 +1,21 @@
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
 import { Avatar } from "@/components/atoms/Avatar";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
+import { cn } from "@/lib/utils";
 
 export interface ActivityItem {
   id: string;
-  type: "comment" | "update" | "create" | "delete" | "mention" | "like" | "share" | "assign" | "complete";
+  type:
+    | "comment"
+    | "update"
+    | "create"
+    | "delete"
+    | "mention"
+    | "like"
+    | "share"
+    | "assign"
+    | "complete";
   user: {
     name: string;
     avatarSrc?: string;
@@ -21,7 +30,8 @@ export interface ActivityItem {
   metadata?: React.ReactNode;
 }
 
-export interface ActivityFeedProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ActivityFeedProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   activities: ActivityItem[];
   title?: string;
   showHeader?: boolean;
@@ -44,7 +54,7 @@ export const ActivityFeed = forwardRef<HTMLDivElement, ActivityFeedProps>(
       hasMore = false,
       ...props
     },
-    ref
+    ref,
   ) => {
     const displayedActivities = maxItems
       ? activities.slice(0, maxItems)
@@ -91,7 +101,7 @@ export const ActivityFeed = forwardRef<HTMLDivElement, ActivityFeedProps>(
         )}
       </div>
     );
-  }
+  },
 );
 ActivityFeed.displayName = "ActivityFeed";
 
@@ -100,63 +110,66 @@ interface ActivityFeedItemProps {
   activity: ActivityItem;
 }
 
-export const ActivityFeedItem = forwardRef<HTMLDivElement, ActivityFeedItemProps & React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, activity, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn("flex gap-x-3 px-4 py-3", className)}
-        {...props}
-      >
-        {/* Avatar */}
-        <Avatar
-          src={activity.user.avatarSrc}
-          fallback={activity.user.name.charAt(0)}
-          size="sm"
-        />
+export const ActivityFeedItem = forwardRef<
+  HTMLDivElement,
+  ActivityFeedItemProps & React.HTMLAttributes<HTMLDivElement>
+>(({ className, activity, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn("flex gap-x-3 px-4 py-3", className)}
+      {...props}
+    >
+      {/* Avatar */}
+      <Avatar
+        src={activity.user.avatarSrc}
+        fallback={activity.user.name.charAt(0)}
+        size="sm"
+      />
 
-        {/* Content */}
-        <div className="flex-1 min-w-0">
-          <div className="flex flex-wrap items-baseline gap-x-1">
-            <span className="font-medium text-foreground">{activity.user.name}</span>
-            <span className="text-sm text-muted-foreground">{activity.action}</span>
-            {activity.target && (
-              activity.target.href ? (
-                <a
-                  href={activity.target.href}
-                  className="text-sm font-medium text-primary hover:underline"
-                >
-                  {activity.target.name}
-                </a>
-              ) : (
-                <span className="text-sm font-medium text-foreground">
-                  {activity.target.name}
-                </span>
-              )
-            )}
-          </div>
-
-          {/* Timestamp */}
-          <p className="mt-0.5 text-xs text-muted-foreground">{activity.timestamp}</p>
-
-          {/* Content (comment, etc.) */}
-          {activity.content && (
-            <div className="mt-2">{activity.content}</div>
-          )}
-
-          {/* Metadata */}
-          {activity.metadata && (
-            <div className="mt-2">{activity.metadata}</div>
-          )}
+      {/* Content */}
+      <div className="flex-1 min-w-0">
+        <div className="flex flex-wrap items-baseline gap-x-1">
+          <span className="font-medium text-foreground">
+            {activity.user.name}
+          </span>
+          <span className="text-sm text-muted-foreground">
+            {activity.action}
+          </span>
+          {activity.target &&
+            (activity.target.href ? (
+              <a
+                href={activity.target.href}
+                className="text-sm font-medium text-primary hover:underline"
+              >
+                {activity.target.name}
+              </a>
+            ) : (
+              <span className="text-sm font-medium text-foreground">
+                {activity.target.name}
+              </span>
+            ))}
         </div>
+
+        {/* Timestamp */}
+        <p className="mt-0.5 text-xs text-muted-foreground">
+          {activity.timestamp}
+        </p>
+
+        {/* Content (comment, etc.) */}
+        {activity.content && <div className="mt-2">{activity.content}</div>}
+
+        {/* Metadata */}
+        {activity.metadata && <div className="mt-2">{activity.metadata}</div>}
       </div>
-    );
-  }
-);
+    </div>
+  );
+});
 ActivityFeedItem.displayName = "ActivityFeedItem";
 
 // Compact Activity Feed (for sidebars)
-export interface CompactActivityFeedProps extends Omit<ActivityFeedProps, "activities"> {
+export interface CompactActivityFeedProps
+  extends Omit<ActivityFeedProps, "activities"> {
   activities: Array<{
     id: string;
     icon?: React.ReactNode;
@@ -165,7 +178,10 @@ export interface CompactActivityFeedProps extends Omit<ActivityFeedProps, "activ
   }>;
 }
 
-export const CompactActivityFeed = forwardRef<HTMLDivElement, CompactActivityFeedProps>(
+export const CompactActivityFeed = forwardRef<
+  HTMLDivElement,
+  CompactActivityFeedProps
+>(
   (
     {
       className,
@@ -175,7 +191,7 @@ export const CompactActivityFeed = forwardRef<HTMLDivElement, CompactActivityFee
       maxItems,
       ...props
     },
-    ref
+    ref,
   ) => {
     const displayedActivities = maxItems
       ? activities.slice(0, maxItems)
@@ -205,35 +221,35 @@ export const CompactActivityFeed = forwardRef<HTMLDivElement, CompactActivityFee
               )}
               <div className="flex-1 min-w-0">
                 <p className="text-sm text-foreground">{activity.text}</p>
-                <p className="text-xs text-muted-foreground">{activity.timestamp}</p>
+                <p className="text-xs text-muted-foreground">
+                  {activity.timestamp}
+                </p>
               </div>
             </li>
           ))}
         </ul>
       </div>
     );
-  }
+  },
 );
 CompactActivityFeed.displayName = "CompactActivityFeed";
 
 // Activity with grouped items by date
-export interface GroupedActivityFeedProps extends Omit<ActivityFeedProps, "activities"> {
+export interface GroupedActivityFeedProps
+  extends Omit<ActivityFeedProps, "activities"> {
   groups: Array<{
     date: string;
     activities: ActivityItem[];
   }>;
 }
 
-export const GroupedActivityFeed = forwardRef<HTMLDivElement, GroupedActivityFeedProps>(
+export const GroupedActivityFeed = forwardRef<
+  HTMLDivElement,
+  GroupedActivityFeedProps
+>(
   (
-    {
-      className,
-      groups,
-      title = "Activity",
-      showHeader = true,
-      ...props
-    },
-    ref
+    { className, groups, title = "Activity", showHeader = true, ...props },
+    ref,
   ) => {
     return (
       <div
@@ -247,8 +263,8 @@ export const GroupedActivityFeed = forwardRef<HTMLDivElement, GroupedActivityFee
           </div>
         )}
         <div className="divide-y divide-border">
-          {groups.map((group, index) => (
-            <div key={index}>
+          {groups.map((group) => (
+            <div key={group.date}>
               <div className="bg-muted/50 px-4 py-2">
                 <p className="text-xs font-medium text-muted-foreground">
                   {group.date}
@@ -264,7 +280,7 @@ export const GroupedActivityFeed = forwardRef<HTMLDivElement, GroupedActivityFee
         </div>
       </div>
     );
-  }
+  },
 );
 GroupedActivityFeed.displayName = "GroupedActivityFeed";
 
@@ -286,84 +302,93 @@ export interface NotificationActivityProps {
   onMarkAllRead?: () => void;
 }
 
-export const NotificationActivity = forwardRef<HTMLDivElement, NotificationActivityProps & React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, activities, onMarkAllRead, ...props }, ref) => {
-    const unreadCount = activities.filter((a) => a.unread).length;
+export const NotificationActivity = forwardRef<
+  HTMLDivElement,
+  NotificationActivityProps & React.HTMLAttributes<HTMLDivElement>
+>(({ className, activities, onMarkAllRead, ...props }, ref) => {
+  const unreadCount = activities.filter((a) => a.unread).length;
 
-    return (
-      <div
-        ref={ref}
-        className={cn("rounded-lg border border-border bg-card", className)}
-        {...props}
-      >
-        <div className="flex items-center justify-between border-b border-border px-4 py-3">
-          <div className="flex items-center gap-x-2">
-            <h3 className="font-semibold text-foreground">Notifications</h3>
-            {unreadCount > 0 && (
-              <Badge variant="default" size="sm">{unreadCount}</Badge>
-            )}
-          </div>
-          {onMarkAllRead && unreadCount > 0 && (
-            <button
-              type="button"
-              onClick={onMarkAllRead}
-              className="text-sm text-primary hover:underline"
-            >
-              Mark all read
-            </button>
+  return (
+    <div
+      ref={ref}
+      className={cn("rounded-lg border border-border bg-card", className)}
+      {...props}
+    >
+      <div className="flex items-center justify-between border-b border-border px-4 py-3">
+        <div className="flex items-center gap-x-2">
+          <h3 className="font-semibold text-foreground">Notifications</h3>
+          {unreadCount > 0 && (
+            <Badge variant="default" size="sm">
+              {unreadCount}
+            </Badge>
           )}
         </div>
-        <div className="divide-y divide-border">
-          {activities.map((activity) => (
-            <div
-              key={activity.id}
-              className={cn(
-                "flex items-start gap-x-3 px-4 py-3",
-                activity.unread && "bg-primary/5"
-              )}
-            >
-              {activity.icon && (
-                <div className={cn(
+        {onMarkAllRead && unreadCount > 0 && (
+          <button
+            type="button"
+            onClick={onMarkAllRead}
+            className="text-sm text-primary hover:underline"
+          >
+            Mark all read
+          </button>
+        )}
+      </div>
+      <div className="divide-y divide-border">
+        {activities.map((activity) => (
+          <div
+            key={activity.id}
+            className={cn(
+              "flex items-start gap-x-3 px-4 py-3",
+              activity.unread && "bg-primary/5",
+            )}
+          >
+            {activity.icon && (
+              <div
+                className={cn(
                   "flex size-9 shrink-0 items-center justify-center rounded-full",
-                  activity.iconBg || "bg-muted text-muted-foreground"
-                )}>
-                  {activity.icon}
-                </div>
-              )}
-              <div className="flex-1 min-w-0">
-                <p className={cn(
-                  "text-sm",
-                  activity.unread ? "font-medium text-foreground" : "text-muted-foreground"
-                )}>
-                  {activity.title}
-                </p>
-                {activity.description && (
-                  <p className="mt-0.5 text-xs text-muted-foreground">
-                    {activity.description}
-                  </p>
+                  activity.iconBg || "bg-muted text-muted-foreground",
                 )}
-                <p className="mt-1 text-xs text-muted-foreground">
-                  {activity.timestamp}
-                </p>
-                {activity.action && (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="mt-2 -ml-2 h-7"
-                    onClick={activity.action.onClick}
-                  >
-                    {activity.action.label}
-                  </Button>
-                )}
+              >
+                {activity.icon}
               </div>
-              {activity.unread && (
-                <div className="size-2 shrink-0 rounded-full bg-primary" />
+            )}
+            <div className="flex-1 min-w-0">
+              <p
+                className={cn(
+                  "text-sm",
+                  activity.unread
+                    ? "font-medium text-foreground"
+                    : "text-muted-foreground",
+                )}
+              >
+                {activity.title}
+              </p>
+              {activity.description && (
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {activity.description}
+                </p>
+              )}
+              <p className="mt-1 text-xs text-muted-foreground">
+                {activity.timestamp}
+              </p>
+              {activity.action && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="mt-2 -ml-2 h-7"
+                  onClick={activity.action.onClick}
+                >
+                  {activity.action.label}
+                </Button>
               )}
             </div>
-          ))}
-        </div>
+            {activity.unread && (
+              <div className="size-2 shrink-0 rounded-full bg-primary" />
+            )}
+          </div>
+        ))}
       </div>
-    );
-  }
-);
+    </div>
+  );
+});
 NotificationActivity.displayName = "NotificationActivity";

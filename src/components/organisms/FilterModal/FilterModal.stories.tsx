@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { FilterModal } from "./index";
 import { Button } from "@/components/atoms/Button";
 import type { FilterSection, FilterValues } from "../FilterDrawer";
+import { FilterModal } from "./index";
 
 const meta: Meta<typeof FilterModal> = {
   title: "Organisms/Overlays/FilterModal",

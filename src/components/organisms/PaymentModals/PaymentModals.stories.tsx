@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
+import { Button } from "@/components/atoms/Button";
+import type { CardData, PaymentMethodType, Plan, SavedCard } from "./index";
 import {
   AddCardModal,
+  AddPaymentModal,
   ManageCardsModal,
   UpgradeModal,
-  AddPaymentModal,
 } from "./index";
-import type { SavedCard, Plan, CardData, PaymentMethodType } from "./index";
-import { Button } from "@/components/atoms/Button";
 
 const meta: Meta = {
   title: "Organisms/Overlays/PaymentModals",
@@ -225,7 +225,10 @@ export const AddPaymentMethod: StoryObj<typeof AddPaymentModal> = {
         <AddPaymentModal
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
-          onSubmit={(data: { type: PaymentMethodType; details: Record<string, string> }) => {
+          onSubmit={(data: {
+            type: PaymentMethodType;
+            details: Record<string, string>;
+          }) => {
             console.log("Selected method:", data);
             setIsOpen(false);
           }}
@@ -244,7 +247,10 @@ export const AddPaymentMethodLimited: StoryObj<typeof AddPaymentModal> = {
         <AddPaymentModal
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
-          onSubmit={(data: { type: PaymentMethodType; details: Record<string, string> }) => {
+          onSubmit={(data: {
+            type: PaymentMethodType;
+            details: Record<string, string>;
+          }) => {
             console.log("Selected method:", data);
             setIsOpen(false);
           }}

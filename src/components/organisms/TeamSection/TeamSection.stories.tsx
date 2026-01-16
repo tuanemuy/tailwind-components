@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {
-  TeamSection,
-  TeamSectionHeader,
-  TeamSectionTitle,
-  TeamSectionSubtitle,
+  CompleteTeamSection,
+  FeaturedTeamMember,
   TeamGrid,
+  type TeamMember,
   TeamMemberCard,
   TeamMemberList,
-  FeaturedTeamMember,
-  CompleteTeamSection,
-  type TeamMember,
+  TeamSection,
+  TeamSectionHeader,
+  TeamSectionSubtitle,
+  TeamSectionTitle,
 } from ".";
 
 const meta: Meta<typeof TeamSection> = {
@@ -28,7 +28,8 @@ const sampleTeam: TeamMember[] = [
     id: "1",
     name: "Sarah Johnson",
     role: "CEO & Founder",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop",
     bio: "Passionate about building products that make a difference.",
     socials: [
       { platform: "twitter", url: "https://twitter.com" },
@@ -39,7 +40,8 @@ const sampleTeam: TeamMember[] = [
     id: "2",
     name: "Michael Chen",
     role: "CTO",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop",
     bio: "Building scalable systems that power modern applications.",
     socials: [
       { platform: "twitter", url: "https://twitter.com" },
@@ -50,7 +52,8 @@ const sampleTeam: TeamMember[] = [
     id: "3",
     name: "Emily Rodriguez",
     role: "Head of Design",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop",
     bio: "Creating beautiful and intuitive user experiences.",
     socials: [
       { platform: "twitter", url: "https://twitter.com" },
@@ -61,7 +64,8 @@ const sampleTeam: TeamMember[] = [
     id: "4",
     name: "David Kim",
     role: "Head of Engineering",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop",
     bio: "Leading the team to build amazing software.",
     socials: [
       { platform: "github", url: "https://github.com" },
@@ -72,7 +76,8 @@ const sampleTeam: TeamMember[] = [
     id: "5",
     name: "Lisa Wang",
     role: "Product Manager",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop",
     bio: "Turning ideas into products that users love.",
     socials: [
       { platform: "twitter", url: "https://twitter.com" },
@@ -83,7 +88,8 @@ const sampleTeam: TeamMember[] = [
     id: "6",
     name: "James Wilson",
     role: "Marketing Lead",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop",
     bio: "Growing our brand and reaching new audiences.",
     socials: [
       { platform: "twitter", url: "https://twitter.com" },
@@ -94,21 +100,19 @@ const sampleTeam: TeamMember[] = [
     id: "7",
     name: "Anna Martinez",
     role: "Customer Success",
-    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop",
     bio: "Making sure every customer achieves their goals.",
-    socials: [
-      { platform: "linkedin", url: "https://linkedin.com" },
-    ],
+    socials: [{ platform: "linkedin", url: "https://linkedin.com" }],
   },
   {
     id: "8",
     name: "Chris Taylor",
     role: "DevOps Engineer",
-    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=200&fit=crop",
+    avatar:
+      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=200&fit=crop",
     bio: "Keeping our infrastructure running smoothly.",
-    socials: [
-      { platform: "github", url: "https://github.com" },
-    ],
+    socials: [{ platform: "github", url: "https://github.com" }],
   },
 ];
 
@@ -234,7 +238,10 @@ export const WithInitials: Story = {
     const teamWithInitials = sampleTeam.map((m) => ({
       ...m,
       avatar: undefined,
-      initials: m.name.split(" ").map((n) => n[0]).join(""),
+      initials: m.name
+        .split(" ")
+        .map((n) => n[0])
+        .join(""),
     }));
 
     return (

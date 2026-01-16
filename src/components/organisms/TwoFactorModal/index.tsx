@@ -1,9 +1,14 @@
-import { forwardRef, useState, useRef, useEffect } from "react";
-import { cn } from "@/lib/utils";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/atoms/Button";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "@/components/organisms/Modal";
-import { Stepper, Step } from "@/components/molecules/Stepper";
-import { CheckCircleIcon, LockIcon, CopyIcon, CheckIcon } from "@/lib/icons";
+import { Step, Stepper } from "@/components/molecules/Stepper";
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "@/components/organisms/Modal";
+import { CheckCircleIcon, CheckIcon, CopyIcon, LockIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 export type TwoFactorStep = "setup" | "verify" | "backup" | "complete";
 
@@ -74,7 +79,10 @@ export const TwoFactorModal = forwardRef<HTMLDivElement, TwoFactorModalProps>(
 
     const handlePaste = (e: React.ClipboardEvent) => {
       e.preventDefault();
-      const pastedText = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
+      const pastedText = e.clipboardData
+        .getData("text")
+        .replace(/\D/g, "")
+        .slice(0, 6);
       const newCode = [...code];
       for (let i = 0; i < pastedText.length; i++) {
         newCode[i] = pastedText[i];
@@ -83,7 +91,10 @@ export const TwoFactorModal = forwardRef<HTMLDivElement, TwoFactorModalProps>(
       inputRefs.current[Math.min(pastedText.length, 5)]?.focus();
     };
 
-    const copyToClipboard = async (text: string, setCopied: (v: boolean) => void) => {
+    const copyToClipboard = async (
+      text: string,
+      setCopied: (v: boolean) => void,
+    ) => {
       try {
         await navigator.clipboard.writeText(text);
         setCopied(true);
@@ -187,7 +198,9 @@ export const TwoFactorModal = forwardRef<HTMLDivElement, TwoFactorModalProps>(
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => copyToClipboard(secretKey, setCopiedSecret)}
+                        onClick={() =>
+                          copyToClipboard(secretKey, setCopiedSecret)
+                        }
                       >
                         {copiedSecret ? (
                           <CheckIcon className="size-4 text-success" />
@@ -209,10 +222,14 @@ export const TwoFactorModal = forwardRef<HTMLDivElement, TwoFactorModalProps>(
                 </p>
 
                 {/* Code input */}
-                <div className="flex justify-center gap-2" onPaste={handlePaste}>
+                <div
+                  className="flex justify-center gap-2"
+                  onPaste={handlePaste}
+                >
                   {code.map((digit, index) => (
                     <input
-                      key={index}
+                      // biome-ignore lint/suspicious/noArrayIndexKey: Input position represents digit position in code
+                      key={`code-input-${index}`}
                       ref={(el) => {
                         inputRefs.current[index] = el;
                       }}
@@ -252,14 +269,18 @@ export const TwoFactorModal = forwardRef<HTMLDivElement, TwoFactorModalProps>(
               <div className="space-y-4">
                 <div className="rounded-lg border border-warning/50 bg-warning/10 p-3">
                   <p className="text-sm text-warning">
-                    <strong>Important:</strong> Save these backup codes in a secure place.
-                    You can use them to access your account if you lose your authenticator device.
+                    <strong>Important:</strong> Save these backup codes in a
+                    secure place. You can use them to access your account if you
+                    lose your authenticator device.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2 rounded-lg border border-border p-4">
-                  {backupCodes.map((code, index) => (
-                    <code key={index} className="font-mono text-sm text-foreground">
+                  {backupCodes.map((code) => (
+                    <code
+                      key={code}
+                      className="font-mono text-sm text-foreground"
+                    >
                       {code}
                     </code>
                   ))}
@@ -286,7 +307,11 @@ export const TwoFactorModal = forwardRef<HTMLDivElement, TwoFactorModalProps>(
                     )}
                   </Button>
                   {onRequestNewBackupCodes && (
-                    <Button variant="outline" size="sm" onClick={onRequestNewBackupCodes}>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={onRequestNewBackupCodes}
+                    >
                       Generate new codes
                     </Button>
                   )}
@@ -305,8 +330,8 @@ export const TwoFactorModal = forwardRef<HTMLDivElement, TwoFactorModalProps>(
                     Two-factor authentication enabled
                   </h4>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    Your account is now more secure. You'll need to enter a code from your
-                    authenticator app when signing in.
+                    Your account is now more secure. You'll need to enter a code
+                    from your authenticator app when signing in.
                   </p>
                 </div>
               </div>
@@ -370,7 +395,11 @@ export const TwoFactorModal = forwardRef<HTMLDivElement, TwoFactorModalProps>(
           )}
 
           {currentStep === "complete" && (
-            <Button variant="primary" onClick={handleComplete} className="w-full">
+            <Button
+              variant="primary"
+              onClick={handleComplete}
+              className="w-full"
+            >
               Done
             </Button>
           )}

@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "./index";
 import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
 import { Label } from "@/components/atoms/Label";
+import { Modal, ModalBody, ModalFooter, ModalHeader } from "./index";
 
 const meta: Meta<typeof Modal> = {
   title: "Organisms/Modal",
@@ -33,11 +33,14 @@ const ModalDemo = ({
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} size={size}>
         {children || (
           <>
-            <ModalHeader title="Modal Title" subtitle="Optional subtitle text" />
+            <ModalHeader
+              title="Modal Title"
+              subtitle="Optional subtitle text"
+            />
             <ModalBody>
               <p className="text-muted-foreground">
-                This is the modal body content. You can put any content here including
-                forms, text, images, or other components.
+                This is the modal body content. You can put any content here
+                including forms, text, images, or other components.
               </p>
             </ModalBody>
             <ModalFooter>
@@ -90,7 +93,11 @@ export const WithForm: Story = {
               </div>
               <div>
                 <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" placeholder="Create a password" />
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="Create a password"
+                />
               </div>
             </form>
           </ModalBody>
@@ -119,7 +126,8 @@ export const Confirmation: Story = {
           <ModalHeader title="Delete Item" />
           <ModalBody>
             <p className="text-muted-foreground">
-              Are you sure you want to delete this item? This action cannot be undone.
+              Are you sure you want to delete this item? This action cannot be
+              undone.
             </p>
           </ModalBody>
           <ModalFooter>
@@ -148,13 +156,13 @@ export const ScrollableContent: Story = {
           <ModalBody scrollable maxHeight="max-h-[50vh]">
             <div className="space-y-4 text-sm text-muted-foreground">
               {Array.from({ length: 10 }, (_, i) => (
-                <p key={i}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                  ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in
-                  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                  pariatur.
+                <p key={`paragraph-${i + 1}`}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                  irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur.
                 </p>
               ))}
             </div>

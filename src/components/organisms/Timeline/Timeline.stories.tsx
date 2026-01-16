@@ -1,21 +1,21 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {
-  Timeline,
-  TimelineItemComponent,
-  ActivityTimeline,
-  OrderTimeline,
-  HistoryTimeline,
-} from "./index";
-import {
   CheckIcon,
   EditIcon,
-  PlusIcon,
-  UploadIcon,
   MailIcon,
+  MapPinIcon,
+  PlusIcon,
   ShoppingBagIcon,
   TruckIcon,
-  MapPinIcon,
+  UploadIcon,
 } from "@/lib/icons";
+import {
+  ActivityTimeline,
+  HistoryTimeline,
+  OrderTimeline,
+  Timeline,
+  TimelineItemComponent,
+} from "./index";
 
 const meta: Meta<typeof Timeline> = {
   title: "Organisms/PageSections/Timeline",
@@ -168,15 +168,21 @@ export const DotSizes: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="max-w-lg">
-        <h4 className="mb-4 text-sm font-medium text-muted-foreground">Small</h4>
+        <h4 className="mb-4 text-sm font-medium text-muted-foreground">
+          Small
+        </h4>
         <Timeline dotSize="sm" items={basicItems.slice(0, 2)} />
       </div>
       <div className="max-w-lg">
-        <h4 className="mb-4 text-sm font-medium text-muted-foreground">Medium</h4>
+        <h4 className="mb-4 text-sm font-medium text-muted-foreground">
+          Medium
+        </h4>
         <Timeline dotSize="md" items={basicItems.slice(0, 2)} />
       </div>
       <div className="max-w-lg">
-        <h4 className="mb-4 text-sm font-medium text-muted-foreground">Large</h4>
+        <h4 className="mb-4 text-sm font-medium text-muted-foreground">
+          Large
+        </h4>
         <Timeline dotSize="lg" items={basicItems.slice(0, 2)} />
       </div>
     </div>
@@ -190,14 +196,22 @@ export const Activity: StoryObj<typeof ActivityTimeline> = {
       <ActivityTimeline
         activities={[
           {
-            user: { name: "John Doe", avatarSrc: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" },
+            user: {
+              name: "John Doe",
+              avatarSrc:
+                "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face",
+            },
             action: "created",
             target: "Project Alpha",
             timestamp: "2 hours ago",
             dotVariant: "success",
           },
           {
-            user: { name: "Sarah Smith", avatarSrc: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop&crop=face" },
+            user: {
+              name: "Sarah Smith",
+              avatarSrc:
+                "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop&crop=face",
+            },
             action: "commented on",
             target: "Task #123",
             timestamp: "4 hours ago",
@@ -268,7 +282,11 @@ export const ChangeHistory: StoryObj<typeof HistoryTimeline> = {
             timestamp: "Today at 3:45 PM",
             user: { name: "John Doe" },
             changes: [
-              { field: "Status", oldValue: "In Progress", newValue: "Completed" },
+              {
+                field: "Status",
+                oldValue: "In Progress",
+                newValue: "Completed",
+              },
             ],
           },
           {
@@ -302,9 +320,12 @@ export const WithContent: Story = {
         content: (
           <div className="rounded-lg border border-border bg-muted/30 p-3">
             <p className="text-sm text-muted-foreground">
-              "Hey, just checking in on the project status. Let me know if you need any help!"
+              "Hey, just checking in on the project status. Let me know if you
+              need any help!"
             </p>
-            <p className="mt-2 text-xs text-muted-foreground">From: team@example.com</p>
+            <p className="mt-2 text-xs text-muted-foreground">
+              From: team@example.com
+            </p>
           </div>
         ),
       },
@@ -381,7 +402,10 @@ export const Composable: Story = {
         <TimelineItemComponent
           title="Custom item 2"
           timestamp="1 hour ago"
-          avatar={{ src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face", fallback: "JD" }}
+          avatar={{
+            src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face",
+            fallback: "JD",
+          }}
         />
         <TimelineItemComponent
           title="Custom item 3"

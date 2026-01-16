@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { ShareModal } from "./index";
-import type { ShareAccess } from "./index";
 import { Button } from "@/components/atoms/Button";
+import type { ShareAccess } from "./index";
+import { ShareModal } from "./index";
 
 const meta: Meta<typeof ShareModal> = {
   title: "Organisms/Overlays/ShareModal",
@@ -39,7 +39,9 @@ export const WithAccessOptions: Story = {
 
     return (
       <>
-        <Button onClick={() => setIsOpen(true)}>Share with Access Control</Button>
+        <Button onClick={() => setIsOpen(true)}>
+          Share with Access Control
+        </Button>
         <ShareModal
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}

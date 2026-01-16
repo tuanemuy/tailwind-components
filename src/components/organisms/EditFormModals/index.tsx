@@ -1,25 +1,30 @@
-import { forwardRef, useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { forwardRef, type ReactNode, useState } from "react";
+import { Avatar } from "@/components/atoms/Avatar";
+import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
 import { Textarea } from "@/components/atoms/Textarea";
-import { Avatar } from "@/components/atoms/Avatar";
-import { Badge } from "@/components/atoms/Badge";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "@/components/organisms/Modal";
+import { DatePicker } from "@/components/molecules/DatePicker";
 import { FormField } from "@/components/molecules/FormField";
 import { Select, type SelectOption } from "@/components/molecules/Select";
-import { DatePicker } from "@/components/molecules/DatePicker";
 import { TimePicker, type TimeValue } from "@/components/molecules/TimePicker";
 import {
-  UserIcon,
-  MailIcon,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "@/components/organisms/Modal";
+import {
   CalendarIcon,
   FolderIcon,
-  TagIcon,
-  PlusIcon,
-  XIcon,
   ImageIcon,
+  MailIcon,
+  PlusIcon,
+  TagIcon,
+  UserIcon,
+  XIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // ============================================
 // EditUserModal
@@ -83,9 +88,14 @@ export const EditUserModal = forwardRef<HTMLDivElement, EditUserModalProps>(
       tags: initialData.tags || [],
     });
     const [newTag, setNewTag] = useState("");
-    const [errors, setErrors] = useState<Partial<Record<keyof UserFormData, string>>>({});
+    const [errors, setErrors] = useState<
+      Partial<Record<keyof UserFormData, string>>
+    >({});
 
-    const handleChange = (field: keyof UserFormData, value: string | string[]) => {
+    const handleChange = (
+      field: keyof UserFormData,
+      value: string | string[],
+    ) => {
       setFormData((prev) => ({ ...prev, [field]: value }));
       setErrors((prev) => ({ ...prev, [field]: undefined }));
     };
@@ -182,7 +192,9 @@ export const EditUserModal = forwardRef<HTMLDivElement, EditUserModalProps>(
                 fallback={formData.firstName.charAt(0) || "U"}
               />
               <div className="flex-1">
-                <p className="text-sm font-medium text-foreground">Profile Photo</p>
+                <p className="text-sm font-medium text-foreground">
+                  Profile Photo
+                </p>
                 <p className="text-xs text-muted-foreground">
                   JPG, GIF or PNG. Max size 2MB.
                 </p>
@@ -207,11 +219,7 @@ export const EditUserModal = forwardRef<HTMLDivElement, EditUserModalProps>(
 
             {/* Name fields */}
             <div className="grid gap-4 sm:grid-cols-2">
-              <FormField
-                label="First Name"
-                required
-                error={errors.firstName}
-              >
+              <FormField label="First Name" required error={errors.firstName}>
                 <Input
                   value={formData.firstName}
                   onChange={(e) => handleChange("firstName", e.target.value)}
@@ -219,11 +227,7 @@ export const EditUserModal = forwardRef<HTMLDivElement, EditUserModalProps>(
                   disabled={loading}
                 />
               </FormField>
-              <FormField
-                label="Last Name"
-                required
-                error={errors.lastName}
-              >
+              <FormField label="Last Name" required error={errors.lastName}>
                 <Input
                   value={formData.lastName}
                   onChange={(e) => handleChange("lastName", e.target.value)}
@@ -235,11 +239,7 @@ export const EditUserModal = forwardRef<HTMLDivElement, EditUserModalProps>(
 
             {/* Contact fields */}
             <div className="grid gap-4 sm:grid-cols-2">
-              <FormField
-                label="Email"
-                required
-                error={errors.email}
-              >
+              <FormField label="Email" required error={errors.email}>
                 <Input
                   type="email"
                   value={formData.email}
@@ -456,7 +456,9 @@ export const EditEventModal = forwardRef<HTMLDivElement, EditEventModalProps>(
       color: initialData.color || "blue",
     });
     const [newAttendee, setNewAttendee] = useState("");
-    const [errors, setErrors] = useState<Partial<Record<keyof EventFormData, string>>>({});
+    const [errors, setErrors] = useState<
+      Partial<Record<keyof EventFormData, string>>
+    >({});
 
     const handleChange = <K extends keyof EventFormData>(
       field: K,
@@ -467,7 +469,10 @@ export const EditEventModal = forwardRef<HTMLDivElement, EditEventModalProps>(
     };
 
     const addAttendee = () => {
-      if (newAttendee.trim() && !formData.attendees?.includes(newAttendee.trim())) {
+      if (
+        newAttendee.trim() &&
+        !formData.attendees?.includes(newAttendee.trim())
+      ) {
         setFormData((prev) => ({
           ...prev,
           attendees: [...(prev.attendees || []), newAttendee.trim()],
@@ -493,8 +498,10 @@ export const EditEventModal = forwardRef<HTMLDivElement, EditEventModalProps>(
         newErrors.date = "Date is required";
       }
       if (!formData.isAllDay && formData.startTime && formData.endTime) {
-        const startMinutes = formData.startTime.hours * 60 + formData.startTime.minutes;
-        const endMinutes = formData.endTime.hours * 60 + formData.endTime.minutes;
+        const startMinutes =
+          formData.startTime.hours * 60 + formData.startTime.minutes;
+        const endMinutes =
+          formData.endTime.hours * 60 + formData.endTime.minutes;
         if (startMinutes >= endMinutes) {
           newErrors.endTime = "End time must be after start time";
         }
@@ -778,7 +785,10 @@ const defaultPriorityOptions: SelectOption[] = [
   { value: "urgent", label: "Urgent" },
 ];
 
-export const CreateProjectModal = forwardRef<HTMLDivElement, CreateProjectModalProps>(
+export const CreateProjectModal = forwardRef<
+  HTMLDivElement,
+  CreateProjectModalProps
+>(
   (
     {
       isOpen,
@@ -811,7 +821,9 @@ export const CreateProjectModal = forwardRef<HTMLDivElement, CreateProjectModalP
     });
     const [newMember, setNewMember] = useState("");
     const [newTag, setNewTag] = useState("");
-    const [errors, setErrors] = useState<Partial<Record<keyof ProjectFormData, string>>>({});
+    const [errors, setErrors] = useState<
+      Partial<Record<keyof ProjectFormData, string>>
+    >({});
 
     const handleChange = <K extends keyof ProjectFormData>(
       field: K,
@@ -822,7 +834,10 @@ export const CreateProjectModal = forwardRef<HTMLDivElement, CreateProjectModalP
     };
 
     const addMember = () => {
-      if (newMember.trim() && !formData.teamMembers?.includes(newMember.trim())) {
+      if (
+        newMember.trim() &&
+        !formData.teamMembers?.includes(newMember.trim())
+      ) {
         setFormData((prev) => ({
           ...prev,
           teamMembers: [...(prev.teamMembers || []), newMember.trim()],
@@ -861,7 +876,11 @@ export const CreateProjectModal = forwardRef<HTMLDivElement, CreateProjectModalP
       if (!formData.name.trim()) {
         newErrors.name = "Project name is required";
       }
-      if (formData.startDate && formData.endDate && formData.startDate > formData.endDate) {
+      if (
+        formData.startDate &&
+        formData.endDate &&
+        formData.startDate > formData.endDate
+      ) {
         newErrors.endDate = "End date must be after start date";
       }
 
@@ -923,7 +942,10 @@ export const CreateProjectModal = forwardRef<HTMLDivElement, CreateProjectModalP
                 <Select
                   value={formData.template}
                   onChange={(value) => handleChange("template", value)}
-                  options={[{ value: "", label: "Blank project" }, ...templateOptions]}
+                  options={[
+                    { value: "", label: "Blank project" },
+                    ...templateOptions,
+                  ]}
                   disabled={loading}
                 />
               </FormField>

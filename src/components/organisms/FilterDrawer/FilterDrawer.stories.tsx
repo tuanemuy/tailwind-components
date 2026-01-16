@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { FilterDrawer, ActiveFilters } from "./index";
 import { Button } from "@/components/atoms/Button";
 import type { FilterSection, FilterValues } from "./index";
+import { ActiveFilters, FilterDrawer } from "./index";
 
 const meta: Meta<typeof FilterDrawer> = {
   title: "Organisms/Overlays/FilterDrawer",
@@ -105,7 +105,9 @@ export const WithActiveFilters: Story = {
                 if (Array.isArray(current) && typeof current[0] === "string") {
                   return {
                     ...prev,
-                    [sectionId]: (current as string[]).filter((v) => v !== optionId),
+                    [sectionId]: (current as string[]).filter(
+                      (v) => v !== optionId,
+                    ),
                   };
                 }
                 const { [sectionId]: _, ...rest } = prev;

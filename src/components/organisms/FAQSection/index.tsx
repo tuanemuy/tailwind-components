@@ -1,6 +1,6 @@
-import { forwardRef, useState, type ReactNode } from "react";
+import { forwardRef, type ReactNode, useState } from "react";
+import { ChevronDownIcon, MinusIcon, PlusIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
-import { ChevronDownIcon, PlusIcon, MinusIcon } from "@/lib/icons";
 
 // Types
 export interface FAQItem {
@@ -29,11 +29,24 @@ const backgroundClasses = {
 };
 
 export const FAQSection = forwardRef<HTMLElement, FAQSectionProps>(
-  ({ className, padding = "lg", backgroundColor = "default", children, ...props }, ref) => {
+  (
+    {
+      className,
+      padding = "lg",
+      backgroundColor = "default",
+      children,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <section
         ref={ref}
-        className={cn(paddingClasses[padding], backgroundClasses[backgroundColor], className)}
+        className={cn(
+          paddingClasses[padding],
+          backgroundClasses[backgroundColor],
+          className,
+        )}
         {...props}
       >
         <div className="container mx-auto px-4">{children}</div>
@@ -44,61 +57,76 @@ export const FAQSection = forwardRef<HTMLElement, FAQSectionProps>(
 FAQSection.displayName = "FAQSection";
 
 // FAQSectionHeader component
-export interface FAQSectionHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FAQSectionHeaderProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   align?: "left" | "center";
 }
 
-export const FAQSectionHeader = forwardRef<HTMLDivElement, FAQSectionHeaderProps>(
-  ({ className, align = "center", children, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "mb-12 md:mb-16",
-          align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-2xl text-left",
-          className,
-        )}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  },
-);
+export const FAQSectionHeader = forwardRef<
+  HTMLDivElement,
+  FAQSectionHeaderProps
+>(({ className, align = "center", children, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "mb-12 md:mb-16",
+        align === "center"
+          ? "mx-auto max-w-3xl text-center"
+          : "max-w-2xl text-left",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+});
 FAQSectionHeader.displayName = "FAQSectionHeader";
 
 // FAQSectionTitle component
-export interface FAQSectionTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+export interface FAQSectionTitleProps
+  extends React.HTMLAttributes<HTMLHeadingElement> {
   as?: "h2" | "h3";
 }
 
-export const FAQSectionTitle = forwardRef<HTMLHeadingElement, FAQSectionTitleProps>(
-  ({ className, as: Component = "h2", children, ...props }, ref) => {
-    return (
-      <Component
-        ref={ref}
-        className={cn("text-3xl font-bold text-foreground md:text-4xl", className)}
-        {...props}
-      >
-        {children}
-      </Component>
-    );
-  },
-);
+export const FAQSectionTitle = forwardRef<
+  HTMLHeadingElement,
+  FAQSectionTitleProps
+>(({ className, as: Component = "h2", children, ...props }, ref) => {
+  return (
+    <Component
+      ref={ref}
+      className={cn(
+        "text-3xl font-bold text-foreground md:text-4xl",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </Component>
+  );
+});
 FAQSectionTitle.displayName = "FAQSectionTitle";
 
 // FAQSectionSubtitle component
-export interface FAQSectionSubtitleProps extends React.HTMLAttributes<HTMLParagraphElement> {}
+export interface FAQSectionSubtitleProps
+  extends React.HTMLAttributes<HTMLParagraphElement> {}
 
-export const FAQSectionSubtitle = forwardRef<HTMLParagraphElement, FAQSectionSubtitleProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <p ref={ref} className={cn("mt-4 text-lg text-muted-foreground", className)} {...props}>
-        {children}
-      </p>
-    );
-  },
-);
+export const FAQSectionSubtitle = forwardRef<
+  HTMLParagraphElement,
+  FAQSectionSubtitleProps
+>(({ className, children, ...props }, ref) => {
+  return (
+    <p
+      ref={ref}
+      className={cn("mt-4 text-lg text-muted-foreground", className)}
+      {...props}
+    >
+      {children}
+    </p>
+  );
+});
 FAQSectionSubtitle.displayName = "FAQSectionSubtitle";
 
 // FAQList component
@@ -136,7 +164,12 @@ export const FAQList = forwardRef<HTMLDivElement, FAQListProps>(
     return (
       <div
         ref={ref}
-        className={cn("mx-auto", gapClasses[gap], maxWidthClasses[maxWidth], className)}
+        className={cn(
+          "mx-auto",
+          gapClasses[gap],
+          maxWidthClasses[maxWidth],
+          className,
+        )}
         {...props}
       >
         {children}
@@ -147,7 +180,8 @@ export const FAQList = forwardRef<HTMLDivElement, FAQListProps>(
 FAQList.displayName = "FAQList";
 
 // FAQAccordionItem component
-export interface FAQAccordionItemProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FAQAccordionItemProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   question: string;
   answer: string | ReactNode;
   defaultOpen?: boolean;
@@ -161,7 +195,10 @@ const accordionVariants = {
   separated: "rounded-lg bg-muted/50",
 };
 
-export const FAQAccordionItem = forwardRef<HTMLDivElement, FAQAccordionItemProps>(
+export const FAQAccordionItem = forwardRef<
+  HTMLDivElement,
+  FAQAccordionItemProps
+>(
   (
     {
       className,
@@ -179,7 +216,11 @@ export const FAQAccordionItem = forwardRef<HTMLDivElement, FAQAccordionItemProps
     return (
       <div
         ref={ref}
-        className={cn(accordionVariants[variant], variant !== "default" && "mb-3", className)}
+        className={cn(
+          accordionVariants[variant],
+          variant !== "default" && "mb-3",
+          className,
+        )}
         {...props}
       >
         <button
@@ -207,7 +248,9 @@ export const FAQAccordionItem = forwardRef<HTMLDivElement, FAQAccordionItemProps
         <div
           className={cn(
             "grid transition-all duration-200",
-            isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
+            isOpen
+              ? "grid-rows-[1fr] opacity-100"
+              : "grid-rows-[0fr] opacity-0",
           )}
         >
           <div className="overflow-hidden">
@@ -228,7 +271,8 @@ export const FAQAccordionItem = forwardRef<HTMLDivElement, FAQAccordionItemProps
 FAQAccordionItem.displayName = "FAQAccordionItem";
 
 // FAQSimpleItem component
-export interface FAQSimpleItemProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FAQSimpleItemProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   question: string;
   answer: string | ReactNode;
 }
@@ -283,7 +327,8 @@ export interface FAQCategoryItem {
   count?: number;
 }
 
-export interface FAQCategoriesProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
+export interface FAQCategoriesProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   categories: FAQCategoryItem[];
   activeCategory: string;
   onChange: (category: string) => void;
@@ -294,7 +339,10 @@ export const FAQCategories = forwardRef<HTMLDivElement, FAQCategoriesProps>(
     return (
       <div
         ref={ref}
-        className={cn("mb-8 flex flex-wrap items-center justify-center gap-2", className)}
+        className={cn(
+          "mb-8 flex flex-wrap items-center justify-center gap-2",
+          className,
+        )}
         {...props}
       >
         {categories.map((category) => (
@@ -311,7 +359,9 @@ export const FAQCategories = forwardRef<HTMLDivElement, FAQCategoriesProps>(
           >
             {category.name}
             {category.count !== undefined && (
-              <span className="ml-1.5 text-xs opacity-75">({category.count})</span>
+              <span className="ml-1.5 text-xs opacity-75">
+                ({category.count})
+              </span>
             )}
           </button>
         ))}
@@ -322,7 +372,8 @@ export const FAQCategories = forwardRef<HTMLDivElement, FAQCategoriesProps>(
 FAQCategories.displayName = "FAQCategories";
 
 // CompleteFAQSection component - pre-composed full FAQ section
-export interface CompleteFAQSectionProps extends React.HTMLAttributes<HTMLElement> {
+export interface CompleteFAQSectionProps
+  extends React.HTMLAttributes<HTMLElement> {
   title: string;
   subtitle?: string;
   items: FAQItem[];
@@ -337,7 +388,10 @@ export interface CompleteFAQSectionProps extends React.HTMLAttributes<HTMLElemen
   };
 }
 
-export const CompleteFAQSection = forwardRef<HTMLElement, CompleteFAQSectionProps>(
+export const CompleteFAQSection = forwardRef<
+  HTMLElement,
+  CompleteFAQSectionProps
+>(
   (
     {
       className,
@@ -355,7 +409,9 @@ export const CompleteFAQSection = forwardRef<HTMLElement, CompleteFAQSectionProp
     const categories = enableCategories
       ? Array.from(new Set(items.map((item) => item.category || "General")))
       : [];
-    const [activeCategory, setActiveCategory] = useState(categories[0] || "General");
+    const [activeCategory, setActiveCategory] = useState(
+      categories[0] || "General",
+    );
 
     const filteredItems = enableCategories
       ? items.filter((item) => (item.category || "General") === activeCategory)
@@ -372,7 +428,9 @@ export const CompleteFAQSection = forwardRef<HTMLElement, CompleteFAQSectionProp
           <FAQCategories
             categories={categories.map((name) => ({
               name,
-              count: items.filter((item) => (item.category || "General") === name).length,
+              count: items.filter(
+                (item) => (item.category || "General") === name,
+              ).length,
             }))}
             activeCategory={activeCategory}
             onChange={setActiveCategory}

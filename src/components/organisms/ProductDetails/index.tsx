@@ -1,20 +1,20 @@
 "use client";
 
-import { forwardRef, useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
-import { Button, Badge, Separator } from "@/components/atoms";
+import { forwardRef, type ReactNode, useState } from "react";
+import { Badge, Button, Separator } from "@/components/atoms";
 import { IconButton } from "@/components/molecules";
 import {
+  CheckIcon,
   HeartIcon,
-  ShareIcon,
-  TruckIcon,
-  RefreshIcon,
-  StarIcon,
   MinusIcon,
   PlusIcon,
+  RefreshIcon,
+  ShareIcon,
   ShoppingBagIcon,
-  CheckIcon,
+  StarIcon,
+  TruckIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Types
 export interface ProductVariant {
@@ -36,7 +36,8 @@ export interface ProductImage {
   thumbnail?: string;
 }
 
-export interface ProductDetailsProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ProductDetailsProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   name: string;
   description?: string;
   price: number;
@@ -51,7 +52,10 @@ export interface ProductDetailsProps extends React.HTMLAttributes<HTMLDivElement
   stockQuantity?: number;
   sku?: string;
   features?: string[];
-  badges?: Array<{ label: string; variant?: "default" | "secondary" | "destructive" }>;
+  badges?: Array<{
+    label: string;
+    variant?: "default" | "secondary" | "destructive";
+  }>;
   deliveryInfo?: string;
   returnPolicy?: string;
   onVariantChange?: (variantType: string, value: string) => void;
@@ -66,7 +70,7 @@ export interface ProductDetailsProps extends React.HTMLAttributes<HTMLDivElement
   additionalContent?: ReactNode;
 }
 
-const formatPrice = (amount: number, currency: string = "USD"): string => {
+const formatPrice = (amount: number, currency = "USD"): string => {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency,
@@ -125,7 +129,8 @@ export const ProductDetails = forwardRef<HTMLDivElement, ProductDetailsProps>(
           <div className="flex items-center">
             {Array.from({ length: 5 }).map((_, i) => (
               <StarIcon
-                key={i}
+                // biome-ignore lint/suspicious/noArrayIndexKey: Star position is the unique identifier
+                key={`star-${i}`}
                 className={cn(
                   "size-4",
                   i < fullStars
@@ -138,7 +143,9 @@ export const ProductDetails = forwardRef<HTMLDivElement, ProductDetailsProps>(
             ))}
           </div>
           {reviewCount !== undefined && (
-            <span className="text-sm text-muted-foreground">({reviewCount} reviews)</span>
+            <span className="text-sm text-muted-foreground">
+              ({reviewCount} reviews)
+            </span>
           )}
         </div>
       );
@@ -149,9 +156,13 @@ export const ProductDetails = forwardRef<HTMLDivElement, ProductDetailsProps>(
       return variants.map((variant) => (
         <div key={variant.id} className="space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-foreground">{variant.name}</span>
+            <span className="text-sm font-medium text-foreground">
+              {variant.name}
+            </span>
             {selectedVariants[variant.id] && (
-              <span className="text-sm text-muted-foreground">{selectedVariants[variant.id]}</span>
+              <span className="text-sm text-muted-foreground">
+                {selectedVariants[variant.id]}
+              </span>
             )}
           </div>
 
@@ -159,6 +170,7 @@ export const ProductDetails = forwardRef<HTMLDivElement, ProductDetailsProps>(
             <div className="flex flex-wrap gap-2">
               {variant.options.map((option) => (
                 <button
+                  type="button"
                   key={option.value}
                   className={cn(
                     "size-10 rounded-full border-2 transition-all",
@@ -167,8 +179,15 @@ export const ProductDetails = forwardRef<HTMLDivElement, ProductDetailsProps>(
                       : "border-border hover:border-muted-foreground",
                     !option.available && "opacity-50 cursor-not-allowed",
                   )}
-                  style={option.colorHex ? { backgroundColor: option.colorHex } : undefined}
-                  onClick={() => option.available && onVariantChange?.(variant.id, option.value)}
+                  style={
+                    option.colorHex
+                      ? { backgroundColor: option.colorHex }
+                      : undefined
+                  }
+                  onClick={() =>
+                    option.available &&
+                    onVariantChange?.(variant.id, option.value)
+                  }
                   disabled={!option.available}
                   title={option.label}
                 >
@@ -186,15 +205,20 @@ export const ProductDetails = forwardRef<HTMLDivElement, ProductDetailsProps>(
             <div className="flex flex-wrap gap-2">
               {variant.options.map((option) => (
                 <button
+                  type="button"
                   key={option.value}
                   className={cn(
                     "px-4 py-2 text-sm border rounded-lg transition-colors",
                     selectedVariants[variant.id] === option.value
                       ? "border-primary bg-primary/5 text-primary"
                       : "border-border hover:border-muted-foreground text-foreground",
-                    !option.available && "opacity-50 cursor-not-allowed line-through",
+                    !option.available &&
+                      "opacity-50 cursor-not-allowed line-through",
                   )}
-                  onClick={() => option.available && onVariantChange?.(variant.id, option.value)}
+                  onClick={() =>
+                    option.available &&
+                    onVariantChange?.(variant.id, option.value)
+                  }
                   disabled={!option.available}
                 >
                   {option.label}
@@ -212,6 +236,7 @@ export const ProductDetails = forwardRef<HTMLDivElement, ProductDetailsProps>(
         <span className="text-sm font-medium text-foreground">Quantity</span>
         <div className="flex items-center border border-border rounded-lg">
           <button
+            type="button"
             className="p-2 hover:bg-muted rounded-l-lg transition-colors disabled:opacity-50"
             onClick={() => onQuantityChange?.(Math.max(1, quantity - 1))}
             disabled={quantity <= 1}
@@ -220,15 +245,20 @@ export const ProductDetails = forwardRef<HTMLDivElement, ProductDetailsProps>(
           </button>
           <span className="w-12 text-center text-foreground">{quantity}</span>
           <button
+            type="button"
             className="p-2 hover:bg-muted rounded-r-lg transition-colors disabled:opacity-50"
-            onClick={() => onQuantityChange?.(Math.min(maxQuantity, quantity + 1))}
+            onClick={() =>
+              onQuantityChange?.(Math.min(maxQuantity, quantity + 1))
+            }
             disabled={quantity >= maxQuantity}
           >
             <PlusIcon className="size-4" />
           </button>
         </div>
         {stockQuantity !== undefined && stockQuantity < 10 && (
-          <span className="text-sm text-warning">Only {stockQuantity} left</span>
+          <span className="text-sm text-warning">
+            Only {stockQuantity} left
+          </span>
         )}
       </div>
     );
@@ -256,8 +286,8 @@ export const ProductDetails = forwardRef<HTMLDivElement, ProductDetailsProps>(
             {/* Badges */}
             {badges.length > 0 && (
               <div className="absolute top-4 left-4 flex flex-col gap-2">
-                {badges.map((badge, index) => (
-                  <Badge key={index} variant={badge.variant || "default"}>
+                {badges.map((badge) => (
+                  <Badge key={badge.label} variant={badge.variant || "default"}>
                     {badge.label}
                   </Badge>
                 ))}
@@ -296,10 +326,13 @@ export const ProductDetails = forwardRef<HTMLDivElement, ProductDetailsProps>(
             <div className="flex gap-2 overflow-x-auto">
               {images.map((image, index) => (
                 <button
-                  key={index}
+                  type="button"
+                  key={image.src}
                   className={cn(
                     "flex-shrink-0 size-20 rounded-lg overflow-hidden border-2 transition-colors",
-                    currentImageIndex === index ? "border-primary" : "border-transparent",
+                    currentImageIndex === index
+                      ? "border-primary"
+                      : "border-transparent",
                   )}
                   onClick={() => setCurrentImageIndex(index)}
                 >
@@ -315,22 +348,36 @@ export const ProductDetails = forwardRef<HTMLDivElement, ProductDetailsProps>(
         </div>
 
         {/* Product Info */}
-        <div className={cn("space-y-6", layout === "sticky" && "lg:sticky lg:top-6 lg:self-start")}>
+        <div
+          className={cn(
+            "space-y-6",
+            layout === "sticky" && "lg:sticky lg:top-6 lg:self-start",
+          )}
+        >
           {/* Title & Rating */}
           <div>
-            <h1 className="text-2xl lg:text-3xl font-semibold text-foreground">{name}</h1>
+            <h1 className="text-2xl lg:text-3xl font-semibold text-foreground">
+              {name}
+            </h1>
             {renderRating()}
-            {sku && <p className="mt-1 text-sm text-muted-foreground">SKU: {sku}</p>}
+            {sku && (
+              <p className="mt-1 text-sm text-muted-foreground">SKU: {sku}</p>
+            )}
           </div>
 
           {/* Price */}
           <div className="flex items-baseline gap-3">
-            <span className={cn("text-3xl font-bold", hasDiscount ? "text-destructive" : "text-foreground")}>
+            <span
+              className={cn(
+                "text-3xl font-bold",
+                hasDiscount ? "text-destructive" : "text-foreground",
+              )}
+            >
               {formatPrice(price, currency)}
             </span>
-            {hasDiscount && (
+            {hasDiscount && originalPrice && (
               <span className="text-xl text-muted-foreground line-through">
-                {formatPrice(originalPrice!, currency)}
+                {formatPrice(originalPrice, currency)}
               </span>
             )}
           </div>
@@ -348,7 +395,9 @@ export const ProductDetails = forwardRef<HTMLDivElement, ProductDetailsProps>(
 
           {/* Description */}
           {description && (
-            <p className="text-muted-foreground leading-relaxed">{description}</p>
+            <p className="text-muted-foreground leading-relaxed">
+              {description}
+            </p>
           )}
 
           <Separator />
@@ -377,8 +426,11 @@ export const ProductDetails = forwardRef<HTMLDivElement, ProductDetailsProps>(
           {/* Features */}
           {features.length > 0 && (
             <div className="space-y-2">
-              {features.map((feature, index) => (
-                <div key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
+              {features.map((feature) => (
+                <div
+                  key={feature}
+                  className="flex items-center gap-2 text-sm text-muted-foreground"
+                >
                   <CheckIcon className="size-4 text-success" />
                   {feature}
                 </div>
@@ -393,8 +445,12 @@ export const ProductDetails = forwardRef<HTMLDivElement, ProductDetailsProps>(
                 <div className="flex items-start gap-3">
                   <TruckIcon className="size-5 text-muted-foreground flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-sm font-medium text-foreground">Delivery</p>
-                    <p className="text-sm text-muted-foreground">{deliveryInfo}</p>
+                    <p className="text-sm font-medium text-foreground">
+                      Delivery
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {deliveryInfo}
+                    </p>
                   </div>
                 </div>
               )}
@@ -402,8 +458,12 @@ export const ProductDetails = forwardRef<HTMLDivElement, ProductDetailsProps>(
                 <div className="flex items-start gap-3">
                   <RefreshIcon className="size-5 text-muted-foreground flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-sm font-medium text-foreground">Returns</p>
-                    <p className="text-sm text-muted-foreground">{returnPolicy}</p>
+                    <p className="text-sm font-medium text-foreground">
+                      Returns
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {returnPolicy}
+                    </p>
                   </div>
                 </div>
               )}

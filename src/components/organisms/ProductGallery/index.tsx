@@ -1,9 +1,14 @@
 "use client";
 
-import { forwardRef, useState, useCallback, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { forwardRef, type ReactNode, useCallback, useState } from "react";
 import { IconButton } from "@/components/molecules";
-import { ChevronLeftIcon, ChevronRightIcon, SearchIcon, XIcon } from "@/lib/icons";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  SearchIcon,
+  XIcon,
+} from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Types
 export interface GalleryImage {
@@ -13,7 +18,8 @@ export interface GalleryImage {
 }
 
 // ProductGallery component
-export interface ProductGalleryProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ProductGalleryProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   images: GalleryImage[];
   defaultIndex?: number;
   showThumbnails?: boolean;
@@ -111,12 +117,24 @@ export const ProductGallery = forwardRef<HTMLDivElement, ProductGalleryProps>(
             <img
               src={currentImage.src}
               alt={currentImage.alt}
+              role={showZoom ? "button" : undefined}
+              tabIndex={showZoom ? 0 : undefined}
               className={cn(
                 "size-full object-cover transition-transform duration-300",
                 isZoomed && "scale-150 cursor-zoom-out",
                 !isZoomed && showZoom && "cursor-zoom-in",
               )}
               onClick={showZoom ? handleZoomToggle : undefined}
+              onKeyDown={
+                showZoom
+                  ? (e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        handleZoomToggle();
+                      }
+                    }
+                  : undefined
+              }
             />
 
             {/* Badge */}
@@ -127,7 +145,7 @@ export const ProductGallery = forwardRef<HTMLDivElement, ProductGalleryProps>(
               <IconButton
                 icon={<SearchIcon className="size-4" />}
                 size="sm"
-                variant="secondary"
+                variant="outline"
                 onClick={handleZoomToggle}
                 label="Zoom image"
                 className="absolute bottom-4 right-4 bg-background/80 backdrop-blur-sm hover:bg-background"
@@ -139,7 +157,7 @@ export const ProductGallery = forwardRef<HTMLDivElement, ProductGalleryProps>(
               <IconButton
                 icon={<XIcon className="size-4" />}
                 size="sm"
-                variant="secondary"
+                variant="outline"
                 onClick={handleZoomToggle}
                 label="Close zoom"
                 className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm hover:bg-background"
@@ -152,7 +170,7 @@ export const ProductGallery = forwardRef<HTMLDivElement, ProductGalleryProps>(
                 <IconButton
                   icon={<ChevronLeftIcon className="size-5" />}
                   size="md"
-                  variant="secondary"
+                  variant="outline"
                   onClick={handlePrevious}
                   label="Previous image"
                   className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm hover:bg-background"
@@ -160,7 +178,7 @@ export const ProductGallery = forwardRef<HTMLDivElement, ProductGalleryProps>(
                 <IconButton
                   icon={<ChevronRightIcon className="size-5" />}
                   size="md"
-                  variant="secondary"
+                  variant="outline"
                   onClick={handleNext}
                   label="Next image"
                   className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm hover:bg-background"
@@ -195,7 +213,8 @@ export const ProductGallery = forwardRef<HTMLDivElement, ProductGalleryProps>(
 ProductGallery.displayName = "ProductGallery";
 
 // ProductGalleryThumbnails component
-export interface ProductGalleryThumbnailsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect"> {
+export interface ProductGalleryThumbnailsProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect"> {
   images: GalleryImage[];
   activeIndex: number;
   onSelect: (index: number) => void;
@@ -203,7 +222,10 @@ export interface ProductGalleryThumbnailsProps extends Omit<React.HTMLAttributes
   maxVisible?: number;
 }
 
-export const ProductGalleryThumbnails = forwardRef<HTMLDivElement, ProductGalleryThumbnailsProps>(
+export const ProductGalleryThumbnails = forwardRef<
+  HTMLDivElement,
+  ProductGalleryThumbnailsProps
+>(
   (
     {
       className,
@@ -221,14 +243,16 @@ export const ProductGalleryThumbnails = forwardRef<HTMLDivElement, ProductGaller
         ref={ref}
         className={cn(
           "flex gap-2",
-          orientation === "vertical" ? "flex-col w-20" : "flex-row overflow-x-auto",
+          orientation === "vertical"
+            ? "flex-col w-20"
+            : "flex-row overflow-x-auto",
           className,
         )}
         {...props}
       >
         {images.slice(0, maxVisible).map((image, index) => (
           <button
-            key={index}
+            key={image.src}
             type="button"
             onClick={() => onSelect(index)}
             className={cn(
@@ -263,30 +287,39 @@ export const ProductGalleryThumbnails = forwardRef<HTMLDivElement, ProductGaller
 ProductGalleryThumbnails.displayName = "ProductGalleryThumbnails";
 
 // ProductGalleryDots component (alternative navigation)
-export interface ProductGalleryDotsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect"> {
+export interface ProductGalleryDotsProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect"> {
   total: number;
   activeIndex: number;
   onSelect: (index: number) => void;
 }
 
-export const ProductGalleryDots = forwardRef<HTMLDivElement, ProductGalleryDotsProps>(
-  ({ className, total, activeIndex, onSelect, ...props }, ref) => {
-    return (
-      <div ref={ref} className={cn("flex items-center justify-center gap-x-2", className)} {...props}>
-        {Array.from({ length: total }).map((_, index) => (
-          <button
-            key={index}
-            type="button"
-            onClick={() => onSelect(index)}
-            className={cn(
-              "size-2 rounded-full transition-all",
-              activeIndex === index ? "bg-primary w-6" : "bg-muted-foreground/30 hover:bg-muted-foreground/50",
-            )}
-            aria-label={`Go to image ${index + 1}`}
-          />
-        ))}
-      </div>
-    );
-  },
-);
+export const ProductGalleryDots = forwardRef<
+  HTMLDivElement,
+  ProductGalleryDotsProps
+>(({ className, total, activeIndex, onSelect, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn("flex items-center justify-center gap-x-2", className)}
+      {...props}
+    >
+      {Array.from({ length: total }).map((_, index) => (
+        <button
+          // biome-ignore lint/suspicious/noArrayIndexKey: Dot position is the unique identifier
+          key={`dot-${index}`}
+          type="button"
+          onClick={() => onSelect(index)}
+          className={cn(
+            "size-2 rounded-full transition-all",
+            activeIndex === index
+              ? "bg-primary w-6"
+              : "bg-muted-foreground/30 hover:bg-muted-foreground/50",
+          )}
+          aria-label={`Go to image ${index + 1}`}
+        />
+      ))}
+    </div>
+  );
+});
 ProductGalleryDots.displayName = "ProductGalleryDots";

@@ -1,11 +1,16 @@
-import { forwardRef, useState, type ReactNode } from "react";
-import { Button } from "@/components/atoms/Button";
+import { forwardRef, type ReactNode, useState } from "react";
 import { Avatar } from "@/components/atoms/Avatar";
 import { Badge } from "@/components/atoms/Badge";
+import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "@/components/organisms/Modal";
 import { Select, type SelectOption } from "@/components/molecules/Select";
-import { MailIcon, XIcon, UsersIcon } from "@/lib/icons";
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "@/components/organisms/Modal";
+import { MailIcon, UsersIcon, XIcon } from "@/lib/icons";
 
 export type InviteRole = "viewer" | "editor" | "admin" | "owner";
 
@@ -21,7 +26,11 @@ export interface InvitedUser {
 export interface InviteModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onInvite: (data: { emails: string[]; role: InviteRole; message?: string }) => void;
+  onInvite: (data: {
+    emails: string[];
+    role: InviteRole;
+    message?: string;
+  }) => void;
   title?: string;
   subtitle?: ReactNode;
   itemName?: string;
@@ -155,10 +164,10 @@ export const InviteModal = forwardRef<HTMLDivElement, InviteModalProps>(
         <ModalBody padding="md">
           <div className="space-y-4">
             {/* Email input */}
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">
+            <div>
+              <span className="mb-2 block text-sm font-medium text-foreground">
                 Email addresses
-              </label>
+              </span>
               <div className="flex gap-2">
                 <Input
                   value={emailInput}
@@ -181,9 +190,7 @@ export const InviteModal = forwardRef<HTMLDivElement, InviteModalProps>(
                   Add
                 </Button>
               </div>
-              {error && (
-                <p className="text-sm text-destructive">{error}</p>
-              )}
+              {error && <p className="text-sm text-destructive">{error}</p>}
             </div>
 
             {/* Added emails */}
@@ -206,10 +213,10 @@ export const InviteModal = forwardRef<HTMLDivElement, InviteModalProps>(
             )}
 
             {/* Role selection */}
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">
+            <div>
+              <span className="mb-2 block text-sm font-medium text-foreground">
                 Permission level
-              </label>
+              </span>
               <Select
                 value={role}
                 onChange={(value) => setRole(value as InviteRole)}
@@ -220,10 +227,10 @@ export const InviteModal = forwardRef<HTMLDivElement, InviteModalProps>(
 
             {/* Message */}
             {showMessage && (
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">
+              <div>
+                <span className="mb-2 block text-sm font-medium text-foreground">
                   Message
-                </label>
+                </span>
                 <Input
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
@@ -236,10 +243,10 @@ export const InviteModal = forwardRef<HTMLDivElement, InviteModalProps>(
             {/* Existing users */}
             {existingUsers.length > 0 && (
               <div className="space-y-2">
-                <label className="flex items-center gap-2 text-sm font-medium text-foreground">
+                <span className="flex items-center gap-2 text-sm font-medium text-foreground">
                   <UsersIcon className="size-4" />
                   People with access
-                </label>
+                </span>
                 <div className="max-h-40 space-y-2 overflow-y-auto rounded-lg border border-border p-2">
                   {existingUsers.map((user) => (
                     <div
@@ -278,7 +285,10 @@ export const InviteModal = forwardRef<HTMLDivElement, InviteModalProps>(
                           className="w-24 shrink-0"
                         />
                       ) : (
-                        <Badge variant="outline" className="shrink-0 capitalize">
+                        <Badge
+                          variant="outline"
+                          className="shrink-0 capitalize"
+                        >
                           {user.role}
                         </Badge>
                       )}
@@ -321,7 +331,8 @@ export const InviteModal = forwardRef<HTMLDivElement, InviteModalProps>(
 InviteModal.displayName = "InviteModal";
 
 // TeamInviteModal - Convenience for team invitations
-export interface TeamInviteModalProps extends Omit<InviteModalProps, "title" | "availableRoles"> {
+export interface TeamInviteModalProps
+  extends Omit<InviteModalProps, "title" | "availableRoles"> {
   teamName?: string;
 }
 

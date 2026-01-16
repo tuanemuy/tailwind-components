@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { SnoozeModal, ScheduleModal, RecurrenceModal } from "./index";
-import type { SnoozeOption } from "./index";
 import { Button } from "@/components/atoms/Button";
+import type { SnoozeOption } from "./index";
+import { RecurrenceModal, ScheduleModal, SnoozeModal } from "./index";
 
 const meta: Meta = {
   title: "Organisms/Overlays/DateTimeModals",

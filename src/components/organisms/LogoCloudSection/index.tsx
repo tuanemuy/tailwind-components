@@ -13,7 +13,8 @@ export interface LogoItem {
 }
 
 // LogoCloudSection component
-export interface LogoCloudSectionProps extends React.HTMLAttributes<HTMLElement> {
+export interface LogoCloudSectionProps
+  extends React.HTMLAttributes<HTMLElement> {
   padding?: "sm" | "md" | "lg" | "xl";
   backgroundColor?: "default" | "muted";
 }
@@ -31,11 +32,24 @@ const backgroundClasses = {
 };
 
 export const LogoCloudSection = forwardRef<HTMLElement, LogoCloudSectionProps>(
-  ({ className, padding = "md", backgroundColor = "default", children, ...props }, ref) => {
+  (
+    {
+      className,
+      padding = "md",
+      backgroundColor = "default",
+      children,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <section
         ref={ref}
-        className={cn(paddingClasses[padding], backgroundClasses[backgroundColor], className)}
+        className={cn(
+          paddingClasses[padding],
+          backgroundClasses[backgroundColor],
+          className,
+        )}
         {...props}
       >
         <div className="container mx-auto px-4">{children}</div>
@@ -46,7 +60,8 @@ export const LogoCloudSection = forwardRef<HTMLElement, LogoCloudSectionProps>(
 LogoCloudSection.displayName = "LogoCloudSection";
 
 // LogoCloudHeader component
-export interface LogoCloudHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface LogoCloudHeaderProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   align?: "left" | "center";
 }
 
@@ -70,7 +85,8 @@ export const LogoCloudHeader = forwardRef<HTMLDivElement, LogoCloudHeaderProps>(
 LogoCloudHeader.displayName = "LogoCloudHeader";
 
 // LogoCloudTitle component
-export interface LogoCloudTitleProps extends React.HTMLAttributes<HTMLParagraphElement> {
+export interface LogoCloudTitleProps
+  extends React.HTMLAttributes<HTMLParagraphElement> {
   size?: "sm" | "md" | "lg";
 }
 
@@ -80,23 +96,24 @@ const titleSizes = {
   lg: "text-base",
 };
 
-export const LogoCloudTitle = forwardRef<HTMLParagraphElement, LogoCloudTitleProps>(
-  ({ className, size = "md", children, ...props }, ref) => {
-    return (
-      <p
-        ref={ref}
-        className={cn(
-          "font-medium uppercase tracking-wider text-muted-foreground",
-          titleSizes[size],
-          className,
-        )}
-        {...props}
-      >
-        {children}
-      </p>
-    );
-  },
-);
+export const LogoCloudTitle = forwardRef<
+  HTMLParagraphElement,
+  LogoCloudTitleProps
+>(({ className, size = "md", children, ...props }, ref) => {
+  return (
+    <p
+      ref={ref}
+      className={cn(
+        "font-medium uppercase tracking-wider text-muted-foreground",
+        titleSizes[size],
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </p>
+  );
+});
 LogoCloudTitle.displayName = "LogoCloudTitle";
 
 // LogoGrid component
@@ -213,11 +230,15 @@ const logoSizeClasses = {
 const logoVariantClasses = {
   default: "",
   grayscale: "grayscale opacity-50",
-  "grayscale-hover": "grayscale opacity-50 transition-all hover:grayscale-0 hover:opacity-100",
+  "grayscale-hover":
+    "grayscale opacity-50 transition-all hover:grayscale-0 hover:opacity-100",
 };
 
 export const LogoItemComponent = forwardRef<HTMLDivElement, LogoItemProps>(
-  ({ className, logo, variant = "grayscale-hover", size = "md", ...props }, ref) => {
+  (
+    { className, logo, variant = "grayscale-hover", size = "md", ...props },
+    ref,
+  ) => {
     const imageElement = (
       <img
         src={logo.src}
@@ -233,7 +254,11 @@ export const LogoItemComponent = forwardRef<HTMLDivElement, LogoItemProps>(
     );
 
     return (
-      <div ref={ref} className={cn("flex items-center justify-center", className)} {...props}>
+      <div
+        ref={ref}
+        className={cn("flex items-center justify-center", className)}
+        {...props}
+      >
         {logo.url ? (
           <a
             href={logo.url}
@@ -317,7 +342,8 @@ export const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(
 LogoMarquee.displayName = "LogoMarquee";
 
 // SimpleLogoCloud component - compact inline display
-export interface SimpleLogoCloudProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SimpleLogoCloudProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
   logos: LogoItem[];
   variant?: LogoItemProps["variant"];
@@ -325,7 +351,17 @@ export interface SimpleLogoCloudProps extends React.HTMLAttributes<HTMLDivElemen
 }
 
 export const SimpleLogoCloud = forwardRef<HTMLDivElement, SimpleLogoCloudProps>(
-  ({ className, title, logos, variant = "grayscale-hover", size = "md", ...props }, ref) => {
+  (
+    {
+      className,
+      title,
+      logos,
+      variant = "grayscale-hover",
+      size = "md",
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <div ref={ref} className={cn("space-y-6", className)} {...props}>
         {title && (
@@ -348,7 +384,8 @@ export const SimpleLogoCloud = forwardRef<HTMLDivElement, SimpleLogoCloudProps>(
 SimpleLogoCloud.displayName = "SimpleLogoCloud";
 
 // CompleteLogoCloudSection component - pre-composed full logo cloud section
-export interface CompleteLogoCloudSectionProps extends React.HTMLAttributes<HTMLElement> {
+export interface CompleteLogoCloudSectionProps
+  extends React.HTMLAttributes<HTMLElement> {
   title?: string;
   logos: LogoItem[];
   variant?: "grid" | "row" | "marquee";
@@ -357,7 +394,10 @@ export interface CompleteLogoCloudSectionProps extends React.HTMLAttributes<HTML
   backgroundColor?: LogoCloudSectionProps["backgroundColor"];
 }
 
-export const CompleteLogoCloudSection = forwardRef<HTMLElement, CompleteLogoCloudSectionProps>(
+export const CompleteLogoCloudSection = forwardRef<
+  HTMLElement,
+  CompleteLogoCloudSectionProps
+>(
   (
     {
       className,
@@ -372,7 +412,12 @@ export const CompleteLogoCloudSection = forwardRef<HTMLElement, CompleteLogoClou
     ref,
   ) => {
     return (
-      <LogoCloudSection ref={ref} backgroundColor={backgroundColor} className={className} {...props}>
+      <LogoCloudSection
+        ref={ref}
+        backgroundColor={backgroundColor}
+        className={className}
+        {...props}
+      >
         {title && (
           <LogoCloudHeader>
             <LogoCloudTitle>{title}</LogoCloudTitle>

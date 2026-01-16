@@ -1,15 +1,15 @@
 import {
-  forwardRef,
   createContext,
-  useContext,
+  forwardRef,
+  type ReactNode,
   useCallback,
+  useContext,
   useEffect,
   useState,
-  type ReactNode,
 } from "react";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/atoms/Button";
 import { XIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Modal Context
 interface ModalContextValue {
@@ -110,7 +110,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
     }, [isOpen]);
 
     const handleOverlayClick = useCallback(
-      (e: React.MouseEvent<HTMLDivElement>) => {
+      (e: React.MouseEvent) => {
         if (closeOnOverlayClick && e.target === e.currentTarget) {
           onClose();
         }
@@ -133,23 +133,22 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
           )}
         >
           {/* Backdrop */}
-          <div
+          <button
+            type="button"
             className={cn(
-              "fixed inset-0 bg-black/50 transition-opacity duration-300",
+              "fixed inset-0 bg-black/50 transition-opacity duration-300 cursor-default",
               isAnimating ? "opacity-100" : "opacity-0",
             )}
-            aria-hidden="true"
+            aria-label="Close modal"
+            onClick={handleOverlayClick}
           />
 
           {/* Modal container */}
-          <div
-            className="flex min-h-full items-center justify-center p-4"
-            onClick={handleOverlayClick}
-          >
+          <div className="flex min-h-full items-center justify-center p-4 pointer-events-none">
             {/* Modal content */}
             <div
               className={cn(
-                "relative w-full transform rounded-xl bg-card shadow-xl transition-all duration-300",
+                "relative w-full transform rounded-xl bg-card shadow-xl transition-all duration-300 pointer-events-auto",
                 sizeClasses[size],
                 isAnimating
                   ? "translate-y-0 opacity-100"

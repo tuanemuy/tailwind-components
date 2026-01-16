@@ -1,26 +1,26 @@
 "use client";
 
-import { forwardRef, useCallback, useState, Fragment } from "react";
-import { cn } from "@/lib/utils";
+import { Fragment, forwardRef, useCallback, useState } from "react";
+import { Button, Checkbox } from "@/components/atoms";
 import {
-  tableContainerVariants,
-  tableHeaderVariants,
-  tableHeaderCellVariants,
-  tableCellVariants,
-  expandableRowVariants,
-  expandedContentVariants,
-  tablePaginationVariants,
-  tableEmptyStateVariants,
-  tableLoadingStateVariants,
-} from "@/lib/variants";
-import { Checkbox, Button } from "@/components/atoms";
-import {
+  ChevronDownIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   ChevronUpIcon,
-  ChevronDownIcon,
   SpinnerIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
+import {
+  expandableRowVariants,
+  expandedContentVariants,
+  tableCellVariants,
+  tableContainerVariants,
+  tableEmptyStateVariants,
+  tableHeaderCellVariants,
+  tableHeaderVariants,
+  tableLoadingStateVariants,
+  tablePaginationVariants,
+} from "@/lib/variants";
 
 // ============================================
 // Column Types
@@ -118,7 +118,7 @@ function ExpandableTableInner<T>(
     stickyHeader = false,
     ...props
   }: ExpandableTableProps<T>,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const [uncontrolledExpandedRows, setUncontrolledExpandedRows] = useState<
     (string | number)[]
@@ -135,7 +135,7 @@ function ExpandableTableInner<T>(
       const rowKey = getRowKey(row, index);
       return expandedRows.includes(rowKey);
     },
-    [expandedRows, getRowKey]
+    [expandedRows, getRowKey],
   );
 
   const toggleRowExpanded = useCallback(
@@ -151,17 +151,18 @@ function ExpandableTableInner<T>(
         }
       }
     },
-    [expandedRows, getRowKey, setExpandedRows, allowMultipleExpanded]
+    [expandedRows, getRowKey, setExpandedRows, allowMultipleExpanded],
   );
 
   // Selection logic
   const isRowSelected = useCallback(
     (row: T) => selectedRows.includes(row),
-    [selectedRows]
+    [selectedRows],
   );
 
   const isAllSelected = data.length > 0 && selectedRows.length === data.length;
-  const isIndeterminate = selectedRows.length > 0 && selectedRows.length < data.length;
+  const isIndeterminate =
+    selectedRows.length > 0 && selectedRows.length < data.length;
 
   const handleSelectAll = useCallback(() => {
     if (isAllSelected) {
@@ -179,7 +180,7 @@ function ExpandableTableInner<T>(
         onSelectionChange?.([...selectedRows, row]);
       }
     },
-    [isRowSelected, selectedRows, onSelectionChange]
+    [isRowSelected, selectedRows, onSelectionChange],
   );
 
   // Sort logic
@@ -198,7 +199,7 @@ function ExpandableTableInner<T>(
 
       onSort({ key, direction });
     },
-    [sortState, onSort]
+    [sortState, onSort],
   );
 
   // Get cell value
@@ -213,7 +214,9 @@ function ExpandableTableInner<T>(
   };
 
   // Pagination
-  const totalPages = pagination ? Math.ceil(pagination.total / pagination.pageSize) : 0;
+  const totalPages = pagination
+    ? Math.ceil(pagination.total / pagination.pageSize)
+    : 0;
 
   const totalColumns = columns.length + 1 + (selectable ? 1 : 0); // +1 for expand button
 
@@ -224,7 +227,9 @@ function ExpandableTableInner<T>(
         <div className="min-w-full inline-block align-middle">
           <table className="min-w-full divide-y divide-border">
             {/* Header */}
-            <thead className={cn(tableHeaderVariants({ sticky: stickyHeader }))}>
+            <thead
+              className={cn(tableHeaderVariants({ sticky: stickyHeader }))}
+            >
               <tr>
                 {/* Expand Column */}
                 <th scope="col" className="w-10 ps-4 py-3" />
@@ -263,7 +268,7 @@ function ExpandableTableInner<T>(
                           size,
                           align: column.align,
                           sortable: isSortable,
-                        })
+                        }),
                       )}
                     >
                       {isSortable ? (
@@ -292,10 +297,14 @@ function ExpandableTableInner<T>(
                 <tr>
                   <td
                     colSpan={totalColumns}
-                    className={cn(tableLoadingStateVariants({ variant: "spinner" }))}
+                    className={cn(
+                      tableLoadingStateVariants({ variant: "spinner" }),
+                    )}
                   >
                     <SpinnerIcon className="size-5 animate-spin text-muted-foreground" />
-                    <span className="text-sm text-muted-foreground">Loading...</span>
+                    <span className="text-sm text-muted-foreground">
+                      Loading...
+                    </span>
                   </td>
                 </tr>
               ) : data.length === 0 ? (
@@ -322,7 +331,7 @@ function ExpandableTableInner<T>(
                           expandableRowVariants({ expanded: isExpanded }),
                           striped && rowIndex % 2 === 1 && "bg-muted/50",
                           hoverable && "hover:bg-accent/50 transition-colors",
-                          isRowSelected(row) && "bg-primary/5"
+                          isRowSelected(row) && "bg-primary/5",
                         )}
                       >
                         {/* Expand Button */}
@@ -331,12 +340,14 @@ function ExpandableTableInner<T>(
                             type="button"
                             onClick={() => toggleRowExpanded(row, rowIndex)}
                             className="size-6 flex items-center justify-center rounded hover:bg-muted transition-colors"
-                            aria-label={isExpanded ? "Collapse row" : "Expand row"}
+                            aria-label={
+                              isExpanded ? "Collapse row" : "Expand row"
+                            }
                           >
                             <ChevronDownIcon
                               className={cn(
                                 "size-4 text-muted-foreground transition-transform",
-                                isExpanded && "rotate-180"
+                                isExpanded && "rotate-180",
                               )}
                             />
                           </button>
@@ -346,6 +357,7 @@ function ExpandableTableInner<T>(
                           <td
                             className="w-px whitespace-nowrap py-3"
                             onClick={(e) => e.stopPropagation()}
+                            onKeyDown={(e) => e.stopPropagation()}
                           >
                             <Checkbox
                               checked={isRowSelected(row)}
@@ -361,11 +373,18 @@ function ExpandableTableInner<T>(
                             <td
                               key={column.key}
                               className={cn(
-                                tableCellVariants({ size, align: column.align })
+                                tableCellVariants({
+                                  size,
+                                  align: column.align,
+                                }),
                               )}
                             >
                               {column.render ? (
-                                column.render(value as T[keyof T], row, rowIndex)
+                                column.render(
+                                  value as T[keyof T],
+                                  row,
+                                  rowIndex,
+                                )
                               ) : (
                                 <span className="text-sm text-muted-foreground">
                                   {String(value ?? "")}
@@ -382,7 +401,7 @@ function ExpandableTableInner<T>(
                           colSpan={totalColumns}
                           className={cn(
                             "p-0 bg-muted/30",
-                            expandedContentVariants({ expanded: isExpanded })
+                            expandedContentVariants({ expanded: isExpanded }),
                           )}
                         >
                           {isExpanded && (
@@ -405,7 +424,9 @@ function ExpandableTableInner<T>(
       {pagination && totalPages > 1 && (
         <div
           className={cn(
-            tablePaginationVariants({ variant: compact ? "compact" : "default" })
+            tablePaginationVariants({
+              variant: compact ? "compact" : "default",
+            }),
           )}
         >
           <span className="text-sm text-muted-foreground">
@@ -439,7 +460,7 @@ function ExpandableTableInner<T>(
 
 // Export with forwardRef workaround for generics
 export const ExpandableTable = forwardRef(ExpandableTableInner) as <T>(
-  props: ExpandableTableProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> }
+  props: ExpandableTableProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> },
 ) => React.ReactElement;
 
 (ExpandableTable as { displayName?: string }).displayName = "ExpandableTable";

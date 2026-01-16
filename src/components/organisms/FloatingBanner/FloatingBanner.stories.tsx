@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  FloatingBanner,
-  RateUsBanner,
-  FeedbackBanner,
-  QuickActionsBanner,
-  CookieConsentBanner,
-} from "./index";
 import { Button } from "@/components/atoms/Button";
-import { BellIcon, ShareIcon, BookmarkIcon, PlusIcon } from "@/lib/icons";
+import { BellIcon, BookmarkIcon, PlusIcon, ShareIcon } from "@/lib/icons";
+import {
+  CookieConsentBanner,
+  FeedbackBanner,
+  FloatingBanner,
+  QuickActionsBanner,
+  RateUsBanner,
+} from "./index";
 
 const meta: Meta<typeof FloatingBanner> = {
   title: "Organisms/PageSections/FloatingBanner",
@@ -30,7 +30,14 @@ const meta: Meta<typeof FloatingBanner> = {
     },
     position: {
       control: "select",
-      options: ["top", "bottom", "top-left", "top-right", "bottom-left", "bottom-right"],
+      options: [
+        "top",
+        "bottom",
+        "top-left",
+        "top-right",
+        "bottom-left",
+        "bottom-right",
+      ],
     },
     size: {
       control: "select",
@@ -94,12 +101,8 @@ export const Positions: Story = {
       <FloatingBanner position="top-left" variant="dark">
         Top Left
       </FloatingBanner>
-      <FloatingBanner position="top-right">
-        Top Right
-      </FloatingBanner>
-      <FloatingBanner position="bottom-left">
-        Bottom Left
-      </FloatingBanner>
+      <FloatingBanner position="top-right">Top Right</FloatingBanner>
+      <FloatingBanner position="bottom-left">Bottom Left</FloatingBanner>
       <FloatingBanner position="bottom-right" variant="dark">
         Bottom Right
       </FloatingBanner>
@@ -142,7 +145,9 @@ export const Feedback: StoryObj<typeof FeedbackBanner> = {
   render: () => (
     <FeedbackBanner
       question="Was this article helpful?"
-      onFeedback={(isPositive) => console.log(`Feedback: ${isPositive ? "Positive" : "Negative"}`)}
+      onFeedback={(isPositive) =>
+        console.log(`Feedback: ${isPositive ? "Positive" : "Negative"}`)
+      }
       position="bottom"
     />
   ),
@@ -154,9 +159,21 @@ export const QuickActions: StoryObj<typeof QuickActionsBanner> = {
     <QuickActionsBanner
       position="bottom"
       actions={[
-        { icon: <PlusIcon className="size-full" />, label: "New", onClick: () => console.log("New") },
-        { icon: <ShareIcon className="size-full" />, label: "Share", onClick: () => console.log("Share") },
-        { icon: <BookmarkIcon className="size-full" />, label: "Save", onClick: () => console.log("Save") },
+        {
+          icon: <PlusIcon className="size-full" />,
+          label: "New",
+          onClick: () => console.log("New"),
+        },
+        {
+          icon: <ShareIcon className="size-full" />,
+          label: "Share",
+          onClick: () => console.log("Share"),
+        },
+        {
+          icon: <BookmarkIcon className="size-full" />,
+          label: "Save",
+          onClick: () => console.log("Save"),
+        },
       ]}
     />
   ),

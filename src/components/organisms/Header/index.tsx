@@ -1,7 +1,7 @@
 import { forwardRef, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/atoms/Button";
 import { MenuIcon, XIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Header variants
 type HeaderVariant = "default" | "bordered" | "elevated" | "transparent";
@@ -146,7 +146,9 @@ export const HeaderNav = forwardRef<HTMLDivElement, HeaderNavProps>(
         ref={ref}
         className={cn(
           "flex",
-          orientation === "horizontal" ? "flex-row items-center gap-x-1" : "flex-col gap-y-1",
+          orientation === "horizontal"
+            ? "flex-row items-center gap-x-1"
+            : "flex-col gap-y-1",
           className,
         )}
         {...props}
@@ -222,7 +224,8 @@ export const HeaderLogo = forwardRef<HTMLAnchorElement, HeaderLogoProps>(
 HeaderLogo.displayName = "HeaderLogo";
 
 // HeaderActions component for action buttons
-export interface HeaderActionsProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface HeaderActionsProps
+  extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const HeaderActions = forwardRef<HTMLDivElement, HeaderActionsProps>(
   ({ className, children, ...props }, ref) => {

@@ -1,15 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { SectionNav, SectionNavItem, SectionNavLink, VerticalSectionNav } from "./index";
 import { Badge } from "@/components/atoms/Badge";
 import {
-  HomeIcon,
-  UserIcon,
-  SettingsIcon,
   BellIcon,
-  ShieldIcon,
   CreditCardIcon,
+  HomeIcon,
+  SettingsIcon,
+  ShieldIcon,
+  UserIcon,
 } from "@/lib/icons";
+import {
+  SectionNav,
+  SectionNavItem,
+  SectionNavLink,
+  VerticalSectionNav,
+} from "./index";
 
 const meta: Meta<typeof SectionNav> = {
   title: "Organisms/PageSections/SectionNav",
@@ -88,9 +93,21 @@ export const WithIcons: Story = {
     variant: "pills",
     defaultValue: "dashboard",
     items: [
-      { value: "dashboard", label: "Dashboard", icon: <HomeIcon className="size-full" /> },
-      { value: "profile", label: "Profile", icon: <UserIcon className="size-full" /> },
-      { value: "settings", label: "Settings", icon: <SettingsIcon className="size-full" /> },
+      {
+        value: "dashboard",
+        label: "Dashboard",
+        icon: <HomeIcon className="size-full" />,
+      },
+      {
+        value: "profile",
+        label: "Profile",
+        icon: <UserIcon className="size-full" />,
+      },
+      {
+        value: "settings",
+        label: "Settings",
+        icon: <SettingsIcon className="size-full" />,
+      },
     ],
   },
 };
@@ -103,7 +120,15 @@ export const WithBadges: Story = {
       { value: "inbox", label: "Inbox", badge: <Badge size="sm">12</Badge> },
       { value: "drafts", label: "Drafts" },
       { value: "sent", label: "Sent" },
-      { value: "spam", label: "Spam", badge: <Badge variant="destructive" size="sm">3</Badge> },
+      {
+        value: "spam",
+        label: "Spam",
+        badge: (
+          <Badge variant="destructive" size="sm">
+            3
+          </Badge>
+        ),
+      },
     ],
   },
 };
@@ -127,10 +152,26 @@ export const Vertical: Story = {
     orientation: "vertical",
     defaultValue: "general",
     items: [
-      { value: "general", label: "General", icon: <SettingsIcon className="size-full" /> },
-      { value: "security", label: "Security", icon: <ShieldIcon className="size-full" /> },
-      { value: "notifications", label: "Notifications", icon: <BellIcon className="size-full" /> },
-      { value: "billing", label: "Billing", icon: <CreditCardIcon className="size-full" /> },
+      {
+        value: "general",
+        label: "General",
+        icon: <SettingsIcon className="size-full" />,
+      },
+      {
+        value: "security",
+        label: "Security",
+        icon: <ShieldIcon className="size-full" />,
+      },
+      {
+        value: "notifications",
+        label: "Notifications",
+        icon: <BellIcon className="size-full" />,
+      },
+      {
+        value: "billing",
+        label: "Billing",
+        icon: <CreditCardIcon className="size-full" />,
+      },
     ],
   },
   decorators: [
@@ -151,10 +192,26 @@ export const VerticalWithTitle: StoryObj<typeof VerticalSectionNav> = {
         variant="pills"
         defaultValue="general"
         items={[
-          { value: "general", label: "General", icon: <SettingsIcon className="size-full" /> },
-          { value: "security", label: "Security", icon: <ShieldIcon className="size-full" /> },
-          { value: "notifications", label: "Notifications", icon: <BellIcon className="size-full" /> },
-          { value: "billing", label: "Billing", icon: <CreditCardIcon className="size-full" /> },
+          {
+            value: "general",
+            label: "General",
+            icon: <SettingsIcon className="size-full" />,
+          },
+          {
+            value: "security",
+            label: "Security",
+            icon: <ShieldIcon className="size-full" />,
+          },
+          {
+            value: "notifications",
+            label: "Notifications",
+            icon: <BellIcon className="size-full" />,
+          },
+          {
+            value: "billing",
+            label: "Billing",
+            icon: <CreditCardIcon className="size-full" />,
+          },
         ]}
       />
     </div>
@@ -165,7 +222,9 @@ export const Sizes: Story = {
   render: () => (
     <div className="space-y-8">
       <div>
-        <h4 className="mb-2 text-sm font-medium text-muted-foreground">Small</h4>
+        <h4 className="mb-2 text-sm font-medium text-muted-foreground">
+          Small
+        </h4>
         <SectionNav
           size="sm"
           variant="pills"
@@ -174,7 +233,9 @@ export const Sizes: Story = {
         />
       </div>
       <div>
-        <h4 className="mb-2 text-sm font-medium text-muted-foreground">Medium (Default)</h4>
+        <h4 className="mb-2 text-sm font-medium text-muted-foreground">
+          Medium (Default)
+        </h4>
         <SectionNav
           size="md"
           variant="pills"
@@ -183,7 +244,9 @@ export const Sizes: Story = {
         />
       </div>
       <div>
-        <h4 className="mb-2 text-sm font-medium text-muted-foreground">Large</h4>
+        <h4 className="mb-2 text-sm font-medium text-muted-foreground">
+          Large
+        </h4>
         <SectionNav
           size="lg"
           variant="pills"
@@ -212,7 +275,8 @@ export const Controlled: Story = {
         />
         <div className="rounded-lg border border-border p-4">
           <p className="text-sm text-muted-foreground">
-            Active tab: <span className="font-medium text-foreground">{value}</span>
+            Active tab:{" "}
+            <span className="font-medium text-foreground">{value}</span>
           </p>
         </div>
       </div>
@@ -262,19 +326,31 @@ export const AllVariants: Story = {
   render: () => (
     <div className="space-y-8">
       <div>
-        <h4 className="mb-2 text-sm font-medium text-muted-foreground">Underline</h4>
-        <SectionNav variant="underline" defaultValue="tab1" items={basicItems} />
+        <h4 className="mb-2 text-sm font-medium text-muted-foreground">
+          Underline
+        </h4>
+        <SectionNav
+          variant="underline"
+          defaultValue="tab1"
+          items={basicItems}
+        />
       </div>
       <div>
-        <h4 className="mb-2 text-sm font-medium text-muted-foreground">Pills</h4>
+        <h4 className="mb-2 text-sm font-medium text-muted-foreground">
+          Pills
+        </h4>
         <SectionNav variant="pills" defaultValue="tab1" items={basicItems} />
       </div>
       <div>
-        <h4 className="mb-2 text-sm font-medium text-muted-foreground">Segment</h4>
+        <h4 className="mb-2 text-sm font-medium text-muted-foreground">
+          Segment
+        </h4>
         <SectionNav variant="segment" defaultValue="tab1" items={basicItems} />
       </div>
       <div>
-        <h4 className="mb-2 text-sm font-medium text-muted-foreground">Bordered</h4>
+        <h4 className="mb-2 text-sm font-medium text-muted-foreground">
+          Bordered
+        </h4>
         <SectionNav variant="bordered" defaultValue="tab1" items={basicItems} />
       </div>
     </div>

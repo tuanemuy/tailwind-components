@@ -1,7 +1,7 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 import { dataCardVariants } from "@/lib/variants/dataVisualization";
-import type { VariantProps } from "class-variance-authority";
 
 // ============================================
 // Types
@@ -32,7 +32,10 @@ export interface SegmentedProgressCardProps
   formatValue?: (value: number) => string;
 }
 
-export const SegmentedProgressCard = forwardRef<HTMLDivElement, SegmentedProgressCardProps>(
+export const SegmentedProgressCard = forwardRef<
+  HTMLDivElement,
+  SegmentedProgressCardProps
+>(
   (
     {
       className,
@@ -65,7 +68,9 @@ export const SegmentedProgressCard = forwardRef<HTMLDivElement, SegmentedProgres
                 <h3 className="text-sm font-medium text-foreground">{title}</h3>
               )}
               {subtitle && (
-                <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {subtitle}
+                </p>
               )}
             </div>
             {action && <div className="shrink-0">{action}</div>}
@@ -87,7 +92,8 @@ export const SegmentedProgressCard = forwardRef<HTMLDivElement, SegmentedProgres
           <div className="flex h-3 rounded-full overflow-hidden bg-muted">
             {segments.map((segment, index) => {
               const percentage = (segment.value / total) * 100;
-              const segmentColor = segment.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+              const segmentColor =
+                segment.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
               return (
                 <div
@@ -108,7 +114,8 @@ export const SegmentedProgressCard = forwardRef<HTMLDivElement, SegmentedProgres
             <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3">
               {segments.map((segment, index) => {
                 const percentage = (segment.value / total) * 100;
-                const segmentColor = segment.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+                const segmentColor =
+                  segment.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
                 return (
                   <div key={segment.id} className="flex items-center gap-x-2">
@@ -161,7 +168,10 @@ export interface DonutSegmentedCardProps
   formatValue?: (value: number) => string;
 }
 
-export const DonutSegmentedCard = forwardRef<HTMLDivElement, DonutSegmentedCardProps>(
+export const DonutSegmentedCard = forwardRef<
+  HTMLDivElement,
+  DonutSegmentedCardProps
+>(
   (
     {
       className,
@@ -203,7 +213,11 @@ export const DonutSegmentedCard = forwardRef<HTMLDivElement, DonutSegmentedCardP
         <div className="p-4">
           <div className="flex items-center justify-center gap-x-8">
             <div className="relative size-40">
-              <svg className="size-40 -rotate-90" viewBox="0 0 140 140">
+              <svg
+                aria-hidden="true"
+                className="size-40 -rotate-90"
+                viewBox="0 0 140 140"
+              >
                 <circle
                   cx="70"
                   cy="70"
@@ -215,9 +229,11 @@ export const DonutSegmentedCard = forwardRef<HTMLDivElement, DonutSegmentedCardP
                 />
                 {segments.map((segment, index) => {
                   const percentage = (segment.value / total) * 100;
-                  const segmentColor = segment.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+                  const segmentColor =
+                    segment.color || `hsl(var(--chart-${(index % 5) + 1}))`;
                   const strokeDasharray = (percentage / 100) * circumference;
-                  const strokeDashoffset = -(cumulativePercentage / 100) * circumference;
+                  const strokeDashoffset =
+                    -(cumulativePercentage / 100) * circumference;
                   cumulativePercentage += percentage;
 
                   return (
@@ -240,7 +256,9 @@ export const DonutSegmentedCard = forwardRef<HTMLDivElement, DonutSegmentedCardP
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 {centerValue !== undefined && (
                   <span className="text-2xl font-bold text-foreground">
-                    {typeof centerValue === "number" ? formatValue(centerValue) : centerValue}
+                    {typeof centerValue === "number"
+                      ? formatValue(centerValue)
+                      : centerValue}
                   </span>
                 )}
                 {centerLabel && (
@@ -256,7 +274,8 @@ export const DonutSegmentedCard = forwardRef<HTMLDivElement, DonutSegmentedCardP
               <div className="flex flex-col gap-y-2">
                 {segments.map((segment, index) => {
                   const percentage = (segment.value / total) * 100;
-                  const segmentColor = segment.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+                  const segmentColor =
+                    segment.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
                   return (
                     <div key={segment.id} className="flex items-center gap-x-2">
@@ -295,7 +314,10 @@ export interface CompactSegmentedCardProps
   formatValue?: (value: number) => string;
 }
 
-export const CompactSegmentedCard = forwardRef<HTMLDivElement, CompactSegmentedCardProps>(
+export const CompactSegmentedCard = forwardRef<
+  HTMLDivElement,
+  CompactSegmentedCardProps
+>(
   (
     {
       className,
@@ -326,7 +348,8 @@ export const CompactSegmentedCard = forwardRef<HTMLDivElement, CompactSegmentedC
         <div className="flex h-2 rounded-full overflow-hidden bg-muted">
           {segments.map((segment, index) => {
             const percentage = (segment.value / total) * 100;
-            const segmentColor = segment.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+            const segmentColor =
+              segment.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
             return (
               <div
@@ -344,7 +367,8 @@ export const CompactSegmentedCard = forwardRef<HTMLDivElement, CompactSegmentedC
         {/* Inline Legend */}
         <div className="mt-2 flex items-center gap-x-3 flex-wrap">
           {segments.map((segment, index) => {
-            const segmentColor = segment.color || `hsl(var(--chart-${(index % 5) + 1}))`;
+            const segmentColor =
+              segment.color || `hsl(var(--chart-${(index % 5) + 1}))`;
 
             return (
               <div key={segment.id} className="flex items-center gap-x-1">

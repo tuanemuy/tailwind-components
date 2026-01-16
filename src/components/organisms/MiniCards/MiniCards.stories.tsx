@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { FileTextIcon, MailIcon, VideoIcon } from "@/lib/icons";
 import {
   CreditsCard,
+  GiftCard,
   HelpResourcesCard,
   IntroVideoCard,
   TrialCard,
   UpgradeProCard,
-  GiftCard,
 } from "./index";
-import { FileTextIcon, VideoIcon, MailIcon } from "@/lib/icons";
 
 const meta: Meta = {
   title: "Organisms/Cards/MiniCards",

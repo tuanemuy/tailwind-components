@@ -1,39 +1,26 @@
-import {
-  forwardRef,
-  createContext,
-  useContext,
-  useState,
-  useCallback,
-  type ReactNode,
-} from "react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/atoms/Button";
-import { Badge } from "@/components/atoms/Badge";
+import { forwardRef, type ReactNode, useState } from "react";
 import { Avatar } from "@/components/atoms/Avatar";
+import { Badge } from "@/components/atoms/Badge";
+import { Button } from "@/components/atoms/Button";
 import { Checkbox } from "@/components/atoms/Checkbox";
-import { Radio } from "@/components/atoms/Radio";
 import { Input } from "@/components/atoms/Input";
-import { Switch } from "@/components/atoms/Switch";
+import { Radio } from "@/components/atoms/Radio";
 import {
   Sidebar,
-  SidebarSection,
-  SidebarItem,
   SidebarGroup,
-  SidebarToggle,
+  SidebarItem,
   SidebarLogo,
+  SidebarSection,
+  SidebarToggle,
 } from "@/components/organisms/Sidebar";
 import {
-  ChevronRightIcon,
   ChevronDownIcon,
   ChevronLeftIcon,
-  SearchIcon,
-  SettingsIcon,
-  HomeIcon,
-  UserIcon,
-  XIcon,
+  ChevronRightIcon,
   FilterIcon,
-  CheckIcon,
+  SearchIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // ==============================================
 // Common Types
@@ -45,7 +32,12 @@ export interface SidebarNavItem {
   icon?: ReactNode;
   href?: string;
   badge?: string | number;
-  badgeVariant?: "default" | "secondary" | "destructive" | "success" | "warning";
+  badgeVariant?:
+    | "default"
+    | "secondary"
+    | "destructive"
+    | "success"
+    | "warning";
   active?: boolean;
   disabled?: boolean;
   children?: SidebarNavItem[];
@@ -70,7 +62,8 @@ export interface SidebarUser {
 // DashboardSidebar
 // ==============================================
 
-export interface DashboardSidebarProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DashboardSidebarProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   logo?: ReactNode;
   logoText?: string;
   logoHref?: string;
@@ -87,7 +80,10 @@ export interface DashboardSidebarProps extends React.HTMLAttributes<HTMLDivEleme
   onProfileClick?: () => void;
 }
 
-export const DashboardSidebar = forwardRef<HTMLDivElement, DashboardSidebarProps>(
+export const DashboardSidebar = forwardRef<
+  HTMLDivElement,
+  DashboardSidebarProps
+>(
   (
     {
       className,
@@ -164,7 +160,7 @@ export const DashboardSidebar = forwardRef<HTMLDivElement, DashboardSidebarProps
               {showUserSection && user && (
                 <div
                   className={cn(
-                    "flex items-center gap-x-3 p-2 rounded-lg bg-accent/50",
+                    "flex items-center gap-3 p-2 rounded-lg bg-accent/50",
                     collapsed && "justify-center",
                   )}
                 >
@@ -173,17 +169,23 @@ export const DashboardSidebar = forwardRef<HTMLDivElement, DashboardSidebarProps
                     alt={user.name}
                     initials={user.initials}
                     size="sm"
+                    className="shrink-0"
                   />
-                  {!collapsed && (
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium truncate">{user.name}</p>
-                      {user.role && (
-                        <p className="text-xs text-muted-foreground truncate">
-                          {user.role}
-                        </p>
-                      )}
-                    </div>
-                  )}
+                  <div
+                    className={cn(
+                      "min-w-0 transition-all duration-300 overflow-hidden",
+                      collapsed ? "opacity-0 w-0" : "opacity-100 flex-1",
+                    )}
+                  >
+                    <p className="text-sm font-medium truncate">
+                      {user.name}
+                    </p>
+                    {user.role && (
+                      <p className="text-xs text-muted-foreground truncate">
+                        {user.role}
+                      </p>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
@@ -206,7 +208,8 @@ DashboardSidebar.displayName = "DashboardSidebar";
 // DetachedSidebar
 // ==============================================
 
-export interface DetachedSidebarProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DetachedSidebarProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   logo?: ReactNode;
   logoText?: string;
   logoHref?: string;
@@ -218,6 +221,8 @@ export interface DetachedSidebarProps extends React.HTMLAttributes<HTMLDivElemen
   onItemClick?: (item: SidebarNavItem) => void;
   margin?: "sm" | "md" | "lg";
   rounded?: "sm" | "md" | "lg" | "xl" | "2xl";
+  /** Show border below header. Default: false */
+  showHeaderBorder?: boolean;
 }
 
 const detachedMargins = {
@@ -249,11 +254,12 @@ export const DetachedSidebar = forwardRef<HTMLDivElement, DetachedSidebarProps>(
       onItemClick,
       margin = "md",
       rounded = "xl",
+      showHeaderBorder = false,
       ...props
     },
     ref,
   ) => {
-    const renderNavItem = (item: SidebarNavItem) => {
+    const _renderNavItem = (item: SidebarNavItem) => {
       if (item.children && item.children.length > 0) {
         return (
           <SidebarGroup
@@ -262,7 +268,7 @@ export const DetachedSidebar = forwardRef<HTMLDivElement, DetachedSidebarProps>(
             label={item.label}
             defaultOpen={item.children.some((child) => child.active)}
           >
-            {item.children.map((child) => renderNavItem(child))}
+            {item.children.map((child) => _renderNavItem(child))}
           </SidebarGroup>
         );
       }
@@ -303,19 +309,61 @@ export const DetachedSidebar = forwardRef<HTMLDivElement, DetachedSidebarProps>(
           {...props}
         >
           {/* Header */}
-          <div className="shrink-0 p-4 border-b border-border">
-            <div className="flex items-center justify-between">
-              <SidebarLogo
-                text={!collapsed ? logoText : undefined}
-                href={logoHref}
-              >
-                {logo}
-              </SidebarLogo>
+          <div
+            className={cn(
+              "shrink-0 p-4",
+              showHeaderBorder && "border-b border-border",
+            )}
+          >
+            <div className="flex items-center justify-center">
+              {logoHref ? (
+                <a
+                  href={logoHref}
+                  className={cn(
+                    "flex items-center focus:outline-none focus:opacity-80 transition-all duration-300 overflow-hidden",
+                    collapsed ? "mr-0" : "mr-auto",
+                  )}
+                >
+                  <span className="shrink-0">{logo}</span>
+                  {logoText && (
+                    <span
+                      className={cn(
+                        "text-lg font-semibold text-foreground whitespace-nowrap transition-all duration-300 overflow-hidden",
+                        collapsed ? "opacity-0 w-0 ml-0" : "opacity-100 w-auto ml-2",
+                      )}
+                    >
+                      {logoText}
+                    </span>
+                  )}
+                </a>
+              ) : (
+                <div
+                  className={cn(
+                    "flex items-center transition-all duration-300 overflow-hidden",
+                    collapsed ? "mr-0" : "mr-auto",
+                  )}
+                >
+                  <span className="shrink-0">{logo}</span>
+                  {logoText && (
+                    <span
+                      className={cn(
+                        "text-lg font-semibold text-foreground whitespace-nowrap transition-all duration-300 overflow-hidden",
+                        collapsed ? "opacity-0 w-0 ml-0" : "opacity-100 w-auto ml-2",
+                      )}
+                    >
+                      {logoText}
+                    </span>
+                  )}
+                </div>
+              )}
               {collapsible && (
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="size-8 p-0"
+                  className={cn(
+                    "size-8 p-0 shrink-0 transition-all duration-300 overflow-hidden",
+                    collapsed ? "opacity-0 w-0 ml-0" : "opacity-100 ml-2",
+                  )}
                   onClick={() => onCollapsedChange?.(!collapsed)}
                 >
                   <ChevronRightIcon
@@ -333,27 +381,33 @@ export const DetachedSidebar = forwardRef<HTMLDivElement, DetachedSidebarProps>(
           <div className="flex-1 overflow-y-auto p-4">
             {sections.map((section) => (
               <div key={section.id} className="mb-4 last:mb-0">
-                {section.title && !collapsed && (
-                  <h3 className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                {section.title && (
+                  <h3
+                    className={cn(
+                      "mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground transition-all duration-300 overflow-hidden whitespace-nowrap",
+                      collapsed ? "opacity-0 max-h-0 mb-0" : "opacity-100 max-h-8",
+                    )}
+                  >
                     {section.title}
                   </h3>
                 )}
                 <nav className="space-y-1">
                   {section.items.map((item) => (
                     <button
+                      type="button"
                       key={item.id}
                       onClick={() => {
                         item.onClick?.();
                         onItemClick?.(item);
                       }}
                       className={cn(
-                        "flex items-center gap-x-3 w-full px-3 py-2 text-sm font-medium rounded-lg transition-colors",
+                        "flex items-center w-full px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300",
                         "focus:outline-none focus:ring-2 focus:ring-ring",
                         item.active
                           ? "bg-primary/10 text-primary"
                           : "text-muted-foreground hover:text-foreground hover:bg-accent",
-                        collapsed && "justify-center",
                         item.disabled && "opacity-50 pointer-events-none",
+                        collapsed && "justify-center",
                       )}
                       title={collapsed ? item.label : undefined}
                     >
@@ -361,28 +415,33 @@ export const DetachedSidebar = forwardRef<HTMLDivElement, DetachedSidebarProps>(
                         <span
                           className={cn(
                             "shrink-0 size-5",
-                            item.active ? "text-primary" : "text-muted-foreground",
+                            item.active
+                              ? "text-primary"
+                              : "text-muted-foreground",
                           )}
                         >
                           {item.icon}
                         </span>
                       )}
-                      {!collapsed && (
-                        <>
-                          <span className="flex-1 truncate text-left">
-                            {item.label}
-                          </span>
-                          {item.badge !== undefined && (
-                            <Badge
-                              variant={item.badgeVariant || "secondary"}
-                              size="sm"
-                              className="shrink-0"
-                            >
-                              {item.badge}
-                            </Badge>
-                          )}
-                        </>
-                      )}
+                      <div
+                        className={cn(
+                          "flex items-center gap-3 overflow-hidden transition-all duration-300",
+                          collapsed ? "w-0 opacity-0 ml-0" : "flex-1 opacity-100 ml-3",
+                        )}
+                      >
+                        <span className="flex-1 truncate text-left">
+                          {item.label}
+                        </span>
+                        {item.badge !== undefined && (
+                          <Badge
+                            variant={item.badgeVariant || "secondary"}
+                            size="sm"
+                            className="shrink-0"
+                          >
+                            {item.badge}
+                          </Badge>
+                        )}
+                      </div>
                     </button>
                   ))}
                 </nav>
@@ -395,7 +454,7 @@ export const DetachedSidebar = forwardRef<HTMLDivElement, DetachedSidebarProps>(
             <div className="shrink-0 p-4 border-t border-border">
               <div
                 className={cn(
-                  "flex items-center gap-x-3",
+                  "flex items-center gap-3",
                   collapsed && "justify-center",
                 )}
               >
@@ -404,17 +463,21 @@ export const DetachedSidebar = forwardRef<HTMLDivElement, DetachedSidebarProps>(
                   alt={user.name}
                   initials={user.initials}
                   size="sm"
+                  className="shrink-0"
                 />
-                {!collapsed && (
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium truncate">{user.name}</p>
-                    {user.email && (
-                      <p className="text-xs text-muted-foreground truncate">
-                        {user.email}
-                      </p>
-                    )}
-                  </div>
-                )}
+                <div
+                  className={cn(
+                    "min-w-0 transition-all duration-300 overflow-hidden",
+                    collapsed ? "opacity-0 w-0" : "opacity-100 flex-1",
+                  )}
+                >
+                  <p className="text-sm font-medium truncate">{user.name}</p>
+                  {user.email && (
+                    <p className="text-xs text-muted-foreground truncate">
+                      {user.email}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
           )}
@@ -429,7 +492,8 @@ DetachedSidebar.displayName = "DetachedSidebar";
 // CollapsibleSidebar
 // ==============================================
 
-export interface CollapsibleSidebarProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CollapsibleSidebarProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   logo?: ReactNode;
   collapsedLogo?: ReactNode;
   logoText?: string;
@@ -441,9 +505,14 @@ export interface CollapsibleSidebarProps extends React.HTMLAttributes<HTMLDivEle
   expandOnHover?: boolean;
   onItemClick?: (item: SidebarNavItem) => void;
   position?: "fixed" | "sticky" | "relative";
+  /** Show border below header. Default: false */
+  showHeaderBorder?: boolean;
 }
 
-export const CollapsibleSidebar = forwardRef<HTMLDivElement, CollapsibleSidebarProps>(
+export const CollapsibleSidebar = forwardRef<
+  HTMLDivElement,
+  CollapsibleSidebarProps
+>(
   (
     {
       className,
@@ -458,6 +527,7 @@ export const CollapsibleSidebar = forwardRef<HTMLDivElement, CollapsibleSidebarP
       expandOnHover = true,
       onItemClick,
       position = "fixed",
+      showHeaderBorder = false,
       ...props
     },
     ref,
@@ -471,45 +541,55 @@ export const CollapsibleSidebar = forwardRef<HTMLDivElement, CollapsibleSidebarP
         return (
           <div key={item.id} className="space-y-1">
             <button
+              type="button"
               className={cn(
-                "flex items-center gap-x-3 w-full px-3 py-2 text-sm font-medium rounded-lg transition-colors",
+                "flex items-center w-full px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300",
                 "text-muted-foreground hover:text-foreground hover:bg-accent",
                 !isExpanded && "justify-center",
               )}
               title={!isExpanded ? item.label : undefined}
             >
-              {item.icon && <span className="shrink-0 size-5">{item.icon}</span>}
-              {isExpanded && (
-                <>
-                  <span className="flex-1 truncate text-left">{item.label}</span>
-                  <ChevronRightIcon className="size-4" />
-                </>
+              {item.icon && (
+                <span className="shrink-0 size-5">{item.icon}</span>
               )}
-            </button>
-            {isExpanded && (
-              <div className="pl-8 space-y-1">
-                {item.children.map((child) => renderNavItem(child))}
+              <div
+                className={cn(
+                  "flex items-center gap-3 overflow-hidden transition-all duration-300",
+                  !isExpanded ? "w-0 opacity-0 ml-0" : "flex-1 opacity-100 ml-3",
+                )}
+              >
+                <span className="flex-1 truncate text-left">{item.label}</span>
+                <ChevronRightIcon className="size-4 shrink-0" />
               </div>
-            )}
+            </button>
+            <div
+              className={cn(
+                "pl-8 space-y-1 overflow-hidden transition-all duration-300",
+                isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0",
+              )}
+            >
+              {item.children.map((child) => renderNavItem(child))}
+            </div>
           </div>
         );
       }
 
       return (
         <button
+          type="button"
           key={item.id}
           onClick={() => {
             item.onClick?.();
             onItemClick?.(item);
           }}
           className={cn(
-            "flex items-center gap-x-3 w-full px-3 py-2 text-sm font-medium rounded-lg transition-colors",
+            "flex items-center w-full px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300",
             "focus:outline-none focus:ring-2 focus:ring-ring",
             item.active
               ? "bg-primary/10 text-primary"
               : "text-muted-foreground hover:text-foreground hover:bg-accent",
-            !isExpanded && "justify-center",
             item.disabled && "opacity-50 pointer-events-none",
+            !isExpanded && "justify-center",
           )}
           title={!isExpanded ? item.label : undefined}
         >
@@ -523,20 +603,23 @@ export const CollapsibleSidebar = forwardRef<HTMLDivElement, CollapsibleSidebarP
               {item.icon}
             </span>
           )}
-          {isExpanded && (
-            <>
-              <span className="flex-1 truncate text-left">{item.label}</span>
-              {item.badge !== undefined && (
-                <Badge
-                  variant={item.badgeVariant || "secondary"}
-                  size="sm"
-                  className="shrink-0"
-                >
-                  {item.badge}
-                </Badge>
-              )}
-            </>
-          )}
+          <div
+            className={cn(
+              "flex items-center gap-3 overflow-hidden transition-all duration-300",
+              !isExpanded ? "w-0 opacity-0 ml-0" : "flex-1 opacity-100 ml-3",
+            )}
+          >
+            <span className="flex-1 truncate text-left">{item.label}</span>
+            {item.badge !== undefined && (
+              <Badge
+                variant={item.badgeVariant || "secondary"}
+                size="sm"
+                className="shrink-0"
+              >
+                {item.badge}
+              </Badge>
+            )}
+          </div>
         </button>
       );
     };
@@ -556,26 +639,41 @@ export const CollapsibleSidebar = forwardRef<HTMLDivElement, CollapsibleSidebarP
         {...props}
       >
         {/* Header */}
-        <div className="shrink-0 p-4 border-b border-border">
-          <div className="flex items-center justify-between">
-            {isExpanded ? (
-              <a href={logoHref} className="flex items-center gap-x-2">
-                {logo}
-                {logoText && (
-                  <span className="text-lg font-semibold">{logoText}</span>
-                )}
-              </a>
-            ) : (
-              <a href={logoHref} className="mx-auto">
-                {collapsedLogo || logo}
-              </a>
-            )}
-            {isExpanded && !expandOnHover && (
+        <div
+          className={cn(
+            "shrink-0 p-4",
+            showHeaderBorder && "border-b border-border",
+          )}
+        >
+          <div className="flex items-center justify-center">
+            <a
+              href={logoHref}
+              className={cn(
+                "flex items-center transition-all duration-300 overflow-hidden",
+                !isExpanded ? "mr-0" : "mr-auto",
+              )}
+            >
+              <span className="shrink-0">{isExpanded ? logo : (collapsedLogo || logo)}</span>
+              {logoText && (
+                <span
+                  className={cn(
+                    "text-lg font-semibold whitespace-nowrap transition-all duration-300 overflow-hidden",
+                    !isExpanded ? "opacity-0 w-0 ml-0" : "opacity-100 w-auto ml-2",
+                  )}
+                >
+                  {logoText}
+                </span>
+              )}
+            </a>
+            {!expandOnHover && onCollapsedChange && (
               <Button
                 variant="ghost"
                 size="sm"
-                className="size-8 p-0"
-                onClick={() => onCollapsedChange?.(!collapsed)}
+                className={cn(
+                  "size-8 p-0 shrink-0 transition-all duration-300 overflow-hidden",
+                  !isExpanded ? "opacity-0 w-0 ml-0" : "opacity-100 ml-2",
+                )}
+                onClick={() => onCollapsedChange(!collapsed)}
               >
                 <ChevronLeftIcon className="size-4" />
               </Button>
@@ -587,8 +685,13 @@ export const CollapsibleSidebar = forwardRef<HTMLDivElement, CollapsibleSidebarP
         <div className="flex-1 overflow-y-auto p-4">
           {sections.map((section) => (
             <div key={section.id} className="mb-4 last:mb-0">
-              {section.title && isExpanded && (
-                <h3 className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              {section.title && (
+                <h3
+                  className={cn(
+                    "mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground transition-all duration-300 overflow-hidden whitespace-nowrap",
+                    !isExpanded ? "opacity-0 max-h-0 mb-0" : "opacity-100 max-h-8",
+                  )}
+                >
                   {section.title}
                 </h3>
               )}
@@ -604,7 +707,7 @@ export const CollapsibleSidebar = forwardRef<HTMLDivElement, CollapsibleSidebarP
           <div className="shrink-0 p-4 border-t border-border">
             <div
               className={cn(
-                "flex items-center gap-x-3",
+                "flex items-center gap-3",
                 !isExpanded && "justify-center",
               )}
             >
@@ -613,29 +716,33 @@ export const CollapsibleSidebar = forwardRef<HTMLDivElement, CollapsibleSidebarP
                 alt={user.name}
                 initials={user.initials}
                 size="sm"
+                className="shrink-0"
               />
-              {isExpanded && (
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium truncate">{user.name}</p>
-                  {user.role && (
-                    <p className="text-xs text-muted-foreground truncate">
-                      {user.role}
-                    </p>
-                  )}
-                </div>
-              )}
+              <div
+                className={cn(
+                  "min-w-0 transition-all duration-300 overflow-hidden",
+                  !isExpanded ? "opacity-0 w-0" : "opacity-100 flex-1",
+                )}
+              >
+                <p className="text-sm font-medium truncate">{user.name}</p>
+                {user.role && (
+                  <p className="text-xs text-muted-foreground truncate">
+                    {user.role}
+                  </p>
+                )}
+              </div>
             </div>
           </div>
         )}
 
-        {/* Expand button when collapsed */}
-        {collapsed && !expandOnHover && (
+        {/* Expand button when collapsed (manual mode only) */}
+        {collapsed && !expandOnHover && onCollapsedChange && (
           <div className="shrink-0 p-4 border-t border-border flex justify-center">
             <Button
               variant="ghost"
               size="sm"
               className="size-8 p-0"
-              onClick={() => onCollapsedChange?.(false)}
+              onClick={() => onCollapsedChange(false)}
             >
               <ChevronRightIcon className="size-4" />
             </Button>
@@ -691,6 +798,7 @@ export const IconSidebar = forwardRef<HTMLDivElement, IconSidebarProps>(
   ) => {
     const renderItem = (item: IconSidebarItem) => (
       <button
+        type="button"
         key={item.id}
         onClick={() => {
           item.onClick?.();
@@ -777,7 +885,8 @@ export interface DoubleSidebarSecondarySection {
   items: SidebarNavItem[];
 }
 
-export interface DoubleSidebarProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DoubleSidebarProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   logo?: ReactNode;
   logoHref?: string;
   primaryItems?: DoubleSidebarPrimaryItem[];
@@ -814,6 +923,7 @@ export const DoubleSidebar = forwardRef<HTMLDivElement, DoubleSidebarProps>(
   ) => {
     const renderSecondaryItem = (item: SidebarNavItem) => (
       <button
+        type="button"
         key={item.id}
         onClick={() => {
           item.onClick?.();
@@ -875,6 +985,7 @@ export const DoubleSidebar = forwardRef<HTMLDivElement, DoubleSidebarProps>(
           <nav className="flex-1 flex flex-col items-center gap-y-2">
             {primaryItems.map((item) => (
               <button
+                type="button"
                 key={item.id}
                 onClick={() => onPrimarySelect?.(item)}
                 className={cn(
@@ -925,8 +1036,11 @@ export const DoubleSidebar = forwardRef<HTMLDivElement, DoubleSidebarProps>(
 
             {/* Content */}
             <div className="flex-1 overflow-y-auto p-4">
-              {secondarySections.map((section, index) => (
-                <div key={index} className="mb-4 last:mb-0">
+              {secondarySections.map((section) => (
+                <div
+                  key={section.title || section.items[0]?.label}
+                  className="mb-4 last:mb-0"
+                >
                   {section.title && (
                     <h3 className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                       {section.title}
@@ -977,7 +1091,8 @@ export interface FilterSection {
   expanded?: boolean;
 }
 
-export interface FilterSidebarProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FilterSidebarProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
   sections?: FilterSection[];
   onFilterChange?: (sectionId: string, value: unknown) => void;
@@ -1024,9 +1139,13 @@ export const FilterSidebar = forwardRef<HTMLDivElement, FilterSidebarProps>(
       const isExpanded = expandedSections.has(section.id);
 
       return (
-        <div key={section.id} className="border-b border-border last:border-b-0">
+        <div
+          key={section.id}
+          className="border-b border-border last:border-b-0"
+        >
           {/* Section Header */}
           <button
+            type="button"
             onClick={() => toggleSection(section.id)}
             className="flex items-center justify-between w-full px-4 py-3 text-sm font-medium hover:bg-accent transition-colors"
           >
@@ -1050,14 +1169,17 @@ export const FilterSidebar = forwardRef<HTMLDivElement, FilterSidebarProps>(
               {/* Checkbox Options */}
               {section.type === "checkbox" &&
                 section.options?.map((option) => (
-                  <label
+                  <span
                     key={option.id}
                     className="flex items-center gap-x-3 cursor-pointer"
                   >
                     <Checkbox
                       checked={option.checked}
                       onCheckedChange={(checked) =>
-                        onFilterChange?.(section.id, { optionId: option.id, checked })
+                        onFilterChange?.(section.id, {
+                          optionId: option.id,
+                          checked,
+                        })
                       }
                     />
                     <span className="text-sm flex-1">{option.label}</span>
@@ -1066,13 +1188,13 @@ export const FilterSidebar = forwardRef<HTMLDivElement, FilterSidebarProps>(
                         ({option.count})
                       </span>
                     )}
-                  </label>
+                  </span>
                 ))}
 
               {/* Radio Options */}
               {section.type === "radio" &&
                 section.options?.map((option) => (
-                  <label
+                  <span
                     key={option.id}
                     className="flex items-center gap-x-3 cursor-pointer"
                   >
@@ -1080,7 +1202,10 @@ export const FilterSidebar = forwardRef<HTMLDivElement, FilterSidebarProps>(
                       name={section.id}
                       checked={option.checked}
                       onChange={() =>
-                        onFilterChange?.(section.id, { optionId: option.id, checked: true })
+                        onFilterChange?.(section.id, {
+                          optionId: option.id,
+                          checked: true,
+                        })
                       }
                     />
                     <span className="text-sm flex-1">{option.label}</span>
@@ -1089,7 +1214,7 @@ export const FilterSidebar = forwardRef<HTMLDivElement, FilterSidebarProps>(
                         ({option.count})
                       </span>
                     )}
-                  </label>
+                  </span>
                 ))}
 
               {/* Range */}
@@ -1133,7 +1258,9 @@ export const FilterSidebar = forwardRef<HTMLDivElement, FilterSidebarProps>(
                   <Input
                     type="text"
                     placeholder={section.searchPlaceholder || "Search..."}
-                    onChange={(e) => onFilterChange?.(section.id, e.target.value)}
+                    onChange={(e) =>
+                      onFilterChange?.(section.id, e.target.value)
+                    }
                     className="pl-9"
                     size="sm"
                   />
@@ -1170,6 +1297,7 @@ export const FilterSidebar = forwardRef<HTMLDivElement, FilterSidebarProps>(
           </div>
           {showClearButton && activeFilterCount > 0 && (
             <button
+              type="button"
               onClick={onClearAll}
               className="text-xs text-primary hover:underline"
             >
@@ -1219,7 +1347,8 @@ export interface SettingsNavSection {
   items: SettingsNavItem[];
 }
 
-export interface SettingsSidebarProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SettingsSidebarProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
   description?: string;
   sections?: SettingsNavSection[];
@@ -1273,6 +1402,7 @@ export const SettingsSidebar = forwardRef<HTMLDivElement, SettingsSidebarProps>(
               <nav className="space-y-1">
                 {section.items.map((item) => (
                   <button
+                    type="button"
                     key={item.id}
                     onClick={() => {
                       item.onClick?.();
@@ -1291,7 +1421,9 @@ export const SettingsSidebar = forwardRef<HTMLDivElement, SettingsSidebarProps>(
                       <span
                         className={cn(
                           "shrink-0 size-5 mt-0.5",
-                          item.active ? "text-primary" : "text-muted-foreground",
+                          item.active
+                            ? "text-primary"
+                            : "text-muted-foreground",
                         )}
                       >
                         {item.icon}
@@ -1299,7 +1431,9 @@ export const SettingsSidebar = forwardRef<HTMLDivElement, SettingsSidebarProps>(
                     )}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-x-2">
-                        <span className="text-sm font-medium">{item.label}</span>
+                        <span className="text-sm font-medium">
+                          {item.label}
+                        </span>
                         {item.badge}
                       </div>
                       {item.description && (
@@ -1317,7 +1451,9 @@ export const SettingsSidebar = forwardRef<HTMLDivElement, SettingsSidebarProps>(
 
         {/* Footer */}
         {footer && (
-          <div className="shrink-0 px-4 py-4 border-t border-border">{footer}</div>
+          <div className="shrink-0 px-4 py-4 border-t border-border">
+            {footer}
+          </div>
         )}
       </aside>
     );
@@ -1327,10 +1463,10 @@ SettingsSidebar.displayName = "SettingsSidebar";
 
 // Re-export types from Sidebar
 export type {
+  SidebarGroupProps,
+  SidebarItemProps,
+  SidebarLogoProps,
   SidebarProps,
   SidebarSectionProps,
-  SidebarItemProps,
-  SidebarGroupProps,
   SidebarToggleProps,
-  SidebarLogoProps,
 } from "@/components/organisms/Sidebar";

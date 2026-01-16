@@ -1,13 +1,29 @@
-import { forwardRef, useState, useEffect, type ReactNode } from "react";
-import { Button } from "@/components/atoms/Button";
+import { forwardRef, type ReactNode, useEffect, useState } from "react";
 import { Badge } from "@/components/atoms/Badge";
+import { Button } from "@/components/atoms/Button";
 import { Checkbox } from "@/components/atoms/Checkbox";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "@/components/organisms/Modal";
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/molecules/Accordion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/molecules/Accordion";
+import {
+  type DateRange,
+  DateRangePicker,
+} from "@/components/molecules/DateRangePicker";
 import { RangeSlider } from "@/components/molecules/RangeSlider";
-import { DateRangePicker, type DateRange } from "@/components/molecules/DateRangePicker";
+import type {
+  FilterSection,
+  FilterValues,
+} from "@/components/organisms/FilterDrawer";
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "@/components/organisms/Modal";
 import { FilterIcon } from "@/lib/icons";
-import type { FilterSection, FilterValues } from "@/components/organisms/FilterDrawer";
 
 export interface FilterModalProps {
   isOpen: boolean;
@@ -59,17 +75,20 @@ export const FilterModal = forwardRef<HTMLDivElement, FilterModalProps>(
       }
     }, [isOpen, initialValues]);
 
-    const handleCheckboxChange = (sectionId: string, optionId: string, checked: boolean) => {
+    const handleCheckboxChange = (
+      sectionId: string,
+      optionId: string,
+      checked: boolean,
+    ) => {
       setValues((prev) => {
         const currentValues = (prev[sectionId] as string[]) || [];
         if (checked) {
           return { ...prev, [sectionId]: [...currentValues, optionId] };
-        } else {
-          return {
-            ...prev,
-            [sectionId]: currentValues.filter((v) => v !== optionId),
-          };
         }
+        return {
+          ...prev,
+          [sectionId]: currentValues.filter((v) => v !== optionId),
+        };
       });
     };
 
@@ -77,7 +96,10 @@ export const FilterModal = forwardRef<HTMLDivElement, FilterModalProps>(
       setValues((prev) => ({ ...prev, [sectionId]: range }));
     };
 
-    const handleDateRangeChange = (sectionId: string, range: DateRange | undefined) => {
+    const handleDateRangeChange = (
+      sectionId: string,
+      range: DateRange | undefined,
+    ) => {
       if (range) {
         setValues((prev) => ({ ...prev, [sectionId]: range }));
       }
@@ -92,15 +114,22 @@ export const FilterModal = forwardRef<HTMLDivElement, FilterModalProps>(
       onApply(values);
     };
 
-    const activeFilterCount = Object.entries(values).reduce((count, [_, value]) => {
-      if (Array.isArray(value) && value.length > 0) {
-        return count + (typeof value[0] === "string" ? value.length : 1);
-      }
-      if (value && typeof value === "object" && ("start" in value || "end" in value)) {
-        return count + 1;
-      }
-      return count;
-    }, 0);
+    const activeFilterCount = Object.entries(values).reduce(
+      (count, [_, value]) => {
+        if (Array.isArray(value) && value.length > 0) {
+          return count + (typeof value[0] === "string" ? value.length : 1);
+        }
+        if (
+          value &&
+          typeof value === "object" &&
+          ("start" in value || "end" in value)
+        ) {
+          return count + 1;
+        }
+        return count;
+      },
+      0,
+    );
 
     return (
       <Modal
@@ -140,11 +169,11 @@ export const FilterModal = forwardRef<HTMLDivElement, FilterModalProps>(
                 value={section.id}
                 className="border-b border-border last:border-b-0"
               >
-                <AccordionTrigger className="px-4 py-3 text-sm font-medium">
-                  {section.label}
+                <AccordionTrigger className="gap-2 px-4 py-3 text-sm font-medium">
+                  <span className="flex-1">{section.label}</span>
                   {section.type === "checkbox" &&
                     (values[section.id] as string[])?.length > 0 && (
-                      <Badge soft className="ml-auto mr-2 text-xs">
+                      <Badge soft className="mr-2 text-xs">
                         {(values[section.id] as string[]).length}
                       </Badge>
                     )}
@@ -153,15 +182,18 @@ export const FilterModal = forwardRef<HTMLDivElement, FilterModalProps>(
                   {section.type === "checkbox" && section.options && (
                     <div className="grid gap-2 sm:grid-cols-2">
                       {section.options.map((option) => {
-                        const isChecked = (values[section.id] as string[])?.includes(
-                          option.id,
-                        );
+                        const isChecked = (
+                          values[section.id] as string[]
+                        )?.includes(option.id);
+                        const checkboxId = `filter-${section.id}-${option.id}`;
                         return (
                           <label
                             key={option.id}
+                            htmlFor={checkboxId}
                             className="flex cursor-pointer items-center gap-3"
                           >
                             <Checkbox
+                              id={checkboxId}
                               checked={isChecked}
                               onChange={(e) =>
                                 handleCheckboxChange(
@@ -251,4 +283,8 @@ export const FilterModal = forwardRef<HTMLDivElement, FilterModalProps>(
 FilterModal.displayName = "FilterModal";
 
 // Re-export types for convenience
-export type { FilterSection, FilterValues, FilterOption } from "@/components/organisms/FilterDrawer";
+export type {
+  FilterOption,
+  FilterSection,
+  FilterValues,
+} from "@/components/organisms/FilterDrawer";

@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {
   OrderConfirmation,
-  SimpleOrderConfirmation,
   type OrderItem,
   type ShippingAddress,
+  SimpleOrderConfirmation,
 } from "./index";
 
 const meta: Meta<typeof OrderConfirmation> = {
@@ -22,7 +22,8 @@ const sampleItems: OrderItem[] = [
   {
     id: "1",
     name: "Guatemala Elephant Coffee",
-    image: "https://images.unsplash.com/photo-1615486629862-10b0890e79b3?w=200&h=200&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1615486629862-10b0890e79b3?w=200&h=200&fit=crop",
     price: 5.5,
     quantity: 2,
     variant: "250g, Ground",
@@ -30,7 +31,8 @@ const sampleItems: OrderItem[] = [
   {
     id: "2",
     name: "Colombia Premium Blend",
-    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=200&h=200&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=200&h=200&fit=crop",
     price: 8.99,
     quantity: 1,
     variant: "500g, Beans",

@@ -1,10 +1,10 @@
+import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
+import { Badge } from "@/components/atoms";
+import { TrendIndicator } from "@/components/molecules";
+import type { TrendDirection, TrendVariant } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { dataCardVariants } from "@/lib/variants/dataVisualization";
-import { TrendIndicator } from "@/components/molecules";
-import { Badge } from "@/components/atoms";
-import type { VariantProps } from "class-variance-authority";
-import type { TrendDirection, TrendVariant } from "@/lib/types";
 
 // ============================================
 // Types
@@ -88,7 +88,9 @@ export const IconStats = forwardRef<HTMLDivElement, IconStatsProps>(
                 <h3 className="text-sm font-medium text-foreground">{title}</h3>
               )}
               {subtitle && (
-                <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {subtitle}
+                </p>
               )}
             </div>
             {action && <div className="shrink-0">{action}</div>}
@@ -96,10 +98,15 @@ export const IconStats = forwardRef<HTMLDivElement, IconStatsProps>(
         )}
 
         {/* Stats Grid */}
-        <div className={cn("grid divide-x divide-border", columnClasses[columns])}>
+        <div
+          className={cn("grid divide-x divide-border", columnClasses[columns])}
+        >
           {stats.map((stat, index) => {
-            const iconBg = stat.iconBackground || `hsl(var(--chart-${(index % 5) + 1}) / 0.1)`;
-            const iconClr = stat.iconColor || `hsl(var(--chart-${(index % 5) + 1}))`;
+            const iconBg =
+              stat.iconBackground ||
+              `hsl(var(--chart-${(index % 5) + 1}) / 0.1)`;
+            const iconClr =
+              stat.iconColor || `hsl(var(--chart-${(index % 5) + 1}))`;
 
             return (
               <div key={stat.id} className="p-4">
@@ -108,7 +115,7 @@ export const IconStats = forwardRef<HTMLDivElement, IconStatsProps>(
                   <div
                     className={cn(
                       "shrink-0 rounded-lg flex items-center justify-center",
-                      iconWrapperClasses[iconSize]
+                      iconWrapperClasses[iconSize],
                     )}
                     style={{
                       backgroundColor: iconBg,
@@ -175,13 +182,7 @@ export interface IconStatsRowProps
 
 export const IconStatsRow = forwardRef<HTMLDivElement, IconStatsRowProps>(
   (
-    {
-      className,
-      variant = "bordered",
-      stats,
-      iconSize = "md",
-      ...props
-    },
+    { className, variant = "bordered", stats, iconSize = "md", ...props },
     ref,
   ) => {
     return (
@@ -190,29 +191,32 @@ export const IconStatsRow = forwardRef<HTMLDivElement, IconStatsRowProps>(
         className={cn(
           dataCardVariants({ variant }),
           "flex items-center divide-x divide-border overflow-x-auto",
-          className
+          className,
         )}
         {...props}
       >
         {stats.map((stat, index) => {
-          const iconBg = stat.iconBackground || `hsl(var(--chart-${(index % 5) + 1}) / 0.1)`;
-          const iconClr = stat.iconColor || `hsl(var(--chart-${(index % 5) + 1}))`;
+          const iconBg =
+            stat.iconBackground || `hsl(var(--chart-${(index % 5) + 1}) / 0.1)`;
+          const iconClr =
+            stat.iconColor || `hsl(var(--chart-${(index % 5) + 1}))`;
 
           return (
-            <div key={stat.id} className="flex items-center gap-x-3 p-4 flex-shrink-0">
+            <div
+              key={stat.id}
+              className="flex items-center gap-x-3 p-4 flex-shrink-0"
+            >
               <div
                 className={cn(
                   "shrink-0 rounded-lg flex items-center justify-center",
-                  iconWrapperClasses[iconSize]
+                  iconWrapperClasses[iconSize],
                 )}
                 style={{
                   backgroundColor: iconBg,
                   color: iconClr,
                 }}
               >
-                <span className={iconSizeClasses[iconSize]}>
-                  {stat.icon}
-                </span>
+                <span className={iconSizeClasses[iconSize]}>{stat.icon}</span>
               </div>
               <div>
                 <p className="text-xs text-muted-foreground">{stat.label}</p>
@@ -252,7 +256,10 @@ export interface CenteredIconStatsProps
   action?: React.ReactNode;
 }
 
-export const CenteredIconStats = forwardRef<HTMLDivElement, CenteredIconStatsProps>(
+export const CenteredIconStats = forwardRef<
+  HTMLDivElement,
+  CenteredIconStatsProps
+>(
   (
     {
       className,
@@ -288,10 +295,15 @@ export const CenteredIconStats = forwardRef<HTMLDivElement, CenteredIconStatsPro
         )}
 
         {/* Stats Grid */}
-        <div className={cn("grid divide-x divide-border", columnClasses[columns])}>
+        <div
+          className={cn("grid divide-x divide-border", columnClasses[columns])}
+        >
           {stats.map((stat, index) => {
-            const iconBg = stat.iconBackground || `hsl(var(--chart-${(index % 5) + 1}) / 0.1)`;
-            const iconClr = stat.iconColor || `hsl(var(--chart-${(index % 5) + 1}))`;
+            const iconBg =
+              stat.iconBackground ||
+              `hsl(var(--chart-${(index % 5) + 1}) / 0.1)`;
+            const iconClr =
+              stat.iconColor || `hsl(var(--chart-${(index % 5) + 1}))`;
 
             return (
               <div key={stat.id} className="p-4 text-center">
@@ -303,9 +315,7 @@ export const CenteredIconStats = forwardRef<HTMLDivElement, CenteredIconStatsPro
                     color: iconClr,
                   }}
                 >
-                  <span className="size-6">
-                    {stat.icon}
-                  </span>
+                  <span className="size-6">{stat.icon}</span>
                 </div>
 
                 {/* Value */}
@@ -324,7 +334,9 @@ export const CenteredIconStats = forwardRef<HTMLDivElement, CenteredIconStatsPro
                 </div>
 
                 {/* Label */}
-                <p className="text-sm text-muted-foreground mt-1">{stat.label}</p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {stat.label}
+                </p>
 
                 {/* Description */}
                 {stat.description && (
@@ -352,45 +364,39 @@ export interface CompactIconStatsProps
   stats: IconStatItem[];
 }
 
-export const CompactIconStats = forwardRef<HTMLDivElement, CompactIconStatsProps>(
-  (
-    {
-      className,
-      variant = "bordered",
-      stats,
-      ...props
-    },
-    ref,
-  ) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(dataCardVariants({ variant }), "p-4", className)}
-        {...props}
-      >
-        <div className="flex items-center justify-around gap-4">
-          {stats.map((stat, index) => {
-            const iconClr = stat.iconColor || `hsl(var(--chart-${(index % 5) + 1}))`;
+export const CompactIconStats = forwardRef<
+  HTMLDivElement,
+  CompactIconStatsProps
+>(({ className, variant = "bordered", stats, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn(dataCardVariants({ variant }), "p-4", className)}
+      {...props}
+    >
+      <div className="flex items-center justify-around gap-4">
+        {stats.map((stat, index) => {
+          const iconClr =
+            stat.iconColor || `hsl(var(--chart-${(index % 5) + 1}))`;
 
-            return (
-              <div key={stat.id} className="flex items-center gap-x-2">
-                <span style={{ color: iconClr }} className="shrink-0">
-                  {stat.icon}
-                </span>
-                <div>
-                  <p className="text-lg font-bold text-foreground tabular-nums leading-tight">
-                    {stat.value}
-                  </p>
-                  <p className="text-xs text-muted-foreground">{stat.label}</p>
-                </div>
+          return (
+            <div key={stat.id} className="flex items-center gap-x-2">
+              <span style={{ color: iconClr }} className="shrink-0">
+                {stat.icon}
+              </span>
+              <div>
+                <p className="text-lg font-bold text-foreground tabular-nums leading-tight">
+                  {stat.value}
+                </p>
+                <p className="text-xs text-muted-foreground">{stat.label}</p>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
-    );
-  },
-);
+    </div>
+  );
+});
 CompactIconStats.displayName = "CompactIconStats";
 
 // ============================================
@@ -473,9 +479,7 @@ export const IconStatCard = forwardRef<HTMLDivElement, IconStatCardProps>(
               color: iconColor,
             }}
           >
-            <span className="size-6">
-              {icon}
-            </span>
+            <span className="size-6">{icon}</span>
           </div>
         </div>
       </div>

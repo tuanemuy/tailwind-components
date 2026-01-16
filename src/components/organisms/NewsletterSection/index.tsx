@@ -1,10 +1,11 @@
-import { forwardRef, useState, type FormEvent, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { type FormEvent, forwardRef, type ReactNode, useState } from "react";
 import { Button, Input } from "@/components/atoms";
 import { CheckIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // NewsletterSection component
-export interface NewsletterSectionProps extends React.HTMLAttributes<HTMLElement> {
+export interface NewsletterSectionProps
+  extends React.HTMLAttributes<HTMLElement> {
   padding?: "sm" | "md" | "lg" | "xl";
   backgroundColor?: "default" | "muted" | "primary" | "gradient";
 }
@@ -20,15 +21,32 @@ const backgroundClasses = {
   default: "bg-background",
   muted: "bg-muted/50",
   primary: "bg-primary text-primary-foreground",
-  gradient: "bg-gradient-to-r from-primary via-primary/90 to-primary/80 text-primary-foreground",
+  gradient:
+    "bg-gradient-to-r from-primary via-primary/90 to-primary/80 text-primary-foreground",
 };
 
-export const NewsletterSection = forwardRef<HTMLElement, NewsletterSectionProps>(
-  ({ className, padding = "lg", backgroundColor = "default", children, ...props }, ref) => {
+export const NewsletterSection = forwardRef<
+  HTMLElement,
+  NewsletterSectionProps
+>(
+  (
+    {
+      className,
+      padding = "lg",
+      backgroundColor = "default",
+      children,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <section
         ref={ref}
-        className={cn(paddingClasses[padding], backgroundClasses[backgroundColor], className)}
+        className={cn(
+          paddingClasses[padding],
+          backgroundClasses[backgroundColor],
+          className,
+        )}
         {...props}
       >
         <div className="container mx-auto px-4">{children}</div>
@@ -39,7 +57,8 @@ export const NewsletterSection = forwardRef<HTMLElement, NewsletterSectionProps>
 NewsletterSection.displayName = "NewsletterSection";
 
 // NewsletterContent component
-export interface NewsletterContentProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface NewsletterContentProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   align?: "left" | "center";
   maxWidth?: "sm" | "md" | "lg" | "xl";
 }
@@ -51,8 +70,14 @@ const maxWidthClasses = {
   xl: "max-w-2xl",
 };
 
-export const NewsletterContent = forwardRef<HTMLDivElement, NewsletterContentProps>(
-  ({ className, align = "center", maxWidth = "lg", children, ...props }, ref) => {
+export const NewsletterContent = forwardRef<
+  HTMLDivElement,
+  NewsletterContentProps
+>(
+  (
+    { className, align = "center", maxWidth = "lg", children, ...props },
+    ref,
+  ) => {
     return (
       <div
         ref={ref}
@@ -71,7 +96,8 @@ export const NewsletterContent = forwardRef<HTMLDivElement, NewsletterContentPro
 NewsletterContent.displayName = "NewsletterContent";
 
 // NewsletterTitle component
-export interface NewsletterTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+export interface NewsletterTitleProps
+  extends React.HTMLAttributes<HTMLHeadingElement> {
   as?: "h2" | "h3";
   size?: "sm" | "md" | "lg";
 }
@@ -82,8 +108,14 @@ const titleSizeClasses = {
   lg: "text-3xl md:text-4xl",
 };
 
-export const NewsletterTitle = forwardRef<HTMLHeadingElement, NewsletterTitleProps>(
-  ({ className, as: Component = "h2", size = "md", children, ...props }, ref) => {
+export const NewsletterTitle = forwardRef<
+  HTMLHeadingElement,
+  NewsletterTitleProps
+>(
+  (
+    { className, as: Component = "h2", size = "md", children, ...props },
+    ref,
+  ) => {
     return (
       <Component
         ref={ref}
@@ -98,21 +130,24 @@ export const NewsletterTitle = forwardRef<HTMLHeadingElement, NewsletterTitlePro
 NewsletterTitle.displayName = "NewsletterTitle";
 
 // NewsletterDescription component
-export interface NewsletterDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {}
+export interface NewsletterDescriptionProps
+  extends React.HTMLAttributes<HTMLParagraphElement> {}
 
-export const NewsletterDescription = forwardRef<HTMLParagraphElement, NewsletterDescriptionProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <p ref={ref} className={cn("mt-3 opacity-80", className)} {...props}>
-        {children}
-      </p>
-    );
-  },
-);
+export const NewsletterDescription = forwardRef<
+  HTMLParagraphElement,
+  NewsletterDescriptionProps
+>(({ className, children, ...props }, ref) => {
+  return (
+    <p ref={ref} className={cn("mt-3 opacity-80", className)} {...props}>
+      {children}
+    </p>
+  );
+});
 NewsletterDescription.displayName = "NewsletterDescription";
 
 // NewsletterForm component
-export interface NewsletterFormProps extends Omit<React.FormHTMLAttributes<HTMLFormElement>, "onSubmit"> {
+export interface NewsletterFormProps
+  extends Omit<React.FormHTMLAttributes<HTMLFormElement>, "onSubmit"> {
   onSubmit: (email: string) => void | Promise<void>;
   layout?: "inline" | "stacked";
   placeholder?: string;
@@ -165,7 +200,8 @@ export const NewsletterForm = forwardRef<HTMLFormElement, NewsletterFormProps>(
           required
           className={cn(
             layout === "inline" && "sm:flex-1",
-            inverted && "bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/60",
+            inverted &&
+              "bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/60",
           )}
         />
         <Button
@@ -186,13 +222,17 @@ export const NewsletterForm = forwardRef<HTMLFormElement, NewsletterFormProps>(
 NewsletterForm.displayName = "NewsletterForm";
 
 // NewsletterSuccess component
-export interface NewsletterSuccessProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface NewsletterSuccessProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
   message?: string;
   showIcon?: boolean;
 }
 
-export const NewsletterSuccess = forwardRef<HTMLDivElement, NewsletterSuccessProps>(
+export const NewsletterSuccess = forwardRef<
+  HTMLDivElement,
+  NewsletterSuccessProps
+>(
   (
     {
       className,
@@ -206,7 +246,10 @@ export const NewsletterSuccess = forwardRef<HTMLDivElement, NewsletterSuccessPro
     return (
       <div
         ref={ref}
-        className={cn("mt-6 flex flex-col items-center gap-3 text-center", className)}
+        className={cn(
+          "mt-6 flex flex-col items-center gap-3 text-center",
+          className,
+        )}
         {...props}
       >
         {showIcon && (
@@ -230,42 +273,48 @@ export interface NewsletterFeatureItem {
   text: string;
 }
 
-export interface NewsletterFeaturesProps extends React.HTMLAttributes<HTMLUListElement> {
+export interface NewsletterFeaturesProps
+  extends React.HTMLAttributes<HTMLUListElement> {
   features: NewsletterFeatureItem[];
   layout?: "row" | "column";
 }
 
-export const NewsletterFeatures = forwardRef<HTMLUListElement, NewsletterFeaturesProps>(
-  ({ className, features, layout = "row", ...props }, ref) => {
-    return (
-      <ul
-        ref={ref}
-        className={cn(
-          "mt-6 flex gap-4 text-sm",
-          layout === "column" ? "flex-col" : "flex-row flex-wrap justify-center",
-          className,
-        )}
-        {...props}
-      >
-        {features.map((feature, index) => (
-          <li key={index} className="flex items-center gap-2">
-            {feature.icon || <CheckIcon className="size-4 text-success" />}
-            <span className="opacity-80">{feature.text}</span>
-          </li>
-        ))}
-      </ul>
-    );
-  },
-);
+export const NewsletterFeatures = forwardRef<
+  HTMLUListElement,
+  NewsletterFeaturesProps
+>(({ className, features, layout = "row", ...props }, ref) => {
+  return (
+    <ul
+      ref={ref}
+      className={cn(
+        "mt-6 flex gap-4 text-sm",
+        layout === "column" ? "flex-col" : "flex-row flex-wrap justify-center",
+        className,
+      )}
+      {...props}
+    >
+      {features.map((feature) => (
+        <li key={feature.text} className="flex items-center gap-2">
+          {feature.icon || <CheckIcon className="size-4 text-success" />}
+          <span className="opacity-80">{feature.text}</span>
+        </li>
+      ))}
+    </ul>
+  );
+});
 NewsletterFeatures.displayName = "NewsletterFeatures";
 
 // NewsletterPrivacy component
-export interface NewsletterPrivacyProps extends React.HTMLAttributes<HTMLParagraphElement> {
+export interface NewsletterPrivacyProps
+  extends React.HTMLAttributes<HTMLParagraphElement> {
   privacyUrl?: string;
   privacyText?: string;
 }
 
-export const NewsletterPrivacy = forwardRef<HTMLParagraphElement, NewsletterPrivacyProps>(
+export const NewsletterPrivacy = forwardRef<
+  HTMLParagraphElement,
+  NewsletterPrivacyProps
+>(
   (
     {
       className,
@@ -277,7 +326,11 @@ export const NewsletterPrivacy = forwardRef<HTMLParagraphElement, NewsletterPriv
     ref,
   ) => {
     return (
-      <p ref={ref} className={cn("mt-4 text-xs opacity-60", className)} {...props}>
+      <p
+        ref={ref}
+        className={cn("mt-4 text-xs opacity-60", className)}
+        {...props}
+      >
         {children || (
           <>
             We care about your data.{" "}
@@ -294,7 +347,8 @@ export const NewsletterPrivacy = forwardRef<HTMLParagraphElement, NewsletterPriv
 NewsletterPrivacy.displayName = "NewsletterPrivacy";
 
 // SimpleNewsletter component - pre-composed inline newsletter
-export interface SimpleNewsletterProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SimpleNewsletterProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSubmit"> {
   title: string;
   description?: string;
   placeholder?: string;
@@ -307,7 +361,10 @@ export interface SimpleNewsletterProps extends React.HTMLAttributes<HTMLDivEleme
   inverted?: boolean;
 }
 
-export const SimpleNewsletter = forwardRef<HTMLDivElement, SimpleNewsletterProps>(
+export const SimpleNewsletter = forwardRef<
+  HTMLDivElement,
+  SimpleNewsletterProps
+>(
   (
     {
       className,
@@ -328,7 +385,9 @@ export const SimpleNewsletter = forwardRef<HTMLDivElement, SimpleNewsletterProps
     return (
       <div ref={ref} className={cn("text-center", className)} {...props}>
         <NewsletterTitle size="sm">{title}</NewsletterTitle>
-        {description && <NewsletterDescription>{description}</NewsletterDescription>}
+        {description && (
+          <NewsletterDescription>{description}</NewsletterDescription>
+        )}
 
         {success ? (
           <NewsletterSuccess />
@@ -356,7 +415,8 @@ export const SimpleNewsletter = forwardRef<HTMLDivElement, SimpleNewsletterProps
 SimpleNewsletter.displayName = "SimpleNewsletter";
 
 // CompleteNewsletterSection component - pre-composed full newsletter section
-export interface CompleteNewsletterSectionProps extends React.HTMLAttributes<HTMLElement> {
+export interface CompleteNewsletterSectionProps
+  extends Omit<React.HTMLAttributes<HTMLElement>, "onSubmit"> {
   title: string;
   description?: string;
   placeholder?: string;
@@ -374,7 +434,10 @@ export interface CompleteNewsletterSectionProps extends React.HTMLAttributes<HTM
   };
 }
 
-export const CompleteNewsletterSection = forwardRef<HTMLElement, CompleteNewsletterSectionProps>(
+export const CompleteNewsletterSection = forwardRef<
+  HTMLElement,
+  CompleteNewsletterSectionProps
+>(
   (
     {
       className,
@@ -394,15 +457,23 @@ export const CompleteNewsletterSection = forwardRef<HTMLElement, CompleteNewslet
     },
     ref,
   ) => {
-    const isPrimaryBg = backgroundColor === "primary" || backgroundColor === "gradient";
+    const isPrimaryBg =
+      backgroundColor === "primary" || backgroundColor === "gradient";
 
     if (layout === "split" && image) {
       return (
-        <NewsletterSection ref={ref} backgroundColor={backgroundColor} className={className} {...props}>
+        <NewsletterSection
+          ref={ref}
+          backgroundColor={backgroundColor}
+          className={className}
+          {...props}
+        >
           <div className="grid items-center gap-8 md:gap-12 lg:grid-cols-2">
             <NewsletterContent align="left" maxWidth="xl">
               <NewsletterTitle size="lg">{title}</NewsletterTitle>
-              {description && <NewsletterDescription>{description}</NewsletterDescription>}
+              {description && (
+                <NewsletterDescription>{description}</NewsletterDescription>
+              )}
 
               {success ? (
                 <NewsletterSuccess />
@@ -440,10 +511,17 @@ export const CompleteNewsletterSection = forwardRef<HTMLElement, CompleteNewslet
     }
 
     return (
-      <NewsletterSection ref={ref} backgroundColor={backgroundColor} className={className} {...props}>
+      <NewsletterSection
+        ref={ref}
+        backgroundColor={backgroundColor}
+        className={className}
+        {...props}
+      >
         <NewsletterContent>
           <NewsletterTitle size="lg">{title}</NewsletterTitle>
-          {description && <NewsletterDescription>{description}</NewsletterDescription>}
+          {description && (
+            <NewsletterDescription>{description}</NewsletterDescription>
+          )}
 
           {success ? (
             <NewsletterSuccess />

@@ -1,44 +1,40 @@
 "use client";
 
+import type { VariantProps } from "class-variance-authority";
 import {
-  useState,
+  type KeyboardEvent,
+  type ReactNode,
   useEffect,
   useRef,
-  type ReactNode,
-  type KeyboardEvent,
+  useState,
 } from "react";
-import { cn } from "@/lib/utils";
-import {
-  commandPaletteVariants,
-  commandPaletteContentVariants,
-  commandInputVariants,
-  commandGroupVariants,
-  commandGroupLabelVariants,
-  commandItemVariants,
-  searchModalVariants,
-  searchResultsVariants,
-  searchResultItemVariants,
-  recentSearchesVariants,
-  recentSearchItemVariants,
-  searchSuggestionsVariants,
-  searchSuggestionItemVariants,
-} from "@/lib/variants";
-import { Input } from "@/components/atoms/Input";
 import { Kbd } from "@/components/atoms/Kbd";
 import {
-  SearchIcon,
-  CommandIcon,
-  ClockIcon,
   ArrowRightIcon,
-  XIcon,
+  ClockIcon,
   FileTextIcon,
-  UserIcon,
-  SettingsIcon,
   HashIcon,
+  SearchIcon,
   TrendUpIcon,
-  ZapIcon,
+  UserIcon,
+  XIcon,
 } from "@/lib/icons";
-import type { VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+import {
+  commandGroupLabelVariants,
+  commandGroupVariants,
+  commandInputVariants,
+  commandItemVariants,
+  commandPaletteContentVariants,
+  commandPaletteVariants,
+  recentSearchesVariants,
+  recentSearchItemVariants,
+  searchModalVariants,
+  searchResultItemVariants,
+  searchResultsVariants,
+  searchSuggestionItemVariants,
+  searchSuggestionsVariants,
+} from "@/lib/variants";
 
 // =============================================================================
 // CommandPalette
@@ -91,8 +87,8 @@ export function CommandPalette({
       (a) =>
         !query ||
         a.label.toLowerCase().includes(query.toLowerCase()) ||
-        a.description?.toLowerCase().includes(query.toLowerCase())
-    )
+        a.description?.toLowerCase().includes(query.toLowerCase()),
+    ),
   );
 
   useEffect(() => {
@@ -144,16 +140,18 @@ export function CommandPalette({
         (action) =>
           !query ||
           action.label.toLowerCase().includes(query.toLowerCase()) ||
-          action.description?.toLowerCase().includes(query.toLowerCase())
+          action.description?.toLowerCase().includes(query.toLowerCase()),
       ),
     }))
     .filter((group) => group.actions.length > 0);
 
   return (
+    // biome-ignore lint/a11y/useKeyWithClickEvents: Backdrop close
     <div
       className={cn(commandPaletteVariants({ variant: "default" }), className)}
       onClick={onClose}
     >
+      {/* biome-ignore lint/a11y/useKeyWithClickEvents: Stop propagation */}
       <div
         className={cn(commandPaletteContentVariants({ size }))}
         onClick={(e) => e.stopPropagation()}
@@ -183,12 +181,15 @@ export function CommandPalette({
           ) : (
             filteredGroups.map((group) => (
               <div key={group.id} className={cn(commandGroupVariants({}))}>
-                <p className={cn(commandGroupLabelVariants({}))}>{group.label}</p>
+                <p className={cn(commandGroupLabelVariants({}))}>
+                  {group.label}
+                </p>
                 {group.actions.map((action) => {
                   const globalIndex = flatActions.findIndex(
-                    (a) => a.id === action.id
+                    (a) => a.id === action.id,
                   );
                   return (
+                    // biome-ignore lint/a11y/useKeyWithClickEvents: Action item selection
                     <div
                       key={action.id}
                       className={cn(
@@ -197,9 +198,9 @@ export function CommandPalette({
                             globalIndex === selectedIndex
                               ? "selected"
                               : action.disabled
-                              ? "disabled"
-                              : "default",
-                        })
+                                ? "disabled"
+                                : "default",
+                        }),
                       )}
                       onClick={() => {
                         if (!action.disabled) {
@@ -224,8 +225,8 @@ export function CommandPalette({
                       </div>
                       {action.shortcut && (
                         <div className="flex gap-1">
-                          {action.shortcut.map((key, i) => (
-                            <Kbd key={i} keys={[key]} />
+                          {action.shortcut.map((key) => (
+                            <Kbd key={key} keys={[key]} />
                           ))}
                         </div>
                       )}
@@ -319,26 +320,14 @@ export function SearchModal({
 
   if (!isOpen) return null;
 
-  const getTypeIcon = (type?: string) => {
-    switch (type) {
-      case "page":
-        return <FileTextIcon className="size-4" />;
-      case "document":
-        return <FileTextIcon className="size-4" />;
-      case "user":
-        return <UserIcon className="size-4" />;
-      case "tag":
-        return <HashIcon className="size-4" />;
-      default:
-        return <FileTextIcon className="size-4" />;
-    }
-  };
 
   return (
+    // biome-ignore lint/a11y/useKeyWithClickEvents: Backdrop close
     <div
       className={cn(searchModalVariants({ position }), className)}
       onClick={onClose}
     >
+      {/* biome-ignore lint/a11y/useKeyWithClickEvents: Stop propagation */}
       <div
         className="w-full max-w-2xl rounded-xl border border-border bg-card shadow-2xl overflow-hidden"
         onClick={(e) => e.stopPropagation()}
@@ -354,7 +343,7 @@ export function SearchModal({
             onChange={(e) => handleSearch(e.target.value)}
           />
           {query && (
-            <button onClick={() => handleSearch("")}>
+            <button type="button" onClick={() => handleSearch("")}>
               <XIcon className="size-5 text-muted-foreground hover:text-foreground" />
             </button>
           )}
@@ -459,13 +448,14 @@ export function SearchResults({
   return (
     <div className={cn(searchResultsVariants({ variant }), className)}>
       {results.map((result, index) => (
-        <div
+        <button
+          type="button"
           key={result.id}
           className={cn(
             searchResultItemVariants({
               variant: index === highlightedIndex ? "selected" : "default",
             }),
-            "cursor-pointer"
+            "cursor-pointer w-full text-left",
           )}
           onClick={() => onResultClick?.(result)}
         >
@@ -484,7 +474,7 @@ export function SearchResults({
             <span className="text-xs text-muted-foreground">{result.meta}</span>
           )}
           <ArrowRightIcon className="size-4 text-muted-foreground" />
-        </div>
+        </button>
       ))}
     </div>
   );
@@ -521,6 +511,7 @@ export function RecentSearches({
         </p>
         {onClear && (
           <button
+            type="button"
             className="text-xs text-muted-foreground hover:text-foreground"
             onClick={onClear}
           >
@@ -529,15 +520,17 @@ export function RecentSearches({
         )}
       </div>
       {searches.map((search) => (
-        <div
+        <button
+          type="button"
           key={search}
-          className={cn(recentSearchItemVariants({}))}
+          className={cn(recentSearchItemVariants({}), "w-full text-left")}
           onClick={() => onSearchClick?.(search)}
         >
           <ClockIcon className="size-4 text-muted-foreground" />
           <span className="flex-1">{search}</span>
           {onRemove && (
             <button
+              type="button"
               className="p-1 hover:bg-muted rounded"
               onClick={(e) => {
                 e.stopPropagation();
@@ -547,7 +540,7 @@ export function RecentSearches({
               <XIcon className="size-3 text-muted-foreground" />
             </button>
           )}
-        </div>
+        </button>
       ))}
     </div>
   );
@@ -582,7 +575,7 @@ export function SearchSuggestions({
   if (suggestions.length === 0) return null;
 
   const normalizedSuggestions: SearchSuggestion[] = suggestions.map((s) =>
-    typeof s === "string" ? { label: s } : s
+    typeof s === "string" ? { label: s } : s,
   );
 
   return (
@@ -593,11 +586,16 @@ export function SearchSuggestions({
       <div className={cn(searchSuggestionsVariants({ variant }))}>
         {normalizedSuggestions.map((suggestion, index) => (
           <button
+            type="button"
             key={suggestion.id || index}
             className={cn(
               searchSuggestionItemVariants({
-                variant: suggestion.trending ? "trending" : variant === "inline" ? "chip" : "default",
-              })
+                variant: suggestion.trending
+                  ? "trending"
+                  : variant === "inline"
+                    ? "chip"
+                    : "default",
+              }),
             )}
             onClick={() => onSuggestionClick?.(suggestion.label)}
           >
@@ -616,13 +614,4 @@ export function SearchSuggestions({
   );
 }
 
-// =============================================================================
-// Exports
-// =============================================================================
-
-export type {
-  CommandAction,
-  CommandGroup,
-  SearchResult,
-  SearchSuggestion,
-};
+// Types are exported at their definitions above

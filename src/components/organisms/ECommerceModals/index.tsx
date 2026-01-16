@@ -1,16 +1,21 @@
-import { forwardRef, useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/atoms/Button";
+import { forwardRef, type ReactNode, useState } from "react";
 import { Badge } from "@/components/atoms/Badge";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "@/components/organisms/Modal";
+import { Button } from "@/components/atoms/Button";
 import { RatingDisplay } from "@/components/molecules/Rating";
 import {
-  ShoppingBagIcon,
-  HeartIcon,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "@/components/organisms/Modal";
+import {
+  CheckIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
-  CheckIcon,
+  HeartIcon,
+  ShoppingBagIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // ProductDetailModal
 export interface ProductImage {
@@ -43,14 +48,21 @@ export interface ProductDetail {
 export interface ProductDetailModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onAddToCart: (data: { productId: string; quantity: number; variants: Record<string, string> }) => void;
+  onAddToCart: (data: {
+    productId: string;
+    quantity: number;
+    variants: Record<string, string>;
+  }) => void;
   onAddToWishlist?: (productId: string) => void;
   product: ProductDetail;
   loading?: boolean;
   className?: string;
 }
 
-export const ProductDetailModal = forwardRef<HTMLDivElement, ProductDetailModalProps>(
+export const ProductDetailModal = forwardRef<
+  HTMLDivElement,
+  ProductDetailModalProps
+>(
   (
     {
       isOpen,
@@ -65,14 +77,18 @@ export const ProductDetailModal = forwardRef<HTMLDivElement, ProductDetailModalP
   ) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [quantity, setQuantity] = useState(1);
-    const [selectedVariants, setSelectedVariants] = useState<Record<string, string>>({});
+    const [selectedVariants, setSelectedVariants] = useState<
+      Record<string, string>
+    >({});
     const [isWishlisted, setIsWishlisted] = useState(false);
 
     const currency = product.currency || "$";
-    const hasDiscount = product.originalPrice && product.originalPrice > product.price;
-    const discountPercent = hasDiscount
-      ? Math.round((1 - product.price / product.originalPrice!) * 100)
-      : 0;
+    const hasDiscount =
+      product.originalPrice && product.originalPrice > product.price;
+    const discountPercent =
+      hasDiscount && product.originalPrice
+        ? Math.round((1 - product.price / product.originalPrice) * 100)
+        : 0;
 
     const handlePrevImage = () => {
       setCurrentImageIndex((prev) =>
@@ -134,12 +150,14 @@ export const ProductDetailModal = forwardRef<HTMLDivElement, ProductDetailModalP
                 {product.images.length > 1 && (
                   <>
                     <button
+                      type="button"
                       onClick={handlePrevImage}
                       className="absolute start-2 top-1/2 -translate-y-1/2 rounded-full bg-background/80 p-2 shadow hover:bg-background"
                     >
                       <ChevronLeftIcon className="size-5" />
                     </button>
                     <button
+                      type="button"
                       onClick={handleNextImage}
                       className="absolute end-2 top-1/2 -translate-y-1/2 rounded-full bg-background/80 p-2 shadow hover:bg-background"
                     >
@@ -162,6 +180,7 @@ export const ProductDetailModal = forwardRef<HTMLDivElement, ProductDetailModalP
                 <div className="flex gap-2 overflow-x-auto">
                   {product.images.map((image, index) => (
                     <button
+                      type="button"
                       key={image.id}
                       onClick={() => setCurrentImageIndex(index)}
                       className={cn(
@@ -203,11 +222,13 @@ export const ProductDetailModal = forwardRef<HTMLDivElement, ProductDetailModalP
               {/* Price */}
               <div className="flex items-baseline gap-2">
                 <span className="text-2xl font-bold text-foreground">
-                  {currency}{product.price.toFixed(2)}
+                  {currency}
+                  {product.price.toFixed(2)}
                 </span>
                 {hasDiscount && (
                   <span className="text-lg text-muted-foreground line-through">
-                    {currency}{product.originalPrice!.toFixed(2)}
+                    {currency}
+                    {product.originalPrice?.toFixed(2)}
                   </span>
                 )}
               </div>
@@ -221,17 +242,21 @@ export const ProductDetailModal = forwardRef<HTMLDivElement, ProductDetailModalP
 
               {/* Variants */}
               {product.variants?.map((variant) => (
-                <div key={variant.name} className="space-y-2">
-                  <label className="text-sm font-medium text-foreground">
+                <div key={variant.name}>
+                  <span className="mb-2 block text-sm font-medium text-foreground">
                     {variant.name}
-                  </label>
+                  </span>
                   <div className="flex flex-wrap gap-2">
                     {variant.options.map((option) => {
-                      const isSelected = selectedVariants[variant.name] === option.id;
+                      const isSelected =
+                        selectedVariants[variant.name] === option.id;
                       return (
                         <button
+                          type="button"
                           key={option.id}
-                          onClick={() => handleVariantChange(variant.name, option.id)}
+                          onClick={() =>
+                            handleVariantChange(variant.name, option.id)
+                          }
                           disabled={option.available === false || loading}
                           className={cn(
                             "rounded-lg border px-4 py-2 text-sm font-medium transition-colors",
@@ -251,10 +276,10 @@ export const ProductDetailModal = forwardRef<HTMLDivElement, ProductDetailModalP
               ))}
 
               {/* Quantity */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">
+              <div>
+                <span className="mb-2 block text-sm font-medium text-foreground">
                   Quantity
-                </label>
+                </span>
                 <div className="flex items-center gap-2">
                   <Button
                     variant="outline"
@@ -264,7 +289,9 @@ export const ProductDetailModal = forwardRef<HTMLDivElement, ProductDetailModalP
                   >
                     -
                   </Button>
-                  <span className="w-12 text-center font-medium">{quantity}</span>
+                  <span className="w-12 text-center font-medium">
+                    {quantity}
+                  </span>
                   <Button
                     variant="outline"
                     size="sm"
@@ -279,9 +306,9 @@ export const ProductDetailModal = forwardRef<HTMLDivElement, ProductDetailModalP
               {/* Features */}
               {product.features && product.features.length > 0 && (
                 <ul className="space-y-1">
-                  {product.features.map((feature, index) => (
+                  {product.features.map((feature) => (
                     <li
-                      key={index}
+                      key={feature}
                       className="flex items-center gap-2 text-sm text-muted-foreground"
                     >
                       <CheckIcon className="size-4 text-success" />
@@ -371,14 +398,14 @@ export const SizeGuideModal = forwardRef<HTMLDivElement, SizeGuideModalProps>(
 
     const convertValue = (value: string): string => {
       if (unit === "inches" && measurementUnit === "cm") {
-        const num = parseFloat(value);
-        if (!isNaN(num)) {
+        const num = Number.parseFloat(value);
+        if (!Number.isNaN(num)) {
           return (num / 2.54).toFixed(1);
         }
       }
       if (unit === "cm" && measurementUnit === "inches") {
-        const num = parseFloat(value);
-        if (!isNaN(num)) {
+        const num = Number.parseFloat(value);
+        if (!Number.isNaN(num)) {
           return (num * 2.54).toFixed(1);
         }
       }
@@ -393,11 +420,7 @@ export const SizeGuideModal = forwardRef<HTMLDivElement, SizeGuideModalProps>(
         size="lg"
         className={className}
       >
-        <ModalHeader
-          title={title}
-          subtitle={subtitle}
-          showCloseButton
-        />
+        <ModalHeader title={title} subtitle={subtitle} showCloseButton />
 
         <ModalBody padding="md">
           <div className="space-y-4">
@@ -406,6 +429,7 @@ export const SizeGuideModal = forwardRef<HTMLDivElement, SizeGuideModalProps>(
               <span className="text-sm text-muted-foreground">Unit:</span>
               <div className="flex rounded-lg border border-border p-1">
                 <button
+                  type="button"
                   onClick={() => setUnit("cm")}
                   className={cn(
                     "rounded-md px-3 py-1 text-sm font-medium transition-colors",
@@ -417,6 +441,7 @@ export const SizeGuideModal = forwardRef<HTMLDivElement, SizeGuideModalProps>(
                   cm
                 </button>
                 <button
+                  type="button"
                   onClick={() => setUnit("inches")}
                   className={cn(
                     "rounded-md px-3 py-1 text-sm font-medium transition-colors",
@@ -479,8 +504,8 @@ export const SizeGuideModal = forwardRef<HTMLDivElement, SizeGuideModalProps>(
               <div className="space-y-2 rounded-lg bg-muted/50 p-4">
                 <p className="text-sm font-medium text-foreground">Notes:</p>
                 <ul className="list-inside list-disc space-y-1 text-sm text-muted-foreground">
-                  {notes.map((note, index) => (
-                    <li key={index}>{note}</li>
+                  {notes.map((note) => (
+                    <li key={note}>{note}</li>
                   ))}
                 </ul>
               </div>
@@ -609,6 +634,7 @@ export const ViewLookModal = forwardRef<HTMLDivElement, ViewLookModalProps>(
                       )}
                     >
                       <button
+                        type="button"
                         onClick={() => toggleItem(item.id)}
                         disabled={loading}
                         className={cn(
@@ -621,7 +647,8 @@ export const ViewLookModal = forwardRef<HTMLDivElement, ViewLookModalProps>(
                         {isSelected && <CheckIcon className="size-3" />}
                       </button>
 
-                      <div
+                      <button
+                        type="button"
                         className="size-16 shrink-0 cursor-pointer overflow-hidden rounded-lg bg-muted"
                         onClick={() => onViewItem?.(item.id)}
                       >
@@ -630,7 +657,7 @@ export const ViewLookModal = forwardRef<HTMLDivElement, ViewLookModalProps>(
                           alt={item.name}
                           className="size-full object-cover"
                         />
-                      </div>
+                      </button>
 
                       <div className="min-w-0 flex-1">
                         {item.category && (
@@ -638,14 +665,16 @@ export const ViewLookModal = forwardRef<HTMLDivElement, ViewLookModalProps>(
                             {item.category}
                           </p>
                         )}
-                        <p
+                        <button
+                          type="button"
                           className="cursor-pointer truncate font-medium text-foreground hover:underline"
                           onClick={() => onViewItem?.(item.id)}
                         >
                           {item.name}
-                        </p>
+                        </button>
                         <p className="text-sm font-semibold text-foreground">
-                          {currency}{item.price.toFixed(2)}
+                          {currency}
+                          {item.price.toFixed(2)}
                         </p>
                       </div>
                     </div>
@@ -659,7 +688,8 @@ export const ViewLookModal = forwardRef<HTMLDivElement, ViewLookModalProps>(
                   {selectedItems.size} items selected
                 </span>
                 <span className="text-lg font-bold text-foreground">
-                  {currency}{totalPrice.toFixed(2)}
+                  {currency}
+                  {totalPrice.toFixed(2)}
                 </span>
               </div>
             </div>

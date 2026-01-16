@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ProjectCard, ProjectCardGrid, ProjectCardList } from "./";
+import { CodeIcon, FolderIcon, PaletteIcon, RocketIcon } from "@/lib/icons";
 import type { ProjectCardData } from "./";
-import { FolderIcon, CodeIcon, RocketIcon, PaletteIcon } from "@/lib/icons";
+import { ProjectCard, ProjectCardGrid, ProjectCardList } from "./";
 
 const meta: Meta<typeof ProjectCard> = {
   title: "Organisms/ProjectCard",
@@ -18,7 +18,8 @@ type Story = StoryObj<typeof ProjectCard>;
 const sampleProject: ProjectCardData = {
   id: "1",
   name: "E-Commerce Platform",
-  description: "Complete redesign and development of the e-commerce platform with new checkout flow",
+  description:
+    "Complete redesign and development of the e-commerce platform with new checkout flow",
   status: "active",
   progress: 65,
   dueDate: "Mar 30, 2024",
@@ -46,7 +47,8 @@ export const Featured: Story = {
   args: {
     project: {
       ...sampleProject,
-      coverImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop",
+      coverImage:
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop",
     },
     variant: "featured",
     onStar: (project, starred) => console.log("Star:", project.name, starred),
@@ -102,7 +104,8 @@ const sampleProjects: ProjectCardData[] = [
     tasksTotal: 48,
     tasksCompleted: 31,
     isStarred: true,
-    coverImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop",
+    coverImage:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop",
   },
   {
     id: "2",
@@ -114,12 +117,11 @@ const sampleProjects: ProjectCardData[] = [
     category: "Mobile",
     color: "#10B981",
     icon: <CodeIcon className="size-5 text-white" />,
-    members: [
-      { id: "m3", name: "David", avatarFallback: "D" },
-    ],
+    members: [{ id: "m3", name: "David", avatarFallback: "D" }],
     tasksTotal: 32,
     tasksCompleted: 13,
-    coverImage: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=400&fit=crop",
+    coverImage:
+      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=400&fit=crop",
   },
   {
     id: "3",
@@ -195,19 +197,21 @@ export const List: StoryObj<typeof ProjectCardList> = {
 export const AllStatuses: Story = {
   render: () => (
     <div className="grid gap-4">
-      {(["active", "completed", "on-hold", "archived", "draft"] as const).map((status) => (
-        <ProjectCard
-          key={status}
-          project={{
-            ...sampleProject,
-            id: status,
-            name: `Project (${status})`,
-            status,
-          }}
-          variant="horizontal"
-          className="w-[600px]"
-        />
-      ))}
+      {(["active", "completed", "on-hold", "archived", "draft"] as const).map(
+        (status) => (
+          <ProjectCard
+            key={status}
+            project={{
+              ...sampleProject,
+              id: status,
+              name: `Project (${status})`,
+              status,
+            }}
+            variant="horizontal"
+            className="w-[600px]"
+          />
+        ),
+      )}
     </div>
   ),
 };
