@@ -1,17 +1,18 @@
 "use client";
 
 import { forwardRef, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
 import { Button, Link } from "@/components/atoms";
 import {
   AlertCircleIcon,
-  HomeIcon,
   ArrowLeftIcon,
-  RefreshIcon,
-  SettingsIcon,
+  CalendarIcon,
   ClockIcon,
+  HomeIcon,
+  RefreshIcon,
   RocketIcon,
+  SettingsIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Base error page props
 interface BaseErrorPageProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -45,7 +46,10 @@ export const NotFoundPage = forwardRef<HTMLDivElement, NotFoundPageProps>(
       code = "404",
       icon,
       primaryAction = { label: "Go home", href: "/" },
-      secondaryAction = { label: "Go back", onClick: () => window.history.back() },
+      secondaryAction = {
+        label: "Go back",
+        onClick: () => window.history.back(),
+      },
       footer,
       showBackgroundPattern = true,
       ...props
@@ -84,21 +88,17 @@ export const NotFoundPage = forwardRef<HTMLDivElement, NotFoundPageProps>(
           </div>
 
           {/* Title */}
-          <h1 className="text-2xl font-bold text-foreground mb-2">
-            {title}
-          </h1>
+          <h1 className="text-2xl font-bold text-foreground mb-2">{title}</h1>
 
           {/* Description */}
-          <p className="text-muted-foreground mb-8">
-            {description}
-          </p>
+          <p className="text-muted-foreground mb-8">{description}</p>
 
           {/* Actions */}
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            {primaryAction && (
-              primaryAction.href ? (
+            {primaryAction &&
+              (primaryAction.href ? (
                 <Button asChild>
-                  <Link href={primaryAction.href}>
+                  <Link href={primaryAction.href} unstyled>
                     <HomeIcon className="size-4 mr-2" />
                     {primaryAction.label}
                   </Link>
@@ -108,12 +108,11 @@ export const NotFoundPage = forwardRef<HTMLDivElement, NotFoundPageProps>(
                   <HomeIcon className="size-4 mr-2" />
                   {primaryAction.label}
                 </Button>
-              )
-            )}
-            {secondaryAction && (
-              secondaryAction.href ? (
+              ))}
+            {secondaryAction &&
+              (secondaryAction.href ? (
                 <Button variant="outline" asChild>
-                  <Link href={secondaryAction.href}>
+                  <Link href={secondaryAction.href} unstyled>
                     <ArrowLeftIcon className="size-4 mr-2" />
                     {secondaryAction.label}
                   </Link>
@@ -123,8 +122,7 @@ export const NotFoundPage = forwardRef<HTMLDivElement, NotFoundPageProps>(
                   <ArrowLeftIcon className="size-4 mr-2" />
                   {secondaryAction.label}
                 </Button>
-              )
-            )}
+              ))}
           </div>
         </div>
 
@@ -184,9 +182,7 @@ export const ErrorPage = forwardRef<HTMLDivElement, ErrorPageProps>(
         )}
 
         <div className="relative z-10 text-center max-w-lg">
-          <p className="text-8xl font-bold text-destructive/30 mb-4">
-            {code}
-          </p>
+          <p className="text-8xl font-bold text-destructive/30 mb-4">{code}</p>
 
           <div className="flex justify-center mb-6">
             {icon || (
@@ -196,15 +192,11 @@ export const ErrorPage = forwardRef<HTMLDivElement, ErrorPageProps>(
             )}
           </div>
 
-          <h1 className="text-2xl font-bold text-foreground mb-2">
-            {title}
-          </h1>
+          <h1 className="text-2xl font-bold text-foreground mb-2">{title}</h1>
 
-          <p className="text-muted-foreground mb-4">
-            {description}
-          </p>
+          <p className="text-muted-foreground mb-4">{description}</p>
 
-          {error && process.env.NODE_ENV === "development" && (
+          {error && import.meta.env.DEV && (
             <div className="mb-6 p-4 rounded-lg bg-muted text-left overflow-auto max-h-32">
               <p className="text-xs font-mono text-muted-foreground">
                 {error.message}
@@ -289,13 +281,9 @@ export const MaintenancePage = forwardRef<HTMLDivElement, MaintenancePageProps>(
             )}
           </div>
 
-          <h1 className="text-2xl font-bold text-foreground mb-2">
-            {title}
-          </h1>
+          <h1 className="text-2xl font-bold text-foreground mb-2">{title}</h1>
 
-          <p className="text-muted-foreground mb-6">
-            {description}
-          </p>
+          <p className="text-muted-foreground mb-6">{description}</p>
 
           {/* Estimated time */}
           {estimatedTime && (
@@ -323,11 +311,18 @@ export const MaintenancePage = forwardRef<HTMLDivElement, MaintenancePageProps>(
           {/* Status updates */}
           {statusUpdates.length > 0 && (
             <div className="mb-6 p-4 rounded-lg bg-muted/50 text-left">
-              <h3 className="text-sm font-medium text-foreground mb-2">Status Updates</h3>
+              <h3 className="text-sm font-medium text-foreground mb-2">
+                Status Updates
+              </h3>
               <div className="space-y-2">
-                {statusUpdates.map((update, index) => (
-                  <div key={index} className="flex gap-2 text-sm">
-                    <span className="text-muted-foreground shrink-0">{update.time}</span>
+                {statusUpdates.map((update) => (
+                  <div
+                    key={`${update.time}-${update.message}`}
+                    className="flex gap-2 text-sm"
+                  >
+                    <span className="text-muted-foreground shrink-0">
+                      {update.time}
+                    </span>
                     <span className="text-foreground">{update.message}</span>
                   </div>
                 ))}
@@ -424,9 +419,7 @@ export const ComingSoonPage = forwardRef<HTMLDivElement, ComingSoonPageProps>(
             {title}
           </h1>
 
-          <p className="text-lg text-muted-foreground mb-6">
-            {description}
-          </p>
+          <p className="text-lg text-muted-foreground mb-6">{description}</p>
 
           {/* Launch date */}
           {launchDate && (
@@ -438,7 +431,10 @@ export const ComingSoonPage = forwardRef<HTMLDivElement, ComingSoonPageProps>(
 
           {/* Email signup form */}
           {onEmailSubmit && (
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-8">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-8"
+            >
               <input
                 type="email"
                 name="email"
@@ -446,22 +442,22 @@ export const ComingSoonPage = forwardRef<HTMLDivElement, ComingSoonPageProps>(
                 required
                 className="flex-1 h-10 px-4 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
               />
-              <Button type="submit">
-                Notify Me
-              </Button>
+              <Button type="submit">Notify Me</Button>
             </form>
           )}
 
           {/* Features preview */}
           {features.length > 0 && (
             <div className="grid sm:grid-cols-3 gap-6 mb-8">
-              {features.map((feature, index) => (
-                <div key={index} className="text-center">
-                  <div className="flex justify-center mb-2">
-                    {feature.icon}
-                  </div>
-                  <h3 className="text-sm font-medium text-foreground">{feature.title}</h3>
-                  <p className="text-xs text-muted-foreground">{feature.description}</p>
+              {features.map((feature) => (
+                <div key={feature.title} className="text-center">
+                  <div className="flex justify-center mb-2">{feature.icon}</div>
+                  <h3 className="text-sm font-medium text-foreground">
+                    {feature.title}
+                  </h3>
+                  <p className="text-xs text-muted-foreground">
+                    {feature.description}
+                  </p>
                 </div>
               ))}
             </div>
@@ -470,9 +466,9 @@ export const ComingSoonPage = forwardRef<HTMLDivElement, ComingSoonPageProps>(
           {/* Social links */}
           {socialLinks.length > 0 && (
             <div className="flex justify-center gap-4">
-              {socialLinks.map((link, index) => (
+              {socialLinks.map((link) => (
                 <a
-                  key={index}
+                  key={link.href}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"

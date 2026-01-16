@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { PricingPage, PricingComparison } from ".";
-import { GlobeIcon, CheckIcon } from "@/lib/icons";
-import type { PricingSectionPlan, FAQItem } from "@/components/organisms";
+import type { FAQItem, PricingSectionPlan } from "@/components/organisms";
+import { GlobeIcon } from "@/lib/icons";
+import { PricingComparison, PricingPage } from ".";
 
 const meta: Meta<typeof PricingPage> = {
   title: "Pages/PricingPage",
@@ -95,19 +95,23 @@ const samplePlans: PricingSectionPlan[] = [
 const sampleFAQs: FAQItem[] = [
   {
     question: "Can I change plans at any time?",
-    answer: "Yes, you can upgrade or downgrade your plan at any time. Changes will be reflected in your next billing cycle.",
+    answer:
+      "Yes, you can upgrade or downgrade your plan at any time. Changes will be reflected in your next billing cycle.",
   },
   {
     question: "What payment methods do you accept?",
-    answer: "We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers for enterprise customers.",
+    answer:
+      "We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers for enterprise customers.",
   },
   {
     question: "Is there a free trial?",
-    answer: "Yes, all paid plans include a 14-day free trial. No credit card required to start.",
+    answer:
+      "Yes, all paid plans include a 14-day free trial. No credit card required to start.",
   },
   {
     question: "What happens if I exceed my storage limit?",
-    answer: "You'll receive a notification when you're approaching your limit. You can upgrade your plan or purchase additional storage.",
+    answer:
+      "You'll receive a notification when you're approaching your limit. You can upgrade your plan or purchase additional storage.",
   },
 ];
 
@@ -146,7 +150,8 @@ export const WithGuarantee: Story = {
     logo: <Logo />,
     guarantee: {
       title: "30-day money-back guarantee",
-      description: "If you're not satisfied with our service, we'll refund your purchase within 30 days. No questions asked.",
+      description:
+        "If you're not satisfied with our service, we'll refund your purchase within 30 days. No questions asked.",
     },
     onPlanSelect: (planId) => console.log("Selected plan:", planId),
   },

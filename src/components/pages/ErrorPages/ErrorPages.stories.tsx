@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { NotFoundPage, ErrorPage, MaintenancePage, ComingSoonPage } from ".";
 import {
-  TwitterIcon,
-  LinkedInIcon,
   GitHubIcon,
-  ZapIcon,
-  ShieldIcon,
+  LinkedInIcon,
   RocketIcon,
+  ShieldIcon,
+  TwitterIcon,
+  ZapIcon,
 } from "@/lib/icons";
+import { ComingSoonPage, ErrorPage, MaintenancePage, NotFoundPage } from ".";
 
 // NotFoundPage stories
 const notFoundMeta: Meta<typeof NotFoundPage> = {
@@ -30,8 +30,18 @@ type NotFoundStory = StoryObj<typeof NotFoundPage>;
 export const Default404: NotFoundStory = {
   args: {
     primaryAction: { label: "Go home", href: "/" },
-    secondaryAction: { label: "Go back", onClick: () => console.log("Go back") },
-    footer: <span>Need help? <a href="/support" className="underline">Contact support</a></span>,
+    secondaryAction: {
+      label: "Go back",
+      onClick: () => console.log("Go back"),
+    },
+    footer: (
+      <span>
+        Need help?{" "}
+        <a href="/support" className="underline">
+          Contact support
+        </a>
+      </span>
+    ),
   },
 };
 
@@ -41,7 +51,10 @@ export const Custom404: NotFoundStory = {
     description: "The page you're looking for doesn't exist or has been moved.",
     code: "404",
     primaryAction: { label: "Return to Dashboard", href: "/dashboard" },
-    secondaryAction: { label: "Search", onClick: () => console.log("Open search") },
+    secondaryAction: {
+      label: "Search",
+      onClick: () => console.log("Open search"),
+    },
   },
 };
 
@@ -73,7 +86,8 @@ export const CustomError: StoryObj<typeof ErrorPage> = {
   render: (args) => <ErrorPage {...args} />,
   args: {
     title: "Service Unavailable",
-    description: "Our servers are temporarily overloaded. Please try again in a few minutes.",
+    description:
+      "Our servers are temporarily overloaded. Please try again in a few minutes.",
     code: "503",
     primaryAction: { label: "Retry", onClick: () => console.log("Retry") },
     secondaryAction: { label: "Check Status", href: "/status" },
@@ -91,7 +105,10 @@ export const Maintenance: StoryObj<typeof MaintenancePage> = {
       { time: "1:15 PM", message: "Backup completed successfully" },
       { time: "1:00 PM", message: "Maintenance window started" },
     ],
-    primaryAction: { label: "Refresh", onClick: () => window.location.reload() },
+    primaryAction: {
+      label: "Refresh",
+      onClick: () => window.location.reload(),
+    },
     footer: <span>Follow us on Twitter for updates</span>,
   },
 };
@@ -110,7 +127,10 @@ export const MaintenanceWithProgress: StoryObj<typeof MaintenancePage> = {
   args: {
     progressPercent: 85,
     estimatedTime: "10 minutes remaining",
-    primaryAction: { label: "Check Status", onClick: () => console.log("Check status") },
+    primaryAction: {
+      label: "Check Status",
+      onClick: () => console.log("Check status"),
+    },
   },
 };
 
@@ -119,7 +139,8 @@ export const ComingSoon: StoryObj<typeof ComingSoonPage> = {
   render: (args) => <ComingSoonPage {...args} />,
   args: {
     title: "Something Amazing is Coming",
-    description: "We're building something special. Sign up to be the first to know when we launch.",
+    description:
+      "We're building something special. Sign up to be the first to know when we launch.",
     launchDate: "March 2025",
     onEmailSubmit: (email) => console.log("Email submitted:", email),
     features: [
@@ -140,9 +161,21 @@ export const ComingSoon: StoryObj<typeof ComingSoonPage> = {
       },
     ],
     socialLinks: [
-      { icon: <TwitterIcon className="size-5" />, href: "https://twitter.com", label: "Twitter" },
-      { icon: <LinkedInIcon className="size-5" />, href: "https://linkedin.com", label: "LinkedIn" },
-      { icon: <GitHubIcon className="size-5" />, href: "https://github.com", label: "GitHub" },
+      {
+        icon: <TwitterIcon className="size-5" />,
+        href: "https://twitter.com",
+        label: "Twitter",
+      },
+      {
+        icon: <LinkedInIcon className="size-5" />,
+        href: "https://linkedin.com",
+        label: "LinkedIn",
+      },
+      {
+        icon: <GitHubIcon className="size-5" />,
+        href: "https://github.com",
+        label: "GitHub",
+      },
     ],
     footer: <span>© 2025 Company Name. All rights reserved.</span>,
   },

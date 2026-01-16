@@ -1,34 +1,32 @@
 "use client";
 
-import { forwardRef, useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
-import { Button, Link, Badge, Input } from "@/components/atoms";
-import { FormField, Stepper, Step } from "@/components/molecules";
+import { forwardRef, type ReactNode, useState } from "react";
+import { Badge, Button, Input, Link } from "@/components/atoms";
+import { FormField, Step, Stepper } from "@/components/molecules";
 import {
-  PageLayout,
-  PageContent,
-  PageSection,
-  Header,
-  HeaderLogo,
   Card,
-  CardHeader,
   CardBody,
+  CardHeader,
+  CreditCardForm,
   Form,
+  FormActions,
   FormBody,
   FormRow,
-  FormActions,
-  OrderSummary,
-  ShippingForm,
-  CreditCardForm,
+  Header,
+  HeaderLogo,
   type OrderItem,
+  PageContent,
+  PageLayout,
+  PageSection,
 } from "@/components/organisms";
 import {
-  LockIcon,
-  TruckIcon,
-  CreditCardIcon,
   CheckCircleIcon,
   ChevronLeftIcon,
+  CreditCardIcon,
+  LockIcon,
+  TruckIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Checkout step
 type CheckoutStep = "information" | "shipping" | "payment" | "confirmation";
@@ -73,7 +71,8 @@ export interface ShippingMethodOption {
 }
 
 // CheckoutPage props
-export interface CheckoutPageProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CheckoutPageProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSubmit"> {
   items: OrderItem[];
   subtotal: number;
   shipping?: number;
@@ -125,7 +124,7 @@ export const CheckoutPage = forwardRef<HTMLDivElement, CheckoutPageProps>(
   (
     {
       className,
-      items,
+      items = [],
       subtotal,
       shipping = 0,
       tax = 0,
@@ -150,17 +149,37 @@ export const CheckoutPage = forwardRef<HTMLDivElement, CheckoutPageProps>(
     },
     ref,
   ) => {
-    const [currentStep, setCurrentStep] = useState<CheckoutStep>(orderId ? "confirmation" : "information");
+    const [currentStep, setCurrentStep] = useState<CheckoutStep>(
+      orderId ? "confirmation" : "information",
+    );
     const [checkoutData, setCheckoutData] = useState<Partial<CheckoutData>>({});
-    const [selectedShipping, setSelectedShipping] = useState<string>(shippingMethods[0]?.id || "");
-    const [sameAsBilling, setSameAsBilling] = useState(true);
+    const [selectedShipping, setSelectedShipping] = useState<string>(
+      shippingMethods[0]?.id || "",
+    );
+    const [_sameAsBilling, _setSameAsBilling] = useState(true);
     const [couponInput, setCouponInput] = useState("");
 
     const steps: { id: CheckoutStep; label: string; icon: ReactNode }[] = [
-      { id: "information", label: "Information", icon: <LockIcon className="size-4" /> },
-      { id: "shipping", label: "Shipping", icon: <TruckIcon className="size-4" /> },
-      { id: "payment", label: "Payment", icon: <CreditCardIcon className="size-4" /> },
-      { id: "confirmation", label: "Confirmation", icon: <CheckCircleIcon className="size-4" /> },
+      {
+        id: "information",
+        label: "Information",
+        icon: <LockIcon className="size-4" />,
+      },
+      {
+        id: "shipping",
+        label: "Shipping",
+        icon: <TruckIcon className="size-4" />,
+      },
+      {
+        id: "payment",
+        label: "Payment",
+        icon: <CreditCardIcon className="size-4" />,
+      },
+      {
+        id: "confirmation",
+        label: "Confirmation",
+        icon: <CheckCircleIcon className="size-4" />,
+      },
     ];
 
     const currentStepIndex = steps.findIndex((s) => s.id === currentStep);
@@ -244,11 +263,7 @@ export const CheckoutPage = forwardRef<HTMLDivElement, CheckoutPageProps>(
     const renderHeader = () => (
       <Header
         variant="bordered"
-        logo={
-          <HeaderLogo href={logoHref}>
-            {logo}
-          </HeaderLogo>
-        }
+        logo={<HeaderLogo href={logoHref}>{logo}</HeaderLogo>}
         actions={
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <LockIcon className="size-4" />
@@ -279,7 +294,9 @@ export const CheckoutPage = forwardRef<HTMLDivElement, CheckoutPageProps>(
     const renderInformationStep = () => (
       <Form onSubmit={handleInformationSubmit}>
         <FormBody>
-          <h3 className="text-lg font-semibold text-foreground mb-4">Contact Information</h3>
+          <h3 className="text-lg font-semibold text-foreground mb-4">
+            Contact Information
+          </h3>
           <FormField
             label="Email"
             type="email"
@@ -291,7 +308,9 @@ export const CheckoutPage = forwardRef<HTMLDivElement, CheckoutPageProps>(
             }}
           />
 
-          <h3 className="text-lg font-semibold text-foreground mt-6 mb-4">Shipping Address</h3>
+          <h3 className="text-lg font-semibold text-foreground mt-6 mb-4">
+            Shipping Address
+          </h3>
           <FormRow columns={2}>
             <FormField
               label="First name"
@@ -365,7 +384,8 @@ export const CheckoutPage = forwardRef<HTMLDivElement, CheckoutPageProps>(
               inputProps={{
                 name: "country",
                 placeholder: "United States",
-                defaultValue: checkoutData.shippingAddress?.country || "United States",
+                defaultValue:
+                  checkoutData.shippingAddress?.country || "United States",
               }}
             />
             <FormField
@@ -404,7 +424,8 @@ export const CheckoutPage = forwardRef<HTMLDivElement, CheckoutPageProps>(
           <div className="flex justify-between text-sm mt-2 pt-2 border-t border-border">
             <span className="text-muted-foreground">Ship to</span>
             <span className="text-foreground">
-              {checkoutData.shippingAddress?.address1}, {checkoutData.shippingAddress?.city}
+              {checkoutData.shippingAddress?.address1},{" "}
+              {checkoutData.shippingAddress?.city}
             </span>
             <button
               type="button"
@@ -416,7 +437,9 @@ export const CheckoutPage = forwardRef<HTMLDivElement, CheckoutPageProps>(
           </div>
         </div>
 
-        <h3 className="text-lg font-semibold text-foreground">Shipping Method</h3>
+        <h3 className="text-lg font-semibold text-foreground">
+          Shipping Method
+        </h3>
         <div className="space-y-3">
           {shippingMethods.map((method) => (
             <label
@@ -425,7 +448,7 @@ export const CheckoutPage = forwardRef<HTMLDivElement, CheckoutPageProps>(
                 "flex items-center justify-between p-4 rounded-lg border cursor-pointer transition-colors",
                 selectedShipping === method.id
                   ? "border-primary bg-primary/5"
-                  : "border-border hover:border-primary/50"
+                  : "border-border hover:border-primary/50",
               )}
             >
               <div className="flex items-center gap-3">
@@ -439,10 +462,14 @@ export const CheckoutPage = forwardRef<HTMLDivElement, CheckoutPageProps>(
                 />
                 <div>
                   <p className="font-medium text-foreground">{method.name}</p>
-                  <p className="text-sm text-muted-foreground">{method.description}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {method.description}
+                  </p>
                 </div>
               </div>
-              <span className="font-medium text-foreground">{formatPrice(method.price)}</span>
+              <span className="font-medium text-foreground">
+                {formatPrice(method.price)}
+              </span>
             </label>
           ))}
         </div>
@@ -473,18 +500,22 @@ export const CheckoutPage = forwardRef<HTMLDivElement, CheckoutPageProps>(
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Ship to</span>
               <span className="text-foreground">
-                {checkoutData.shippingAddress?.address1}, {checkoutData.shippingAddress?.city}
+                {checkoutData.shippingAddress?.address1},{" "}
+                {checkoutData.shippingAddress?.city}
               </span>
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Method</span>
               <span className="text-foreground">
-                {checkoutData.shippingMethod?.name} - {formatPrice(checkoutData.shippingMethod?.price || 0)}
+                {checkoutData.shippingMethod?.name} -{" "}
+                {formatPrice(checkoutData.shippingMethod?.price || 0)}
               </span>
             </div>
           </div>
 
-          <h3 className="text-lg font-semibold text-foreground mt-6 mb-4">Payment</h3>
+          <h3 className="text-lg font-semibold text-foreground mt-6 mb-4">
+            Payment
+          </h3>
           <CreditCardForm />
         </FormBody>
 
@@ -516,7 +547,9 @@ export const CheckoutPage = forwardRef<HTMLDivElement, CheckoutPageProps>(
         <div className="size-20 rounded-full bg-success/10 flex items-center justify-center mx-auto mb-6">
           <CheckCircleIcon className="size-10 text-success" />
         </div>
-        <h2 className="text-2xl font-bold text-foreground mb-2">Thank you for your order!</h2>
+        <h2 className="text-2xl font-bold text-foreground mb-2">
+          Thank you for your order!
+        </h2>
         <p className="text-muted-foreground mb-6">
           We've received your order and will begin processing it right away.
         </p>
@@ -537,13 +570,19 @@ export const CheckoutPage = forwardRef<HTMLDivElement, CheckoutPageProps>(
                 )}
                 {estimatedDelivery && (
                   <div>
-                    <p className="text-sm text-muted-foreground">Estimated delivery</p>
-                    <p className="font-medium text-foreground">{estimatedDelivery}</p>
+                    <p className="text-sm text-muted-foreground">
+                      Estimated delivery
+                    </p>
+                    <p className="font-medium text-foreground">
+                      {estimatedDelivery}
+                    </p>
                   </div>
                 )}
                 <div>
                   <p className="text-sm text-muted-foreground">Total</p>
-                  <p className="font-medium text-foreground">{formatPrice(total)}</p>
+                  <p className="font-medium text-foreground">
+                    {formatPrice(total)}
+                  </p>
                 </div>
               </div>
             </CardBody>
@@ -551,7 +590,8 @@ export const CheckoutPage = forwardRef<HTMLDivElement, CheckoutPageProps>(
         )}
 
         <p className="text-sm text-muted-foreground mb-6">
-          A confirmation email has been sent to <strong>{checkoutData.email}</strong>
+          A confirmation email has been sent to{" "}
+          <strong>{checkoutData.email}</strong>
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -585,9 +625,13 @@ export const CheckoutPage = forwardRef<HTMLDivElement, CheckoutPageProps>(
                     </span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-foreground truncate">{item.name}</p>
+                    <p className="text-sm font-medium text-foreground truncate">
+                      {item.name}
+                    </p>
                     {item.variant && (
-                      <p className="text-xs text-muted-foreground">{item.variant}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {item.variant}
+                      </p>
                     )}
                   </div>
                   <span className="text-sm font-medium text-foreground">
@@ -605,7 +649,9 @@ export const CheckoutPage = forwardRef<HTMLDivElement, CheckoutPageProps>(
                     <div className="flex items-center gap-2">
                       <Badge variant="soft">{couponCode}</Badge>
                       {couponDiscount && (
-                        <span className="text-sm text-success">-{formatPrice(couponDiscount)}</span>
+                        <span className="text-sm text-success">
+                          -{formatPrice(couponDiscount)}
+                        </span>
                       )}
                     </div>
                     <button
@@ -624,7 +670,11 @@ export const CheckoutPage = forwardRef<HTMLDivElement, CheckoutPageProps>(
                       onChange={(e) => setCouponInput(e.target.value)}
                       inputSize="sm"
                     />
-                    <Button variant="outline" size="sm" onClick={handleApplyCoupon}>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={handleApplyCoupon}
+                    >
                       Apply
                     </Button>
                   </div>
@@ -656,7 +706,9 @@ export const CheckoutPage = forwardRef<HTMLDivElement, CheckoutPageProps>(
               </div>
               <div className="flex justify-between pt-2 border-t border-border">
                 <span className="font-semibold text-foreground">Total</span>
-                <span className="font-semibold text-foreground">{formatPrice(total)}</span>
+                <span className="font-semibold text-foreground">
+                  {formatPrice(total)}
+                </span>
               </div>
             </div>
           </div>
@@ -673,9 +725,7 @@ export const CheckoutPage = forwardRef<HTMLDivElement, CheckoutPageProps>(
       >
         <PageContent maxWidth="6xl" padding="lg">
           {/* Stepper */}
-          <PageSection>
-            {renderStepper()}
-          </PageSection>
+          <PageSection>{renderStepper()}</PageSection>
 
           <PageSection>
             <div className="grid lg:grid-cols-3 gap-8">
@@ -689,9 +739,7 @@ export const CheckoutPage = forwardRef<HTMLDivElement, CheckoutPageProps>(
 
               {/* Order summary */}
               {currentStep !== "confirmation" && (
-                <div className="lg:col-span-1">
-                  {renderOrderSummary()}
-                </div>
+                <div className="lg:col-span-1">{renderOrderSummary()}</div>
               )}
             </div>
           </PageSection>

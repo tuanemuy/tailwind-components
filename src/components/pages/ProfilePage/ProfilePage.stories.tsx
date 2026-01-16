@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { FileIcon, GlobeIcon, MessageSquareIcon, StarIcon } from "@/lib/icons";
 import { ProfilePage, ProfilePageSkeleton } from ".";
-import { GlobeIcon, FileIcon, StarIcon, MessageSquareIcon } from "@/lib/icons";
 
 const meta: Meta<typeof ProfilePage> = {
   title: "Pages/ProfilePage",
@@ -37,8 +37,10 @@ const sampleUser = {
   username: "@johndoe",
   email: "john@example.com",
   phone: "+1 (555) 123-4567",
-  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80",
-  coverImage: "https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&w=1200&q=80",
+  avatar:
+    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80",
+  coverImage:
+    "https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&w=1200&q=80",
   bio: "Senior Software Engineer passionate about building great products. Open source contributor and tech enthusiast.",
   role: "Senior Software Engineer",
   company: "Tech Corp",
@@ -63,21 +65,21 @@ const sampleActivities = [
   {
     id: "1",
     type: "create",
-    description: "Created a new project \"Dashboard Redesign\"",
+    description: 'Created a new project "Dashboard Redesign"',
     timestamp: "2 hours ago",
     icon: <FileIcon className="size-4" />,
   },
   {
     id: "2",
     type: "complete",
-    description: "Completed task \"Update user authentication\"",
+    description: 'Completed task "Update user authentication"',
     timestamp: "5 hours ago",
     icon: <StarIcon className="size-4" />,
   },
   {
     id: "3",
     type: "comment",
-    description: "Commented on \"API Integration\" discussion",
+    description: 'Commented on "API Integration" discussion',
     timestamp: "1 day ago",
     icon: <MessageSquareIcon className="size-4" />,
   },
@@ -155,7 +157,9 @@ export const WithTabs: Story = {
         label: "Overview",
         content: (
           <div className="p-4 bg-muted/50 rounded-lg">
-            <p className="text-muted-foreground">Overview content goes here...</p>
+            <p className="text-muted-foreground">
+              Overview content goes here...
+            </p>
           </div>
         ),
       },

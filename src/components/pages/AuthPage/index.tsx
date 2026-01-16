@@ -1,23 +1,28 @@
 "use client";
 
 import { forwardRef, useState } from "react";
-import { cn } from "@/lib/utils";
-import { Button, Link, Checkbox } from "@/components/atoms";
+import { Button, Checkbox, Link } from "@/components/atoms";
 import { FormField } from "@/components/molecules";
 import {
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
+  CardHeader,
   Form,
-  FormBody,
   FormActions,
+  FormBody,
   FormDivider,
 } from "@/components/organisms";
-import { EyeIcon, EyeOffIcon, MailIcon, LockIcon, UserIcon } from "@/lib/icons";
+import { EyeIcon, EyeOffIcon, LockIcon, MailIcon, UserIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Auth page variants
-type AuthVariant = "login" | "signup" | "forgot-password" | "reset-password" | "verify-2fa";
+type AuthVariant =
+  | "login"
+  | "signup"
+  | "forgot-password"
+  | "reset-password"
+  | "verify-2fa";
 type AuthLayout = "centered" | "split" | "stacked";
 
 // Social login provider
@@ -29,7 +34,8 @@ export interface SocialProvider {
 }
 
 // AuthPage props
-export interface AuthPageProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSubmit"> {
+export interface AuthPageProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSubmit"> {
   variant?: AuthVariant;
   layout?: AuthLayout;
   logo?: React.ReactNode;
@@ -184,7 +190,9 @@ export const AuthPage = forwardRef<HTMLDivElement, AuthPageProps>(
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="text-muted-foreground hover:text-foreground transition-colors"
-                    aria-label={showPassword ? "Hide password" : "Show password"}
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
                   >
                     {showPassword ? (
                       <EyeOffIcon className="size-4" />
@@ -243,7 +251,7 @@ export const AuthPage = forwardRef<HTMLDivElement, AuthPageProps>(
                 maxLength: 6,
                 leftIcon: <LockIcon className="size-4 text-muted-foreground" />,
               }}
-              helperText="Enter the code from your authenticator app"
+              helpText="Enter the code from your authenticator app"
             />
           )}
 
@@ -280,12 +288,7 @@ export const AuthPage = forwardRef<HTMLDivElement, AuthPageProps>(
         </FormBody>
 
         <FormActions align="start" className="flex-col gap-4">
-          <Button
-            type="submit"
-            className="w-full"
-            size="lg"
-            loading={loading}
-          >
+          <Button type="submit" className="w-full" size="lg" loading={loading}>
             {variant === "login" && "Sign in"}
             {variant === "signup" && "Create account"}
             {variant === "forgot-password" && "Send reset link"}
@@ -294,28 +297,29 @@ export const AuthPage = forwardRef<HTMLDivElement, AuthPageProps>(
           </Button>
 
           {/* Social login */}
-          {socialProviders.length > 0 && (variant === "login" || variant === "signup") && (
-            <>
-              <FormDivider label="Or continue with" />
-              <div className="flex flex-col gap-2 w-full">
-                {socialProviders.map((provider) => (
-                  <Button
-                    key={provider.id}
-                    type="button"
-                    variant="outline"
-                    className="w-full"
-                    leftIcon={provider.icon}
-                    onClick={() => {
-                      provider.onClick?.();
-                      onSocialLogin?.(provider.id);
-                    }}
-                  >
-                    Continue with {provider.name}
-                  </Button>
-                ))}
-              </div>
-            </>
-          )}
+          {socialProviders.length > 0 &&
+            (variant === "login" || variant === "signup") && (
+              <>
+                <FormDivider label="Or continue with" />
+                <div className="flex flex-col gap-2 w-full">
+                  {socialProviders.map((provider) => (
+                    <Button
+                      key={provider.id}
+                      type="button"
+                      variant="outline"
+                      className="w-full"
+                      leftIcon={provider.icon}
+                      onClick={() => {
+                        provider.onClick?.();
+                        onSocialLogin?.(provider.id);
+                      }}
+                    >
+                      Continue with {provider.name}
+                    </Button>
+                  ))}
+                </div>
+              </>
+            )}
         </FormActions>
       </Form>
     );
@@ -461,10 +465,7 @@ export const AuthPage = forwardRef<HTMLDivElement, AuthPageProps>(
     return (
       <div
         ref={ref}
-        className={cn(
-          "min-h-screen flex flex-col bg-background",
-          className,
-        )}
+        className={cn("min-h-screen flex flex-col bg-background", className)}
         {...props}
       >
         {/* Header with logo */}
@@ -489,9 +490,7 @@ export const AuthPage = forwardRef<HTMLDivElement, AuthPageProps>(
         </main>
 
         {/* Footer */}
-        {footer && (
-          <footer className="p-4 lg:p-6 text-center">{footer}</footer>
-        )}
+        {footer && <footer className="p-4 lg:p-6 text-center">{footer}</footer>}
       </div>
     );
   },

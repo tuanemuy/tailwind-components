@@ -1,26 +1,26 @@
 "use client";
 
 import { forwardRef, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
 import { Avatar, Badge, Link } from "@/components/atoms";
 import {
-  PageLayout,
-  PageContent,
-  Header,
-  HeaderNav,
-  HeaderNavItem,
-  HeaderLogo,
   Footer,
   FooterDivider,
+  Header,
+  HeaderLogo,
+  HeaderNav,
+  HeaderNavItem,
+  PageContent,
+  PageLayout,
 } from "@/components/organisms";
 import {
   CalendarIcon,
-  ClockIcon,
-  UserIcon,
-  TagIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
+  ClockIcon,
+  TagIcon,
+  UserIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Article variants
 type ArticleLayout = "default" | "centered" | "wide" | "sidebar";
@@ -147,20 +147,22 @@ export const ArticlePage = forwardRef<HTMLDivElement, ArticlePageProps>(
           {author && (
             <div className="flex items-center gap-x-2">
               {author.avatar ? (
-                <Avatar
-                  src={author.avatar}
-                  alt={author.name}
-                  size="sm"
-                />
+                <Avatar src={author.avatar} alt={author.name} size="sm" />
               ) : (
                 <UserIcon className="size-4" />
               )}
               {author.href ? (
-                <Link href={author.href} variant="default" className="font-medium">
+                <Link
+                  href={author.href}
+                  variant="default"
+                  className="font-medium"
+                >
                   {author.name}
                 </Link>
               ) : (
-                <span className="font-medium text-foreground">{author.name}</span>
+                <span className="font-medium text-foreground">
+                  {author.name}
+                </span>
               )}
             </div>
           )}
@@ -209,9 +211,9 @@ export const ArticlePage = forwardRef<HTMLDivElement, ArticlePageProps>(
         <div className="mt-8 pt-8 border-t border-border">
           <div className="flex flex-wrap items-center gap-2">
             <TagIcon className="size-4 text-muted-foreground" />
-            {tags.map((tag, index) =>
+            {tags.map((tag) =>
               tag.href ? (
-                <a key={index} href={tag.href}>
+                <a key={tag.label} href={tag.href}>
                   <Badge
                     variant="outline"
                     className="cursor-pointer hover:bg-accent"
@@ -220,10 +222,10 @@ export const ArticlePage = forwardRef<HTMLDivElement, ArticlePageProps>(
                   </Badge>
                 </a>
               ) : (
-                <Badge key={index} variant="outline">
+                <Badge key={tag.label} variant="outline">
                   {tag.label}
                 </Badge>
-              )
+              ),
             )}
           </div>
         </div>
@@ -237,7 +239,10 @@ export const ArticlePage = forwardRef<HTMLDivElement, ArticlePageProps>(
             <Avatar
               src={author.avatar}
               alt={author.name}
-              initials={author.name.split(" ").map(n => n[0]).join("")}
+              initials={author.name
+                .split(" ")
+                .map((n) => n[0])
+                .join("")}
               size="lg"
             />
             <div>
@@ -264,7 +269,9 @@ export const ArticlePage = forwardRef<HTMLDivElement, ArticlePageProps>(
               >
                 <ChevronLeftIcon className="size-5 text-muted-foreground group-hover:text-foreground transition-colors" />
                 <div>
-                  <span className="text-xs text-muted-foreground">Previous</span>
+                  <span className="text-xs text-muted-foreground">
+                    Previous
+                  </span>
                   <p className="font-medium text-foreground line-clamp-1">
                     {previousArticle.title}
                   </p>
@@ -301,11 +308,7 @@ export const ArticlePage = forwardRef<HTMLDivElement, ArticlePageProps>(
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {relatedArticles.map((article) => (
-              <a
-                key={article.id}
-                href={article.href}
-                className="group block"
-              >
+              <a key={article.id} href={article.href} className="group block">
                 {article.image && (
                   <div className="aspect-video rounded-lg overflow-hidden mb-4">
                     <img
@@ -452,7 +455,8 @@ export const ArticlePage = forwardRef<HTMLDivElement, ArticlePageProps>(
 ArticlePage.displayName = "ArticlePage";
 
 // ArticleContent component for prose styling
-export interface ArticleContentProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ArticleContentProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   size?: "sm" | "md" | "lg";
 }
 
@@ -482,7 +486,8 @@ export const ArticleContent = forwardRef<HTMLDivElement, ArticleContentProps>(
 ArticleContent.displayName = "ArticleContent";
 
 // ArticleCard component for article listings
-export interface ArticleCardProps extends React.HTMLAttributes<HTMLAnchorElement> {
+export interface ArticleCardProps
+  extends React.HTMLAttributes<HTMLAnchorElement> {
   title: string;
   excerpt?: string;
   image?: string;
@@ -516,10 +521,7 @@ export const ArticleCard = forwardRef<HTMLAnchorElement, ArticleCardProps>(
         <a
           ref={ref}
           href={href}
-          className={cn(
-            "group flex gap-4 sm:gap-6",
-            className,
-          )}
+          className={cn("group flex gap-4 sm:gap-6", className)}
           {...props}
         >
           {image && (

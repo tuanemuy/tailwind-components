@@ -1,36 +1,34 @@
 "use client";
 
-import { forwardRef, useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
-import { Button, Badge, Link, Avatar } from "@/components/atoms";
-import { Tabs, Tab, Rating, IconButton } from "@/components/molecules";
+import { forwardRef, type ReactNode, useState } from "react";
+import { Avatar, Badge, Button, Link } from "@/components/atoms";
+import { IconButton, Rating, Tab, Tabs } from "@/components/molecules";
 import {
-  PageLayout,
-  PageContent,
-  PageSection,
+  Card,
+  CardBody,
+  Footer,
+  type GalleryImage,
   Header,
   HeaderLogo,
   HeaderNav,
   HeaderNavItem,
-  Footer,
-  Card,
-  CardBody,
+  PageContent,
+  PageLayout,
+  PageSection,
   ProductGallery,
-  ProductDetails as ProductDetailsComponent,
   ProductListing,
-  type GalleryImage,
   type ProductListingItem,
 } from "@/components/organisms";
 import {
+  CheckIcon,
   HeartIcon,
+  RefreshIcon,
   ShareIcon,
+  ShieldIcon,
   ShoppingBagIcon,
   TruckIcon,
-  RefreshIcon,
-  ShieldIcon,
-  StarIcon,
-  CheckIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Product data
 export interface Product {
@@ -100,7 +98,11 @@ export interface ProductPageProps extends React.HTMLAttributes<HTMLDivElement> {
   product: Product;
   relatedProducts?: ProductListingItem[];
   recentlyViewed?: ProductListingItem[];
-  onAddToCart?: (productId: string, quantity: number, variants: Record<string, string>) => void;
+  onAddToCart?: (
+    productId: string,
+    quantity: number,
+    variants: Record<string, string>,
+  ) => void;
   onAddToWishlist?: (productId: string) => void;
   onShare?: () => void;
   logo?: ReactNode;
@@ -162,7 +164,9 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
     },
     ref,
   ) => {
-    const [selectedVariants, setSelectedVariants] = useState<Record<string, string>>({});
+    const [selectedVariants, setSelectedVariants] = useState<
+      Record<string, string>
+    >({});
     const [quantity, setQuantity] = useState(1);
     const [activeTab, setActiveTab] = useState("description");
 
@@ -196,8 +200,8 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
           navigation={
             navigation.length > 0 && (
               <HeaderNav>
-                {navigation.map((item, index) => (
-                  <HeaderNavItem key={index} href={item.href}>
+                {navigation.map((item) => (
+                  <HeaderNavItem key={item.href} href={item.href}>
                     {item.label}
                   </HeaderNavItem>
                 ))}
@@ -233,9 +237,14 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
 
     const renderBreadcrumbs = () => (
       <nav className="text-sm text-muted-foreground mb-6">
-        <Link href="/" className="hover:text-foreground">Home</Link>
+        <Link href="/" className="hover:text-foreground">
+          Home
+        </Link>
         <span className="mx-2">/</span>
-        <Link href={`/category/${product.category.slug}`} className="hover:text-foreground">
+        <Link
+          href={`/category/${product.category.slug}`}
+          className="hover:text-foreground"
+        >
           {product.category.name}
         </Link>
         <span className="mx-2">/</span>
@@ -253,8 +262,11 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
             <div className="flex flex-wrap gap-2">
               {variant.options.map((option) => (
                 <button
+                  type="button"
                   key={option.id}
-                  onClick={() => handleVariantChange(variant.type, option.value)}
+                  onClick={() =>
+                    handleVariantChange(variant.type, option.value)
+                  }
                   disabled={!option.available}
                   className={cn(
                     "px-4 py-2 rounded-lg border text-sm font-medium transition-colors",
@@ -262,7 +274,7 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
                       ? "border-primary bg-primary text-primary-foreground"
                       : option.available
                         ? "border-border hover:border-primary"
-                        : "border-border bg-muted text-muted-foreground cursor-not-allowed"
+                        : "border-border bg-muted text-muted-foreground cursor-not-allowed",
                   )}
                 >
                   {option.label}
@@ -279,6 +291,7 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
         <p className="text-sm font-medium text-foreground">Quantity:</p>
         <div className="flex items-center border border-border rounded-lg">
           <button
+            type="button"
             onClick={() => setQuantity(Math.max(1, quantity - 1))}
             className="px-3 py-2 hover:bg-muted transition-colors"
           >
@@ -288,6 +301,7 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
             {quantity}
           </span>
           <button
+            type="button"
             onClick={() => setQuantity(quantity + 1)}
             className="px-3 py-2 hover:bg-muted transition-colors"
           >
@@ -299,13 +313,17 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
 
     const renderPolicies = () => (
       <div className="grid grid-cols-3 gap-4">
-        {policies.map((policy, index) => (
-          <div key={index} className="text-center p-3">
+        {policies.map((policy) => (
+          <div key={policy.title} className="text-center p-3">
             <div className="size-10 rounded-full bg-muted flex items-center justify-center mx-auto mb-2">
               {policy.icon}
             </div>
-            <p className="text-sm font-medium text-foreground">{policy.title}</p>
-            <p className="text-xs text-muted-foreground">{policy.description}</p>
+            <p className="text-sm font-medium text-foreground">
+              {policy.title}
+            </p>
+            <p className="text-xs text-muted-foreground">
+              {policy.description}
+            </p>
           </div>
         ))}
       </div>
@@ -317,9 +335,13 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
         {product.rating && (
           <div className="flex items-center gap-4 p-4 rounded-lg bg-muted/50">
             <div className="text-center">
-              <p className="text-4xl font-bold text-foreground">{product.rating.average.toFixed(1)}</p>
+              <p className="text-4xl font-bold text-foreground">
+                {product.rating.average.toFixed(1)}
+              </p>
               <Rating value={product.rating.average} readonly size="sm" />
-              <p className="text-sm text-muted-foreground mt-1">{product.rating.count} reviews</p>
+              <p className="text-sm text-muted-foreground mt-1">
+                {product.rating.count} reviews
+              </p>
             </div>
           </div>
         )}
@@ -334,12 +356,17 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
                     <Avatar
                       src={review.author.avatar}
                       alt={review.author.name}
-                      initials={review.author.name.split(" ").map(n => n[0]).join("")}
+                      initials={review.author.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
                       size="sm"
                     />
                     <div>
                       <div className="flex items-center gap-2">
-                        <p className="font-medium text-foreground">{review.author.name}</p>
+                        <p className="font-medium text-foreground">
+                          {review.author.name}
+                        </p>
                         {review.author.verified && (
                           <Badge variant="soft" size="sm">
                             <CheckIcon className="size-3 mr-1" />
@@ -350,19 +377,25 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
                       <Rating value={review.rating} readonly size="sm" />
                     </div>
                   </div>
-                  <span className="text-sm text-muted-foreground">{review.date}</span>
+                  <span className="text-sm text-muted-foreground">
+                    {review.date}
+                  </span>
                 </div>
                 {review.title && (
-                  <h4 className="font-medium text-foreground mb-1">{review.title}</h4>
+                  <h4 className="font-medium text-foreground mb-1">
+                    {review.title}
+                  </h4>
                 )}
-                <p className="text-sm text-muted-foreground">{review.content}</p>
+                <p className="text-sm text-muted-foreground">
+                  {review.content}
+                </p>
                 {review.images && review.images.length > 0 && (
                   <div className="flex gap-2 mt-3">
-                    {review.images.map((img, index) => (
+                    {review.images.map((img) => (
                       <img
-                        key={index}
+                        key={img}
                         src={img}
-                        alt={`Review image ${index + 1}`}
+                        alt="Review attachment"
                         className="size-16 rounded-lg object-cover"
                       />
                     ))}
@@ -379,7 +412,9 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
       <PageLayout
         ref={ref}
         header={renderHeader()}
-        footer={footer || <Footer variant="simple" copyright="All rights reserved." />}
+        footer={
+          footer || <Footer variant="simple" copyright="All rights reserved." />
+        }
         className={className}
         {...props}
       >
@@ -392,10 +427,7 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
               {/* Gallery */}
               <div>
-                <ProductGallery
-                  images={product.images}
-                  variant="thumbnails"
-                />
+                <ProductGallery images={product.images} showThumbnails />
               </div>
 
               {/* Details */}
@@ -403,10 +435,12 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
                 {/* Badges */}
                 {product.badges && product.badges.length > 0 && (
                   <div className="flex gap-2">
-                    {product.badges.map((badge, index) => (
+                    {product.badges.map((badge) => (
                       <Badge
-                        key={index}
-                        variant={badge.type === "sale" ? "destructive" : "default"}
+                        key={badge.label}
+                        variant={
+                          badge.type === "sale" ? "destructive" : "default"
+                        }
                       >
                         {badge.label}
                       </Badge>
@@ -417,14 +451,20 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
                 {/* Title and rating */}
                 <div>
                   {product.brand && (
-                    <p className="text-sm text-muted-foreground mb-1">{product.brand}</p>
+                    <p className="text-sm text-muted-foreground mb-1">
+                      {product.brand}
+                    </p>
                   )}
                   <h1 className="text-2xl lg:text-3xl font-bold text-foreground mb-2">
                     {product.name}
                   </h1>
                   {product.rating && (
                     <div className="flex items-center gap-2">
-                      <Rating value={product.rating.average} readonly size="sm" />
+                      <Rating
+                        value={product.rating.average}
+                        readonly
+                        size="sm"
+                      />
                       <span className="text-sm text-muted-foreground">
                         ({product.rating.count} reviews)
                       </span>
@@ -443,7 +483,11 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
                         {formatPrice(product.compareAtPrice)}
                       </span>
                       <Badge variant="destructive">
-                        Save {Math.round((1 - product.price / product.compareAtPrice) * 100)}%
+                        Save{" "}
+                        {Math.round(
+                          (1 - product.price / product.compareAtPrice) * 100,
+                        )}
+                        %
                       </Badge>
                     </>
                   )}
@@ -453,7 +497,9 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
                 <p className="text-muted-foreground">{product.description}</p>
 
                 {/* Variants */}
-                {product.variants && product.variants.length > 0 && renderVariants()}
+                {product.variants &&
+                  product.variants.length > 0 &&
+                  renderVariants()}
 
                 {/* Quantity */}
                 {renderQuantitySelector()}
@@ -466,14 +512,19 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
                       <span className="text-sm text-success">
                         In stock
                         {product.stockCount && product.stockCount < 10 && (
-                          <span className="text-muted-foreground"> - Only {product.stockCount} left</span>
+                          <span className="text-muted-foreground">
+                            {" "}
+                            - Only {product.stockCount} left
+                          </span>
                         )}
                       </span>
                     </>
                   ) : (
                     <>
                       <span className="size-2 rounded-full bg-destructive" />
-                      <span className="text-sm text-destructive">Out of stock</span>
+                      <span className="text-sm text-destructive">
+                        Out of stock
+                      </span>
                     </>
                   )}
                 </div>
@@ -513,15 +564,17 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
 
           {/* Tabs: Description, Specifications, Reviews */}
           <PageSection>
-            <Tabs value={activeTab} onValueChange={setActiveTab} variant="underline">
+            <Tabs
+              value={activeTab}
+              onValueChange={setActiveTab}
+              variant="underline"
+            >
               <Tab value="description">Description</Tab>
               {product.specifications && product.specifications.length > 0 && (
                 <Tab value="specifications">Specifications</Tab>
               )}
               {product.reviews && product.reviews.length > 0 && (
-                <Tab value="reviews">
-                  Reviews ({product.reviews.length})
-                </Tab>
+                <Tab value="reviews">Reviews ({product.reviews.length})</Tab>
               )}
             </Tabs>
 
@@ -531,8 +584,8 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
                   <p>{product.description}</p>
                   {product.features && (
                     <ul>
-                      {product.features.map((feature, index) => (
-                        <li key={index}>{feature}</li>
+                      {product.features.map((feature) => (
+                        <li key={feature}>{feature}</li>
                       ))}
                     </ul>
                   )}
@@ -543,14 +596,18 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
                 <div className="grid gap-2">
                   {product.specifications.map((spec, index) => (
                     <div
-                      key={index}
+                      key={spec.label}
                       className={cn(
                         "flex justify-between py-3 px-4",
-                        index % 2 === 0 && "bg-muted/50 rounded-lg"
+                        index % 2 === 0 && "bg-muted/50 rounded-lg",
                       )}
                     >
-                      <span className="text-muted-foreground">{spec.label}</span>
-                      <span className="font-medium text-foreground">{spec.value}</span>
+                      <span className="text-muted-foreground">
+                        {spec.label}
+                      </span>
+                      <span className="font-medium text-foreground">
+                        {spec.value}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -563,7 +620,9 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
           {/* Related products */}
           {relatedProducts.length > 0 && (
             <PageSection>
-              <h2 className="text-2xl font-bold text-foreground mb-6">You might also like</h2>
+              <h2 className="text-2xl font-bold text-foreground mb-6">
+                You might also like
+              </h2>
               <ProductListing
                 products={relatedProducts}
                 variant="grid"
@@ -575,7 +634,9 @@ export const ProductPage = forwardRef<HTMLDivElement, ProductPageProps>(
           {/* Recently viewed */}
           {recentlyViewed.length > 0 && (
             <PageSection>
-              <h2 className="text-2xl font-bold text-foreground mb-6">Recently Viewed</h2>
+              <h2 className="text-2xl font-bold text-foreground mb-6">
+                Recently Viewed
+              </h2>
               <ProductListing
                 products={recentlyViewed}
                 variant="grid"

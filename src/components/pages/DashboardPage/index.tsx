@@ -1,38 +1,43 @@
 "use client";
 
-import { forwardRef, useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { forwardRef, type ReactNode, useState } from "react";
 import { Avatar, Input } from "@/components/atoms";
-import { Dropdown, DropdownItem, DropdownDivider, IconButton } from "@/components/molecules";
 import {
-  PageLayout,
-  PageContent,
-  PageSection,
+  Dropdown,
+  DropdownDivider,
+  DropdownItem,
+  IconButton,
+} from "@/components/molecules";
+import {
+  Card,
+  CardBody,
+  CardHeader,
   Header,
+  HeaderLogo,
   HeaderNav,
   HeaderNavItem,
-  HeaderLogo,
+  PageContent,
+  PageLayout,
+  PageSection,
   Sidebar,
-  SidebarSection,
+  SidebarHeader,
   SidebarItem,
   SidebarLogo,
-  SidebarToggle,
+  SidebarSection,
   StatCardGroup,
-  Table,
-  Card,
-  CardHeader,
-  CardBody,
   type StatCardGroupItem,
+  Table,
   type TableColumn,
 } from "@/components/organisms";
 import {
-  HomeIcon,
-  UsersIcon,
-  SettingsIcon,
   BellIcon,
-  SearchIcon,
   ChevronDownIcon,
+  HomeIcon,
+  SearchIcon,
+  SettingsIcon,
+  UsersIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Dashboard variants
 type DashboardVariant = "default" | "analytics" | "crm" | "ecommerce";
@@ -56,7 +61,8 @@ export interface DashboardSection {
 }
 
 // Main DashboardPage props
-export interface DashboardPageProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DashboardPageProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   variant?: DashboardVariant;
   logo?: ReactNode;
   logoText?: string;
@@ -80,9 +86,23 @@ export interface DashboardPageProps extends React.HTMLAttributes<HTMLDivElement>
 
 // Default navigation items
 const defaultNavigation: DashboardNavItem[] = [
-  { id: "home", label: "Home", icon: <HomeIcon className="size-5" />, active: true },
-  { id: "users", label: "Users", icon: <UsersIcon className="size-5" />, badge: 5 },
-  { id: "settings", label: "Settings", icon: <SettingsIcon className="size-5" /> },
+  {
+    id: "home",
+    label: "Home",
+    icon: <HomeIcon className="size-5" />,
+    active: true,
+  },
+  {
+    id: "users",
+    label: "Users",
+    icon: <UsersIcon className="size-5" />,
+    badge: 5,
+  },
+  {
+    id: "settings",
+    label: "Settings",
+    icon: <SettingsIcon className="size-5" />,
+  },
 ];
 
 export const DashboardPage = forwardRef<HTMLDivElement, DashboardPageProps>(
@@ -109,7 +129,9 @@ export const DashboardPage = forwardRef<HTMLDivElement, DashboardPageProps>(
     },
     ref,
   ) => {
-    const [sidebarCollapsed, setSidebarCollapsed] = useState(sidebarDefaultCollapsed);
+    const [sidebarCollapsed, setSidebarCollapsed] = useState(
+      sidebarDefaultCollapsed,
+    );
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -130,27 +152,30 @@ export const DashboardPage = forwardRef<HTMLDivElement, DashboardPageProps>(
         onCollapsedChange={setSidebarCollapsed}
         collapsible={sidebarCollapsible}
         header={
-          <div className="flex items-center justify-between">
-            <SidebarLogo
-              href={logoHref}
-              text={logoText}
-            >
-              {logo}
-            </SidebarLogo>
-            {sidebarCollapsible && !sidebarCollapsed && (
-              <SidebarToggle />
-            )}
-          </div>
+          <SidebarHeader
+            logo={
+              <SidebarLogo href={logoHref} text={logoText}>
+                {logo}
+              </SidebarLogo>
+            }
+            showToggle={sidebarCollapsible}
+          />
         }
         footer={
           user && (
             <Dropdown
               trigger={
-                <button className="flex items-center gap-x-3 w-full p-2 rounded-lg hover:bg-accent transition-colors text-left">
+                <button
+                  type="button"
+                  className="flex items-center gap-x-3 w-full p-2 rounded-lg hover:bg-accent transition-colors text-left"
+                >
                   <Avatar
                     src={user.avatar}
                     alt={user.name}
-                    initials={user.name.split(" ").map(n => n[0]).join("")}
+                    initials={user.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
                     size="sm"
                   />
                   {!sidebarCollapsed && (
@@ -259,7 +284,7 @@ export const DashboardPage = forwardRef<HTMLDivElement, DashboardPageProps>(
             {/* Notifications */}
             <div className="relative">
               <IconButton
-                icon={<BellIcon className="size-5" />}
+                icon={<BellIcon />}
                 variant="ghost"
                 size="sm"
                 label="Notifications"
@@ -277,7 +302,10 @@ export const DashboardPage = forwardRef<HTMLDivElement, DashboardPageProps>(
                 <Avatar
                   src={user.avatar}
                   alt={user.name}
-                  initials={user.name.split(" ").map(n => n[0]).join("")}
+                  initials={user.name
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join("")}
                   size="sm"
                 />
               </div>
@@ -323,7 +351,8 @@ export const DashboardPage = forwardRef<HTMLDivElement, DashboardPageProps>(
 DashboardPage.displayName = "DashboardPage";
 
 // DashboardCard component for common dashboard cards
-export interface DashboardCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DashboardCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
   subtitle?: string;
   action?: ReactNode;
@@ -331,7 +360,10 @@ export interface DashboardCardProps extends React.HTMLAttributes<HTMLDivElement>
 }
 
 export const DashboardCard = forwardRef<HTMLDivElement, DashboardCardProps>(
-  ({ className, title, subtitle, action, padding = "md", children, ...props }, ref) => {
+  (
+    { className, title, subtitle, action, padding = "md", children, ...props },
+    ref,
+  ) => {
     return (
       <Card ref={ref} variant="bordered" className={className} {...props}>
         {(title || subtitle || action) && (
@@ -391,38 +423,36 @@ export function DashboardTable<T>({
 }
 
 // DashboardEmptyState component
-export interface DashboardEmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DashboardEmptyStateProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   icon?: ReactNode;
   title: string;
   description?: string;
   action?: ReactNode;
 }
 
-export const DashboardEmptyState = forwardRef<HTMLDivElement, DashboardEmptyStateProps>(
-  ({ className, icon, title, description, action, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "flex flex-col items-center justify-center py-12 text-center",
-          className,
-        )}
-        {...props}
-      >
-        {icon && (
-          <div className="mb-4 rounded-full bg-muted p-4">
-            {icon}
-          </div>
-        )}
-        <h3 className="text-lg font-semibold text-foreground">{title}</h3>
-        {description && (
-          <p className="mt-1 max-w-md text-sm text-muted-foreground">
-            {description}
-          </p>
-        )}
-        {action && <div className="mt-4">{action}</div>}
-      </div>
-    );
-  },
-);
+export const DashboardEmptyState = forwardRef<
+  HTMLDivElement,
+  DashboardEmptyStateProps
+>(({ className, icon, title, description, action, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "flex flex-col items-center justify-center py-12 text-center",
+        className,
+      )}
+      {...props}
+    >
+      {icon && <div className="mb-4 rounded-full bg-muted p-4">{icon}</div>}
+      <h3 className="text-lg font-semibold text-foreground">{title}</h3>
+      {description && (
+        <p className="mt-1 max-w-md text-sm text-muted-foreground">
+          {description}
+        </p>
+      )}
+      {action && <div className="mt-4">{action}</div>}
+    </div>
+  );
+});
 DashboardEmptyState.displayName = "DashboardEmptyState";

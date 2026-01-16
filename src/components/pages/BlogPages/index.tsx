@@ -1,31 +1,31 @@
 "use client";
 
 import { forwardRef, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
-import { Button, Avatar, Badge, Link, Separator } from "@/components/atoms";
-import { Pagination, IconButton } from "@/components/molecules";
+import { Avatar, Badge, Button, Link } from "@/components/atoms";
+import { IconButton, PaginationNumbers } from "@/components/molecules";
 import {
-  PageLayout,
-  PageContent,
-  PageSection,
+  Card,
+  CardBody,
+  Footer,
   Header,
   HeaderLogo,
   HeaderNav,
   HeaderNavItem,
-  Footer,
-  Card,
-  CardBody,
+  PageContent,
+  PageLayout,
+  PageSection,
 } from "@/components/organisms";
 import {
   CalendarIcon,
-  ClockIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
-  TwitterIcon,
-  LinkedInIcon,
+  ClockIcon,
   FacebookIcon,
+  LinkedInIcon,
   LinkIcon,
+  TwitterIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Blog post data
 export interface BlogPost {
@@ -52,7 +52,8 @@ export interface BlogPost {
 }
 
 // BlogListPage props
-export interface BlogListPageProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface BlogListPageProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   posts: BlogPost[];
   featuredPost?: BlogPost;
   categories?: {
@@ -118,8 +119,8 @@ export const BlogListPage = forwardRef<HTMLDivElement, BlogListPageProps>(
           navigation={
             navigation.length > 0 && (
               <HeaderNav>
-                {navigation.map((item, index) => (
-                  <HeaderNavItem key={index} href={item.href}>
+                {navigation.map((item) => (
+                  <HeaderNavItem key={item.href} href={item.href}>
                     {item.label}
                   </HeaderNavItem>
                 ))}
@@ -160,11 +161,16 @@ export const BlogListPage = forwardRef<HTMLDivElement, BlogListPageProps>(
                   <Avatar
                     src={featuredPost.author.avatar}
                     alt={featuredPost.author.name}
-                    initials={featuredPost.author.name.split(" ").map(n => n[0]).join("")}
+                    initials={featuredPost.author.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
                     size="sm"
                   />
                   <div>
-                    <p className="text-sm font-medium text-foreground">{featuredPost.author.name}</p>
+                    <p className="text-sm font-medium text-foreground">
+                      {featuredPost.author.name}
+                    </p>
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
                       <span>{featuredPost.publishedAt}</span>
                       <span>·</span>
@@ -206,10 +212,15 @@ export const BlogListPage = forwardRef<HTMLDivElement, BlogListPageProps>(
                 <Avatar
                   src={post.author.avatar}
                   alt={post.author.name}
-                  initials={post.author.name.split(" ").map(n => n[0]).join("")}
+                  initials={post.author.name
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join("")}
                   size="xs"
                 />
-                <span className="text-xs text-foreground">{post.author.name}</span>
+                <span className="text-xs text-foreground">
+                  {post.author.name}
+                </span>
               </div>
               <div className="flex items-center gap-1 text-xs text-muted-foreground">
                 <CalendarIcon className="size-3" />
@@ -225,15 +236,21 @@ export const BlogListPage = forwardRef<HTMLDivElement, BlogListPageProps>(
       <PageLayout
         ref={ref}
         header={renderHeader()}
-        footer={footer || <Footer variant="simple" copyright="All rights reserved." />}
+        footer={
+          footer || <Footer variant="simple" copyright="All rights reserved." />
+        }
         className={className}
         {...props}
       >
         <PageContent maxWidth="6xl" padding="lg">
           {/* Header */}
           <PageSection className="text-center">
-            <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">{title}</h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{subtitle}</p>
+            <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+              {title}
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              {subtitle}
+            </p>
           </PageSection>
 
           {/* Categories */}
@@ -255,7 +272,11 @@ export const BlogListPage = forwardRef<HTMLDivElement, BlogListPageProps>(
                     onClick={() => onCategoryChange?.(cat.slug)}
                   >
                     {cat.name}
-                    {cat.count && <span className="ml-1 text-xs opacity-60">({cat.count})</span>}
+                    {cat.count && (
+                      <span className="ml-1 text-xs opacity-60">
+                        ({cat.count})
+                      </span>
+                    )}
                   </Button>
                 ))}
               </div>
@@ -263,11 +284,7 @@ export const BlogListPage = forwardRef<HTMLDivElement, BlogListPageProps>(
           )}
 
           {/* Featured post */}
-          {featuredPost && (
-            <PageSection>
-              {renderFeaturedPost()}
-            </PageSection>
-          )}
+          {featuredPost && <PageSection>{renderFeaturedPost()}</PageSection>}
 
           {/* Posts grid */}
           <PageSection>
@@ -280,7 +297,7 @@ export const BlogListPage = forwardRef<HTMLDivElement, BlogListPageProps>(
           {totalPages > 1 && (
             <PageSection>
               <div className="flex justify-center">
-                <Pagination
+                <PaginationNumbers
                   currentPage={currentPage}
                   totalPages={totalPages}
                   onPageChange={onPageChange || (() => {})}
@@ -298,7 +315,8 @@ export const BlogListPage = forwardRef<HTMLDivElement, BlogListPageProps>(
 BlogListPage.displayName = "BlogListPage";
 
 // BlogPostPage props
-export interface BlogPostPageProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface BlogPostPageProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   post: BlogPost;
   relatedPosts?: BlogPost[];
   previousPost?: { title: string; slug: string };
@@ -360,8 +378,8 @@ export const BlogPostPage = forwardRef<HTMLDivElement, BlogPostPageProps>(
           navigation={
             navigation.length > 0 && (
               <HeaderNav>
-                {navigation.map((item, index) => (
-                  <HeaderNavItem key={index} href={item.href}>
+                {navigation.map((item) => (
+                  <HeaderNavItem key={item.href} href={item.href}>
                     {item.label}
                   </HeaderNavItem>
                 ))}
@@ -413,16 +431,25 @@ export const BlogPostPage = forwardRef<HTMLDivElement, BlogPostPageProps>(
             <Avatar
               src={post.author.avatar}
               alt={post.author.name}
-              initials={post.author.name.split(" ").map(n => n[0]).join("")}
+              initials={post.author.name
+                .split(" ")
+                .map((n) => n[0])
+                .join("")}
               size="lg"
             />
             <div>
-              <p className="font-semibold text-foreground">{post.author.name}</p>
+              <p className="font-semibold text-foreground">
+                {post.author.name}
+              </p>
               {post.author.role && (
-                <p className="text-sm text-muted-foreground mb-2">{post.author.role}</p>
+                <p className="text-sm text-muted-foreground mb-2">
+                  {post.author.role}
+                </p>
               )}
               {post.author.bio && (
-                <p className="text-sm text-muted-foreground">{post.author.bio}</p>
+                <p className="text-sm text-muted-foreground">
+                  {post.author.bio}
+                </p>
               )}
             </div>
           </div>
@@ -433,7 +460,11 @@ export const BlogPostPage = forwardRef<HTMLDivElement, BlogPostPageProps>(
     const renderRelatedPosts = () => (
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {relatedPosts.map((relatedPost) => (
-          <Link key={relatedPost.id} href={`/blog/${relatedPost.slug}`} className="group">
+          <Link
+            key={relatedPost.id}
+            href={`/blog/${relatedPost.slug}`}
+            className="group"
+          >
             <Card variant="bordered" className="h-full">
               {relatedPost.coverImage && (
                 <div className="aspect-[16/9] overflow-hidden">
@@ -462,7 +493,9 @@ export const BlogPostPage = forwardRef<HTMLDivElement, BlogPostPageProps>(
       <PageLayout
         ref={ref}
         header={renderHeader()}
-        footer={footer || <Footer variant="simple" copyright="All rights reserved." />}
+        footer={
+          footer || <Footer variant="simple" copyright="All rights reserved." />
+        }
         className={className}
         {...props}
       >
@@ -482,7 +515,10 @@ export const BlogPostPage = forwardRef<HTMLDivElement, BlogPostPageProps>(
                     <Avatar
                       src={post.author.avatar}
                       alt={post.author.name}
-                      initials={post.author.name.split(" ").map(n => n[0]).join("")}
+                      initials={post.author.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
                       size="sm"
                     />
                     <span>{post.author.name}</span>
@@ -520,7 +556,9 @@ export const BlogPostPage = forwardRef<HTMLDivElement, BlogPostPageProps>(
               {tableOfContents.length > 0 && (
                 <aside className="hidden lg:block lg:col-span-1">
                   <div className="sticky top-24">
-                    <p className="text-sm font-semibold text-foreground mb-3">On this page</p>
+                    <p className="text-sm font-semibold text-foreground mb-3">
+                      On this page
+                    </p>
                     <nav className="space-y-1">
                       {tableOfContents.map((item) => (
                         <a
@@ -528,7 +566,7 @@ export const BlogPostPage = forwardRef<HTMLDivElement, BlogPostPageProps>(
                           href={`#${item.id}`}
                           className={cn(
                             "block text-sm text-muted-foreground hover:text-foreground transition-colors",
-                            item.level > 1 && "pl-3"
+                            item.level > 1 && "pl-3",
                           )}
                         >
                           {item.title}
@@ -540,7 +578,12 @@ export const BlogPostPage = forwardRef<HTMLDivElement, BlogPostPageProps>(
               )}
 
               {/* Main content */}
-              <div className={cn("lg:col-span-3", tableOfContents.length === 0 && "lg:col-span-4")}>
+              <div
+                className={cn(
+                  "lg:col-span-3",
+                  tableOfContents.length === 0 && "lg:col-span-4",
+                )}
+              >
                 {/* Article content */}
                 <div className="prose prose-neutral dark:prose-invert max-w-none">
                   {post.content ? (
@@ -569,9 +612,7 @@ export const BlogPostPage = forwardRef<HTMLDivElement, BlogPostPageProps>(
                 </div>
 
                 {/* Author card */}
-                <div className="mt-8">
-                  {renderAuthorCard()}
-                </div>
+                <div className="mt-8">{renderAuthorCard()}</div>
 
                 {/* Previous/Next navigation */}
                 {(previousPost || nextPost) && (
@@ -618,7 +659,9 @@ export const BlogPostPage = forwardRef<HTMLDivElement, BlogPostPageProps>(
           {relatedPosts.length > 0 && (
             <PageContent maxWidth="6xl" padding="lg">
               <PageSection>
-                <h2 className="text-2xl font-bold text-foreground mb-6">Related Articles</h2>
+                <h2 className="text-2xl font-bold text-foreground mb-6">
+                  Related Articles
+                </h2>
                 {renderRelatedPosts()}
               </PageSection>
             </PageContent>

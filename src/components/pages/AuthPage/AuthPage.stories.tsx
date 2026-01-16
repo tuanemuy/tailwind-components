@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { AuthPage, AuthLogo, AuthFooter } from ".";
 import { GlobeIcon } from "@/lib/icons";
+import { AuthFooter, AuthLogo, AuthPage } from ".";
 
 const meta: Meta<typeof AuthPage> = {
   title: "Pages/AuthPage",
@@ -12,7 +12,13 @@ const meta: Meta<typeof AuthPage> = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["login", "signup", "forgot-password", "reset-password", "verify-2fa"],
+      options: [
+        "login",
+        "signup",
+        "forgot-password",
+        "reset-password",
+        "verify-2fa",
+      ],
     },
     layout: {
       control: "select",
@@ -57,7 +63,7 @@ const socialProviders = [
     id: "google",
     name: "Google",
     icon: (
-      <svg className="size-5" viewBox="0 0 24 24">
+      <svg aria-hidden="true" className="size-5" viewBox="0 0 24 24">
         <path
           fill="currentColor"
           d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -81,7 +87,12 @@ const socialProviders = [
     id: "github",
     name: "GitHub",
     icon: (
-      <svg className="size-5" fill="currentColor" viewBox="0 0 24 24">
+      <svg
+        aria-hidden="true"
+        className="size-5"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
         <path
           fillRule="evenodd"
           clipRule="evenodd"
@@ -94,9 +105,7 @@ const socialProviders = [
 
 // Footer component
 const Footer = () => (
-  <AuthFooter>
-    © 2024 Preline. All rights reserved.
-  </AuthFooter>
+  <AuthFooter>© 2024 Preline. All rights reserved.</AuthFooter>
 );
 
 // Default login story
@@ -164,7 +173,8 @@ export const SplitLayout: Story = {
     layout: "split",
     logo: <Logo />,
     socialProviders,
-    splitImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
+    splitImage:
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
     splitContent: (
       <div className="text-white text-center space-y-4 bg-black/50 p-8 rounded-xl backdrop-blur-sm">
         <h2 className="text-3xl font-bold">Welcome to Preline</h2>
@@ -230,7 +240,8 @@ export const SignupSplit: Story = {
     layout: "split",
     logo: <Logo />,
     socialProviders,
-    splitImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+    splitImage:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
     onSubmit: (data) => console.log("Signup submitted:", data),
   },
 };

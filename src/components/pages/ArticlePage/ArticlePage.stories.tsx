@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ArticlePage, ArticleCard, ArticleContent } from ".";
 import { GlobeIcon } from "@/lib/icons";
+import { ArticleCard, ArticleContent, ArticlePage } from ".";
 
 const meta: Meta<typeof ArticlePage> = {
   title: "Pages/ArticlePage",
@@ -71,7 +71,8 @@ const relatedArticles = [
     id: "1",
     title: "Getting Started with Next.js 14",
     excerpt: "Learn the basics of Next.js and build your first application.",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=400&q=80",
+    image:
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=400&q=80",
     href: "/blog/nextjs-14",
     date: "Jan 10, 2024",
   },
@@ -79,7 +80,8 @@ const relatedArticles = [
     id: "2",
     title: "Mastering Tailwind CSS",
     excerpt: "Advanced techniques for building beautiful UIs with Tailwind.",
-    image: "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?auto=format&fit=crop&w=400&q=80",
+    image:
+      "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?auto=format&fit=crop&w=400&q=80",
     href: "/blog/tailwind-css",
     date: "Jan 8, 2024",
   },
@@ -87,7 +89,8 @@ const relatedArticles = [
     id: "3",
     title: "State Management in React",
     excerpt: "Compare different state management solutions for React apps.",
-    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=400&q=80",
+    image:
+      "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=400&q=80",
     href: "/blog/react-state",
     date: "Jan 5, 2024",
   },
@@ -98,25 +101,26 @@ const SampleContent = () => (
   <ArticleContent>
     <h2 id="introduction">Introduction</h2>
     <p>
-      Building modern web applications requires a solid understanding of component
-      architecture and design patterns. In this comprehensive guide, we&apos;ll explore
-      the best practices for creating reusable, maintainable components.
+      Building modern web applications requires a solid understanding of
+      component architecture and design patterns. In this comprehensive guide,
+      we&apos;ll explore the best practices for creating reusable, maintainable
+      components.
     </p>
     <p>
-      Whether you&apos;re just starting out or looking to level up your skills, this
-      article will provide valuable insights and practical examples.
+      Whether you&apos;re just starting out or looking to level up your skills,
+      this article will provide valuable insights and practical examples.
     </p>
 
     <h2 id="getting-started">Getting Started</h2>
     <p>
-      Before we dive into the technical details, let&apos;s set up our development
-      environment and understand the prerequisites.
+      Before we dive into the technical details, let&apos;s set up our
+      development environment and understand the prerequisites.
     </p>
 
     <h3 id="installation">Installation</h3>
     <p>
-      First, you&apos;ll need to install the necessary dependencies. Run the following
-      command in your terminal:
+      First, you&apos;ll need to install the necessary dependencies. Run the
+      following command in your terminal:
     </p>
     <pre>
       <code>npm install @preline/ui tailwindcss postcss autoprefixer</code>
@@ -124,8 +128,8 @@ const SampleContent = () => (
 
     <h3 id="configuration">Configuration</h3>
     <p>
-      Next, configure your tailwind.config.js file to include the component library
-      paths and extend the default theme as needed.
+      Next, configure your tailwind.config.js file to include the component
+      library paths and extend the default theme as needed.
     </p>
     <pre>
       <code>{`module.exports = {
@@ -163,12 +167,13 @@ const SampleContent = () => (
 
     <h2 id="conclusion">Conclusion</h2>
     <p>
-      We&apos;ve covered a lot of ground in this article, from setting up your development
-      environment to implementing best practices for performance optimization.
+      We&apos;ve covered a lot of ground in this article, from setting up your
+      development environment to implementing best practices for performance
+      optimization.
     </p>
     <p>
-      Remember, the best way to learn is by doing. Start building your own projects
-      and apply these concepts in real-world scenarios.
+      Remember, the best way to learn is by doing. Start building your own
+      projects and apply these concepts in real-world scenarios.
     </p>
   </ArticleContent>
 );
@@ -178,8 +183,10 @@ export const Default: Story = {
   args: {
     layout: "default",
     title: "Building Modern Web Applications with React and TypeScript",
-    subtitle: "A comprehensive guide to creating scalable, type-safe applications",
-    featuredImage: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80",
+    subtitle:
+      "A comprehensive guide to creating scalable, type-safe applications",
+    featuredImage:
+      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80",
     author,
     date: "January 15, 2024",
     readTime: "8 min read",

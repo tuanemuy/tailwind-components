@@ -1,25 +1,21 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  DashboardPage,
-  DashboardCard,
-  DashboardEmptyState,
-} from ".";
-import { Button, Avatar, Badge } from "@/components/atoms";
+import { Avatar, Badge, Button } from "@/components/atoms";
 import { TrendIndicator } from "@/components/molecules";
 import { Table } from "@/components/organisms";
 import {
+  CalendarIcon,
+  GlobeIcon,
   HomeIcon,
-  UsersIcon,
+  MailIcon,
+  PlusIcon,
   SettingsIcon,
   StoreIcon,
-  GlobeIcon,
   TagIcon,
-  PlusIcon,
-  TrendUpIcon,
   TrendDownIcon,
-  CalendarIcon,
-  MailIcon,
+  TrendUpIcon,
+  UsersIcon,
 } from "@/lib/icons";
+import { DashboardCard, DashboardEmptyState, DashboardPage } from ".";
 
 const meta: Meta<typeof DashboardPage> = {
   title: "Pages/DashboardPage",
@@ -187,7 +183,14 @@ const orderColumns = [
     header: "Customer",
     render: (_value: unknown, row: Order) => (
       <div className="flex items-center gap-x-3">
-        <Avatar initials={row.customer.split(" ").map(n => n[0]).join("")} alt={row.customer} size="sm" />
+        <Avatar
+          initials={row.customer
+            .split(" ")
+            .map((n) => n[0])
+            .join("")}
+          alt={row.customer}
+          size="sm"
+        />
         <div>
           <p className="text-sm font-medium text-foreground">{row.customer}</p>
           <p className="text-xs text-muted-foreground">{row.email}</p>
@@ -259,11 +262,7 @@ export const Default: Story = {
         }
         padding="none"
       >
-        <Table
-          data={ordersData}
-          columns={orderColumns}
-          hoverable
-        />
+        <Table data={ordersData} columns={orderColumns} hoverable />
       </DashboardCard>
     </DashboardPage>
   ),
@@ -293,11 +292,7 @@ export const WithHeaderNavigation: Story = {
         }
         padding="none"
       >
-        <Table
-          data={ordersData}
-          columns={orderColumns}
-          hoverable
-        />
+        <Table data={ordersData} columns={orderColumns} hoverable />
       </DashboardCard>
     </DashboardPage>
   ),
@@ -374,13 +369,17 @@ export const MultipleSections: Story = {
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <DashboardCard title="Revenue">
               <div className="flex items-end gap-x-4">
-                <span className="text-3xl font-bold text-foreground">$12,426</span>
+                <span className="text-3xl font-bold text-foreground">
+                  $12,426
+                </span>
                 <TrendIndicator value="+12.5%" direction="up" />
               </div>
             </DashboardCard>
             <DashboardCard title="Users">
               <div className="flex items-end gap-x-4">
-                <span className="text-3xl font-bold text-foreground">1,234</span>
+                <span className="text-3xl font-bold text-foreground">
+                  1,234
+                </span>
                 <TrendIndicator value="+8.2%" direction="up" />
               </div>
             </DashboardCard>

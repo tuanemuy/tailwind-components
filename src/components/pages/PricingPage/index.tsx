@@ -1,23 +1,23 @@
 "use client";
 
-import { forwardRef, useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
-import { Button, Badge, Link } from "@/components/atoms";
+import React, { forwardRef, type ReactNode, useState } from "react";
+import { Badge, Button, Link } from "@/components/atoms";
 import {
-  PageLayout,
-  PageContent,
-  PageSection,
+  CompleteFAQSection,
+  CompletePricingSection,
+  type FAQItem,
+  Footer,
   Header,
   HeaderLogo,
   HeaderNav,
   HeaderNavItem,
-  Footer,
-  CompletePricingSection,
-  CompleteFAQSection,
+  PageContent,
+  PageLayout,
+  PageSection,
   type PricingSectionPlan,
-  type FAQItem,
 } from "@/components/organisms";
 import { CheckIcon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // PricingPage props
 export interface PricingPageProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -76,13 +76,17 @@ export const PricingPage = forwardRef<HTMLDivElement, PricingPageProps>(
     },
     ref,
   ) => {
-    const [internalBillingPeriod, setInternalBillingPeriod] = useState<"monthly" | "yearly">("monthly");
+    const [internalBillingPeriod, setInternalBillingPeriod] = useState<
+      "monthly" | "yearly"
+    >("monthly");
     const billingPeriod = controlledBillingPeriod ?? internalBillingPeriod;
 
     const handleBillingPeriodChange = (period: "monthly" | "yearly") => {
       setInternalBillingPeriod(period);
       onBillingPeriodChange?.(period);
     };
+    void billingPeriod;
+    void handleBillingPeriodChange;
 
     const renderHeader = () => {
       if (header) return header;
@@ -99,8 +103,8 @@ export const PricingPage = forwardRef<HTMLDivElement, PricingPageProps>(
           navigation={
             navigation.length > 0 && (
               <HeaderNav>
-                {navigation.map((item, index) => (
-                  <HeaderNavItem key={index} href={item.href}>
+                {navigation.map((item) => (
+                  <HeaderNavItem key={item.href} href={item.href}>
                     {item.label}
                   </HeaderNavItem>
                 ))}
@@ -118,24 +122,34 @@ export const PricingPage = forwardRef<HTMLDivElement, PricingPageProps>(
 
     const defaultFAQs: FAQItem[] = [
       {
+        id: "faq-1",
         question: "Can I change plans later?",
-        answer: "Yes, you can upgrade or downgrade your plan at any time. Changes will be reflected in your next billing cycle.",
+        answer:
+          "Yes, you can upgrade or downgrade your plan at any time. Changes will be reflected in your next billing cycle.",
       },
       {
+        id: "faq-2",
         question: "What payment methods do you accept?",
-        answer: "We accept all major credit cards (Visa, MasterCard, American Express) and PayPal. Enterprise customers can also pay by invoice.",
+        answer:
+          "We accept all major credit cards (Visa, MasterCard, American Express) and PayPal. Enterprise customers can also pay by invoice.",
       },
       {
+        id: "faq-3",
         question: "Is there a free trial?",
-        answer: "Yes, all plans include a 14-day free trial. No credit card required to start.",
+        answer:
+          "Yes, all plans include a 14-day free trial. No credit card required to start.",
       },
       {
+        id: "faq-4",
         question: "Can I cancel anytime?",
-        answer: "Absolutely. You can cancel your subscription at any time with no questions asked. You'll continue to have access until the end of your billing period.",
+        answer:
+          "Absolutely. You can cancel your subscription at any time with no questions asked. You'll continue to have access until the end of your billing period.",
       },
       {
+        id: "faq-5",
         question: "Do you offer refunds?",
-        answer: "We offer a 30-day money-back guarantee. If you're not satisfied, contact us within 30 days of your purchase for a full refund.",
+        answer:
+          "We offer a 30-day money-back guarantee. If you're not satisfied, contact us within 30 days of your purchase for a full refund.",
       },
     ];
 
@@ -143,7 +157,9 @@ export const PricingPage = forwardRef<HTMLDivElement, PricingPageProps>(
       <PageLayout
         ref={ref}
         header={renderHeader()}
-        footer={footer || <Footer variant="simple" copyright="All rights reserved." />}
+        footer={
+          footer || <Footer variant="simple" copyright="All rights reserved." />
+        }
         className={className}
         {...props}
       >
@@ -154,10 +170,8 @@ export const PricingPage = forwardRef<HTMLDivElement, PricingPageProps>(
               title={title}
               subtitle={subtitle}
               plans={plans}
-              billingPeriod={billingPeriod}
-              onBillingPeriodChange={handleBillingPeriodChange}
-              onPlanSelect={onPlanSelect}
-              yearlyDiscount={yearlyDiscount}
+              onSelectPlan={onPlanSelect ? (planId) => onPlanSelect(planId) : undefined}
+              yearlyDiscount={yearlyDiscount ? `Save ${yearlyDiscount}%` : undefined}
             />
           </PageSection>
 
@@ -165,7 +179,9 @@ export const PricingPage = forwardRef<HTMLDivElement, PricingPageProps>(
           {trustedBy && (
             <PageSection>
               <div className="text-center">
-                <p className="text-sm text-muted-foreground mb-6">{trustedBy.label}</p>
+                <p className="text-sm text-muted-foreground mb-6">
+                  {trustedBy.label}
+                </p>
                 <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
                   {trustedBy.logos}
                 </div>
@@ -180,7 +196,9 @@ export const PricingPage = forwardRef<HTMLDivElement, PricingPageProps>(
                 <div className="size-12 rounded-full bg-success/10 flex items-center justify-center mx-auto mb-4">
                   <CheckIcon className="size-6 text-success" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">{guarantee.title}</h3>
+                <h3 className="text-xl font-semibold text-foreground mb-2">
+                  {guarantee.title}
+                </h3>
                 <p className="text-muted-foreground">{guarantee.description}</p>
               </div>
             </PageSection>
@@ -192,8 +210,8 @@ export const PricingPage = forwardRef<HTMLDivElement, PricingPageProps>(
               <CompleteFAQSection
                 title="Frequently asked questions"
                 subtitle="Everything you need to know about our pricing and plans."
-                faqs={faqs.length > 0 ? faqs : defaultFAQs}
-                variant="accordion"
+                items={faqs.length > 0 ? faqs : defaultFAQs}
+                variant="default"
               />
             </PageSection>
           )}
@@ -208,7 +226,8 @@ export const PricingPage = forwardRef<HTMLDivElement, PricingPageProps>(
 PricingPage.displayName = "PricingPage";
 
 // Pricing comparison table component
-export interface PricingComparisonProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface PricingComparisonProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   plans: {
     name: string;
     featured?: boolean;
@@ -222,85 +241,82 @@ export interface PricingComparisonProps extends React.HTMLAttributes<HTMLDivElem
   }[];
 }
 
-export const PricingComparison = forwardRef<HTMLDivElement, PricingComparisonProps>(
-  ({ className, plans, categories, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn("overflow-x-auto", className)}
-        {...props}
-      >
-        <table className="w-full border-collapse">
-          <thead>
-            <tr>
-              <th className="text-left p-4 border-b border-border font-medium text-foreground">
-                Features
+export const PricingComparison = forwardRef<
+  HTMLDivElement,
+  PricingComparisonProps
+>(({ className, plans, categories, ...props }, ref) => {
+  return (
+    <div ref={ref} className={cn("overflow-x-auto", className)} {...props}>
+      <table className="w-full border-collapse">
+        <thead>
+          <tr>
+            <th className="text-left p-4 border-b border-border font-medium text-foreground">
+              Features
+            </th>
+            {plans.map((plan) => (
+              <th
+                key={plan.name}
+                className={cn(
+                  "text-center p-4 border-b font-medium",
+                  plan.featured
+                    ? "bg-primary/5 text-primary border-primary/20"
+                    : "text-foreground border-border",
+                )}
+              >
+                {plan.name}
+                {plan.featured && (
+                  <Badge variant="default" size="sm" className="ml-2">
+                    Popular
+                  </Badge>
+                )}
               </th>
-              {plans.map((plan, index) => (
-                <th
-                  key={index}
-                  className={cn(
-                    "text-center p-4 border-b font-medium",
-                    plan.featured
-                      ? "bg-primary/5 text-primary border-primary/20"
-                      : "text-foreground border-border"
-                  )}
-                >
-                  {plan.name}
-                  {plan.featured && (
-                    <Badge variant="default" size="sm" className="ml-2">
-                      Popular
-                    </Badge>
-                  )}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {categories.map((category, catIndex) => (
-              <>
-                <tr key={`cat-${catIndex}`}>
-                  <td
-                    colSpan={plans.length + 1}
-                    className="p-4 bg-muted/50 font-semibold text-foreground"
-                  >
-                    {category.name}
-                  </td>
-                </tr>
-                {category.features.map((feature, featIndex) => (
-                  <tr key={`feat-${catIndex}-${featIndex}`}>
-                    <td className="p-4 border-b border-border text-foreground">
-                      {feature.name}
-                    </td>
-                    {feature.values.map((value, valIndex) => (
-                      <td
-                        key={valIndex}
-                        className={cn(
-                          "text-center p-4 border-b",
-                          plans[valIndex]?.featured
-                            ? "bg-primary/5 border-primary/20"
-                            : "border-border"
-                        )}
-                      >
-                        {typeof value === "boolean" ? (
-                          value ? (
-                            <CheckIcon className="size-5 text-success mx-auto" />
-                          ) : (
-                            <span className="text-muted-foreground">—</span>
-                          )
-                        ) : (
-                          <span className="text-foreground">{value}</span>
-                        )}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </>
             ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  },
-);
+          </tr>
+        </thead>
+        <tbody>
+          {categories.map((category) => (
+            <React.Fragment key={category.name}>
+              <tr>
+                <td
+                  colSpan={plans.length + 1}
+                  className="p-4 bg-muted/50 font-semibold text-foreground"
+                >
+                  {category.name}
+                </td>
+              </tr>
+              {category.features.map((feature) => (
+                <tr key={`${category.name}-${feature.name}`}>
+                  <td className="p-4 border-b border-border text-foreground">
+                    {feature.name}
+                  </td>
+                  {feature.values.map((value, valIndex) => (
+                    <td
+                      key={plans[valIndex]?.name ?? `value-${valIndex}`}
+                      className={cn(
+                        "text-center p-4 border-b",
+                        plans[valIndex]?.featured
+                          ? "bg-primary/5 border-primary/20"
+                          : "border-border",
+                      )}
+                    >
+                      {typeof value === "boolean" ? (
+                        value ? (
+                          <CheckIcon className="size-5 text-success mx-auto" />
+                        ) : (
+                          <span className="text-muted-foreground">—</span>
+                        )
+                      ) : (
+                        <span className="text-foreground">{value}</span>
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </React.Fragment>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+});
 PricingComparison.displayName = "PricingComparison";

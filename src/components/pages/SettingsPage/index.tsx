@@ -1,38 +1,35 @@
 "use client";
 
-import { forwardRef, useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
-import { Button, Avatar, Switch, Input, Separator } from "@/components/atoms";
-import { FormField, Tabs, Tab, IconButton } from "@/components/molecules";
+import { forwardRef, type ReactNode, useState } from "react";
+import { Avatar, Button, Switch } from "@/components/atoms";
+import { Tab, Tabs } from "@/components/molecules";
 import {
-  PageLayout,
-  PageContent,
-  PageSection,
+  Card,
+  CardBody,
+  CardHeader,
+  Form,
+  FormActions,
+  FormBody,
   Header,
   HeaderLogo,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Form,
-  FormBody,
-  FormSection,
-  FormRow,
-  FormActions,
-  SettingsSidebar,
+  PageContent,
+  PageLayout,
+  PageSection,
   type SettingsNavSection,
+  SettingsSidebar,
 } from "@/components/organisms";
 import {
-  UserIcon,
-  LockIcon,
   BellIcon,
-  CreditCardIcon,
-  ShieldIcon,
-  PaletteIcon,
-  GlobeIcon,
-  SettingsIcon,
   CheckIcon,
+  CreditCardIcon,
+  GlobeIcon,
+  LockIcon,
+  PaletteIcon,
+  SettingsIcon,
+  ShieldIcon,
+  UserIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Settings page variants
 type SettingsVariant = "default" | "tabbed" | "sidebar";
@@ -47,7 +44,8 @@ export interface SettingsSection {
 }
 
 // SettingsPage props
-export interface SettingsPageProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SettingsPageProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   variant?: SettingsVariant;
   sections?: SettingsSection[];
   activeSection?: string;
@@ -151,7 +149,9 @@ export const SettingsPage = forwardRef<HTMLDivElement, SettingsPageProps>(
     },
     ref,
   ) => {
-    const [internalActiveSection, setInternalActiveSection] = useState(sections[0]?.id || "profile");
+    const [internalActiveSection, setInternalActiveSection] = useState(
+      sections[0]?.id || "profile",
+    );
     const activeSection = controlledActiveSection ?? internalActiveSection;
 
     const handleSectionChange = (sectionId: string) => {
@@ -162,15 +162,18 @@ export const SettingsPage = forwardRef<HTMLDivElement, SettingsPageProps>(
     const currentSection = sections.find((s) => s.id === activeSection);
 
     const renderSidebarNav = (): SettingsNavSection[] => {
-      return [{
-        items: sections.map((section) => ({
-          id: section.id,
-          label: section.label,
-          icon: section.icon,
-          active: section.id === activeSection,
-          onClick: () => handleSectionChange(section.id),
-        })),
-      }];
+      return [
+        {
+          id: "settings-nav",
+          items: sections.map((section) => ({
+            id: section.id,
+            label: section.label,
+            icon: section.icon,
+            active: section.id === activeSection,
+            onClick: () => handleSectionChange(section.id),
+          })),
+        },
+      ];
     };
 
     const renderContent = () => {
@@ -204,9 +207,7 @@ export const SettingsPage = forwardRef<HTMLDivElement, SettingsPageProps>(
 
           {/* Section content */}
           <Card variant="bordered">
-            <CardBody>
-              {currentSection?.content || children}
-            </CardBody>
+            <CardBody>{currentSection?.content || children}</CardBody>
           </Card>
         </div>
       );
@@ -233,7 +234,10 @@ export const SettingsPage = forwardRef<HTMLDivElement, SettingsPageProps>(
                 <Avatar
                   src={user.avatar}
                   alt={user.name}
-                  initials={user.name.split(" ").map(n => n[0]).join("")}
+                  initials={user.name
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join("")}
                   size="sm"
                 />
               </div>
@@ -253,11 +257,6 @@ export const SettingsPage = forwardRef<HTMLDivElement, SettingsPageProps>(
           sidebar={
             <SettingsSidebar
               sections={renderSidebarNav()}
-              user={user ? {
-                name: user.name,
-                email: user.email,
-                avatar: user.avatar,
-              } : undefined}
             />
           }
           className={className}
@@ -300,9 +299,7 @@ export const SettingsPage = forwardRef<HTMLDivElement, SettingsPageProps>(
                 ))}
               </Tabs>
             </PageSection>
-            <PageSection>
-              {renderContent()}
-            </PageSection>
+            <PageSection>{renderContent()}</PageSection>
           </PageContent>
         </PageLayout>
       );
@@ -329,9 +326,7 @@ export const SettingsPage = forwardRef<HTMLDivElement, SettingsPageProps>(
                   subtitle={section.description}
                   bordered
                 />
-                <CardBody>
-                  {section.content}
-                </CardBody>
+                <CardBody>{section.content}</CardBody>
               </Card>
             </PageSection>
           ))}
@@ -344,7 +339,8 @@ export const SettingsPage = forwardRef<HTMLDivElement, SettingsPageProps>(
 SettingsPage.displayName = "SettingsPage";
 
 // Settings form components
-export interface SettingsFormProps extends React.HTMLAttributes<HTMLFormElement> {
+export interface SettingsFormProps
+  extends Omit<React.HTMLAttributes<HTMLFormElement>, "onSubmit"> {
   title?: string;
   description?: string;
   onSubmit?: (data: Record<string, unknown>) => void;
@@ -353,7 +349,19 @@ export interface SettingsFormProps extends React.HTMLAttributes<HTMLFormElement>
 }
 
 export const SettingsForm = forwardRef<HTMLFormElement, SettingsFormProps>(
-  ({ className, title, description, onSubmit, loading, saveText = "Save changes", children, ...props }, ref) => {
+  (
+    {
+      className,
+      title,
+      description,
+      onSubmit,
+      loading,
+      saveText = "Save changes",
+      children,
+      ...props
+    },
+    ref,
+  ) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const formData = new FormData(e.currentTarget);
@@ -368,8 +376,14 @@ export const SettingsForm = forwardRef<HTMLFormElement, SettingsFormProps>(
       <Form ref={ref} onSubmit={handleSubmit} className={className} {...props}>
         {(title || description) && (
           <div className="mb-6">
-            {title && <h3 className="text-lg font-medium text-foreground">{title}</h3>}
-            {description && <p className="mt-1 text-sm text-muted-foreground">{description}</p>}
+            {title && (
+              <h3 className="text-lg font-medium text-foreground">{title}</h3>
+            )}
+            {description && (
+              <p className="mt-1 text-sm text-muted-foreground">
+                {description}
+              </p>
+            )}
           </div>
         )}
         <FormBody>{children}</FormBody>
@@ -385,7 +399,8 @@ export const SettingsForm = forwardRef<HTMLFormElement, SettingsFormProps>(
 SettingsForm.displayName = "SettingsForm";
 
 // Settings toggle item
-export interface SettingsToggleProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SettingsToggleProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   label: string;
   description?: string;
   checked?: boolean;
@@ -394,14 +409,22 @@ export interface SettingsToggleProps extends React.HTMLAttributes<HTMLDivElement
 }
 
 export const SettingsToggle = forwardRef<HTMLDivElement, SettingsToggleProps>(
-  ({ className, label, description, checked, onCheckedChange, disabled, ...props }, ref) => {
+  (
+    {
+      className,
+      label,
+      description,
+      checked,
+      onCheckedChange,
+      disabled,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <div
         ref={ref}
-        className={cn(
-          "flex items-center justify-between py-3",
-          className
-        )}
+        className={cn("flex items-center justify-between py-3", className)}
         {...props}
       >
         <div className="space-y-0.5">
@@ -422,33 +445,35 @@ export const SettingsToggle = forwardRef<HTMLDivElement, SettingsToggleProps>(
 SettingsToggle.displayName = "SettingsToggle";
 
 // Settings page skeleton
-export interface SettingsPageSkeletonProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface SettingsPageSkeletonProps
+  extends React.HTMLAttributes<HTMLDivElement> {}
 
-export const SettingsPageSkeleton = forwardRef<HTMLDivElement, SettingsPageSkeletonProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn("animate-pulse space-y-6", className)}
-        {...props}
-      >
-        <div className="space-y-2">
-          <div className="h-6 w-32 bg-muted rounded" />
-          <div className="h-4 w-64 bg-muted rounded" />
-        </div>
-        <div className="space-y-4">
-          {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="flex items-center justify-between py-3">
-              <div className="space-y-2">
-                <div className="h-4 w-24 bg-muted rounded" />
-                <div className="h-3 w-48 bg-muted rounded" />
-              </div>
-              <div className="h-6 w-12 bg-muted rounded-full" />
-            </div>
-          ))}
-        </div>
+export const SettingsPageSkeleton = forwardRef<
+  HTMLDivElement,
+  SettingsPageSkeletonProps
+>(({ className, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn("animate-pulse space-y-6", className)}
+      {...props}
+    >
+      <div className="space-y-2">
+        <div className="h-6 w-32 bg-muted rounded" />
+        <div className="h-4 w-64 bg-muted rounded" />
       </div>
-    );
-  },
-);
+      <div className="space-y-4">
+        {[1, 2, 3, 4].map((i) => (
+          <div key={i} className="flex items-center justify-between py-3">
+            <div className="space-y-2">
+              <div className="h-4 w-24 bg-muted rounded" />
+              <div className="h-3 w-48 bg-muted rounded" />
+            </div>
+            <div className="h-6 w-12 bg-muted rounded-full" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+});
 SettingsPageSkeleton.displayName = "SettingsPageSkeleton";

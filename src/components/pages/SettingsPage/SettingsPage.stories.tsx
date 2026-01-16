@@ -1,15 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { SettingsPage, SettingsPageSkeleton, SettingsForm, SettingsToggle } from ".";
 import { FormField } from "@/components/molecules";
 import {
-  GlobeIcon,
-  UserIcon,
-  LockIcon,
   BellIcon,
   CreditCardIcon,
-  ShieldIcon,
+  GlobeIcon,
+  LockIcon,
   PaletteIcon,
+  ShieldIcon,
+  UserIcon,
 } from "@/lib/icons";
+import {
+  SettingsForm,
+  SettingsPage,
+  SettingsPageSkeleton,
+  SettingsToggle,
+} from ".";
 
 const meta: Meta<typeof SettingsPage> = {
   title: "Pages/SettingsPage",
@@ -39,7 +44,8 @@ type Story = StoryObj<typeof SettingsPage>;
 const sampleUser = {
   name: "John Doe",
   email: "john@example.com",
-  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80",
+  avatar:
+    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80",
 };
 
 // Logo component
@@ -88,7 +94,9 @@ const NotificationSettings = () => (
       label="Email notifications"
       description="Receive email notifications for important updates"
       checked={true}
-      onCheckedChange={(checked) => console.log("Email notifications:", checked)}
+      onCheckedChange={(checked) =>
+        console.log("Email notifications:", checked)
+      }
     />
     <SettingsToggle
       label="Push notifications"
@@ -138,7 +146,9 @@ const SecuritySettings = () => (
     </SettingsForm>
 
     <div className="pt-6 border-t border-border">
-      <h3 className="text-lg font-medium text-foreground mb-4">Two-Factor Authentication</h3>
+      <h3 className="text-lg font-medium text-foreground mb-4">
+        Two-Factor Authentication
+      </h3>
       <SettingsToggle
         label="Enable 2FA"
         description="Add an extra layer of security to your account"

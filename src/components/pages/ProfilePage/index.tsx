@@ -1,35 +1,35 @@
 "use client";
 
-import { forwardRef, useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
-import { Button, Avatar, Badge, Link } from "@/components/atoms";
-import { Tabs, Tab, IconButton } from "@/components/molecules";
+import { forwardRef, type ReactNode, useState } from "react";
+import { Button, Link } from "@/components/atoms";
+import { IconButton, Tab, Tabs } from "@/components/molecules";
 import {
-  PageLayout,
-  PageContent,
-  PageSection,
-  Header,
-  HeaderLogo,
-  UserProfileCard,
-  DescriptionList,
-  DescriptionListItem,
   ActivityFeed,
   Card,
-  CardHeader,
   CardBody,
+  CardHeader,
+  DescriptionList,
+  DescriptionListItem,
+  Header,
+  HeaderLogo,
+  PageContent,
+  PageLayout,
+  PageSection,
 } from "@/components/organisms";
+import { Avatar, Badge } from "@/components/atoms";
 import {
-  SettingsIcon,
-  EditIcon,
-  MailIcon,
-  PhoneIcon,
-  MapPinIcon,
   CalendarIcon,
-  LinkIcon,
-  TwitterIcon,
-  LinkedInIcon,
+  EditIcon,
   GitHubIcon,
+  LinkedInIcon,
+  LinkIcon,
+  MailIcon,
+  MapPinIcon,
+  PhoneIcon,
+  SettingsIcon,
+  TwitterIcon,
 } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 // Profile page variants
 type ProfileVariant = "default" | "minimal" | "detailed";
@@ -123,25 +123,76 @@ export const ProfilePage = forwardRef<HTMLDivElement, ProfilePageProps>(
     const [activeTab, setActiveTab] = useState(tabs[0]?.id || "overview");
 
     const renderProfileCard = () => (
-      <UserProfileCard
-        user={{
-          name: user.name,
-          username: user.username,
-          avatarSrc: user.avatar,
-          coverSrc: user.coverImage,
-          bio: user.bio,
-          role: user.role,
-          location: user.location,
-          verified: user.verified,
-        }}
-        stats={user.stats}
-        size={variant === "minimal" ? "sm" : "md"}
-        showCover={variant !== "minimal"}
-        actions={
-          <div className="flex gap-2">
+      <Card variant="bordered" className="overflow-hidden">
+        {/* Cover Image */}
+        {variant !== "minimal" && (
+          <div
+            className="relative w-full h-32 bg-gradient-to-r from-primary/20 to-primary/10"
+          >
+            {user.coverImage && (
+              <img
+                src={user.coverImage}
+                alt=""
+                className="absolute inset-0 size-full object-cover"
+              />
+            )}
+          </div>
+        )}
+
+        {/* Avatar */}
+        <div className={cn("px-4", variant !== "minimal" ? "" : "pt-4")}>
+          <div
+            className={cn(
+              variant !== "minimal" ? "-mt-12" : "",
+              "mx-auto w-fit"
+            )}
+          >
+            <Avatar
+              src={user.avatar}
+              fallback={user.name.charAt(0)}
+              size="xl"
+              className="border-4 border-background"
+            />
+          </div>
+        </div>
+
+        {/* Content */}
+        <CardBody className="text-center">
+          <div className="flex items-center justify-center gap-x-2">
+            <h3 className="text-lg font-semibold text-foreground">
+              {user.name}
+            </h3>
+            {user.verified && (
+              <Badge variant="default" size="sm">Verified</Badge>
+            )}
+          </div>
+
+          {user.username && (
+            <p className="text-sm text-muted-foreground">@{user.username}</p>
+          )}
+
+          {user.role && (
+            <p className="text-sm text-muted-foreground">{user.role}</p>
+          )}
+
+          {user.bio && (
+            <p className="mt-2 text-sm text-muted-foreground">{user.bio}</p>
+          )}
+
+          {user.location && (
+            <p className="mt-1 text-xs text-muted-foreground">{user.location}</p>
+          )}
+
+          {/* Actions */}
+          <div className="mt-4 flex justify-center gap-2">
             {isOwnProfile ? (
               <>
-                <Button variant="outline" size="sm" onClick={onEdit} leftIcon={<EditIcon className="size-4" />}>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={onEdit}
+                  leftIcon={<EditIcon className="size-4" />}
+                >
                   Edit Profile
                 </Button>
                 <IconButton
@@ -163,8 +214,34 @@ export const ProfilePage = forwardRef<HTMLDivElement, ProfilePageProps>(
               </>
             )}
           </div>
-        }
-      />
+        </CardBody>
+
+        {/* Stats */}
+        {user.stats && user.stats.length > 0 && (
+          <div
+            className={cn(
+              "grid divide-x divide-border border-t border-border",
+              user.stats.length === 2 && "grid-cols-2",
+              user.stats.length === 3 && "grid-cols-3",
+              user.stats.length >= 4 && "grid-cols-4"
+            )}
+          >
+            {user.stats.map((stat, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center justify-center py-4 text-center"
+              >
+                <span className="text-xl font-semibold text-foreground">
+                  {stat.value}
+                </span>
+                <span className="text-sm text-muted-foreground">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+      </Card>
     );
 
     const renderAboutSection = () => (
@@ -269,12 +346,17 @@ export const ProfilePage = forwardRef<HTMLDivElement, ProfilePageProps>(
           <ActivityFeed
             activities={activities.map((a) => ({
               id: a.id,
-              type: a.type as "comment" | "update" | "create" | "delete" | "assign" | "complete" | "other",
-              description: a.description,
+              type: a.type as
+                | "comment"
+                | "update"
+                | "create"
+                | "delete"
+                | "assign"
+                | "complete",
+              user: { name: "User" },
+              action: a.description,
               timestamp: a.timestamp,
-              icon: a.icon,
             }))}
-            variant="compact"
           />
         </CardBody>
       </Card>
@@ -295,28 +377,30 @@ export const ProfilePage = forwardRef<HTMLDivElement, ProfilePageProps>(
                 </Tab>
               ))}
             </Tabs>
-            <div>
-              {tabs.find((t) => t.id === activeTab)?.content}
-            </div>
+            <div>{tabs.find((t) => t.id === activeTab)?.content}</div>
           </div>
         );
       }
 
       // Default content layout
       return (
-        <div className={cn(
-          "grid gap-6",
-          layout === "sidebar" ? "lg:grid-cols-3" : "lg:grid-cols-1"
-        )}>
+        <div
+          className={cn(
+            "grid gap-6",
+            layout === "sidebar" ? "lg:grid-cols-3" : "lg:grid-cols-1",
+          )}
+        >
           {layout === "sidebar" && (
             <div className="lg:col-span-1 space-y-6">
               {renderAboutSection()}
             </div>
           )}
-          <div className={cn(
-            "space-y-6",
-            layout === "sidebar" ? "lg:col-span-2" : ""
-          )}>
+          <div
+            className={cn(
+              "space-y-6",
+              layout === "sidebar" ? "lg:col-span-2" : "",
+            )}
+          >
             {layout !== "sidebar" && renderAboutSection()}
             {activities.length > 0 && renderActivitySection()}
             {children}
@@ -361,12 +445,8 @@ export const ProfilePage = forwardRef<HTMLDivElement, ProfilePageProps>(
         {...props}
       >
         <PageContent maxWidth="4xl" padding="md">
-          <PageSection>
-            {renderProfileCard()}
-          </PageSection>
-          <PageSection>
-            {renderContent()}
-          </PageSection>
+          <PageSection>{renderProfileCard()}</PageSection>
+          <PageSection>{renderContent()}</PageSection>
         </PageContent>
       </PageLayout>
     );
@@ -375,33 +455,35 @@ export const ProfilePage = forwardRef<HTMLDivElement, ProfilePageProps>(
 ProfilePage.displayName = "ProfilePage";
 
 // ProfilePageSkeleton for loading state
-export interface ProfilePageSkeletonProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface ProfilePageSkeletonProps
+  extends React.HTMLAttributes<HTMLDivElement> {}
 
-export const ProfilePageSkeleton = forwardRef<HTMLDivElement, ProfilePageSkeletonProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn("animate-pulse space-y-6", className)}
-        {...props}
-      >
-        {/* Cover skeleton */}
-        <div className="h-48 bg-muted rounded-lg" />
-        {/* Avatar and name skeleton */}
-        <div className="flex items-center gap-4 px-4 -mt-12">
-          <div className="size-24 rounded-full bg-muted border-4 border-background" />
-          <div className="space-y-2">
-            <div className="h-6 w-32 bg-muted rounded" />
-            <div className="h-4 w-24 bg-muted rounded" />
-          </div>
-        </div>
-        {/* Content skeleton */}
-        <div className="grid gap-6 lg:grid-cols-3">
-          <div className="h-64 bg-muted rounded-lg" />
-          <div className="lg:col-span-2 h-96 bg-muted rounded-lg" />
+export const ProfilePageSkeleton = forwardRef<
+  HTMLDivElement,
+  ProfilePageSkeletonProps
+>(({ className, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn("animate-pulse space-y-6", className)}
+      {...props}
+    >
+      {/* Cover skeleton */}
+      <div className="h-48 bg-muted rounded-lg" />
+      {/* Avatar and name skeleton */}
+      <div className="flex items-center gap-4 px-4 -mt-12">
+        <div className="size-24 rounded-full bg-muted border-4 border-background" />
+        <div className="space-y-2">
+          <div className="h-6 w-32 bg-muted rounded" />
+          <div className="h-4 w-24 bg-muted rounded" />
         </div>
       </div>
-    );
-  },
-);
+      {/* Content skeleton */}
+      <div className="grid gap-6 lg:grid-cols-3">
+        <div className="h-64 bg-muted rounded-lg" />
+        <div className="lg:col-span-2 h-96 bg-muted rounded-lg" />
+      </div>
+    </div>
+  );
+});
 ProfilePageSkeleton.displayName = "ProfilePageSkeleton";

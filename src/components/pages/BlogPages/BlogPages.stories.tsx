@@ -1,6 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import {
+  FacebookIcon,
+  GlobeIcon,
+  LinkedInIcon,
+  TwitterIcon,
+} from "@/lib/icons";
 import { BlogListPage, BlogPostPage } from ".";
-import { GlobeIcon, TwitterIcon, LinkedInIcon, FacebookIcon } from "@/lib/icons";
 
 // BlogListPage meta
 const blogListMeta: Meta<typeof BlogListPage> = {
@@ -49,13 +54,16 @@ const samplePosts = [
     id: "1",
     title: "Getting Started with React 19: What's New and Exciting",
     slug: "getting-started-react-19",
-    excerpt: "Explore the latest features in React 19 including the new compiler, Actions, and more.",
+    excerpt:
+      "Explore the latest features in React 19 including the new compiler, Actions, and more.",
     content: "",
-    coverImage: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=800&q=80",
+    coverImage:
+      "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=800&q=80",
     author: {
       id: "1",
       name: "John Doe",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80",
+      avatar:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80",
       bio: "Senior Developer",
     },
     category: { id: "technology", name: "Technology", slug: "technology" },
@@ -68,13 +76,16 @@ const samplePosts = [
     id: "2",
     title: "Designing for Accessibility: A Comprehensive Guide",
     slug: "designing-accessibility-guide",
-    excerpt: "Learn how to create inclusive designs that work for everyone, regardless of ability.",
+    excerpt:
+      "Learn how to create inclusive designs that work for everyone, regardless of ability.",
     content: "",
-    coverImage: "https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=800&q=80",
+    coverImage:
+      "https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=800&q=80",
     author: {
       id: "2",
       name: "Jane Smith",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80",
+      avatar:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80",
       bio: "UX Designer",
     },
     category: { id: "design", name: "Design", slug: "design" },
@@ -86,13 +97,16 @@ const samplePosts = [
     id: "3",
     title: "The Future of AI in Business: Trends to Watch in 2025",
     slug: "ai-business-trends-2025",
-    excerpt: "Discover how artificial intelligence is reshaping industries and what to expect next.",
+    excerpt:
+      "Discover how artificial intelligence is reshaping industries and what to expect next.",
     content: "",
-    coverImage: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80",
+    coverImage:
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80",
     author: {
       id: "3",
       name: "Mike Johnson",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
       bio: "Tech Analyst",
     },
     category: { id: "business", name: "Business", slug: "business" },
@@ -104,13 +118,16 @@ const samplePosts = [
     id: "4",
     title: "Building a Strong Brand Identity from Scratch",
     slug: "building-brand-identity",
-    excerpt: "Step-by-step guide to creating a memorable brand that resonates with your audience.",
+    excerpt:
+      "Step-by-step guide to creating a memorable brand that resonates with your audience.",
     content: "",
-    coverImage: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
+    coverImage:
+      "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
     author: {
       id: "4",
       name: "Sarah Williams",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80",
+      avatar:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80",
       bio: "Brand Strategist",
     },
     category: { id: "marketing", name: "Marketing", slug: "marketing" },
@@ -122,13 +139,16 @@ const samplePosts = [
     id: "5",
     title: "Modern CSS Techniques You Should Know",
     slug: "modern-css-techniques",
-    excerpt: "Level up your CSS skills with these modern techniques and best practices.",
+    excerpt:
+      "Level up your CSS skills with these modern techniques and best practices.",
     content: "",
-    coverImage: "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?auto=format&fit=crop&w=800&q=80",
+    coverImage:
+      "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?auto=format&fit=crop&w=800&q=80",
     author: {
       id: "1",
       name: "John Doe",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80",
+      avatar:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80",
       bio: "Senior Developer",
     },
     category: { id: "technology", name: "Technology", slug: "technology" },
@@ -140,13 +160,16 @@ const samplePosts = [
     id: "6",
     title: "Content Marketing Strategies That Actually Work",
     slug: "content-marketing-strategies",
-    excerpt: "Proven strategies to create content that drives engagement and conversions.",
+    excerpt:
+      "Proven strategies to create content that drives engagement and conversions.",
     content: "",
-    coverImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+    coverImage:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
     author: {
       id: "4",
       name: "Sarah Williams",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80",
+      avatar:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80",
       bio: "Brand Strategist",
     },
     category: { id: "marketing", name: "Marketing", slug: "marketing" },
@@ -228,7 +251,8 @@ export const BlogPost: StoryObj<typeof BlogPostPage> = {
       id: "1",
       title: "Getting Started with React 19: What's New and Exciting",
       slug: "getting-started-react-19",
-      excerpt: "Explore the latest features in React 19 including the new compiler, Actions, and more.",
+      excerpt:
+        "Explore the latest features in React 19 including the new compiler, Actions, and more.",
       content: `
         <p>React 19 is finally here, bringing a host of exciting new features that will transform how we build web applications. In this comprehensive guide, we'll explore everything you need to know about the latest version of React.</p>
 
@@ -247,11 +271,13 @@ export const BlogPost: StoryObj<typeof BlogPostPage> = {
         <h2 id="conclusion">Conclusion</h2>
         <p>React 19 represents a significant step forward for the library. The new features make it easier to build performant, user-friendly applications while reducing boilerplate code.</p>
       `,
-      coverImage: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=1200&q=80",
+      coverImage:
+        "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=1200&q=80",
       author: {
         id: "1",
         name: "John Doe",
-        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80",
+        avatar:
+          "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80",
         bio: "Senior Software Engineer with 10+ years of experience in web development. Passionate about React and modern JavaScript.",
       },
       category: { id: "technology", name: "Technology", slug: "technology" },
@@ -270,9 +296,21 @@ export const BlogPost: StoryObj<typeof BlogPostPage> = {
     showTableOfContents: true,
     showShareButtons: true,
     shareButtons: [
-      { icon: <TwitterIcon className="size-4" />, label: "Twitter", onClick: () => console.log("Share Twitter") },
-      { icon: <LinkedInIcon className="size-4" />, label: "LinkedIn", onClick: () => console.log("Share LinkedIn") },
-      { icon: <FacebookIcon className="size-4" />, label: "Facebook", onClick: () => console.log("Share Facebook") },
+      {
+        icon: <TwitterIcon className="size-4" />,
+        label: "Twitter",
+        onClick: () => console.log("Share Twitter"),
+      },
+      {
+        icon: <LinkedInIcon className="size-4" />,
+        label: "LinkedIn",
+        onClick: () => console.log("Share LinkedIn"),
+      },
+      {
+        icon: <FacebookIcon className="size-4" />,
+        label: "Facebook",
+        onClick: () => console.log("Share Facebook"),
+      },
     ],
     logo: <Logo />,
     navigation: [
@@ -305,14 +343,22 @@ export const BlogPostWithComments: StoryObj<typeof BlogPostPage> = {
     comments: [
       {
         id: "1",
-        author: { name: "Alice", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" },
+        author: {
+          name: "Alice",
+          avatar:
+            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80",
+        },
         content: "Great article! Very informative.",
         createdAt: "2 hours ago",
         likes: 5,
       },
       {
         id: "2",
-        author: { name: "Bob", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" },
+        author: {
+          name: "Bob",
+          avatar:
+            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
+        },
         content: "Thanks for sharing this. Really helpful!",
         createdAt: "1 day ago",
         likes: 3,
