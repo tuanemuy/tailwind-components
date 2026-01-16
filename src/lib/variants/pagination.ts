@@ -1,20 +1,17 @@
 import { cva } from "class-variance-authority";
 
-export const paginationVariants = cva(
-  "flex items-center",
-  {
-    variants: {
-      size: {
-        sm: "gap-x-1",
-        md: "gap-x-2",
-        lg: "gap-x-3",
-      },
+export const paginationVariants = cva("flex items-center", {
+  variants: {
+    size: {
+      sm: "gap-x-1",
+      md: "gap-x-2",
+      lg: "gap-x-3",
     },
-    defaultVariants: {
-      size: "md",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});
 
 export const paginationItemVariants = cva(
   "inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
@@ -27,9 +24,7 @@ export const paginationItemVariants = cva(
         outline: [
           "border border-border text-muted-foreground hover:bg-accent hover:text-foreground",
         ],
-        ghost: [
-          "text-muted-foreground hover:bg-accent hover:text-foreground",
-        ],
+        ghost: ["text-muted-foreground hover:bg-accent hover:text-foreground"],
       },
       size: {
         sm: "h-8 w-8 text-xs",
@@ -46,5 +41,5 @@ export const paginationItemVariants = cva(
       size: "md",
       active: false,
     },
-  }
+  },
 );

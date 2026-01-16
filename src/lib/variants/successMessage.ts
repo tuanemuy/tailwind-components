@@ -19,7 +19,7 @@ export const successMessageVariants = cva(
       variant: "default",
       size: "md",
     },
-  }
+  },
 );
 
 export const successMessageIconVariants = cva(
@@ -42,7 +42,7 @@ export const successMessageIconVariants = cva(
       variant: "success",
       size: "md",
     },
-  }
+  },
 );
 
 export const successMessageTitleVariants = cva(
@@ -58,7 +58,7 @@ export const successMessageTitleVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
 export const successMessageDescriptionVariants = cva(
@@ -74,5 +74,5 @@ export const successMessageDescriptionVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );

@@ -13,7 +13,7 @@ export const menuVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
 export const menuItemVariants = cva(
@@ -27,7 +27,8 @@ export const menuItemVariants = cva(
       },
       variant: {
         default: "text-foreground hover:bg-accent focus:bg-accent",
-        destructive: "text-destructive hover:bg-destructive/10 focus:bg-destructive/10",
+        destructive:
+          "text-destructive hover:bg-destructive/10 focus:bg-destructive/10",
       },
       disabled: {
         true: "pointer-events-none opacity-50",
@@ -39,21 +40,18 @@ export const menuItemVariants = cva(
       variant: "default",
       disabled: false,
     },
-  }
+  },
 );
 
-export const menuLabelVariants = cva(
-  "font-medium text-muted-foreground",
-  {
-    variants: {
-      size: {
-        sm: "px-2 py-1 text-xs",
-        md: "px-3 py-1.5 text-xs",
-        lg: "px-4 py-2 text-sm",
-      },
+export const menuLabelVariants = cva("font-medium text-muted-foreground", {
+  variants: {
+    size: {
+      sm: "px-2 py-1 text-xs",
+      md: "px-3 py-1.5 text-xs",
+      lg: "px-4 py-2 text-sm",
     },
-    defaultVariants: {
-      size: "md",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});

@@ -5,12 +5,9 @@ export const kbdVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "bg-muted text-muted-foreground border-border",
-        outline:
-          "bg-transparent text-foreground border-border",
-        filled:
-          "bg-secondary text-secondary-foreground border-secondary",
+        default: "bg-muted text-muted-foreground border-border",
+        outline: "bg-transparent text-foreground border-border",
+        filled: "bg-secondary text-secondary-foreground border-secondary",
       },
       size: {
         xs: "px-1 py-0.5 text-[10px] min-w-4",

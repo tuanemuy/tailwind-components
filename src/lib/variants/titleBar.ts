@@ -19,38 +19,32 @@ export const titleBarVariants = cva(
       variant: "default",
       size: "md",
     },
-  }
+  },
 );
 
-export const titleBarTitleVariants = cva(
-  "font-semibold text-foreground",
-  {
-    variants: {
-      size: {
-        sm: "text-base",
-        md: "text-lg",
-        lg: "text-2xl",
-        xl: "text-3xl",
-      },
+export const titleBarTitleVariants = cva("font-semibold text-foreground", {
+  variants: {
+    size: {
+      sm: "text-base",
+      md: "text-lg",
+      lg: "text-2xl",
+      xl: "text-3xl",
     },
-    defaultVariants: {
-      size: "md",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});
 
-export const titleBarSubtitleVariants = cva(
-  "text-muted-foreground",
-  {
-    variants: {
-      size: {
-        sm: "text-xs mt-0.5",
-        md: "text-sm mt-1",
-        lg: "text-base mt-1",
-      },
+export const titleBarSubtitleVariants = cva("text-muted-foreground", {
+  variants: {
+    size: {
+      sm: "text-xs mt-0.5",
+      md: "text-sm mt-1",
+      lg: "text-base mt-1",
     },
-    defaultVariants: {
-      size: "md",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});

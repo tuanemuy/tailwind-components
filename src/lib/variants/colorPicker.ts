@@ -13,24 +13,21 @@ export const colorPickerTriggerVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
-export const colorPickerSwatchVariants = cva(
-  "rounded",
-  {
-    variants: {
-      size: {
-        sm: "h-6 w-6",
-        md: "h-8 w-8",
-        lg: "h-10 w-10",
-      },
+export const colorPickerSwatchVariants = cva("rounded", {
+  variants: {
+    size: {
+      sm: "h-6 w-6",
+      md: "h-8 w-8",
+      lg: "h-10 w-10",
     },
-    defaultVariants: {
-      size: "md",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});
 
 export const colorPickerPresetVariants = cva(
   "rounded transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-ring",
@@ -50,15 +47,23 @@ export const colorPickerPresetVariants = cva(
       size: "md",
       selected: false,
     },
-  }
+  },
 );
 
 export const colorPickerDropdownVariants = cva(
-  "absolute top-full z-50 mt-2 rounded-lg border border-border bg-card p-3 shadow-lg",
+  "absolute top-full left-0 z-50 mt-2 rounded-lg border border-border bg-card p-3 shadow-lg",
   {
-    variants: {},
-    defaultVariants: {},
-  }
+    variants: {
+      size: {
+        sm: "min-w-[156px]",
+        md: "min-w-[180px]",
+        lg: "min-w-[204px]",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+    },
+  },
 );
 
 export const colorPickerNativeVariants = cva(
@@ -66,5 +71,5 @@ export const colorPickerNativeVariants = cva(
   {
     variants: {},
     defaultVariants: {},
-  }
+  },
 );

@@ -1,34 +1,28 @@
 import { cva } from "class-variance-authority";
 
-export const stepperVariants = cva(
-  "flex",
-  {
-    variants: {
-      orientation: {
-        horizontal: "items-start",
-        vertical: "flex-col",
-      },
+export const stepperVariants = cva("flex", {
+  variants: {
+    orientation: {
+      horizontal: "items-start",
+      vertical: "flex-col",
     },
-    defaultVariants: {
-      orientation: "horizontal",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    orientation: "horizontal",
+  },
+});
 
-export const stepVariants = cva(
-  "flex items-center",
-  {
-    variants: {
-      orientation: {
-        horizontal: "flex-1",
-        vertical: "gap-x-3",
-      },
+export const stepVariants = cva("flex items-center", {
+  variants: {
+    orientation: {
+      horizontal: "flex-1",
+      vertical: "gap-x-3",
     },
-    defaultVariants: {
-      orientation: "horizontal",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    orientation: "horizontal",
+  },
+});
 
 export const stepIndicatorVariants = cva(
   "flex items-center justify-center rounded-full font-medium transition-colors",
@@ -50,25 +44,22 @@ export const stepIndicatorVariants = cva(
       size: "md",
       status: "upcoming",
     },
-  }
+  },
 );
 
-export const stepConnectorVariants = cva(
-  "transition-colors",
-  {
-    variants: {
-      orientation: {
-        horizontal: "mx-2 h-0.5 flex-1",
-        vertical: "ms-4 mt-2 w-0.5 min-h-8",
-      },
-      completed: {
-        true: "bg-primary",
-        false: "bg-border",
-      },
+export const stepConnectorVariants = cva("transition-colors", {
+  variants: {
+    orientation: {
+      horizontal: "mx-2 h-0.5 flex-1",
+      vertical: "ms-4 mt-2 w-0.5 min-h-8",
     },
-    defaultVariants: {
-      orientation: "horizontal",
-      completed: false,
+    completed: {
+      true: "bg-primary",
+      false: "bg-border",
     },
-  }
-);
+  },
+  defaultVariants: {
+    orientation: "horizontal",
+    completed: false,
+  },
+});

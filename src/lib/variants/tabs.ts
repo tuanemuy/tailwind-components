@@ -1,23 +1,20 @@
 import { cva } from "class-variance-authority";
 
-export const tabsListVariants = cva(
-  "flex",
-  {
-    variants: {
-      variant: {
-        default: "border-b border-border",
-        bordered: "gap-x-1 rounded-lg border border-border p-1",
-        segment: "gap-x-1 rounded-lg bg-muted p-1",
-        pills: "gap-x-2",
-        underline: "border-b border-border",
-        vertical: "flex-col gap-y-1 border-e border-border pe-2",
-      },
+export const tabsListVariants = cva("flex", {
+  variants: {
+    variant: {
+      default: "border-b border-border",
+      bordered: "gap-x-1 rounded-lg border border-border p-1",
+      segment: "gap-x-1 rounded-lg bg-muted p-1",
+      pills: "gap-x-2",
+      underline: "border-b border-border",
+      vertical: "flex-col gap-y-1 border-e border-border pe-2",
     },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
 
 export const tabsTriggerVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
@@ -65,7 +62,7 @@ export const tabsTriggerVariants = cva(
       variant: "default",
       size: "md",
     },
-  }
+  },
 );
 
 export const tabsContentVariants = cva(
@@ -84,5 +81,5 @@ export const tabsContentVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );

@@ -1,36 +1,30 @@
 import { cva } from "class-variance-authority";
 
-export const accordionVariants = cva(
-  "w-full divide-y divide-border",
-  {
-    variants: {
-      variant: {
-        default: "",
-        bordered: "rounded-lg border border-border",
-        separated: "space-y-2 divide-y-0",
-      },
+export const accordionVariants = cva("w-full divide-y divide-border", {
+  variants: {
+    variant: {
+      default: "",
+      bordered: "rounded-lg border border-border",
+      separated: "space-y-2 divide-y-0",
     },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
 
-export const accordionItemVariants = cva(
-  "",
-  {
-    variants: {
-      variant: {
-        default: "",
-        bordered: "first:rounded-t-lg last:rounded-b-lg",
-        separated: "rounded-lg border border-border",
-      },
+export const accordionItemVariants = cva("", {
+  variants: {
+    variant: {
+      default: "",
+      bordered: "first:rounded-t-lg last:rounded-b-lg",
+      separated: "rounded-lg border border-border",
     },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
 
 export const accordionTriggerVariants = cva(
   "flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
@@ -45,7 +39,7 @@ export const accordionTriggerVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
 export const accordionContentVariants = cva(
@@ -61,5 +55,5 @@ export const accordionContentVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );

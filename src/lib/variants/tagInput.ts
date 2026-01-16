@@ -13,7 +13,7 @@ export const tagInputContainerVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
 export const tagVariants = cva(
@@ -29,5 +29,5 @@ export const tagVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );

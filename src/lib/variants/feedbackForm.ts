@@ -26,7 +26,7 @@ export const feedbackCategoryVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 // Rating Form variants
@@ -70,7 +70,7 @@ export const ratingScaleItemVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 // NPS Survey variants
@@ -79,7 +79,8 @@ export const npsSurveyVariants = cva("space-y-6", {
     variant: {
       default: "",
       card: "rounded-xl border border-border bg-card p-6",
-      fullscreen: "fixed inset-0 flex items-center justify-center bg-background p-4",
+      fullscreen:
+        "fixed inset-0 flex items-center justify-center bg-background p-4",
     },
   },
   defaultVariants: {
@@ -119,23 +120,20 @@ export const npsScoreVariants = cva(
       variant: "default",
       grouped: false,
     },
-  }
+  },
 );
 
-export const npsLabelVariants = cva(
-  "text-xs text-muted-foreground",
-  {
-    variants: {
-      position: {
-        start: "text-left",
-        end: "text-right",
-      },
+export const npsLabelVariants = cva("text-xs text-muted-foreground", {
+  variants: {
+    position: {
+      start: "text-left",
+      end: "text-right",
     },
-    defaultVariants: {
-      position: "start",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    position: "start",
+  },
+});
 
 // Thank you message variants
 export const thankYouVariants = cva(
@@ -150,5 +148,5 @@ export const thankYouVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );

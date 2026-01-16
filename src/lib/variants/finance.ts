@@ -8,7 +8,8 @@ export const balanceCardVariants = cva(
       variant: {
         default: "",
         primary: "bg-primary text-primary-foreground border-primary",
-        gradient: "bg-gradient-to-br from-primary/90 to-primary text-primary-foreground border-transparent",
+        gradient:
+          "bg-gradient-to-br from-primary/90 to-primary text-primary-foreground border-transparent",
       },
       size: {
         sm: "p-4",
@@ -20,7 +21,7 @@ export const balanceCardVariants = cva(
       variant: "default",
       size: "md",
     },
-  }
+  },
 );
 
 // Transaction List variants
@@ -43,7 +44,7 @@ export const transactionItemVariants = cva(
       variant: "default",
       status: "completed",
     },
-  }
+  },
 );
 
 export const transactionAmountVariants = cva("font-semibold tabular-nums", {
@@ -60,33 +61,30 @@ export const transactionAmountVariants = cva("font-semibold tabular-nums", {
 });
 
 // Payment Card variants
-export const paymentCardVariants = cva(
-  "rounded-xl p-6 transition-all",
-  {
-    variants: {
-      variant: {
-        visa: "bg-gradient-to-br from-blue-600 to-blue-800 text-white",
-        mastercard: "bg-gradient-to-br from-red-500 to-orange-600 text-white",
-        amex: "bg-gradient-to-br from-gray-700 to-gray-900 text-white",
-        default: "bg-gradient-to-br from-gray-800 to-gray-900 text-white",
-      },
-      size: {
-        sm: "p-4 text-sm",
-        md: "p-6",
-        lg: "p-8 text-lg",
-      },
-      selected: {
-        true: "ring-2 ring-primary ring-offset-2 ring-offset-background",
-        false: "",
-      },
+export const paymentCardVariants = cva("rounded-xl p-6 transition-all", {
+  variants: {
+    variant: {
+      visa: "bg-gradient-to-br from-blue-600 to-blue-800 text-white",
+      mastercard: "bg-gradient-to-br from-red-500 to-orange-600 text-white",
+      amex: "bg-gradient-to-br from-gray-700 to-gray-900 text-white",
+      default: "bg-gradient-to-br from-gray-800 to-gray-900 text-white",
     },
-    defaultVariants: {
-      variant: "default",
-      size: "md",
-      selected: false,
+    size: {
+      sm: "p-4 text-sm",
+      md: "p-6",
+      lg: "p-8 text-lg",
     },
-  }
-);
+    selected: {
+      true: "ring-2 ring-primary ring-offset-2 ring-offset-background",
+      false: "",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "md",
+    selected: false,
+  },
+});
 
 // Transfer Form variants
 export const transferFormVariants = cva("space-y-6", {
@@ -122,7 +120,7 @@ export const accountCardVariants = cva(
       variant: "default",
       size: "md",
     },
-  }
+  },
 );
 
 // Receipt Timeline variants
@@ -152,7 +150,7 @@ export const receiptItemVariants = cva(
     defaultVariants: {
       status: "completed",
     },
-  }
+  },
 );
 
 // Currency Select variants
@@ -169,5 +167,5 @@ export const currencySelectVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );

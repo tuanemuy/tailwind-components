@@ -13,7 +13,7 @@ export const datePickerVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
 export const calendarVariants = cva(
@@ -21,15 +21,15 @@ export const calendarVariants = cva(
   {
     variants: {
       size: {
-        sm: "text-xs",
-        md: "text-sm",
-        lg: "text-base",
+        sm: "w-[220px] text-xs",
+        md: "w-[280px] text-sm",
+        lg: "w-[340px] text-base",
       },
     },
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
 export const calendarDayVariants = cva(
@@ -55,5 +55,5 @@ export const calendarDayVariants = cva(
       size: "md",
       variant: "default",
     },
-  }
+  },
 );

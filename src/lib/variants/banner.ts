@@ -11,7 +11,8 @@ export const bannerVariants = cva(
         success: "bg-success text-success-foreground",
         warning: "bg-warning text-warning-foreground",
         error: "bg-destructive text-destructive-foreground",
-        gradient: "bg-gradient-to-r from-primary to-primary/80 text-primary-foreground",
+        gradient:
+          "bg-gradient-to-r from-primary to-primary/80 text-primary-foreground",
       },
       size: {
         sm: "py-2 text-xs",
@@ -28,7 +29,7 @@ export const bannerVariants = cva(
       size: "md",
       position: "top",
     },
-  }
+  },
 );
 
 export const floatingBannerVariants = cva(
@@ -59,5 +60,5 @@ export const floatingBannerVariants = cva(
       position: "bottom",
       size: "md",
     },
-  }
+  },
 );

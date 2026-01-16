@@ -36,7 +36,13 @@ export const fileTypeColorConfig: Record<FileTypeColor, string> = {
 /**
  * Folder color variants for customizable folder colors
  */
-export type FolderColor = "default" | "blue" | "green" | "yellow" | "red" | "purple";
+export type FolderColor =
+  | "default"
+  | "blue"
+  | "green"
+  | "yellow"
+  | "red"
+  | "purple";
 
 export const folderColorConfig: Record<FolderColor, string> = {
   default: "text-warning bg-warning/10",

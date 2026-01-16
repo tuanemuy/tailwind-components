@@ -34,7 +34,7 @@ export const kanbanColumnVariants = cva(
       variant: "default",
       size: "md",
     },
-  }
+  },
 );
 
 export const kanbanColumnHeaderVariants = cva(
@@ -43,6 +43,8 @@ export const kanbanColumnHeaderVariants = cva(
     variants: {
       variant: {
         default: "bg-muted/80",
+        bordered: "bg-muted/80",
+        minimal: "",
         transparent: "",
         colored: "",
       },
@@ -50,7 +52,7 @@ export const kanbanColumnHeaderVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 export const kanbanColumnContentVariants = cva(
@@ -59,13 +61,15 @@ export const kanbanColumnContentVariants = cva(
     variants: {
       variant: {
         default: "",
+        bordered: "",
+        minimal: "",
         compact: "space-y-1 p-1",
       },
     },
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 // Kanban Card variants
@@ -94,7 +98,7 @@ export const kanbanCardVariants = cva(
       priority: "none",
       dragging: false,
     },
-  }
+  },
 );
 
 // Kanban Header variants
@@ -111,7 +115,7 @@ export const kanbanHeaderVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 // Column color indicator
@@ -141,16 +145,20 @@ export const kanbanTagVariants = cva(
       color: {
         gray: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300",
         red: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300",
-        orange: "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300",
-        yellow: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300",
-        green: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",
+        orange:
+          "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300",
+        yellow:
+          "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300",
+        green:
+          "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",
         blue: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
-        purple: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300",
+        purple:
+          "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300",
         pink: "bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-300",
       },
     },
     defaultVariants: {
       color: "gray",
     },
-  }
+  },
 );

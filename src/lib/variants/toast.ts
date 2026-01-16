@@ -15,7 +15,7 @@ export const toastVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 export const toastContainerVariants = cva(
@@ -34,5 +34,5 @@ export const toastContainerVariants = cva(
     defaultVariants: {
       position: "bottom-right",
     },
-  }
+  },
 );

@@ -13,7 +13,7 @@ export const commandPaletteVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 export const commandPaletteContentVariants = cva(
@@ -29,7 +29,7 @@ export const commandPaletteContentVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
 export const commandInputVariants = cva(
@@ -44,7 +44,7 @@ export const commandInputVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 export const commandGroupVariants = cva("p-2", {
@@ -71,7 +71,7 @@ export const commandGroupLabelVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 export const commandItemVariants = cva(
@@ -87,7 +87,7 @@ export const commandItemVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 // Search Modal variants
@@ -103,7 +103,7 @@ export const searchModalVariants = cva(
     defaultVariants: {
       position: "top",
     },
-  }
+  },
 );
 
 // Search Results variants
@@ -133,7 +133,7 @@ export const searchResultItemVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 // Recent Searches variants
@@ -161,7 +161,7 @@ export const recentSearchItemVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 // Search Suggestions variants
@@ -190,5 +190,5 @@ export const searchSuggestionItemVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );

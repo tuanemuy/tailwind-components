@@ -14,7 +14,7 @@ export const calendarHeaderVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 // Calendar Grid variants
@@ -52,7 +52,7 @@ export const calendarCellVariants = cva(
       variant: "default",
       size: "md",
     },
-  }
+  },
 );
 
 // Event Card variants
@@ -78,7 +78,7 @@ export const eventCardVariants = cva(
       variant: "default",
       size: "md",
     },
-  }
+  },
 );
 
 export const eventMiniVariants = cva(
@@ -87,19 +87,23 @@ export const eventMiniVariants = cva(
     variants: {
       color: {
         blue: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
-        green: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
+        green:
+          "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
         red: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300",
-        yellow: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
-        purple: "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300",
+        yellow:
+          "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
+        purple:
+          "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300",
         pink: "bg-pink-100 text-pink-800 dark:bg-pink-900/30 dark:text-pink-300",
-        indigo: "bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300",
+        indigo:
+          "bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300",
         gray: "bg-gray-100 text-gray-800 dark:bg-gray-700/50 dark:text-gray-300",
       },
     },
     defaultVariants: {
       color: "blue",
     },
-  }
+  },
 );
 
 // Schedule Timeline variants
@@ -138,7 +142,7 @@ export const scheduleSlotVariants = cva(
       hasEvent: false,
       isCurrentTime: false,
     },
-  }
+  },
 );
 
 // Timeslot Picker variants
@@ -168,5 +172,137 @@ export const timeslotVariants = cva(
     defaultVariants: {
       variant: "available",
     },
-  }
+  },
+);
+
+// FullCalendar variants
+export const fullCalendarVariants = cva("flex flex-col h-full", {
+  variants: {
+    variant: {
+      default: "bg-card rounded-lg border border-border",
+      bordered: "border border-border rounded-lg",
+      minimal: "",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
+
+// MiniCalendar variants
+export const miniCalendarVariants = cva("", {
+  variants: {
+    variant: {
+      default: "bg-card rounded-lg border border-border p-3",
+      compact: "p-2",
+      inline: "",
+    },
+    size: {
+      sm: "text-xs",
+      md: "text-sm",
+      lg: "text-base",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "md",
+  },
+});
+
+export const miniCalendarDayVariants = cva(
+  "size-8 rounded-full flex items-center justify-center transition-colors cursor-pointer",
+  {
+    variants: {
+      variant: {
+        default: "hover:bg-muted",
+        today: "bg-primary text-primary-foreground font-semibold",
+        selected: "bg-primary/20 text-primary font-medium",
+        disabled: "text-muted-foreground/50 cursor-not-allowed",
+        hasEvents: "relative hover:bg-muted",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  },
+);
+
+// CalendarEventSidebar variants
+export const calendarEventSidebarVariants = cva("flex flex-col h-full", {
+  variants: {
+    variant: {
+      default: "bg-card border-l border-border p-4",
+      floating: "bg-card rounded-lg border border-border p-4 shadow-lg",
+      minimal: "p-4",
+    },
+    size: {
+      sm: "w-72",
+      md: "w-80",
+      lg: "w-96",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "md",
+  },
+});
+
+// ScheduleWidget variants
+export const scheduleWidgetVariants = cva("", {
+  variants: {
+    variant: {
+      default: "bg-card rounded-lg border border-border",
+      card: "bg-card rounded-lg border border-border shadow-sm",
+      minimal: "",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
+
+export const scheduleItemVariants = cva(
+  "flex items-start gap-3 p-3 border-b border-border last:border-b-0 transition-colors cursor-pointer hover:bg-muted/50",
+  {
+    variants: {
+      variant: {
+        default: "",
+        compact: "p-2 gap-2",
+        detailed: "p-4 gap-4",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  },
+);
+
+export const viewSwitcherVariants = cva(
+  "inline-flex items-center rounded-lg border border-border bg-muted/50 p-1",
+  {
+    variants: {
+      variant: {
+        default: "",
+        pills: "rounded-full",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  },
+);
+
+export const viewSwitcherItemVariants = cva(
+  "px-3 py-1.5 text-sm font-medium rounded-md transition-colors",
+  {
+    variants: {
+      active: {
+        true: "bg-card text-foreground shadow-sm",
+        false: "text-muted-foreground hover:text-foreground",
+      },
+    },
+    defaultVariants: {
+      active: false,
+    },
+  },
 );

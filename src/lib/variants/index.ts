@@ -1,230 +1,260 @@
-export { buttonVariants } from "./button";
-export { badgeVariants } from "./badge";
-export { inputVariants, textareaVariants } from "./input";
-export { avatarVariants, avatarStatusVariants } from "./avatar";
-export { checkboxVariants, radioVariants } from "./checkbox";
-export { switchVariants, switchThumbVariants } from "./switch";
-export { progressVariants, progressBarVariants } from "./progress";
-export { linkVariants } from "./link";
-export { tooltipVariants, tooltipArrowVariants } from "./tooltip";
-export { skeletonVariants } from "./skeleton";
-export { spinnerVariants } from "./spinner";
-export { imageVariants } from "./image";
-export { kbdVariants } from "./kbd";
-export { tabsListVariants, tabsTriggerVariants, tabsContentVariants } from "./tabs";
-export { breadcrumbVariants, breadcrumbItemVariants } from "./breadcrumb";
-export { paginationVariants, paginationItemVariants } from "./pagination";
-export { stepperVariants, stepVariants, stepIndicatorVariants, stepConnectorVariants } from "./stepper";
-export { searchInputVariants } from "./searchInput";
-export { datePickerVariants, calendarVariants, calendarDayVariants } from "./datePicker";
-export { rangeSliderTrackVariants, rangeSliderRangeVariants, rangeSliderThumbVariants } from "./rangeSlider";
-export { tagInputContainerVariants, tagVariants } from "./tagInput";
-export { comboBoxTriggerVariants, comboBoxContentVariants, comboBoxItemVariants } from "./comboBox";
-export { alertVariants, alertIconVariants } from "./alert";
-export { toastVariants, toastContainerVariants } from "./toast";
 export {
-  emptyStateVariants,
-  emptyStateIconVariants,
-  emptyStateTitleVariants,
-  emptyStateDescriptionVariants,
-} from "./emptyState";
-export {
-  accordionVariants,
+  accordionContentVariants,
   accordionItemVariants,
   accordionTriggerVariants,
-  accordionContentVariants,
+  accordionVariants,
 } from "./accordion";
-export { menuVariants, menuItemVariants, menuLabelVariants } from "./menu";
-export { ratingVariants, ratingStarVariants } from "./rating";
-export {
-  colorPickerTriggerVariants,
-  colorPickerSwatchVariants,
-  colorPickerPresetVariants,
-  colorPickerDropdownVariants,
-  colorPickerNativeVariants,
-} from "./colorPicker";
-
+export { alertIconVariants, alertVariants } from "./alert";
+export { avatarStatusVariants, avatarVariants } from "./avatar";
+export { badgeVariants } from "./badge";
 // Phase 11: PageSections
 export { bannerVariants, floatingBannerVariants } from "./banner";
+export { breadcrumbItemVariants, breadcrumbVariants } from "./breadcrumb";
+export { buttonVariants } from "./button";
+export { checkboxVariants, radioVariants } from "./checkbox";
 export {
-  timelineVariants,
-  timelineItemVariants,
-  timelineConnectorVariants,
-  timelineDotVariants,
-} from "./timeline";
+  colorPickerDropdownVariants,
+  colorPickerNativeVariants,
+  colorPickerPresetVariants,
+  colorPickerSwatchVariants,
+  colorPickerTriggerVariants,
+} from "./colorPicker";
 export {
-  titleBarVariants,
-  titleBarTitleVariants,
-  titleBarSubtitleVariants,
-} from "./titleBar";
-export {
-  descriptionListVariants,
-  descriptionListItemVariants,
-  descriptionTermVariants,
-  descriptionDetailsVariants,
-} from "./descriptionList";
-export {
-  quickActionCardVariants,
-  quickActionIconVariants,
-  quickActionBarVariants,
-} from "./quickAction";
-export {
-  setupFlowVariants,
-  setupFlowStepVariants,
-  setupFlowIndicatorVariants,
-  onboardingChecklistVariants,
-  onboardingChecklistItemVariants,
-} from "./setupFlow";
-export {
-  successMessageVariants,
-  successMessageIconVariants,
-  successMessageTitleVariants,
-  successMessageDescriptionVariants,
-} from "./successMessage";
-export {
-  notificationSettingsVariants,
-  notificationSettingsRowVariants,
-  notificationSettingsHeaderVariants,
-  notificationChannelVariants,
-} from "./notificationSettings";
-export {
-  sectionNavVariants,
-  sectionNavItemVariants,
-  cardNavVariants,
-  cardNavItemVariants,
-} from "./sectionNav";
-export {
-  userProfileCardVariants,
-  userProfileCardCoverVariants,
-  userProfileCardAvatarVariants,
-  userProfileCardContentVariants,
-  userProfileCardStatsVariants,
-  userProfileCardStatVariants,
-} from "./userProfileCard";
-
-// Phase 13: Cards
-export { socialPlatformConfig, type SocialPlatform } from "./socialPlatform";
-export {
-  fileTypeColorConfig,
-  folderColorConfig,
-  type FileTypeColor,
-  type FolderColor,
-} from "./fileType";
-
+  comboBoxContentVariants,
+  comboBoxItemVariants,
+  comboBoxTriggerVariants,
+} from "./comboBox";
 // Phase 15: DataVisualization
 export {
   dataCardVariants,
-  statBlockVariants,
   dataListItemVariants,
-  rankingBadgeStyles,
   getRankingBadgeStyle,
+  rankingBadgeStyles,
+  statBlockVariants,
 } from "./dataVisualization";
+export {
+  calendarDayVariants,
+  calendarVariants,
+  datePickerVariants,
+} from "./datePicker";
+export {
+  descriptionDetailsVariants,
+  descriptionListItemVariants,
+  descriptionListVariants,
+  descriptionTermVariants,
+} from "./descriptionList";
+export {
+  emptyStateDescriptionVariants,
+  emptyStateIconVariants,
+  emptyStateTitleVariants,
+  emptyStateVariants,
+} from "./emptyState";
+export {
+  type FileTypeColor,
+  type FolderColor,
+  fileTypeColorConfig,
+  folderColorConfig,
+} from "./fileType";
+export { imageVariants } from "./image";
+export { inputVariants, textareaVariants } from "./input";
+export { kbdVariants } from "./kbd";
+export { linkVariants } from "./link";
+export { menuItemVariants, menuLabelVariants, menuVariants } from "./menu";
+export {
+  notificationChannelVariants,
+  notificationSettingsHeaderVariants,
+  notificationSettingsRowVariants,
+  notificationSettingsVariants,
+} from "./notificationSettings";
+export { paginationItemVariants, paginationVariants } from "./pagination";
+export { progressBarVariants, progressVariants } from "./progress";
+export {
+  quickActionBarVariants,
+  quickActionCardVariants,
+  quickActionIconVariants,
+} from "./quickAction";
+export {
+  rangeSliderRangeVariants,
+  rangeSliderThumbVariants,
+  rangeSliderTrackVariants,
+} from "./rangeSlider";
+export { ratingStarVariants, ratingVariants } from "./rating";
+export { searchInputVariants } from "./searchInput";
+export {
+  cardNavItemVariants,
+  cardNavVariants,
+  sectionNavItemVariants,
+  sectionNavVariants,
+} from "./sectionNav";
+export {
+  onboardingChecklistItemVariants,
+  onboardingChecklistVariants,
+  setupFlowIndicatorVariants,
+  setupFlowStepVariants,
+  setupFlowVariants,
+} from "./setupFlow";
+export { skeletonVariants } from "./skeleton";
+// Phase 13: Cards
+export { type SocialPlatform, socialPlatformConfig } from "./socialPlatform";
+export { spinnerVariants } from "./spinner";
+export {
+  stepConnectorVariants,
+  stepIndicatorVariants,
+  stepperVariants,
+  stepVariants,
+} from "./stepper";
+export {
+  successMessageDescriptionVariants,
+  successMessageIconVariants,
+  successMessageTitleVariants,
+  successMessageVariants,
+} from "./successMessage";
+export { switchThumbVariants, switchVariants } from "./switch";
+export {
+  tabsContentVariants,
+  tabsListVariants,
+  tabsTriggerVariants,
+} from "./tabs";
+export { tagInputContainerVariants, tagVariants } from "./tagInput";
+export {
+  timelineConnectorVariants,
+  timelineDotVariants,
+  timelineItemVariants,
+  timelineVariants,
+} from "./timeline";
+export {
+  titleBarSubtitleVariants,
+  titleBarTitleVariants,
+  titleBarVariants,
+} from "./titleBar";
+export { toastContainerVariants, toastVariants } from "./toast";
+export { tooltipArrowVariants, tooltipVariants } from "./tooltip";
+export {
+  userProfileCardAvatarVariants,
+  userProfileCardContentVariants,
+  userProfileCardCoverVariants,
+  userProfileCardStatsVariants,
+  userProfileCardStatVariants,
+  userProfileCardVariants,
+} from "./userProfileCard";
 
 // Phase 17: Domain-Specific
 
-// Finance
-export {
-  balanceCardVariants,
-  transactionItemVariants,
-  transactionAmountVariants,
-  paymentCardVariants,
-  transferFormVariants,
-  accountCardVariants,
-  receiptTimelineVariants,
-  receiptItemVariants,
-  currencySelectVariants,
-} from "./finance";
-
 // Calendar & Scheduling
 export {
-  calendarHeaderVariants,
-  calendarGridVariants,
   calendarCellVariants,
+  calendarEventSidebarVariants,
+  calendarGridVariants,
+  calendarHeaderVariants,
   eventCardVariants,
   eventMiniVariants,
-  scheduleTimelineVariants,
+  fullCalendarVariants,
+  miniCalendarDayVariants,
+  miniCalendarVariants,
+  scheduleItemVariants,
   scheduleSlotVariants,
+  scheduleTimelineVariants,
+  scheduleWidgetVariants,
   timeslotPickerVariants,
   timeslotVariants,
+  viewSwitcherItemVariants,
+  viewSwitcherVariants,
 } from "./calendar";
-
-// Kanban Boards
-export {
-  kanbanBoardVariants,
-  kanbanColumnVariants,
-  kanbanColumnHeaderVariants,
-  kanbanColumnContentVariants,
-  kanbanCardVariants,
-  kanbanHeaderVariants,
-  columnColorVariants,
-  kanbanTagVariants,
-} from "./kanban";
-
 // Command Palette & Search
 export {
-  commandPaletteVariants,
-  commandPaletteContentVariants,
-  commandInputVariants,
-  commandGroupVariants,
   commandGroupLabelVariants,
+  commandGroupVariants,
+  commandInputVariants,
   commandItemVariants,
-  searchModalVariants,
-  searchResultsVariants,
-  searchResultItemVariants,
+  commandPaletteContentVariants,
+  commandPaletteVariants,
   recentSearchesVariants,
   recentSearchItemVariants,
-  searchSuggestionsVariants,
+  searchModalVariants,
+  searchResultItemVariants,
+  searchResultsVariants,
   searchSuggestionItemVariants,
+  searchSuggestionsVariants,
 } from "./commandPalette";
-
+// Feedback Forms
+export {
+  feedbackCategoryVariants,
+  feedbackFormVariants,
+  npsLabelVariants,
+  npsScaleVariants,
+  npsScoreVariants,
+  npsSurveyVariants,
+  ratingFormVariants,
+  ratingScaleItemVariants,
+  ratingScaleVariants,
+  thankYouVariants,
+} from "./feedbackForm";
+// Finance
+export {
+  accountCardVariants,
+  balanceCardVariants,
+  currencySelectVariants,
+  paymentCardVariants,
+  receiptItemVariants,
+  receiptTimelineVariants,
+  transactionAmountVariants,
+  transactionItemVariants,
+  transferFormVariants,
+} from "./finance";
+// Kanban Boards
+export {
+  columnColorVariants,
+  kanbanBoardVariants,
+  kanbanCardVariants,
+  kanbanColumnContentVariants,
+  kanbanColumnHeaderVariants,
+  kanbanColumnVariants,
+  kanbanHeaderVariants,
+  kanbanTagVariants,
+} from "./kanban";
 // Media (Video & Audio)
 export {
-  videoPlayerVariants,
-  videoControlsVariants,
   audioPlayerVariants,
-  audioWaveformVariants,
   audioWaveformBarVariants,
-  videoCallVariants,
-  videoCallParticipantVariants,
-  videoCallControlsVariants,
-  videoCallButtonVariants,
-  mediaControlsVariants,
+  audioWaveformVariants,
   mediaControlButtonVariants,
+  mediaControlsVariants,
   progressBarVariants as mediaProgressBarVariants,
   progressFillVariants as mediaProgressFillVariants,
+  videoCallButtonVariants,
+  videoCallControlsVariants,
+  videoCallParticipantVariants,
+  videoCallSettingsControlVariants,
+  videoCallSettingsPreviewVariants,
+  videoCallSettingsSelectVariants,
+  // Video Call Settings
+  videoCallSettingsVariants,
+  videoCallVariants,
+  videoControlsVariants,
+  videoPlayerVariants,
+  // Voice Message
+  voiceMessageVariants,
+  voiceMessageWaveformBarVariants,
+  voiceMessageWaveformVariants,
   volumeSliderVariants,
 } from "./media";
 
-// Feedback Forms
-export {
-  feedbackFormVariants,
-  feedbackCategoryVariants,
-  ratingFormVariants,
-  ratingScaleVariants,
-  ratingScaleItemVariants,
-  npsSurveyVariants,
-  npsScaleVariants,
-  npsScoreVariants,
-  npsLabelVariants,
-  thankYouVariants,
-} from "./feedbackForm";
-
 // Phase 18: Tables
 export {
-  tableContainerVariants,
-  tableVariants,
-  tableHeaderVariants,
-  tableHeaderCellVariants,
-  tableCellVariants,
-  tableRowVariants,
+  columnResizeHandleVariants,
   expandableRowVariants,
   expandedContentVariants,
-  tableFilterBarVariants,
-  tableToolbarVariants,
-  tablePaginationVariants,
-  tableEmptyStateVariants,
-  tableLoadingStateVariants,
-  columnResizeHandleVariants,
-  tableStatusVariants,
   type TableStatusType,
+  tableCellVariants,
+  tableContainerVariants,
+  tableEmptyStateVariants,
+  tableFilterBarVariants,
+  tableHeaderCellVariants,
+  tableHeaderVariants,
+  tableLoadingStateVariants,
+  tablePaginationVariants,
+  tableRowVariants,
+  tableStatusVariants,
+  tableToolbarVariants,
+  tableVariants,
 } from "./table";

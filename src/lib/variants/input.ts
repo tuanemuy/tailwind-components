@@ -5,8 +5,7 @@ export const inputVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "border-input focus:border-ring focus:ring-ring/50",
+        default: "border-input focus:border-ring focus:ring-ring/50",
         error:
           "border-destructive focus:border-destructive focus:ring-destructive/50",
       },
@@ -28,8 +27,7 @@ export const textareaVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "border-input focus:border-ring focus:ring-ring/50",
+        default: "border-input focus:border-ring focus:ring-ring/50",
         error:
           "border-destructive focus:border-destructive focus:ring-destructive/50",
       },

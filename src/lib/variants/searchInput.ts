@@ -13,5 +13,5 @@ export const searchInputVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );

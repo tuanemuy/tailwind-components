@@ -22,24 +22,21 @@ export const tooltipVariants = cva(
   },
 );
 
-export const tooltipArrowVariants = cva(
-  "absolute size-2 rotate-45",
-  {
-    variants: {
-      variant: {
-        default: "bg-foreground",
-        light: "bg-card border-l border-b border-border",
-      },
-      position: {
-        top: "top-full left-1/2 -translate-x-1/2 -mt-1",
-        bottom: "bottom-full left-1/2 -translate-x-1/2 -mb-1",
-        left: "left-full top-1/2 -translate-y-1/2 -ml-1",
-        right: "right-full top-1/2 -translate-y-1/2 -mr-1",
-      },
+export const tooltipArrowVariants = cva("absolute size-2 rotate-45", {
+  variants: {
+    variant: {
+      default: "bg-foreground",
+      light: "bg-card border-l border-b border-border",
     },
-    defaultVariants: {
-      variant: "default",
-      position: "top",
+    position: {
+      top: "top-full left-1/2 -translate-x-1/2 -mt-1",
+      bottom: "bottom-full left-1/2 -translate-x-1/2 -mb-1",
+      left: "left-full top-1/2 -translate-y-1/2 -ml-1",
+      right: "right-full top-1/2 -translate-y-1/2 -mr-1",
     },
   },
-);
+  defaultVariants: {
+    variant: "default",
+    position: "top",
+  },
+});

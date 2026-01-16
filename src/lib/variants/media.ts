@@ -21,7 +21,7 @@ export const videoPlayerVariants = cva(
       variant: "default",
       size: "full",
     },
-  }
+  },
 );
 
 export const videoControlsVariants = cva(
@@ -42,7 +42,7 @@ export const videoControlsVariants = cva(
       variant: "default",
       visible: true,
     },
-  }
+  },
 );
 
 // Audio Player variants
@@ -66,7 +66,7 @@ export const audioPlayerVariants = cva(
       variant: "default",
       size: "full",
     },
-  }
+  },
 );
 
 export const audioWaveformVariants = cva("flex items-end gap-0.5 h-8", {
@@ -93,7 +93,7 @@ export const audioWaveformBarVariants = cva(
     defaultVariants: {
       active: false,
     },
-  }
+  },
 );
 
 // Video Call variants
@@ -110,7 +110,7 @@ export const videoCallVariants = cva(
     defaultVariants: {
       layout: "grid",
     },
-  }
+  },
 );
 
 export const videoCallParticipantVariants = cva(
@@ -127,7 +127,7 @@ export const videoCallParticipantVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 export const videoCallControlsVariants = cva(
@@ -136,13 +136,14 @@ export const videoCallControlsVariants = cva(
     variants: {
       variant: {
         default: "",
-        floating: "absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-gray-900/90 px-6",
+        floating:
+          "absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-gray-900/90 px-6",
       },
     },
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 export const videoCallButtonVariants = cva(
@@ -159,7 +160,7 @@ export const videoCallButtonVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 // Media Controls variants
@@ -203,7 +204,7 @@ export const mediaControlButtonVariants = cva(
       variant: "default",
       size: "md",
     },
-  }
+  },
 );
 
 export const progressBarVariants = cva(
@@ -219,7 +220,7 @@ export const progressBarVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 export const progressFillVariants = cva(
@@ -234,21 +235,144 @@ export const progressFillVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 // Volume Slider variants
-export const volumeSliderVariants = cva(
-  "flex items-center gap-2 group",
+export const volumeSliderVariants = cva("flex items-center gap-2 group", {
+  variants: {
+    orientation: {
+      horizontal: "flex-row",
+      vertical: "flex-col-reverse",
+    },
+  },
+  defaultVariants: {
+    orientation: "horizontal",
+  },
+});
+
+// Voice Message variants
+export const voiceMessageVariants = cva(
+  "flex items-center gap-3 rounded-2xl px-4 py-3",
   {
     variants: {
-      orientation: {
-        horizontal: "flex-row",
-        vertical: "flex-col-reverse",
+      variant: {
+        default: "bg-muted",
+        sent: "bg-primary text-primary-foreground",
+        received: "bg-muted",
+        crm: "bg-card border border-border shadow-sm",
+      },
+      status: {
+        played: "opacity-70",
+        unplayed: "",
+      },
+      size: {
+        sm: "px-3 py-2 gap-2",
+        md: "px-4 py-3 gap-3",
+        lg: "px-5 py-4 gap-4",
       },
     },
     defaultVariants: {
-      orientation: "horizontal",
+      variant: "default",
+      status: "unplayed",
+      size: "md",
     },
-  }
+  },
+);
+
+export const voiceMessageWaveformVariants = cva("flex items-center gap-0.5", {
+  variants: {
+    size: {
+      sm: "h-6 gap-px",
+      md: "h-8 gap-0.5",
+      lg: "h-10 gap-1",
+    },
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});
+
+export const voiceMessageWaveformBarVariants = cva(
+  "rounded-full transition-all",
+  {
+    variants: {
+      variant: {
+        default: "bg-foreground/30",
+        sent: "bg-primary-foreground/40",
+        active: "bg-primary",
+        activeSent: "bg-primary-foreground",
+      },
+      size: {
+        sm: "w-0.5",
+        md: "w-1",
+        lg: "w-1.5",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "md",
+    },
+  },
+);
+
+// Video Call Settings variants
+export const videoCallSettingsVariants = cva("rounded-xl bg-card", {
+  variants: {
+    variant: {
+      default: "p-6",
+      compact: "p-4",
+      modal: "p-6 border border-border shadow-lg",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
+
+export const videoCallSettingsPreviewVariants = cva(
+  "relative rounded-lg overflow-hidden bg-gray-900",
+  {
+    variants: {
+      size: {
+        sm: "aspect-video max-w-xs",
+        md: "aspect-video max-w-md",
+        lg: "aspect-video max-w-lg",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+    },
+  },
+);
+
+export const videoCallSettingsControlVariants = cva(
+  "flex items-center justify-between gap-4 py-3",
+  {
+    variants: {
+      variant: {
+        default: "border-b border-border",
+        last: "",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  },
+);
+
+export const videoCallSettingsSelectVariants = cva(
+  "w-full rounded-lg border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring",
+  {
+    variants: {
+      size: {
+        sm: "px-2 py-1.5 text-xs",
+        md: "px-3 py-2 text-sm",
+        lg: "px-4 py-2.5 text-base",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+    },
+  },
 );

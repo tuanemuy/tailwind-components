@@ -15,55 +15,46 @@ export function getRankingBadgeStyle(rank: number): string {
   return rankingBadgeStyles.default;
 }
 
-export const dataCardVariants = cva(
-  "rounded-xl overflow-hidden",
-  {
-    variants: {
-      variant: {
-        default: "bg-card",
-        bordered: "bg-card border border-border",
-        elevated: "bg-card shadow-md",
-      },
+export const dataCardVariants = cva("rounded-xl overflow-hidden", {
+  variants: {
+    variant: {
+      default: "bg-card",
+      bordered: "bg-card border border-border",
+      elevated: "bg-card shadow-md",
     },
-    defaultVariants: {
-      variant: "bordered",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    variant: "bordered",
+  },
+});
 
-export const statBlockVariants = cva(
-  "flex flex-col",
-  {
-    variants: {
-      size: {
-        sm: "gap-y-1 p-3",
-        md: "gap-y-1.5 p-4",
-        lg: "gap-y-2 p-5",
-      },
+export const statBlockVariants = cva("flex flex-col", {
+  variants: {
+    size: {
+      sm: "gap-y-1 p-3",
+      md: "gap-y-1.5 p-4",
+      lg: "gap-y-2 p-5",
     },
-    defaultVariants: {
-      size: "md",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});
 
-export const dataListItemVariants = cva(
-  "flex items-center justify-between",
-  {
-    variants: {
-      size: {
-        sm: "py-2",
-        md: "py-3",
-        lg: "py-4",
-      },
-      bordered: {
-        true: "border-b border-border last:border-b-0",
-        false: "",
-      },
+export const dataListItemVariants = cva("flex items-center justify-between", {
+  variants: {
+    size: {
+      sm: "py-2",
+      md: "py-3",
+      lg: "py-4",
     },
-    defaultVariants: {
-      size: "md",
-      bordered: true,
+    bordered: {
+      true: "border-b border-border last:border-b-0",
+      false: "",
     },
-  }
-);
+  },
+  defaultVariants: {
+    size: "md",
+    bordered: true,
+  },
+});

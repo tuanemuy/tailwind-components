@@ -13,7 +13,7 @@ export const comboBoxTriggerVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
 export const comboBoxContentVariants = cva(
@@ -29,7 +29,7 @@ export const comboBoxContentVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
 export const comboBoxItemVariants = cva(
@@ -55,5 +55,5 @@ export const comboBoxItemVariants = cva(
       selected: false,
       highlighted: false,
     },
-  }
+  },
 );

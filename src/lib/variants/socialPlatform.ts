@@ -30,7 +30,8 @@ export const socialPlatformConfig = {
   },
   github: {
     name: "GitHub",
-    color: "bg-[#333333]/10 text-[#333333] dark:bg-[#ffffff]/10 dark:text-[#ffffff]",
+    color:
+      "bg-[#333333]/10 text-[#333333] dark:bg-[#ffffff]/10 dark:text-[#ffffff]",
     hoverColor: "hover:bg-[#333333]/20 dark:hover:bg-[#ffffff]/20",
   },
   discord: {
@@ -40,7 +41,8 @@ export const socialPlatformConfig = {
   },
   tiktok: {
     name: "TikTok",
-    color: "bg-[#000000]/10 text-[#000000] dark:bg-[#ffffff]/10 dark:text-[#ffffff]",
+    color:
+      "bg-[#000000]/10 text-[#000000] dark:bg-[#ffffff]/10 dark:text-[#ffffff]",
     hoverColor: "hover:bg-[#000000]/20 dark:hover:bg-[#ffffff]/20",
   },
 } as const;

@@ -13,7 +13,7 @@ export const emptyStateVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
 export const emptyStateIconVariants = cva(
@@ -29,24 +29,21 @@ export const emptyStateIconVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
-export const emptyStateTitleVariants = cva(
-  "font-semibold text-foreground",
-  {
-    variants: {
-      size: {
-        sm: "text-sm",
-        md: "text-base",
-        lg: "text-lg",
-      },
+export const emptyStateTitleVariants = cva("font-semibold text-foreground", {
+  variants: {
+    size: {
+      sm: "text-sm",
+      md: "text-base",
+      lg: "text-lg",
     },
-    defaultVariants: {
-      size: "md",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});
 
 export const emptyStateDescriptionVariants = cva(
   "max-w-sm text-muted-foreground",
@@ -61,5 +58,5 @@ export const emptyStateDescriptionVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );

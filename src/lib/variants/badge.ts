@@ -11,6 +11,8 @@ export const badgeVariants = cva(
         outline: "border border-border text-foreground bg-transparent",
         success: "bg-success text-success-foreground",
         warning: "bg-warning text-warning-foreground",
+        soft: "bg-primary/10 text-primary",
+        info: "bg-info text-info-foreground",
       },
       size: {
         xs: "text-xs py-0.5 px-1.5",

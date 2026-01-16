@@ -13,7 +13,7 @@ export const tableContainerVariants = cva(
     defaultVariants: {
       bordered: false,
     },
-  }
+  },
 );
 
 // Table element variants
@@ -68,7 +68,7 @@ export const tableHeaderCellVariants = cva(
       align: "start",
       sortable: false,
     },
-  }
+  },
 );
 
 // Table body cell variants
@@ -91,7 +91,7 @@ export const tableCellVariants = cva(
       size: "default",
       align: "start",
     },
-  }
+  },
 );
 
 // Table row variants
@@ -135,7 +135,7 @@ export const expandableRowVariants = cva(
     defaultVariants: {
       expanded: false,
     },
-  }
+  },
 );
 
 // Expanded content variants
@@ -151,7 +151,7 @@ export const expandedContentVariants = cva(
     defaultVariants: {
       expanded: false,
     },
-  }
+  },
 );
 
 // Filter bar variants
@@ -167,7 +167,7 @@ export const tableFilterBarVariants = cva(
     defaultVariants: {
       position: "top",
     },
-  }
+  },
 );
 
 // Toolbar variants
@@ -184,7 +184,7 @@ export const tableToolbarVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 // Pagination variants
@@ -200,33 +200,30 @@ export const tablePaginationVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 // Empty state variants
 export const tableEmptyStateVariants = cva(
-  "px-4 py-8 text-center text-sm text-muted-foreground"
+  "px-4 py-8 text-center text-sm text-muted-foreground",
 );
 
 // Loading state variants
-export const tableLoadingStateVariants = cva(
-  "px-4 py-8 text-center",
-  {
-    variants: {
-      variant: {
-        spinner: "flex items-center justify-center gap-x-2",
-        skeleton: "space-y-3",
-      },
+export const tableLoadingStateVariants = cva("px-4 py-8 text-center", {
+  variants: {
+    variant: {
+      spinner: "flex items-center justify-center gap-x-2",
+      skeleton: "space-y-3",
     },
-    defaultVariants: {
-      variant: "spinner",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    variant: "spinner",
+  },
+});
 
 // Column resize handle variants
 export const columnResizeHandleVariants = cva(
-  "absolute right-0 top-0 h-full w-1 cursor-col-resize bg-border opacity-0 hover:opacity-100 active:bg-primary transition-opacity"
+  "absolute right-0 top-0 h-full w-1 cursor-col-resize bg-border opacity-0 hover:opacity-100 active:bg-primary transition-opacity",
 );
 
 // Status badge mapping for table cells

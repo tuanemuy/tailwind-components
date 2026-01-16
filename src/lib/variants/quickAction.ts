@@ -20,7 +20,7 @@ export const quickActionCardVariants = cva(
       variant: "default",
       size: "md",
     },
-  }
+  },
 );
 
 export const quickActionIconVariants = cva(
@@ -28,7 +28,8 @@ export const quickActionIconVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-muted text-muted-foreground group-hover:bg-primary group-hover:text-primary-foreground",
+        default:
+          "bg-muted text-muted-foreground group-hover:bg-primary group-hover:text-primary-foreground",
         primary: "bg-primary text-primary-foreground",
         ghost: "bg-transparent text-muted-foreground group-hover:text-primary",
         outlined: "border-2 border-current text-primary",
@@ -43,7 +44,7 @@ export const quickActionIconVariants = cva(
       variant: "default",
       size: "md",
     },
-  }
+  },
 );
 
 export const quickActionBarVariants = cva(
@@ -65,5 +66,5 @@ export const quickActionBarVariants = cva(
       position: "bottom",
       size: "md",
     },
-  }
+  },
 );

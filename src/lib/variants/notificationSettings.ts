@@ -1,20 +1,17 @@
 import { cva } from "class-variance-authority";
 
-export const notificationSettingsVariants = cva(
-  "",
-  {
-    variants: {
-      variant: {
-        default: "",
-        card: "bg-card rounded-lg border border-border p-6",
-        compact: "",
-      },
+export const notificationSettingsVariants = cva("", {
+  variants: {
+    variant: {
+      default: "",
+      card: "bg-card rounded-lg border border-border p-6",
+      compact: "",
     },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
 
 export const notificationSettingsRowVariants = cva(
   "flex items-start justify-between gap-x-4 py-4",
@@ -29,7 +26,7 @@ export const notificationSettingsRowVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 export const notificationSettingsHeaderVariants = cva(
@@ -45,7 +42,7 @@ export const notificationSettingsHeaderVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
 export const notificationChannelVariants = cva(
@@ -54,7 +51,8 @@ export const notificationChannelVariants = cva(
     variants: {
       active: {
         true: "border-primary bg-primary text-primary-foreground",
-        false: "border-border bg-background text-muted-foreground hover:bg-muted",
+        false:
+          "border-border bg-background text-muted-foreground hover:bg-muted",
       },
       size: {
         sm: "size-8",
@@ -66,5 +64,5 @@ export const notificationChannelVariants = cva(
       active: false,
       size: "md",
     },
-  }
+  },
 );

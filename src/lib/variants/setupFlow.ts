@@ -1,50 +1,45 @@
 import { cva } from "class-variance-authority";
 
-export const setupFlowVariants = cva(
-  "",
-  {
-    variants: {
-      variant: {
-        list: "space-y-3",
-        timeline: "relative",
-        accordion: "divide-y divide-border rounded-lg border border-border overflow-hidden",
-        card: "grid gap-4",
-      },
-      columns: {
-        1: "",
-        2: "sm:grid-cols-2",
-        3: "sm:grid-cols-2 lg:grid-cols-3",
-      },
+export const setupFlowVariants = cva("", {
+  variants: {
+    variant: {
+      list: "space-y-3",
+      timeline: "relative",
+      accordion:
+        "divide-y divide-border rounded-lg border border-border overflow-hidden",
+      card: "grid gap-4",
     },
-    defaultVariants: {
-      variant: "list",
-      columns: 1,
+    columns: {
+      1: "",
+      2: "sm:grid-cols-2",
+      3: "sm:grid-cols-2 lg:grid-cols-3",
     },
-  }
-);
+  },
+  defaultVariants: {
+    variant: "list",
+    columns: 1,
+  },
+});
 
-export const setupFlowStepVariants = cva(
-  "relative flex items-start gap-x-4",
-  {
-    variants: {
-      variant: {
-        list: "rounded-lg border border-border p-4",
-        timeline: "pb-8 last:pb-0",
-        accordion: "p-4",
-        card: "rounded-lg border border-border p-4 flex-col gap-y-3",
-      },
-      status: {
-        pending: "opacity-70",
-        current: "",
-        completed: "",
-      },
+export const setupFlowStepVariants = cva("relative flex items-start gap-x-4", {
+  variants: {
+    variant: {
+      list: "rounded-lg border border-border p-4",
+      timeline: "pb-8 last:pb-0",
+      accordion: "p-4",
+      card: "rounded-lg border border-border p-4 flex-col gap-y-3",
     },
-    defaultVariants: {
-      variant: "list",
-      status: "pending",
+    status: {
+      pending: "opacity-70",
+      current: "",
+      completed: "",
     },
-  }
-);
+  },
+  defaultVariants: {
+    variant: "list",
+    status: "pending",
+  },
+});
 
 export const setupFlowIndicatorVariants = cva(
   "flex shrink-0 items-center justify-center rounded-full font-medium",
@@ -65,7 +60,7 @@ export const setupFlowIndicatorVariants = cva(
       status: "pending",
       size: "md",
     },
-  }
+  },
 );
 
 export const onboardingChecklistVariants = cva(
@@ -81,7 +76,7 @@ export const onboardingChecklistVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 export const onboardingChecklistItemVariants = cva(
@@ -96,5 +91,5 @@ export const onboardingChecklistItemVariants = cva(
     defaultVariants: {
       status: "pending",
     },
-  }
+  },
 );
