@@ -226,9 +226,9 @@ export const ProfilePage = forwardRef<HTMLDivElement, ProfilePageProps>(
               user.stats.length >= 4 && "grid-cols-4"
             )}
           >
-            {user.stats.map((stat, index) => (
+            {user.stats.map((stat) => (
               <div
-                key={index}
+                key={stat.label}
                 className="flex flex-col items-center justify-center py-4 text-center"
               >
                 <span className="text-xl font-semibold text-foreground">

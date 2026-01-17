@@ -127,7 +127,17 @@ export { SearchInput } from "./SearchInput";
 export type { FilterTag, SectionFilterBarProps } from "./SectionFilterBar";
 // SectionFilterBar
 export { SectionFilterBar } from "./SectionFilterBar";
-export type { SelectOption, SelectProps } from "./Select";
+export type { InlineSelectProps } from "./InlineSelect";
+// InlineSelect
+export { InlineSelect } from "./InlineSelect";
+export type {
+  MultiSelectColorType,
+  MultiSelectOption,
+  MultiSelectProps,
+} from "./MultiSelect";
+// MultiSelect
+export { MultiSelect } from "./MultiSelect";
+export type { SelectColorType, SelectOption, SelectProps } from "./Select";
 // Select
 export { Select } from "./Select";
 export type {
