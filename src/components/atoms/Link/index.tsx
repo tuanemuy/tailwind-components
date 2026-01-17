@@ -1,7 +1,7 @@
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { linkVariants } from "@/lib/variants/link";
+import { cn } from "@/components/utils";
+import { linkVariants } from "@/components/variants/link";
 
 export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement>,

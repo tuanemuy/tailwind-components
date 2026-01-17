@@ -9,8 +9,8 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@/components/organisms/Layout/Modal";
-import { CheckIcon, CreditCardIcon, PlusIcon, TrashIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckIcon, CreditCardIcon, PlusIcon, TrashIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Card type detection
 const detectCardType = (number: string): string => {

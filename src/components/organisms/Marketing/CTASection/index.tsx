@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import { Button } from "@/components/atoms";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
 
 // CTASection component
 export interface CTASectionProps extends React.HTMLAttributes<HTMLElement> {

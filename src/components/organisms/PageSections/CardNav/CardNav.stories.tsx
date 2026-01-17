@@ -15,7 +15,7 @@ import {
   SettingsIcon,
   UserIcon,
   VideoIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import {
   CardNav,
   CardNavItem,

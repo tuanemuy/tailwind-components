@@ -1,8 +1,8 @@
 "use client";
 
 import { forwardRef } from "react";
-import { ChevronRightIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { ChevronRightIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Types
 export interface CategoryData {

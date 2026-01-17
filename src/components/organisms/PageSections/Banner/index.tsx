@@ -3,9 +3,9 @@
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
 import { Button } from "@/components/atoms/Button";
-import { GiftIcon, InfoIcon, MegaphoneIcon, XIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
-import { bannerVariants } from "@/lib/variants/banner";
+import { GiftIcon, InfoIcon, MegaphoneIcon, XIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
+import { bannerVariants } from "@/components/variants/banner";
 
 type BannerVariant =
   | "default"

@@ -13,8 +13,8 @@ import {
   FormBody,
   FormDivider,
 } from "@/components/organisms";
-import { EyeIcon, EyeOffIcon, LockIcon, MailIcon, UserIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { EyeIcon, EyeOffIcon, LockIcon, MailIcon, UserIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Auth page variants
 type AuthVariant =

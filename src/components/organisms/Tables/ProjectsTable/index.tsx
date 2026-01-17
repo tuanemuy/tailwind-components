@@ -3,7 +3,7 @@
 import { forwardRef, useMemo } from "react";
 import { Badge, ProgressBar } from "@/components/atoms";
 import { AvatarGroup } from "@/components/molecules";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
 import {
   DataTable,
   type DataTableColumn,

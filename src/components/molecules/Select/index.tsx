@@ -10,14 +10,14 @@ import {
   type ReactNode,
 } from "react";
 import { createPortal } from "react-dom";
-import { CheckIcon, ChevronDownIcon, SearchIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckIcon, ChevronDownIcon, SearchIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   selectColorIndicatorVariants,
   selectDropdownVariants,
   selectOptionVariants,
   selectTriggerVariants,
-} from "@/lib/variants";
+} from "@/components/variants";
 import type { VariantProps } from "class-variance-authority";
 
 /** Color configuration for status indicators */

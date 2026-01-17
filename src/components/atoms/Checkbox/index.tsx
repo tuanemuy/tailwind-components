@@ -1,8 +1,8 @@
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
-import { CheckIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
-import { checkboxVariants } from "@/lib/variants/checkbox";
+import { CheckIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
+import { checkboxVariants } from "@/components/variants/checkbox";
 
 export interface CheckboxProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "type">,

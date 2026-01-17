@@ -21,8 +21,8 @@ import {
   SearchIcon,
   TagIcon,
   UserIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 import { ComposeThread } from "../ComposeThread";
 import { type MessageData, MessageGroup } from "../MessageBubble";
 

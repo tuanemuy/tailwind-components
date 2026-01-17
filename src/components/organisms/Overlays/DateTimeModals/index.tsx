@@ -10,8 +10,8 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@/components/organisms/Layout/Modal";
-import { CheckIcon, ClockIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckIcon, ClockIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // SnoozeModal
 export interface SnoozeOption {

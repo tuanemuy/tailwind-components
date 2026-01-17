@@ -1,7 +1,7 @@
 import { type FormEvent, forwardRef, type ReactNode, useState } from "react";
 import { Button, Input } from "@/components/atoms";
-import { CheckIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // NewsletterSection component
 export interface NewsletterSectionProps

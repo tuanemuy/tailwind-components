@@ -17,9 +17,9 @@ import {
   ImageIcon,
   UploadCloudIcon,
   XIcon,
-} from "@/lib/icons";
-import type { FileType } from "@/lib/types";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import type { FileType } from "@/components/types";
+import { cn } from "@/components/utils";
 
 // Helper function to determine file type
 const getFileType = (file: File): FileType => {

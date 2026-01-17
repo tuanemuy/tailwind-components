@@ -1,8 +1,8 @@
 import { forwardRef, type ReactNode } from "react";
 import { Badge, type BadgeProps, Button } from "@/components/atoms";
 import { IconButton } from "@/components/molecules";
-import { EyeIcon, HeartIcon, ShoppingBagIcon, StarIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { EyeIcon, HeartIcon, ShoppingBagIcon, StarIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Types
 export type ProductBadgeType = "new" | "sale" | "soldOut" | "featured";

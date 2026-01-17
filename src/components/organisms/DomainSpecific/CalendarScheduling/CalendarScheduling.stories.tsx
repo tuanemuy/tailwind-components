@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@/components/atoms/Button";
-import { PlusIcon } from "@/lib/icons";
+import { PlusIcon } from "@/components/icons";
 import {
   type CalendarDay,
   type CalendarEvent,

@@ -27,8 +27,8 @@ import {
   ShieldIcon,
   ShoppingBagIcon,
   TruckIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Product data
 export interface Product {

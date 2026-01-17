@@ -19,8 +19,8 @@ import {
   ClockIcon,
   TagIcon,
   UserIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Article variants
 type ArticleLayout = "default" | "centered" | "wide" | "sidebar";

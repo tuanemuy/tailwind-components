@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { CalendarIcon, CloudIcon, DatabaseIcon, MailIcon } from "@/lib/icons";
+import { CalendarIcon, CloudIcon, DatabaseIcon, MailIcon } from "@/components/icons";
 import {
   IntegrationCard,
   IntegrationCardGrid,

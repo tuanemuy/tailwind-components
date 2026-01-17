@@ -6,7 +6,7 @@ import {
   SettingsIcon,
   SpinnerIcon,
   UsersIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import {
   FeatureCard,
   FeatureCardContent,

@@ -8,7 +8,7 @@ import {
   MessageIcon,
   ShareIcon,
   UserPlusIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import {
   ActivityFeed,
   CompactActivityFeed,

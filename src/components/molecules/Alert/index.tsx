@@ -8,9 +8,9 @@ import {
   InfoIcon,
   XCircleIcon,
   XIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
-import { alertIconVariants, alertVariants } from "@/lib/variants/alert";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
+import { alertIconVariants, alertVariants } from "@/components/variants/alert";
 
 type AlertVariant = "default" | "info" | "success" | "warning" | "error";
 

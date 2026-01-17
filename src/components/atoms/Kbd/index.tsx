@@ -1,7 +1,7 @@
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { kbdVariants } from "@/lib/variants/kbd";
+import { cn } from "@/components/utils";
+import { kbdVariants } from "@/components/variants/kbd";
 
 export interface KbdProps
   extends React.HTMLAttributes<HTMLElement>,

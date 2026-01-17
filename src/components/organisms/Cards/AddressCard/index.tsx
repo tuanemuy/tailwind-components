@@ -8,8 +8,8 @@ import {
   HomeIcon,
   MapPinIcon,
   TrashIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 
 export type AddressType = "home" | "work" | "billing" | "shipping" | "other";
 

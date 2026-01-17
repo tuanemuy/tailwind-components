@@ -3,8 +3,8 @@
 import { forwardRef, type ReactNode } from "react";
 import { Button } from "@/components/atoms";
 import { IconButton } from "@/components/molecules";
-import { EditIcon, XIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { EditIcon, XIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Types
 export interface ShoppingBagItem {

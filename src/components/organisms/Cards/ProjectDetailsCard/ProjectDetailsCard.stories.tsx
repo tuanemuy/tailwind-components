@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { CodeIcon, FolderIcon, PaletteIcon, RocketIcon } from "@/lib/icons";
+import { CodeIcon, FolderIcon, PaletteIcon, RocketIcon } from "@/components/icons";
 import type { ProjectDetails } from "./";
 import { ProjectDetailsCard, ProjectDetailsGrid, ProjectDetailsList } from "./";
 

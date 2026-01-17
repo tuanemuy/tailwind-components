@@ -11,8 +11,8 @@ import {
   MapPinIcon,
   MoreHorizontalIcon,
   PhoneIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 
 export interface SocialLink {
   type: "twitter" | "linkedin" | "github" | "instagram" | "website" | "other";

@@ -1,8 +1,8 @@
 import { forwardRef } from "react";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
-import { ChevronDownIcon, MoreHorizontalIcon, PlusIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { ChevronDownIcon, MoreHorizontalIcon, PlusIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 export interface KanbanGroupHeadingProps
   extends React.HTMLAttributes<HTMLDivElement> {

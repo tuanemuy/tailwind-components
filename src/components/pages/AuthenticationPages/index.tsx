@@ -13,8 +13,8 @@ import {
   MailIcon,
   ShieldIcon,
   SmartphoneIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // =============================================================================
 // LockScreenPage - ロック画面

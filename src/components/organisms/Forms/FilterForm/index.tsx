@@ -2,8 +2,8 @@
 
 import { createContext, forwardRef, useContext, useId, useState } from "react";
 import { Badge, Button, Input } from "@/components/atoms";
-import { ChevronDownIcon, FilterIcon, XIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { ChevronDownIcon, FilterIcon, XIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Filter context for state management
 interface FilterContextValue {

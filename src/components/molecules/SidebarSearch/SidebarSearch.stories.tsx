@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { CalendarIcon, MailIcon, MusicIcon, VideoIcon } from "@/lib/icons";
+import { CalendarIcon, MailIcon, MusicIcon, VideoIcon } from "@/components/icons";
 import { type Contact, type QuickAction, SidebarSearch } from ".";
 
 const meta: Meta<typeof SidebarSearch> = {

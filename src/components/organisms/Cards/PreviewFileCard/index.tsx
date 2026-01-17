@@ -12,9 +12,9 @@ import {
   MoreHorizontalIcon,
   ShareIcon,
   StarIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
-import { fileTypeColorConfig } from "@/lib/variants";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
+import { fileTypeColorConfig } from "@/components/variants";
 
 export type PreviewFileType =
   | "document"

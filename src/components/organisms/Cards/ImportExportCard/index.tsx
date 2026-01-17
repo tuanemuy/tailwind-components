@@ -3,9 +3,9 @@ import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import { Checkbox } from "@/components/atoms/Checkbox";
 import { ProgressBar } from "@/components/atoms/ProgressBar";
-import { DownloadIcon, FileIcon, UploadIcon } from "@/lib/icons";
-import type { ExportFormat } from "@/lib/types";
-import { cn } from "@/lib/utils";
+import { DownloadIcon, FileIcon, UploadIcon } from "@/components/icons";
+import type { ExportFormat } from "@/components/types";
+import { cn } from "@/components/utils";
 
 // Re-export for backward compatibility
 export type { ExportFormat };

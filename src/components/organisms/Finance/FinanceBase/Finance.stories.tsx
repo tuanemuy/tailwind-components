@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@/components/atoms/Button";
-import { DollarSignIcon } from "@/lib/icons";
+import { DollarSignIcon } from "@/components/icons";
 import {
   AccountCard,
   BalanceCard,

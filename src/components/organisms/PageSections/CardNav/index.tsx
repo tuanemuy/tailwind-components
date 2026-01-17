@@ -3,11 +3,11 @@
 import type { VariantProps } from "class-variance-authority";
 import { createContext, forwardRef, useContext, useState } from "react";
 import { Badge } from "@/components/atoms/Badge";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
 import {
   cardNavItemVariants,
   cardNavVariants,
-} from "@/lib/variants/sectionNav";
+} from "@/components/variants/sectionNav";
 
 type CardNavVariant = "default" | "outlined" | "filled";
 

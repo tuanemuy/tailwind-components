@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@/components/atoms";
-import { ChevronLeftIcon, ChevronRightIcon } from "@/lib/icons";
+import { ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
 import { ButtonGroup } from "./index";
 
 const meta: Meta<typeof ButtonGroup> = {

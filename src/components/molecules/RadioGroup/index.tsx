@@ -2,7 +2,7 @@
 
 import { type ReactNode, useId, useState } from "react";
 import { Radio } from "@/components/atoms";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
 
 export interface RadioGroupOption {
   value: string;

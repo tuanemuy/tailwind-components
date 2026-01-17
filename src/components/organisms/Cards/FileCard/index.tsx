@@ -19,8 +19,8 @@ import {
   StarIcon,
   TrashIcon,
   VideoIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 
 export type FileCardType =
   | "image"

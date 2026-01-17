@@ -1,8 +1,8 @@
 import { forwardRef } from "react";
 import type { FileItemProps } from "@/components/molecules";
 import { FileItem } from "@/components/molecules";
-import type { LayoutVariant } from "@/lib/types";
-import { cn } from "@/lib/utils";
+import type { LayoutVariant } from "@/components/types";
+import { cn } from "@/components/utils";
 
 export interface FileListItem extends FileItemProps {
   id: string;

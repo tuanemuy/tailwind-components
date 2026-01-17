@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { BellIcon, HomeIcon, SettingsIcon, UserIcon } from "@/lib/icons";
+import { BellIcon, HomeIcon, SettingsIcon, UserIcon } from "@/components/icons";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./index";
 
 const meta: Meta<typeof Tabs> = {

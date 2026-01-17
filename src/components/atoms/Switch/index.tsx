@@ -1,7 +1,7 @@
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { switchThumbVariants, switchVariants } from "@/lib/variants/switch";
+import { cn } from "@/components/utils";
+import { switchThumbVariants, switchVariants } from "@/components/variants/switch";
 
 export interface SwitchProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "type">,

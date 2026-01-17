@@ -8,8 +8,8 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@/components/organisms/Layout/Modal";
-import { CheckIcon, PlusIcon, TagIcon, XIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckIcon, PlusIcon, TagIcon, XIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 export interface TagItem {
   id: string;

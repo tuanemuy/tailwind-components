@@ -8,7 +8,7 @@ import {
   ShoppingBagIcon,
   TruckIcon,
   UploadIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import {
   ActivityTimeline,
   HistoryTimeline,

@@ -7,9 +7,9 @@ import {
   MoreHorizontalIcon,
   StarIcon,
   UsersIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
-import { type FolderColor, folderColorConfig } from "@/lib/variants";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
+import { type FolderColor, folderColorConfig } from "@/components/variants";
 
 export interface FolderData {
   id: string;

@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { Avatar } from "@/components/atoms";
-import type { Size } from "@/lib/types";
-import { cn } from "@/lib/utils";
+import type { Size } from "@/components/types";
+import { cn } from "@/components/utils";
 
 export interface AvatarGroupItem {
   src?: string;

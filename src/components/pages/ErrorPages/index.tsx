@@ -11,8 +11,8 @@ import {
   RefreshIcon,
   RocketIcon,
   SettingsIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Base error page props
 interface BaseErrorPageProps extends React.HTMLAttributes<HTMLDivElement> {

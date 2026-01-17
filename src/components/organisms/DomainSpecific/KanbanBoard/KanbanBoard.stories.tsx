@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@/components/atoms/Button";
-import { FilterIcon, SettingsIcon } from "@/lib/icons";
+import { FilterIcon, SettingsIcon } from "@/components/icons";
 import {
   KanbanBoard,
   KanbanCard,

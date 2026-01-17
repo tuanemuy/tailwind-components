@@ -12,8 +12,8 @@ import {
   SearchIcon,
   SpinnerIcon,
   XIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   tableCellVariants,
   tableContainerVariants,
@@ -25,7 +25,7 @@ import {
   tablePaginationVariants,
   tableRowVariants,
   tableToolbarVariants,
-} from "@/lib/variants";
+} from "@/components/variants";
 
 // ============================================
 // Column Types

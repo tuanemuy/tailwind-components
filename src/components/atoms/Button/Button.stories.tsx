@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ChevronRightIcon, DownloadIcon, PlusIcon } from "@/lib/icons";
+import { ChevronRightIcon, DownloadIcon, PlusIcon } from "@/components/icons";
 import { Button } from "./index";
 
 const meta: Meta<typeof Button> = {

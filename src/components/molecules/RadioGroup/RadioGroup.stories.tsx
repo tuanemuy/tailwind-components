@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { GridIcon, LayoutIcon, ListIcon } from "@/lib/icons";
+import { GridIcon, LayoutIcon, ListIcon } from "@/components/icons";
 import { RadioGroup } from ".";
 
 const meta: Meta<typeof RadioGroup> = {

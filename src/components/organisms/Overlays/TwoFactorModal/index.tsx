@@ -7,8 +7,8 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@/components/organisms/Layout/Modal";
-import { CheckCircleIcon, CheckIcon, CopyIcon, LockIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckCircleIcon, CheckIcon, CopyIcon, LockIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 export type TwoFactorStep = "setup" | "verify" | "backup" | "complete";
 

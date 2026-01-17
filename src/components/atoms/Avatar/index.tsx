@@ -1,7 +1,7 @@
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef, useState } from "react";
-import { cn } from "@/lib/utils";
-import { avatarStatusVariants, avatarVariants } from "@/lib/variants/avatar";
+import { cn } from "@/components/utils";
+import { avatarStatusVariants, avatarVariants } from "@/components/variants/avatar";
 
 export type AvatarStatus = "online" | "offline" | "busy" | "away";
 

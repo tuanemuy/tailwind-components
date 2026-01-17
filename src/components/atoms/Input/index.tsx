@@ -1,8 +1,8 @@
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef, useState } from "react";
-import { EyeIcon, EyeOffIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
-import { inputVariants } from "@/lib/variants/input";
+import { EyeIcon, EyeOffIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
+import { inputVariants } from "@/components/variants/input";
 
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">,

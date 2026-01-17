@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
-import { FilterIcon, SettingsIcon } from "@/lib/icons";
+import { FilterIcon, SettingsIcon } from "@/components/icons";
 import {
   DraggableKanbanHeading,
   KanbanColumn,

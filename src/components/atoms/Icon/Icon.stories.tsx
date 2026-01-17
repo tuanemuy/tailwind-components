@@ -16,7 +16,7 @@ import {
   TrendUpIcon,
   UserIcon,
   XIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import { Icon } from "./index";
 
 const meta: Meta<typeof Icon> = {

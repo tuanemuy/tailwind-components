@@ -1,7 +1,7 @@
 import { forwardRef, type ReactNode } from "react";
 import { Button } from "@/components/atoms/Button";
-import { MenuIcon, XIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { MenuIcon, XIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Header variants
 type HeaderVariant = "default" | "bordered" | "elevated" | "transparent";

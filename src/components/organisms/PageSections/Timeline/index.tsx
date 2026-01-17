@@ -1,14 +1,14 @@
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
 import { Avatar } from "@/components/atoms/Avatar";
-import { CheckIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   timelineConnectorVariants,
   timelineDotVariants,
   timelineItemVariants,
   timelineVariants,
-} from "@/lib/variants/timeline";
+} from "@/components/variants/timeline";
 
 type TimelineVariant = "default" | "compact" | "card";
 type TimelineOrientation = "vertical" | "horizontal";

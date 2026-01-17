@@ -3,14 +3,14 @@
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
 import { Button } from "@/components/atoms/Button";
-import { AlertTriangleIcon, CheckIcon, InfoIcon, XIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { AlertTriangleIcon, CheckIcon, InfoIcon, XIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   successMessageDescriptionVariants,
   successMessageIconVariants,
   successMessageTitleVariants,
   successMessageVariants,
-} from "@/lib/variants/successMessage";
+} from "@/components/variants/successMessage";
 
 type MessageType = "success" | "error" | "warning" | "info";
 

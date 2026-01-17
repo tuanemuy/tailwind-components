@@ -14,7 +14,7 @@ import {
   TrendDownIcon,
   TrendUpIcon,
   UsersIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import { DashboardCard, DashboardEmptyState, DashboardPage } from ".";
 
 const meta: Meta<typeof DashboardPage> = {

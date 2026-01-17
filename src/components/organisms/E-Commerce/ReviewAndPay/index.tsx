@@ -2,8 +2,8 @@
 
 import { forwardRef, type ReactNode } from "react";
 import { Badge, Button, Checkbox, Radio, Separator } from "@/components/atoms";
-import { CreditCardIcon, ShieldIcon, TruckIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CreditCardIcon, ShieldIcon, TruckIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Types
 export interface OrderItem {

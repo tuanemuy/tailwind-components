@@ -4,13 +4,13 @@ import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
 import { Button } from "@/components/atoms/Button";
 import { Switch } from "@/components/atoms/Switch";
-import { BellIcon, MailIcon, SmartphoneIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { BellIcon, MailIcon, SmartphoneIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   notificationChannelVariants,
   notificationSettingsRowVariants,
   notificationSettingsVariants,
-} from "@/lib/variants/notificationSettings";
+} from "@/components/variants/notificationSettings";
 
 export interface NotificationSetting {
   id: string;

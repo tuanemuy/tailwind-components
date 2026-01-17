@@ -21,8 +21,8 @@ import {
   TrendUpIcon,
   WalletIcon,
   XCircleIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   accountCardVariants,
   balanceCardVariants,
@@ -33,7 +33,7 @@ import {
   transactionAmountVariants,
   transactionItemVariants,
   transferFormVariants,
-} from "@/lib/variants";
+} from "@/components/variants";
 
 // =============================================================================
 // BalanceCard

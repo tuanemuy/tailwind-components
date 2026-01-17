@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { SmartphoneIcon } from "@/lib/icons";
+import { SmartphoneIcon } from "@/components/icons";
 import { AppDownloadCard } from "./";
 
 const meta: Meta<typeof AppDownloadCard> = {

@@ -6,8 +6,8 @@ import {
   Textarea,
   type TextareaProps,
 } from "@/components/atoms";
-import { AlertCircleIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { AlertCircleIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 type InputType = "text" | "email" | "password" | "number" | "tel" | "url";
 

@@ -1,6 +1,6 @@
 import { forwardRef, type ReactNode } from "react";
-import { TrendingDownIcon, TrendingUpIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { TrendingDownIcon, TrendingUpIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Types
 export interface StatItem {

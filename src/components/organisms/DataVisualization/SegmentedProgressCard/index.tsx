@@ -1,7 +1,7 @@
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { dataCardVariants } from "@/lib/variants/dataVisualization";
+import { cn } from "@/components/utils";
+import { dataCardVariants } from "@/components/variants/dataVisualization";
 
 // ============================================
 // Types

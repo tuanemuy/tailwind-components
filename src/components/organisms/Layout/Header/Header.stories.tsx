@@ -8,7 +8,7 @@ import {
   DropdownDivider,
   DropdownItem,
 } from "@/components/molecules/Dropdown";
-import { BellIcon, SearchIcon, SettingsIcon } from "@/lib/icons";
+import { BellIcon, SearchIcon, SettingsIcon } from "@/components/icons";
 import {
   Header,
   HeaderActions,

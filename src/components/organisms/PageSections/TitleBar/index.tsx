@@ -2,12 +2,12 @@ import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
 import {
   titleBarSubtitleVariants,
   titleBarTitleVariants,
   titleBarVariants,
-} from "@/lib/variants/titleBar";
+} from "@/components/variants/titleBar";
 
 export interface TitleBarProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "title">,

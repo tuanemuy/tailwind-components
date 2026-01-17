@@ -2,7 +2,7 @@
 
 import { forwardRef, useMemo } from "react";
 import { Avatar, Badge } from "@/components/atoms";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
 import {
   DataTable,
   type DataTableColumn,

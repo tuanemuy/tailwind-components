@@ -2,8 +2,8 @@
 
 import { forwardRef, type ReactNode } from "react";
 import { Badge, Button } from "@/components/atoms";
-import { CheckIcon, ChevronRightIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckIcon, ChevronRightIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Types
 export interface ImageTextPairProps

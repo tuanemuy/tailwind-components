@@ -25,8 +25,8 @@ import {
   CreditCardIcon,
   LockIcon,
   TruckIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Checkout step
 type CheckoutStep = "information" | "shipping" | "payment" | "confirmation";

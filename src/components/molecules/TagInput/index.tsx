@@ -3,12 +3,12 @@
 import type { VariantProps } from "class-variance-authority";
 import type { KeyboardEvent } from "react";
 import { forwardRef, useRef, useState } from "react";
-import { XIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { XIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   tagInputContainerVariants,
   tagVariants,
-} from "@/lib/variants/tagInput";
+} from "@/components/variants/tagInput";
 
 export interface TagInputProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange">,

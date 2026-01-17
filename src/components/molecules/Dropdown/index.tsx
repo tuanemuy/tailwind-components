@@ -13,8 +13,8 @@ import React, {
 } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "@/components/atoms";
-import { ChevronDownIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { ChevronDownIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 type Placement = "bottom-start" | "bottom-end" | "top-start" | "top-end";
 

@@ -2,12 +2,12 @@
 
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
 import {
   rangeSliderRangeVariants,
   rangeSliderThumbVariants,
   rangeSliderTrackVariants,
-} from "@/lib/variants/rangeSlider";
+} from "@/components/variants/rangeSlider";
 
 // Helper function moved outside component to avoid recreating on each render
 const clamp = (val: number, minVal: number, maxVal: number) =>

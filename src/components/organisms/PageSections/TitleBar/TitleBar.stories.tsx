@@ -11,7 +11,7 @@ import {
   PlusIcon,
   SearchIcon,
   SettingsIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import {
   FilterableTitleBar,
   SimpleTitleBar,

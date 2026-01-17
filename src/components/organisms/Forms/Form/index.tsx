@@ -8,7 +8,7 @@ import {
   useId,
 } from "react";
 import { Button } from "@/components/atoms";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
 
 // Form context for sharing form state
 interface FormContextValue {

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@/components/atoms";
-import { MailIcon, PlusIcon, SearchIcon, UploadIcon } from "@/lib/icons";
+import { MailIcon, PlusIcon, SearchIcon, UploadIcon } from "@/components/icons";
 import { EmptyState, NoData, NoFiles, NoResults, NoUsers } from "./index";
 
 const meta: Meta<typeof EmptyState> = {

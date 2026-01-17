@@ -23,8 +23,8 @@ import {
   Volume2Icon,
   VolumeXIcon,
   XIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   audioPlayerVariants,
   mediaControlButtonVariants,
@@ -37,7 +37,7 @@ import {
   videoCallVariants,
   videoControlsVariants,
   videoPlayerVariants,
-} from "@/lib/variants";
+} from "@/components/variants";
 
 // =============================================================================
 // VideoPlayer

@@ -7,7 +7,7 @@ import {
   SettingsIcon,
   TrashIcon,
   UserIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import {
   ContextMenu,
   Menu,

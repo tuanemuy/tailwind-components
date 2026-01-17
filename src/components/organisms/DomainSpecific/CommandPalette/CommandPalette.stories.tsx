@@ -9,7 +9,7 @@ import {
   SearchIcon,
   SettingsIcon,
   UserIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import {
   type CommandGroup,
   CommandPalette,

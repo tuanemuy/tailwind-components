@@ -4,8 +4,8 @@ import type { VariantProps } from "class-variance-authority";
 import { cva } from "class-variance-authority";
 import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { ChevronDownIcon, ChevronUpIcon, ClockIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { ChevronDownIcon, ChevronUpIcon, ClockIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 const timePickerVariants = cva(
   "inline-flex items-center gap-x-2 rounded-lg border border-border bg-background transition-colors focus-within:ring-2 focus-within:ring-ring",

@@ -36,8 +36,8 @@ import {
   SearchIcon,
   SettingsIcon,
   UsersIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Dashboard variants
 type DashboardVariant = "default" | "analytics" | "crm" | "ecommerce";

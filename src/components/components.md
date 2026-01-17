@@ -315,6 +315,6 @@
 - MaintenancePage: メンテナンス
 - ComingSoonPage: 準備中
 
-## Icons (lib/icons)
+## Icons (components/icons)
 
 AlertCircle, AlertTriangle, Archive, ArrowLeft, ArrowRight, BarChart, Bell, Bookmark, Briefcase, Building, Calendar, Check, CheckCheck, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, Clock, Cloud, Code, Command, Copy, CreditCard, Database, Discord, DollarSign, Download, Edit, ExternalLink, Eye, EyeOff, Facebook, File, FileCode, FileText, Filter, Folder, Forward, Gift, GitHub, Globe, Grid, Grip, Hash, Heart, Home, Image, Info, Instagram, Layout, Link, LinkedIn, List, Lock, Mail, MapPin, Maximize, Megaphone, Menu, Message, MessageSquare, Mic, MicOff, Minus, MoreHorizontal, MoreVertical, Music, Package, Palette, Paperclip, Pause, Phone, PhoneOff, Play, Plus, Printer, Question, Quote, Refresh, Repeat, Reply, Rocket, Search, Send, Settings, Share, Shield, ShoppingBag, SkipBack, SkipForward, Smartphone, Smile, Spinner, Star, Store, Tag, ThumbsDown, ThumbsUp, Ticket, TikTok, Trash, TrendDown, TrendUp, TrendingDown, TrendingUp, Truck, Twitter, Upload, UploadCloud, User, UserPlus, Users, Video, VideoOff, Volume2, VolumeX, Wallet, X, XCircle, YouTube, Zap

@@ -1,7 +1,7 @@
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
-import { cn } from "@/lib/utils";
-import { tooltipArrowVariants, tooltipVariants } from "@/lib/variants/tooltip";
+import { cn } from "@/components/utils";
+import { tooltipArrowVariants, tooltipVariants } from "@/components/variants/tooltip";
 
 export interface TooltipProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "content">,

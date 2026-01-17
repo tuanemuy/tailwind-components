@@ -3,8 +3,8 @@ import { Avatar } from "@/components/atoms/Avatar";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import { Checkbox } from "@/components/atoms/Checkbox";
-import { MailIcon, MoreHorizontalIcon, PhoneIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { MailIcon, MoreHorizontalIcon, PhoneIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Contact information type
 export interface Contact {

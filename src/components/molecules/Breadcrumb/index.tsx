@@ -9,12 +9,12 @@ import {
   isValidElement,
   useContext,
 } from "react";
-import { ChevronRightIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { ChevronRightIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   breadcrumbItemVariants,
   breadcrumbVariants,
-} from "@/lib/variants/breadcrumb";
+} from "@/components/variants/breadcrumb";
 
 type BreadcrumbSize = "sm" | "md" | "lg";
 

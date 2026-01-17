@@ -5,7 +5,7 @@ import {
   MailIcon,
   RocketIcon,
   SearchIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import {
   ConfirmationMessage,
   EmptyStateMessage,

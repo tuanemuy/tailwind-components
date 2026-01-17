@@ -13,8 +13,8 @@ import {
   MoreHorizontalIcon,
   PaperclipIcon,
   PlusIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   columnColorVariants,
   kanbanBoardVariants,
@@ -24,7 +24,7 @@ import {
   kanbanColumnVariants,
   kanbanHeaderVariants,
   kanbanTagVariants,
-} from "@/lib/variants";
+} from "@/components/variants";
 
 // =============================================================================
 // Types

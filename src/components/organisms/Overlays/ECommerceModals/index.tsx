@@ -14,8 +14,8 @@ import {
   ChevronRightIcon,
   HeartIcon,
   ShoppingBagIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // ProductDetailModal
 export interface ProductImage {

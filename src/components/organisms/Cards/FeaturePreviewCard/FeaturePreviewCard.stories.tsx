@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { CodeIcon, PaletteIcon, RocketIcon, ShieldIcon } from "@/lib/icons";
+import { CodeIcon, PaletteIcon, RocketIcon, ShieldIcon } from "@/components/icons";
 import type { FeaturePreviewData } from "./";
 import { FeaturePreviewCard, FeaturePreviewGrid } from "./";
 

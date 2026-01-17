@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import type { StatCardProps } from "@/components/molecules";
 import { StatCard } from "@/components/molecules";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
 
 export interface StatCardGroupItem extends StatCardProps {
   id: string;

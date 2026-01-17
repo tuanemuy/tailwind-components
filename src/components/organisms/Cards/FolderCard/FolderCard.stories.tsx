@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import type { FolderColor } from "@/lib/variants";
+import type { FolderColor } from "@/components/variants";
 import { FolderCard, FolderCardGrid, FolderCardList } from "./index";
 
 const meta: Meta<typeof FolderCard> = {

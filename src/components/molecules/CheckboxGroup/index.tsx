@@ -1,8 +1,8 @@
 "use client";
 
 import { type ReactNode, useId, useState } from "react";
-import { CheckIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 export interface CheckboxGroupOption {
   value: string;

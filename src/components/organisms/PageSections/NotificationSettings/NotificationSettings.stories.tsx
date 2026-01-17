@@ -5,7 +5,7 @@ import {
   MailIcon,
   MessageSquareIcon,
   SmartphoneIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import {
   EmailDigestSettings,
   GroupedNotificationSettings,

@@ -8,7 +8,7 @@ import {
   SearchIcon,
   SettingsIcon,
   TrashIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import { IconButton } from "./index";
 
 const meta: Meta<typeof IconButton> = {

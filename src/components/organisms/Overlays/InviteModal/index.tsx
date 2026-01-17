@@ -10,7 +10,7 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@/components/organisms/Layout/Modal";
-import { MailIcon, UsersIcon, XIcon } from "@/lib/icons";
+import { MailIcon, UsersIcon, XIcon } from "@/components/icons";
 
 export type InviteRole = "viewer" | "editor" | "admin" | "owner";
 

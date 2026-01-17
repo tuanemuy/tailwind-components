@@ -10,7 +10,7 @@ import {
   MailIcon,
   SettingsIcon,
   UsersIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import {
   Sidebar,
   SidebarGroup,

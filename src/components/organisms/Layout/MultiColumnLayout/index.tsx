@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, forwardRef, type ReactNode, useContext } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
 
 // =============================================================================
 // Context for sharing layout state

@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import { Avatar } from "@/components/atoms/Avatar";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
 
 export interface ActivityItem {
   id: string;

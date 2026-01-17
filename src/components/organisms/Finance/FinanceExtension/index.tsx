@@ -14,8 +14,8 @@ import {
   PrinterIcon,
   ShareIcon,
   XCircleIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // =============================================================================
 // PaymentGradientCard - Gradient Credit Card Display

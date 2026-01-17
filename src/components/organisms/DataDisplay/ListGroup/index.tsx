@@ -1,6 +1,6 @@
 import { forwardRef, type ReactNode } from "react";
-import { ChevronRightIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { ChevronRightIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // ============================================
 // Types

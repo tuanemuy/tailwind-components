@@ -8,8 +8,8 @@ import {
 } from "react";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
-import { ChevronDownIcon, ChevronRightIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { ChevronDownIcon, ChevronRightIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Sidebar Context
 interface SidebarContextValue {

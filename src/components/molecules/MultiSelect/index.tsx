@@ -10,15 +10,15 @@ import {
   type ReactNode,
 } from "react";
 import { createPortal } from "react-dom";
-import { CheckIcon, ChevronDownIcon, SearchIcon, XIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckIcon, ChevronDownIcon, SearchIcon, XIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   multiSelectContainerVariants,
   multiSelectTagRemoveVariants,
   multiSelectTagVariants,
   selectDropdownVariants,
   selectOptionVariants,
-} from "@/lib/variants";
+} from "@/components/variants";
 
 /** Color configuration for status indicators */
 export type MultiSelectColorType =

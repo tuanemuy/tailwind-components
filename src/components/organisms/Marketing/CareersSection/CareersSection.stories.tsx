@@ -8,7 +8,7 @@ import {
   MegaphoneIcon,
   RocketIcon,
   UsersIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import {
   CareersHero,
   CareersSection,

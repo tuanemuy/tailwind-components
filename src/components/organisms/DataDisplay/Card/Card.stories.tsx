@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@/components/atoms";
 import { AvatarGroup } from "@/components/molecules";
-import { MoreHorizontalIcon } from "@/lib/icons";
+import { MoreHorizontalIcon } from "@/components/icons";
 import { Card, CardBody, CardFooter, CardHeader, CardImage } from "./index";
 
 const meta: Meta<typeof Card> = {

@@ -9,7 +9,7 @@ import {
   PlusIcon,
   SettingsIcon,
   UsersIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import { Card, CardBody, CardHeader } from "../../DataDisplay/Card";
 import { Footer, FooterLogo, FooterSocialLink } from "../Footer";
 import {

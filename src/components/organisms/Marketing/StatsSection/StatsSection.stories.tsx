@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { BarChartIcon, DollarSignIcon, GlobeIcon, UsersIcon } from "@/lib/icons";
+import { BarChartIcon, DollarSignIcon, GlobeIcon, UsersIcon } from "@/components/icons";
 import {
   CompleteStatsSection,
   SimpleStatsBar,

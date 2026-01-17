@@ -6,7 +6,7 @@ import {
   SendIcon,
   StarIcon,
   TrashIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import {
   CompactInboxItem,
   type EmailData,

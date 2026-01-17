@@ -9,14 +9,14 @@ import {
   isValidElement,
   useContext,
 } from "react";
-import { CheckIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   stepConnectorVariants,
   stepIndicatorVariants,
   stepperVariants,
   stepVariants,
-} from "@/lib/variants/stepper";
+} from "@/components/variants/stepper";
 
 type Orientation = "horizontal" | "vertical";
 type StepStatus = "completed" | "current" | "upcoming" | "error";

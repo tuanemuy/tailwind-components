@@ -4,13 +4,13 @@ import type { VariantProps } from "class-variance-authority";
 import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "@/components/atoms";
-import { CalendarIcon, ChevronLeftIcon, ChevronRightIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CalendarIcon, ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   calendarDayVariants,
   calendarVariants,
   datePickerVariants,
-} from "@/lib/variants/datePicker";
+} from "@/components/variants/datePicker";
 
 type DatePickerSize = "sm" | "md" | "lg";
 

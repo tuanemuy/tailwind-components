@@ -2,14 +2,14 @@
 
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
-import { FileIcon, FolderIcon, SearchIcon, UsersIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { FileIcon, FolderIcon, SearchIcon, UsersIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   emptyStateDescriptionVariants,
   emptyStateIconVariants,
   emptyStateTitleVariants,
   emptyStateVariants,
-} from "@/lib/variants/emptyState";
+} from "@/components/variants/emptyState";
 
 export interface EmptyStateProps
   extends React.HTMLAttributes<HTMLDivElement>,

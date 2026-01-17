@@ -6,7 +6,7 @@ import {
   ShieldIcon,
   TwitterIcon,
   ZapIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import { ComingSoonPage, ErrorPage, MaintenancePage, NotFoundPage } from ".";
 
 // NotFoundPage stories

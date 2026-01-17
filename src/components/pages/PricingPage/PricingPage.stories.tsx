@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import type { FAQItem, PricingSectionPlan } from "@/components/organisms";
-import { GlobeIcon } from "@/lib/icons";
+import { GlobeIcon } from "@/components/icons";
 import { PricingComparison, PricingPage } from ".";
 
 const meta: Meta<typeof PricingPage> = {

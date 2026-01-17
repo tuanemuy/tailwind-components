@@ -1,7 +1,7 @@
 import { forwardRef, type ReactNode } from "react";
 import { Avatar } from "@/components/atoms";
-import { GitHubIcon, LinkedInIcon, TwitterIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { GitHubIcon, LinkedInIcon, TwitterIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Types
 export interface TeamMemberSocial {

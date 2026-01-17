@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { FileIcon, GlobeIcon, MessageSquareIcon, StarIcon } from "@/lib/icons";
+import { FileIcon, GlobeIcon, MessageSquareIcon, StarIcon } from "@/components/icons";
 import { ProfilePage, ProfilePageSkeleton } from ".";
 
 const meta: Meta<typeof ProfilePage> = {

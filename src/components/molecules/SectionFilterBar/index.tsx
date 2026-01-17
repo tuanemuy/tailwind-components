@@ -4,8 +4,8 @@ import { forwardRef, type ReactNode } from "react";
 import { Button } from "@/components/atoms";
 import { SearchInput } from "@/components/molecules/SearchInput";
 import { Select, type SelectOption } from "@/components/molecules/Select";
-import { FilterIcon, GridIcon, ListIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { FilterIcon, GridIcon, ListIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 export interface FilterTag {
   id: string;

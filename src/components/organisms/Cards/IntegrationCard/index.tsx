@@ -2,8 +2,8 @@ import { forwardRef } from "react";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import { Switch } from "@/components/atoms/Switch";
-import { CheckCircleIcon, SettingsIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckCircleIcon, SettingsIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 export type IntegrationStatus =
   | "connected"

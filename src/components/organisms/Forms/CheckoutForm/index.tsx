@@ -3,8 +3,8 @@
 import { createContext, forwardRef, useContext, useId, useState } from "react";
 import { Button, Input, Radio, Separator } from "@/components/atoms";
 import { FormField } from "@/components/molecules";
-import { CheckIcon, LockIcon, TagIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckIcon, LockIcon, TagIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Checkout context
 interface CheckoutContextValue {

@@ -11,7 +11,7 @@ import {
   UserIcon,
   UsersIcon,
   ZapIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import {
   OnboardingPlansPage,
   OnboardingProjectPage,

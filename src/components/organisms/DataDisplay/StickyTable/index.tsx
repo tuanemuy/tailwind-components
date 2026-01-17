@@ -8,8 +8,8 @@ import {
   ChevronRightIcon,
   ChevronUpIcon,
   SpinnerIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   tableCellVariants,
   tableContainerVariants,
@@ -18,7 +18,7 @@ import {
   tableLoadingStateVariants,
   tablePaginationVariants,
   tableRowVariants,
-} from "@/lib/variants";
+} from "@/components/variants";
 
 // ============================================
 // Column Types

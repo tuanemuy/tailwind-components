@@ -8,7 +8,7 @@ import {
   PaletteIcon,
   ShieldIcon,
   UserIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import {
   SettingsForm,
   SettingsPage,

@@ -2,12 +2,12 @@
 
 import type { VariantProps } from "class-variance-authority";
 import { createContext, forwardRef, useContext, useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
 import {
   tabsContentVariants,
   tabsListVariants,
   tabsTriggerVariants,
-} from "@/lib/variants/tabs";
+} from "@/components/variants/tabs";
 
 type TabsVariant =
   | "default"

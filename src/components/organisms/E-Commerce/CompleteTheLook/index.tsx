@@ -2,8 +2,8 @@
 
 import { forwardRef, useState } from "react";
 import { Badge, Button, Checkbox } from "@/components/atoms";
-import { CheckIcon, PlusIcon, ShoppingBagIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckIcon, PlusIcon, ShoppingBagIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Types
 export interface LookItem {

@@ -6,9 +6,9 @@ import {
   FolderIcon,
   ImageIcon,
   MoreHorizontalIcon,
-} from "@/lib/icons";
-import type { FileType } from "@/lib/types";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import type { FileType } from "@/components/types";
+import { cn } from "@/components/utils";
 
 const fileTypeIcons: Record<
   FileType,

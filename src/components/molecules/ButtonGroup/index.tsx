@@ -1,6 +1,6 @@
 import { Children, cloneElement, forwardRef, isValidElement } from "react";
 import type { ButtonProps } from "@/components/atoms";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
 
 export interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "attached" | "separated";

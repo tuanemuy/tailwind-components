@@ -13,8 +13,8 @@ import {
   PhoneIcon,
   TwitterIcon,
   YouTubeIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Footer variants
 type FooterVariant = "default" | "bordered" | "minimal" | "stacked" | "simple";

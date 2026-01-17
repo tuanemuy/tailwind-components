@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { SettingsIcon } from "@/lib/icons";
+import { SettingsIcon } from "@/components/icons";
 import { Button } from "../Button";
 import { Tooltip } from "./index";
 

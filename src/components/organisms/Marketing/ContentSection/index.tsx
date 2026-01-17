@@ -1,7 +1,7 @@
 import { forwardRef, type ReactNode } from "react";
 import { Button } from "@/components/atoms";
-import { CheckIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Types
 export interface ContentItem {

@@ -13,7 +13,7 @@ import {
   ShareIcon,
   UploadIcon,
   UserIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import {
   MiniQuickActionCard,
   QuickActionCard,

@@ -6,7 +6,7 @@ import {
   CreditCardIcon,
   ShoppingBagIcon,
   UserIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import { Step, Stepper } from "./index";
 
 const meta: Meta<typeof Stepper> = {

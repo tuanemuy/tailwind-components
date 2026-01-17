@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@/components/atoms/Button";
-import { BellIcon } from "@/lib/icons";
+import { BellIcon } from "@/components/icons";
 import { AuthBanner, Banner, GiftBanner, NewsBanner } from "./index";
 
 const meta: Meta<typeof Banner> = {

@@ -1,8 +1,8 @@
 "use client";
 
 import { forwardRef, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
-import { inlineSelectContainerVariants } from "@/lib/variants";
+import { cn } from "@/components/utils";
+import { inlineSelectContainerVariants } from "@/components/variants";
 import { Select, type SelectOption, type SelectProps } from "../Select";
 
 export interface InlineSelectProps<T = string>

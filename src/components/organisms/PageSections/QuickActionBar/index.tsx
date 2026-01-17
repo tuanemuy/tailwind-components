@@ -2,9 +2,9 @@
 
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
-import { XIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
-import { quickActionBarVariants } from "@/lib/variants/quickAction";
+import { XIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
+import { quickActionBarVariants } from "@/components/variants/quickAction";
 
 export interface QuickActionBarAction {
   icon: React.ReactNode;

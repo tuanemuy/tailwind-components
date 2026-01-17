@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { Button, Separator } from "@/components/atoms";
-import { BuildingIcon, CreditCardIcon, WalletIcon } from "@/lib/icons";
+import { BuildingIcon, CreditCardIcon, WalletIcon } from "@/components/icons";
 import {
   CheckoutForm,
   CheckoutSection,

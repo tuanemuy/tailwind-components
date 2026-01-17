@@ -19,8 +19,8 @@ import {
   ReplyIcon,
   StarIcon,
   TrashIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // ============================================
 // Types

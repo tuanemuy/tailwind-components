@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@/components/atoms/Button";
-import { BellIcon, BookmarkIcon, PlusIcon, ShareIcon } from "@/lib/icons";
+import { BellIcon, BookmarkIcon, PlusIcon, ShareIcon } from "@/components/icons";
 import {
   CookieConsentBanner,
   FeedbackBanner,

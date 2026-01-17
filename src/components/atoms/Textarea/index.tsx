@@ -1,7 +1,7 @@
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { textareaVariants } from "@/lib/variants/input";
+import { cn } from "@/components/utils";
+import { textareaVariants } from "@/components/variants/input";
 
 export interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement>,

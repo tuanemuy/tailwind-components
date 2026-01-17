@@ -8,8 +8,8 @@ import {
   useState,
 } from "react";
 import { Button } from "@/components/atoms/Button";
-import { XIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { XIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Drawer Context
 interface DrawerContextValue {

@@ -7,7 +7,7 @@ import {
   StoreIcon,
   TrendUpIcon,
   UsersIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import { DataCard, DataCardList, DataCardMini } from "./index";
 
 const meta: Meta<typeof DataCard> = {

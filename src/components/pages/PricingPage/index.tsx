@@ -16,8 +16,8 @@ import {
   PageSection,
   type PricingSectionPlan,
 } from "@/components/organisms";
-import { CheckIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // PricingPage props
 export interface PricingPageProps extends React.HTMLAttributes<HTMLDivElement> {

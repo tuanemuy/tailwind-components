@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { GlobeIcon } from "@/lib/icons";
+import { GlobeIcon } from "@/components/icons";
 import { CheckoutPage } from ".";
 
 const meta: Meta<typeof CheckoutPage> = {

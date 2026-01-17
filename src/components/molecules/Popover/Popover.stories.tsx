@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@/components/atoms";
-import { BellIcon, InfoIcon, SettingsIcon } from "@/lib/icons";
+import { BellIcon, InfoIcon, SettingsIcon } from "@/components/icons";
 import { Popover } from "./index";
 
 const meta: Meta<typeof Popover> = {

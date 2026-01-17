@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ImageIcon } from "@/lib/icons";
+import { ImageIcon } from "@/components/icons";
 import { Skeleton } from "../Skeleton";
 import { Spinner } from "../Spinner";
 import { EagerImage, Image } from "./index";

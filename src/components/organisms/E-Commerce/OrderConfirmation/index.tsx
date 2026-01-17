@@ -2,8 +2,8 @@
 
 import { forwardRef } from "react";
 import { Button, Separator } from "@/components/atoms";
-import { CheckCircleIcon, MailIcon, PrinterIcon, TruckIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckCircleIcon, MailIcon, PrinterIcon, TruckIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Types
 export interface OrderItem {

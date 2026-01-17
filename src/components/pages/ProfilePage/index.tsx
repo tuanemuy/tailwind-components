@@ -28,8 +28,8 @@ import {
   PhoneIcon,
   SettingsIcon,
   TwitterIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Profile page variants
 type ProfileVariant = "default" | "minimal" | "detailed";

@@ -17,8 +17,8 @@ import {
   SendIcon,
   StarIcon,
   TrashIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 import { EmailCompose } from "../ComposeThread";
 import {
   CompactInboxItem,

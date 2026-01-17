@@ -9,9 +9,9 @@ import {
   FolderIcon,
   ImageIcon,
   MoreHorizontalIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
-import { type FileTypeColor, fileTypeColorConfig } from "@/lib/variants";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
+import { type FileTypeColor, fileTypeColorConfig } from "@/components/variants";
 
 export type FileType = FileTypeColor;
 

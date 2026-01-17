@@ -6,12 +6,12 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
   MoreHorizontalIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   paginationItemVariants,
   paginationVariants,
-} from "@/lib/variants/pagination";
+} from "@/components/variants/pagination";
 
 // Pagination Root
 export interface PaginationProps

@@ -1,8 +1,8 @@
 import { forwardRef } from "react";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
-import { SmartphoneIcon, StarIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { SmartphoneIcon, StarIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // App Store Badge Icons (inline SVGs for better customization)
 const AppleIcon = ({ className }: { className?: string }) => (

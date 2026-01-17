@@ -12,8 +12,8 @@ import {
   HeartIcon,
   ThumbsDownIcon,
   ThumbsUpIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   feedbackCategoryVariants,
   feedbackFormVariants,
@@ -25,7 +25,7 @@ import {
   ratingScaleItemVariants,
   ratingScaleVariants,
   thankYouVariants,
-} from "@/lib/variants";
+} from "@/components/variants";
 
 // =============================================================================
 // FeedbackForm

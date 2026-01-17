@@ -2,11 +2,11 @@
 
 import type { VariantProps } from "class-variance-authority";
 import { createContext, forwardRef, useContext, useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
 import {
   sectionNavItemVariants,
   sectionNavVariants,
-} from "@/lib/variants/sectionNav";
+} from "@/components/variants/sectionNav";
 
 type SectionNavVariant = "underline" | "pills" | "segment" | "bordered";
 type SectionNavSize = "sm" | "md" | "lg";

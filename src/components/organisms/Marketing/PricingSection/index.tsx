@@ -1,7 +1,7 @@
 import { forwardRef, useState } from "react";
 import { Badge, Button } from "@/components/atoms";
-import { CheckIcon, XIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckIcon, XIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Types
 export interface PricingSectionFeature {

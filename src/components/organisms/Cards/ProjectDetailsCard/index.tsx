@@ -15,8 +15,8 @@ import {
   TagIcon,
   TrashIcon,
   UsersIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 // Note: StarIcon is used in JSX
 
 export type ProjectDetailStatus =

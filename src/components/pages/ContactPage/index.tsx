@@ -26,7 +26,7 @@ import {
   MapPinIcon,
   MessageSquareIcon,
   PhoneIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 
 // Contact page variants
 type ContactVariant = "default" | "split" | "centered" | "minimal";

@@ -19,8 +19,8 @@ import {
   ChevronRightIcon,
   FilterIcon,
   SearchIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // ==============================================
 // Common Types

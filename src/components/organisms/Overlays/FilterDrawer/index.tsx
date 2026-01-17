@@ -19,8 +19,8 @@ import {
   DrawerFooter,
   DrawerHeader,
 } from "@/components/organisms/Layout/Drawer";
-import { FilterIcon, XIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { FilterIcon, XIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 export interface FilterOption {
   id: string;

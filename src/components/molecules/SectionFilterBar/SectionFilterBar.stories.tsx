@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { Button } from "@/components/atoms";
-import { FileIcon, FolderIcon, PlusIcon, TagIcon } from "@/lib/icons";
+import { FileIcon, FolderIcon, PlusIcon, TagIcon } from "@/components/icons";
 import { SectionFilterBar } from ".";
 
 const meta: Meta<typeof SectionFilterBar> = {

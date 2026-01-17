@@ -2,8 +2,8 @@ import { forwardRef, type ReactNode } from "react";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import { Separator } from "@/components/atoms/Separator";
-import { DownloadIcon, MailIcon, PrinterIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { DownloadIcon, MailIcon, PrinterIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // ============================================
 // Types

@@ -4,7 +4,7 @@ import {
   GlobeIcon,
   LinkedInIcon,
   TwitterIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import { BlogListPage, BlogPostPage } from ".";
 
 // BlogListPage meta

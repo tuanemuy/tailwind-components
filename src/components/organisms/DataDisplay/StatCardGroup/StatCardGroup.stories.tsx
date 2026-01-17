@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { DownloadIcon, StoreIcon, TrendUpIcon, UsersIcon } from "@/lib/icons";
+import { DownloadIcon, StoreIcon, TrendUpIcon, UsersIcon } from "@/components/icons";
 import { StatCardGroup } from "./index";
 
 const meta: Meta<typeof StatCardGroup> = {

@@ -3,14 +3,14 @@
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import { Input } from "@/components/atoms";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
 import {
   colorPickerDropdownVariants,
   colorPickerNativeVariants,
   colorPickerPresetVariants,
   colorPickerSwatchVariants,
   colorPickerTriggerVariants,
-} from "@/lib/variants/colorPicker";
+} from "@/components/variants/colorPicker";
 
 // Predefined color presets
 const DEFAULT_PRESETS = [

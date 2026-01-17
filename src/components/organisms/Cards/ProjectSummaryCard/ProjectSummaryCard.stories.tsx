@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@/components/atoms/Button";
-import { CodeIcon, DatabaseIcon, FolderIcon, LayoutIcon } from "@/lib/icons";
+import { CodeIcon, DatabaseIcon, FolderIcon, LayoutIcon } from "@/components/icons";
 import { ProjectSummaryCard, ProjectSummaryGrid } from "./index";
 
 const meta: Meta<typeof ProjectSummaryCard> = {

@@ -9,7 +9,7 @@ import {
   ShareIcon,
   StarIcon,
   TrashIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import { ContextActionBar, QuickActionBar, SelectionActionBar } from "./index";
 
 const meta: Meta<typeof QuickActionBar> = {

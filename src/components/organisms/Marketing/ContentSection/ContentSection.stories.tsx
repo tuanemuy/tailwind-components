@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@/components/atoms";
-import { RocketIcon, ShieldIcon, ZapIcon } from "@/lib/icons";
+import { RocketIcon, ShieldIcon, ZapIcon } from "@/components/icons";
 import {
   AlternatingContentSection,
   ContentActions,

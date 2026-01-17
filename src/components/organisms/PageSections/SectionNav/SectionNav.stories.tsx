@@ -8,7 +8,7 @@ import {
   SettingsIcon,
   ShieldIcon,
   UserIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import {
   SectionNav,
   SectionNavItem,

@@ -1,11 +1,11 @@
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
-import { ChevronRightIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { ChevronRightIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   quickActionCardVariants,
   quickActionIconVariants,
-} from "@/lib/variants/quickAction";
+} from "@/components/variants/quickAction";
 
 export interface QuickActionCardProps
   extends React.HTMLAttributes<HTMLDivElement>,

@@ -23,7 +23,7 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@/components/organisms/Layout/Modal";
-import { FilterIcon } from "@/lib/icons";
+import { FilterIcon } from "@/components/icons";
 
 export interface FilterModalProps {
   isOpen: boolean;

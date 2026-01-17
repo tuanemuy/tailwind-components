@@ -5,12 +5,12 @@ import { forwardRef, useState } from "react";
 import { Button } from "@/components/atoms/Button";
 import { Checkbox } from "@/components/atoms/Checkbox";
 import { ProgressBar } from "@/components/atoms/ProgressBar";
-import { CheckIcon, ChevronRightIcon, XIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckIcon, ChevronRightIcon, XIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   onboardingChecklistItemVariants,
   onboardingChecklistVariants,
-} from "@/lib/variants/setupFlow";
+} from "@/components/variants/setupFlow";
 
 export interface OnboardingChecklistItem {
   id: string;

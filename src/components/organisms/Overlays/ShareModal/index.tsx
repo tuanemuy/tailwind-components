@@ -7,8 +7,8 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@/components/organisms/Layout/Modal";
-import { CheckIcon, CopyIcon, GlobeIcon, LinkIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckIcon, CopyIcon, GlobeIcon, LinkIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 export type ShareAccess = "private" | "restricted" | "public";
 

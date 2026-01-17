@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { MailIcon, SearchIcon, UserIcon } from "@/lib/icons";
+import { MailIcon, SearchIcon, UserIcon } from "@/components/icons";
 import { Input } from "./index";
 
 const meta: Meta<typeof Input> = {

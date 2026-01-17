@@ -3,13 +3,13 @@
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
 import { Button } from "@/components/atoms/Button";
-import { CheckIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   setupFlowIndicatorVariants,
   setupFlowStepVariants,
   setupFlowVariants,
-} from "@/lib/variants/setupFlow";
+} from "@/components/variants/setupFlow";
 
 type SetupFlowVariant = "list" | "timeline" | "accordion" | "card";
 type StepStatus = "pending" | "current" | "completed";

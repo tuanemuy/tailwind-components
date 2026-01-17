@@ -6,7 +6,7 @@ import {
   RocketIcon,
   ShieldIcon,
   ZapIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import {
   CompleteIconSection,
   HighlightIconSection,

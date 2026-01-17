@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ClockIcon, MailIcon, TicketIcon, UsersIcon } from "@/lib/icons";
+import { ClockIcon, MailIcon, TicketIcon, UsersIcon } from "@/components/icons";
 import {
   QuickStatsCard,
   type ReportChartData,

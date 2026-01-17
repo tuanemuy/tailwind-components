@@ -9,13 +9,13 @@ import {
   useRef,
   useState,
 } from "react";
-import { CheckIcon, ChevronRightIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckIcon, ChevronRightIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   menuItemVariants,
   menuLabelVariants,
   menuVariants,
-} from "@/lib/variants/menu";
+} from "@/components/variants/menu";
 
 type MenuSize = "sm" | "md" | "lg";
 

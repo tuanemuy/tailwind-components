@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { StoreIcon, TagIcon, TrendUpIcon, UsersIcon } from "@/lib/icons";
+import { StoreIcon, TagIcon, TrendUpIcon, UsersIcon } from "@/components/icons";
 import { StatCard } from "./index";
 
 const meta: Meta<typeof StatCard> = {

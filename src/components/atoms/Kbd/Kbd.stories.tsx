@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { SearchIcon } from "@/lib/icons";
+import { SearchIcon } from "@/components/icons";
 import { Kbd, KbdGroup, PlatformKbd } from "./index";
 
 const meta: Meta<typeof Kbd> = {

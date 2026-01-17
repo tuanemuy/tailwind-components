@@ -2,9 +2,9 @@
 
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef, useState } from "react";
-import { StarIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
-import { ratingStarVariants, ratingVariants } from "@/lib/variants/rating";
+import { StarIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
+import { ratingStarVariants, ratingVariants } from "@/components/variants/rating";
 
 // Star component
 interface StarProps {

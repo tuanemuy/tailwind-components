@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { FileTextIcon, FolderIcon, HomeIcon } from "@/lib/icons";
+import { FileTextIcon, FolderIcon, HomeIcon } from "@/components/icons";
 import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem } from "./index";
 
 const meta: Meta<typeof Breadcrumb> = {

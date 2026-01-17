@@ -1,6 +1,6 @@
 import { forwardRef, type ReactNode, useState } from "react";
-import { ChevronDownIcon, MinusIcon, PlusIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { ChevronDownIcon, MinusIcon, PlusIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Types
 export interface FAQItem {

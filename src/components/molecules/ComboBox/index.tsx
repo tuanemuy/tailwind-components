@@ -4,12 +4,12 @@ import type { VariantProps } from "class-variance-authority";
 import type { KeyboardEvent } from "react";
 import { forwardRef, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { CheckIcon, ChevronDownIcon, SearchIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { CheckIcon, ChevronDownIcon, SearchIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   comboBoxItemVariants,
   comboBoxTriggerVariants,
-} from "@/lib/variants/comboBox";
+} from "@/components/variants/comboBox";
 
 export interface ComboBoxOption {
   value: string;

@@ -18,8 +18,8 @@ import {
   TrashIcon,
   UsersIcon,
   XIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   calendarCellVariants,
   calendarEventSidebarVariants,
@@ -38,7 +38,7 @@ import {
   timeslotVariants,
   viewSwitcherItemVariants,
   viewSwitcherVariants,
-} from "@/lib/variants";
+} from "@/components/variants";
 
 // =============================================================================
 // CalendarHeader

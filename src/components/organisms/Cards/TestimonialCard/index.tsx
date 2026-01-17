@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { Avatar } from "@/components/atoms";
-import { QuoteIcon, StarIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { QuoteIcon, StarIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // Types
 export interface Testimonial {

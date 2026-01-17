@@ -7,7 +7,7 @@ import {
   ImageIcon,
   MusicIcon,
   VideoIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import type { SelectOption } from "./index";
 import { Select } from "./index";
 

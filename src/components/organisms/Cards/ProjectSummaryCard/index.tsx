@@ -8,8 +8,8 @@ import {
   CheckIcon,
   ClockIcon,
   MoreHorizontalIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 
 export type ProjectStatus =
   | "active"

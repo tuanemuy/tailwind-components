@@ -10,14 +10,14 @@ import {
   useContext,
   useState,
 } from "react";
-import { ChevronDownIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
+import { ChevronDownIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
 import {
   accordionContentVariants,
   accordionItemVariants,
   accordionTriggerVariants,
   accordionVariants,
-} from "@/lib/variants/accordion";
+} from "@/components/variants/accordion";
 
 type AccordionVariant = "default" | "bordered" | "separated";
 type AccordionSize = "sm" | "md" | "lg";

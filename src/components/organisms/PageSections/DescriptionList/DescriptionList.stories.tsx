@@ -9,7 +9,7 @@ import {
   MapPinIcon,
   PhoneIcon,
   UserIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import {
   CardDescriptionList,
   DescriptionDetails,

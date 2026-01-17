@@ -21,9 +21,9 @@ import {
   FileIcon,
   UploadIcon,
   XIcon,
-} from "@/lib/icons";
-import type { ExportFormat } from "@/lib/types";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import type { ExportFormat } from "@/components/types";
+import { cn } from "@/components/utils";
 
 // Re-export for backward compatibility
 export type { ExportFormat };

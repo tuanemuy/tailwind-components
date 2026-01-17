@@ -10,8 +10,8 @@ import {
   LinkIcon,
   SearchIcon,
   XCircleIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // =============================================================================
 // Types

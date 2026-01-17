@@ -13,7 +13,7 @@ import {
   SettingsIcon,
   UserIcon,
   UsersIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import {
   CollapsibleSidebar,
   DashboardSidebar,

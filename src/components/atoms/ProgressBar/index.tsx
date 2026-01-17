@@ -1,7 +1,7 @@
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { progressBarVariants, progressVariants } from "@/lib/variants/progress";
+import { cn } from "@/components/utils";
+import { progressBarVariants, progressVariants } from "@/components/variants/progress";
 
 export interface ProgressBarProps
   extends React.HTMLAttributes<HTMLDivElement>,

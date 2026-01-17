@@ -2,12 +2,12 @@ import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
 import { Avatar, Badge, ProgressBar } from "@/components/atoms";
 import { AvatarGroup, TrendIndicator } from "@/components/molecules";
-import type { TrendDirection, TrendVariant } from "@/lib/types";
-import { cn } from "@/lib/utils";
+import type { TrendDirection, TrendVariant } from "@/components/types";
+import { cn } from "@/components/utils";
 import {
   dataCardVariants,
   getRankingBadgeStyle,
-} from "@/lib/variants/dataVisualization";
+} from "@/components/variants/dataVisualization";
 
 // ============================================
 // Types

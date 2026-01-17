@@ -12,8 +12,8 @@ import {
   InfoIcon,
   TrashIcon,
   XCircleIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // ConfirmModal variants
 export type ConfirmVariant = "danger" | "warning" | "info" | "success";

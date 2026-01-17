@@ -1,7 +1,7 @@
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { radioVariants } from "@/lib/variants/checkbox";
+import { cn } from "@/components/utils";
+import { radioVariants } from "@/components/variants/checkbox";
 
 export interface RadioProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "type">,

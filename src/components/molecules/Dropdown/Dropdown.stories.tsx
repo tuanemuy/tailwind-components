@@ -8,7 +8,7 @@ import {
   SettingsIcon,
   TrashIcon,
   UserIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import { Dropdown, DropdownDivider, DropdownItem } from "./index";
 
 const meta: Meta<typeof Dropdown> = {

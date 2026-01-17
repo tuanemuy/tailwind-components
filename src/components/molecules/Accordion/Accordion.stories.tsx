@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { CreditCardIcon, InfoIcon, SettingsIcon, UserIcon } from "@/lib/icons";
+import { CreditCardIcon, InfoIcon, SettingsIcon, UserIcon } from "@/components/icons";
 import {
   Accordion,
   AccordionContent,

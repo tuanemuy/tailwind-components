@@ -1,7 +1,7 @@
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { spinnerVariants } from "@/lib/variants/spinner";
+import { cn } from "@/components/utils";
+import { spinnerVariants } from "@/components/variants/spinner";
 
 export interface SpinnerProps
   extends React.SVGAttributes<SVGSVGElement>,

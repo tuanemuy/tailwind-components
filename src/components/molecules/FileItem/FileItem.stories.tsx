@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@/components/atoms";
-import { DownloadIcon, EditIcon, TrashIcon } from "@/lib/icons";
+import { DownloadIcon, EditIcon, TrashIcon } from "@/components/icons";
 import { FileItem } from "./index";
 
 const meta: Meta<typeof FileItem> = {

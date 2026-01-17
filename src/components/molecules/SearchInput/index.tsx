@@ -3,9 +3,9 @@
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef, useEffect, useRef } from "react";
 import { Kbd } from "@/components/atoms";
-import { SearchIcon, XIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
-import { searchInputVariants } from "@/lib/variants/searchInput";
+import { SearchIcon, XIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
+import { searchInputVariants } from "@/components/variants/searchInput";
 
 export interface SearchInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">,

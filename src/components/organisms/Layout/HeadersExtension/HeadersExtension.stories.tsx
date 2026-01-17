@@ -4,7 +4,7 @@ import {
   HeaderNav,
   HeaderNavItem,
 } from "@/components/organisms/Layout/Header";
-import { MailIcon, SettingsIcon } from "@/lib/icons";
+import { MailIcon, SettingsIcon } from "@/components/icons";
 import {
   ApplicationNavbar,
   ApplicationToolbar,

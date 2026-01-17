@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { MailIcon } from "@/lib/icons";
+import { MailIcon } from "@/components/icons";
 import { FormField } from "./index";
 
 const meta: Meta<typeof FormField> = {

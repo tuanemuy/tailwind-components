@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@/components/atoms/Button";
-import { GiftIcon, StarIcon } from "@/lib/icons";
+import { GiftIcon, StarIcon } from "@/components/icons";
 import {
   CompactChecklist,
   ExpandableChecklist,

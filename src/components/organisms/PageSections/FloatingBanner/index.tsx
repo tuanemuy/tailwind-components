@@ -3,9 +3,9 @@
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef, useState } from "react";
 import { Button } from "@/components/atoms/Button";
-import { StarIcon, ThumbsDownIcon, ThumbsUpIcon, XIcon } from "@/lib/icons";
-import { cn } from "@/lib/utils";
-import { floatingBannerVariants } from "@/lib/variants/banner";
+import { StarIcon, ThumbsDownIcon, ThumbsUpIcon, XIcon } from "@/components/icons";
+import { cn } from "@/components/utils";
+import { floatingBannerVariants } from "@/components/variants/banner";
 
 export interface FloatingBannerProps
   extends React.HTMLAttributes<HTMLDivElement>,

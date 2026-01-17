@@ -7,7 +7,7 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@/components/organisms/Layout/Modal";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
 
 // ============================================
 // SettingsModal

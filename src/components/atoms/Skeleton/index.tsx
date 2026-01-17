@@ -1,7 +1,7 @@
 import type { VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
-import { skeletonVariants } from "@/lib/variants/skeleton";
+import { cn } from "@/components/utils";
+import { skeletonVariants } from "@/components/variants/skeleton";
 
 export interface SkeletonProps
   extends React.HTMLAttributes<HTMLDivElement>,

@@ -9,9 +9,9 @@ import {
   TikTokIcon,
   TwitterIcon,
   YouTubeIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
-import { type SocialPlatform, socialPlatformConfig } from "@/lib/variants";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
+import { type SocialPlatform, socialPlatformConfig } from "@/components/variants";
 
 export interface SocialLink {
   platform: SocialPlatform;

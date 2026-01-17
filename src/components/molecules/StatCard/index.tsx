@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { TrendIndicator } from "@/components/molecules/TrendIndicator";
-import type { TrendDirection, TrendVariant } from "@/lib/types";
-import { cn } from "@/lib/utils";
+import type { TrendDirection, TrendVariant } from "@/components/types";
+import { cn } from "@/components/utils";
 
 export interface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {
   icon?: React.ReactNode;

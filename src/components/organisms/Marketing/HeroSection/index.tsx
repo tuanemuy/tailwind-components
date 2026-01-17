@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import { Badge } from "@/components/atoms";
-import { cn } from "@/lib/utils";
+import { cn } from "@/components/utils";
 
 // HeroSection component
 export interface HeroSectionProps extends React.HTMLAttributes<HTMLElement> {

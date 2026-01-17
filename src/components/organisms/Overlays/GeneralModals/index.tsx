@@ -15,8 +15,8 @@ import {
   GlobeIcon,
   PrinterIcon,
   SearchIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
 
 // KeyboardShortcutsModal
 export interface ShortcutCategory {

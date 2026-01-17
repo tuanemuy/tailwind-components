@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { GitHubIcon, GlobeIcon, LinkedInIcon, TwitterIcon } from "@/lib/icons";
+import { GitHubIcon, GlobeIcon, LinkedInIcon, TwitterIcon } from "@/components/icons";
 import { ContactPage } from ".";
 
 const meta: Meta<typeof ContactPage> = {

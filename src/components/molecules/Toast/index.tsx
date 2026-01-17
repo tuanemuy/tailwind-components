@@ -15,9 +15,9 @@ import {
   InfoIcon,
   XCircleIcon,
   XIcon,
-} from "@/lib/icons";
-import { cn } from "@/lib/utils";
-import { toastContainerVariants, toastVariants } from "@/lib/variants/toast";
+} from "@/components/icons";
+import { cn } from "@/components/utils";
+import { toastContainerVariants, toastVariants } from "@/components/variants/toast";
 
 type ToastVariant = "default" | "info" | "success" | "warning" | "error";
 type ToastPosition =

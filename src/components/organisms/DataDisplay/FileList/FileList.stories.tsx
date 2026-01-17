@@ -11,7 +11,7 @@ import {
   EditIcon,
   MoreHorizontalIcon,
   TrashIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import { FileList } from "./index";
 
 const meta: Meta<typeof FileList> = {

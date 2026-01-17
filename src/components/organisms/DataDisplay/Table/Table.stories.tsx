@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { Avatar, Badge, Button } from "@/components/atoms";
 import { Dropdown, DropdownItem } from "@/components/molecules";
-import { EditIcon, MoreHorizontalIcon, TrashIcon } from "@/lib/icons";
+import { EditIcon, MoreHorizontalIcon, TrashIcon } from "@/components/icons";
 import type { PaginationProps, SortState, TableColumn } from "./index";
 import { Table } from "./index";
 

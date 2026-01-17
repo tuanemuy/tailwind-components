@@ -4,7 +4,7 @@ import {
   MessageSquareIcon,
   SmileIcon,
   ZapIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import {
   type FeedbackCategory,
   FeedbackForm,

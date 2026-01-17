@@ -3,7 +3,7 @@
 import { forwardRef, useMemo } from "react";
 import { Avatar, Badge } from "@/components/atoms";
 import { AvatarGroup } from "@/components/molecules";
-import { FileIcon, FolderIcon, ImageIcon } from "@/lib/icons";
+import { FileIcon, FolderIcon, ImageIcon } from "@/components/icons";
 import {
   DataTable,
   type DataTableColumn,

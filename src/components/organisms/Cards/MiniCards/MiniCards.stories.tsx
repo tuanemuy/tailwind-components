@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { FileTextIcon, MailIcon, VideoIcon } from "@/lib/icons";
+import { FileTextIcon, MailIcon, VideoIcon } from "@/components/icons";
 import {
   CreditsCard,
   GiftCard,

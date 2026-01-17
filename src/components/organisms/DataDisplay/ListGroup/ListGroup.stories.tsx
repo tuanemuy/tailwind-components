@@ -10,7 +10,7 @@ import {
   SettingsIcon,
   StarIcon,
   UserIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import {
   ActionListGroup,
   CheckableListGroup,

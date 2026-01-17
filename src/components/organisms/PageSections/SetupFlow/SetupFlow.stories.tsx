@@ -7,7 +7,7 @@ import {
   MailIcon,
   ShieldIcon,
   UserIcon,
-} from "@/lib/icons";
+} from "@/components/icons";
 import { SetupFlow, SetupProgress } from "./index";
 
 const meta: Meta<typeof SetupFlow> = {

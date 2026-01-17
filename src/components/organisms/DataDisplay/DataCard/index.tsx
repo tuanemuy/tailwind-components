@@ -1,8 +1,8 @@
 import { forwardRef } from "react";
 import { ProgressBar } from "@/components/atoms";
 import { TrendIndicator } from "@/components/molecules";
-import type { TrendDirection, TrendVariant } from "@/lib/types";
-import { cn } from "@/lib/utils";
+import type { TrendDirection, TrendVariant } from "@/components/types";
+import { cn } from "@/components/utils";
 
 export interface DataCardProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
