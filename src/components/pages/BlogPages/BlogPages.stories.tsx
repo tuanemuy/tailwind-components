@@ -1,10 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  FacebookIcon,
-  GlobeIcon,
-  LinkedInIcon,
-  TwitterIcon,
-} from "@/components/icons";
+import { GlobeIcon } from "@/components/icons";
 import { BlogListPage, BlogPostPage } from ".";
 
 // BlogListPage meta
@@ -15,15 +10,7 @@ const blogListMeta: Meta<typeof BlogListPage> = {
     layout: "fullscreen",
   },
   tags: ["autodocs"],
-  argTypes: {
-    variant: {
-      control: "select",
-      options: ["grid", "list", "magazine"],
-    },
-    loading: {
-      control: "boolean",
-    },
-  },
+  argTypes: {},
 };
 
 export default blogListMeta;
@@ -41,11 +28,11 @@ const Logo = () => (
 
 // Sample categories
 const sampleCategories = [
-  { id: "all", name: "All", count: 24 },
-  { id: "technology", name: "Technology", slug: "technology", count: 8 },
-  { id: "design", name: "Design", slug: "design", count: 6 },
-  { id: "business", name: "Business", slug: "business", count: 5 },
-  { id: "marketing", name: "Marketing", slug: "marketing", count: 5 },
+  { name: "All", slug: "all", count: 24 },
+  { name: "Technology", slug: "technology", count: 8 },
+  { name: "Design", slug: "design", count: 6 },
+  { name: "Business", slug: "business", count: 5 },
+  { name: "Marketing", slug: "marketing", count: 5 },
 ];
 
 // Sample posts
@@ -60,13 +47,12 @@ const samplePosts = [
     coverImage:
       "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=800&q=80",
     author: {
-      id: "1",
       name: "John Doe",
       avatar:
         "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80",
       bio: "Senior Developer",
     },
-    category: { id: "technology", name: "Technology", slug: "technology" },
+    category: { name: "Technology", slug: "technology" },
     tags: ["React", "JavaScript", "Web Development"],
     publishedAt: "March 15, 2025",
     readingTime: "8 min read",
@@ -82,13 +68,12 @@ const samplePosts = [
     coverImage:
       "https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=800&q=80",
     author: {
-      id: "2",
       name: "Jane Smith",
       avatar:
         "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80",
       bio: "UX Designer",
     },
-    category: { id: "design", name: "Design", slug: "design" },
+    category: { name: "Design", slug: "design" },
     tags: ["Accessibility", "UX", "Design"],
     publishedAt: "March 12, 2025",
     readingTime: "6 min read",
@@ -103,13 +88,12 @@ const samplePosts = [
     coverImage:
       "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80",
     author: {
-      id: "3",
       name: "Mike Johnson",
       avatar:
         "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
       bio: "Tech Analyst",
     },
-    category: { id: "business", name: "Business", slug: "business" },
+    category: { name: "Business", slug: "business" },
     tags: ["AI", "Business", "Technology"],
     publishedAt: "March 10, 2025",
     readingTime: "10 min read",
@@ -124,13 +108,12 @@ const samplePosts = [
     coverImage:
       "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
     author: {
-      id: "4",
       name: "Sarah Williams",
       avatar:
         "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80",
       bio: "Brand Strategist",
     },
-    category: { id: "marketing", name: "Marketing", slug: "marketing" },
+    category: { name: "Marketing", slug: "marketing" },
     tags: ["Branding", "Marketing", "Strategy"],
     publishedAt: "March 8, 2025",
     readingTime: "7 min read",
@@ -145,13 +128,12 @@ const samplePosts = [
     coverImage:
       "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?auto=format&fit=crop&w=800&q=80",
     author: {
-      id: "1",
       name: "John Doe",
       avatar:
         "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80",
       bio: "Senior Developer",
     },
-    category: { id: "technology", name: "Technology", slug: "technology" },
+    category: { name: "Technology", slug: "technology" },
     tags: ["CSS", "Web Development", "Frontend"],
     publishedAt: "March 5, 2025",
     readingTime: "5 min read",
@@ -166,13 +148,12 @@ const samplePosts = [
     coverImage:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
     author: {
-      id: "4",
       name: "Sarah Williams",
       avatar:
         "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80",
       bio: "Brand Strategist",
     },
-    category: { id: "marketing", name: "Marketing", slug: "marketing" },
+    category: { name: "Marketing", slug: "marketing" },
     tags: ["Content", "Marketing", "SEO"],
     publishedAt: "March 3, 2025",
     readingTime: "9 min read",
@@ -190,56 +171,50 @@ export const Default: BlogListStory = {
       { label: "Blog", href: "/blog" },
       { label: "About", href: "/about" },
     ],
-    pagination: {
-      currentPage: 1,
-      totalPages: 5,
-      onPageChange: (page) => console.log("Page:", page),
-    },
-    onCategoryChange: (categoryId) => console.log("Category:", categoryId),
-    onSearch: (query) => console.log("Search:", query),
+    currentPage: 1,
+    totalPages: 5,
+    onPageChange: (page: number) => console.log("Page:", page),
+    onCategoryChange: (categoryId: string) => console.log("Category:", categoryId),
   },
 };
 
 // Grid layout
 export const GridLayout: BlogListStory = {
   args: {
-    variant: "grid",
     posts: samplePosts,
     categories: sampleCategories,
     logo: <Logo />,
-    onCategoryChange: (categoryId) => console.log("Category:", categoryId),
+    onCategoryChange: (categoryId: string) => console.log("Category:", categoryId),
   },
 };
 
 // List layout
 export const ListLayout: BlogListStory = {
   args: {
-    variant: "list",
     posts: samplePosts,
     categories: sampleCategories,
     logo: <Logo />,
-    onCategoryChange: (categoryId) => console.log("Category:", categoryId),
+    onCategoryChange: (categoryId: string) => console.log("Category:", categoryId),
   },
 };
 
 // Magazine layout
 export const MagazineLayout: BlogListStory = {
   args: {
-    variant: "magazine",
     posts: samplePosts,
     categories: sampleCategories,
     logo: <Logo />,
-    onCategoryChange: (categoryId) => console.log("Category:", categoryId),
+    onCategoryChange: (categoryId: string) => console.log("Category:", categoryId),
   },
 };
 
-// With search
-export const WithSearch: BlogListStory = {
+// With categories
+export const WithCategories: BlogListStory = {
   args: {
     posts: samplePosts,
     categories: sampleCategories,
     logo: <Logo />,
-    onSearch: (query) => console.log("Search:", query),
+    onCategoryChange: (categoryId: string) => console.log("Category:", categoryId),
   },
 };
 
@@ -274,13 +249,12 @@ export const BlogPost: StoryObj<typeof BlogPostPage> = {
       coverImage:
         "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=1200&q=80",
       author: {
-        id: "1",
         name: "John Doe",
         avatar:
           "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80",
         bio: "Senior Software Engineer with 10+ years of experience in web development. Passionate about React and modern JavaScript.",
       },
-      category: { id: "technology", name: "Technology", slug: "technology" },
+      category: { name: "Technology", slug: "technology" },
       tags: ["React", "JavaScript", "Web Development"],
       publishedAt: "March 15, 2025",
       readingTime: "8 min read",
@@ -293,25 +267,7 @@ export const BlogPost: StoryObj<typeof BlogPostPage> = {
       { id: "conclusion", title: "Conclusion", level: 2 },
     ],
     relatedPosts: samplePosts.slice(1, 4),
-    showTableOfContents: true,
-    showShareButtons: true,
-    shareButtons: [
-      {
-        icon: <TwitterIcon className="size-4" />,
-        label: "Twitter",
-        onClick: () => console.log("Share Twitter"),
-      },
-      {
-        icon: <LinkedInIcon className="size-4" />,
-        label: "LinkedIn",
-        onClick: () => console.log("Share LinkedIn"),
-      },
-      {
-        icon: <FacebookIcon className="size-4" />,
-        label: "Facebook",
-        onClick: () => console.log("Share Facebook"),
-      },
-    ],
+    onShare: (platform: string) => console.log("Share:", platform),
     logo: <Logo />,
     navigation: [
       { label: "Home", href: "/" },
@@ -326,46 +282,21 @@ export const BlogPostSimple: StoryObj<typeof BlogPostPage> = {
   args: {
     post: samplePosts[0],
     relatedPosts: samplePosts.slice(1, 4),
-    showTableOfContents: false,
-    showShareButtons: true,
     logo: <Logo />,
   },
 };
 
-// Blog post with comments
-export const BlogPostWithComments: StoryObj<typeof BlogPostPage> = {
+// Blog post with navigation
+export const BlogPostWithNavigation: StoryObj<typeof BlogPostPage> = {
   render: (args) => <BlogPostPage {...args} />,
   args: {
     post: {
       ...samplePosts[0],
       content: "<p>This is a sample blog post content...</p>",
     },
-    comments: [
-      {
-        id: "1",
-        author: {
-          name: "Alice",
-          avatar:
-            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80",
-        },
-        content: "Great article! Very informative.",
-        createdAt: "2 hours ago",
-        likes: 5,
-      },
-      {
-        id: "2",
-        author: {
-          name: "Bob",
-          avatar:
-            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
-        },
-        content: "Thanks for sharing this. Really helpful!",
-        createdAt: "1 day ago",
-        likes: 3,
-      },
-    ],
-    showComments: true,
-    onComment: (comment) => console.log("New comment:", comment),
+    relatedPosts: samplePosts.slice(1, 4),
+    previousPost: { title: "Previous Article", slug: "previous-article" },
+    nextPost: { title: "Next Article", slug: "next-article" },
     logo: <Logo />,
   },
 };

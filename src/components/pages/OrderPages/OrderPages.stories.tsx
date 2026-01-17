@@ -49,14 +49,6 @@ export const CheckOrderWithError: CheckOrderStory = {
 // OrderCheckupPage Stories
 // =============================================================================
 
-const _orderCheckupMeta: Meta<typeof OrderCheckupPage> = {
-  title: "Pages/Order/OrderCheckupPage",
-  component: OrderCheckupPage,
-  parameters: {
-    layout: "fullscreen",
-  },
-};
-
 type OrderCheckupStory = StoryObj<typeof OrderCheckupPage>;
 
 const sampleOrder: OrderDetails = {
@@ -181,14 +173,6 @@ export const OrderWithoutTabs: OrderCheckupStory = {
 // =============================================================================
 // GuestCheckoutPage Stories
 // =============================================================================
-
-const _guestCheckoutMeta: Meta<typeof GuestCheckoutPage> = {
-  title: "Pages/Order/GuestCheckoutPage",
-  component: GuestCheckoutPage,
-  parameters: {
-    layout: "fullscreen",
-  },
-};
 
 type GuestCheckoutStory = StoryObj<typeof GuestCheckoutPage>;
 

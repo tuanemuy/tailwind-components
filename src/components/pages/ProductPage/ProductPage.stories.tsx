@@ -9,15 +9,7 @@ const meta: Meta<typeof ProductPage> = {
     layout: "fullscreen",
   },
   tags: ["autodocs"],
-  argTypes: {
-    variant: {
-      control: "select",
-      options: ["default", "gallery-left", "gallery-right", "full-width"],
-    },
-    loading: {
-      control: "boolean",
-    },
-  },
+  argTypes: {},
 };
 
 export default meta;
@@ -157,7 +149,7 @@ const relatedProducts = [
     image:
       "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=800&q=80",
     price: { current: 149.99, currency: "USD" },
-    rating: { average: 4.6, count: 189 },
+    rating: { value: 4.6, count: 189 },
     inStock: true,
   },
   {
@@ -166,7 +158,7 @@ const relatedProducts = [
     image:
       "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80",
     price: { current: 79.99, currency: "USD" },
-    rating: { average: 4.4, count: 124 },
+    rating: { value: 4.4, count: 124 },
     inStock: true,
   },
   {
@@ -175,7 +167,7 @@ const relatedProducts = [
     image:
       "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80",
     price: { current: 39.99, currency: "USD" },
-    rating: { average: 4.7, count: 87 },
+    rating: { value: 4.7, count: 87 },
     inStock: true,
   },
 ];

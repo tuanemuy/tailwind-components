@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { AlertCircleIcon, CheckIcon, XIcon } from "@/lib/icons";
+import { AlertCircleIcon, CheckIcon, XIcon } from "@/components/icons";
 import { Badge } from "./index";
 
 const meta: Meta<typeof Badge> = {

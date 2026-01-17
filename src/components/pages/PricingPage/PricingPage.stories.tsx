@@ -53,7 +53,7 @@ const samplePlans: PricingSectionPlan[] = [
       { text: "API access", included: false },
       { text: "Custom domain", included: false },
     ],
-    cta: "Get started",
+    ctaText: "Get started",
   },
   {
     id: "professional",
@@ -61,7 +61,7 @@ const samplePlans: PricingSectionPlan[] = [
     description: "For growing teams and businesses",
     monthlyPrice: 29,
     yearlyPrice: 24,
-    featured: true,
+    highlighted: true,
     badge: "Most Popular",
     features: [
       { text: "Unlimited projects", included: true },
@@ -71,7 +71,7 @@ const samplePlans: PricingSectionPlan[] = [
       { text: "API access", included: true },
       { text: "Custom domain", included: true },
     ],
-    cta: "Start free trial",
+    ctaText: "Start free trial",
   },
   {
     id: "enterprise",
@@ -87,28 +87,32 @@ const samplePlans: PricingSectionPlan[] = [
       { text: "SLA guarantee", included: true },
       { text: "SSO/SAML", included: true },
     ],
-    cta: "Contact sales",
+    ctaText: "Contact sales",
   },
 ];
 
 // Sample FAQs
 const sampleFAQs: FAQItem[] = [
   {
+    id: "1",
     question: "Can I change plans at any time?",
     answer:
       "Yes, you can upgrade or downgrade your plan at any time. Changes will be reflected in your next billing cycle.",
   },
   {
+    id: "2",
     question: "What payment methods do you accept?",
     answer:
       "We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers for enterprise customers.",
   },
   {
+    id: "3",
     question: "Is there a free trial?",
     answer:
       "Yes, all paid plans include a 14-day free trial. No credit card required to start.",
   },
   {
+    id: "4",
     question: "What happens if I exceed my storage limit?",
     answer:
       "You'll receive a notification when you're approaching your limit. You can upgrade your plan or purchase additional storage.",

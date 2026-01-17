@@ -114,14 +114,6 @@ export const PlansLoading: PlansStory = {
 // OnboardingSyncContactsPage Stories
 // =============================================================================
 
-const _syncContactsMeta: Meta<typeof OnboardingSyncContactsPage> = {
-  title: "Pages/Onboarding/OnboardingSyncContactsPage",
-  component: OnboardingSyncContactsPage,
-  parameters: {
-    layout: "fullscreen",
-  },
-};
-
 type SyncContactsStory = StoryObj<typeof OnboardingSyncContactsPage>;
 
 const contactSources = [
@@ -180,14 +172,6 @@ export const SyncContactsConnecting: SyncContactsStory = {
 // =============================================================================
 // OnboardingRolePage Stories
 // =============================================================================
-
-const _roleMeta: Meta<typeof OnboardingRolePage> = {
-  title: "Pages/Onboarding/OnboardingRolePage",
-  component: OnboardingRolePage,
-  parameters: {
-    layout: "fullscreen",
-  },
-};
 
 type RoleStory = StoryObj<typeof OnboardingRolePage>;
 
@@ -249,14 +233,6 @@ export const RolePreselected: RoleStory = {
 // =============================================================================
 // OnboardingProjectPage Stories
 // =============================================================================
-
-const _projectMeta: Meta<typeof OnboardingProjectPage> = {
-  title: "Pages/Onboarding/OnboardingProjectPage",
-  component: OnboardingProjectPage,
-  parameters: {
-    layout: "fullscreen",
-  },
-};
 
 type ProjectStory = StoryObj<typeof OnboardingProjectPage>;
 
