@@ -81,6 +81,16 @@ export {
 export { ratingStarVariants, ratingVariants } from "./rating";
 export { searchInputVariants } from "./searchInput";
 export {
+  inlineSelectContainerVariants,
+  multiSelectContainerVariants,
+  multiSelectTagRemoveVariants,
+  multiSelectTagVariants,
+  selectColorIndicatorVariants,
+  selectDropdownVariants,
+  selectOptionVariants,
+  selectTriggerVariants,
+} from "./select";
+export {
   cardNavItemVariants,
   cardNavVariants,
   sectionNavItemVariants,
