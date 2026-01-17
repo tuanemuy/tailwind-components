@@ -1,0 +1,71 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Atoms/Introduction" />
+
+# Atoms
+
+基本的なUIコンポーネントです。他のコンポーネントの構成要素として使用されます。
+
+## コンポーネント一覧
+
+| コンポーネント | 説明 | 主なProps |
+|--------------|------|----------|
+| **Avatar** | ユーザーアイコン | src, size, status |
+| **Badge** | ラベル/ステータス表示 | variant, size |
+| **Button** | ボタン | variant, size, leftIcon, rightIcon |
+| **Checkbox** | チェックボックス | checked, onChange |
+| **Icon** | アイコン | name, size |
+| **Image** | 画像 | src, alt, aspectRatio |
+| **Input** | テキスト入力 | type, placeholder, error |
+| **Kbd** | キーボードショートカット表示 | - |
+| **Label** | フォームラベル | htmlFor, required |
+| **Link** | リンク | href, variant, external |
+| **ProgressBar** | 進捗バー | value, max, variant |
+| **Radio** | ラジオボタン | checked, name, value |
+| **Separator** | 区切り線 | orientation |
+| **Skeleton** | ローディングプレースホルダー | - |
+| **Spinner** | ローディングインジケーター | size |
+| **Switch** | トグルスイッチ | checked, onChange |
+| **Textarea** | 複数行テキスト入力 | rows, placeholder |
+| **Tooltip** | ツールチップ | content, position |
+
+## 使用例
+
+### Button
+
+```tsx
+import { Button } from '@/components/atoms/Button';
+
+<Button variant="primary" size="md">
+  Click me
+</Button>
+```
+
+### Input
+
+```tsx
+import { Input } from '@/components/atoms/Input';
+
+<Input
+  type="text"
+  placeholder="Enter your name"
+/>
+```
+
+### Checkbox
+
+```tsx
+import { Checkbox } from '@/components/atoms/Checkbox';
+
+<Checkbox
+  checked={isChecked}
+  onChange={handleChange}
+/>
+```
+
+## デザイン原則
+
+- **シンプル**: 単一の責務を持つ
+- **再利用可能**: 様々なコンテキストで使用可能
+- **カスタマイズ可能**: propsを通じてスタイル変更が可能
+- **アクセシブル**: WAI-ARIAに準拠

@@ -1,73 +1,63 @@
-# React + TypeScript + Vite
+# Tailwind Components
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Tailwind CSSベースのUIコンポーネントライブラリです。
 
-Currently, two official plugins are available:
+## 技術スタック
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 19
+- Tailwind CSS 4
+- Storybook 10
+- TypeScript
+- Vite
 
-## React Compiler
+## セットアップ
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+pnpm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 開発
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Storybookを起動
+pnpm run storybook
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# 開発サーバーを起動
+pnpm run dev
+
+# 型チェック
+pnpm run typecheck
+
+# Lint
+pnpm run lint
+
+# フォーマット
+pnpm run format
 ```
+
+## ビルド
+
+```bash
+# プロダクションビルド
+pnpm run build
+
+# Storybookビルド
+pnpm run build-storybook
+```
+
+## コンポーネント構成
+
+Atomic Designに基づき、以下の階層で構成されています。
+
+| 階層 | 説明 | 例 |
+|------|------|-----|
+| Atoms | 最小単位の基本要素 | Button, Input, Icon |
+| Molecules | Atomsを組み合わせた複合要素 | FormField, Select, Tabs |
+| Organisms | 独立した機能を持つ組織体 | Header, Modal, Table |
+| Pages | ページ全体のテンプレート | DashboardPage, AuthPage |
+
+コンポーネントの詳細は [src/components/components.md](src/components/components.md) を参照してください。
+
+## Icons
+
+`src/lib/icons` に100種類以上のアイコンコンポーネントを収録しています。

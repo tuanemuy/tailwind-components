@@ -1,0 +1,214 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Icons/Introduction" />
+
+# Icons
+
+アイコンライブラリです。すべてのアイコンはReactコンポーネントとして提供されます。
+
+## 使用方法
+
+```tsx
+import { SearchIcon, UserIcon, SettingsIcon } from '@/lib/icons';
+
+// 基本的な使用
+<SearchIcon />
+
+// サイズ指定
+<SearchIcon className="size-4" />
+<SearchIcon className="size-6" />
+<SearchIcon className="size-8" />
+
+// 色の指定
+<SearchIcon className="text-blue-500" />
+<SearchIcon className="text-gray-400" />
+```
+
+## 利用可能なアイコン一覧
+
+### アラート・通知
+
+| アイコン | 名前 | 用途 |
+|---------|------|-----|
+| AlertCircle | AlertCircleIcon | 警告（丸） |
+| AlertTriangle | AlertTriangleIcon | 警告（三角） |
+| Bell | BellIcon | 通知 |
+| Info | InfoIcon | 情報 |
+| Question | QuestionIcon | ヘルプ |
+
+### ナビゲーション
+
+| アイコン | 名前 | 用途 |
+|---------|------|-----|
+| ArrowLeft | ArrowLeftIcon | 戻る |
+| ArrowRight | ArrowRightIcon | 進む |
+| ChevronDown | ChevronDownIcon | 展開 |
+| ChevronLeft | ChevronLeftIcon | 前へ |
+| ChevronRight | ChevronRightIcon | 次へ |
+| ChevronUp | ChevronUpIcon | 折りたたみ |
+| ExternalLink | ExternalLinkIcon | 外部リンク |
+| Home | HomeIcon | ホーム |
+| Menu | MenuIcon | メニュー |
+
+### アクション
+
+| アイコン | 名前 | 用途 |
+|---------|------|-----|
+| Check | CheckIcon | 完了 |
+| CheckCheck | CheckCheckIcon | 既読 |
+| CheckCircle | CheckCircleIcon | 成功 |
+| Copy | CopyIcon | コピー |
+| Download | DownloadIcon | ダウンロード |
+| Edit | EditIcon | 編集 |
+| Filter | FilterIcon | フィルター |
+| Maximize | MaximizeIcon | 最大化 |
+| Minus | MinusIcon | 削除/減少 |
+| Plus | PlusIcon | 追加 |
+| Refresh | RefreshIcon | 更新 |
+| Search | SearchIcon | 検索 |
+| Send | SendIcon | 送信 |
+| Share | ShareIcon | 共有 |
+| Trash | TrashIcon | 削除 |
+| Upload | UploadIcon | アップロード |
+| UploadCloud | UploadCloudIcon | クラウドアップロード |
+| X | XIcon | 閉じる |
+| XCircle | XCircleIcon | エラー/キャンセル |
+
+### メディア
+
+| アイコン | 名前 | 用途 |
+|---------|------|-----|
+| Image | ImageIcon | 画像 |
+| Mic | MicIcon | マイク |
+| MicOff | MicOffIcon | マイクオフ |
+| Music | MusicIcon | 音楽 |
+| Pause | PauseIcon | 一時停止 |
+| Play | PlayIcon | 再生 |
+| SkipBack | SkipBackIcon | 前へスキップ |
+| SkipForward | SkipForwardIcon | 次へスキップ |
+| Video | VideoIcon | ビデオ |
+| VideoOff | VideoOffIcon | ビデオオフ |
+| Volume2 | Volume2Icon | 音量 |
+| VolumeX | VolumeXIcon | ミュート |
+
+### ファイル・フォルダ
+
+| アイコン | 名前 | 用途 |
+|---------|------|-----|
+| Archive | ArchiveIcon | アーカイブ |
+| File | FileIcon | ファイル |
+| FileCode | FileCodeIcon | コードファイル |
+| FileText | FileTextIcon | テキストファイル |
+| Folder | FolderIcon | フォルダ |
+| Paperclip | PaperclipIcon | 添付 |
+
+### ユーザー
+
+| アイコン | 名前 | 用途 |
+|---------|------|-----|
+| User | UserIcon | ユーザー |
+| UserPlus | UserPlusIcon | ユーザー追加 |
+| Users | UsersIcon | ユーザー群 |
+
+### ソーシャル
+
+| アイコン | 名前 | 用途 |
+|---------|------|-----|
+| Discord | DiscordIcon | Discord |
+| Facebook | FacebookIcon | Facebook |
+| GitHub | GitHubIcon | GitHub |
+| Instagram | InstagramIcon | Instagram |
+| LinkedIn | LinkedInIcon | LinkedIn |
+| TikTok | TikTokIcon | TikTok |
+| Twitter | TwitterIcon | Twitter |
+| YouTube | YouTubeIcon | YouTube |
+
+### ビジネス
+
+| アイコン | 名前 | 用途 |
+|---------|------|-----|
+| BarChart | BarChartIcon | グラフ |
+| Briefcase | BriefcaseIcon | ビジネス |
+| Building | BuildingIcon | 会社 |
+| Calendar | CalendarIcon | カレンダー |
+| Clock | ClockIcon | 時刻 |
+| CreditCard | CreditCardIcon | クレジットカード |
+| DollarSign | DollarSignIcon | 金額 |
+| Store | StoreIcon | 店舗 |
+| Wallet | WalletIcon | ウォレット |
+
+### ステータス・トレンド
+
+| アイコン | 名前 | 用途 |
+|---------|------|-----|
+| TrendDown | TrendDownIcon | 減少 |
+| TrendUp | TrendUpIcon | 増加 |
+| TrendingDown | TrendingDownIcon | 下降傾向 |
+| TrendingUp | TrendingUpIcon | 上昇傾向 |
+
+### コミュニケーション
+
+| アイコン | 名前 | 用途 |
+|---------|------|-----|
+| Forward | ForwardIcon | 転送 |
+| Mail | MailIcon | メール |
+| Megaphone | MegaphoneIcon | アナウンス |
+| Message | MessageIcon | メッセージ |
+| MessageSquare | MessageSquareIcon | チャット |
+| Phone | PhoneIcon | 電話 |
+| PhoneOff | PhoneOffIcon | 電話オフ |
+| Reply | ReplyIcon | 返信 |
+
+### その他
+
+| アイコン | 名前 | 用途 |
+|---------|------|-----|
+| Bookmark | BookmarkIcon | ブックマーク |
+| Cloud | CloudIcon | クラウド |
+| Code | CodeIcon | コード |
+| Command | CommandIcon | コマンド |
+| Database | DatabaseIcon | データベース |
+| Eye | EyeIcon | 表示 |
+| EyeOff | EyeOffIcon | 非表示 |
+| Gift | GiftIcon | ギフト |
+| Globe | GlobeIcon | グローバル |
+| Grid | GridIcon | グリッド |
+| Grip | GripIcon | ドラッグハンドル |
+| Hash | HashIcon | ハッシュタグ |
+| Heart | HeartIcon | お気に入り |
+| Layout | LayoutIcon | レイアウト |
+| Link | LinkIcon | リンク |
+| List | ListIcon | リスト |
+| Lock | LockIcon | ロック |
+| MapPin | MapPinIcon | 位置 |
+| MoreHorizontal | MoreHorizontalIcon | その他（横） |
+| MoreVertical | MoreVerticalIcon | その他（縦） |
+| Package | PackageIcon | パッケージ |
+| Palette | PaletteIcon | パレット |
+| Printer | PrinterIcon | 印刷 |
+| Quote | QuoteIcon | 引用 |
+| Repeat | RepeatIcon | リピート |
+| Rocket | RocketIcon | ロケット |
+| Settings | SettingsIcon | 設定 |
+| Shield | ShieldIcon | セキュリティ |
+| Smartphone | SmartphoneIcon | スマートフォン |
+| Smile | SmileIcon | スマイル |
+| Spinner | SpinnerIcon | ローディング |
+| Star | StarIcon | 星評価 |
+| Tag | TagIcon | タグ |
+| ThumbsDown | ThumbsDownIcon | 低評価 |
+| ThumbsUp | ThumbsUpIcon | 高評価 |
+| Ticket | TicketIcon | チケット |
+| Truck | TruckIcon | 配送 |
+| Zap | ZapIcon | 電気/高速 |
+
+## サイズガイド
+
+| クラス | サイズ | 用途 |
+|--------|-------|------|
+| `size-3` | 12px | インライン、極小 |
+| `size-4` | 16px | ボタン内、テキスト横 |
+| `size-5` | 20px | 標準 |
+| `size-6` | 24px | 見出し横、強調 |
+| `size-8` | 32px | 大きめのUI |
+| `size-10` | 40px | ヒーロー、装飾 |
