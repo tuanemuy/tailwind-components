@@ -44,7 +44,7 @@ function calculateDropdownPosition(
   triggerRect: DOMRect,
   menuRect: DOMRect,
   placement: Placement,
-  offset: number = 8,
+  offset = 8,
 ): { top: number; left: number } {
   let top = 0;
   let left = 0;
