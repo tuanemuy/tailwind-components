@@ -110,7 +110,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
     const [positioned, setPositioned] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
     const triggerRef = useRef<HTMLDivElement>(null);
-    const listboxRef = useRef<HTMLUListElement>(null);
+    const listboxRef = useRef<HTMLDivElement>(null);
     const searchInputRef = useRef<HTMLInputElement>(null);
     const listboxId = useId();
 
