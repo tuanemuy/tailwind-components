@@ -864,31 +864,31 @@ Phase 22で追加される主要コンポーネント（53個）の概要：
 
 ### 23.1 基盤整備
 
-- [ ] lib/variants/select.ts 新規作成（selectTriggerVariants, selectOptionVariants）
-- [ ] SelectOption インターフェース拡張（icon, avatar, description, color追加）
+- [x] lib/variants/select.ts 新規作成（selectTriggerVariants, selectOptionVariants）
+- [x] SelectOption インターフェース拡張（icon, avatar, description, color追加）
 
 ### 23.2 Select コンポーネント拡張
 
-- [ ] `size` prop 追加（xs, sm, md, lg）
-- [ ] `variant` prop 追加（default, inline, minimal, tag）
-- [ ] `icon` 表示サポート追加（オプション内アイコン表示）
-- [ ] `avatar` 表示サポート追加（オプション内アバター表示）
-- [ ] `description` 表示サポート追加（オプション内説明テキスト）
-- [ ] `color` インジケーター表示サポート追加（ステータスカラー）
-- [ ] `renderOption` prop 追加（カスタムオプション描画）
-- [ ] `renderValue` prop 追加（カスタムトリガー表示）
-- [ ] `searchable` prop 追加（ComboBox機能の統合オプション）
+- [x] `size` prop 追加（xs, sm, md, lg）
+- [x] `variant` prop 追加（default, inline, minimal, tag）
+- [x] `icon` 表示サポート追加（オプション内アイコン表示）
+- [x] `avatar` 表示サポート追加（オプション内アバター表示）
+- [x] `description` 表示サポート追加（オプション内説明テキスト）
+- [x] `color` インジケーター表示サポート追加（ステータスカラー）
+- [x] `renderOption` prop 追加（カスタムオプション描画）
+- [x] `renderValue` prop 追加（カスタムトリガー表示）
+- [x] `searchable` prop 追加（ComboBox機能の統合オプション）
 
 ### 23.3 新規コンポーネント
 
-- [ ] MultiSelect（複数選択セレクト - TagsSelect, ThreadsTagSelect対応）
-- [ ] InlineSelect（インラインラベル付きセレクト - InlineWithLabelSelect, WithinInputSelect対応）
+- [x] MultiSelect（複数選択セレクト - TagsSelect, ThreadsTagSelect対応）
+- [x] InlineSelect（インラインラベル付きセレクト - InlineWithLabelSelect, WithinInputSelect対応）
 
 ### 23.4 Storybook
 
-- [ ] Select.stories.tsx 拡張（新規バリエーション追加）
-- [ ] MultiSelect.stories.tsx 新規作成
-- [ ] InlineSelect.stories.tsx 新規作成
+- [x] Select.stories.tsx 拡張（新規バリエーション追加）
+- [x] MultiSelect.stories.tsx 新規作成
+- [x] InlineSelect.stories.tsx 新規作成
 
 ### 対応サンプルマッピング
 
@@ -919,5 +919,5 @@ Phase 22で追加される主要コンポーネント（53個）の概要：
 | Phase | 内容 | タスク数 | 完了 | 進捗 |
 |-------|------|---------|------|------|
 | 1-22 | 既存計画 | 347 | 347 | 100% |
-| **23** | **Select拡張** | **16** | **0** | **0%** |
-| **合計** | | **363** | **347** | **96%** |
+| **23** | **Select拡張** | **16** | **16** | **100%** |
+| **合計** | | **363** | **363** | **100%** |
